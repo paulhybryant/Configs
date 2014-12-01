@@ -1,0 +1,25 @@
+$Id: Changelog.txt,v 1.2 2003/05/14 09:20:00 codemangler Exp $
+
+ChangeLog
+==========================================================
+
+v1.2.0 (2003-05-14)
+	* configuration is now stored in $HOME/.cpp2diarc
+	* multiple inheritance of classed is supported
+	* command-line parameter can be used to override
+	  configfile settings (they do not change the configfile)
+	
+v1.1.0 (2002-12-11)
+	* major rework, to fix open brace problem [#566299].
+	* added template < >; support
+	* output is no longer stdout but a configurable 
+	  filename
+	* display of keywords void, inline, static, virtual 
+	  can be turned on/off
+	* virtual members can be prefixed by v:	
+
+v1.0.1 (2001-12-14)
+	* changed the handling of an abstract class
+
+v1.0 (2001-12-10)
+	* Initial release

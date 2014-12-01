@@ -1,0 +1,3 @@
+alias desktopvpn="myssh -Y yuhuang2012.mtv.corp.google.com"
+alias desktop="myssh -Y -p 8022 localhost"
+alias dls="myssh -Y yuhuang.dls.corp.google.com"

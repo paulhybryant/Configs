@@ -1,0 +1,13 @@
+# https://wiki.corp.google.com/twiki/bin/view/Nonconf/GitFiveForPerforceUsers
+[alias]
+diffe = diff --exported
+diffgui = ! git difftool --tool=tkdiff $(git5 status --base)
+difftool = ! git difftool $(git5 status --base)
+list = ! git5 diff --name-only | sed -e 's@^google3/@@'
+listg = diff --name-only
+change = export -e
+presubmit = export -p all
+
+[export]
+copy-detection = true
+fast-export = true

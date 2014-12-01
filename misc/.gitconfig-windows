@@ -1,0 +1,119 @@
+[user]
+  name = paulhybryant
+  email = paulhybryant@gmail.com
+
+[push]
+  default = simple
+
+[diff]
+  tool = vimdiff
+
+  # Detect copies as well as renames
+  renames = copies
+
+[difftool]
+  prompt = false
+
+[alias]
+  unstage = reset --
+
+  alias = config --get-regexp ^alias\\.
+
+  export = "!gitexport() { if [[ $# -ne 2 ]]; then echo 'Usage: git export [branch] [output]'; exit 1; fi; git archive --format=tar --output $2 $1; }; gitexport"
+
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+
+  # Pull from upstream and merge
+  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+
+  # View abbreviated SHA, description, and history graph of the latest 20 commits
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+  # View the current working tree status using the short format
+  s = status -s
+
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+
+  # Clone a repository including all submodules
+  cr = clone --recursive
+
+  # Commit all changes
+  ca = !git add -A && git commit -av
+
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+
+  # Interactive rebase with the given number of latest commits
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+  # Find commits by commit message
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+  # diff --name-only
+  list = ! git diff --name-only | sed -e 's@^google3/@@'
+
+[core]
+  pager = less -F -X
+
+  # Use custom `.gitignore` and `.gitattributes`
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+
+  # Treat spaces before tabs and all kinds of trailing whitespace as an error
+  # [default] trailing-space: looks for spaces at the end of a line
+  # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+  # Make `git rebase` safer on OS X
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+
+[merge]
+  tool = splice
+
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+
+[mergetool "splice"]
+  cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+  trustExitCode = true
+
+[help]
+  # Automatically correct and execute mistyped commands
+  autocorrect = 1
+
+[color "branch"]
+  current = green reverse
+  local = green
+  remote = red
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold # line info
+  old = red # deletions
+  new = green # additions
+
+[color "status"]
+  added = yellow
+  changed = cyan
+  untracked = red
+
+[color]
+  # Use colors in Git commands that are capable of colored output when
+  # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+  ui = auto
+
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
+
+[github]
+  user = paulhybryant@gmail.com
+
+[credential]
+  helper = !'C:/Users/Yu/AppData/Roaming/GitCredStore/git-credential-winstore.exe'

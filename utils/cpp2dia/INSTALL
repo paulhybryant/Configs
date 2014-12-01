@@ -1,0 +1,31 @@
+INSTALL cpp2dia
+==========================================================
+
+1.	untar the downloaded release
+
+		tar xvfz cpp2dia-1.2.0.tgz
+   
+	this will create a directory "cpp2dia" and extracts the
+	files into this directory
+   
+2.	if you run version 1.2.0 for the first time a config
+	file will be created in $HOME/.cpp2diarc
+	
+3.	set the configuration in $HOME/.cpp2diarc to the values, 
+	you like.
+	
+	THAT'S IT
+
+
+
+
+RUN cpp2dia
+==========================================================
+
+cpp2dia reads the content of the current directory and
+prints the content of a valid dia (v 0.88.1) file to 
+"output.dia" in the current directory
+
+so just change into the directory which contains your cpp
+files and execute "cpp2dia.tclsh"
+

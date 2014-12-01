@@ -1,0 +1,92 @@
+config_version 1
+
+##
+## this is the path where cpp2dia and its files are located
+## e.g. "/usr/local/cpp2dia"
+##
+install_path /usr/local/google/home/yuhuang/utils/cpp2dia
+
+##
+## this is the command to layout the graph with graphviz
+## e.g. "/usr/local/neato"
+##
+dot_layouter /usr/bin/neato
+
+##
+## should the dot_layouter use a directed or undirected
+## graph (graph/digraph)
+##
+dot_graphtype graph
+
+##
+## globbing for headerfiles
+## e.g. "*.h *.hxx"
+##
+glob_header {*.h *.hxx}
+
+##
+## globbing for sourcefiles
+## e.g. "*.cxx *.cpp"
+##
+glob_source {*.cxx *.cpp *.cc}
+
+##
+## set the name of the outputfile
+## e.g. "output.dia"
+##
+output_filename output.dia
+
+##
+## this is the command to create a ctags file
+## e.g. "/usr/bin/ctags -n --fields=+aim"
+##
+ctags_cmd {/usr/bin/ctags -n --fields=+aim --c++-types=+cegmpstuvx-dnf --if0=yes}
+
+##
+## this is used to switch generalization edges in the
+## UML graph on/off (1/0)
+##
+graph_generalizations 1
+
+##
+## this is used to switch association edges in the
+## UML graph on/off (1/0)
+##
+graph_associations 1
+
+##
+## this is used to toggle display of "void" return
+## datatype on/off (1/0)
+##
+syntax_ignoreVoidResult 1
+
+##
+## this is used to toggle display of "void" argument
+## datatype on/off (1/0)
+##
+syntax_ignoreVoidArgument 1
+
+##
+## this is used to toggle display of "inline" modifier
+## on/off (1/0)
+##
+syntax_ignoreInline 1
+
+##
+## this is used to toggle display of "static" modifier
+## on/off (1/0)
+##
+syntax_ignoreStatic 1
+
+##
+## this is used to toggle display of "virtual" modifier
+## on/off (1/0)
+##
+syntax_ignoreVirtual 1
+
+##
+## this is used to toggle add of "v:" prefix to function
+## member if virtual on/off (1/0)
+##
+syntax_prefixVirtual 1
+

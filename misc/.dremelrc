@@ -1,0 +1,2 @@
+set min_completion_ratio 1.0
+set materialize_overwrite true

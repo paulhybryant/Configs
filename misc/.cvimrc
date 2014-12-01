@@ -1,0 +1,60 @@
+" vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=vim nospell:
+
+" Settings {{{
+
+set noautofocus                         " The opposite of autofocus; this setting stops sites from focusing on an input box when they load.
+set typelinkhints
+set regexp
+set ignorecase
+set nolinkaimations
+set nonumerichints
+set incsearch
+" set noinsertmappings
+set noautoupdategist
+
+" }}}
+
+" Variables {{{
+
+let barposition = "bottom"
+let completionengines = ["google", "amazon", "imdb", "dogpile"]
+let hintcharacters = "asdfghjkl"
+let scrollstep = 70                     " Number of pixels scrolled each time
+let searchlimit = 30                    " Amount of results displayed in command bar
+let timeoutlen = 1000                   " The amount of time to wait for <Leader> in milliseconds
+let fullpagescrollpercent = 85          " Percent of page to scroll when scrollFullPageUp or scrollFullPageDown
+
+" For example, typing ':tabnew g example' would act the same way as ':tabnew google example'
+let searchalias g = "google"            " Create a shortcut for search engines.
+" If you leave out the '%s' at the end of the URL, your query will be appended to the link. Otherwise, your query will replace the '%s'.
+let searchengine dogpile = "http://www.dogpile.com/search/web?q=%s"
+" Open all of these in a tab with `gnb` or open one of these with <N>goa where <N>
+let blacklists = ["*://mail.google.com/*","*://*.reddit.com/*","*://cs.corp.google.com/*","*://critique.corp.google.com/*","*://docs.google.com/*","*://inbox.google.com/*"]
+let qmark a = ["http://www.reddit.com", "http://www.google.com", "http://twitter.com"]
+" let locale = "uk"                     " 'jp' or 'uk'. Allows cVim to use google.co.uk or google.co.jp to search.
+
+" }}}
+
+" Mappings {{{
+
+let mapleader = ","
+unmap d
+unmap u
+unmap e
+unmap A
+unmap gR
+unmap X
+map gb :buffer<Space>                   " Can use <Space>, to enter buffer completion mode
+map <C-h> :set hud!<CR>                 " Toggle the current HUD display value
+map <C-i> :set numerichints!<CR>        " Switch between alphabetical hint characters and numeric hints
+map <C-d> scrollPageDown
+map <C-u> scrollPageUp
+map <Leader>t :tabNew
+map dd closeTab
+map u lastClosedTab
+map U :restore<Space>
+map f F
+map R reloadTabUncached
+" map X :execute gTx<CR>                " Close the current tab and move to the one before it
+
+" }}}
