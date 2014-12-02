@@ -105,8 +105,6 @@ function link_bash() {
 
   if [[ -f "$HOME/.google" ]]; then
     backup_and_link "$_bashconf_/.bashrc.google" "$HOME/.bashrc.local"
-  elif [[ -f "$HOME/.glaptop" ]]; then
-    backup_and_link "$_bashconf_/.bashrc.glaptop" "$HOME/.bashrc.local"
   else
     backup_and_link "$_bashconf_/.bashrc.personal" "$HOME/.bashrc.local"
   fi
@@ -181,8 +179,6 @@ function link_vim() {
 
   if [[ -f "$HOME/.google" ]]; then
     backup_and_link "$_vimconf_/.vimrc.google" "$HOME/.vimrc.local"
-  elif [[ -f "$HOME/.glaptop" ]]; then
-    backup_and_link "$_vimconf_/.vimrc.glaptop" "$HOME/.vimrc.local"
   else
     backup_and_link "$_vimconf_/.vimrc.personal" "$HOME/.vimrc.local"
   fi
@@ -196,29 +192,34 @@ function link_zsh() {
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
   fi
 
+  if [[ -d "$HOME/.zshcustom" ]]; then
+    echo "$HOME/.zshcustom exists! Nothing done."
+    return
+  fi
+
   _zshcustom_="$HOME/.zshcustom"
   mkdir -p "$_zshcustom_"
 
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    backup_and_link "$_zshconf_/linux-gnu.zsh" "$_zshcustom_/platform.zsh"
-    backup_and_link "$_zshconf_/plugins.linux-gnu.zsh" "$_zshcustom_/plugins.zsh"
+    backup_and_link "$_zshconf_/zsh.linux-gnu" "$_zshcustom_/platform.zsh"
+    backup_and_link "$_zshconf_/zsh.plugins.linux-gnu" "$_zshcustom_/plugins.zsh"
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    backup_and_link "$_zshconf_/mac.zsh" "$_zshcustom_/platform.zsh"
-    backup_and_link "$_zshconf_/plugins.mac.zsh" "$_zshcustom_/plugins.zsh"
+    backup_and_link "$_zshconf_/zsh.mac" "$_zshcustom_/platform.zsh"
+    backup_and_link "$_zshconf_/zsh.plugins.mac" "$_zshcustom_/plugins.zsh"
   fi
 
   backup_and_link "$_zshconf_/.zshrc" "$HOME/.zshrc"
   backup_and_link "$_zshconf_/zshenv" "$HOME/.zshenv"
-  backup_and_link "$_zshconf_/custom.zsh" "$_zshcustom_/custom.zsh"
+  backup_and_link "$_zshconf_/zsh.custom" "$_zshcustom_/custom.zsh"
   if [[ ! -h "$_zshcustom_/themes" ]]; then
     ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
   fi
 
   if [[ -f "$HOME/.google" ]]; then
-    backup_and_link "$_zshconf_/google.zsh" "$_zshcustom_/local.zsh"
-    backup_and_link "$_zshconf_/google.zshenv" "$HOME/.zshenv"
+    backup_and_link "$_zshconf_/zsh.google" "$_zshcustom_/local.zsh"
+    backup_and_link "$_zshconf_/zshenv.google" "$HOME/.zshenv"
   else
-    backup_and_link "$_zshconf_/glaptop.zsh" "$_zshcustom_/local.zsh"
+    backup_and_link "$_zshconf_/zsh.personal" "$_zshcustom_/local.zsh"
   fi
 }
 

@@ -21,6 +21,8 @@
 
   export = "!gitexport() { if [[ $# -ne 2 ]]; then echo 'Usage: git export [branch] [output]'; exit 1; fi; git archive --format=tar --output $2 $1; }; gitexport"
 
+  ignored = ls-files --others -i --exclude-standard
+
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull; git submodule foreach git pull origin master"
 
