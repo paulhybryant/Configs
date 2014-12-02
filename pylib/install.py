@@ -342,6 +342,7 @@ def BootstrapMac():
                                   deps=set(["brew"])),
         "tmux": BrewPackage("tmux", "brew",
                             installer_args=["--HEAD"], deps=set(["brew"])),
+        "vimpager": BrewPackage("vimpager", "brew", deps=set(["brew"])),
         "vim": BrewPackage("vim", "brew",
                            installer_args=["--with-lua",
                                            "--override-system-vi",
