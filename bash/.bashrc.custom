@@ -7,7 +7,8 @@
 [[ -n "$__BASH_CUSTOM_VERSION__" && "$__BASH_CUSTOM_VERSION__" -eq "$__BASH_CUSTOM_NEW_VERSION__" ]] && return
 
 __BASH_CUSTOM_VERSION__="$__BASH_CUSTOM_NEW_VERSION__"
-echo "$__BASH_CUSTOM__ sourced, timestamp $__BASH_CUSTOM_NEW_VERSION__"
+[[ "$OSTYPE" != "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
+[[ "$OSTYPE" == "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date -r $__BASH_CUSTOM_NEW_VERSION__)"
 
 # General {{{
 
@@ -36,7 +37,7 @@ stty start undef
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
-# export TERM=xterm-256color
+export TERM=screen-256color-bce
 export GREP_OPTIONS='--color=auto'
 
 # autocutsel -selection PRIMARY -fork
@@ -76,10 +77,11 @@ function ta() {
       if [[ $cmd != "bash" && $cmd != "blaze64" ]]; then
         tmux send-keys -t "$1:$window" C-z
         sleep 0.2
-      fi
-      tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
-      if [[ $cmd != "bash" && $cmd != "blaze64" ]]; then
+        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        sleep 0.2
         tmux send-keys -t "$1:$window.$id" fg ENTER
+      else
+        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
       fi
     done
   done

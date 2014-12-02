@@ -26,11 +26,11 @@ function mirror_and_start() {
   local _startcwd_="$3"
   if [[ -d "$GIT_WORKING_DIR_ROOT/$_muxproj_" ]]; then
     echo "Error: $GIT_WORKING_DIR_ROOT/$_muxproj_ exists!"
-    if [[ $DRYRUN -ne 1 ]]; then
+    if [[ $DRYRUN == false ]]; then
       return
     fi
   fi
-  if [[ $DRYRUN -eq true ]]; then
+  if [[ $DRYRUN == true ]]; then
     echo "sed -e \"s#\${SESSION}#$_muxproj_#\" -e \"s#\${ROOT}#$_startcwd_#\" \"$MUXDIR/project.yml.template\" > \"$_muxconfig_\""
     echo "$GIT_NEW_WORKDIR_CMD $GIT_REPO $GIT_WORKING_DIR_ROOT/$_muxproj_"
     echo "mux start \"$_muxproj_\""
@@ -85,8 +85,8 @@ function delete() {
 
 exit_if_not_exist tmuxinator
 
-VERBOSE=
-DRYRUN=
+VERBOSE=false
+DRYRUN=false
 CONFIRM=true
 
 if [[ -e "$HOME/.google" ]]; then
@@ -121,7 +121,7 @@ while true; do
   esac
 done
 
-if [[ $VERBOSE -eq true ]]; then
+if [[ $VERBOSE == true ]]; then
   echo "Verbose mode..."
   echo "Options: DRYRUN:$DRYRUN, CONFIRM:$CONFIRM, CMD:$1"
 fi

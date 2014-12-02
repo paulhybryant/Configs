@@ -4,6 +4,8 @@
   @ Profile vim write slowness.
   @ Know vtd better.
   @ Know vimdoc better.
+  @ Syntax highlight file for .cvimrc
+  @ Fix airline tabline (current buffer not highlighted) (Update: this is caused by value of 'TERM') (DONE 2014-12-01 15:51)
   @ Find out why only the first and last buffer get syntax highlighting (DONE 2014-11-23 15:38)
   @ Change the background of selected tmux window (DONE 2014-11-21 22:57)
   @ Set nospell for DONE item in vtd. (DONE 2014-11-17 20:12)
@@ -12,12 +14,14 @@
 
 = Tmux @p:2 =
   @ tmux-session.sh
+  @ Fix the issue for attaching, when a shell script spawn another long running process.
 
 = Misc @p:2 =
   @ Cleanup and enhance cVim mappings in chrome.
-  @ Change tmuxline.vim back after pull request merged
+  @ Change tmuxline.vim back after pull request merged.
   @ Reinstall bundle (vim-nerdtree-tabs, ReloadScript) (DONE 2014-11-28 10:55)
   @ Make the key map from Caps_Lock to ESC universal (DONE 2014-11-21 20:00)
   @ In autohotkey, make C-D exit terminal if in one (DONE 2014-11-27 12:39)
   @ Fix vim-vtd in windows (DONE 2014-11-27 12:39)
-  @ Map Fn key to control
+  @ Map Fn key to control in autohotkey.
+  @ Try out babun.
