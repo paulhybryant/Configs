@@ -6,7 +6,7 @@
 [[ -n "$__LIB_COMMON_VERSION__" && "$__LIB_COMMON_VERSION__" -eq "$__LIB_COMMON_NEW_VERSION__" ]] && return
 
 __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
-echo "$__LIB_COMMON__ sourced, timestamp $__LIB_COMMON_NEW_VERSION__"
+echo "$__LIB_COMMON__ sourced, modified at $(date --date=@$__LIB_COMMON_NEW_VERSION__)"
 RETVAL=
 REPLY=
 
@@ -48,8 +48,8 @@ function strip_slash_if_exist() {
 function run() {
   local _cmd_="$1"
   local _msg_="$2"
-  [[ $VERBOSE -eq true ]] && echo "$_msg_"
-  if [[ $DRYRUN -eq true ]]; then
+  [[ $VERBOSE == true ]] && echo "$_msg_"
+  if [[ $DRYRUN == true ]]; then
     echo "$_cmd_"
   else
     $_cmd_
@@ -66,7 +66,7 @@ function exit_if_not_exist() {
 
 function confirm() {
   local _question_="$1"
-  if [[ $CONFIRM -eq true ]]; then
+  if [[ $CONFIRM == true ]]; then
     read -p "$_question_"
   else
     REPLY="y"
