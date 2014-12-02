@@ -105,8 +105,10 @@ function link_bash() {
 
   if [[ -f "$HOME/.google" ]]; then
     backup_and_link "$_bashconf_/.bashrc.google" "$HOME/.bashrc.local"
+  elif [[ -f "$HOME/.glaptop" ]]; then
+    backup_and_link "$_bashconf_/.bashrc.glaptop" "$HOME/.bashrc.local"
   else
-    backup_and_link "$_bashconf_/.bashrc.nongoogle" "$HOME/.bashrc.local"
+    backup_and_link "$_bashconf_/.bashrc.personal" "$HOME/.bashrc.local"
   fi
 
   if [[ -f "$HOME/.bashrc" ]]; then
@@ -180,8 +182,10 @@ function link_vim() {
 
   if [[ -f "$HOME/.google" ]]; then
     backup_and_link "$_vimconf_/.vimrc.google" "$HOME/.vimrc.local"
+  elif [[ -f "$HOME/.glaptop" ]]; then
+    backup_and_link "$_vimconf_/.vimrc.glaptop" "$HOME/.vimrc.local"
   else
-    backup_and_link "$_vimconf_/.vimrc.nongoogle" "$HOME/.vimrc.local"
+    backup_and_link "$_vimconf_/.vimrc.personal" "$HOME/.vimrc.local"
   fi
 }
 
