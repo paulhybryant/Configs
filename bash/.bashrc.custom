@@ -7,7 +7,8 @@
 [[ -n "$__BASH_CUSTOM_VERSION__" && "$__BASH_CUSTOM_VERSION__" -eq "$__BASH_CUSTOM_NEW_VERSION__" ]] && return
 
 __BASH_CUSTOM_VERSION__="$__BASH_CUSTOM_NEW_VERSION__"
-echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
+[[ "$OSTYPE" != "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
+[[ "$OSTYPE" == "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date -r $__BASH_CUSTOM_NEW_VERSION__)"
 
 # General {{{
 
