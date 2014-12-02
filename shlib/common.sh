@@ -125,7 +125,6 @@ function link_misc() {
   mkdir -p "$HOME/.ssh"
   backup_and_link "$_miscfong_/ssh_config" "$HOME/.ssh/config"
 
-  mkdir -p "$HOME/Notes"
   backup_and_link "$PWD/notes" "$HOME/Notes"
 
   mkdir -p "$HOME/.config/terminator"
