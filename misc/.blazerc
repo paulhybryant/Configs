@@ -1,2 +1,0 @@
-build --forge --genrule_strategy=forced_forge --nolocal_fallback
-test --test_output=errors --nobuild_runfile_links --notest_fallback
