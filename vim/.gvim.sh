@@ -1,6 +1,6 @@
 #!/bin/bash
 # gvim.sh
-# Copyright (C) 2013 Yu Huang <yuhuang@google.com>
+# Copyright (C) 2013 Yu Huang <paulhybryant@gmail.com>
 #
 # Distributed under terms of the MIT license.
 #

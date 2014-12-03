@@ -4,7 +4,7 @@ config_version 1
 ## this is the path where cpp2dia and its files are located
 ## e.g. "/usr/local/cpp2dia"
 ##
-install_path /usr/local/google/home/yuhuang/utils/cpp2dia
+install_path $HOME/utils/cpp2dia
 
 ##
 ## this is the command to layout the graph with graphviz
