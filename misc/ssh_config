@@ -1,5 +1,0 @@
-Host yuhuang2012.mtv.corp.google.com yuhuang2012.mtv yuhuang.dls.corp.google.com yuhuang.dls localhost localhost
-    ForwardAgent yes
-    ForwardX11 yes
-    RemoteForward 3000 localhost:1817
-    PreferredAuthentications publickey,gssapi-with-mic,hostbased,keyboard-interactive,password
