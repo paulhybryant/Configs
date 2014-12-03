@@ -15,6 +15,7 @@
 = Tmux @p:2 =
   @ tmux-session.sh
   @ Fix the issue for attaching, when a shell script spawn another long running process.
+  @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching.
 
 = Misc @p:2 =
   @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
