@@ -41,14 +41,16 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zshcustom
 
-export __SHLIB__=$(dirname $(dirname $(readlink "$ZSH_CUSTOM/custom.zsh")))/shlib
-source "$__SHLIB__/common.sh"
+if [[ -d $ZSH_CUSTOM ]]; then
+  export __SHLIB__=$(dirname $(dirname $(readlink "$ZSH_CUSTOM/custom.zsh")))/shlib
+  source "$__SHLIB__/common.sh"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-source $ZSH_CUSTOM/plugins.zsh
+  # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+  # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+  # Example format: plugins=(rails git textmate ruby lighthouse)
+  # Add wisely, as too many plugins slow down shell startup.
+  source $ZSH_CUSTOM/plugins.zsh
+fi
 
 source $ZSH/oh-my-zsh.sh
 
