@@ -122,7 +122,7 @@
   NeoBundle 'xolox/vim-notes', {
     \   'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
     \ }
-  let g:notes_directories = ['~/Notes', '~/Workspace/notes']
+  let g:notes_directories = ['~/Notes']
   let g:notes_suffix = '.txt'
   let g:notes_indexfile = '~/Notes/notes.idx'
   let g:notes_tagsindex = '~/Notes/notes.tags'
