@@ -53,6 +53,7 @@
       source $VIMRUNTIME/mswin.vim
       behave mswin
 
+      let $TERM='win32'
       set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
       " Be nice and check for multi_byte even if the config requires
       " multi_byte support most of the time

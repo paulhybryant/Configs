@@ -11,3 +11,7 @@ vim
    ◦ mingw32-make.exe -f Make_ming.mak PYTHON="D:/Programs/Python27" PYTHON_VER=27 DYNAMIC_PYTHON=yes ARCH=x86-64 LUA="D:/Programs/lua5.1.5/src" FEATURES=HUGE GUI=yes vimrun.exe
    ◦ mingw32-make.exe -f Make_ming.mak PYTHON="D:/Programs/Python27" PYTHON_VER=27 DYNAMIC_PYTHON=yes ARCH=x86-64 LUA="D:/Programs/lua5.1.5/src" FEATURES=HUGE GUI=yes gvim.exe
    ◦ mingw32-make.exe -f Make_ming.mak PYTHON="D:/Programs/Python27" PYTHON_VER=27 DYNAMIC_PYTHON=yes ARCH=x86-64 LUA="D:/Programs/lua5.1.5/src" FEATURES=HUGE GUI=no vim.exe
+
+# Compile the vim shell context extension for windows
+• Go to $VIM_SRC_ROOT/GvimExt
+   ◦ mingw32-make.exe -f Make_ming.mak gvimext.dll
