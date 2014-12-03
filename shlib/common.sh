@@ -92,6 +92,7 @@ function link_bash() {
   local _bashconf_="${1:-$HOME/Configs/bash}"
   _bashconf_="${_bashconf_%/}"
 
+  [[ -z "$__BASH_CUSTOM__" ]] && echo "source $HOME/.bashrc.custom" >> "$HOME/.bashrc"
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
     backup_and_link "$_bashconf_/.bashrc.linux-gnu" "$HOME/.bashrc.platform"
   elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -106,20 +107,11 @@ function link_bash() {
   if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_bashconf_/.bashrc.personal" "$HOME/.bashrc.local"
   fi
-
-  if [[ -f "$HOME/.bashrc" ]]; then
-    echo "source $HOME/.bashrc.custom" >> "$HOME/.bashrc"
-  else
-    echo "source $HOME/.bashrc.custom" > "$HOME/.bashrc"
-  fi
 }
 
 function link_misc() {
   local _miscfong_="${1:-$HOME/Configs/misc}"
   _miscfong_="${_miscfong_%/}"
-
-  mkdir -p "$HOME/.ssh"
-  backup_and_link "$_miscfong_/ssh_config" "$HOME/.ssh/config"
 
   backup_and_link "$PWD/notes" "$HOME/Notes"
 
@@ -168,7 +160,6 @@ function link_vim() {
   backup_and_link "$_vimconf_/.gvim.sh" "$HOME/.gvim.sh"
   backup_and_link "$_vimconf_/.gvimrc" "$HOME/.gvimrc"
   backup_and_link "$_vimconf_/.vimrc" "$HOME/.vimrc"
-
   if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_vimconf_/.vimrc.personal" "$HOME/.vimrc.local"
   fi
@@ -199,7 +190,6 @@ function link_zsh() {
   fi
 
   backup_and_link "$_zshconf_/.zshrc" "$HOME/.zshrc"
-  backup_and_link "$_zshconf_/zshenv" "$HOME/.zshenv"
   backup_and_link "$_zshconf_/zsh.custom" "$_zshcustom_/custom.zsh"
   if [[ ! -h "$_zshcustom_/themes" ]]; then
     ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
@@ -207,6 +197,7 @@ function link_zsh() {
 
   if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_zshconf_/zsh.personal" "$_zshcustom_/local.zsh"
+    backup_and_link "$_zshconf_/zshenv.personal" "$HOME/.zshenv"
   fi
 }
 
@@ -217,8 +208,6 @@ function link_x11() {
   backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
     backup_and_link "$_x11conf_/.Xmodmap.linux-gnu" "$HOME/.Xmodmap"
-  # elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # backup_and_link "$_x11conf_/.Xmodmap.mac" "$HOME/.Xmodmap"
   fi
 }
 
