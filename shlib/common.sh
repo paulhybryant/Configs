@@ -103,9 +103,7 @@ function link_bash() {
 
   backup_and_link "$_bashconf_/.bashrc.custom" "$HOME/.bashrc.custom"
 
-  if [[ -f "$HOME/.google" ]]; then
-    backup_and_link "$_bashconf_/.bashrc.google" "$HOME/.bashrc.local"
-  else
+  if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_bashconf_/.bashrc.personal" "$HOME/.bashrc.local"
   fi
 
@@ -132,12 +130,6 @@ function link_misc() {
   backup_and_link "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"
   backup_and_link "$_miscfong_/.gitignore" "$HOME/.gitignore"
   backup_and_link "$_miscfong_/git-new-workdir" "$HOME/.local/bin/git-new-workdir"
-
-  if [[ -f "$HOME/.google" ]]; then
-    backup_and_link "$_miscfong_/.git5rc" "$HOME/.git5rc"
-    backup_and_link "$_miscfong_/.dremelrc" "$HOME/.dremelrc"
-    backup_and_link "$_miscfong_/.blazerc" "$HOME/.blazerc"
-  fi
 }
 
 function link_tmux() {
@@ -177,9 +169,7 @@ function link_vim() {
   backup_and_link "$_vimconf_/.gvimrc" "$HOME/.gvimrc"
   backup_and_link "$_vimconf_/.vimrc" "$HOME/.vimrc"
 
-  if [[ -f "$HOME/.google" ]]; then
-    backup_and_link "$_vimconf_/.vimrc.google" "$HOME/.vimrc.local"
-  else
+  if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_vimconf_/.vimrc.personal" "$HOME/.vimrc.local"
   fi
 }
@@ -215,10 +205,7 @@ function link_zsh() {
     ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
   fi
 
-  if [[ -f "$HOME/.google" ]]; then
-    backup_and_link "$_zshconf_/zsh.google" "$_zshcustom_/local.zsh"
-    backup_and_link "$_zshconf_/zshenv.google" "$HOME/.zshenv"
-  else
+  if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_zshconf_/zsh.personal" "$_zshcustom_/local.zsh"
   fi
 }
