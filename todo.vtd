@@ -28,3 +28,4 @@
   @ Try out babun. (DONE 2014-12-02 21:13)
   @ Build vim on windows (DONE 2014-12-02 21:13)
   @ Gvim windows shell context extension
+  @ Copy and then 'p' does not work in vim for mac.

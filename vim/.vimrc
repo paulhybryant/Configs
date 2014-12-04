@@ -118,6 +118,11 @@
   NeoBundle 'zaiste/tmux.vim'                                             " Tmux syntax highlight
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
 
+  NeoBundle 'vim-scripts/Vim-Support'                                     " Make vim an IDE for writing vimscript
+  let g:Vim_MapLeader  = g:maplocalleader
+  NeoBundle 'vim-scripts/bash-support.vim'                                " Make vim an IDE for writing bash
+  let g:BASH_MapLeader  = g:maplocalleader
+
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
     \   'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
