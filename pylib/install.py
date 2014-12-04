@@ -86,6 +86,7 @@ class Bundle(object):
         "pip-user": Bundle.InstallWithPipUser,
         "brew": Bundle.InstallWithBrew,
         "curl": Bundle.InstallWithCurl,
+        "gem": Bundle.InstallWithGem,
     }
     print "Installing %s..." % target
     installations[self._installer](self, target)
@@ -119,6 +120,16 @@ class Bundle(object):
     """Install the bundle with curl."""
 
     cmdlist = ["curl", "-fSsL", self._src, "-o", "/tmp/%s" % target]
+    cmd = " ".join(cmdlist)
+    self.ExecuteSystemCmd(cmd)
+
+    for cmd in self._cmds:
+      self.ExecuteSystemCmd(cmd)
+
+  def InstallWithGem(self, target):
+    """Install the bundle with gem"""
+
+    cmdlist = ["sudo", "gem", "install", target]
     cmd = " ".join(cmdlist)
     self.ExecuteSystemCmd(cmd)
 
@@ -307,6 +318,7 @@ def BootstrapDebian():
                        "http://git.code.sf.net/p/tmux/tmux-code",
                        ["./autogen.sh", "./configure", "make",
                         "sudo make install"], deps=set(["git", "automake"])),
+        "tmuxinator": Binary("tmuxinator", "gem"),
     }
     dag = {}
     for name, bundle in bundles.items():
@@ -358,6 +370,7 @@ def BootstrapMac():
         "htop-osx-patched": Binary(
             "htop", "git", "git@github.com:paulhybryant/htop-osx-patched.git",
             deps=set(["git"])),
+        "tmuxinator": Binary("tmuxinator", "gem"),
     }
     dag = {}
     for name, bundle in bundles.items():
