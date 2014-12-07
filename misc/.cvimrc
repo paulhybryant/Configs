@@ -56,6 +56,10 @@ map U :restore<Space>
 map f F
 map R reloadTabUncached
 map <Leader>o :open http://
+unmap gh
+unmap gl
+map gl nextTab
+map gh previousTab
 " map X :execute gTx<CR>                " Close the current tab and move to the one before it
 
 " }}}

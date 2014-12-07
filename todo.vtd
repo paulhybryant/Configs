@@ -30,3 +30,5 @@
   @ Gvim windows shell context extension
   @ Copy and then 'p' does not work in vim for mac.
   @ Try out rocket dock in win
+  @ Completion for .cvimrc
+  @ Vtd syntax highlight fix on windows
