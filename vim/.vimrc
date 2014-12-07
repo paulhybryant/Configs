@@ -269,9 +269,9 @@
   map L <Plug>(expand_region_expand)
   map H <Plug>(expand_region_shrink)
 
+  NeoBundle 'altercation/vim-colors-solarized'                            " Vim colorscheme solarized
   NeoBundle 'flazz/vim-colorschemes'                                      " Collection of vim colorschemes
   NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                     " Vim colorscheme github
-  NeoBundle 'altercation/vim-colors-solarized'                            " Vim colorscheme solarized
   NeoBundle 'itchyny/landscape.vim'                                       " Vim colorscheme landscape
   NeoBundle 'tomasr/molokai'                                              " Vim colorscheme molokai
   NeoBundle 'tpope/vim-vividchalk'                                        " Vim colorscheme vividchalk
@@ -324,16 +324,12 @@
   let g:NERDTreeShowHidden=1
   let g:nerdtree_tabs_open_on_gui_startup=0
 
-  if has('gui_running')
-    NeoBundle 'vim-scripts/SemanticHL'                                    " Semantic highlighting for C / C++
-  else
-    let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
-    NeoBundle 'jaxbot/semantic-highlight.vim'                             " General semantic highlighting for vim
-    NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-    " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
-    let g:tmuxline_theme = 'airline'
-    " let g:tmuxline_preset = 'tmux'
-  endif
+  let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+  NeoBundle 'jaxbot/semantic-highlight.vim'                             " General semantic highlighting for vim
+  NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
+  " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
+  let g:tmuxline_theme = 'airline'
+  " let g:tmuxline_preset = 'tmux'
 
   if executable('ag')
     NeoBundle 'rking/ag.vim'
@@ -495,13 +491,7 @@
   endif
 
   " Has to be after syntax on for colorscheme to work
-  let g:solarized_termcolors=256
-  if has('gui_running')
-    set background=light
-    colorscheme solarized
-  else
-    colorscheme putty
-  endif
+  colorscheme putty
 
   let g:omni_syntax_ignorecase=0
 

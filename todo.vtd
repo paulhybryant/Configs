@@ -1,10 +1,10 @@
 * vim related tasks
 = Vim @p:1 =
-  @ Documentation for vim-textobj-path < 2014-12-31 (DONE 2014-11-22 09:40)
   @ Profile vim write slowness.
   @ Know vtd better.
   @ Know vimdoc better.
   @ Syntax highlight file for .cvimrc
+  @ Documentation for vim-textobj-path < 2014-12-31 (DONE 2014-11-22 09:40)
   @ Fix airline tabline (current buffer not highlighted) (Update: this is caused by value of 'TERM') (DONE 2014-12-01 15:51)
   @ Find out why only the first and last buffer get syntax highlighting (DONE 2014-11-23 15:38)
   @ Change the background of selected tmux window (DONE 2014-11-21 22:57)
@@ -15,20 +15,20 @@
 = Tmux @p:2 =
   @ tmux-session.sh
   @ Fix the issue for attaching, when a shell script spawn another long running process.
-  @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching.
+  @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching. (DONE 2014-12-06 18:09)
 
 = Misc @p:2 =
-  @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
   @ Change tmuxline.vim back after pull request merged.
+  @ Map Fn key to control in autohotkey.
+  @ Copy and then 'p' does not work in vim for mac.
+  @ Completion for .cvimrc
+  @ Vtd syntax highlight fix on windows
+  @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
   @ Reinstall bundle (vim-nerdtree-tabs, ReloadScript) (DONE 2014-11-28 10:55)
   @ Make the key map from Caps_Lock to ESC universal (DONE 2014-11-21 20:00)
   @ In autohotkey, make C-D exit terminal if in one (DONE 2014-11-27 12:39)
   @ Fix vim-vtd in windows (DONE 2014-11-27 12:39)
-  @ Map Fn key to control in autohotkey.
   @ Try out babun. (DONE 2014-12-02 21:13)
   @ Build vim on windows (DONE 2014-12-02 21:13)
-  @ Gvim windows shell context extension
-  @ Copy and then 'p' does not work in vim for mac.
-  @ Try out rocket dock in win
-  @ Completion for .cvimrc
-  @ Vtd syntax highlight fix on windows
+  @ Gvim windows shell context extension (DONE 2014-12-06 18:10)
+  @ Try out rocket dock in win (DONE 2014-12-06 18:10)
