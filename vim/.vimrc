@@ -414,7 +414,7 @@
   Glaive vtd plugin[mappings]='vtd'
   autocmd BufEnter * if &filetype == 'vtd' | Glaive vtd files+=`[expand('%:p')]`
 
-  Glaive syncopate plugin[mappings]
+  Glaive syncopate plugin[mappings] colorscheme=putty
   let g:html_number_lines = 0
 
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
