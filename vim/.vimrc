@@ -484,9 +484,9 @@
     set spell                                                             " Spellcheck
   endif
 
-  if has ('x11') && LINUX()                                               " On Linux use + register for copy-paste
+  if has ('x11') && (LINUX() || OSX())                                               " On Linux and mac use + register for copy-paste
     set clipboard=unnamedplus
-  else                                                                    " On mac and Windows, use * register for copy-paste
+  else                                                                    " On Windows, use * register for copy-paste
     set clipboard=unnamed
   endif
 

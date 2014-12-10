@@ -3,6 +3,7 @@
   @ Profile vim write slowness.
   @ Know vtd better.
   @ Know vimdoc better.
+
   @ Syntax highlight file for .cvimrc
   @ Documentation for vim-textobj-path < 2014-12-31 (DONE 2014-11-22 09:40)
   @ Fix airline tabline (current buffer not highlighted) (Update: this is caused by value of 'TERM') (DONE 2014-12-01 15:51)
@@ -20,7 +21,7 @@
 = Misc @p:2 =
   @ Change tmuxline.vim back after pull request merged.
   @ Map Fn key to control in autohotkey.
-  @ Copy and then 'p' does not work in vim for mac.
+  @ Copy and then 'p' does not work in vim for mac. (DONE 2014-12-09 16:03)
   @ Completion for .cvimrc
   @ Vtd syntax highlight fix on windows
   @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
