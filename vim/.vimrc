@@ -112,6 +112,7 @@
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
   NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
   NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
+  NeoBundle 'tpope/vim-unimpaired'                                      " Complementary pairs of mappings
   NeoBundle 'vim-scripts/HTML-AutoCloseTag'                               " Automatically close html tags
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
