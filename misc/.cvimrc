@@ -2,15 +2,16 @@
 
 " Settings {{{
 
-set noautofocus                         " The opposite of autofocus; this setting stops sites from focusing on an input box when they load.
-set typelinkhints
-set regexp
+" set noinsertmappings
+set cncpcompletion
 set ignorecase
+set incsearch
+set noautofocus                         " Stops sites from focusing on input box when loaded.
+set noautoupdategist
 set nolinkaimations
 set nonumerichints
-set incsearch
-" set noinsertmappings
-set noautoupdategist
+set regexp
+set typelinkhints
 
 " }}}
 

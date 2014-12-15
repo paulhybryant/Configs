@@ -3,9 +3,7 @@
 " Unsed {{
     " NeoBundle 'akesling/ondemandhighlight'
     " NeoBundle 'jeetsukumaran/vim-buffergator'                             " Use vim-airline for buffers
-    " NeoBundle 'tpope/vim-unimpaired'                                      " Complementary pairs of mappings
     " NeoBundle 'mhinz/vim-startify'                                        " Don't need a fancy start page in vim
-    " NeoBundle 'paulhybryant/TabBar', {'type__protocol' : 'ssh'}           " Feature provided by vim-airline
     " NeoBundle 'TyeMcQueen/vim-merge-windows'
     " NeoBundle 'nathanaelkane/vim-indent-guides'
     " NeoBundle 'bling/vim-bufferline'                                      " Seems to be redundant with tabline in vim-airline
@@ -21,12 +19,6 @@
     " NeoBundle 'vim-scripts/TagHighlight'
     " NeoBundle 'matchit.zip'                                               " Included in vim distribution
     " NeoBundle 'paulhybryant/vimoutliner'
-
-    " if ! &diff
-        " Disabled for now. It breaks the filetype detection when editing multiple files
-        " NeoBundle 'bogado/file-line'                                      " Open a file and go to specific line / column
-    " endif
-    "
 
     " NeoBundle 'basepi/vim-conque'                                         " Conque term (terminal in vim)
     " function! MyConqueStartup(term)
@@ -90,10 +82,6 @@
     " \ 'file': '\.exe$\|\.so$\|\.dll$',
     " \ 'link': 'blaze-bin\|blaze-genfiles\|blaze-google3\|blaze-out\|blaze-testlogs\|READONLY$',
     " \ }
-
-" if !WINDOWS() && has('python') && !filereadable(expand("~/.google"))
-    " NeoBundle 'Valloric/YouCompleteMe'
-" endif
 
 " " Provided by CornadIrwin/vim-bracketed-paste
 " " Automatically handle paste mode toggle when pasting {{
