@@ -54,6 +54,7 @@
       behave mswin
 
       let $TERM='win32'
+      let $PATH="C:/Users/Yu/AppData/Local/GitHub/PortableGit_ed44d00daa128db527396557813e7b68709ed0e2/bin;" . $PATH
       set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
       " Be nice and check for multi_byte even if the config requires
       " multi_byte support most of the time
@@ -112,11 +113,14 @@
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
   NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
   NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
+  NeoBundle 'tpope/vim-unimpaired'                                      " Complementary pairs of mappings
   NeoBundle 'vim-scripts/HTML-AutoCloseTag'                               " Automatically close html tags
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
   NeoBundle 'zaiste/tmux.vim'                                             " Tmux syntax highlight
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
+  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
+  NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
 
   NeoBundle 'vim-scripts/Vim-Support'                                     " Make vim an IDE for writing vimscript
   let g:Vim_MapLeader  = g:maplocalleader
@@ -439,6 +443,7 @@
   set history=1000                                                        " Store a ton of history (default is 20)
   set hlsearch                                                            " Highlight search terms
   set ignorecase                                                          " Case insensitive search
+  set imdisable                                                           " Disable IME in vim
   set incsearch                                                           " Find as you type search
   set laststatus=2                                                        " Always show statusline
   set linespace=0                                                         " No extra spaces between rows
