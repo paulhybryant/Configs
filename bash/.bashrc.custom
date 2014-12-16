@@ -1,5 +1,6 @@
-# vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker nospell:
+# vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
+# Inclusion guard {{{
 [[ -n "$BASH" && -z "$__BASH_CUSTOM__" ]] && readonly __BASH_CUSTOM__=$(realpath "${BASH_SOURCE}")
 
 [[ "$OSTYPE" != "darwin"* ]] && __BASH_CUSTOM_NEW_VERSION__=$(date -r "$__BASH_CUSTOM__" +%s)
@@ -10,40 +11,29 @@ __BASH_CUSTOM_VERSION__="$__BASH_CUSTOM_NEW_VERSION__"
 [[ "$OSTYPE" != "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
 [[ "$OSTYPE" == "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date -r $__BASH_CUSTOM_NEW_VERSION__)"
 
-# General {{{
-
 [[ "$OSTYPE" == "darwin"* ]] && export __SHLIB__=$(dirname $(dirname $(readlink "$HOME/.bashrc.custom")))/shlib
 [[ "$OSTYPE" != "darwin"* ]] && export __SHLIB__=$(dirname $(dirname $(readlink -f "$HOME/.bashrc.custom")))/shlib
-export PATH=$HOME/.local/bin:$PATH
 
 source "$__SHLIB__/common.sh"
+# }}}
 
-if [ -f "$HOME/.bashrc.platform" ]; then
-    source ~/.bashrc.platform
-fi
-
-# Turn on vi mode by default.
-set -o vi
+# General {{{
 
 # Expand $VAR when pressing tab for completion
 shopt -s direxpand
 
-# Allow pass Ctrl + C(Q) for terminator
-stty ixany
-stty ixoff -ixon
-stty stop undef
-stty start undef
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-# Don't enable the following line, it will screw up HOME and END key in tmux
-# If it is really need for program foo, create an alias like this
-# alias foo='TERM=xterm-256color foo'
-export TERM=screen-256color-bce
-export GREP_OPTIONS='--color=auto'
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+# shopt -s globstar
 
 # autocutsel -selection PRIMARY -fork
-
-# Put in .inputrc
-# bind '"\e[A": history-search-backward' '"\e[B": history-search-forward'
 
 # Share history across terminals
 function _update_ps1() {
@@ -53,11 +43,8 @@ export PROMPT_COMMAND="_update_ps1; history -a; history -c; history -r;"
 
 # }}}
 
-# Aliases {{{
+# Completions {{{
 
-# tmux
-alias tmux='TERM=screen-256color-bce tmux -2'
-alias tls="tmux ls"
 function ta() {
   local setenv="/tmp/set-tmux-env.sh"
   > "$setenv"
@@ -74,7 +61,7 @@ function ta() {
     do
       local id=${pane_id_command%%:*}
       local cmd=${pane_id_command##*:}
-      if [[ $cmd != "bash" && $cmd != "blaze64" ]]; then
+      if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
         tmux send-keys -t "$1:$window" C-z
         sleep 0.2
         tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
@@ -104,109 +91,28 @@ complete -F _tmux_sessions -o default ta
 complete -F _tmux_sessions -o default ts
 complete -F _tmux_sessions -o default tk
 
-# vi
-# alias vi="vi -p"
-# alias vim="vim -p"
-
-# misc
-# Print function definition
-alias pfd="declare -f"
-alias rm="rm -v"
-
-# }}}
-
-# functions {{{
-
-function ll() {
-  ls -lh "$@"
-  ls -l "$@" | awk -f "$HOME/.utils/lldu.awk"
-}
-
-function la() {
-  ls -alF "$@"
-  ls -alF "$@" | awk -f "$HOME/.utils/lldu.awk"
-}
-
-function myssh() {
-  ssh "$@" -t "export SSH_OS=\"`uname`\"; bash"
-}
-
-function histgrep() {
-  tac ${HISTFILE:-~/.bash_history} | grep -m 1 "$@"
-}
-
-# }}}
-
-# Start ssh agent if needed {{{
-
-# Check to see if SSH Agent is already running
-agent_pid="$(ps -ef | grep "ssh-agent" | grep -v "grep" | awk '{print($2)}')"
-
-# If the agent is not running (pid is zero length string)
-if [[ -z "$agent_pid" ]]; then
-    # Start up SSH Agent
-
-    # this seems to be the proper method as opposed to `exec ssh-agent bash`
-    eval "$(ssh-agent)"
-fi
 # }}}
 
 # Additional configurations to load {{{
-
-# Force control sequences such as <c-s> and <c-q> to vim
-stty -ixon > /dev/null 2>/dev/null
 
 if [ -f "$HOME/.bashrc.local" ]; then
   . ~/.bashrc.local
 fi
 
-# RVM
-if [ -f ~/.rvm/scripts/rvm ]; then
-  source ~/.rvm/scripts/rvm
-fi
-
 # Tmuxinator
-export EDITOR='vim'
 if [ -e "$HOME/.tmuxinator.bash" ]; then
   source ~/.tmuxinator.bash
 fi
 
-# Use vimpager to replace less, which is used to view man page
-# export PAGER=/usr/local/bin/vimpager
-# alias less=$PAGER
-# alias zless=$PAGER
+function config_darwin() {
+  alias updatedb="sudo /usr/libexec/locate.updatedb"
+}
 
-# The following won't have effect unless less is used (instead of vimpager)
-# http://superuser.com/questions/452034/bash-colorized-man-page
-#
-#   L E S S   C O L O R S   F O R   M A N   P A G E S
-#
+function config_linux() {
+  :
+}
 
-# CHANGE FIRST NUMBER PAIR FOR COMMAND AND FLAG COLOR
-# currently 0;33 a.k.a. brown, which is dark yellow for me
-   export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
-
-# CHANGE FIRST NUMBER PAIR FOR PARAMETER COLOR
-# currently 0;36 a.k.a. cyan
-   export LESS_TERMCAP_us=$'\E[0;36;5;146m' # begin underline
-
-# don't change anything here
-   export LESS_TERMCAP_mb=$'\E[1;31m'       # begin blinking
-   export LESS_TERMCAP_me=$'\E[0m'           # end mode
-   export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-   export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
-   export LESS_TERMCAP_ue=$'\E[0m'           # end underline
-
-#########################################
-# Colorcodes:
-# Black       0;30     Dark Gray     1;30
-# Red         0;31     Light Red     1;31
-# Green       0;32     Light Green   1;32
-# Brown       0;33     Yellow        1;33
-# Blue        0;34     Light Blue    1;34
-# Purple      0;35     Light Purple  1;35
-# Cyan        0;36     Light Cyan    1;36
-# Light Gray  0;37     White         1;37
-#########################################
+[[ "$OSTYPE" == "darwin"* ]] && config_darwin
+[[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
 
 # }}}

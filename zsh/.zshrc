@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+export __SHLIB__=$(dirname $(dirname $(readlink "$HOME/.zshrc")))/shlib
+source "$__SHLIB__/common.sh"
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -41,16 +44,12 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zshcustom
 
-if [[ -d $ZSH_CUSTOM ]]; then
-  export __SHLIB__=$(dirname $(dirname $(readlink "$ZSH_CUSTOM/custom.zsh")))/shlib
-  source "$__SHLIB__/common.sh"
-
-  # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-  # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-  # Example format: plugins=(rails git textmate ruby lighthouse)
-  # Add wisely, as too many plugins slow down shell startup.
-  source $ZSH_CUSTOM/plugins.zsh
-fi
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+[[ "$OSTYPE" == "darwin"* ]] && plugins=(battery brew cp git git-extras github osx ssh-agent tmux tmuxinator vi-mode urltools)
+[[ "$OSTYPE" == "linux-gnu"* ]] && plugins=(battery cp debian git git-extras github tmux tmuxinator vi-mode urltools)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,13 +67,13 @@ export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='vim'
+# export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/github_rsa"
+# export SSH_KEY_PATH="~/.ssh/github_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
