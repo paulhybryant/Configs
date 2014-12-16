@@ -106,10 +106,11 @@ fi
 
 function config_darwin() {
   alias updatedb="sudo /usr/libexec/locate.updatedb"
+  alias ls="ls -F -G"
 }
 
 function config_linux() {
-  :
+  alias ls="ls -F --color=auto"
 }
 
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin

@@ -47,8 +47,6 @@ stty -ixon > /dev/null 2>/dev/null
 
 # aliases {{{
 
-alias ls="ls -F --color=auto"
-
 # vi
 # alias vi="vi -p"
 # alias vim="vim -p"
