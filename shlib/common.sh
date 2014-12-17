@@ -9,8 +9,11 @@
 [[ -n "$__LIB_COMMON_VERSION__" && "$__LIB_COMMON_VERSION__" -eq "$__LIB_COMMON_NEW_VERSION__" ]] && return
 
 __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
-[[ "$OSTYPE" != "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date --date=@$__LIB_COMMON_NEW_VERSION__)"
-[[ "$OSTYPE" == "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
+
+if [[ $DEBUG == true ]]; then
+  [[ "$OSTYPE" != "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date --date=@$__LIB_COMMON_NEW_VERSION__)"
+  [[ "$OSTYPE" == "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
+fi
 RETVAL=
 REPLY=
 # }}}

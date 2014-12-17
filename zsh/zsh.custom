@@ -3,6 +3,7 @@
 # Enalbe Ctrl-R for revert search in vi mode
 bindkey "^R" history-incremental-search-backward
 
+# Put the cursor at the end of line when using Up / Down for command history
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -10,6 +11,7 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
+# Setup powerline for zsh prompt
 function powerline_precmd() {
   export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
 }
@@ -25,7 +27,7 @@ function install_powerline_precmd() {
 
 install_powerline_precmd
 
-# tmux
+# tmux alias
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias ta="tmux attach -t "
 alias tls="tmux ls"

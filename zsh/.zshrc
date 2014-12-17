@@ -92,6 +92,7 @@ setopt share_history
 bindkey "^[OH" beginning-of-line
 bindkey "^[OF" end-of-line
 bindkey "^[[3~" delete-char
+bindkey "^I" complete-word
 
 # Let zsh history search use regex pattern
 bindkey '^R' history-incremental-pattern-search-backward
