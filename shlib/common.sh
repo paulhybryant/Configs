@@ -340,7 +340,6 @@ function link_zsh() {
 
   if [[ -f "$HOME/.personal" ]]; then
     backup_and_link "$_zshconf_/zsh.personal" "$_zshcustom_/local.zsh"
-    backup_and_link "$_zshconf_/zshenv.personal" "$HOME/.zshenv"
   fi
 }
 

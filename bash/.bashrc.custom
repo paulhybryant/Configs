@@ -8,8 +8,10 @@
 [[ -n "$__BASH_CUSTOM_VERSION__" && "$__BASH_CUSTOM_VERSION__" -eq "$__BASH_CUSTOM_NEW_VERSION__" ]] && return
 
 __BASH_CUSTOM_VERSION__="$__BASH_CUSTOM_NEW_VERSION__"
-[[ "$OSTYPE" != "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
-[[ "$OSTYPE" == "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date -r $__BASH_CUSTOM_NEW_VERSION__)"
+if [[ $DEBUG = true ]]; then
+  [[ "$OSTYPE" != "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date --date=@$__BASH_CUSTOM_NEW_VERSION__)"
+  [[ "$OSTYPE" == "darwin"* ]] && echo "$__BASH_CUSTOM__ sourced, modified at $(date -r $__BASH_CUSTOM_NEW_VERSION__)"
+fi
 
 [[ "$OSTYPE" == "darwin"* ]] && export __SHLIB__=$(dirname $(dirname $(readlink "$HOME/.bashrc.custom")))/shlib
 [[ "$OSTYPE" != "darwin"* ]] && export __SHLIB__=$(dirname $(dirname $(readlink -f "$HOME/.bashrc.custom")))/shlib
