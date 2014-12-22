@@ -32,11 +32,11 @@ function mirror_and_start() {
   fi
   if [[ $DRYRUN == true ]]; then
     echo "sed -e \"s#\${SESSION}#$_muxproj_#\" -e \"s#\${ROOT}#$_startcwd_#\" \"$MUXDIR/project.yml.template\" > \"$_muxconfig_\""
-    echo "$GIT_NEW_WORKDIR_CMD $GIT_REPO $GIT_WORKING_DIR_ROOT/$_muxproj_"
+    echo "$GIT_NEW_WORKDIR_CMD $GIT_REPO $GIT_WORKING_DIR_ROOT/$_muxproj_ $_muxproj_"
     echo "mux start \"$_muxproj_\""
   else
     sed -e "s#\${SESSION}#$_muxproj_#" -e "s#\${ROOT}#$_startcwd_#" "$MUXDIR/project.yml.template" > "$_muxconfig_"
-    $GIT_NEW_WORKDIR_CMD "$GIT_REPO" "$GIT_WORKING_DIR_ROOT/$_muxproj_"
+    $GIT_NEW_WORKDIR_CMD "$GIT_REPO" "$GIT_WORKING_DIR_ROOT/$_muxproj_" "$_muxproj_"
     mux start "$_muxproj_"
   fi
 }
@@ -83,6 +83,14 @@ function delete() {
   fi
 }
 
+function git5wrapper() {
+  if [[ $# -ne 3 ]]; then
+    echo "Require 3 parameters"
+    exit 1
+  fi
+  git5 mirror $1 $2 --allow_existing_branch --branch=$3
+}
+
 exit_if_not_exist tmuxinator
 
 VERBOSE=false
@@ -92,7 +100,7 @@ CONFIRM=true
 if [[ -e "$HOME/.google" ]]; then
   GIT_WORKING_DIR_ROOT=$HOME/git5
   GIT_REPO=$HOME/git5repo
-  GIT_NEW_WORKDIR_CMD="git5 mirror"
+  GIT_NEW_WORKDIR_CMD="git5wrapper"
   START_CWD=$GIT_WORKING_DIR_ROOT/__MUXPROJ__/google3
 else
   GIT_WORKING_DIR_ROOT=$HOME/Workspace
