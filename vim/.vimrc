@@ -113,7 +113,7 @@
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
   NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
   NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
-  NeoBundle 'tpope/vim-unimpaired'                                      " Complementary pairs of mappings
+  NeoBundle 'tpope/vim-unimpaired'                                        " Complementary pairs of mappings
   NeoBundle 'vim-scripts/HTML-AutoCloseTag'                               " Automatically close html tags
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
@@ -121,6 +121,9 @@
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
+
+  NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
+  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
 
   NeoBundle 'vim-scripts/Vim-Support'                                     " Make vim an IDE for writing vimscript
   let g:Vim_MapLeader  = g:maplocalleader
