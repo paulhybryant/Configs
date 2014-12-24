@@ -266,7 +266,7 @@ function link_misc() {
 
   backup_and_link "$PWD/notes" "$HOME/Notes"
 
-  mkdir -p "$HOME/.config/terminator"
+  mkdir -p "$HOME/.config/terminator" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/terminator_config" "$HOME/.config/terminator/config"
 
   backup_and_link "$_miscfong_/.inputrc" "$HOME/.inputrc"
@@ -290,7 +290,7 @@ function link_tmux() {
   backup_and_link "$_tmuxconf_/.tmux.extra.conf" "$HOME/.tmux.extra.conf"
   backup_and_link "$_tmuxconf_/mux-config" "$HOME/.local/bin/mux-config"
 
-  mkdir -p "$HOME/.tmuxinator"
+  mkdir -p "$HOME/.tmuxinator" > /dev/null 2>/dev/null
   backup_and_link "$_tmuxconf_/project.yml.template" "$HOME/.tmuxinator/project.yml.template"
 }
 
@@ -298,7 +298,7 @@ function link_utils() {
   local _utilsconf_="${1:-$HOME/Configs/utils}"
   _utilsconf_="${_utilsconf_%/}"
 
-  mkdir -p "$HOME/.utils"
+  mkdir -p "$HOME/.utils" > /dev/null 2>/dev/null
   backup_and_link "$_utilsconf_/awk/flldu.awk" "$HOME/.utils/flldu.awk"
   backup_and_link "$_utilsconf_/awk/lsdu.awk" "$HOME/.utils/lsdu.awk"
   backup_and_link "$_utilsconf_/lldu.awk" "$HOME/.utils/lldu.awk"
@@ -330,7 +330,7 @@ function link_zsh() {
   fi
 
   _zshcustom_="$HOME/.zshcustom"
-  mkdir -p "$_zshcustom_"
+  mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
   backup_and_link "$_zshconf_/.zshrc" "$HOME/.zshrc"
   backup_and_link "$_zshconf_/zsh.custom" "$_zshcustom_/custom.zsh"

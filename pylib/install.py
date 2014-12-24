@@ -142,14 +142,14 @@ class Bundle(object):
     cmdlist = ["sudo", "pip", "install"]
     if FLAGS.reinstall:
       cmdlist.extend(["--reinstall", "--ignore-installed"])
-    cmdlist.append(self._src)
+    cmdlist.append(self._name)
     cmd = " ".join(cmdlist)
     self.ExecuteSystemCmd(cmd)
 
   def InstallWithPipUser(self, target):
     """Install the bundle with pip --user."""
 
-    cmdlist = ["pip", "--user", "install"]
+    cmdlist = ["pip", "install", "--user"]
     if FLAGS.reinstall:
       cmdlist.extend(["--reinstall", "--ignore-installed"])
     cmdlist.append(self._src)
@@ -159,10 +159,11 @@ class Bundle(object):
   def InstallWithGit(self, target):
     """Install the bundle by clone the repository and compile."""
 
-    if FLAGS.dryrun:
-      print "mkdir -p %s" % self._git_dir
-    else:
-      os.makedirs(self._git_dir)
+    if not os.path.exists(self._git_dir):
+      if FLAGS.dryrun:
+        print "mkdir -p %s" % self._git_dir
+      else:
+        os.makedirs(self._git_dir)
 
     target_dir = os.path.join(self._git_dir, target)
     if os.path.isdir(target_dir):
@@ -173,7 +174,7 @@ class Bundle(object):
       self.ExecuteSystemCmd(cmd)
 
     for cmd in self._cmds:
-      self.ExecuteSystemCmd(cmd)
+      self.ExecuteSystemCmd("cd %s; %s" % (target_dir, cmd))
 
 
 class Binary(Bundle):
@@ -275,8 +276,10 @@ def BootstrapDebian():
         "automake": AptPackage("automake", "apt"),
         "checkinstall": AptPackage("checkinstall", "apt"),
         "git": AptPackage("git", "apt"),
+        "sharutils": AptPackage("sharutils", "apt"),
         "libevent-dev": AptPackage("libevent-dev", "apt"),
         "liblzma-dev": AptPackage("liblzma-dev", "apt"),
+        "libncursesw5-dev": AptPackage("libncursesw5-dev", "apt"),
         "libpcre3-dev": AptPackage("libpcre3-dev", "apt"),
         "python-pip": AptPackage("python-pip", "apt"),
         "terminator": AptPackage("terminator", "apt"),
@@ -298,14 +301,15 @@ def BootstrapDebian():
         "vimpager": Binary("vimpager", "git",
                      "https://github.com/rkitover/vimpager.git",
                      ["make", "sudo make install"],
-                     deps=set(["pandoc", "dos2unix", "git"])),
+                     deps=set(["pandoc", "dos2unix", "git", "sharutils"])),
         "htop": Binary("htop", "git",
                        "https://github.com/hishamhm/htop.git",
                        ["./autogen.sh", "./configure", "make",
-                        "sudo make install"], deps=set(["git", "automake"])),
+                        "sudo make install"],
+                       deps=set(["git", "automake", "libncursesw5-dev"])),
         "powerline-shell": Binary(
             "powerline-shell.py", "git",
-            "git@github.com:paulhybryant/powerline-shell.git",
+            "https://github.com/paulhybryant/powerline-shell.git",
             ["mkdir -p $HOME/.local/bin",
              "ln -s $HOME/.gitrepo/powerline-shell.py/powerline-shell.py"
              " $HOME/.local/bin/powerline-shell.py"], deps=set(["git"])),
@@ -362,13 +366,14 @@ def BootstrapMac():
                            deps=set(["brew"])),
         "powerline-shell": Binary(
             "powerline-shell.py", "git",
-            "git@github.com:paulhybryant/powerline-shell.git",
+            "https://github.com/paulhybryant/powerline-shell.git",
             ["ln -s $HOME/.gitrepo/powerline-shell/powerline-shell.py"
              " $HOME/.local/bin/powerline-shell.py"], deps=set(["git"])),
         "powerline": Binary("powerline", "pip-user",
                             "git+git://github.com/Lokaltog/powerline"),
         "htop-osx-patched": Binary(
-            "htop", "git", "git@github.com:paulhybryant/htop-osx-patched.git",
+            "htop", "git",
+            "https://github.com/paulhybryant/htop-osx-patched.git",
             deps=set(["git"])),
         "tmuxinator": Binary("tmuxinator", "gem"),
     }

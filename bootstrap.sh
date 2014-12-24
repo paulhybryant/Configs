@@ -7,6 +7,17 @@
 # http://blog.ivansiu.com/blog/2014/05/01/os-x-get-full-path-of-file-using-realpath/
 
 SCRIPT_PATH=$(dirname "$0")
+which realpath > /dev/null 2>/dev/null
+if [[ $? -ne 0 ]]; then
+  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install realpath
+  [[ "$OSTYPE" == "darwin"* ]] && brew tap iveney/mocha && brew install realpath
+fi
+
+which pip > /dev/null 2>/dev/null
+if [[ $? -ne 0 ]]; then
+  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install python-pip && sudo pip install toposort
+  [[ "$OSTYPE" == "darwin"* ]] && brew install pip
+fi
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
