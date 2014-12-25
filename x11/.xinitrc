@@ -2,5 +2,5 @@
 
 if [ -s ~/.Xmodmap ]; then
   xmodmap ~/.Xmodmap
-  echo "xmodmap loaded" | tee /tmp/log.txt
+  # zenity --info --text=".Xmodmap loaded"
 fi
