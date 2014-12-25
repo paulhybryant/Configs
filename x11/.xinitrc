@@ -1,3 +1,6 @@
+#!/bin/sh
+
 if [ -s ~/.Xmodmap ]; then
-  Xmodmap ~/.Xmodmap
+  xmodmap ~/.Xmodmap
+  echo "xmodmap loaded" | tee /tmp/log.txt
 fi

@@ -298,10 +298,8 @@ function link_utils() {
   local _utilsconf_="${1:-$HOME/Configs/utils}"
   _utilsconf_="${_utilsconf_%/}"
 
-  mkdir -p "$HOME/.utils" > /dev/null 2>/dev/null
-  backup_and_link "$_utilsconf_/awk/flldu.awk" "$HOME/.utils/flldu.awk"
-  backup_and_link "$_utilsconf_/awk/lsdu.awk" "$HOME/.utils/lsdu.awk"
-  backup_and_link "$_utilsconf_/lldu.awk" "$HOME/.utils/lldu.awk"
+  mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
+  backup_and_link "$_utilsconf_/bash/winresize.sh" "$HOME/.local/bin/winresize.sh"
 }
 
 function link_vim() {
