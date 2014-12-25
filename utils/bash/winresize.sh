@@ -12,7 +12,7 @@ function get_active_win_geometry() {
         WIN_Y=${a[4]}
         WIN_W=${a[5]}
         WIN_H=${a[6]}
-        if [[ $DEBUG == true ]]; then
+        if [[ $DEBUG ]]; then
           echo $WIN_X $WIN_Y $WIN_W $WIN_H >> $LOGFILE
         fi
         break;
@@ -21,14 +21,14 @@ function get_active_win_geometry() {
 }
 
 function log_run() {
-  if [[ $DEBUG == true ]]; then
+  if [[ $DEBUG ]]; then
     echo "$1" >> $LOGFILE
   fi
   $1
 }
 
 get_active_win_geometry
-if [[ $DEBUG == true ]]; then
+if [[ $DEBUG ]]; then
   echo "Moving to $1" >> $LOGFILE
 fi
 
