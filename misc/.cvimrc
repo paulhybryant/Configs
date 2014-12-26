@@ -63,7 +63,7 @@ map gh previousTab
 unmap gl
 map gl nextTab
 unmap gs
-map gs :settings
+map gs :settings<CR>
 
 map <Leader>t :tabnew<Space>
 map <Leader>o :open http://
