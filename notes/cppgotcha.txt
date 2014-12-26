@@ -1,0 +1,7 @@
+cppgotcha
+
+• Type conversion. Do not use char as array subscript.
+• Array initialization. Use c++ bracketed initialization.
+• Use std:: for classes in standard library (e.g. std::string).
+• Use uint in for loop to avoid warnings.
+• When chars are involved, ask whether it is ASCII or Unicode.
