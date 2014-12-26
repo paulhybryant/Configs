@@ -40,33 +40,38 @@ let qmark a = ["http://www.reddit.com", "http://www.google.com", "http://twitter
 
 let mapleader = ","
 unmap d
-unmap u
 unmap e
 unmap A
 unmap gR
 unmap X
+" Close the current tab and move to the one before it
+" map X :execute gTx<CR>
+
 " Can use <Space>, to enter buffer completion mode
 map gb :buffer<Space>
 " Toggle the current HUD display value
 map <C-h> :set hud!<CR>
 " Switch between alphabetical hint characters and numeric hints
 map <C-i> :set numerichints!<CR>
+map f F
+
+" Navigation
 map <C-d> scrollPageDown
 map <C-u> scrollPageUp
-map <Leader>t :tabnew<Space>
-map <Leader>o :open http://
-map dd closeTab
-map u lastClosedTab
-map U :restore<Space>
-map f F
-map R reloadTabUncached
 unmap gh
+map gh previousTab
 unmap gl
 map gl nextTab
-map gh previousTab
 unmap gs
 map gs settings
+
+map <Leader>t :tabnew<Space>
+map <Leader>o :open http://
+map R reloadTabUncached
 map gH :open chrome://newtab<CR>
-" map X :execute gTx<CR>                " Close the current tab and move to the one before it
+map dd closeTab
+unmap u
+map u lastClosedTab
+map U :restore<Space>
 
 " }}}
