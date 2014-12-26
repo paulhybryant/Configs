@@ -56,22 +56,22 @@ map <C-i> :set numerichints!<CR>
 map f F
 
 " Navigation
-map <C-d> scrollPageDown
-map <C-u> scrollPageUp
+map <C-d> :scrollPageDown
+map <C-u> :scrollPageUp
 unmap gh
-map gh previousTab
+map gh :previousTab
 unmap gl
-map gl nextTab
+map gl :nextTab
 unmap gs
-map gs settings
+map gs :settings
 
 map <Leader>t :tabnew<Space>
 map <Leader>o :open http://
-map R reloadTabUncached
+map R :reloadTabUncached
 map gH :open chrome://newtab<CR>
-map dd closeTab
+map dd :closeTab
 unmap u
-map u lastClosedTab
+map u :lastClosedTab
 map U :restore<Space>
 
 " }}}
