@@ -299,6 +299,7 @@ function link_utils() {
   _utilsconf_="${_utilsconf_%/}"
 
   mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
+  backup_and_link "$_utilsconf_/bash/winmove.sh" "$HOME/.local/bin/winmove.sh"
   backup_and_link "$_utilsconf_/bash/winresize.sh" "$HOME/.local/bin/winresize.sh"
 }
 
