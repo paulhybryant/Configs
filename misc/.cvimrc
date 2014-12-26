@@ -45,22 +45,28 @@ unmap e
 unmap A
 unmap gR
 unmap X
-map gb :buffer<Space>                   " Can use <Space>, to enter buffer completion mode
-map <C-h> :set hud!<CR>                 " Toggle the current HUD display value
-map <C-i> :set numerichints!<CR>        " Switch between alphabetical hint characters and numeric hints
+" Can use <Space>, to enter buffer completion mode
+map gb :buffer<Space>
+" Toggle the current HUD display value
+map <C-h> :set hud!<CR>
+" Switch between alphabetical hint characters and numeric hints
+map <C-i> :set numerichints!<CR>
 map <C-d> scrollPageDown
 map <C-u> scrollPageUp
-map <Leader>t :tabNew
+map <Leader>t :tabnew<Space>
+map <Leader>o :open http://
 map dd closeTab
 map u lastClosedTab
 map U :restore<Space>
 map f F
 map R reloadTabUncached
-map <Leader>o :open http://
 unmap gh
 unmap gl
 map gl nextTab
 map gh previousTab
+unmap gs
+map gs settings
+map gH :open chrome://newtab<CR>
 " map X :execute gTx<CR>                " Close the current tab and move to the one before it
 
 " }}}

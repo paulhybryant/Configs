@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-DEBUG=true
 LOGFILE=/tmp/log.txt
 
 function get_active_win_geometry() {
@@ -35,7 +34,7 @@ fi
 
 if [[ $WIN_X -ge 1366 ]]; then
   if [[ $1 == "LEFT" ]]; then
-    log_run 'wmctrl -r :ACTIVE: -e 0,0,0,1366,700'
+    log_run 'wmctrl -r :ACTIVE: -e 0,0,0,1366,670'
   fi
 else
   if [[ $1 == "RIGHT" ]]; then
