@@ -276,11 +276,14 @@ def BootstrapDebian():
         "automake": AptPackage("automake", "apt"),
         "checkinstall": AptPackage("checkinstall", "apt"),
         "git": AptPackage("git", "apt"),
+        "pkg-config": AptPackage("pkg-config", "apt"),
         "sharutils": AptPackage("sharutils", "apt"),
         "libevent-dev": AptPackage("libevent-dev", "apt"),
         "liblzma-dev": AptPackage("liblzma-dev", "apt"),
+        "libncurses5-dev": AptPackage("libncurses5-dev", "apt"),
         "libncursesw5-dev": AptPackage("libncursesw5-dev", "apt"),
         "libpcre3-dev": AptPackage("libpcre3-dev", "apt"),
+        "libtool": AptPackage("libtool", "apt"),
         "python-pip": AptPackage("python-pip", "apt"),
         "terminator": AptPackage("terminator", "apt"),
         "pandoc": AptPackage("pandoc", "apt"),
@@ -306,7 +309,8 @@ def BootstrapDebian():
                        "https://github.com/hishamhm/htop.git",
                        ["./autogen.sh", "./configure", "make",
                         "sudo make install"],
-                       deps=set(["git", "automake", "libncursesw5-dev"])),
+                       deps=set(["git", "automake", "libncursesw5-dev",
+                         "libtool"])),
         "powerline-shell": Binary(
             "powerline-shell.py", "git",
             "https://github.com/paulhybryant/powerline-shell.git",
@@ -321,7 +325,8 @@ def BootstrapDebian():
         "tmux": Binary("tmux", "git",
                        "http://git.code.sf.net/p/tmux/tmux-code",
                        ["./autogen.sh", "./configure", "make",
-                        "sudo make install"], deps=set(["git", "automake"])),
+                        "sudo make install"], deps=set(["git", "automake",
+                          "libevent-dev", "libncurses5-dev"])),
         "tmuxinator": Binary("tmuxinator", "gem"),
     }
     dag = {}
@@ -390,7 +395,7 @@ def BootstrapMac():
 def main():
   # TODO(me): Use aspect python for logging
   if (bool(re.match("^linux", platform.platform(), re.IGNORECASE)) and
-      bool(re.match("ubuntu|debian",
+      bool(re.match("ubuntu|debian|deepin",
                     platform.linux_distribution()[0], re.IGNORECASE))):
     BootstrapDebian()
   elif bool(re.match("^darwin", platform.platform(), re.IGNORECASE)):

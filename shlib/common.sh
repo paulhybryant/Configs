@@ -269,6 +269,7 @@ function link_misc() {
   mkdir -p "$HOME/.config/terminator" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/terminator_config" "$HOME/.config/terminator/config"
 
+  mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/.inputrc" "$HOME/.inputrc"
   backup_and_link "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"
   backup_and_link "$_miscfong_/.gitignore" "$HOME/.gitignore"
@@ -285,6 +286,7 @@ function link_tmux() {
     backup_and_link "$_tmuxconf_/.tmux.conf.mac" "$HOME/.tmux.conf.local"
   fi
 
+  mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
   backup_and_link "$_tmuxconf_/.tmux-default.conf" "$HOME/.tmux-default.conf"
   backup_and_link "$_tmuxconf_/.tmux.conf" "$HOME/.tmux.conf"
   backup_and_link "$_tmuxconf_/.tmux.extra.conf" "$HOME/.tmux.extra.conf"
