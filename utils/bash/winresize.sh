@@ -42,9 +42,9 @@ if [[ $WIN_X -ge 1366 ]]; then
   fi
 else
   if [[ $1 == "LEFT" ]]; then
-    log_run 'wmctrl -r :ACTIVE: -e 0,0,470,683,668'
+    log_run 'wmctrl -r :ACTIVE: -e 0,0,470,683,660'
   elif [[ $1 == "RIGHT" ]]; then
-    log_run 'wmctrl -r :ACTIVE: -e 0,683,470,683,668'
+    log_run 'wmctrl -r :ACTIVE: -e 0,683,470,683,660'
   else
     zenity --info --text="Unknown parameter $1"
   fi

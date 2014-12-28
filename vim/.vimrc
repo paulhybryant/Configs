@@ -129,6 +129,7 @@
   let g:Vim_MapLeader  = g:maplocalleader
   NeoBundle 'vim-scripts/bash-support.vim'                                " Make vim an IDE for writing bash
   let g:BASH_MapLeader  = g:maplocalleader
+  let g:BASH_GlobalTemplateFile = expand("$HOME/.vim/bundle/bash-support.vim/bash-support/templates/Templates")
 
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
@@ -243,7 +244,7 @@
     NeoBundle 'tpope/vim-fugitive'                                        " Commands for working with git
     nnoremap <silent> <leader>gs :Gstatus<CR>
     nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
+    nnoremap <silent> <leader>gm :Gcommit<CR>
     nnoremap <silent> <leader>gb :Gblame<CR>
     nnoremap <silent> <leader>gl :Glog<CR>
     nnoremap <silent> <leader>gp :Git push<CR>
