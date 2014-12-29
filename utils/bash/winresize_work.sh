@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# DEBUG=true
 LOGFILE=/tmp/log.txt
 
 function get_active_win_geometry() {
@@ -32,12 +33,24 @@ if [[ $DEBUG == true ]]; then
   echo "Moving to $1" >> $LOGFILE
 fi
 
-if [[ $WIN_X -ge 1366 ]]; then
+if [[ $WIN_X -lt 1920 ]]; then
   if [[ $1 == "LEFT" ]]; then
-    log_run 'wmctrl -r :ACTIVE: -e 0,0,0,1366,670'
+    log_run 'wmctrl -r :ACTIVE: -e 0,0,0,960,1120'
+  elif [[ $1 == "RIGHT" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -e 0,960,0,960,1120'
+  elif [[ $1 == "MAX" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -e 0,0,0,1920,1120'
+  else
+    zenity --info --text="Unknown parameter $1"
   fi
 else
-  if [[ $1 == "RIGHT" ]]; then
-    log_run 'wmctrl -r :ACTIVE: -e 0,1366,0,1920,1160'
+  if [[ $1 == "LEFT" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -e 0,1920,0,960,1152'
+  elif [[ $1 == "RIGHT" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -e 0,2880,0,960,1152'
+  elif [[ $1 == "MAX" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -e 0,1920,0,1920,1152'
+  else
+    zenity --info --text="Unknown parameter $1"
   fi
 fi
