@@ -276,6 +276,7 @@ def BootstrapDebian():
         "automake": AptPackage("automake", "apt"),
         "checkinstall": AptPackage("checkinstall", "apt"),
         "git": AptPackage("git", "apt"),
+        "wmctrl": AptPackage("wmctrl", "apt"),
         "pkg-config": AptPackage("pkg-config", "apt"),
         "sharutils": AptPackage("sharutils", "apt"),
         "libevent-dev": AptPackage("libevent-dev", "apt"),

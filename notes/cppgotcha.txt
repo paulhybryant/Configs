@@ -21,3 +21,4 @@ cppgotcha
 • Find substring in c++ 11 (string.find() return std::size_t, check against std::string::npos), string.substr() to extract.
 • std::regex_search and std::regex_match
 • Remember to allocate one more space for ‘\0’
+• Use std::unique_ptr<T[]> if the pointer is allocated for array.

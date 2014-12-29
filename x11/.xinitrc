@@ -2,5 +2,5 @@
 
 if [ -s ~/.Xmodmap ]; then
   xmodmap ~/.Xmodmap
-  zenity --info --text=".Xmodmap loaded"
+  # zenity --info --text=".Xmodmap loaded"
 fi
