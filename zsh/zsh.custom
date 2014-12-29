@@ -32,6 +32,9 @@ alias tmux="TERM=screen-256color-bce tmux -2"
 alias ta="tmux attach -t "
 alias tls="tmux ls"
 
+unalias ll
+unalias la
+
 # Additional configurations to load {{{
 
 # Tmuxinator
