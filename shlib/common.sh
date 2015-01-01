@@ -349,9 +349,6 @@ function link_x11() {
   _x11conf_="${_x11conf_%/}"
 
   backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
-  if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    backup_and_link "$_x11conf_/.Xmodmap.linux-gnu" "$HOME/.Xmodmap"
-  fi
 }
 
 function link_ctags() {
