@@ -355,8 +355,8 @@
     NeoBundle 'SirVer/ultisnips'
     " remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-j>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    " let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    " let g:UltiSnipsJumpBackwardTrigger="<c-k>"
   else
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
