@@ -340,7 +340,7 @@
   " let g:tmuxline_preset = 'tmux'
 
   if executable('ag')
-    NeoBundle 'rking/ag.vim'
+    NeoBundle 'paulhybryant/ag.vim'
     NeoBundle 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
   elseif executable('ack-grep')

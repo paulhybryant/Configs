@@ -1,6 +1,6 @@
 ! Use Caps_Lock as modifier key, and use Caps_Lock + Arrow key to simulate vim key binding hjkl
 ! remove Caps Lock
-clear lock
+! clear lock
 ! remove Lock = Caps_Lock
 ! remove Shift = Caps_Lock
 ! add Mode_switch
@@ -21,7 +21,7 @@ clear lock
 pointer = 1 2 3 5 4 6 7 8 9 10 11 12 13 14
 
 ! Remap Caps_Lock as Escape
-remove Lock = Caps_Lock
+! remove Lock = Caps_Lock
 ! add Lock = Escape
 ! keysym Caps_Lock = Escape
 ! keysym Escape = Caps_Lock
@@ -31,4 +31,4 @@ remove Lock = Caps_Lock
 
 ! Swap Caps_Lock and Escape
 ! keycode 9 = Caps_Lock NoSymbol Caps_Lock
-keycode 66 = Escape NoSymbol Escape
+! keycode 66 = Escape NoSymbol Escape
