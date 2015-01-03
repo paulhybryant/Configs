@@ -22,3 +22,7 @@ cppgotcha
 • std::regex_search and std::regex_match
 • Remember to allocate one more space for ‘\0’
 • Use std::unique_ptr<T[]> if the pointer is allocated for array.
+• Use std::reference_wrapper<T> to have reference in STL containers.
+• In DFS / BFS, the state Visiting is used to prevent adding repeated elements into the stack / queue.
+• Initialize pointer members etc.
+• Watch out when selecting the `mean` element (e.g. Question 4.3).
