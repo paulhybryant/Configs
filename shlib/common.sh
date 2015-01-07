@@ -121,6 +121,10 @@ function start_ssh_agent() {
   fi
 }
 
+function gnome-shell-exts() {
+  grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
+}
+
 function ll() {
   ls -lh "$@"
   awk '/^-/ {
