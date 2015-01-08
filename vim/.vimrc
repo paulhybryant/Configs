@@ -303,7 +303,7 @@
 
   NeoBundle 'jistr/vim-nerdtree-tabs'                                     " One NERDTree only, shared among buffers / tabs
   NeoBundle 'scrooloose/nerdtree'                                         " File explorer inside vim
-  NeoBundle 'tpope/vim-vinegar'                                           " NERDTree enhancement
+  " NeoBundle 'tpope/vim-vinegar'                                           " NERDTree enhancement
   NeoBundle 'eiginn/netrw'                                                " NERDTree plugin for network
   let g:netrw_altfile = 1
   " File explorer inside vim
