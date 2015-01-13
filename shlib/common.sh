@@ -126,7 +126,7 @@ function gnome-shell-exts() {
 }
 
 function ll() {
-  ls -lh "$@"
+  ls -lh --color=auto "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -142,7 +142,7 @@ function ll() {
 }
 
 function la() {
-  ls -alF "$@"
+  ls -alF --color=auto "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
