@@ -329,6 +329,8 @@ def BootstrapDebian():
                         "sudo make install"], deps=set(["git", "automake",
                           "libevent-dev", "libncurses5-dev"])),
         "tmuxinator": Binary("tmuxinator", "gem"),
+        "linuxbrew": Binary("brew", "git", "https://github.com/Homebrew/linuxbrew.git",
+                       deps=set(["git"])),
     }
     dag = {}
     for name, bundle in bundles.items():
