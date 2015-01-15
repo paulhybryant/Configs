@@ -22,7 +22,10 @@ REPLY=
 # Turn on vi mode by default.
 set -o vi
 
-export PATH=$HOME/.local/bin:$PATH
+export BREWHOME=$HOME/.gitrepo/linuxbrew
+export PATH=$HOME/.local/bin:$BREWHOME/bin:$PATH
+export MANPATH="$BREWHOME/share/man:$MANPATH"
+export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
