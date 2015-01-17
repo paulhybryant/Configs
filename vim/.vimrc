@@ -334,9 +334,10 @@
 
   let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
   NeoBundle 'jaxbot/semantic-highlight.vim'                             " General semantic highlighting for vim
-  NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
+  " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
   " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
-  let g:tmuxline_theme = 'airline'
+  " NeoBundle 'edkolev/promptline.vim'
+  " let g:tmuxline_theme = 'airline'
   " let g:tmuxline_preset = 'tmux'
 
   if executable('ag')
@@ -368,7 +369,8 @@
     if g:statusline_use_airline
       NeoBundle 'bling/vim-airline'
       let g:airline#extensions#tabline#enabled = 1
-      let g:airline#extensions#tmuxline#enabled = 0                       " Disable this for plugin Tmuxline
+      " let g:airline#extensions#tmuxline#enabled = 1                       " Disable this for plugin Tmuxline
+      " let g:airline#extensions#tmuxline#color_template = 'normal'
       let g:airline#extensions#tabline#left_sep = ''
       let g:airline#extensions#tabline#left_alt_sep = ''
       let g:airline#extensions#tabline#buffer_idx_mode = 1
