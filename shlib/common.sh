@@ -22,7 +22,7 @@ REPLY=
 # Turn on vi mode by default.
 set -o vi
 
-export BREWHOME=$HOME/.gitrepo/linuxbrew
+export BREWHOME=$HOME/.linuxbrew
 export PATH=$HOME/.local/bin:$BREWHOME/bin:$PATH
 export MANPATH="$BREWHOME/share/man:$MANPATH"
 export INFOPATH="$BREWHOME/share/info:$INFOPATH"
