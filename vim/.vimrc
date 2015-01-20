@@ -91,7 +91,7 @@
   filetype on
   filetype off
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-  call neobundle#begin()
+  call neobundle#begin(expand('~/.vim/bundle/'))
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
@@ -429,6 +429,7 @@
 
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
+  NeoBundleCheck
 " }}}
 
 " General {{{
