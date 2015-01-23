@@ -23,7 +23,7 @@ REPLY=
 set -o vi
 
 export BREWHOME=$HOME/.linuxbrew
-export PATH=$HOME/.local/bin:$BREWHOME/bin:$PATH
+export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
 export MANPATH="$BREWHOME/share/man:$MANPATH"
 export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 # Don't enable the following line, it will screw up HOME and END key in tmux
