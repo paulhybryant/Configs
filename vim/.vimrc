@@ -118,6 +118,7 @@
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
   NeoBundle 'zaiste/tmux.vim'                                             " Tmux syntax highlight
+  NeoBundle 'tmux-plugins/vim-tmux'                                       " Vim plugin for editing .tmux.conf
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
