@@ -82,16 +82,20 @@
   let g:mapleader = ','
   let g:maplocalleader = ',,'
 
-  if !isdirectory(expand("~/.vim/bundle/neobundle.vim"))
+  if empty($VIMPLUGINDIR)
+    let $VIMPLUGINDIR=expand("$HOME/.vim/bundle")
+  endif
+
+  if !isdirectory(expand("$VIMPLUGINDIR/neobundle.vim"))
     echo "Installing neobundle..."
-    silent !mkdir -p $HOME/.vim/bundle/
-    silent !git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+    silent !mkdir -p $VIMPLUGINDIR/
+    silent !git clone https://github.com/Shougo/neobundle.vim.git $VIMPLUGINDIR/neobundle.vim
   endif
 
   filetype on
   filetype off
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-  call neobundle#begin(expand('~/.vim/bundle/'))
+  set runtimepath+=$VIMPLUGINDIR/neobundle.vim/
+  call neobundle#begin(expand('$VIMPLUGINDIR/'))
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
@@ -130,7 +134,7 @@
   let g:Vim_MapLeader  = g:maplocalleader
   NeoBundle 'vim-scripts/bash-support.vim'                                " Make vim an IDE for writing bash
   let g:BASH_MapLeader  = g:maplocalleader
-  let g:BASH_GlobalTemplateFile = expand("$HOME/.vim/bundle/bash-support.vim/bash-support/templates/Templates")
+  let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINDIR/bash-support.vim/bash-support/templates/Templates")
 
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
@@ -229,7 +233,7 @@
   let g:decho_winheight = 10
 
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
-  set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
+  set spellfile=$VIMPLUGINDIR/vim-custom/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
 
   NeoBundle 'paulhybryant/SQLUtilities'                                   " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)

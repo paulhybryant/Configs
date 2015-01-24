@@ -343,6 +343,68 @@ def BootstrapDebian():
     print e.value
 
 
+def BootstrapDebianWithLinuxbrew():
+  """Bootstrap on debian based system with linuxbrew."""
+  # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+
+  print "Bootstraping debian based system with linuxbrew..."
+  try:
+    bundles = {
+        "git": BrewPackage("git", "brew",
+                           cmds=["brew tap paulhybryant/myformulae"]),
+        "powerline-shell": BrewPackage("powerline-shell", "brew"),
+        "the_silver_searcher": BrewPackage("the_silver_searcher", "brew",
+                                           installer_args=["--HEAD"],
+                                           deps=set(["pcre"])),
+        "automake": BrewPackage("automake", "brew"),
+        "autoconf": BrewPackage("autoconf", "brew"),
+        "pkg-config": BrewPackage("pkg-config", "brew"),
+        "pcre": BrewPackage("pcre", "brew"),
+        "libtool": BrewPackage("libtool", "brew"),
+        "libevent": BrewPackage("libevent", "brew"),
+        "vimpager": BrewPackage("vimpager", "brew"),
+        "htop": BrewPackage("htop", "brew"),
+        "tmux": BrewPackage("tmux", "brew"),
+        "xz": BrewPackage("xz", "brew"),
+        "pandoc": BrewPackage("pandoc", "brew"),
+        "gettext": BrewPackage("gettext", "brew"),
+        "vim": BrewPackage("vim", "brew",
+                           installer_args=["--HEAD", "--without-python3",
+                                           "--override-system-vi",
+                                           "--with-client-server",
+                                           "--with-lua", "--with-luajit",
+                                           "--with-python","--disable-nls"],
+                           deps=set(["python", "bison", "flex", "ncurses",
+                                    "readline"])),
+        "python": BrewPackage("python", "brew"),
+        "bison": BrewPackage("bison", "brew"),
+        "flex": BrewPackage("flex", "brew"),
+        "ncurses": BrewPackage("ncurses", "brew"),
+        "readline": BrewPackage("readline", "brew"),
+        "dos2unix": BrewPackage("dos2unix", "brew",
+                                deps=set(["gettext"])),
+        "checkinstall": AptPackage("checkinstall", "apt"),
+        "terminator": AptPackage("terminator", "apt"),
+        "libxmu-dev": AptPackage("libxmu-dev", "apt"),
+        "wmctrl": BrewPackage("wmctrl", "brew",
+                              deps=set(["libxmu-dev"])),
+        "powerline": PipPackage("powerline", "pip",
+                                "git+git://github.com/Lokaltog/powerline",
+                                deps=set(["python"])),
+        "python-dateutil": PipPackage("python-dateutil", "pip",
+                                      deps=set(["python"])),
+        "tmuxinator": Binary("tmuxinator", "gem"),
+    }
+    dag = {}
+    for name, bundle in bundles.items():
+      if bundle.Deps() is not None:
+        dag[name] = bundle.Deps()
+    for name in toposort_flatten(dag):
+      bundles[name].Install(name)
+  except ExecutionError as e:
+    print e.value
+
+
 def BootstrapMac():
   """Bootstrap on mac osx family system."""
 
