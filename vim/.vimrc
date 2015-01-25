@@ -82,20 +82,23 @@
   let g:mapleader = ','
   let g:maplocalleader = ',,'
 
-  if empty($VIMPLUGINDIR)
-    let $VIMPLUGINDIR=expand("$HOME/.vim/bundle")
+  if empty($VIMPLUGINSDIR)
+    let $VIMPLUGINSDIR=expand("$HOME/.linuxbrew/Cellar/vim/.vim/bundle")
+    if !isdirectory($VIMPLUGINSDIR)
+      let $VIMPLUGINSDIR=expand("$HOME/.vim/bundle")
+    endif
   endif
 
-  if !isdirectory(expand("$VIMPLUGINDIR/neobundle.vim"))
+  if !isdirectory(expand("$VIMPLUGINSDIR/neobundle.vim"))
     echo "Installing neobundle..."
-    silent !mkdir -p $VIMPLUGINDIR/
-    silent !git clone https://github.com/Shougo/neobundle.vim.git $VIMPLUGINDIR/neobundle.vim
+    silent !mkdir -p $VIMPLUGINSDIR/
+    silent !git clone https://github.com/Shougo/neobundle.vim.git $VIMPLUGINSDIR/neobundle.vim
   endif
 
   filetype on
   filetype off
-  set runtimepath+=$VIMPLUGINDIR/neobundle.vim/
-  call neobundle#begin(expand('$VIMPLUGINDIR/'))
+  set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
+  call neobundle#begin(expand('$VIMPLUGINSDIR/'))
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
@@ -134,7 +137,7 @@
   let g:Vim_MapLeader  = g:maplocalleader
   NeoBundle 'vim-scripts/bash-support.vim'                                " Make vim an IDE for writing bash
   let g:BASH_MapLeader  = g:maplocalleader
-  let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINDIR/bash-support.vim/bash-support/templates/Templates")
+  let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
 
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
@@ -233,7 +236,7 @@
   let g:decho_winheight = 10
 
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
-  set spellfile=$VIMPLUGINDIR/vim-custom/spell/en.utf-8.add
+  set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
 
   NeoBundle 'paulhybryant/SQLUtilities'                                   " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)

@@ -32,7 +32,7 @@ export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 export TERM=screen-256color-bce
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
-export VIMPLUGINDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
+export VIMPLUGINSDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
