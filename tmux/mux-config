@@ -26,11 +26,11 @@ function mirror_and_start() {
   local _startcwd_="$3"
   if [[ -d "$GIT_WORKING_DIR_ROOT/$_muxproj_" ]]; then
     echo "Error: $GIT_WORKING_DIR_ROOT/$_muxproj_ exists!"
-    if [[ ! $DRYRUN ]]; then
+    if [[ $DRYRUN == false ]]; then
       return
     fi
   fi
-  if [[ $DRYRUN ]]; then
+  if [[ $DRYRUN == true ]]; then
     echo "sed -e \"s#\${SESSION}#$_muxproj_#\" -e \"s#\${ROOT}#$_startcwd_#\" \"$MUXDIR/project.yml.template\" > \"$_muxconfig_\""
     echo "$GIT_NEW_WORKDIR_CMD $GIT_REPO $GIT_WORKING_DIR_ROOT/$_muxproj_ $_muxproj_"
     echo "mux start \"$_muxproj_\""
