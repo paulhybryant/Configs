@@ -33,6 +33,7 @@ export TERM=screen-256color-bce
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
 export VIMPLUGINSDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
+[[ "$OSTYPE" == "darwin"* ]] && export VIMPLUGINSDIR=$HOME/.vim/bundle
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -71,6 +72,7 @@ alias tls="tmux ls"
 # Print function definition
 alias pfd="declare -f"
 alias rm="rm -v"
+alias nvim="NVIM=nvim nvim"
 
 # }}}
 
