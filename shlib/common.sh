@@ -33,6 +33,7 @@ export TERM=screen-256color-bce
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
 export VIMPLUGINSDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
+export XML_CATALOG_FILES="/usr/local/google/home/yuhuang/.linuxbrew/etc/xml/catalog"
 [[ "$OSTYPE" == "darwin"* ]] && export VIMPLUGINSDIR=$HOME/.vim/bundle
 
 # don't put duplicate lines or lines starting with space in the history.
