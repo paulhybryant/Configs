@@ -86,6 +86,10 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
+function find_no_git() {
+  find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
+}
+
 function colorful_manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
   # http://superuser.com/questions/452034/bash-colorized-man-page
@@ -263,10 +267,6 @@ function git_branch_exist() {
 # }}}
 
 # Bootstrap util functions {{{
-
-function find_no_git() {
-  find . -path "./.git*" -prune -o -type f "$@"
-}
 
 function link_bash() {
   local _bashconf_="${1:-$HOME/Configs/bash}"
