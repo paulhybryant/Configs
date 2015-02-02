@@ -4,3 +4,6 @@
 [submodule "third_party/terminator-solarized"]
 	path = third_party/terminator-solarized
 	url = https://github.com/ghuntley/terminator-solarized.git
+[submodule "third_party/solarized"]
+	path = third_party/solarized
+	url = https://github.com/altercation/solarized.git

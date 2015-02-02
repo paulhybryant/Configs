@@ -28,7 +28,7 @@ function install_powerline_precmd() {
 install_powerline_precmd
 
 # tmux alias
-alias tmux="TERM=screen-256color-bce tmux -2"
+alias tmux="TERM=screen-256color tmux -2"
 
 function ta() {
   local setenv="/tmp/set-tmux-env.sh"
@@ -65,6 +65,17 @@ alias tls="tmux ls"
 
 unalias ll
 unalias la
+unalias ls
+
+if gls --color -d . &>/dev/null 2>&1
+then
+  alias ls='gls --color=tty'
+elif ls --color -d . &>/dev/null 2>&1
+then
+  alias ls='ls --color=tty'
+else
+  alias ls='ls -G'
+fi
 
 # Additional configurations to load {{{
 

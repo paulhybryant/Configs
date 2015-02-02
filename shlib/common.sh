@@ -53,9 +53,11 @@ stty start undef
 # Force control sequences such as <c-s> and <c-q> to vim
 stty -ixon > /dev/null 2>/dev/null
 
+[[ "$OSTYPE" != "darwin"* ]] && DIRCOLORS_CMD="dircolors"
+[[ "$OSTYPE" == "darwin"* ]] && DIRCOLORS_CMD="gdircolors"
 CONFIG_DIR=$(dirname "$__LIB_COMMON__")
 CONFIG_DIR=$(dirname "$CONFIG_DIR")
-GET_DIRCOLORS=$(dircolors "$CONFIG_DIR/third_party/dircolors-solarized/dircolors.256dark")
+GET_DIRCOLORS=$($DIRCOLORS_CMD "$CONFIG_DIR/third_party/dircolors-solarized/dircolors.256dark")
 eval "$GET_DIRCOLORS"
 # }}}
 
