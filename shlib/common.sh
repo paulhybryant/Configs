@@ -29,7 +29,7 @@ export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
-export TERM=screen-256color-bce
+export TERM=screen-256color
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
 export VIMPLUGINSDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
@@ -52,6 +52,11 @@ stty start undef
 
 # Force control sequences such as <c-s> and <c-q> to vim
 stty -ixon > /dev/null 2>/dev/null
+
+CONFIG_DIR=$(dirname "$__LIB_COMMON__")
+CONFIG_DIR=$(dirname "$CONFIG_DIR")
+GET_DIRCOLORS=$(dircolors "$CONFIG_DIR/third_party/dircolors-solarized/dircolors.256dark")
+eval "$GET_DIRCOLORS"
 # }}}
 
 # aliases {{{
@@ -61,7 +66,7 @@ stty -ixon > /dev/null 2>/dev/null
 # alias vim="vim -p"
 
 # tmux
-alias tmux='TERM=screen-256color-bce tmux -2'
+alias tmux='TERM=screen-256color tmux -2'
 alias tls="tmux ls"
 
 # Use vimpager to replace less, which is used to view man page
@@ -256,6 +261,10 @@ function git_branch_exist() {
 # }}}
 
 # Bootstrap util functions {{{
+
+function find_no_git() {
+  find . -path "./.git*" -prune -o -type f "$@"
+}
 
 function link_bash() {
   local _bashconf_="${1:-$HOME/Configs/bash}"

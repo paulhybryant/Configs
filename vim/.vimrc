@@ -511,7 +511,8 @@
   endif
 
   " Has to be after syntax on for colorscheme to work
-  colorscheme putty
+  " colorscheme putty
+  colorscheme solarized
 
   let g:omni_syntax_ignorecase=0
 

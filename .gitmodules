@@ -1,0 +1,6 @@
+[submodule "third_party/dircolors-solarized"]
+	path = third_party/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "third_party/terminator-solarized"]
+	path = third_party/terminator-solarized
+	url = https://github.com/ghuntley/terminator-solarized.git
