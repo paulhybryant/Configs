@@ -88,6 +88,16 @@ alias nvim="NVIM=nvim nvim"
 
 function find_no_git() {
   find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
+  # Commands with the same output
+  # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
+  # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
+  # find . -type d \( -path './third_party*' -o -path './.git*' \) -prune -o -type f -print
+  # Differences betwee these commands
+  # 1. -prune stops find from descending into a directory. Just specifying
+  #    -not -path will still descend into the skipped directory, but -not -path
+  #    will be false whenever find tests each file.
+  # 2. find prints the pruned directory
+  # So performance of 1 and 3 will be better
 }
 
 function colorful_manpage() {
