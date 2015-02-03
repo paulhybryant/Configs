@@ -129,7 +129,7 @@
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
-
+  NeoBundle 'wellle/tmux-complete.vim'                                    " Vim plugin for insert mode completion of words in adjacent tmux panes
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
   NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
 
