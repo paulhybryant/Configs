@@ -100,6 +100,8 @@
   set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
   call neobundle#begin(expand('$VIMPLUGINSDIR/'))
 
+  " TODO(yuhuang): Use NeoBundleLazy to load plugins for specific filetypes if
+  " vim starts slow.
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
@@ -430,8 +432,8 @@
   endif
 
   call neobundle#end()
-  call glaive#Install()
 
+  call glaive#Install()
   Glaive vtd plugin[mappings]='vtd'
   autocmd BufEnter * if &filetype == 'vtd' | Glaive vtd files+=`[expand('%:p')]`
 
