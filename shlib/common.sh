@@ -86,6 +86,19 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
+function get_tmux_pid() {
+  TMUX_PID=$(ps -e | grep tmux | cut -d' ' -f1)
+  export TMUX_PID
+}
+
+function tmux_wrapper() {
+  get_tmux_pid
+  if [[ -z $TMUX_PID ]]; then
+    :
+  fi
+}
+
+
 function find_no_git() {
   find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   # Commands with the same output
@@ -154,9 +167,7 @@ function gnome-shell-exts() {
 }
 
 function ll() {
-  [[ "$OSTYPE" != "darwin"* ]] && _lsopts_='--color=auto'
-  [[ "$OSTYPE" == "darwin"* ]] && _lsopts_='-G'
-  ls -lh $_lsopts_ "$@"
+  ls -lh "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -172,9 +183,7 @@ function ll() {
 }
 
 function la() {
-  [[ "$OSTYPE" != "darwin"* ]] && _lsopts_='--color=auto'
-  [[ "$OSTYPE" == "darwin"* ]] && _lsopts_='-G'
-  ls -alF $_lsopts_ "$@"
+  ls -alF "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
