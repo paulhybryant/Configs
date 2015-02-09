@@ -103,42 +103,35 @@
   " TODO(yuhuang): Use NeoBundleLazy to load plugins for specific filetypes if
   " vim starts slow.
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
-  NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
-  NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
-  NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
   NeoBundle 'Shougo/neobundle-vim-recipes'                                " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
+
+  NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
   NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
-  NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
   NeoBundle 'christoomey/vim-tmux-navigator'                              " Allow using the same keymap to move between tmux panes and vim splits seamlessly
-  NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
-  NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
   NeoBundle 'justinmk/vim-sneak'                                          " Easy motion within one line
-  NeoBundle 'octol/vim-cpp-enhanced-highlight'                            " Enhanced vim cpp highlight
-  NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
+
   NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
-  NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
-  NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
   NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
   NeoBundle 'tpope/vim-unimpaired'                                        " Complementary pairs of mappings
-  NeoBundle 'vim-scripts/HTML-AutoCloseTag'                               " Automatically close html tags
-  NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
-  NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
-  NeoBundle 'zaiste/tmux.vim'                                             " Tmux syntax highlight
-  NeoBundle 'tmux-plugins/vim-tmux'                                       " Vim plugin for editing .tmux.conf
-  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
-  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
-  NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
-  NeoBundle 'wellle/tmux-complete.vim'                                    " Vim plugin for insert mode completion of words in adjacent tmux panes
+
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
+  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
 
-  NeoBundle 'vim-scripts/Vim-Support'                                     " Make vim an IDE for writing vimscript
-  let g:Vim_MapLeader  = g:maplocalleader
-  NeoBundle 'vim-scripts/bash-support.vim'                                " Make vim an IDE for writing bash
-  let g:BASH_MapLeader  = g:maplocalleader
-  let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
+  NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
+  NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
+  NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
+  NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
+  NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
+  NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
+  NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
+  NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
+  NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
+  NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
+  NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
+  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
+  NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
 
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
@@ -151,7 +144,6 @@
 
   " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
   " let g:weather#area='Sunnyvale'
-
   " NeoBundle 'szw/vim-ctrlspace'                                         " Vim workspace manager
 
   NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
@@ -211,12 +203,6 @@
     " autocmd FileType text call textobj#quote#init({'educate': 0})
   " augroup END
 
-  NeoBundle 'osyo-manga/vim-over'                                         " Preview changes to be made
-  map <leader>o :OverCommandLine<CR>
-
-  NeoBundle 'syngan/vim-vimlint', {'depends' : 'ynkdir/vim-vimlparser'}   " Syntax checker for vimscript
-  " NeoBundle 'dbakker/vim-lint'                                          " Syntax checker for vimscript
-
   NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
   " NeoBundle 'paulhybryant/vim-LargeFile'                                  " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
@@ -225,17 +211,10 @@
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                 " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
 
-  NeoBundle 'vim-scripts/ReloadScript'                                    " Reload vim script without having to restart vim
-  map <leader>rl :ReloadScript %:p<CR>
-
   NeoBundle 'paulhybryant/mark'                                           " Highlight multiple patterns with different color (Host latest version 2.8.5)
   " NeoBundle 'vim-scripts/ShowMarks'                                     " Use gutter to show location of marks
   nnoremap <leader>mc :MarkClear<CR>
   nnoremap <leader>m/ :Mark <C-R>/<CR>
-
-  NeoBundle 'paulhybryant/Decho.vim'                                      " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
-  let g:dechofuncname = 1
-  let g:decho_winheight = 10
 
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
   set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
@@ -325,6 +304,10 @@
     \   'mappings' : '<Plug>',
     \   'explorer' : 1,
     \ }
+  " NeoBundle 'wincent/Command-T'
+  NeoBundle 'osyo-manga/vim-over'                                         " Preview changes to be made
+  map <leader>o :OverCommandLine<CR>
+
   noremap <C-e> :NERDTreeToggle %<CR>
   " noremap <C-e> :NERDTreeTabsToggle<CR>
   " noremap <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -419,15 +402,42 @@
     let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
     let g:unite_source_grep_recursive_opt=''
   endif
-  " NeoBundle 'wincent/Command-T'
 
+  " Lazily load Filetype specific bundles
+  " Filetype vtd
   NeoBundleLazy 'chiphogg/vim-vtd'
 
+  " Filetype sql
   NeoBundleLazy 'paulhybryant/SQLUtilities', { 'filetypes' : 'sql' }          " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)
   NeoBundleLazy 'vim-scripts/SQLComplete.vim', { 'filetypes' : 'sql' }        " SQL script completion
   NeoBundleLazy 'vim-scripts/sql.vim--Stinson', { 'filetypes' : 'sql' }       " Better SQL syntax highlighting
-
   let g:sqlutil_align_comma=0
+
+  " Filetype html
+  NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'filetypes' : 'sql' }      " Automatically close html tags
+
+  " Filetype tmux
+  NeoBundleLazy 'tmux-plugins/vim-tmux', { 'filetypes' : 'tmux' }             " Vim plugin for editing .tmux.conf
+  NeoBundleLazy 'zaiste/tmux.vim', { 'filetypes' : 'tmux' }                   " Tmux syntax highlight
+  NeoBundleLazy 'wellle/tmux-complete.vim', { 'filetype' : 'tmux' }           " Vim plugin for insert mode completion of words in adjacent tmux panes
+
+  " Filetype sh
+  NeoBundleLazy 'vim-scripts/bash-support.vim', { 'filetypes' : 'sh' }        " Make vim an IDE for writing bash
+  let g:BASH_MapLeader  = g:maplocalleader
+  let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
+
+  " Filetype vim
+  NeoBundleLazy 'vim-scripts/ReloadScript', { 'filetypes' : 'vim' }           " Reload vim script without having to restart vim
+  map <leader>rl :ReloadScript %:p<CR>
+  NeoBundleLazy 'paulhybryant/Decho.vim', { 'filetypes' : 'vim' }             " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
+  let g:dechofuncname = 1
+  let g:decho_winheight = 10
+  NeoBundleLazy 'syngan/vim-vimlint', {
+        \ 'filetypes' : 'vim',
+        \ 'depends' : 'ynkdir/vim-vimlparser'}                                " Syntax checker for vimscript
+  " NeoBundleLazy 'dbakker/vim-lint', { 'filetyps' : 'vim' }                  " Syntax checker for vimscript
+  NeoBundleLazy 'vim-scripts/Vim-Support', { 'filetypes' : 'vim' }            " Make vim an IDE for writing vimscript
+  let g:Vim_MapLeader  = g:maplocalleader
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
@@ -440,7 +450,7 @@
   call glaive#Install()
 
   autocmd FileType vtd NeoBundleSource vim-vtd
-    \ | Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
+        \ | Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
 
   Glaive syncopate plugin[mappings] colorscheme=putty
   let g:html_number_lines = 0
