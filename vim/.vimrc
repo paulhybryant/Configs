@@ -217,6 +217,7 @@
   " NeoBundle 'dbakker/vim-lint'                                          " Syntax checker for vimscript
 
   NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
+  " NeoBundle 'paulhybryant/vim-LargeFile'                                  " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vim-textobj-path'                               " Define text object for a file system path
@@ -247,6 +248,8 @@
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let g:syntastic_always_populate_loc_list = 1
 
+  NeoBundle 'mhinz/vim-hugefile'                                          " Make edit / view of huge files better
+  let g:hugefile_trigger_size = 50                                        " In MB
   NeoBundle 'mhinz/vim-signify'                                           " Show the sign at changes from last git commit
   if !WINDOWS()
     NeoBundle 'tpope/vim-fugitive'                                        " Commands for working with git

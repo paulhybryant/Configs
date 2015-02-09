@@ -86,6 +86,19 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
+function get_tmux_pid() {
+  TMUX_PID=$(ps -e | grep tmux | cut -d' ' -f1)
+  export TMUX_PID
+}
+
+function tmux_wrapper() {
+  get_tmux_pid
+  if [[ -z $TMUX_PID ]]; then
+    :
+  fi
+}
+
+
 function find_no_git() {
   find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   # Commands with the same output
