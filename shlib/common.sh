@@ -154,9 +154,7 @@ function gnome-shell-exts() {
 }
 
 function ll() {
-  [[ "$OSTYPE" != "darwin"* ]] && _lsopts_='--color=auto'
-  [[ "$OSTYPE" == "darwin"* ]] && _lsopts_='-G'
-  ls -lh $_lsopts_ "$@"
+  ls -lh "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -172,9 +170,7 @@ function ll() {
 }
 
 function la() {
-  [[ "$OSTYPE" != "darwin"* ]] && _lsopts_='--color=auto'
-  [[ "$OSTYPE" == "darwin"* ]] && _lsopts_='-G'
-  ls -alF $_lsopts_ "$@"
+  ls -alF "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
