@@ -239,7 +239,9 @@ function run() {
   if [[ $DRYRUN == true ]]; then
     echo "$_cmd_"
   else
+    set -o noglob
     $_cmd_
+    set +o noglob
   fi
 }
 

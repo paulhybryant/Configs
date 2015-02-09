@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -o nounset                  # Treat unset variables as an error.
+set -o errexit                  # Exit script when run into the first error.
+
 # realpath is not available on osx
 # to install:
 # brew tap iveney/mocha
