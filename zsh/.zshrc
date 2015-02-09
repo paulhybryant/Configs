@@ -1,9 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-export __SHLIB__=$(dirname $(dirname $(readlink "$HOME/.zshrc")))/shlib
-source "$__SHLIB__/common.sh"
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -49,7 +46,7 @@ ZSH_CUSTOM=$HOME/.zshcustom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 [[ "$OSTYPE" == "darwin"* ]] && plugins=(battery brew cp git git-extras github osx ssh-agent tmux tmuxinator vi-mode urltools)
-[[ "$OSTYPE" == "linux-gnu"* ]] && plugins=(battery cp git git-extras github tmux tmuxinator vi-mode urltools)
+[[ "$OSTYPE" == "linux-gnu"* ]] && plugins=(battery brew cp git git-extras github ssh-agent tmux tmuxinator vi-mode urltools)
 
 source $ZSH/oh-my-zsh.sh
 
