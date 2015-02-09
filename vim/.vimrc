@@ -109,7 +109,6 @@
   NeoBundle 'Shougo/neobundle-vim-recipes'                                " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
   NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
-  NeoBundle 'chiphogg/vim-vtd'                                            " Advanced TODO list in vim (Uncomment after bug fix merged)
   NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
   NeoBundle 'christoomey/vim-tmux-navigator'                              " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
@@ -241,11 +240,6 @@
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
   set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
-
-  NeoBundle 'paulhybryant/SQLUtilities'                                   " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)
-  let g:sqlutil_align_comma=0
-  NeoBundle 'vim-scripts/SQLComplete.vim'                                 " SQL script completion
-  NeoBundle 'vim-scripts/sql.vim--Stinson'                                " Better SQL syntax highlighting
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let g:syntastic_always_populate_loc_list = 1
@@ -427,15 +421,26 @@
   endif
   " NeoBundle 'wincent/Command-T'
 
+  NeoBundleLazy 'chiphogg/vim-vtd'
+
+  NeoBundleLazy 'paulhybryant/SQLUtilities', { 'filetypes' : 'sql' }          " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)
+  NeoBundleLazy 'vim-scripts/SQLComplete.vim', { 'filetypes' : 'sql' }        " SQL script completion
+  NeoBundleLazy 'vim-scripts/sql.vim--Stinson', { 'filetypes' : 'sql' }       " Better SQL syntax highlighting
+
+  let g:sqlutil_align_comma=0
+
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
   endif
 
   call neobundle#end()
 
+  " Must be maktaba and glaive in runtime path because this is called
+  " Thus it has to be after neobundle#end()
   call glaive#Install()
-  Glaive vtd plugin[mappings]='vtd'
-  autocmd BufEnter * if &filetype == 'vtd' | Glaive vtd files+=`[expand('%:p')]`
+
+  autocmd FileType vtd NeoBundleSource vim-vtd
+    \ | Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
 
   Glaive syncopate plugin[mappings] colorscheme=putty
   let g:html_number_lines = 0

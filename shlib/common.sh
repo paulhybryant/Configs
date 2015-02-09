@@ -100,7 +100,7 @@ function tmux_wrapper() {
 
 
 function find_no_git() {
-  find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
+  find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   # Commands with the same output
   # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
   # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
