@@ -108,6 +108,7 @@
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
   NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
   NeoBundle 'christoomey/vim-tmux-navigator'                              " Allow using the same keymap to move between tmux panes and vim splits seamlessly
+  NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
   NeoBundle 'justinmk/vim-sneak'                                          " Easy motion within one line
 
   NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
@@ -128,15 +129,14 @@
   NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
   NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
   NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
-  NeoBundle 'tpope/vim-git'                                               " Syntax highlight for git
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
 
   " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
-    \   'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
-    \ }
+        \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
+        \ }
   let g:notes_directories = ['~/Notes']
   let g:notes_suffix = '.txt'
   let g:notes_indexfile = '~/Notes/notes.idx'
@@ -153,17 +153,17 @@
     " NeoBundle 'xolox/easytags', {'depends' : 'xolox/vim-misc'}      " Vim integration with ctags
     NeoBundle 'majutsushi/tagbar'
     let g:tagbar_type_autohotkey = {
-      \   'ctagstype' : 'autohotkey',
-      \   'kinds' : [
-      \     's:sections',
-      \     'g:graphics:0:0',
-      \     'l:labels',
-      \     'r:refs:1:0',
-      \     'p:pagerefs:1:0'
-      \   ],
-      \   'sort'  : 0,
-      \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
-      \ }
+          \ 'ctagstype' : 'autohotkey',
+          \   'kinds' : [
+          \     's:sections',
+          \     'g:graphics:0:0',
+          \     'l:labels',
+          \     'r:refs:1:0',
+          \     'p:pagerefs:1:0'
+          \   ],
+          \   'sort'  : 0,
+          \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
+          \ }
   endif
 
   NeoBundle 'kien/rainbow_parentheses.vim'                                " Colorful parentheses
@@ -174,12 +174,8 @@
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
 
-  " NeoBundle 'vinarise.vim'                                              " Ultimate hex editing system with vim
-  " NeoBundle 'glts/vim-radical'                                          " Show number under cursor in hex, octal, binary
-
-  " NeoBundle 'tpope/vim-markdown'                                        " Syntax highlighting for markdown
-  NeoBundle 'plasticboy/vim-markdown'                                     " Yet another markdown syntax highlighting
-  NeoBundle 'isnowfy/python-vim-instant-markdown'                         " Start a http server and preview markdown instantly
+  " NeoBundle 'Shougo/vinarise.vim'                                         " Ultimate hex editing system with vim
+  " NeoBundle 'glts/vim-radical'                                            " Show number under cursor in hex, octal, binary
 
   NeoBundle 'kana/vim-textobj-user'                                       " Allow defining text object by user
   NeoBundle 'jceb/vim-textobj-uri'                                        " Define text object for uri
@@ -322,14 +318,6 @@
   let g:NERDTreeShowHidden=1
   let g:nerdtree_tabs_open_on_gui_startup=0
 
-  let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
-  NeoBundle 'jaxbot/semantic-highlight.vim'                             " General semantic highlighting for vim
-  " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-  " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
-  " NeoBundle 'edkolev/promptline.vim'
-  " let g:tmuxline_theme = 'airline'
-  " let g:tmuxline_preset = 'tmux'
-
   if executable('ag')
     NeoBundle 'rking/ag.vim'
     NeoBundle 'mileszs/ack.vim'
@@ -351,6 +339,12 @@
   else
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
+
+  " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
+  " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'edkolev/promptline.vim'
+  " let g:tmuxline_theme = 'airline'
+  " let g:tmuxline_preset = 'tmux'
 
   if has('python')
     NeoBundle 'Valloric/MatchTagAlways'
@@ -438,6 +432,20 @@
   " NeoBundleLazy 'dbakker/vim-lint', { 'filetyps' : 'vim' }                  " Syntax checker for vimscript
   NeoBundleLazy 'vim-scripts/Vim-Support', { 'filetypes' : 'vim' }            " Make vim an IDE for writing vimscript
   let g:Vim_MapLeader  = g:maplocalleader
+
+  " Filetype gitcommit
+  NeoBundleLazy 'tpope/vim-git', { 'filetypes' : 'gitcommit' }                " Syntax highlight for git
+
+  " Filetype markdown
+  " NeoBundle 'tpope/vim-markdown', { 'filetypes' : 'markdown' }              " Syntax highlighting for markdown
+  NeoBundleLazy 'plasticboy/vim-markdown', { 'filetypes' : 'markdown' }       " Yet another markdown syntax highlighting
+  NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
+        \ 'filetypes' : 'markdown' }                                          " Start a http server and preview markdown instantly
+
+  " Filetype cpp
+  NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', { 'filetypes' : 'cpp' }   " Enhanced vim cpp highlight
+  NeoBundleLazy 'jaxbot/semantic-highlight.vim', { 'filetypes' : 'cpp' }      " General semantic highlighting for vim
+  let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
