@@ -149,8 +149,13 @@
   NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
   " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
 
+  " NeoBundle 'tpope/vim-surround'
+  " NeoBundle 'tpope/vim-abolish.git'                                     " Creates set of abbreviations for spell correction easily
+  " NeoBundle 'rhysd/libclang-vim'
+  " NeoBundle 'godlygeek/tabular'
+
   if executable('ctags')
-    " NeoBundle 'xolox/easytags', {'depends' : 'xolox/vim-misc'}      " Vim integration with ctags
+    NeoBundle 'xolox/easytags', {'depends' : 'xolox/vim-misc'}      " Vim integration with ctags
     NeoBundle 'majutsushi/tagbar'
     let g:tagbar_type_autohotkey = {
           \ 'ctagstype' : 'autohotkey',
@@ -441,6 +446,7 @@
   NeoBundleLazy 'plasticboy/vim-markdown', { 'filetypes' : 'markdown' }       " Yet another markdown syntax highlighting
   NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
         \ 'filetypes' : 'markdown' }                                          " Start a http server and preview markdown instantly
+  " NeoBundle 'suan/vim-instant-markdown'
 
   " Filetype cpp
   NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', { 'filetypes' : 'cpp' }   " Enhanced vim cpp highlight

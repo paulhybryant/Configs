@@ -7,15 +7,9 @@
     " NeoBundle 'TyeMcQueen/vim-merge-windows'
     " NeoBundle 'nathanaelkane/vim-indent-guides'
     " NeoBundle 'bling/vim-bufferline'                                      " Seems to be redundant with tabline in vim-airline
-    " NeoBundle 'suan/vim-instant-markdown'
-    " NeoBundle 'godlygeek/tabular'
     " NeoBundle 'vim-scripts/ReplaceWithRegister'                           " Replace motion text with content of a register
-    " NeoBundle 'rhysd/libclang-vim'
     " NeoBundle 'sjl/gundo.vim'
-    " NeoBundle 'tpope/vim-abolish.git'                                     " Creates set of abbreviations for spell correction easily
     " NeoBundle 'tpope/vim-eunuch'
-    " NeoBundle 'tpope/vim-surround'
-    " NeoBundle 'vim-jp/cpp-vim'
     " NeoBundle 'vim-scripts/TagHighlight'
     " NeoBundle 'matchit.zip'                                               " Included in vim distribution
     " NeoBundle 'paulhybryant/vimoutliner'
