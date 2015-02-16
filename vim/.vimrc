@@ -132,30 +132,27 @@
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
+  NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
+  " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
 
-  " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
-        \ }
+        \ }                                                               " Note taking with vim
   let g:notes_directories = ['~/Notes']
   let g:notes_suffix = '.txt'
   let g:notes_indexfile = '~/Notes/notes.idx'
   let g:notes_tagsindex = '~/Notes/notes.tags'
 
-  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
-  " let g:weather#area='Sunnyvale'
   " NeoBundle 'szw/vim-ctrlspace'                                         " Vim workspace manager
-
-  NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
-  " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
-
   " NeoBundle 'tpope/vim-surround'
   " NeoBundle 'tpope/vim-abolish.git'                                     " Creates set of abbreviations for spell correction easily
   " NeoBundle 'rhysd/libclang-vim'
   " NeoBundle 'godlygeek/tabular'
+  " NeoBundle 'Shougo/vinarise.vim'                                         " Ultimate hex editing system with vim
+  " NeoBundle 'glts/vim-radical'                                            " Show number under cursor in hex, octal, binary
 
   if executable('ctags')
-    NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
+    " NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
     NeoBundle 'majutsushi/tagbar'
     let g:tagbar_type_autohotkey = {
           \ 'ctagstype' : 'autohotkey',
@@ -178,9 +175,6 @@
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-
-  " NeoBundle 'Shougo/vinarise.vim'                                         " Ultimate hex editing system with vim
-  " NeoBundle 'glts/vim-radical'                                            " Show number under cursor in hex, octal, binary
 
   NeoBundle 'kana/vim-textobj-user'                                       " Allow defining text object by user
   NeoBundle 'jceb/vim-textobj-uri'                                        " Define text object for uri
@@ -205,17 +199,15 @@
   " augroup END
 
   NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'paulhybryant/vim-LargeFile'                                  " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vim-textobj-path'                               " Define text object for a file system path
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                 " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
-
   NeoBundle 'paulhybryant/mark'                                           " Highlight multiple patterns with different color (Host latest version 2.8.5)
-  " NeoBundle 'vim-scripts/ShowMarks'                                     " Use gutter to show location of marks
   nnoremap <leader>mc :MarkClear<CR>
   nnoremap <leader>m/ :Mark <C-R>/<CR>
+  " NeoBundle 'vim-scripts/ShowMarks'                                     " Use gutter to show location of marks
 
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
   set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
@@ -224,9 +216,12 @@
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let g:syntastic_always_populate_loc_list = 1
 
+  " NeoBundle 'paulhybryant/vim-LargeFile'                                  " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'mhinz/vim-hugefile'                                          " Make edit / view of huge files better
   let g:hugefile_trigger_size = 50                                        " In MB
+
   NeoBundle 'mhinz/vim-signify'                                           " Show the sign at changes from last git commit
+  " NeoBundle 'airblade/vim-gitgutter'                                  " Prefer vim-signify
   if !WINDOWS()
     NeoBundle 'tpope/vim-fugitive'                                        " Commands for working with git
     nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -240,7 +235,6 @@
     nnoremap <silent> <leader>ge :Gedit<CR>
     nnoremap <silent> <leader>gi :Git add -p %<CR>
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
-    " NeoBundle 'airblade/vim-gitgutter'                                  " Prefer vim-signify
   else
     NeoBundle 'vim-scripts/Tail-Bundle'                                   " Tail for windows in vim
   endif
@@ -279,6 +273,7 @@
   " NeoBundle 'tpope/vim-commentary'                                      " Add comments
   NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
   let g:NERDSpaceDelims = 1
+  let g:NERDCustomDelimiters = {}
   if exists('g:NERDCustomDelimiters')
     let g:NERDCustomDelimiters['rvl'] = { 'left': '#' }
   else
@@ -323,19 +318,9 @@
   let g:NERDTreeShowHidden=1
   let g:nerdtree_tabs_open_on_gui_startup=0
 
-  if executable('ag')
-    NeoBundle 'rking/ag.vim'
-    NeoBundle 'mileszs/ack.vim'
-    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-  elseif executable('ack-grep')
-    NeoBundle 'mileszs/ack.vim'
-    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-  elseif executable('ack')
-    NeoBundle 'mileszs/ack.vim'
-  endif
-
   NeoBundle 'honza/vim-snippets'                                          " Collection of vim snippets
   if has('python')
+    NeoBundle 'Valloric/MatchTagAlways'
     NeoBundle 'SirVer/ultisnips'
     " remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger="<tab>"
@@ -345,28 +330,22 @@
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
 
+  NeoBundle 'bling/vim-airline'
+  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
+  " let g:weather#area='Sunnyvale'
+  let g:airline#extensions#tabline#enabled = 1
+  " let g:airline#extensions#tmuxline#enabled = 1                         " Disable this for plugin Tmuxline
+  " let g:airline#extensions#tmuxline#color_template = 'normal'
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+
   " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-  " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'edkolev/tmuxline.vim'                                      " Change tmux theme to be consistent with vim statusline
   " NeoBundle 'edkolev/promptline.vim'
   " let g:tmuxline_theme = 'airline'
   " let g:tmuxline_preset = 'tmux'
-
-  if has('python')
-    NeoBundle 'Valloric/MatchTagAlways'
-
-    let g:statusline_use_airline = 1
-    if g:statusline_use_airline
-      NeoBundle 'bling/vim-airline'
-      let g:airline#extensions#tabline#enabled = 1
-      " let g:airline#extensions#tmuxline#enabled = 1                       " Disable this for plugin Tmuxline
-      " let g:airline#extensions#tmuxline#color_template = 'normal'
-      let g:airline#extensions#tabline#left_sep = ''
-      let g:airline#extensions#tabline#left_alt_sep = ''
-      let g:airline#extensions#tabline#buffer_idx_mode = 1
-    else
-      NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-    endif
-  endif
 
   " Background process for unite.vim
   NeoBundle 'Shougo/vimproc.vim', {
@@ -392,11 +371,25 @@
   nnoremap <C-p> :Unite file_rec/async<CR>
   let g:unite_enable_start_insert=1
   let g:unite_prompt='» '
+
   if executable('ag')
+    NeoBundle 'rking/ag.vim'
+    NeoBundle 'mileszs/ack.vim'
+    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+
     let g:unite_source_grep_command='ag'
     let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
     let g:unite_source_grep_recursive_opt=''
+  elseif executable('ack-grep')
+    NeoBundle 'mileszs/ack.vim'
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+    let g:unite_source_grep_command='ack'
+    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+    let g:unite_source_grep_recursive_opt=''
   elseif executable('ack')
+    NeoBundle 'mileszs/ack.vim'
+
     let g:unite_source_grep_command='ack'
     let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
     let g:unite_source_grep_recursive_opt=''
@@ -458,6 +451,27 @@
   endif
 
   call neobundle#end()
+
+  nnoremap <leader>km <Plug>SetupTablineMappingForMac
+  nnoremap <leader>kl <Plug>SetupTablineMappingForLinux
+  nnoremap <leader>kw <Plug>SetupTablineMappingForWindows
+  if exists('g:airline#extensions#tabline#buffer_idx_mode')
+    if len($SSH_CLIENT) > 0
+      if $SSH_OS == "Darwin"
+        normal <Plug>SetupTablineMappingForMac()
+      elseif $SSH_OS == "Linux"
+        normal <Plug>SetupTablineMappingForLinux()
+      endif
+    else
+      if OSX()
+        normal <Plug>SetupTablineMappingForMac()
+      elseif LINUX()
+        normal <Plug>SetupTablineMappingForLinux()
+      elseif WINDOWS()
+        normal <Plug>SetupTablineMappingForWindows()
+      endif
+    endif
+  endif
 
   " Must be maktaba and glaive in runtime path because this is called
   " Thus it has to be after neobundle#end()
