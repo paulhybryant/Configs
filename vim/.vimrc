@@ -210,10 +210,30 @@
   nnoremap <leader>m/ :Mark <C-R>/<CR>
   " NeoBundle 'vim-scripts/ShowMarks', { 'disabled' : 1 }                   " Use gutter to show location of marks
 
-  " NeoBundle 'paulhybryant/vim-custom', { 'hooks' : { 'on_source' : 'echom hello' } }
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
-  set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
-  autocmd BufEnter * call myutils#SyncNTTree()
+  let s:vimcustom = neobundle#get('vim-custom')
+  function! s:vimcustom.hooks.on_source(bundle)
+    set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
+    autocmd BufEnter * call myutils#SyncNTTree()
+    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()
+    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()
+    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()
+    if len($SSH_CLIENT) > 0
+      if $SSH_OS == "Darwin"
+        call myutils#SetupTablineMappingForMac()
+      elseif $SSH_OS == "Linux"
+        call myutils#SetupTablineMappingForLinux()
+      endif
+    else
+      if OSX()
+        call myutils#SetupTablineMappingForMac()
+      elseif LINUX()
+        call myutils#SetupTablineMappingForLinux()
+      elseif WINDOWS()
+        call myutils#SetupTablineMappingForWindows()
+      endif
+    endif
+  endfunction
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let g:syntastic_always_populate_loc_list = 1
@@ -461,27 +481,6 @@
   call neobundle#end()
 
   NeoBundleRecipe 'unite'
-
-  nnoremap <leader>km <Plug>SetupTablineMappingForMac
-  nnoremap <leader>kl <Plug>SetupTablineMappingForLinux
-  nnoremap <leader>kw <Plug>SetupTablineMappingForWindows
-  if exists('g:airline#extensions#tabline#buffer_idx_mode')
-    if len($SSH_CLIENT) > 0
-      if $SSH_OS == "Darwin"
-        normal <Plug>SetupTablineMappingForMac()
-      elseif $SSH_OS == "Linux"
-        normal <Plug>SetupTablineMappingForLinux()
-      endif
-    else
-      if OSX()
-        normal <Plug>SetupTablineMappingForMac()
-      elseif LINUX()
-        normal <Plug>SetupTablineMappingForLinux()
-      elseif WINDOWS()
-        normal <Plug>SetupTablineMappingForWindows()
-      endif
-    endif
-  endif
 
   " Must be maktaba and glaive in runtime path because this is called
   " Thus it has to be after neobundle#end()
