@@ -45,8 +45,8 @@ ZSH_CUSTOM=$HOME/.zshcustom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-[[ "$OSTYPE" == "darwin"* ]] && plugins=(vi-mode battery brew cp git git-extras github osx safe-paste ssh-agent tmux tmuxinator urltools)
-[[ "$OSTYPE" == "linux-gnu"* ]] && plugins=(vi-mode battery brew cp git git-extras github safe-paste ssh-agent tmux tmuxinator urltools)
+[[ "$OSTYPE" == "darwin"* ]] && plugins=(vi-mode battery brew cp git git-extras github osx ssh-agent tmux tmuxinator urltools)
+[[ "$OSTYPE" == "linux-gnu"* ]] && plugins=(vi-mode battery brew cp git git-extras github ssh-agent tmux tmuxinator urltools)
 
 source $ZSH/oh-my-zsh.sh
 
