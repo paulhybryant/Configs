@@ -236,9 +236,13 @@
   endfunction
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
-  nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+  let s:syntastic = neobundle#get('syntastic')
+  function! s:syntastic.hooks.on_source(bundle)
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
+    nnoremap <C-w>E :SyntasticCheck<CR>
+    " nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+  endfunction
 
   " NeoBundle 'paulhybryant/vim-LargeFile', { 'disabled' : 1 }              " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'mhinz/vim-hugefile'                                          " Make edit / view of huge files better
