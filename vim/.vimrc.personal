@@ -4,6 +4,7 @@ NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'aperezdc/vim-template'
 NeoBundle 'google/vim-glaive'
 NeoBundle 'google/vim-maktaba'
+NeoBundle 'google/vim-codefmt', { 'depends' : 'google/vim-codefmtlib' } " Code formating plugin from google
 NeoBundle 'vim-jp/cpp-vim'
 
 if empty($NVIM)
