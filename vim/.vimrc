@@ -95,7 +95,6 @@
     silent !git clone https://github.com/Shougo/neobundle.vim.git $VIMPLUGINSDIR/neobundle.vim
   endif
 
-  filetype on
   filetype off
   set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
   call neobundle#begin(expand('$VIMPLUGINSDIR/'))
@@ -123,39 +122,38 @@
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
   NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
+  NeoBundle 'Shougo/echodoc.vim'
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
   NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
   NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
+  NeoBundle 'google/vim-ft-vroom', { 'filetypes' : 'vroom' }              " Filetype plugin for vroom
   NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
   NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
   NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
+  NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
+  " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
 
-  " Note taking with vim
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
-        \ }
+        \ }                                                               " Note taking with vim
   let g:notes_directories = ['~/Notes']
   let g:notes_suffix = '.txt'
   let g:notes_indexfile = '~/Notes/notes.idx'
   let g:notes_tagsindex = '~/Notes/notes.tags'
 
-  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
-  " let g:weather#area='Sunnyvale'
-  " NeoBundle 'szw/vim-ctrlspace'                                         " Vim workspace manager
-
-  NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
-  " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
-
-  " NeoBundle 'tpope/vim-surround'
-  " NeoBundle 'tpope/vim-abolish.git'                                     " Creates set of abbreviations for spell correction easily
-  " NeoBundle 'rhysd/libclang-vim'
-  " NeoBundle 'godlygeek/tabular'
+  " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : 1 }                       " Vim workspace manager
+  NeoBundle 'tpope/vim-surround', { 'disabled' : 1 }
+  NeoBundle 'tpope/vim-abolish.git', { 'disabled' : 1 }                   " Creates set of abbreviations for spell correction easily
+  " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
+  " NeoBundle 'godlygeek/tabular', { 'disabled' : 1 }
+  NeoBundle 'Shougo/vinarise.vim', { 'disabled' : 1 }                     " Ultimate hex editing system with vim
+  NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
 
   if executable('ctags')
-    NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
+    " NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
     NeoBundle 'majutsushi/tagbar'
     let g:tagbar_type_autohotkey = {
           \ 'ctagstype' : 'autohotkey',
@@ -179,24 +177,21 @@
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
 
-  " NeoBundle 'Shougo/vinarise.vim'                                         " Ultimate hex editing system with vim
-  " NeoBundle 'glts/vim-radical'                                            " Show number under cursor in hex, octal, binary
-
   NeoBundle 'kana/vim-textobj-user'                                       " Allow defining text object by user
   NeoBundle 'jceb/vim-textobj-uri'                                        " Define text object for uri
   NeoBundle 'kana/vim-textobj-line'                                       " Define text object for a line
   NeoBundle 'kana/vim-textobj-entire'                                     " Define text object for the entire buffer
   NeoBundle 'Raimondi/vim_search_objects'                                 " Define text object for a search pattern
-  " NeoBundle 'Raimondi/VimLTextObjects'                                  " Define text object for vimscript
-  " NeoBundle 'Julian/vim-textobj-brace'                                  " Define text object between braces
-  " NeoBundle 'beloglazov/vim-textobj-quotes'                             " Define text object between any type of quotes
-  " NeoBundle 'glts/vim-textobj-comment'                                  " Define text object for comments
-  " NeoBundle 'kana/vim-textobj-datetime'                                 " Define text object for datetime format
-  " NeoBundle 'kana/vim-textobj-function'                                 " Define text object for function
-  " NeoBundle 'kana/vim-textobj-indent'                                   " Define text object for indent
-  " NeoBundle 'reedes/vim-textobj-sentence'                               " Define text obj for a sentence
-  " NeoBundle 'rhysd/vim-textobj-clang'                                   " Define text object for c family languages
-  " NeoBundle 'reedes/vim-textobj-quote'                                  " Define text object between also typographic ('curly') quote characters
+  " NeoBundle 'Raimondi/VimLTextObjects', { 'disabled' : 1 }                " Define text object for vimscript
+  " NeoBundle 'Julian/vim-textobj-brace', { 'disabled' : 1 }                " Define text object between braces
+  " NeoBundle 'beloglazov/vim-textobj-quotes', { 'disabled' : 1 }           " Define text object between any type of quotes
+  " NeoBundle 'glts/vim-textobj-comment', { 'disabled' : 1 }                " Define text object for comments
+  " NeoBundle 'kana/vim-textobj-datetime', { 'disabled' : 1 }               " Define text object for datetime format
+  " NeoBundle 'kana/vim-textobj-function', { 'disabled' : 1 }               " Define text object for function
+  " NeoBundle 'kana/vim-textobj-indent', { 'disabled' : 1 }                 " Define text object for indent
+  " NeoBundle 'reedes/vim-textobj-sentence', { 'disabled' : 1 }             " Define text obj for a sentence
+  " NeoBundle 'rhysd/vim-textobj-clang', { 'disabled' : 1 }                 " Define text object for c family languages
+  " NeoBundle 'reedes/vim-textobj-quote', { 'disabled' : 1 }                " Define text object between also typographic ('curly') quote characters
   " augroup textobj_quote
     " autocmd!
     " autocmd FileType markdown call textobj#quote#init()
@@ -205,28 +200,32 @@
   " augroup END
 
   NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'paulhybryant/vim-LargeFile'                                  " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vim-textobj-path'                               " Define text object for a file system path
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                 " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
-
   NeoBundle 'paulhybryant/mark'                                           " Highlight multiple patterns with different color (Host latest version 2.8.5)
-  " NeoBundle 'vim-scripts/ShowMarks'                                     " Use gutter to show location of marks
   nnoremap <leader>mc :MarkClear<CR>
   nnoremap <leader>m/ :Mark <C-R>/<CR>
+  " NeoBundle 'vim-scripts/ShowMarks', { 'disabled' : 1 }                   " Use gutter to show location of marks
 
+  " NeoBundle 'paulhybryant/vim-custom', { 'hooks' : { 'on_source' : 'echom hello' } }
   NeoBundle 'paulhybryant/vim-custom'                                     " My vim customization (utility function, mappings, autocmds, etc)
   set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
+  nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
+  " NeoBundle 'paulhybryant/vim-LargeFile', { 'disabled' : 1 }              " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   NeoBundle 'mhinz/vim-hugefile'                                          " Make edit / view of huge files better
   let g:hugefile_trigger_size = 50                                        " In MB
+
   NeoBundle 'mhinz/vim-signify'                                           " Show the sign at changes from last git commit
+  " NeoBundle 'airblade/vim-gitgutter', { 'disabled' : 1 }                  " Prefer vim-signify
   if !WINDOWS()
     NeoBundle 'tpope/vim-fugitive'                                        " Commands for working with git
     nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -240,7 +239,6 @@
     nnoremap <silent> <leader>ge :Gedit<CR>
     nnoremap <silent> <leader>gi :Git add -p %<CR>
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
-    " NeoBundle 'airblade/vim-gitgutter'                                  " Prefer vim-signify
   else
     NeoBundle 'vim-scripts/Tail-Bundle'                                   " Tail for windows in vim
   endif
@@ -274,11 +272,12 @@
   NeoBundle 'Lokaltog/vim-distinguished'                                  " Vim colorscheme distinguished
   let g:rehash256 = 1
 
-  " NeoBundle 'tomtom/tlib_vim'                                           " Library utilities for plugin from tomtom
-  " NeoBundle 'tomtom/tcomment_vim'                                       " Add comments
-  " NeoBundle 'tpope/vim-commentary'                                      " Add comments
+  " NeoBundle 'tomtom/tlib_vim', { 'disabled' : 1 }                         " Library utilities for plugin from tomtom
+  " NeoBundle 'tomtom/tcomment_vim', { 'disabled' : 1 }                     " Add comments
+  " NeoBundle 'tpope/vim-commentary', { 'disabled' : 1 }                    " Add comments
   NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
   let g:NERDSpaceDelims = 1
+  let g:NERDCustomDelimiters = {}
   if exists('g:NERDCustomDelimiters')
     let g:NERDCustomDelimiters['rvl'] = { 'left': '#' }
   else
@@ -290,7 +289,7 @@
 
   NeoBundle 'jistr/vim-nerdtree-tabs'                                     " One NERDTree only, shared among buffers / tabs
   NeoBundle 'scrooloose/nerdtree'                                         " File explorer inside vim
-  " NeoBundle 'tpope/vim-vinegar'                                           " NERDTree enhancement
+  " NeoBundle 'tpope/vim-vinegar', { 'disabled' : 1 }                       " NERDTree enhancement
   NeoBundle 'eiginn/netrw'                                                " NERDTree plugin for network
   let g:netrw_altfile = 1
   " File explorer inside vim
@@ -323,19 +322,9 @@
   let g:NERDTreeShowHidden=1
   let g:nerdtree_tabs_open_on_gui_startup=0
 
-  if executable('ag')
-    NeoBundle 'rking/ag.vim'
-    NeoBundle 'mileszs/ack.vim'
-    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-  elseif executable('ack-grep')
-    NeoBundle 'mileszs/ack.vim'
-    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-  elseif executable('ack')
-    NeoBundle 'mileszs/ack.vim'
-  endif
-
   NeoBundle 'honza/vim-snippets'                                          " Collection of vim snippets
   if has('python')
+    NeoBundle 'Valloric/MatchTagAlways'
     NeoBundle 'SirVer/ultisnips'
     " remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger="<tab>"
@@ -345,28 +334,22 @@
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
 
+  NeoBundle 'bling/vim-airline'
+  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
+  " let g:weather#area='Sunnyvale'
+  let g:airline#extensions#tabline#enabled = 1
+  " let g:airline#extensions#tmuxline#enabled = 1                         " Disable this for plugin Tmuxline
+  " let g:airline#extensions#tmuxline#color_template = 'normal'
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+
   " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-  " NeoBundle 'edkolev/tmuxline.vim'                                    " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'edkolev/tmuxline.vim'                                      " Change tmux theme to be consistent with vim statusline
   " NeoBundle 'edkolev/promptline.vim'
   " let g:tmuxline_theme = 'airline'
   " let g:tmuxline_preset = 'tmux'
-
-  if has('python')
-    NeoBundle 'Valloric/MatchTagAlways'
-
-    let g:statusline_use_airline = 1
-    if g:statusline_use_airline
-      NeoBundle 'bling/vim-airline'
-      let g:airline#extensions#tabline#enabled = 1
-      " let g:airline#extensions#tmuxline#enabled = 1                       " Disable this for plugin Tmuxline
-      " let g:airline#extensions#tmuxline#color_template = 'normal'
-      let g:airline#extensions#tabline#left_sep = ''
-      let g:airline#extensions#tabline#left_alt_sep = ''
-      let g:airline#extensions#tabline#buffer_idx_mode = 1
-    else
-      NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-    endif
-  endif
 
   " Background process for unite.vim
   NeoBundle 'Shougo/vimproc.vim', {
@@ -384,6 +367,10 @@
   NeoBundle 'ujihisa/unite-colorscheme'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'mattn/unite-gist'
+  NeoBundle 'Shougo/unite-build'
+  NeoBundle 'Shougo/unite-sudo'
+  NeoBundle 'Shougo/unite-ssh'
+  NeoBundle 'Shougo/eev.vim'
   let g:unite_data_directory = $HOME . '/.cache/unite'
   let g:unite_abbr_highlight = 'Keyword'
   if (!isdirectory(g:unite_data_directory))
@@ -392,11 +379,25 @@
   nnoremap <C-p> :Unite file_rec/async<CR>
   let g:unite_enable_start_insert=1
   let g:unite_prompt='» '
+
   if executable('ag')
+    NeoBundle 'rking/ag.vim'
+    NeoBundle 'mileszs/ack.vim'
+    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+
     let g:unite_source_grep_command='ag'
     let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
     let g:unite_source_grep_recursive_opt=''
+  elseif executable('ack-grep')
+    NeoBundle 'mileszs/ack.vim'
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+    let g:unite_source_grep_command='ack'
+    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+    let g:unite_source_grep_recursive_opt=''
   elseif executable('ack')
+    NeoBundle 'mileszs/ack.vim'
+
     let g:unite_source_grep_command='ack'
     let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
     let g:unite_source_grep_recursive_opt=''
@@ -435,7 +436,7 @@
         \ 'filetypes' : 'vim',
         \ 'depends' : 'ynkdir/vim-vimlparser'}                                " Syntax checker for vimscript
   " NeoBundleLazy 'dbakker/vim-lint', { 'filetyps' : 'vim' }                  " Syntax checker for vimscript
-  NeoBundleLazy 'vim-scripts/Vim-Support', { 'filetypes' : 'vim' }            " Make vim an IDE for writing vimscript
+  " NeoBundleLazy 'vim-scripts/Vim-Support', { 'filetypes' : 'vim' }            " Make vim an IDE for writing vimscript
   let g:Vim_MapLeader  = g:maplocalleader
 
   " Filetype gitcommit
@@ -459,9 +460,33 @@
 
   call neobundle#end()
 
+  NeoBundleRecipe 'unite'
+
+  nnoremap <leader>km <Plug>SetupTablineMappingForMac
+  nnoremap <leader>kl <Plug>SetupTablineMappingForLinux
+  nnoremap <leader>kw <Plug>SetupTablineMappingForWindows
+  if exists('g:airline#extensions#tabline#buffer_idx_mode')
+    if len($SSH_CLIENT) > 0
+      if $SSH_OS == "Darwin"
+        normal <Plug>SetupTablineMappingForMac()
+      elseif $SSH_OS == "Linux"
+        normal <Plug>SetupTablineMappingForLinux()
+      endif
+    else
+      if OSX()
+        normal <Plug>SetupTablineMappingForMac()
+      elseif LINUX()
+        normal <Plug>SetupTablineMappingForLinux()
+      elseif WINDOWS()
+        normal <Plug>SetupTablineMappingForWindows()
+      endif
+    endif
+  endif
+
   " Must be maktaba and glaive in runtime path because this is called
   " Thus it has to be after neobundle#end()
   call glaive#Install()
+  Glaive codefmt plugin[mappings]
 
   autocmd FileType vtd NeoBundleSource vim-vtd
         \ | Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
