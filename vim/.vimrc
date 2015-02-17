@@ -215,9 +215,10 @@
   function! s:vimcustom.hooks.on_source(bundle)
     set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
     autocmd BufEnter * call myutils#SyncNTTree()
-    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()
-    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()
-    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()
+    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>
+    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
+    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()<CR>
+
     if len($SSH_CLIENT) > 0
       if $SSH_OS == "Darwin"
         call myutils#SetupTablineMappingForMac()
