@@ -395,6 +395,7 @@
   NeoBundle 'Shougo/unite-build'
   NeoBundle 'Shougo/unite-sudo'
   NeoBundle 'Shougo/unite-ssh'
+  NeoBundle 'tsukkee/unite-help'
   NeoBundle 'Shougo/eev.vim'
   let g:unite_data_directory = $HOME . '/.cache/unite'
   let g:unite_abbr_highlight = 'Keyword'
