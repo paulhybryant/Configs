@@ -104,71 +104,16 @@
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes'                                " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 
+  " Nativation
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
   NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
   NeoBundle 'christoomey/vim-tmux-navigator'                              " Allow using the same keymap to move between tmux panes and vim splits seamlessly
-  NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
   NeoBundle 'justinmk/vim-sneak'                                          " Easy motion within one line
 
-  NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
-  NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
-  NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
-  NeoBundle 'tpope/vim-unimpaired'                                        " Complementary pairs of mappings
-
-  NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
-  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
-  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
-
-  NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
-  NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
-  NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
-  NeoBundle 'Shougo/echodoc.vim'
-  NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
-  NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
-  NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
-  NeoBundle 'google/vim-ft-vroom', { 'filetypes' : 'vroom' }              " Filetype plugin for vroom
-  NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
-  NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
-  NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
-  NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
-  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
+  " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                     " Dim inactive windows
   NeoBundle 'myusuf3/numbers.vim'                                         " Automatically toggle line number for certain filetypes
   " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
-
-  NeoBundle 'xolox/vim-notes', {
-        \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
-        \ }                                                               " Note taking with vim
-  let g:notes_directories = ['~/Notes']
-  let g:notes_suffix = '.txt'
-  let g:notes_indexfile = '~/Notes/notes.idx'
-  let g:notes_tagsindex = '~/Notes/notes.tags'
-
-  " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : 1 }                       " Vim workspace manager
-  NeoBundle 'tpope/vim-surround', { 'disabled' : 1 }
-  NeoBundle 'tpope/vim-abolish.git', { 'disabled' : 1 }                   " Creates set of abbreviations for spell correction easily
-  " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
-  " NeoBundle 'godlygeek/tabular', { 'disabled' : 1 }
-  NeoBundle 'Shougo/vinarise.vim', { 'disabled' : 1 }                     " Ultimate hex editing system with vim
-  NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
-
-  if executable('ctags')
-    " NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
-    NeoBundle 'majutsushi/tagbar'
-    let g:tagbar_type_autohotkey = {
-          \ 'ctagstype' : 'autohotkey',
-          \   'kinds' : [
-          \     's:sections',
-          \     'g:graphics:0:0',
-          \     'l:labels',
-          \     'r:refs:1:0',
-          \     'p:pagerefs:1:0'
-          \   ],
-          \   'sort'  : 0,
-          \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
-          \ }
-  endif
-
   NeoBundle 'kien/rainbow_parentheses.vim'                                " Colorful parentheses
   let g:rbpt_max = 16
   let g:rbpt_loadcmd_toggle = 0
@@ -176,6 +121,39 @@
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
+  NeoBundle 'altercation/vim-colors-solarized'                            " Vim colorscheme solarized
+  NeoBundle 'flazz/vim-colorschemes'                                      " Collection of vim colorschemes
+  NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                     " Vim colorscheme github
+  NeoBundle 'itchyny/landscape.vim'                                       " Vim colorscheme landscape
+  NeoBundle 'tomasr/molokai'                                              " Vim colorscheme molokai
+  NeoBundle 'tpope/vim-vividchalk'                                        " Vim colorscheme vividchalk
+  NeoBundle 'vim-scripts/candy.vim'                                       " Vim colorscheme candy
+  NeoBundle 'Lokaltog/vim-distinguished'                                  " Vim colorscheme distinguished
+  let g:rehash256 = 1
+  NeoBundle 'bling/vim-airline'
+  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
+  " let g:weather#area='Sunnyvale'
+  let g:airline#extensions#tabline#enabled = 1
+  " let g:airline#extensions#tmuxline#enabled = 1                         " Disable this for plugin Tmuxline
+  " let g:airline#extensions#tmuxline#color_template = 'normal'
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
+  " NeoBundle 'edkolev/tmuxline.vim'                                      " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'edkolev/promptline.vim'
+  " let g:tmuxline_theme = 'airline'
+  " let g:tmuxline_preset = 'tmux'
+  " }}}
+
+  NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
+  NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
+  NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
+
+  NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
+  NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
+  NeoBundle 'tpope/vim-surround', { 'disabled' : 1 }
 
   NeoBundle 'kana/vim-textobj-user'                                       " Allow defining text object by user
   NeoBundle 'jceb/vim-textobj-uri'                                        " Define text object for uri
@@ -198,6 +176,59 @@
     " autocmd FileType textile call textobj#quote#init()
     " autocmd FileType text call textobj#quote#init({'educate': 0})
   " augroup END
+
+  " Special purpose plugins {{{
+  NeoBundle 'xolox/vim-notes', {
+        \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
+        \ }                                                               " Note taking with vim
+  let g:notes_directories = ['~/Notes']
+  let g:notes_suffix = '.txt'
+  let g:notes_indexfile = '~/Notes/notes.idx'
+  let g:notes_tagsindex = '~/Notes/notes.tags'
+
+  NeoBundle 'Shougo/vinarise.vim', { 'disabled' : 1 }                     " Ultimate hex editing system with vim
+  NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
+  " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
+  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
+  NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
+  " }}}
+
+
+
+  NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
+  NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
+  NeoBundle 'tpope/vim-unimpaired'                                        " Complementary pairs of mappings
+  NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
+  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
+  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
+  NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
+  NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
+  NeoBundle 'Shougo/echodoc.vim'
+  NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
+  NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
+  NeoBundle 'google/vim-ft-vroom', { 'filetypes' : 'vroom' }              " Filetype plugin for vroom
+  NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
+  NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
+  " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : 1 }                       " Vim workspace manager
+  NeoBundle 'tpope/vim-abolish.git', { 'disabled' : 1 }                   " Creates set of abbreviations for spell correction easily
+  " NeoBundle 'godlygeek/tabular', { 'disabled' : 1 }
+
+  if executable('ctags')
+    " NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
+    NeoBundle 'majutsushi/tagbar'
+    let g:tagbar_type_autohotkey = {
+          \ 'ctagstype' : 'autohotkey',
+          \   'kinds' : [
+          \     's:sections',
+          \     'g:graphics:0:0',
+          \     'l:labels',
+          \     'r:refs:1:0',
+          \     'p:pagerefs:1:0'
+          \   ],
+          \   'sort'  : 0,
+          \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
+          \ }
+  endif
 
   NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
@@ -251,20 +282,20 @@
 
   NeoBundle 'mhinz/vim-signify'                                           " Show the sign at changes from last git commit
   " NeoBundle 'airblade/vim-gitgutter', { 'disabled' : 1 }                  " Prefer vim-signify
-  if !WINDOWS()
-    NeoBundle 'tpope/vim-fugitive'                                        " Commands for working with git
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gm :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gr :Gread<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>
-    nnoremap <silent> <leader>ge :Gedit<CR>
-    nnoremap <silent> <leader>gi :Git add -p %<CR>
-    nnoremap <silent> <leader>gg :SignifyToggle<CR>
-  else
+  NeoBundle 'tpope/vim-fugitive'                                          " Commands for working with git
+  nnoremap <silent> <leader>gs :Gstatus<CR>
+  nnoremap <silent> <leader>gd :Gdiff<CR>
+  nnoremap <silent> <leader>gm :Gcommit<CR>
+  nnoremap <silent> <leader>gb :Gblame<CR>
+  nnoremap <silent> <leader>gl :Glog<CR>
+  nnoremap <silent> <leader>gp :Git push<CR>
+  nnoremap <silent> <leader>gr :Gread<CR>
+  nnoremap <silent> <leader>gw :Gwrite<CR>
+  nnoremap <silent> <leader>ge :Gedit<CR>
+  nnoremap <silent> <leader>gi :Git add -p %<CR>
+  nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
+  if WINDOWS()
     NeoBundle 'vim-scripts/Tail-Bundle'                                   " Tail for windows in vim
   endif
 
@@ -286,16 +317,6 @@
     \ }
   map L <Plug>(expand_region_expand)
   map H <Plug>(expand_region_shrink)
-
-  NeoBundle 'altercation/vim-colors-solarized'                            " Vim colorscheme solarized
-  NeoBundle 'flazz/vim-colorschemes'                                      " Collection of vim colorschemes
-  NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                     " Vim colorscheme github
-  NeoBundle 'itchyny/landscape.vim'                                       " Vim colorscheme landscape
-  NeoBundle 'tomasr/molokai'                                              " Vim colorscheme molokai
-  NeoBundle 'tpope/vim-vividchalk'                                        " Vim colorscheme vividchalk
-  NeoBundle 'vim-scripts/candy.vim'                                       " Vim colorscheme candy
-  NeoBundle 'Lokaltog/vim-distinguished'                                  " Vim colorscheme distinguished
-  let g:rehash256 = 1
 
   " NeoBundle 'tomtom/tlib_vim', { 'disabled' : 1 }                         " Library utilities for plugin from tomtom
   " NeoBundle 'tomtom/tcomment_vim', { 'disabled' : 1 }                     " Add comments
@@ -332,7 +353,6 @@
   " NeoBundle 'wincent/Command-T'
   NeoBundle 'osyo-manga/vim-over'                                         " Preview changes to be made
   map <leader>o :OverCommandLine<CR>
-
   noremap <C-e> :NERDTreeToggle %<CR>
   " noremap <C-e> :NERDTreeTabsToggle<CR>
   " noremap <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -358,23 +378,6 @@
   else
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
-
-  NeoBundle 'bling/vim-airline'
-  " NeoBundle 'mattn/vim-airline-weather'                                 " Vim airline extension to show weather
-  " let g:weather#area='Sunnyvale'
-  let g:airline#extensions#tabline#enabled = 1
-  " let g:airline#extensions#tmuxline#enabled = 1                         " Disable this for plugin Tmuxline
-  " let g:airline#extensions#tmuxline#color_template = 'normal'
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-
-  " NeoBundle 'paulhybryant/tmuxline.vim'                                 " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-  " NeoBundle 'edkolev/tmuxline.vim'                                      " Change tmux theme to be consistent with vim statusline
-  " NeoBundle 'edkolev/promptline.vim'
-  " let g:tmuxline_theme = 'airline'
-  " let g:tmuxline_preset = 'tmux'
 
   " Background process for unite.vim
   NeoBundle 'Shougo/vimproc.vim', {
