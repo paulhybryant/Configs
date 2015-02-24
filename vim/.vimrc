@@ -97,12 +97,11 @@
 
   filetype off
   set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
+  set runtimepath+=$VIMPLUGINSDIR/neobundle-vim-recipes/
   call neobundle#begin(expand('$VIMPLUGINSDIR/'))
 
-  " TODO(yuhuang): Use NeoBundleLazy to load plugins for specific filetypes if
-  " vim starts slow.
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
-  NeoBundle 'Shougo/neobundle-vim-recipes'                                " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  NeoBundleFetch 'Shougo/neobundle-vim-recipes'                           " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 
   " Nativation
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
@@ -148,7 +147,7 @@
   " }}}
 
   NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
-  NeoBundle 'Shougo/vimshell.vim'                                         " Shell implemented with vimscript
+  NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell' }              " Shell implemented with vimscript
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
 
   NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
@@ -185,7 +184,10 @@
   let g:notes_indexfile = '~/Notes/notes.idx'
   let g:notes_tagsindex = '~/Notes/notes.tags'
 
-  NeoBundle 'Shougo/vinarise.vim', { 'disabled' : 1 }                     " Ultimate hex editing system with vim
+  NeoBundle 'Shougo/vinarise.vim', {
+        \ 'recipe' : 'vinarise',
+        \ 'disabled' : 1,
+        \ }                                                               " Ultimate hex editing system with vim
   NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
   " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
@@ -202,6 +204,7 @@
   NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
   NeoBundle 'google/vim-syncopate'                                        " Makes it easy to copy syntax highlighted code and paste in emails
   NeoBundle 'google/vim-ft-vroom', { 'filetypes' : 'vroom' }              " Filetype plugin for vroom
+  NeoBundle 'thinca/vim-themis'                                           " Testing framework for vimscript
   NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
   NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
   " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : 1 }                       " Vim workspace manager
@@ -343,6 +346,7 @@
         \   ],
         \   'mappings' : '<Plug>',
         \   'explorer' : 1,
+        \   'recipe' : 'vimfiler',
         \ }
   " NeoBundle 'wincent/Command-T'
   NeoBundle 'osyo-manga/vim-over'                                         " Preview changes to be made
@@ -378,15 +382,21 @@
         \     'unix' : 'gmake',
         \   },
         \ }                                                               " Background process for unite.vim
-  NeoBundle 'Shougo/unite.vim'
-  let g:unite_data_directory = $HOME . '/.cache/unite'
-  let g:unite_abbr_highlight = 'Keyword'
-  if (!isdirectory(g:unite_data_directory))
-    call mkdir(g:unite_data_directory, "p")
-  endif
-  nnoremap <C-p> :Unite file_rec/async<CR>
-  let g:unite_enable_start_insert=1
-  let g:unite_prompt='» '
+
+  NeoBundle 'Shougo/unite.vim', { 'recipe' : 'unite' }
+  let s:unite = neobundle#get('unite.vim')
+  function! s:unite.hooks.on_source(bundle)
+    let g:unite_data_directory = $HOME . '/.cache/unite'
+    let g:unite_abbr_highlight = 'Keyword'
+    if (!isdirectory(g:unite_data_directory))
+      call mkdir(g:unite_data_directory, "p")
+    endif
+    nnoremap <C-p> :Unite file_rec/async<CR>
+    let g:unite_enable_start_insert=1
+    let g:unite_prompt='» '
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  endfunction
+
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'ujihisa/unite-colorscheme'
@@ -396,6 +406,7 @@
   NeoBundle 'Shougo/unite-sudo'
   NeoBundle 'Shougo/unite-ssh'
   NeoBundle 'tsukkee/unite-help'
+
   NeoBundle 'Shougo/eev.vim'
 
   if executable('ag')
@@ -471,8 +482,6 @@
 
   call neobundle#end()
 
-  " NeoBundleRecipe 'unite'
-
   " Must be maktaba and glaive in runtime path because this is called
   " Thus it has to be after neobundle#end()
   call glaive#Install()
@@ -483,8 +492,6 @@
 
   Glaive syncopate plugin[mappings] colorscheme=putty
   let g:html_number_lines = 0
-
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
   NeoBundleCheck
 " }}}
