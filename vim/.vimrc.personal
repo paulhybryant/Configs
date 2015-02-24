@@ -6,8 +6,9 @@ NeoBundle 'google/vim-glaive'
 NeoBundle 'google/vim-maktaba'
 NeoBundle 'google/vim-codefmt', { 'depends' : 'google/vim-codefmtlib' } " Code formating plugin from google
 NeoBundle 'vim-jp/cpp-vim'
+let g:use_ycm = 1
 
-if empty($NVIM)
+if empty($NVIM) && !exists("g:use_ycm")
   " neocomplete {{{
 
     NeoBundle 'Shougo/neocomplete.vim'
@@ -95,6 +96,15 @@ if empty($NVIM)
       let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
   " }}}
+elseif exists("g:use_ycm")
+  NeoBundle 'Valloric/YouCompleteMe', {
+      \ 'build' : {
+      \     'mac' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+      \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+      \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+      \     'cygwin' : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+      \    }
+      \ }
 else
   NeoBundle 'Shougo/neocomplcache.vim'
 endif

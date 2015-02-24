@@ -177,7 +177,6 @@
     " autocmd FileType text call textobj#quote#init({'educate': 0})
   " augroup END
 
-  " Special purpose plugins {{{
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
         \ }                                                               " Note taking with vim
@@ -191,10 +190,6 @@
   " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
-  " }}}
-
-
-
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'tpope/vim-repeat'                                            " Repeat any command with '.'
   NeoBundle 'tpope/vim-unimpaired'                                        " Complementary pairs of mappings
@@ -272,8 +267,7 @@
   function! s:syntastic.hooks.on_source(bundle)
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
-    nnoremap <C-w>E :SyntasticCheck<CR>
-    " nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+    nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
 
   " NeoBundle 'paulhybryant/vim-LargeFile', { 'disabled' : 1 }              " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
@@ -304,17 +298,17 @@
 
   NeoBundle 'terryma/vim-expand-region'                                   " Expand visual selection by text object
   let g:expand_region_text_objects = {
-    \   'iw'  :0,
-    \   'iW'  :0,
-    \   'i"'  :0,
-    \   'i''' :0,
-    \   'i]'  :1,
-    \   'ib'  :1,
-    \   'iB'  :1,
-    \   'il'  :0,
-    \   'ip'  :0,
-    \   'ie'  :0,
-    \ }
+        \ 'iw'  :0,
+        \ 'iW'  :0,
+        \ 'i"'  :0,
+        \ 'i''' :0,
+        \ 'i]'  :1,
+        \ 'ib'  :1,
+        \ 'iB'  :1,
+        \ 'il'  :0,
+        \ 'ip'  :0,
+        \ 'ie'  :0,
+        \ }
   map L <Plug>(expand_region_expand)
   map H <Plug>(expand_region_shrink)
 
@@ -328,9 +322,9 @@
     let g:NERDCustomDelimiters['rvl'] = { 'left': '#' }
   else
     let g:NERDCustomDelimiters = {
-      \   'rvl' : { 'left': '#' },
-      \   'borg' : { 'left' : '//' }
-      \ }
+          \   'rvl' : { 'left': '#' },
+          \   'borg' : { 'left' : '//' }
+          \ }
   endif
 
   NeoBundle 'jistr/vim-nerdtree-tabs'                                     " One NERDTree only, shared among buffers / tabs
@@ -340,24 +334,20 @@
   let g:netrw_altfile = 1
   " File explorer inside vim
   NeoBundle 'Shougo/vimfiler.vim', {
-    \   'depends' : 'Shougo/unite.vim',
-    \   'commands' : [
-    \     { 'name' : ['VimFiler', 'Edit', 'Write'],
-    \       'complete' : 'customlist,vimfiler#complete' },
-    \     'Read',
-    \     'Source'
-    \   ],
-    \   'mappings' : '<Plug>',
-    \   'explorer' : 1,
-    \ }
+        \   'depends' : 'Shougo/unite.vim',
+        \   'commands' : [
+        \     { 'name' : ['VimFiler', 'Edit', 'Write'],
+        \       'complete' : 'customlist,vimfiler#complete' },
+        \     'Read',
+        \     'Source'
+        \   ],
+        \   'mappings' : '<Plug>',
+        \   'explorer' : 1,
+        \ }
   " NeoBundle 'wincent/Command-T'
   NeoBundle 'osyo-manga/vim-over'                                         " Preview changes to be made
   map <leader>o :OverCommandLine<CR>
   noremap <C-e> :NERDTreeToggle %<CR>
-  " noremap <C-e> :NERDTreeTabsToggle<CR>
-  " noremap <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-  " noremap <leader>e :NERDTreeFind<CR>
-  " nnoremap <leader>nt :NERDTreeFind<CR>
   let g:NERDShutUp=1
   let g:NERDTreeChDirMode=1
   let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
@@ -379,17 +369,24 @@
     NeoBundle 'neosnippet.vim'                                            " Snippet support for vim
   endif
 
-  " Background process for unite.vim
   NeoBundle 'Shougo/vimproc.vim', {
-    \   'build' : {
-    \     'windows' : 'tools\\update-dll-mingw',
-    \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'mac' : 'make -f make_mac.mak',
-    \     'linux' : 'make',
-    \     'unix' : 'gmake',
-    \   },
-    \ }
+        \   'build' : {
+        \     'windows' : 'tools\\update-dll-mingw',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make -f make_mac.mak',
+        \     'linux' : 'make',
+        \     'unix' : 'gmake',
+        \   },
+        \ }                                                               " Background process for unite.vim
   NeoBundle 'Shougo/unite.vim'
+  let g:unite_data_directory = $HOME . '/.cache/unite'
+  let g:unite_abbr_highlight = 'Keyword'
+  if (!isdirectory(g:unite_data_directory))
+    call mkdir(g:unite_data_directory, "p")
+  endif
+  nnoremap <C-p> :Unite file_rec/async<CR>
+  let g:unite_enable_start_insert=1
+  let g:unite_prompt='» '
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'ujihisa/unite-colorscheme'
@@ -400,14 +397,6 @@
   NeoBundle 'Shougo/unite-ssh'
   NeoBundle 'tsukkee/unite-help'
   NeoBundle 'Shougo/eev.vim'
-  let g:unite_data_directory = $HOME . '/.cache/unite'
-  let g:unite_abbr_highlight = 'Keyword'
-  if (!isdirectory(g:unite_data_directory))
-    call mkdir(g:unite_data_directory, "p")
-  endif
-  nnoremap <C-p> :Unite file_rec/async<CR>
-  let g:unite_enable_start_insert=1
-  let g:unite_prompt='» '
 
   if executable('ag')
     NeoBundle 'rking/ag.vim'
@@ -433,29 +422,23 @@
   endif
 
   " Lazily load Filetype specific bundles
-  " Filetype vtd
-  NeoBundleLazy 'chiphogg/vim-vtd'
+  NeoBundleLazy 'chiphogg/vim-vtd', { 'fieltypes' : 'vtd' }
 
-  " Filetype sql
   NeoBundleLazy 'paulhybryant/SQLUtilities', { 'filetypes' : 'sql' }          " Utilities for editing SQL scripts (v7.0) ('vim-scripts/SQLUtilities' has only v6.0)
   NeoBundleLazy 'vim-scripts/SQLComplete.vim', { 'filetypes' : 'sql' }        " SQL script completion
   NeoBundleLazy 'vim-scripts/sql.vim--Stinson', { 'filetypes' : 'sql' }       " Better SQL syntax highlighting
   let g:sqlutil_align_comma=0
 
-  " Filetype html
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'filetypes' : 'sql' }      " Automatically close html tags
 
-  " Filetype tmux
   NeoBundleLazy 'tmux-plugins/vim-tmux', { 'filetypes' : 'tmux' }             " Vim plugin for editing .tmux.conf
   NeoBundleLazy 'zaiste/tmux.vim', { 'filetypes' : 'tmux' }                   " Tmux syntax highlight
   NeoBundleLazy 'wellle/tmux-complete.vim', { 'filetype' : 'tmux' }           " Vim plugin for insert mode completion of words in adjacent tmux panes
 
-  " Filetype sh
   NeoBundleLazy 'vim-scripts/bash-support.vim', { 'filetypes' : 'sh' }        " Make vim an IDE for writing bash
   let g:BASH_MapLeader  = g:maplocalleader
   let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
 
-  " Filetype vim
   NeoBundleLazy 'vim-scripts/ReloadScript', { 'filetypes' : 'vim' }           " Reload vim script without having to restart vim
   map <leader>rl :ReloadScript %:p<CR>
   NeoBundleLazy 'paulhybryant/Decho.vim', { 'filetypes' : 'vim' }             " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
@@ -468,20 +451,19 @@
   " NeoBundleLazy 'vim-scripts/Vim-Support', { 'filetypes' : 'vim' }            " Make vim an IDE for writing vimscript
   let g:Vim_MapLeader  = g:maplocalleader
 
-  " Filetype gitcommit
   NeoBundleLazy 'tpope/vim-git', { 'filetypes' : 'gitcommit' }                " Syntax highlight for git
 
-  " Filetype markdown
   " NeoBundle 'tpope/vim-markdown', { 'filetypes' : 'markdown' }              " Syntax highlighting for markdown
   NeoBundleLazy 'plasticboy/vim-markdown', { 'filetypes' : 'markdown' }       " Yet another markdown syntax highlighting
   NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
         \ 'filetypes' : 'markdown' }                                          " Start a http server and preview markdown instantly
   " NeoBundle 'suan/vim-instant-markdown'
 
-  " Filetype cpp
   NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', { 'filetypes' : 'cpp' }   " Enhanced vim cpp highlight
   NeoBundleLazy 'jaxbot/semantic-highlight.vim', { 'filetypes' : 'cpp' }      " General semantic highlighting for vim
   let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+
+  NeoBundleLazy 'jelera/vim-javascript-syntax', { 'filetypes' : ['javascript'] }
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
@@ -489,7 +471,7 @@
 
   call neobundle#end()
 
-  NeoBundleRecipe 'unite'
+  " NeoBundleRecipe 'unite'
 
   " Must be maktaba and glaive in runtime path because this is called
   " Thus it has to be after neobundle#end()
