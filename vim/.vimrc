@@ -225,6 +225,13 @@
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
+  NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
+  let s:syntastic = neobundle#get('syntastic')
+  function! s:syntastic.hooks.on_source(bundle)
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
+    nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+  endfunction
 
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
@@ -316,14 +323,6 @@
         call myutils#SetupTablineMappingForWindows()
       endif
     endif
-  endfunction
-
-  NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
-  let s:syntastic = neobundle#get('syntastic')
-  function! s:syntastic.hooks.on_source(bundle)
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
-    nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
 
   " NeoBundle 'paulhybryant/vim-LargeFile', { 'disabled' : 1 }              " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
