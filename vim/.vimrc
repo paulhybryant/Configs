@@ -260,6 +260,10 @@
   NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
+  NeoBundle 'chrisbra/vim-diff-enhanced'
+  " NeoBundle 'junegunn/vim-plug'                                           " Yet another vim plugin manager
+  " NeoBundle 'gmarik/Vundle.vim'                                           " Yet another vim plugin manager
+  " NeoBundle 'tpope/vim-pathogen'                                          " Yet another vim plugin manager
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
   NeoBundle 'Shougo/echodoc.vim'
@@ -453,6 +457,11 @@
     let g:unite_source_grep_recursive_opt=''
   endif
 
+  " NeoBundle 'thinca/vim-localrc', { 'type' : 'svn', 'disabled' : 1 }          " Enable vim configuration file for each directory
+  " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {'script_type' : 'plugin'}    " For ruby development
+  " NeoBundle 'bronzehedwick/impactjs-colorscheme', {'script_type' : 'colorscheme'}
+  " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
+
   " Lazily load Filetype specific bundles
   NeoBundleLazy 'chiphogg/vim-vtd', { 'fieltypes' : 'vtd' }
 
@@ -462,6 +471,7 @@
   let g:sqlutil_align_comma=0
 
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'filetypes' : 'sql' }      " Automatically close html tags
+  NeoBundle 'rstacruz/sparkup', { 'rtp': 'vim', 'filetypes' : 'html' }        " Write HTML code faster
 
   NeoBundleLazy 'tmux-plugins/vim-tmux', { 'filetypes' : 'tmux' }             " Vim plugin for editing .tmux.conf
   NeoBundleLazy 'zaiste/tmux.vim', { 'filetypes' : 'tmux' }                   " Tmux syntax highlight
