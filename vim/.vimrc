@@ -506,6 +506,10 @@
   let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 
   NeoBundleLazy 'jelera/vim-javascript-syntax', { 'filetypes' : ['javascript'] }
+  " NeoBundle 'glts/vim-magnum', { 'disabled' : 1, 'depends' : 'google/vim-maktaba' }
+  " NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}
+  " NeoBundle 'dhruvasagar/vim-dotoo'
+  " NeoBundle 'gelguy/Cmd2.vim'
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
