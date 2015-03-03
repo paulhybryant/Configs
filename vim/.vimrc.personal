@@ -98,10 +98,10 @@ elseif exists("g:use_ycm")
   " YouCompleteMe {{{
   NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build' : {
-      \     'mac' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-      \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-      \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-      \     'cygwin' : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+      \     'mac' : './install.sh --clang-completer --system-libclang',
+      \     'unix' : './install.sh --clang-completer --system-libclang',
+      \     'windows' : './install.sh --clang-completer --system-libclang',
+      \     'cygwin' : './install.sh --clang-completer --system-libclang'
       \    }
       \ }
   nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
