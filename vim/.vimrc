@@ -278,7 +278,7 @@
   " NeoBundle 'godlygeek/tabular', { 'disabled' : 1 }
 
   if executable('ctags')
-    NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
+    " NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
     NeoBundle 'majutsushi/tagbar'
     let g:tagbar_type_autohotkey = {
           \ 'ctagstype' : 'autohotkey',
