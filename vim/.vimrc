@@ -225,6 +225,13 @@
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
   NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
+  NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
+  let s:syntastic = neobundle#get('syntastic')
+  function! s:syntastic.hooks.on_source(bundle)
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
+    nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+  endfunction
 
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                             " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                        " Show diff between existing swap files and saved file
@@ -253,6 +260,10 @@
   NeoBundle 'glts/vim-radical', { 'disabled' : 1 }                        " Show number under cursor in hex, octal, binary
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}            " Post, view and edit gist in vim
   NeoBundle 'sjl/splice.vim'                                              " Vim three way merge tool
+  NeoBundle 'chrisbra/vim-diff-enhanced'
+  " NeoBundle 'junegunn/vim-plug'                                           " Yet another vim plugin manager
+  " NeoBundle 'gmarik/Vundle.vim'                                           " Yet another vim plugin manager
+  " NeoBundle 'tpope/vim-pathogen'                                          " Yet another vim plugin manager
   NeoBundle 'vim-scripts/scratch.vim'                                     " Creates a scratch buffer
   NeoBundle 'Raimondi/VimRegEx.vim'                                       " Regex dev and test env in vim
   NeoBundle 'Shougo/echodoc.vim'
@@ -316,14 +327,6 @@
         call myutils#SetupTablineMappingForWindows()
       endif
     endif
-  endfunction
-
-  NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
-  let s:syntastic = neobundle#get('syntastic')
-  function! s:syntastic.hooks.on_source(bundle)
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['vim'] }
-    nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
 
   " NeoBundle 'paulhybryant/vim-LargeFile', { 'disabled' : 1 }              " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
@@ -454,6 +457,11 @@
     let g:unite_source_grep_recursive_opt=''
   endif
 
+  " NeoBundle 'thinca/vim-localrc', { 'type' : 'svn', 'disabled' : 1 }          " Enable vim configuration file for each directory
+  " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {'script_type' : 'plugin'}    " For ruby development
+  " NeoBundle 'bronzehedwick/impactjs-colorscheme', {'script_type' : 'colorscheme'}
+  " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
+
   " Lazily load Filetype specific bundles
   NeoBundleLazy 'chiphogg/vim-vtd', { 'fieltypes' : 'vtd' }
 
@@ -463,6 +471,7 @@
   let g:sqlutil_align_comma=0
 
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'filetypes' : 'sql' }      " Automatically close html tags
+  NeoBundle 'rstacruz/sparkup', { 'rtp': 'vim', 'filetypes' : 'html' }        " Write HTML code faster
 
   NeoBundleLazy 'tmux-plugins/vim-tmux', { 'filetypes' : 'tmux' }             " Vim plugin for editing .tmux.conf
   NeoBundleLazy 'zaiste/tmux.vim', { 'filetypes' : 'tmux' }                   " Tmux syntax highlight
@@ -497,6 +506,10 @@
   let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 
   NeoBundleLazy 'jelera/vim-javascript-syntax', { 'filetypes' : ['javascript'] }
+  " NeoBundle 'glts/vim-magnum', { 'disabled' : 1, 'depends' : 'google/vim-maktaba' }
+  " NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}
+  " NeoBundle 'dhruvasagar/vim-dotoo'
+  " NeoBundle 'gelguy/Cmd2.vim'
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local

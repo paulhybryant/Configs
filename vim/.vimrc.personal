@@ -10,7 +10,11 @@ let g:use_ycm = 1
 
 if empty($NVIM) && !exists("g:use_ycm")
   " neocomplete {{{
-    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplete.vim', {
+        \ 'depends' : 'Shougo/context_filetype.vim',
+        \ 'disabled' : !has('lua'),
+        \ 'vim_version' : '7.3.885'
+        \ }
     " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
     " Use neocomplete.
