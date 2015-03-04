@@ -3,6 +3,7 @@
 " Environment {{{
 
   set nocompatible                                    " Must be first line
+  set encoding=utf-8                                                      " Set text encoding default to utf-8
   scriptencoding utf-8                                " Character encoding used in this script
 
   " Identify platform {{{
@@ -97,12 +98,11 @@
 
   filetype off
   set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
-  set runtimepath+=$VIMPLUGINSDIR/neobundle-vim-recipes/
 
   call neobundle#begin(expand('$VIMPLUGINSDIR/'))
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
-  NeoBundleFetch 'Shougo/neobundle-vim-recipes'                           " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 
   " Nativation
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
@@ -144,9 +144,12 @@
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_tab_type = 1
     let g:airline#extensions#tabline#left_sep = ''
     let g:airline#extensions#tabline#left_alt_sep = ''
     let g:airline#extensions#tabline#buffer_idx_mode = 1
+    " let g:airline#extensions#tabline#formatter = 'customtab'
+    " let g:airline#extensions#taboo#enabled = 1
     " let g:airline#extensions#tmuxline#enabled = 1                         " Disable this for plugin Tmuxline
     " let g:airline#extensions#tmuxline#color_template = 'normal'
   endfunction
@@ -241,7 +244,7 @@
 
 
 
-
+  NeoBundle 'jlemetay/permut'
   NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
   NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell' }              " Shell implemented with vimscript
   NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
@@ -275,7 +278,9 @@
   NeoBundle 'tpope/vim-abolish.git', { 'disabled' : 1 }                   " Creates set of abbreviations for spell correction easily
   " NeoBundle 'rhysd/libclang-vim', { 'disabled' : 1 }
   " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : 1 }                       " Vim workspace manager
-  " NeoBundle 'godlygeek/tabular', { 'disabled' : 1 }
+  NeoBundle 'godlygeek/tabular'
+  " NeoBundle 'junegunn/vim-easy-align'
+  " NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
 
   if executable('ctags')
     NeoBundle 'xolox/vim-easytags', {'depends' : 'xolox/vim-misc'}        " Vim integration with ctags
@@ -294,7 +299,6 @@
           \ }
   endif
 
-  NeoBundle 'paulhybryant/Align'                                          " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                 " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
@@ -510,6 +514,7 @@
   " NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}
   " NeoBundle 'dhruvasagar/vim-dotoo'
   " NeoBundle 'gelguy/Cmd2.vim'
+  " NeoBundle 'gcmt/taboo.vim'
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
@@ -517,10 +522,6 @@
 
   call neobundle#end()
 
-  " Must be maktaba and glaive in runtime path because this is called
-  " Thus it has to be after neobundle#end()
-  call glaive#Install()
-  Glaive codefmt plugin[mappings]
 
   autocmd FileType vtd NeoBundleSource vim-vtd
         \ | Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
@@ -542,7 +543,6 @@
   set backspace=indent,eol,start                                          " Backspace for dummies
   set backup                                                              " Whether saves a backup before editing
   set cursorline                                                          " Highlight current line
-  set encoding=utf-8                                                      " Set text encoding default to utf-8
   set expandtab                                                           " Tabs are spaces, not tabs
   set foldenable                                                          " Auto fold code
   set hidden                                                              " Allow buffer switching without saving
