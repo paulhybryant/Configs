@@ -97,6 +97,12 @@
         \ 'vim-vinegar' : 1,
         \ 'vim-magnum' : 1,
         \ }
+
+  let g:google_config = resolve(expand("~/.vimrc.google"))
+  if filereadable(g:google_config)
+    exec "source " . g:google_config
+  endif
+
   let g:mapleader = ','
   let g:maplocalleader = ',,'
 
@@ -116,10 +122,70 @@
   filetype off
   set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
 
-  call neobundle#begin(expand('$VIMPLUGINSDIR/'))
+  call neobundle#begin('$VIMPLUGINSDIR')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+
+  if !filereadable(g:google_config)
+    NeoBundle 'google/vim-maktaba', {
+          \ 'disabled' : PluginDisabled('vim-maktaba'),
+          \ 'force' : 1,
+          \ }
+    NeoBundle 'google/vim-glaive', {
+          \ 'disabled' : PluginDisabled('vim-glaive'),
+          \ 'depends' : 'vim-maktaba',
+          \ 'force' : 1
+          \ }
+    call glaive#Install()
+    NeoBundle 'google/vim-codefmt', {
+          \ 'disabled' : PluginDisabled('vim-codefmt'),
+          \ 'depends' : ['google/vim-codefmtlib', 'vim-glaive']
+          \ } " Code formating plugin from google
+    let s:vimcodefmt = neobundle#get('vim-codefmt')
+    function! s:vimcodefmt.hooks.on_source(bundle)
+      Glaive codefmt plugin[mappings]
+    endfunction
+    NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
+    NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
+
+    NeoBundle 'Valloric/YouCompleteMe', {
+        \ 'build' : {
+        \     'mac' : './install.sh --clang-completer --system-libclang',
+        \     'unix' : './install.sh --clang-completer --system-libclang',
+        \     'windows' : './install.sh --clang-completer --system-libclang',
+        \     'cygwin' : './install.sh --clang-completer --system-libclang'
+        \    }
+        \ }
+    let s:ycm = neobundle#get('YouCompleteMe')
+    function! s:ycm.hooks.on_source(bundle)
+      nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+      nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
+      let g:Show_diagnostics_ui = 1                                           " default 1
+      let g:ycm_always_populate_location_list = 1                             " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
+      let g:ycm_complete_in_strings = 1                                       " default 1
+      let g:ycm_confirm_extra_conf = 1
+      let g:ycm_enable_diagnostic_highlighting = 0
+      let g:ycm_enable_diagnostic_signs = 1
+      let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
+      let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+      let g:ycm_key_invoke_completion = '<C-Space>'
+      let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+      let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+      let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
+      let g:ycm_path_to_python_interpreter = ''                               " default ''
+      let g:ycm_register_as_syntastic_checker = 1                             " default 1
+      let g:ycm_server_keep_logfiles = 10                                     " keep log files
+      let g:ycm_server_log_level = 'info'                                     " default info
+      let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
+    endfunction
+  endif
+
+  NeoBundle 'Chiel92/vim-autoformat'
+  NeoBundle 'aperezdc/vim-template'
+  NeoBundle 'vim-jp/cpp-vim'
 
   " Nativation {{{
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
@@ -189,14 +255,105 @@
   " }}}
 
   " Auto complete / formatting {{{
+  " NeoBundle 'Shougo/neocomplcache.vim'
+  NeoBundle 'Shougo/neocomplete.vim', {
+      \ 'depends' : 'Shougo/context_filetype.vim',
+      \ 'disabled' : !has('lua'),
+      \ 'vim_version' : '7.3.885'
+      \ }
+  let s:neocomplete = neobundle#get('neocomplete.vim')
+  function! s:neocomplete.hooks.on_source(bundle)
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+      \   'default' : '',
+      \   'vimshell' : $HOME.'/.vimshell_hist',
+      \   'scheme' : $HOME.'/.gosh_completions'
+      \ }
+
+      " Define keyword.
+      if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+      endif
+      let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+      " Plugin key-mappings.
+      " inoremap <expr><C-g>     neocomplete#undo_completion()
+      " inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+      " Recommended key-mappings.
+      " <CR>: close popup and save indent.
+      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+      function! s:my_cr_function()
+        return neocomplete#close_popup() . "\<CR>"
+        " For no inserting <CR> key.
+        "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+      endfunction
+      " <TAB>: completion.
+      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+      " <C-h>, <BS>: close popup and delete backword char.
+      inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><C-y>  neocomplete#close_popup()
+      inoremap <expr><C-e>  neocomplete#cancel_popup()
+      " Close popup by <Space>.
+      "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+      " For cursor moving in insert mode(Not recommended)
+      "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+      "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+      "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+      "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+      " Or set this.
+      "let g:neocomplete#enable_cursor_hold_i = 1
+      " Or set this.
+      "let g:neocomplete#enable_insert_char_pre = 1
+
+      " AutoComplPop like behavior.
+      "let g:neocomplete#enable_auto_select = 1
+
+      " Shell like behavior(not recommended).
+      "set completeopt+=longest
+      "let g:neocomplete#enable_auto_select = 1
+      "let g:neocomplete#disable_auto_complete = 1
+      "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+      " Enable omni completion.
+      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+      " Enable heavy omni completion.
+      if !exists('g:neocomplete#sources#omni#input_patterns')
+        let g:neocomplete#sources#omni#input_patterns = {}
+      endif
+      "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+      "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+      "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+      " For perlomni.vim setting.
+      " https://github.com/c9s/perlomni.vim
+      let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+      autocmd FileType cpp NeoCompleteLock
+  endfunction
   NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
   NeoBundle 'tpope/vim-surround', {
         \ 'disabled' : PluginDisabled('vim-surround')
         \ }
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
-  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
-  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
   NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
@@ -512,7 +669,6 @@
   " Lazily load Filetype specific bundles
   NeoBundleLazy 'chiphogg/vim-vtd', {
         \ 'autoload' : { 'filetypes' : 'vtd' },
-        \ 'depends' : 'vim-glaive'
         \ }
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
@@ -579,6 +735,8 @@
     NeoBundle 'vim-scripts/Tail-Bundle'                                   " Tail for windows in vim
   endif
 
+  " NeoBundle 'vim-scripts/SemanticHL'                " Semantic highlighting for C / C++
+
   call neobundle#end()
 
   NeoBundleCheck
@@ -640,7 +798,7 @@
   set winminheight=0                                                      " Windows can be 0 line high
   set wrap                                                                " Wrap long lines
   set wrapscan                                                            " Make regex search wrap to the start of the file
-  " set comments=sl:/*,mb:*,elx:*/                                          " auto format comment blocks
+  set comments=sl:/*,mb:*,elx:*/                                          " auto format comment blocks
 
   if &diff
     set nospell                                                           " No spellcheck
