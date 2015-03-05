@@ -146,8 +146,6 @@
         \ }
   call glaive#Install()
 
-  NeoBundle 'aperezdc/vim-template'
-
   " Nativation {{{
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
   NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
@@ -420,6 +418,12 @@
   " NeoBundle 'rhysd/libclang-vim', { 'disabled' : PluginDisabled('libclang-vim') }
   " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : PluginDisabled('vim-ctrlspace') }                       " Vim workspace manager
 
+  NeoBundle 'vim-jp/vital.vim'
+  NeoBundle "Rykka/os.vim"
+  NeoBundle "Rykka/clickable-things"
+  NeoBundle "Rykka/clickable.vim", { 'depends' : ['os.vim', 'clickable-things'] }
+  NeoBundle 'aperezdc/vim-template'
+
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
   let s:syntastic = neobundle#get('syntastic')
   function! s:syntastic.hooks.on_source(bundle)
@@ -494,7 +498,7 @@
   endfunction
   " NeoBundle 'vim-scripts/TagHighlight'
 
-  NeoBundle 'paulhybryant/foldcol'
+  " NeoBundle 'paulhybryant/foldcol'
   NeoBundle 'paulhybryant/hilinks'
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
