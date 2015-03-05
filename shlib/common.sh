@@ -362,9 +362,6 @@ function link_vim() {
   backup_and_link "$_vimconf_/.gvim.sh" "$HOME/.gvim.sh"
   backup_and_link "$_vimconf_/.gvimrc" "$HOME/.gvimrc"
   backup_and_link "$_vimconf_/.vimrc" "$HOME/.vimrc"
-  if [[ -f "$HOME/.personal" ]]; then
-    backup_and_link "$_vimconf_/.vimrc.personal" "$HOME/.vimrc.local"
-  fi
 }
 
 function link_zsh() {

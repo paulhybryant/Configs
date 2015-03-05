@@ -101,6 +101,11 @@
   let g:google_config = resolve(expand("~/.vimrc.google"))
   if filereadable(g:google_config)
     exec "source " . g:google_config
+    let g:disabled_plugins['vim-maktaba'] = 1
+    let g:disabled_plugins['vim-glaive'] = 1
+    let g:disabled_plugins['vim-codefmt'] = 1
+    let g:disabled_plugins['vim-better-whitespace'] = 1
+    let g:disabled_plugins['vim-trailing-whitespace'] = 1
   endif
 
   let g:mapleader = ','
@@ -125,67 +130,23 @@
   call neobundle#begin('$VIMPLUGINSDIR')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                   " Plugin manager
+  " NeoBundle 'junegunn/vim-plug'                                           " Yet another vim plugin manager
+  " NeoBundle 'gmarik/Vundle.vim'                                           " Yet another vim plugin manager
+  " NeoBundle 'tpope/vim-pathogen'                                          " Yet another vim plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 
-  if !filereadable(g:google_config)
-    NeoBundle 'google/vim-maktaba', {
-          \ 'disabled' : PluginDisabled('vim-maktaba'),
-          \ 'force' : 1,
-          \ }
-    NeoBundle 'google/vim-glaive', {
-          \ 'disabled' : PluginDisabled('vim-glaive'),
-          \ 'depends' : 'vim-maktaba',
-          \ 'force' : 1
-          \ }
-    call glaive#Install()
-    NeoBundle 'google/vim-codefmt', {
-          \ 'disabled' : PluginDisabled('vim-codefmt'),
-          \ 'depends' : ['google/vim-codefmtlib', 'vim-glaive']
-          \ } " Code formating plugin from google
-    let s:vimcodefmt = neobundle#get('vim-codefmt')
-    function! s:vimcodefmt.hooks.on_source(bundle)
-      Glaive codefmt plugin[mappings]
-    endfunction
-    NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
-    NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
-
-    NeoBundle 'Valloric/YouCompleteMe', {
-        \ 'build' : {
-        \     'mac' : './install.sh --clang-completer --system-libclang',
-        \     'unix' : './install.sh --clang-completer --system-libclang',
-        \     'windows' : './install.sh --clang-completer --system-libclang',
-        \     'cygwin' : './install.sh --clang-completer --system-libclang'
-        \    }
+  NeoBundle 'google/vim-maktaba', {
+        \ 'disabled' : PluginDisabled('vim-maktaba'),
+        \ 'force' : 1,
         \ }
-    let s:ycm = neobundle#get('YouCompleteMe')
-    function! s:ycm.hooks.on_source(bundle)
-      nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-      nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
-      let g:Show_diagnostics_ui = 1                                           " default 1
-      let g:ycm_always_populate_location_list = 1                             " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
-      let g:ycm_complete_in_strings = 1                                       " default 1
-      let g:ycm_confirm_extra_conf = 1
-      let g:ycm_enable_diagnostic_highlighting = 0
-      let g:ycm_enable_diagnostic_signs = 1
-      let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
-      let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-      let g:ycm_key_invoke_completion = '<C-Space>'
-      let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-      let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-      let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
-      let g:ycm_path_to_python_interpreter = ''                               " default ''
-      let g:ycm_register_as_syntastic_checker = 1                             " default 1
-      let g:ycm_server_keep_logfiles = 10                                     " keep log files
-      let g:ycm_server_log_level = 'info'                                     " default info
-      let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
-    endfunction
-  endif
+  NeoBundle 'google/vim-glaive', {
+        \ 'disabled' : PluginDisabled('vim-glaive'),
+        \ 'depends' : 'vim-maktaba',
+        \ 'force' : 1
+        \ }
+  call glaive#Install()
 
-  NeoBundle 'Chiel92/vim-autoformat'
   NeoBundle 'aperezdc/vim-template'
-  NeoBundle 'vim-jp/cpp-vim'
 
   " Nativation {{{
   NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
@@ -254,7 +215,40 @@
   " let g:tmuxline_preset = 'tmux'
   " }}}
 
-  " Auto complete / formatting {{{
+  " Auto-complete {{{
+  NeoBundle 'Valloric/YouCompleteMe', {
+      \ 'build' : {
+      \     'mac' : './install.sh --clang-completer --system-libclang',
+      \     'unix' : './install.sh --clang-completer --system-libclang',
+      \     'windows' : './install.sh --clang-completer --system-libclang',
+      \     'cygwin' : './install.sh --clang-completer --system-libclang'
+      \    }
+      \ }
+  let s:ycm = neobundle#get('YouCompleteMe')
+  function! s:ycm.hooks.on_source(bundle)
+    nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
+    let g:Show_diagnostics_ui = 1                                           " default 1
+    let g:ycm_always_populate_location_list = 1                             " default 0
+    let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
+    let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
+    let g:ycm_complete_in_strings = 1                                       " default 1
+    let g:ycm_confirm_extra_conf = 1
+    let g:ycm_enable_diagnostic_highlighting = 0
+    let g:ycm_enable_diagnostic_signs = 1
+    let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
+    let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+    let g:ycm_key_invoke_completion = '<C-Space>'
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
+    let g:ycm_path_to_python_interpreter = ''                               " default ''
+    let g:ycm_register_as_syntastic_checker = 1                             " default 1
+    let g:ycm_server_keep_logfiles = 10                                     " keep log files
+    let g:ycm_server_log_level = 'info'                                     " default info
+    let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
+  endfunction
+
   " NeoBundle 'Shougo/neocomplcache.vim'
   NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
@@ -346,7 +340,18 @@
       " https://github.com/c9s/perlomni.vim
       let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-      autocmd FileType cpp NeoCompleteLock
+      autocmd FileType c,cpp,python NeoCompleteLock
+  endfunction
+  " }}}
+
+  " Auto-formatting {{{
+  NeoBundle 'google/vim-codefmt', {
+        \ 'disabled' : PluginDisabled('vim-codefmt'),
+        \ 'depends' : ['google/vim-codefmtlib', 'vim-glaive']
+        \ } " Code formating plugin from google
+  let s:vimcodefmt = neobundle#get('vim-codefmt')
+  function! s:vimcodefmt.hooks.on_source(bundle)
+    Glaive codefmt plugin[mappings]
   endfunction
   NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
@@ -354,16 +359,13 @@
         \ 'disabled' : PluginDisabled('vim-surround')
         \ }
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
+  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
+  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
   NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDSpaceDelims = 1
     let g:NERDCustomDelimiters = {}
-    " TODO(yuhuang): Move to .vimrc.local
-    " let g:NERDCustomDelimiters = {
-          " \   'rvl' : { 'left': '#' },
-          " \   'borg' : { 'left' : '//' }
-          " \ }
   endfunction
   " }}}
 
@@ -410,9 +412,6 @@
   " NeoBundle 'reedes/vim-textobj-quote', { 'disabled' : PluginDisabled('vim-textobj-quote') }                " Define text object between also typographic ('curly') quote characters
   " }}}
 
-  " NeoBundle 'junegunn/vim-plug'                                           " Yet another vim plugin manager
-  " NeoBundle 'gmarik/Vundle.vim'                                           " Yet another vim plugin manager
-  " NeoBundle 'tpope/vim-pathogen'                                          " Yet another vim plugin manager
   " NeoBundle 'tomtom/tcomment_vim', {
         " \ 'disabled' : PluginDisabled('tcomment_vim'),
         " \ 'depends' : 'tomtom/tlib.vim'
@@ -464,8 +463,6 @@
     Glaive syncopate plugin[mappings] colorscheme=putty
     let g:html_number_lines = 0
   endfunction
-  NeoBundle 'google/vim-ft-vroom', { 'autoload' : { 'filetypes' : 'vroom' } }              " Filetype plugin for vroom
-  NeoBundle 'thinca/vim-themis'                                           " Testing framework for vimscript
   NeoBundle 'guns/xterm-color-table.vim'                                  " Show xterm color tables in vim
   NeoBundle 'tpope/vim-dispatch'                                          " Run command asyncroneously in vim
   NeoBundle 'tpope/vim-abolish.git', { 'disabled' : PluginDisabled('vim-abolish') }                   " Creates set of abbreviations for spell correction easily
@@ -514,10 +511,33 @@
   let s:vimcustom = neobundle#get('vim-custom')
   function! s:vimcustom.hooks.on_source(bundle)
     set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
+    let g:myutils#special_bufvars = ['gistls', 'NERDTreeType']
+
     autocmd BufEnter * call myutils#SyncNTTree()
+
     nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>
     nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
     nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()<CR>
+    nnoremap <leader>gh :call myutils#EditHeader()<CR>
+    nnoremap <leader>gc :call myutils#EditCC()<CR>
+    nnoremap <leader>gt :call myutils#EditTest()<CR>
+    vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
+    vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
+    nnoremap <leader>hh :call myutils#HexHighlight()<CR>
+    nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
+    nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
+    nnoremap <C-q> :Bclose<cr>
+    inoremap <C-q> <ESC>:Bclose<cr>
+
+    command! Bclose call myutils#BufcloseCloseIt(1)
+    command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
+    command! -nargs=* -complete=file -bang E call myutils#MultiEdit("<bang>", <f-args>)
+    command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
+    " TODO: Integrate this with codefmt
+    command! Fsql call myutils#FormatSql()
+
+    " Display-altering option toggles
+    MapToggle <F1> spell
 
     if len($SSH_CLIENT) > 0
       if $SSH_OS == "Darwin"
@@ -665,6 +685,7 @@
   " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {'script_type' : 'plugin'}    " For ruby development
   " NeoBundle 'bronzehedwick/impactjs-colorscheme', {'script_type' : 'colorscheme'}
   " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
+  NeoBundle 'bruno-/vim-vertical-move'
 
   " Lazily load Filetype specific bundles
   NeoBundleLazy 'chiphogg/vim-vtd', {
@@ -691,124 +712,321 @@
   let g:BASH_MapLeader  = g:maplocalleader
   let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
 
+  " Vimscript scripting {{{
+  NeoBundleLazy 'thinca/vim-themis', { 'autoload' : { 'filetypes' : 'vim' } }                  " Testing framework for vimscript
+  NeoBundleLazy 'kana/vim-vspec', { 'autoload' : { 'filetypes' : 'vim' } }                      " Testing framework for vimscript
   NeoBundleLazy 'vim-scripts/ReloadScript', { 'autoload' : { 'filetypes' : 'vim' } }           " Reload vim script without having to restart vim
-  map <leader>rl :ReloadScript %:p<CR>
+  let s:reloadscript = neobundle#get('ReloadScript')
+  function! s:reloadscript.hooks.on_source(bundle)
+    map <leader>rl :ReloadScript %:p<CR>
+  endfunction
+
   NeoBundleLazy 'paulhybryant/Decho.vim', { 'autoload' : { 'filetypes' : 'vim' } }             " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
-  let g:dechofuncname = 1
-  let g:decho_winheight = 10
+  function! s:reloadscript.hooks.on_source(bundle)
+    let g:dechofuncname = 1
+    let g:decho_winheight = 10
+  endfunction
+
   NeoBundleLazy 'syngan/vim-vimlint', {
         \ 'autoload' : { 'filetypes' : 'vim' },
-        \ 'depends' : 'ynkdir/vim-vimlparser'}                                " Syntax checker for vimscript
-  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : 'vim' }                  " Syntax checker for vimscript
-  " NeoBundleLazy 'vim-scripts/Vim-Support', { 'autoload' : { 'filetypes' : 'vim' } }            " Make vim an IDE for writing vimscript
-  let g:Vim_MapLeader  = g:maplocalleader
+        \ 'depends' : 'ynkdir/vim-vimlparser'
+        \ }                                                                                     " Syntax checker for vimscript
+  " let g:Vim_MapLeader  = g:maplocalleader
+  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : 'vim' }                                     " Syntax checker for vimscript
+  " NeoBundleLazy 'vim-scripts/Vim-Support', { 'autoload' : { 'filetypes' : 'vim' } }             " Make vim an IDE for writing vimscript
+  " }}}
 
-  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : 'gitcommit' } }                " Syntax highlight for git
+  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : 'gitcommit' } }                 " Syntax highlight for git
+  NeoBundleLazy 'google/vim-ft-vroom', { 'autoload' : { 'filetypes' : 'vroom' } }               " Filetype plugin for vroom
 
-  " NeoBundle 'tpope/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }              " Syntax highlighting for markdown
-  NeoBundleLazy 'plasticboy/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }       " Yet another markdown syntax highlighting
+  NeoBundleLazy 'plasticboy/vim-markdown', {
+        \ 'autoload' : { 'filetypes' : 'markdown' }
+        \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
-        \ 'autoload' : { 'filetypes' : 'markdown' } }                                          " Start a http server and preview markdown instantly
+        \ 'autoload' : { 'filetypes' : 'markdown' }
+        \ }                                                                     " Start a http server and preview markdown instantly
+  " NeoBundleLazy 'tpope/vim-markdown', {
+        " \ 'autoload' : { 'filetypes' : 'markdown' }
+        " \ }                                                                     " Syntax highlighting for markdown
   " NeoBundle 'suan/vim-instant-markdown'
 
-  NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', { 'autoload' : { 'filetypes' : 'cpp' } }   " Enhanced vim cpp highlight
-  NeoBundleLazy 'jaxbot/semantic-highlight.vim', { 'autoload' : { 'filetypes' : 'cpp' } }      " General semantic highlighting for vim
-  let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+  NeoBundleLazy 'vim-jp/cpp-vim', { 'autoload' : { 'filetypes' : 'cpp' } }
+  NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', {
+        \ 'autoload' : { 'filetypes' : 'cpp' }
+        \ }                                                                     " Enhanced vim cpp highlight
+  NeoBundleLazy 'jaxbot/semantic-highlight.vim', {
+        \ 'autoload' : { 'filetypes' : 'cpp' }
+        \ }                                                                     " General semantic highlighting for vim
+  let s:semantichighlight = neobundle#get('semantic-highlight')
+  function! s:reloadscript.hooks.on_source(bundle)
+    let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+  endfunction
 
-  NeoBundleLazy 'jelera/vim-javascript-syntax', { 'filetypes' : ['javascript'] }
-  NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum'), 'depends' : 'google/vim-maktaba' }
+  NeoBundleLazy 'jelera/vim-javascript-syntax', {
+        \ 'filetypes' : 'javascript'
+        \ }                                                                     " Javascript syntax folding
+  NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Depends on 'google/vim-maktaba'
+  NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
+  NeoBundle 'nathanaelkane/vim-indent-guides'
+
   " NeoBundle 'dhruvasagar/vim-prosession', { 'depends': 'tpope/vim-obsession' , 'disabled' : PluginDisabled('vim-prosession') }
   " NeoBundle 'dhruvasagar/vim-dotoo'
   " NeoBundle 'gelguy/Cmd2.vim'
   " NeoBundle 'gcmt/taboo.vim'
-  " NeoBundle 'sjl/gundo.vim'                                             " Visualize undo tree
-  NeoBundle 'tpope/vim-eunuch'                                            " Vim sugar for the UNIX shell commands that need it the most
-  NeoBundle 'nathanaelkane/vim-indent-guides'
+  " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
   " NeoBundle 'akesling/ondemandhighlight'
   " NeoBundle 'neitanod/vim-ondemandhighlight'
+  " NeoBundle 'vim-scripts/SemanticHL'                                            " Semantic highlighting for C / C++
 
   if filereadable(expand("~/.vimrc.local"))
     source $HOME/.vimrc.local
   endif
 
   if WINDOWS()
-    NeoBundle 'vim-scripts/Tail-Bundle'                                   " Tail for windows in vim
+    NeoBundle 'vim-scripts/Tail-Bundle'                                         " Tail for windows in vim
   endif
-
-  " NeoBundle 'vim-scripts/SemanticHL'                " Semantic highlighting for C / C++
 
   call neobundle#end()
 
   NeoBundleCheck
 " }}}
 
-" General {{{
+" Mappings and autocommands {{{
 
-  filetype plugin indent on                                               " Automatically detect file types.
-  syntax on                                                               " Syntax highlighting
-  set autoindent                                                          " Indent at the same level of the previous line
-  set autoread                                                            " Automatically load changed files
-  set autowrite                                                           " Automatically write a file when leaving a modified buffer
-  set background=dark                                                     " Assume a dark background
-  set backspace=indent,eol,start                                          " Backspace for dummies
-  set backup                                                              " Whether saves a backup before editing
-  set cursorline                                                          " Highlight current line
-  set expandtab                                                           " Tabs are spaces, not tabs
-  set foldenable                                                          " Auto fold code
-  set hidden                                                              " Allow buffer switching without saving
-  set history=1000                                                        " Store a ton of history (default is 20)
-  set hlsearch                                                            " Highlight search terms
-  set ignorecase                                                          " Case insensitive search
-  set imdisable                                                           " Disable IME in vim
-  set incsearch                                                           " Find as you type search
-  set laststatus=2                                                        " Always show statusline
-  set linespace=0                                                         " No extra spaces between rows
-  set list                                                                " Display unprintable characters
-  set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                          " Highlight problematic whitespace
-  set matchpairs+=<:>                                                     " Match, to be used with %
-  set modeline                                                            " Mac disables modeline by default
-  set modelines=4                                                         " Mac sets it to 0 by default
-  set mouse=a                                                             " Automatically enable mouse usage
-  set mousehide                                                           " Hide the mouse cursor while typing
-  set number                                                              " Line numbers on
-  set pastetoggle=<F12>                                                   " pastetoggle (sane indentation on paste)
-  set ruler                                                               " Show the ruler
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                      " A ruler on steroids
-  set scrolljump=5                                                        " Lines to scroll when cursor leaves screen
-  set scrolloff=3                                                         " Minimum lines to keep above and below cursor
-  set shiftround                                                          " Round indent to multiple of shiftwidth
-  set shiftwidth=2                                                        " Use indents of 2 spaces
-  set shortmess+=filmnrxoOtT                                              " Abbrev. of messages (avoids 'hit enter')
-  set showcmd                                                             " Show partial commands in status line and selected text in visual mode
-  set showmatch                                                           " Show matching brackets/parenthesis
-  set showmode                                                            " Display the current mode
-  set showtabline=2                                                       " Always show the tabline
-  set smartcase                                                           " Case sensitive when uppercase present
-  set softtabstop=2                                                       " Let backspace delete indent
-  set t_Co=256                                                            " Set number of colors supported by term
-  set tabstop=2                                                           " An indentation every two columns
-  set term=$TERM                                                          " Make arrow and other keys work
-  set undofile                                                            " Persists undo
-  set undolevels=1000                                                     " Maximum number of changes that can be undone
-  set undoreload=10000                                                    " Save the whole buffer for undo when reloading it
-  set viewoptions=folds,options,cursor,unix,slash                         " Better Unix / Windows compatibility
-  set whichwrap=b,s,h,l,<,>,[,]                                           " Backspace and cursor keys wrap too
-  set wildmenu                                                            " Show list instead of just completing
-  set wildmode=list:longest,full                                          " Command <Tab> completion, list matches, then longest common part, then all
-  set winminheight=0                                                      " Windows can be 0 line high
-  set wrap                                                                " Wrap long lines
-  set wrapscan                                                            " Make regex search wrap to the start of the file
-  set comments=sl:/*,mb:*,elx:*/                                          " auto format comment blocks
+  " Disable key to enter ex mode
+  nnoremap Q <nop>
 
-  if &diff
-    set nospell                                                           " No spellcheck
+  " Wrapped lines goes down/up to next row, rather than next line in file.
+  nnoremap j gj
+  nnoremap k gk
+
+  " Concatenate two lines without whitespace at the end
+  noremap J gJ
+  noremap gJ J
+
+  " Visual shifting (does not exit Visual mode)
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Use C-b to enter visual block mode from normal mode
+  nnoremap <C-b> <C-v>
+
+  " Use C-b to enter literal inputs in command mode
+  cnoremap <C-b> <C-v>
+  inoremap <C-b> <C-v>
+
+  " Ctrl-Tab only works in gvim
+  if has('gui_running')
+      nnoremap <C-Tab> :bn<CR>
+      nnoremap <C-S-Tab> :bp<CR>
   else
-    set spell                                                             " Spellcheck
+      " The keycodes received by vim for <Tab> and <C-Tab> from most
+      " terminal emulators are the same. So <Tab> is mapped here but one can
+      " also use <C-Tab> to switch buffers. Same for <S-Tab>.
+      nnoremap <Tab> :bn<CR>
+      nnoremap <S-Tab> :bp<CR>
+      " nnoremap <C-PageDown> :bn<CR>
+      " nnoremap <C-PageUp> :bp<CR>
   endif
 
-  if has ('x11') && (LINUX() || OSX())                                               " On Linux and mac use + register for copy-paste
+  " Paste from the yank register, which only gets overwriten by yanking but
+  " not deleting.
+  noremap <leader>p "0p
+
+  " Switch CWD to the directory of the open buffer
+  noremap <leader>cd :lcd %:p:h<cr>:pwd<CR>
+
+  " Print current file's full name (including path)
+  noremap <leader>fn :echo expand('%:p')<CR>
+
+  " Mapping for camelcase and underscore variable name conversion
+  " Change CamelCase to underscore (camel_case)
+  noremap <leader>lc viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
+  " Change underscore to CamelCase, first letter not capitalized
+  noremap <leader>uu viw:s#_\(\l\)#\u\1#g<CR>
+  " Change underscore to CamelCase, first letter also capitalized
+  noremap <leader>ua viw:s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
+  " cab lc s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g
+  " cab ua s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g
+
+  " Clear search register, stop highlighting current search text
+  nnoremap <silent> <leader>c/ :let @/=""<CR>
+
+  " Save the current window / tab
+  nnoremap <c-s> :w<cr>
+  inoremap <c-s> <ESC>:w<cr>
+
+  " Some helpers to edit mode
+  " http://vimcasts.org/e/14
+  cnoremap %% <C-R>=expand('%:h').'/'<CR>
+  " cabbr %% expand('%:p:h')
+
+  " Toggle spell
+  nnoremap <leader>ts :let &spell = !&spell<CR>
+
+  " Toggle paste
+  nnoremap <leader>tp :let &paste = !&paste<CR>
+
+  " For wrap text using textwidth when formatting text
+  nnoremap <leader>tw :setlocal formatoptions-=t<CR>
+
+  " Adjust viewports to the same size
+  map <leader>=w <C-w>=
+
+  " Write to files owned by root and is not opened with sudo
+  cmap w!! w !sudo tee > /dev/null %
+
+  " Adding newline and stay in normal mode.
+  " <S-Enter> is not reflected, maybe captured by the tmux binding
+  nnoremap <Enter> o<ESC>
+
+  " Improve completion popup menu
+  " http://vim.wikia.com/wiki/Improve_completion_popup_menu
+  " inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+  " inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+  inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+  inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+  inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+  inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+  inoremap <expr> <C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+  inoremap <expr> <C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+  " Identify the syntax highlighting group used at the cursor
+  map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+  " Use C-j, C-k, C-l, C-h to jump between windows
+  " nnoremap <C-j> <C-W>j
+  " nnoremap <C-h> <C-W>h
+  " nnoremap <C-l> <C-W>l
+  " nnoremap <C-k> <C-W>k
+
+  " inoremap <C-j> <ESC><C-W>j
+  " inoremap <C-h> <ESC><C-W>h
+  " inoremap <C-l> <ESC><C-W>l
+  " inoremap <C-k> <ESC><C-W>k
+
+  " Mapping for quoting a string, <leader>qi (quote it)
+  " Not working well with words having 1 character
+  " noremap <leader>qi bi"<ESC>lviw<ESC>a"<ESC>
+  " Replaced by vim-surround
+  " noremap <leader>qi ciw"<C-r>""
+  " noremap <leader>qs ciw'<C-r>"'
+
+  " Make a simple 'search' text object
+  " http://vim.wikia.com/wiki/Copy_or_change_search_hit
+  " http://vimcasts.org/episodes/operating-on-search-matches-using-gn/
+  " vnoremap <silent> t //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+      " \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+  " omap t :normal vt<CR>
+
+  " Automatically jump to end of text pasted
+  " vnoremap <silent> y y`]
+  " vnoremap <silent> p p`]
+  " nnoremap <silent> p p`]`
+
+  " <leader>w= is mapped in Align.vim
+  " <leader>w is used by CamelCaseMotion for moving
+  " The mapping from Align make the motion slow because vim needs to wait for some
+  " time in case '=' is pressed after <leader>w. Is that a better way to avoid
+  " this?
+  silent! unmap <leader>w=
+  silent! unmap <leader>m=
+
+  augroup FiletypeFormat
+    autocmd!
+    autocmd BufRead *.cc setlocal foldmethod=syntax
+    " Disable spell check for log file and BUILD
+    autocmd BufRead BUILD,*.log setlocal nospell
+    autocmd FileType conf setlocal nospell
+    autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal softtabstop=2
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml,xhtml so ~/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim
+    autocmd FileType autohotkey setlocal omnifunc=syntaxcomplete#Complete
+    if &background == "light"
+      autocmd FileType vtd hi! Ignore guifg=#FDF6E3
+    else
+      autocmd FileType vtd hi! Ignore guifg=#002B36
+    endif
+    " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    " autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  augroup END
+
+" }}}
+
+" General {{{
+
+  filetype plugin indent on                                                     " Automatically detect file types.
+  syntax on                                                                     " Syntax highlighting
+  set autoindent                                                                " Indent at the same level of the previous line
+  set autoread                                                                  " Automatically load changed files
+  set autowrite                                                                 " Automatically write a file when leaving a modified buffer
+  set background=dark                                                           " Assume a dark background
+  set backspace=indent,eol,start                                                " Backspace for dummies
+  set backup                                                                    " Whether saves a backup before editing
+  set cursorline                                                                " Highlight current line
+  set expandtab                                                                 " Tabs are spaces, not tabs
+  set foldenable                                                                " Auto fold code
+  set hidden                                                                    " Allow buffer switching without saving
+  set history=1000                                                              " Store a ton of history (default is 20)
+  set hlsearch                                                                  " Highlight search terms
+  set ignorecase                                                                " Case insensitive search
+  set imdisable                                                                 " Disable IME in vim
+  set incsearch                                                                 " Find as you type search
+  set laststatus=2                                                              " Always show statusline
+  set linespace=0                                                               " No extra spaces between rows
+  set list                                                                      " Display unprintable characters
+  set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                                " Highlight problematic whitespace
+  set matchpairs+=<:>                                                           " Match, to be used with %
+  set modeline                                                                  " Mac disables modeline by default
+  set modelines=4                                                               " Mac sets it to 0 by default
+  set mouse=a                                                                   " Automatically enable mouse usage
+  set mousehide                                                                 " Hide the mouse cursor while typing
+  set number                                                                    " Line numbers on
+  set pastetoggle=<F12>                                                         " pastetoggle (sane indentation on paste)
+  set ruler                                                                     " Show the ruler
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                            " A ruler on steroids
+  set scrolljump=5                                                              " Lines to scroll when cursor leaves screen
+  set scrolloff=3                                                               " Minimum lines to keep above and below cursor
+  set shiftround                                                                " Round indent to multiple of shiftwidth
+  set shiftwidth=2                                                              " Use indents of 2 spaces
+  set shortmess+=filmnrxoOtT                                                    " Abbrev. of messages (avoids 'hit enter')
+  set showcmd                                                                   " Show partial commands in status line and selected text in visual mode
+  set showmatch                                                                 " Show matching brackets/parenthesis
+  set showmode                                                                  " Display the current mode
+  set showtabline=2                                                             " Always show the tabline
+  set smartcase                                                                 " Case sensitive when uppercase present
+  set softtabstop=2                                                             " Let backspace delete indent
+  set t_Co=256                                                                  " Set number of colors supported by term
+  set tabstop=2                                                                 " An indentation every two columns
+  set term=$TERM                                                                " Make arrow and other keys work
+  set undofile                                                                  " Persists undo
+  set undolevels=1000                                                           " Maximum number of changes that can be undone
+  set undoreload=10000                                                          " Save the whole buffer for undo when reloading it
+  set viewoptions=folds,options,cursor,unix,slash                               " Better Unix / Windows compatibility
+  set whichwrap=b,s,h,l,<,>,[,]                                                 " Backspace and cursor keys wrap too
+  set wildmenu                                                                  " Show list instead of just completing
+  set wildmode=list:longest,full                                                " Command <Tab> completion, list matches, then longest common part, then all
+  set winminheight=0                                                            " Windows can be 0 line high
+  set wrap                                                                      " Wrap long lines
+  set wrapscan                                                                  " Make regex search wrap to the start of the file
+  set comments=sl:/*,mb:*,elx:*/                                                " auto format comment blocks
+
+  if &diff
+    set nospell                                                                 " No spellcheck
+  else
+    set spell                                                                   " Spellcheck
+  endif
+
+  if has ('x11') && (LINUX() || OSX())                                          " On Linux and mac use + register for copy-paste
     set clipboard=unnamedplus
-  else                                                                    " On Windows, use * register for copy-paste
+  else                                                                          " On Windows, use * register for copy-paste
     set clipboard=unnamed
   endif
 
