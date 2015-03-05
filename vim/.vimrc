@@ -494,6 +494,8 @@
   endfunction
   " NeoBundle 'vim-scripts/TagHighlight'
 
+  NeoBundle 'paulhybryant/foldcol'
+  NeoBundle 'paulhybryant/hilinks'
   NeoBundle 'paulhybryant/manpageview'                                    " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/vissort'                                        " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                 " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
@@ -515,24 +517,28 @@
 
     autocmd BufEnter * call myutils#SyncNTTree()
 
-    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>
-    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
-    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()<CR>
-    nnoremap <leader>gh :call myutils#EditHeader()<CR>
-    nnoremap <leader>gc :call myutils#EditCC()<CR>
-    nnoremap <leader>gt :call myutils#EditTest()<CR>
-    vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
-    vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
-    nnoremap <leader>hh :call myutils#HexHighlight()<CR>
-    nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
-    nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
-    nnoremap <C-q> :Bclose<cr>
     inoremap <C-q> <ESC>:Bclose<cr>
+    nnoremap <C-q> :Bclose<cr>
+    nnoremap <leader>gc :call myutils#EditCC()<CR>
+    nnoremap <leader>gh :call myutils#EditHeader()<CR>
+    nnoremap <leader>gt :call myutils#EditTest()<CR>
+    nnoremap <leader>hh :call myutils#HexHighlight()<CR>
+    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
+    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>
+    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()<CR>
+    nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
+    nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
+    nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
+    noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
+    vmap <leader>y :call myutils#CopyText()<CR>
+    vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
+    vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
 
-    command! Bclose call myutils#BufcloseCloseIt(1)
-    command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
     command! -nargs=* -complete=file -bang E call myutils#MultiEdit("<bang>", <f-args>)
+    command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
+    command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
     command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
+    command! Bclose call myutils#BufcloseCloseIt(1)
     " TODO: Integrate this with codefmt
     command! Fsql call myutils#FormatSql()
 
