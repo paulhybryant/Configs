@@ -129,7 +129,8 @@
   call neobundle#begin('$VIMPLUGINSDIR')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  NeoBundle 'paulhybryant/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  " NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
