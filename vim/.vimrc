@@ -214,38 +214,40 @@
   " }}}
 
   " Auto-complete {{{
-  NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build' : {
-      \     'mac' : './install.sh --clang-completer --system-libclang',
-      \     'unix' : './install.sh --clang-completer --system-libclang',
-      \     'windows' : './install.sh --clang-completer --system-libclang',
-      \     'cygwin' : './install.sh --clang-completer --system-libclang'
-      \    }
-      \ }
-  let s:ycm = neobundle#get('YouCompleteMe')
-  function! s:ycm.hooks.on_source(bundle)
-    nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
-    let g:Show_diagnostics_ui = 1                                           " default 1
-    let g:ycm_always_populate_location_list = 1                             " default 0
-    let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
-    let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
-    let g:ycm_complete_in_strings = 1                                       " default 1
-    let g:ycm_confirm_extra_conf = 1
-    let g:ycm_enable_diagnostic_highlighting = 0
-    let g:ycm_enable_diagnostic_signs = 1
-    let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
-    let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-    let g:ycm_key_invoke_completion = '<C-Space>'
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
-    let g:ycm_path_to_python_interpreter = ''                               " default ''
-    let g:ycm_register_as_syntastic_checker = 1                             " default 1
-    let g:ycm_server_keep_logfiles = 10                                     " keep log files
-    let g:ycm_server_log_level = 'info'                                     " default info
-    let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
-  endfunction
+  if !WINDOWS()
+    NeoBundle 'Valloric/YouCompleteMe', {
+        \ 'build' : {
+        \     'mac' : './install.sh --clang-completer',
+        \     'unix' : './install.sh --clang-completer',
+        \     'windows' : './install.sh --clang-completer',
+        \     'cygwin' : './install.sh --clang-completer'
+        \    }
+        \ }
+    let s:ycm = neobundle#get('YouCompleteMe')
+    function! s:ycm.hooks.on_source(bundle)
+      nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+      nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
+      let g:Show_diagnostics_ui = 1                                           " default 1
+      let g:ycm_always_populate_location_list = 1                             " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
+      let g:ycm_complete_in_strings = 1                                       " default 1
+      let g:ycm_confirm_extra_conf = 1
+      let g:ycm_enable_diagnostic_highlighting = 0
+      let g:ycm_enable_diagnostic_signs = 1
+      let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
+      let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+      let g:ycm_key_invoke_completion = '<C-Space>'
+      let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+      let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+      let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
+      let g:ycm_path_to_python_interpreter = ''                               " default ''
+      let g:ycm_register_as_syntastic_checker = 1                             " default 1
+      let g:ycm_server_keep_logfiles = 10                                     " keep log files
+      let g:ycm_server_log_level = 'info'                                     " default info
+      let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
+    endfunction
+  endif
 
   " NeoBundle 'Shougo/neocomplcache.vim'
   NeoBundle 'Shougo/neocomplete.vim', {
@@ -419,9 +421,14 @@
   " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : PluginDisabled('vim-ctrlspace') }                       " Vim workspace manager
 
   " NeoBundle 'vim-jp/vital.vim'
-  NeoBundle "Rykka/os.vim"
-  NeoBundle "Rykka/clickable-things"
-  NeoBundle "Rykka/clickable.vim", { 'depends' : ['Rykka/os.vim', 'Rykka/clickable-things'] }
+  " NeoBundle "Rykka/os.vim"
+  " NeoBundle "Rykka/clickable-things"
+  " NeoBundle "Rykka/clickable.vim", { 'depends' : ['Rykka/os.vim', 'Rykka/clickable-things'] }
+  " let s:clickable = neobundle#get('clickable.vim')
+  " function! s:clickable.hooks.on_source(bundle)
+    " call os#init()
+    " let g:clickable_browser = "google-chrome"
+  " endfunction
   NeoBundle 'aperezdc/vim-template'
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
@@ -477,10 +484,10 @@
 
   NeoBundle 'xolox/vim-easytags', {
         \ 'depends' : 'xolox/vim-misc',
-        \ 'disabled' : executable('ctags') && PluginDisabled('vim-easytags')
+        \ 'disabled' : executable('ctags') || PluginDisabled('vim-easytags')
         \ }                                                               " Vim integration with ctags
   NeoBundle 'majutsushi/tagbar', {
-        \ 'disabled' : executable('ctags') && PluginDisabled('vim-tagbar')
+        \ 'disabled' : executable('ctags') || PluginDisabled('vim-tagbar')
         \ }
   let s:tagbar = neobundle#get('tagbar')
   function! s:tagbar.hooks.on_source(bundle)
