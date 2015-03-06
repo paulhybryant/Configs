@@ -446,9 +446,14 @@
   NeoBundle 'vim-scripts/ShowMarks', {
         \ 'disabled' : PluginDisabled('ShowMarks')
         \ }                                                                     " Use gutter to show location of marks
-  NeoBundle 'nathanaelkane/vim-indent-guides'
   NeoBundle 'vim-scripts/SemanticHL', { 'disabled' : !has('gui_running') }      " Semantic highlighting for C / C++
-
+  " NeoBundle 'nathanaelkane/vim-indent-guides'
+  " let s:vimindentguides = neobundle#get('vim-indent-guides')
+  " function! s:vimindentguides.hooks.on_source(bundle)
+    " let g:indent_guides_auto_colors = 0
+    " hi IndentGuidesOdd  guibg=red   ctermbg=3
+    " hi IndentGuidesEven guibg=green ctermbg=4
+  " endfunction
   " NeoBundle 'vim-scripts/TagHighlight'
   " NeoBundle 'vim-scripts/utl.vim'
   " }}}
@@ -772,7 +777,7 @@
 
   NeoBundleLazy 'rstacruz/sparkup', { 'rtp': 'vim', 'autoload' : { 'filetypes' : 'html' } }    " Write HTML code faster
   NeoBundleLazy 'Valloric/MatchTagAlways', {
-        \ 'disabled' : !has('python')
+        \ 'disabled' : !has('python'),
         \ 'autoload' : { 'filetypes' : ['html', 'xml'] }
         \ }
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'autoload' : { 'filetypes' : 'html' } }     " Automatically close html tags
