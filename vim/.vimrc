@@ -141,7 +141,7 @@
         \ }
   NeoBundle 'google/vim-glaive', {
         \ 'disabled' : PluginDisabled('vim-glaive'),
-        \ 'depends' : 'vim-maktaba',
+        \ 'depends' : 'google/vim-maktaba',
         \ 'force' : 1
         \ }
   call glaive#Install()
@@ -345,7 +345,7 @@
   " Auto-formatting {{{
   NeoBundle 'google/vim-codefmt', {
         \ 'disabled' : PluginDisabled('vim-codefmt'),
-        \ 'depends' : ['google/vim-codefmtlib', 'vim-glaive']
+        \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive']
         \ } " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
@@ -418,10 +418,10 @@
   " NeoBundle 'rhysd/libclang-vim', { 'disabled' : PluginDisabled('libclang-vim') }
   " NeoBundle 'szw/vim-ctrlspace', { 'disabled' : PluginDisabled('vim-ctrlspace') }                       " Vim workspace manager
 
-  NeoBundle 'vim-jp/vital.vim'
+  " NeoBundle 'vim-jp/vital.vim'
   NeoBundle "Rykka/os.vim"
   NeoBundle "Rykka/clickable-things"
-  NeoBundle "Rykka/clickable.vim", { 'depends' : ['os.vim', 'clickable-things'] }
+  NeoBundle "Rykka/clickable.vim", { 'depends' : ['Rykka/os.vim', 'Rykka/clickable-things'] }
   NeoBundle 'aperezdc/vim-template'
 
   NeoBundle 'scrooloose/syntastic'                                        " Check syntax with external syntax checker
@@ -437,10 +437,11 @@
   NeoBundle 'paulhybryant/file-line'                                      " Open files and go to specific line and column (original user not active)
   NeoBundle 'jlemetay/permut'
   NeoBundle 'benmills/vimux'                                              " Interact with tmux from vim
+  " NeoBundle 'vim-scripts/utl.vim'
   NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell' }              " Shell implemented with vimscript
-  NeoBundle 'xolox/vim-shell'                                             " Better integration between vim and shell
+  NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
   NeoBundle 'xolox/vim-notes', {
-        \ 'depends' : ['xolox/vim-misc', 'vim-scripts/utl.vim']
+        \ 'depends' : ['xolox/vim-misc']
         \ }                                                               " Note taking with vim
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
@@ -903,8 +904,8 @@
 
   " Identify the syntax highlighting group used at the cursor
   map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+        \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
   " Use C-j, C-k, C-l, C-h to jump between windows
   " nnoremap <C-j> <C-W>j
