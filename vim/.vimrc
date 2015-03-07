@@ -88,16 +88,7 @@
 
   let g:mapleader = ','
   let g:maplocalleader = ',,'
-  let g:disabled_plugins = {
-        \ 'ShowMarks' : 1,
-        \ 'vim-easytags' : 1,
-        \ 'vim-gitgutter' : 1,
-        \ 'numbers.vim' : 1,
-        \ 'vinarise.vim' : 1,
-        \ 'vim-radical' : 1,
-        \ 'vim-vinegar' : 1,
-        \ 'vim-magnum' : 1,
-        \ }
+  let g:disabled_plugins = {}
 
   let g:google_config = resolve(expand("~/.vimrc.google"))
   if filereadable(g:google_config)
@@ -156,17 +147,17 @@
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
   endfunction
 
-  NeoBundle 'airblade/vim-gitgutter', {
-        \ 'disabled' : PluginDisabled('vim-gitgutter')
-        \ }                                                                     " Prefer vim-signify
+  " NeoBundle 'airblade/vim-gitgutter', {
+        " \ 'disabled' : PluginDisabled('vim-gitgutter')
+        " \ }                                                                     " Prefer vim-signify
 
-  NeoBundle 'myusuf3/numbers.vim', {
-        \ 'disabled' : PluginDisabled('numbers.vim')
-        \ }                                                                     " Automatically toggle line number for certain filetypes
-  let s:numbers = neobundle#get('numbers.vim')
-  function! s:numbers.hooks.on_source(bundle)
-    let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
-  endfunction
+  " NeoBundle 'myusuf3/numbers.vim', {
+        " \ 'disabled' : PluginDisabled('numbers.vim')
+        " \ }                                                                     " Automatically toggle line number for certain filetypes
+  " let s:numbers = neobundle#get('numbers.vim')
+  " function! s:numbers.hooks.on_source(bundle)
+    " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
+  " endfunction
 
   NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
@@ -338,10 +329,10 @@
       autocmd FileType c,cpp,python NeoCompleteLock
   endfunction
 
-  NeoBundle 'xolox/vim-easytags', {
-        \ 'depends' : 'xolox/vim-misc',
-        \ 'disabled' : executable('ctags') || PluginDisabled('vim-easytags')
-        \ }                                                                     " Vim integration with ctags
+  " NeoBundle 'xolox/vim-easytags', {
+        " \ 'depends' : 'xolox/vim-misc',
+        " \ 'disabled' : executable('ctags') || PluginDisabled('vim-easytags')
+        " \ }                                                                     " Vim integration with ctags
   NeoBundle 'majutsushi/tagbar', {
         \ 'disabled' : executable('ctags') || PluginDisabled('vim-tagbar')
         \ }
@@ -377,6 +368,10 @@
     nnoremap <silent> <leader>ge :Gedit<CR>
     nnoremap <silent> <leader>gi :Git add -p %<CR>
   endfunction
+
+  " Prefer agit as gitv has some bugs
+  " NeoBundle 'gregsexton/gitv', { 'depends' : 'tpope/vim-fugitive' }             " Git log viewer (Yet another gitk clone for Vim)
+  NeoBundle 'cohama/agit.vim'                                                   " Git log viewer (Yet another gitk clone for Vim)
   " }}}
 
   " Auto-formatting {{{
@@ -398,6 +393,9 @@
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDSpaceDelims = 1
     let g:NERDCustomDelimiters = {}
+    let g:NERDCreateDefaultMappings = 0
+    nmap <leader>ci <Plug>NERDCommenterInvert
+    xmap <leader>ci <Plug>NERDCommenterInvert
   endfunction
   " }}}
 
@@ -410,7 +408,7 @@
   " }}}
 
   " TextObjects {{{
-  NeoBundle 'terryma/vim-expand-region'                                   " Expand visual selection by text object
+  NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
   let s:expand_region = neobundle#get('vim-expand-region')
   function! s:expand_region.hooks.on_source(bundle)
     let g:expand_region_text_objects = {
@@ -428,12 +426,14 @@
     map L <Plug>(expand_region_expand)
     map H <Plug>(expand_region_shrink)
   endfunction
-  NeoBundle 'kana/vim-textobj-user'                                       " Allow defining text object by user
-  NeoBundle 'paulhybryant/vim-textobj-path'                               " Define text object for a file system path
-  NeoBundle 'jceb/vim-textobj-uri'                                        " Define text object for uri
-  NeoBundle 'kana/vim-textobj-line'                                       " Define text object for a line
-  NeoBundle 'kana/vim-textobj-entire'                                     " Define text object for the entire buffer
-  NeoBundle 'Raimondi/vim_search_objects'                                 " Define text object for a search pattern
+  NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
+  NeoBundle 'paulhybryant/vim-textobj-path'                                     " Define text object for a file system path
+  NeoBundle 'jceb/vim-textobj-uri'                                              " Define text object for uri
+  NeoBundle 'kana/vim-textobj-line'                                             " Define text object for a line
+  NeoBundle 'kana/vim-textobj-entire'                                           " Define text object for the entire buffer
+  NeoBundle 'Raimondi/vim_search_objects'                                       " Define text object for a search pattern
+  NeoBundle 'thinca/vim-textobj-between'                                        " Define text object between a char
+  " NeoBundle 'thinca/vim-textobj-comment'                                        " Define text object  for comments
   " NeoBundle 'Raimondi/VimLTextObjects', { 'disabled' : PluginDisabled('VimLTextObjects') }                " Define text object for vimscript
   " NeoBundle 'Julian/vim-textobj-brace', { 'disabled' : PluginDisabled('vim-textobj-brace') }                " Define text object between braces
   " NeoBundle 'beloglazov/vim-textobj-quotes', { 'disabled' : PluginDisabled('vim-textobj-quotes') }           " Define text object between any type of quotes
@@ -485,9 +485,9 @@
     nnoremap <leader>mc :MarkClear<CR>
     nnoremap <leader>m/ :Mark <C-R>/<CR>
   endfunction
-  NeoBundle 'vim-scripts/ShowMarks', {
-        \ 'disabled' : PluginDisabled('ShowMarks')
-        \ }                                                                     " Use gutter to show location of marks
+  " NeoBundle 'vim-scripts/ShowMarks', {
+        " \ 'disabled' : PluginDisabled('ShowMarks')
+        " \ }                                                                     " Use gutter to show location of marks
   NeoBundle 'vim-scripts/SemanticHL', { 'disabled' : !has('gui_running') }      " Semantic highlighting for C / C++
   " NeoBundle 'nathanaelkane/vim-indent-guides'
   " let s:vimindentguides = neobundle#get('vim-indent-guides')
@@ -519,7 +519,7 @@
     noremap <C-e> :NERDTreeToggle %<CR>
   endfunction
 
-  NeoBundle 'tpope/vim-vinegar', { 'disabled' : PluginDisabled('vim-vinegar') } " NERDTree enhancement
+  " NeoBundle 'tpope/vim-vinegar', { 'disabled' : PluginDisabled('vim-vinegar') } " NERDTree enhancement
   NeoBundle 'eiginn/netrw'                                                      " NERDTree plugin for network
   let s:netrw = neobundle#get('netrw')
   function! s:netrw.hooks.on_source(bundle)
@@ -563,12 +563,14 @@
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'ujihisa/unite-colorscheme'
+  NeoBundle 'ujihisa/unite-locate'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'mattn/unite-gist'
   NeoBundle 'Shougo/unite-build'
   NeoBundle 'Shougo/unite-sudo'
   NeoBundle 'Shougo/unite-ssh'
   NeoBundle 'tsukkee/unite-help'
+  " NeoBundle 'tyru/unite-screen.sh'
   " }}}
 
   NeoBundle 'godlygeek/tabular'
@@ -627,10 +629,25 @@
         \ 'disabled' : PluginDisabled('vinarise.vim'),
         \ }                                                                     " Ultimate hex editing system with vim
   NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
-
   NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
   NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
   NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
+  NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
+  NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
+  NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
+  let s:open_browser = neobundle#get('open-browser.vim')
+  function! s:open_browser.hooks.on_source(bundle)
+    nmap <leader>cr <Plug>(openbrowser-open)
+    vmap <leader>cr <Plug>(openbrowser-open)
+    nmap <leader>cs <Plug>(openbrowser-smart-search)
+    vmap <leader>cs <Plug>(openbrowser-smart-search)
+  endfunction
+  " NeoBundle 'tyru/operator-camelize.vim'
+  " let s:camelize = neobundle#get('operator-camelize.vim')
+  " function! s:camelize.hooks.on_source(bundle)
+    " map <leader>lc <Plug>(operator-camelize)
+    " map <leader>lC <Plug>(operator-decamelize)
+  " endfunction
   NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
   NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
   NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
@@ -658,6 +675,7 @@
     nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
     nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
     nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
+    nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
     noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
     vmap <leader>y :call myutils#CopyText()<CR>
     vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
@@ -727,6 +745,9 @@
   if WINDOWS()
     NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   endif
+
+  " NeoBundle 'tyru/winmove.vim'
+  " NeoBundle 'tyru/wim'
 
   " NeoBundle 'tomtom/tcomment_vim', {
         " \ 'disabled' : PluginDisabled('tcomment_vim'),
@@ -916,13 +937,14 @@
   " Print current file's full name (including path)
   noremap <leader>fn :echo expand('%:p')<CR>
 
+  " Replaced by tyru/operator-camelize
   " Mapping for camelcase and underscore variable name conversion Change
   " CamelCase to underscore (camel_case)
   noremap <leader>lc viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
   " Change underscore to CamelCase, first letter not capitalized
-  noremap <leader>uu viw:s#_\(\l\)#\u\1#g<CR>
+  noremap <leader>lC viw:s#_\(\l\)#\u\1#g<CR>
   " Change underscore to CamelCase, first letter also capitalized
-  noremap <leader>ua viw:s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
+  " noremap <leader>ua viw:s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
   " cab lc s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g
   " cab ua s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g
 
