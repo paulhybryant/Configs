@@ -392,7 +392,11 @@
   NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
   NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
   NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
-  NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
+  let s:betterws = neobundle#get('vim-better-whitespace')
+  function! s:betterws.hooks.on_source(bundle)
+    let g:strip_whitespace_on_save = 1
+  endfunction
+  " NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
   NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
