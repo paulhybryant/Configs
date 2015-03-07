@@ -212,7 +212,7 @@
     let s:ycm = neobundle#get('YouCompleteMe')
     function! s:ycm.hooks.on_source(bundle)
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-      nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
+      " nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
       let g:Show_diagnostics_ui = 1                                           " default 1
       let g:ycm_always_populate_location_list = 1                             " default 0
       let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
@@ -629,7 +629,7 @@
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
 
   NeoBundle 'Shougo/vinarise.vim', {
-        \ 'recipe' : 'vinarise',
+        \ 'recipe' : 'vinarise.vim',
         \ 'disabled' : PluginDisabled('vinarise.vim'),
         \ }                                                                     " Ultimate hex editing system with vim
   NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
@@ -883,6 +883,10 @@
   NeoBundleLazy 'jelera/vim-javascript-syntax', {
         \ 'filetypes' : 'javascript'
         \ }                                                                     " Javascript syntax folding
+  let s:jssyntax = neobundle#get('vim-javascript-syntax')
+  function s:jssyntax.hooks.on_source(bundle)
+    autocmd FileType javascript :call JavaScriptFold()
+  endfunction
   " }}}
 
   call neobundle#end()
@@ -902,7 +906,9 @@
 
   " Wrapped lines goes down/up to next row, rather than next line in file.
   nnoremap j gj
+  nnoremap gj j
   nnoremap k gk
+  nnoremap gk k
 
   " Concatenate two lines without whitespace at the end
   noremap J gJ
@@ -1000,6 +1006,9 @@
   imap <C-l> <ESC><C-l>
   imap <C-k> <ESC><C-k>
 
+  " Open all folds in the direct fold that contains current location
+  nnoremap zO [zzczO<C-O>
+
   " Mapping for quoting a string, <leader>qi (quote it)
   " noremap <leader>qi ciw"<C-r>""
   " noremap <leader>qs ciw'<C-r>"'
@@ -1031,15 +1040,6 @@
     autocmd BufRead BUILD,*.log setlocal nospell
     autocmd FileType conf setlocal nospell
     autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal sts=2 | set ft=vim | set foldmethod=marker
-
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType autohotkey setlocal omnifunc=syntaxcomplete#Complete
-    " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    " autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
   augroup END
 
 " }}}
