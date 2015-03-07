@@ -110,23 +110,16 @@
   endif
 
   " Plugin infrastructure {{{
-  if empty($VIMPLUGINSDIR)
-    let $VIMPLUGINSDIR=expand("$HOME/.linuxbrew/Cellar/vim/.vim/bundle")
-    if !isdirectory($VIMPLUGINSDIR)
-      let $VIMPLUGINSDIR=expand("$HOME/.vim/bundle")
-    endif
-  endif
-
-  if !isdirectory(expand("$VIMPLUGINSDIR/neobundle.vim"))
+  if !isdirectory(expand("$HOME/.vim/bundle/neobundle.vim"))
     echo "Installing neobundle..."
-    silent !mkdir -p $VIMPLUGINSDIR/
-    silent !git clone https://github.com/Shougo/neobundle.vim.git $VIMPLUGINSDIR/neobundle.vim
+    silent !mkdir -p $HOME/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
   endif
 
   filetype off
-  set runtimepath+=$VIMPLUGINSDIR/neobundle.vim/
+  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 
-  call neobundle#begin('$VIMPLUGINSDIR')
+  call neobundle#begin('$HOME/.vim/bundle')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
   NeoBundle 'paulhybryant/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
@@ -216,14 +209,15 @@
 
   " Coding assistance {{{
   if !WINDOWS()
-    NeoBundle 'Valloric/YouCompleteMe', {
-        \ 'build' : {
-        \     'mac' : './install.sh --clang-completer',
-        \     'unix' : './install.sh --clang-completer',
-        \     'windows' : './install.sh --clang-completer',
-        \     'cygwin' : './install.sh --clang-completer'
-        \    }
-        \ }
+    NeoBundle 'Valloric/YouCompleteMe'
+    " NeoBundle 'Valloric/YouCompleteMe', {
+        " \ 'build' : {
+        " \     'mac' : './install.sh --clang-completer',
+        " \     'unix' : './install.sh --clang-completer',
+        " \     'windows' : './install.sh --clang-completer',
+        " \     'cygwin' : './install.sh --clang-completer'
+        " \    }
+        " \ }
     let s:ycm = neobundle#get('YouCompleteMe')
     function! s:ycm.hooks.on_source(bundle)
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -591,9 +585,10 @@
     " Remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger="<tab>"
   endfunction
-  NeoBundle 'neosnippet.vim', { 'disabled' : has('python') }                    " Snippet support for vim
+  NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
 
-  NeoBundle 'Shougo/vimproc.vim', { 'recipe' : 'vimproc.vim' }                  " Background process for unite.vim
+  " NeoBundle 'Shougo/vimproc.vim', { 'recipe' : 'vimproc.vim' }                  " Background process for unite.vim
+  NeoBundle 'Shougo/vimproc.vim'                                                " Background process for unite.vim
   NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
   NeoBundle 'mhinz/vim-hugefile'                                                " Make edit / view of huge files better
   let s:vimhugefile = neobundle#get('vim-hugefile')
@@ -648,7 +643,7 @@
   NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
   let s:vimcustom = neobundle#get('vim-custom')
   function! s:vimcustom.hooks.on_source(bundle)
-    set spellfile=$VIMPLUGINSDIR/vim-custom/spell/en.utf-8.add
+    set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
     let g:myutils#special_bufvars = ['gistls', 'NERDTreeType']
     autocmd BufEnter * call myutils#SyncNTTree()
     inoremap <C-q> <ESC>:Bclose<cr>
@@ -794,7 +789,7 @@
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'autoload' : { 'filetypes' : 'html' } }     " Automatically close html tags
   let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
   function! s:autoclosetag.hooks.on_source(bundle)
-    autocmd FileType xml,xhtml execute "source " . "$VIMPLUGINSDIR/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim"
+    autocmd FileType xml,xhtml execute "source " . "$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim"
   endfunction
 
   NeoBundleLazy 'tmux-plugins/vim-tmux', { 'autoload' : { 'filetypes' : 'tmux' } }             " Vim plugin for editing .tmux.conf
@@ -805,7 +800,7 @@
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
     let g:BASH_MapLeader  = g:maplocalleader
-    let g:BASH_GlobalTemplateFile = expand("$VIMPLUGINSDIR/bash-support.vim/bash-support/templates/Templates")
+    let g:BASH_GlobalTemplateFile = expand("$HOME/.vim/bundle/bash-support.vim/bash-support/templates/Templates")
   endfunction
 
   " Vimscript scripting {{{

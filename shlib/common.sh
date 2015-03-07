@@ -32,12 +32,10 @@ export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 export TERM=screen-256color
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
-export VIMPLUGINSDIR=$HOME/.linuxbrew/Cellar/vim/.vim/bundle
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XML_CATALOG_FILES="/usr/local/google/home/yuhuang/.linuxbrew/etc/xml/catalog"
-[[ "$OSTYPE" == "darwin"* ]] && export VIMPLUGINSDIR=$HOME/.vim/bundle
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
