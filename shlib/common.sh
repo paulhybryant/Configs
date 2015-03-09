@@ -69,8 +69,7 @@ eval "$GET_DIRCOLORS"
 # alias vim="vim -p"
 
 # tmux
-alias tmux='TERM=screen-256color tmux -2'
-alias tls="tmux ls"
+alias tmux=tmux_wrapper
 
 # Use vimpager to replace less, which is used to view man page
 # export PAGER=/usr/local/bin/vimpager
@@ -87,18 +86,17 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
-function get_tmux_pid() {
-  TMUX_PID=$(ps -e | grep tmux | cut -d' ' -f1)
-  export TMUX_PID
-}
-
 function tmux_wrapper() {
-  get_tmux_pid
-  if [[ -z $TMUX_PID ]]; then
-    :
+  if [[ -z $(ps -e | grep tmux | cut -d' ' -f2) ]]; then
+    echo "Starting tmux server..."
+    \tmux start-server
+  fi
+  if [[ "$#" == 0 ]]; then
+    TERM=screen-256color \tmux -2 attach
+  else
+    TERM=screen-256color \tmux -2 "$@"
   fi
 }
-
 
 function find_no_git() {
   find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print

@@ -30,7 +30,7 @@ function install_powerline_precmd() {
 
 install_powerline_precmd
 
-function ta() {
+function _ta() {
   local setenv="/tmp/set-tmux-env.sh"
   echo > "$setenv"
   for var in SSH_OS SSH_CLIENT DISPLAY;
@@ -59,7 +59,7 @@ function ta() {
   done
   tmux attach -t "$1"
 }
-unalias ta
+alias ta=_ta
 
 unalias ll
 unalias la
@@ -74,6 +74,10 @@ then
 else
   alias ls='ls -G'
 fi
+
+fpath=($HOME/.zsh-completions/src $fpath)
+autoload -U compinit
+compinit
 
 # Additional configurations to load {{{
 

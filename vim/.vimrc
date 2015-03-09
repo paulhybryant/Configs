@@ -430,24 +430,73 @@
     map L <Plug>(expand_region_expand)
     map H <Plug>(expand_region_shrink)
   endfunction
+
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
-  NeoBundle 'paulhybryant/vim-textobj-path'                                     " Define text object for a file system path
-  NeoBundle 'jceb/vim-textobj-uri'                                              " Define text object for uri
-  NeoBundle 'kana/vim-textobj-line'                                             " Define text object for a line
-  NeoBundle 'kana/vim-textobj-entire'                                           " Define text object for the entire buffer
-  NeoBundle 'Raimondi/vim_search_objects'                                       " Define text object for a search pattern
-  NeoBundle 'thinca/vim-textobj-between'                                        " Define text object between a char
-  " NeoBundle 'thinca/vim-textobj-comment'                                        " Define text object  for comments
-  " NeoBundle 'Raimondi/VimLTextObjects', { 'disabled' : PluginDisabled('VimLTextObjects') }                " Define text object for vimscript
-  " NeoBundle 'Julian/vim-textobj-brace', { 'disabled' : PluginDisabled('vim-textobj-brace') }                " Define text object between braces
-  " NeoBundle 'beloglazov/vim-textobj-quotes', { 'disabled' : PluginDisabled('vim-textobj-quotes') }           " Define text object between any type of quotes
-  " NeoBundle 'glts/vim-textobj-comment', { 'disabled' : PluginDisabled('vim-textobj-comment') }                " Define text object for comments
-  " NeoBundle 'kana/vim-textobj-datetime', { 'disabled' : PluginDisabled('vim-textobj-datetime') }               " Define text object for datetime format
-  " NeoBundle 'kana/vim-textobj-function', { 'disabled' : PluginDisabled('vim-textobj-function') }               " Define text object for function
-  " NeoBundle 'kana/vim-textobj-indent', { 'disabled' : PluginDisabled('vim-textobj-indent') }                 " Define text object for indent
-  " NeoBundle 'reedes/vim-textobj-sentence', { 'disabled' : PluginDisabled('vim-textobj-setence') }             " Define text obj for a sentence
-  " NeoBundle 'rhysd/vim-textobj-clang', { 'disabled' : PluginDisabled('vim-textobj-clang') }                 " Define text object for c family languages
-  " NeoBundle 'reedes/vim-textobj-quote', { 'disabled' : PluginDisabled('vim-textobj-quote') }                " Define text object between also typographic ('curly') quote characters
+  NeoBundle 'paulhybryant/vim-textobj-path', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object for a file system path
+  NeoBundle 'jceb/vim-textobj-uri', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object for uri
+  NeoBundle 'kana/vim-textobj-line', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object for a line
+  NeoBundle 'kana/vim-textobj-entire', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object for the entire buffer
+  NeoBundle 'Raimondi/vim_search_objects', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object for a search pattern
+  NeoBundle 'thinca/vim-textobj-between', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object between a char
+  NeoBundle 'thinca/vim-textobj-comment', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Define text object  for comments
+  NeoBundle 'Raimondi/VimLTextObjects', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('VimLTextObjects')
+        \ }                                                                     " Define text object for vimscript
+  NeoBundle 'Julian/vim-textobj-brace', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-brace')
+        \ }                                                                     " Define text object between braces
+  NeoBundle 'beloglazov/vim-textobj-quotes', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-quotes')
+        \ }                                                                     " Define text object between any type of quotes
+  NeoBundle 'glts/vim-textobj-comment', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-comment')
+        \ }                                                                     " Define text object for comments
+  NeoBundle 'kana/vim-textobj-datetime', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-datetime')
+        \ }                                                                     " Define text object for datetime format
+  NeoBundle 'kana/vim-textobj-lastpat', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-lastpat')
+        \ }                                                                     " Define text object for last searched pattern
+  NeoBundle 'kana/vim-textobj-function', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-function')
+        \ }                                                                     " Define text object for function
+  NeoBundle 'kana/vim-textobj-indent', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-indent')
+        \ }                                                                     " Define text object for indent
+  NeoBundle 'reedes/vim-textobj-sentence', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-setence')
+        \ }                                                                     " Define text obj for a sentence
+  NeoBundle 'rhysd/vim-textobj-clang', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-clang')
+        \ }                                                                     " Define text object for c family languages
+  NeoBundle 'reedes/vim-textobj-quote', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-quote')
+        \ }                                                                     " Define text object between also typographic ('curly') quote characters
   " NeoBundle 'gcmt/wildfire.vim'
   " }}}
 
@@ -635,7 +684,12 @@
   NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
   NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
   NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
-  NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
+  " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
+  NeoBundle 'kana/vim-scratch'                                                  " Creates a scratch buffer
+  NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
+  NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
+  " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
+  " NeoBundle 'kana/vim-fakeclip'                                                 " Fake clipboard for vim
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
   NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
@@ -646,12 +700,18 @@
     nmap <leader>cs <Plug>(openbrowser-smart-search)
     vmap <leader>cs <Plug>(openbrowser-smart-search)
   endfunction
-  " NeoBundle 'tyru/operator-camelize.vim'
-  " let s:camelize = neobundle#get('operator-camelize.vim')
-  " function! s:camelize.hooks.on_source(bundle)
-    " map <leader>lc <Plug>(operator-camelize)
-    " map <leader>lC <Plug>(operator-decamelize)
-  " endfunction
+  NeoBundle 'kana/vim-operator-user'                                            " User defined operator
+  NeoBundle 'kana/vim-operator-replace', {
+        \ 'depends' : 'kana/vim-operator-user'
+        \ }                                                                     " Vim operator for replace
+  NeoBundle 'tyru/operator-camelize.vim', {
+        \ 'depends' : 'kana/vim-operator-user'
+        \ }                                                                     " Convert variable to / from camelcase form
+  let s:camelize = neobundle#get('operator-camelize.vim')
+  function! s:camelize.hooks.on_source(bundle)
+    map <leader>lc <Plug>(operator-camelize)
+    map <leader>lC <Plug>(operator-decamelize)
+  endfunction
   NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
   NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
   NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
@@ -887,6 +947,10 @@
   function s:jssyntax.hooks.on_source(bundle)
     autocmd FileType javascript :call JavaScriptFold()
   endfunction
+
+  NeoBundleLazy 'elzr/vim-json', {
+        \ 'filetypes' : 'json'
+        \ }                                                                     " Json highlight in vim
   " }}}
 
   call neobundle#end()
@@ -950,9 +1014,9 @@
   " Replaced by tyru/operator-camelize
   " Mapping for camelcase and underscore variable name conversion Change
   " CamelCase to underscore (camel_case)
-  noremap <leader>lc viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
+  " noremap <leader>lc viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
   " Change underscore to CamelCase, first letter not capitalized
-  noremap <leader>lC viw:s#_\(\l\)#\u\1#g<CR>
+  " noremap <leader>lC viw:s#_\(\l\)#\u\1#g<CR>
   " Change underscore to CamelCase, first letter also capitalized
   " noremap <leader>ua viw:s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
   " cab lc s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g
@@ -983,7 +1047,7 @@
 
   " Adding newline and stay in normal mode.
   " <S-Enter> is not reflected, maybe captured by the tmux binding
-  nnoremap <Enter> o<ESC>
+  " nnoremap <Enter> o<ESC>
 
   " Improve completion popup menu
   " http://vim.wikia.com/wiki/Improve_completion_popup_menu
@@ -1040,6 +1104,7 @@
     autocmd BufRead BUILD,*.log setlocal nospell
     autocmd FileType conf setlocal nospell
     autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal sts=2 | set ft=vim | set foldmethod=marker
+    autocmd VimEnter * if expand('%') == "" | exec "ScratchOpen"
   augroup END
 
 " }}}
