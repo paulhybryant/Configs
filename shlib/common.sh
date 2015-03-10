@@ -86,8 +86,17 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
-function tmux_wrapper() {
+function is_tmux_running() {
   if [[ -z $(ps -e | grep tmux | cut -d' ' -f2) ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function tmux_wrapper() {
+  is_tmux_running
+  if [[ $? -eq 0 ]]; then
     echo "Starting tmux server..."
     \tmux start-server
   fi
