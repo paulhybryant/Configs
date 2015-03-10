@@ -69,7 +69,7 @@ eval "$GET_DIRCOLORS"
 # alias vim="vim -p"
 
 # tmux
-alias tmux=tmux_wrapper
+alias tmux="TERM=screen-256color tmux -2"
 
 # Use vimpager to replace less, which is used to view man page
 # export PAGER=/usr/local/bin/vimpager
@@ -91,16 +91,16 @@ function is_tmux_running() {
   return $?
 }
 
-function tmux_wrapper() {
+function tmux_start() {
   is_tmux_running
-  if [[ $? -eq 0 ]]; then
+  if [[ $? -eq 1 ]]; then
     echo "Starting tmux server..."
     \tmux start-server
   fi
   if [[ "$#" == 0 ]]; then
-    TERM=screen-256color \tmux -2 attach
+    tmux attach
   else
-    TERM=screen-256color \tmux -2 "$@"
+    tmux "$@"
   fi
 }
 
