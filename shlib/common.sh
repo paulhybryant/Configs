@@ -87,11 +87,8 @@ alias nvim="NVIM=nvim nvim"
 # functions library {{{
 
 function is_tmux_running() {
-  if [[ -z $(ps -e | grep tmux | cut -d' ' -f2) ]]; then
-    return 0
-  else
-    return 1
-  fi
+  \tmux info &> /dev/null
+  return $?
 }
 
 function tmux_wrapper() {
