@@ -86,6 +86,36 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
+function ta() {
+  local setenv="/tmp/set-tmux-env.sh"
+  > "$setenv"
+  for var in SSH_OS SSH_CLIENT DISPLAY;
+  do
+    local value=
+    eval value=\$$var
+    echo "export $var=\"$value\"" >> "$setenv"
+    tmux set-environment -t "$1" $var "${!var}"
+  done
+  for window in $(tmux list-windows -t "$1" -F "#W");
+  do
+    for pane_id_command in $(tmux list-panes -t "$1:$window" -F "#P:#{pane_current_command}");
+    do
+      local id=${pane_id_command%%:*}
+      local cmd=${pane_id_command##*:}
+      if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
+        tmux send-keys -t "$1:$window" C-z
+        sleep 0.2
+        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        sleep 0.2
+        tmux send-keys -t "$1:$window.$id" fg ENTER
+      else
+        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+      fi
+    done
+  done
+  tmux attach -t "$1"
+}
+
 function tmux_start() {
   \tmux info &> /dev/null
   if [[ $? -eq 1 ]]; then
