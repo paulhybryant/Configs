@@ -82,6 +82,10 @@ source $ZSH/oh-my-zsh.sh
 
 setopt inc_append_history
 setopt share_history
+# Do not complete alias before completion is finished
+# This would allow completion to work for aliases
+# e.g. alias tmux=tmux -2
+setopt complete_aliases
 # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
 # setopt no_prompt_cr
 
@@ -90,7 +94,6 @@ bindkey "^[OF" end-of-line
 bindkey "^[[3~" delete-char
 # bindkey "^I" complete-word
 bindkey "^I" expand-or-complete-prefix
-
 
 # Let zsh history search use regex pattern
 bindkey '^R' history-incremental-pattern-search-backward
