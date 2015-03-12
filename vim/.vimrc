@@ -626,12 +626,18 @@
   " NeoBundle 'tyru/unite-screen.sh'
   " }}}
 
+  " Row-/column-wise editing {{{
   NeoBundle 'godlygeek/tabular'
+  NeoBundle 'paulhybryant/foldcol'                                                " Fold columns selected in visual block mode
   NeoBundle 'paulhybryant/Align'                                                " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
   " NeoBundle 'junegunn/vim-easy-align'
   NeoBundle 'jlemetay/permut'
   NeoBundle 'paulhybryant/vissort'                                              " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
+  " }}}
 
+  NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
+  NeoBundle 'calebsmith/vim-lambdify'
+  NeoBundle 'paulhybryant/AnsiEsc.vim'
   NeoBundle 'aperezdc/vim-template'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }
@@ -889,8 +895,9 @@
   endfunction
 
   " Vimscript scripting {{{
-  NeoBundleLazy 'thinca/vim-themis', { 'autoload' : { 'filetypes' : 'vim' } }                  " Testing framework for vimscript
-  NeoBundleLazy 'kana/vim-vspec', { 'autoload' : { 'filetypes' : 'vim' } }                      " Testing framework for vimscript
+  NeoBundleLazy 'kana/vim-vspec', { 'autoload' : { 'filetypes' : 'vim' } }                     " Testing framework for vimscript
+  " NeoBundleLazy 'thinca/vim-themis', { 'autoload' : { 'filetypes' : 'vim' } }                  " Testing framework for vimscript
+  " NeoBundleLazy 'junegunn/vader.vim', { 'autoload' : { 'filetypes' : 'vim' } }                 " Testing framework for vimscript
   NeoBundleLazy 'vim-scripts/ReloadScript', { 'autoload' : { 'filetypes' : 'vim' } }           " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
