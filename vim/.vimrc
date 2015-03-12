@@ -635,9 +635,10 @@
   NeoBundle 'paulhybryant/vissort'                                              " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   " }}}
 
-  NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
+  " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
   " NeoBundle 'calebsmith/vim-lambdify'
   NeoBundle 'paulhybryant/AnsiEsc.vim'
+
   NeoBundle 'aperezdc/vim-template'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }
