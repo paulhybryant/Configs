@@ -117,6 +117,10 @@ function ta() {
 }
 
 function tmux_start() {
+  if [[ ! -z "$TMUX" ]]; then
+    echo "Already in tmux, nothing to be done."
+    return
+  fi
   \tmux info &> /dev/null
   if [[ $? -eq 1 ]]; then
     echo "Starting tmux server..."
