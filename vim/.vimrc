@@ -636,7 +636,7 @@
   " }}}
 
   NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
-  NeoBundle 'calebsmith/vim-lambdify'
+  " NeoBundle 'calebsmith/vim-lambdify'
   NeoBundle 'paulhybryant/AnsiEsc.vim'
   NeoBundle 'aperezdc/vim-template'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
@@ -947,12 +947,24 @@
     let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
   endfunction
 
-  NeoBundleLazy 'jelera/vim-javascript-syntax', {
+  NeoBundleLazy 'pangloss/vim-javascript', {
         \ 'filetypes' : 'javascript'
         \ }                                                                     " Javascript syntax folding
-  let s:jssyntax = neobundle#get('vim-javascript-syntax')
+  let s:jssyntax = neobundle#get('vim-javascript')
   function s:jssyntax.hooks.on_source(bundle)
-    autocmd FileType javascript :call JavaScriptFold()
+    setlocal regexpengine=1
+    setlocal foldmethod=syntax
+    setlocal conceallevel=1
+    let g:javascript_enable_domhtmlcss=1
+    let g:javascript_conceal_function   = "ƒ"
+    let g:javascript_conceal_null       = "ø"
+    " let g:javascript_conceal_this       = "@"
+    " let g:javascript_conceal_return     = "⇚"
+    " let g:javascript_conceal_undefined  = "¿"
+    let g:javascript_conceal_NaN        = "ℕ"
+    " let g:javascript_conceal_prototype  = "¶"
+    " let g:javascript_conceal_static     = "•"
+    " let g:javascript_conceal_super      = "Ω"
   endfunction
 
   NeoBundleLazy 'elzr/vim-json', {
