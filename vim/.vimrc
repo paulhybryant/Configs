@@ -113,7 +113,7 @@
   call neobundle#begin('$HOME/.vim/bundle')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-  NeoBundle 'paulhybryant/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
@@ -691,7 +691,7 @@
   NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
   NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
   " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
-  NeoBundle 'kana/vim-scratch'                                                  " Creates a scratch buffer
+  NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
   NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
   " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
