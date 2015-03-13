@@ -383,16 +383,17 @@
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive codefmt plugin[mappings]
   endfunction
-  NeoBundle 'spf13/vim-autoclose'                                         " Automatically close brackets
-  NeoBundle 'tpope/vim-endwise'                                           " Automatically put end construct (e.g. endfunction)
-  NeoBundle 'Chiel92/vim-autoformat'                                      " Easy code formatting with external formatter
-  NeoBundle 'ntpeters/vim-better-whitespace'                              " Highlight all types of whitespaces
+  NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
+  NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
+  NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
     let g:strip_whitespace_on_save = 1
+    nnoremap <leader>sw :ToggleStripWhitespaceOnSave<CR>
   endfunction
-  " NeoBundle 'bronson/vim-trailing-whitespace'                             " Highlight trailing whitespaces
-  NeoBundle 'scrooloose/nerdcommenter'                                    " Add comments
+  " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
+  NeoBundle 'scrooloose/nerdcommenter'                                          " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDSpaceDelims = 1
@@ -728,7 +729,11 @@
   NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
 
-  NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
+  if filereadable(g:google_config)
+    NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
+  else
+    NeoBundle 'paulhybryant/vim-custom', { 'depends' : 'vim-maktaba' }            " My vim customization (utility functions, syntax etc)
+  endif
   let s:vimcustom = neobundle#get('vim-custom')
   function! s:vimcustom.hooks.on_source(bundle)
     set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
@@ -756,6 +761,7 @@
     command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
     command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
     command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
+    command! -nargs=+ MapToggleVar call myutils#MapToggleVar(<f-args>)
     command! Bclose call myutils#BufcloseCloseIt(1)
     " TODO: Integrate this with codefmt
     command! Fsql call myutils#FormatSql()
