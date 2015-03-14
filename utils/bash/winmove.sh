@@ -34,10 +34,13 @@ fi
 
 if [[ $WIN_X -ge 1366 ]]; then
   if [[ $1 == "LEFT" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz'
     log_run 'wmctrl -r :ACTIVE: -e 0,0,0,1366,670'
   fi
 else
   if [[ $1 == "RIGHT" ]]; then
+    log_run 'wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz'
     log_run 'wmctrl -r :ACTIVE: -e 0,1366,0,1920,1160'
   fi
 fi
+log_run 'wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz'

@@ -2,9 +2,9 @@
 
 " Environment {{{
 
-  set nocompatible                                    " Must be first line
-  set encoding=utf-8                                                      " Set text encoding default to utf-8
-  scriptencoding utf-8                                " Character encoding used in this script
+  set nocompatible                                                              " Must be first line
+  set encoding=utf-8                                                            " Set text encoding default to utf-8
+  scriptencoding utf-8                                                          " Character encoding used in this script
 
   " Identify platform {{{
     silent function! OSX()
@@ -140,6 +140,7 @@
 
   " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
+  NeoBundle 'MattesGroeger/vim-bookmarks'
 
   NeoBundle 'mhinz/vim-signify'                                                 " Show the sign at changes from last git commit
   let s:signify = neobundle#get('vim-signify')
@@ -201,41 +202,39 @@
   " Coding assistance {{{
   if !WINDOWS()
     NeoBundle 'Valloric/YouCompleteMe'
-    " NeoBundle 'Valloric/YouCompleteMe', {
-        " \ 'build' : {
-        " \     'mac' : './install.sh --clang-completer',
-        " \     'unix' : './install.sh --clang-completer',
-        " \     'windows' : './install.sh --clang-completer',
-        " \     'cygwin' : './install.sh --clang-completer'
-        " \    }
-        " \ }
     let s:ycm = neobundle#get('YouCompleteMe')
     function! s:ycm.hooks.on_source(bundle)
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
       " nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
-      let g:Show_diagnostics_ui = 1                                           " default 1
-      let g:ycm_always_populate_location_list = 1                             " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 0                       " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 1                       " enable completion from tags
-      let g:ycm_complete_in_strings = 1                                       " default 1
+      let g:Show_diagnostics_ui = 1                                                 " default 1
+      let g:ycm_always_populate_location_list = 1                                   " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 0                             " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 1                             " enable completion from tags
+      let g:ycm_complete_in_strings = 1                                             " default 1
       let g:ycm_confirm_extra_conf = 1
       let g:ycm_enable_diagnostic_highlighting = 0
       let g:ycm_enable_diagnostic_signs = 1
       let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
-      let g:ycm_goto_buffer_command = 'same-buffer'                           " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+      let g:ycm_goto_buffer_command = 'same-buffer'                                 " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
       let g:ycm_key_invoke_completion = '<C-Space>'
       let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
       let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-      let g:ycm_open_loclist_on_ycm_diags = 1                                 " default 1
-      let g:ycm_path_to_python_interpreter = ''                               " default ''
-      let g:ycm_register_as_syntastic_checker = 1                             " default 1
-      let g:ycm_server_keep_logfiles = 10                                     " keep log files
-      let g:ycm_server_log_level = 'info'                                     " default info
-      let g:ycm_server_use_vim_stdout = 0                                     " default 0 (logging to console)
+      let g:ycm_open_loclist_on_ycm_diags = 1                                       " default 1
+      let g:ycm_path_to_python_interpreter = ''                                     " default ''
+      let g:ycm_register_as_syntastic_checker = 1                                   " default 1
+      let g:ycm_server_keep_logfiles = 10                                           " keep log files
+      let g:ycm_server_log_level = 'info'                                           " default info
+      let g:ycm_server_use_vim_stdout = 0                                           " default 0 (logging to console)
     endfunction
   endif
 
+  NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
+  " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  NeoBundle 'Raimondi/delimitMate'                                              " Automatic close quotes etc, with some syntax awareness
   " NeoBundle 'Shougo/neocomplcache.vim'
+  NeoBundleLazy 'Rip-Rip/clang_complete', {
+        \ 'autoload' : { 'filetypes' : ['cpp', 'c'] }
+        \ }                                                                     " Completion for c-family language
   NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
       \ 'disabled' : !has('lua'),
@@ -383,9 +382,10 @@
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive codefmt plugin[mappings]
   endfunction
+  NeoBundleLazy 'maksimr/vim-jsbeautify', {
+        \ 'filetypes' : 'javascript'
+        \ }                                                                     " Javascript formatting
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
-  NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
-  NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
   NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
@@ -435,69 +435,74 @@
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'paulhybryant/vim-textobj-path', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object for a file system path
+        \ }                                                                     " Text object for a file system path
   NeoBundle 'jceb/vim-textobj-uri', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object for uri
+        \ }                                                                     " Text object for uri
   NeoBundle 'kana/vim-textobj-line', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object for a line
+        \ }                                                                     " Text object for a line
   NeoBundle 'kana/vim-textobj-entire', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object for the entire buffer
+        \ }                                                                     " Text object for the entire buffer
   NeoBundle 'Raimondi/vim_search_objects', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object for a search pattern
+        \ }                                                                     " Text object for a search pattern
   NeoBundle 'thinca/vim-textobj-between', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object between a char
+        \ }                                                                     " Text object between a char
   NeoBundle 'thinca/vim-textobj-comment', {
         \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Define text object  for comments
+        \ }                                                                     " Text object  for comments
   NeoBundle 'Raimondi/VimLTextObjects', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('VimLTextObjects')
-        \ }                                                                     " Define text object for vimscript
+        \ }                                                                     " Text object for vimscript
   NeoBundle 'Julian/vim-textobj-brace', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-brace')
-        \ }                                                                     " Define text object between braces
+        \ }                                                                     " Text object between braces
   NeoBundle 'beloglazov/vim-textobj-quotes', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-quotes')
-        \ }                                                                     " Define text object between any type of quotes
+        \ }                                                                     " Text object between any type of quotes
   NeoBundle 'glts/vim-textobj-comment', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-comment')
-        \ }                                                                     " Define text object for comments
+        \ }                                                                     " Text object for comments
   NeoBundle 'kana/vim-textobj-datetime', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-datetime')
-        \ }                                                                     " Define text object for datetime format
+        \ }                                                                     " Text object for datetime format
   NeoBundle 'kana/vim-textobj-lastpat', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-lastpat')
-        \ }                                                                     " Define text object for last searched pattern
+        \ }                                                                     " Text object for last searched pattern
   NeoBundle 'kana/vim-textobj-function', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-function')
-        \ }                                                                     " Define text object for function
+        \ }                                                                     " Text object for function
+  " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
   NeoBundle 'kana/vim-textobj-indent', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-indent')
-        \ }                                                                     " Define text object for indent
+        \ }                                                                     " Text object for indent
+  NeoBundle 'kana/vim-textobj-fold', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'disabled' : PluginDisabled('vim-textobj-fold')
+        \ }                                                                     " Text object for fold
   NeoBundle 'reedes/vim-textobj-sentence', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-setence')
-        \ }                                                                     " Define text obj for a sentence
+        \ }                                                                     " Text object for a sentence
   NeoBundle 'rhysd/vim-textobj-clang', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-clang')
-        \ }                                                                     " Define text object for c family languages
+        \ }                                                                     " Text object for c family languages
   NeoBundle 'reedes/vim-textobj-quote', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-quote')
-        \ }                                                                     " Define text object between also typographic ('curly') quote characters
+        \ }                                                                     " Text object between also typographic ('curly') quote characters
   " NeoBundle 'gcmt/wildfire.vim'
   " }}}
 
@@ -551,7 +556,7 @@
     " hi IndentGuidesEven guibg=green ctermbg=4
   " endfunction
   " NeoBundle 'vim-scripts/TagHighlight'
-  " NeoBundle 'vim-scripts/utl.vim'
+  NeoBundle 'vim-scripts/utl.vim'
   " }}}
 
   " Explorers in vim {{{
@@ -624,6 +629,7 @@
   NeoBundle 'Shougo/unite-sudo'
   NeoBundle 'Shougo/unite-ssh'
   NeoBundle 'tsukkee/unite-help'
+  NeoBundle 'kopischke/unite-spell-suggest'
   " NeoBundle 'tyru/unite-screen.sh'
   " }}}
 
@@ -658,7 +664,6 @@
   endfunction
   NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
 
-  " NeoBundle 'Shougo/vimproc.vim', { 'recipe' : 'vimproc.vim' }                  " Background process for unite.vim
   NeoBundle 'Shougo/vimproc.vim'                                                " Background process for unite.vim
   NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
   NeoBundle 'mhinz/vim-hugefile'                                                " Make edit / view of huge files better
@@ -677,10 +682,14 @@
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
 
+  NeoBundle 'tpope/vim-speeddating'
+  NeoBundle 'chrisbra/NrrwRgn'
+  NeoBundle 'vitalk/vim-onoff'
   NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
   NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell' }                    " Shell implemented with vimscript
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
-
+  NeoBundle 'thinca/vim-quickrun'
+  NeoBundle 'danro/rename.vim'
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc']
         \ }                                                                     " Note taking with vim
@@ -692,6 +701,7 @@
     let g:notes_tagsindex = '~/Notes/notes.tags'
   endfunction
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
+  " NeoBundle 'Keithbsmiley/gist.vim'
 
   NeoBundle 'Shougo/vinarise.vim', {
         \ 'recipe' : 'vinarise.vim',
@@ -737,6 +747,8 @@
   NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
 
+  NeoBundle 'chrisbra/Colorizer'
+  " NeoBundle 'gorodinskiy/vim-coloresque'
   if filereadable(g:google_config)
     NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
   else
@@ -845,7 +857,7 @@
   " NeoBundle 'szw/vim-ctrlspace', {
         " \ 'disabled' : PluginDisabled('vim-ctrlspace')
         " \ }                                                                     " Vim workspace manager
-  " NeoBundle 'vim-jp/vital.vim'
+  NeoBundle 'vim-jp/vital.vim'
   " NeoBundle "Rykka/os.vim"
   " NeoBundle "Rykka/clickable-things"
   " NeoBundle "Rykka/clickable.vim", { 'depends' : ['Rykka/os.vim', 'Rykka/clickable-things'] }
@@ -866,6 +878,7 @@
   " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
 
   " Lazily load Filetype specific bundles {{{
+  NeoBundle 'jceb/vim-orgmode'
   NeoBundleLazy 'chiphogg/vim-vtd', {
         \ 'autoload' : { 'filetypes' : 'vtd' },
         \ }
@@ -879,30 +892,52 @@
     endif
   endfunction
 
-  NeoBundleLazy 'paulhybryant/SQLUtilities', { 'autoload' : { 'filetypes' : 'sql' } }          " Utilities for editing SQL scripts (v7.0) 'vim-scripts/SQLUtilities' has only v6.0)
+  NeoBundleLazy 'paulhybryant/SQLUtilities', {
+        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ }                                                                     " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
     let g:sqlutil_align_comma=0
   endfunction
-  NeoBundleLazy 'vim-scripts/SQLComplete.vim', { 'autoload' : { 'filetypes' : 'sql' } }        " SQL script completion
-  NeoBundleLazy 'vim-scripts/sql.vim--Stinson', { 'autoload' : { 'filetypes' : 'sql' } }       " Better SQL syntax highlighting
+  NeoBundleLazy 'vim-scripts/SQLComplete.vim', {
+        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ }                                                                     " SQL script completion
+  NeoBundleLazy 'vim-scripts/sql.vim--Stinson', {
+        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ }       " Better SQL syntax highlighting
 
-  NeoBundleLazy 'rstacruz/sparkup', { 'rtp': 'vim', 'autoload' : { 'filetypes' : 'html' } }    " Write HTML code faster
+  NeoBundleLazy 'rstacruz/sparkup', {
+        \ 'rtp': 'vim',
+        \ 'autoload' : { 'filetypes' : 'html' }
+        \ }                                                                     " Write HTML code faster
   NeoBundleLazy 'Valloric/MatchTagAlways', {
         \ 'disabled' : !has('python'),
         \ 'autoload' : { 'filetypes' : ['html', 'xml'] }
         \ }
-  NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', { 'autoload' : { 'filetypes' : 'html' } }     " Automatically close html tags
+  NeoBundleLazy 'vim-scripts/closetag.vim', {
+        \ 'autoload' : { 'filetypes' : 'html' }
+        \ }                                                                     " Automatically close html/xml tags
+  NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', {
+        \ 'autoload' : { 'filetypes' : 'html' }
+        \ }                                                                     " Automatically close html tags
   let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
   function! s:autoclosetag.hooks.on_source(bundle)
     autocmd FileType xml,xhtml execute "source " . "$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim"
   endfunction
 
-  NeoBundleLazy 'tmux-plugins/vim-tmux', { 'autoload' : { 'filetypes' : 'tmux' } }             " Vim plugin for editing .tmux.conf
-  NeoBundleLazy 'zaiste/tmux.vim', { 'autoload' : { 'filetypes' : 'tmux' } }                   " Tmux syntax highlight
-  NeoBundleLazy 'wellle/tmux-complete.vim', { 'autoload' : { 'filetypes' : 'tmux' } }          " Vim plugin for insert mode completion of words in adjacent tmux panes
+  NeoBundleLazy 'tmux-plugins/vim-tmux', {
+        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ }                                                                     " Vim plugin for editing .tmux.conf
+  NeoBundleLazy 'zaiste/tmux.vim', {
+        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ }                                                                     " Tmux syntax highlight
+  NeoBundleLazy 'wellle/tmux-complete.vim', {
+        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ }                                                                     " Insert mode completion of words in adjacent panes
 
-  NeoBundleLazy 'vim-scripts/bash-support.vim', { 'autoload' : { 'filetypes' : 'sh' } }        " Make vim an IDE for writing bash
+  NeoBundleLazy 'vim-scripts/bash-support.vim', {
+        \ 'autoload' : { 'filetypes' : 'sh' }
+        \ }                                                                     " Make vim an IDE for writing bash
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
     let g:BASH_MapLeader  = g:maplocalleader
@@ -910,15 +945,25 @@
   endfunction
 
   " Vimscript scripting {{{
-  NeoBundleLazy 'kana/vim-vspec', { 'autoload' : { 'filetypes' : 'vim' } }                     " Testing framework for vimscript
-  " NeoBundleLazy 'thinca/vim-themis', { 'autoload' : { 'filetypes' : 'vim' } }                  " Testing framework for vimscript
-  " NeoBundleLazy 'junegunn/vader.vim', { 'autoload' : { 'filetypes' : 'vim' } }                 " Testing framework for vimscript
-  NeoBundleLazy 'vim-scripts/ReloadScript', { 'autoload' : { 'filetypes' : 'vim' } }           " Reload vim script without having to restart vim
+  NeoBundleLazy 'kana/vim-vspec', {
+        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ }                                                                     " Testing framework for vimscript
+  " NeoBundleLazy 'thinca/vim-themis', {
+        " \ 'autoload' : { 'filetypes' : 'vim' }
+        " \ }                                                                     " Testing framework for vimscript
+  " NeoBundleLazy 'junegunn/vader.vim', {
+        " \ 'autoload' : { 'filetypes' : 'vim' }
+        " \ }                                                                     " Testing framework for vimscript
+  NeoBundleLazy 'vim-scripts/ReloadScript', {
+        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ }                                                                     " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
-  NeoBundleLazy 'paulhybryant/Decho.vim', { 'autoload' : { 'filetypes' : 'vim' } }             " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
+  NeoBundleLazy 'paulhybryant/Decho.vim', {
+        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ }                                                                     " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
   let s:decho = neobundle#get('Decho.vim')
   function! s:decho.hooks.on_source(bundle)
     let g:dechofuncname = 1
@@ -927,15 +972,19 @@
   NeoBundleLazy 'syngan/vim-vimlint', {
         \ 'autoload' : { 'filetypes' : 'vim' },
         \ 'depends' : 'ynkdir/vim-vimlparser'
-        \ }                                                                                     " Syntax checker for vimscript
+        \ }                                                                     " Syntax checker for vimscript
   " let g:Vim_MapLeader  = g:maplocalleader
-  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : 'vim' }                                     " Syntax checker for vimscript
-  " NeoBundleLazy 'vim-scripts/Vim-Support', { 'autoload' : { 'filetypes' : 'vim' } }             " Make vim an IDE for writing vimscript
+  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : 'vim' }                     " Syntax checker for vimscript
+  NeoBundleLazy 'vim-scripts/Vim-Support', {
+        \  'autoload' : { 'filetypes' : 'vim' }
+        \ }                                                                     " Make vim an IDE for writing vimscript
   " }}}
 
-  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : 'gitcommit' } }                 " Syntax highlight for git
+  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : 'gitcommit' } } " Syntax highlight for git
 
-  NeoBundleLazy 'google/vim-ft-vroom', { 'autoload' : { 'filetypes' : 'vroom' } }               " Filetype plugin for vroom
+  NeoBundleLazy 'google/vim-ft-vroom', {
+        \ 'autoload' : { 'filetypes' : 'vroom' }
+        \ }                                                                     " Filetype plugin for vroom
 
   NeoBundleLazy 'plasticboy/vim-markdown', {
         \ 'autoload' : { 'filetypes' : 'markdown' }
@@ -985,6 +1034,15 @@
   NeoBundleLazy 'elzr/vim-json', {
         \ 'filetypes' : 'json'
         \ }                                                                     " Json highlight in vim
+  let s:vimjson = neobundle#get("vim-json")
+  function s:vimjson.hooks.on_source(bundle)
+    autocmd FileType json set autoindent |
+          \ set formatoptions=tcq2l |
+          \ set textwidth=78 shiftwidth=2 |
+          \ set softtabstop=2 tabstop=8 |
+          \ set expandtab |
+          \ set foldmethod=syntax
+  endfunction
   " }}}
 
   call neobundle#end()

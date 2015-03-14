@@ -1,0 +1,18 @@
+vimscript
+
+# Difference between s: and <SID> for functions
+• s: is only valid under the script context. While <SID> will be replaced by
+  the actual script ID when the script is loaded. For example, to define a
+  mapping to call a function within the script, you can only use <SID>.
+  For example:
+    map <leader>foo :call <SID>FuncFoo()<CR>
+  The following is invalid:
+    map <leader>foo :call s:FuncFoo()<CR>
+  This is because the mappings are not executed under script context. The
+  map can be triggered anywhere. When the map is defined, <SID> will be
+  replaced by <SNR>xxx_ which is global. Thus <leader>foo will actually
+  trigger <SNR>xxx_FuncFoo(). If the map is defined with s:, it won't be
+  replaced and s:FuncFoo is only valid within the file defining this
+  function. On the other hand, using s: in command is ok.
+  For example, the following is valid:
+    command FuncFoo :call s:FuncFoo()
