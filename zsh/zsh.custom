@@ -33,6 +33,7 @@ install_powerline_precmd
 unalias ll
 unalias la
 unalias ls
+unalias ta
 
 if gls --color -d . &>/dev/null 2>&1
 then

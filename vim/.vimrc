@@ -629,7 +629,15 @@
 
   " Row-/column-wise editing {{{
   NeoBundle 'godlygeek/tabular'
-  NeoBundle 'paulhybryant/foldcol'                                                " Fold columns selected in visual block mode
+  if filereadable(g:google_config)
+    NeoBundle 'paulhybryant/foldcol'                                              " Fold columns selected in visual block mode
+  else
+    NeoBundle 'paulhybryant/foldcol', { 'depends' : 'vim-maktaba' }               " Fold columns selected in visual block mode
+  endif
+  let s:foldcol = neobundle#get('foldcol')
+  function! s:foldcol.hooks.on_source(bundle)
+    Glaive foldcol plugin[mappings]
+  endfunction
   NeoBundle 'paulhybryant/Align'                                                " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
   " NeoBundle 'junegunn/vim-easy-align'
   NeoBundle 'jlemetay/permut'
