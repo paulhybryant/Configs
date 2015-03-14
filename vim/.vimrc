@@ -383,9 +383,9 @@
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive codefmt plugin[mappings]
   endfunction
+  NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
-  NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
