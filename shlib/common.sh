@@ -87,33 +87,40 @@ alias nvim="NVIM=nvim nvim"
 # functions library {{{
 
 function ta() {
-  local setenv="/tmp/set-tmux-env.sh"
-  > "$setenv"
+  local setenv=$(mktemp)
+  : > "$setenv"
   for var in SSH_OS SSH_CLIENT DISPLAY;
   do
     local value=
     eval value=\$$var
     echo "export $var=\"$value\"" >> "$setenv"
-    tmux set-environment -t "$1" $var "${!var}"
+    local _var_
+    eval "_val_=\"\${$var}\""
+    echo $_val_
+    \tmux set-environment -t "$1" $var "${_var_}"
   done
-  for window in $(tmux list-windows -t "$1" -F "#W");
+  for window in $(\tmux list-windows -t "$1" -F "#W");
   do
-    for pane_id_command in $(tmux list-panes -t "$1:$window" -F "#P:#{pane_current_command}");
+    for pane_id_command in $(\tmux list-panes -t "$1:$window" -F "#P:#{pane_current_command}");
     do
       local id=${pane_id_command%%:*}
       local cmd=${pane_id_command##*:}
       if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
-        tmux send-keys -t "$1:$window" C-z
+        # run "\\tmux send-keys -t \"$1:$window\" C-z"
+        \tmux send-keys -t "$1:$window" C-z
         sleep 0.2
-        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        # run "\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
+        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
         sleep 0.2
-        tmux send-keys -t "$1:$window.$id" fg ENTER
+        # run "\\tmux send-keys -t \"$1:$window.$id\" fg ENTER"
+        \tmux send-keys -t "$1:$window.$id" fg ENTER
       else
-        tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        # run "\\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
       fi
     done
   done
-  tmux attach -t "$1"
+  \tmux attach -t "$1"
 }
 
 function tmux_start() {
@@ -127,9 +134,9 @@ function tmux_start() {
     \tmux start-server
   fi
   if [[ "$#" == 0 ]]; then
-    tmux attach
+    \tmux attach
   else
-    tmux "$@"
+    \tmux "$@"
   fi
 }
 
@@ -282,6 +289,10 @@ function run() {
   if [[ $DRYRUN == true ]]; then
     echo "$_cmd_"
   else
+    if [[ $LOGCMD == true && -n "$LOGCMDFILE" ]]; then
+      local _ts_=$(date "+%Y-%m-%d %T:")
+      echo "$_ts_ $_cmd_" >> $LOGCMDFILE
+    fi
     set -o noglob
     $_cmd_
     set +o noglob
