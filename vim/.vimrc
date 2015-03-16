@@ -1207,7 +1207,7 @@
 
 " }}}
 
-" General {{{
+" Settings {{{
 
   filetype plugin indent on                                                     " Automatically detect file types.
   syntax on                                                                     " Syntax highlighting
@@ -1279,7 +1279,6 @@
     set clipboard=unnamed
   endif
 
-  " Has to be after syntax on for colorscheme to work
   " colorscheme putty
   colorscheme solarized
 
