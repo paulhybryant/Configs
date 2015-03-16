@@ -88,7 +88,11 @@
 
   let g:mapleader = ','
   let g:maplocalleader = ',,'
-  let g:disabled_plugins = {}
+  " Vim-Support disabled because of the conflicting key mapping C-j with tmux
+  " nativation
+  let g:disabled_plugins = {
+        \ 'Vim-Support' : 1
+        \ }
 
   let g:google_config = resolve(expand("~/.vimrc.google"))
   if filereadable(g:google_config)
@@ -383,7 +387,7 @@
     Glaive codefmt plugin[mappings]
   endfunction
   NeoBundleLazy 'maksimr/vim-jsbeautify', {
-        \ 'filetypes' : 'javascript'
+        \ 'filetypes' : ['javascript']
         \ }                                                                     " Javascript formatting
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
@@ -690,7 +694,8 @@
   NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
   let s:vimshell = neobundle#get('vimshell.vim')
   function! s:vimshell.hooks.on_source(bundle)
-    let g:vimshell_split_command='belowright split'
+    let g:vimshell_popup_command = 'belowright split'
+    let g:vimshell_popup_height = 20
   endfunction
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
   NeoBundle 'thinca/vim-quickrun'
@@ -885,7 +890,7 @@
   " Lazily load Filetype specific bundles {{{
   NeoBundle 'jceb/vim-orgmode'
   NeoBundleLazy 'chiphogg/vim-vtd', {
-        \ 'autoload' : { 'filetypes' : 'vtd' },
+        \ 'autoload' : { 'filetypes' : ['vtd'] },
         \ }
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
@@ -898,32 +903,32 @@
   endfunction
 
   NeoBundleLazy 'paulhybryant/SQLUtilities', {
-        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ 'autoload' : { 'filetypes' : ['sql'] }
         \ }                                                                     " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
     let g:sqlutil_align_comma=0
   endfunction
   NeoBundleLazy 'vim-scripts/SQLComplete.vim', {
-        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ 'autoload' : { 'filetypes' : ['sql'] }
         \ }                                                                     " SQL script completion
   NeoBundleLazy 'vim-scripts/sql.vim--Stinson', {
-        \ 'autoload' : { 'filetypes' : 'sql' }
+        \ 'autoload' : { 'filetypes' : ['sql'] }
         \ }       " Better SQL syntax highlighting
 
   NeoBundleLazy 'rstacruz/sparkup', {
         \ 'rtp': 'vim',
-        \ 'autoload' : { 'filetypes' : 'html' }
+        \ 'autoload' : { 'filetypes' : ['html'] }
         \ }                                                                     " Write HTML code faster
   NeoBundleLazy 'Valloric/MatchTagAlways', {
         \ 'disabled' : !has('python'),
         \ 'autoload' : { 'filetypes' : ['html', 'xml'] }
         \ }
   NeoBundleLazy 'vim-scripts/closetag.vim', {
-        \ 'autoload' : { 'filetypes' : 'html' }
+        \ 'autoload' : { 'filetypes' : ['html'] }
         \ }                                                                     " Automatically close html/xml tags
   NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', {
-        \ 'autoload' : { 'filetypes' : 'html' }
+        \ 'autoload' : { 'filetypes' : ['html'] }
         \ }                                                                     " Automatically close html tags
   let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
   function! s:autoclosetag.hooks.on_source(bundle)
@@ -931,17 +936,17 @@
   endfunction
 
   NeoBundleLazy 'tmux-plugins/vim-tmux', {
-        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Vim plugin for editing .tmux.conf
   NeoBundleLazy 'zaiste/tmux.vim', {
-        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Tmux syntax highlight
   NeoBundleLazy 'wellle/tmux-complete.vim', {
-        \ 'autoload' : { 'filetypes' : 'tmux' }
+        \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Insert mode completion of words in adjacent panes
 
   NeoBundleLazy 'vim-scripts/bash-support.vim', {
-        \ 'autoload' : { 'filetypes' : 'sh' }
+        \ 'autoload' : { 'filetypes' : ['sh'] }
         \ }                                                                     " Make vim an IDE for writing bash
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
@@ -951,23 +956,23 @@
 
   " Vimscript scripting {{{
   NeoBundleLazy 'kana/vim-vspec', {
-        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ 'autoload' : { 'filetypes' : ['vim'] }
         \ }                                                                     " Testing framework for vimscript
   " NeoBundleLazy 'thinca/vim-themis', {
-        " \ 'autoload' : { 'filetypes' : 'vim' }
+        " \ 'autoload' : { 'filetypes' : ['vim'] }
         " \ }                                                                     " Testing framework for vimscript
   " NeoBundleLazy 'junegunn/vader.vim', {
-        " \ 'autoload' : { 'filetypes' : 'vim' }
+        " \ 'autoload' : { 'filetypes' : ['vim'] }
         " \ }                                                                     " Testing framework for vimscript
   NeoBundleLazy 'vim-scripts/ReloadScript', {
-        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ 'autoload' : { 'filetypes' : ['vim'] }
         \ }                                                                     " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
   NeoBundleLazy 'paulhybryant/Decho.vim', {
-        \ 'autoload' : { 'filetypes' : 'vim' }
+        \ 'autoload' : { 'filetypes' : ['vim'] }
         \ }                                                                     " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
   let s:decho = neobundle#get('Decho.vim')
   function! s:decho.hooks.on_source(bundle)
@@ -975,41 +980,42 @@
     let g:decho_winheight = 10
   endfunction
   NeoBundleLazy 'syngan/vim-vimlint', {
-        \ 'autoload' : { 'filetypes' : 'vim' },
+        \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'depends' : 'ynkdir/vim-vimlparser'
         \ }                                                                     " Syntax checker for vimscript
   " let g:Vim_MapLeader  = g:maplocalleader
-  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : 'vim' }                     " Syntax checker for vimscript
+  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                     " Syntax checker for vimscript
   NeoBundleLazy 'vim-scripts/Vim-Support', {
-        \  'autoload' : { 'filetypes' : 'vim' }
+        \  'autoload' : { 'filetypes' : ['vim'] },
+        \  'disabled' : PluginDisabled('Vim-Support'),
         \ }                                                                     " Make vim an IDE for writing vimscript
   " }}}
 
-  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : 'gitcommit' } } " Syntax highlight for git
+  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : ['gitcommit'] } } " Syntax highlight for git
 
   NeoBundleLazy 'google/vim-ft-vroom', {
-        \ 'autoload' : { 'filetypes' : 'vroom' }
+        \ 'autoload' : { 'filetypes' : ['vroom'] }
         \ }                                                                     " Filetype plugin for vroom
 
   NeoBundleLazy 'plasticboy/vim-markdown', {
-        \ 'autoload' : { 'filetypes' : 'markdown' }
+        \ 'autoload' : { 'filetypes' : ['markdown'] }
         \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
-        \ 'autoload' : { 'filetypes' : 'markdown' }
+        \ 'autoload' : { 'filetypes' : ['markdown'] }
         \ }                                                                     " Start a http server and preview markdown instantly
   " NeoBundleLazy 'tpope/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : 'markdown' }
+        " \ 'autoload' : { 'filetypes' : ['markdown'] }
         " \ }                                                                     " Syntax highlighting for markdown
   " NeoBundle 'suan/vim-instant-markdown'
-        " \ 'autoload' : { 'filetypes' : 'markdown' }
+        " \ 'autoload' : { 'filetypes' : ['markdown'] }
         " \ }
 
-  NeoBundleLazy 'vim-jp/cpp-vim', { 'autoload' : { 'filetypes' : 'cpp' } }
+  NeoBundleLazy 'vim-jp/cpp-vim', { 'autoload' : { 'filetypes' : ['cpp'] } }
   NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', {
-        \ 'autoload' : { 'filetypes' : 'cpp' }
+        \ 'autoload' : { 'filetypes' : ['cpp'] }
         \ }                                                                     " Enhanced vim cpp highlight
   NeoBundleLazy 'jaxbot/semantic-highlight.vim', {
-        \ 'autoload' : { 'filetypes' : 'cpp' }
+        \ 'autoload' : { 'filetypes' : ['cpp'] }
         \ }                                                                     " General semantic highlighting for vim
   let s:semantic_highlight = neobundle#get('semantic-highlight.vim')
   function! s:semantic_highlight.hooks.on_source(bundle)
@@ -1017,7 +1023,7 @@
   endfunction
 
   NeoBundleLazy 'pangloss/vim-javascript', {
-        \ 'filetypes' : 'javascript'
+        \ 'filetypes' : ['javascript']
         \ }                                                                     " Javascript syntax folding
   let s:jssyntax = neobundle#get('vim-javascript')
   function s:jssyntax.hooks.on_source(bundle)
@@ -1037,7 +1043,7 @@
   endfunction
 
   " NeoBundleLazy 'elzr/vim-json', {
-        " \ 'filetypes' : 'json'
+        " \ 'filetypes' : ['json']
         " \ }                                                                     " Json highlight in vim
   " let s:vimjson = neobundle#get("vim-json")
   " function s:vimjson.hooks.on_source(bundle)
