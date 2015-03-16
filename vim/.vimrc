@@ -113,8 +113,8 @@
   call neobundle#begin('$HOME/.vim/bundle')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  NeoBundle 'paulhybryant/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
@@ -686,7 +686,12 @@
   NeoBundle 'chrisbra/NrrwRgn'
   NeoBundle 'vitalk/vim-onoff'
   NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
-  NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell' }                    " Shell implemented with vimscript
+  NeoBundle 'paulhybryant/conque'
+  NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
+  let s:vimshell = neobundle#get('vimshell.vim')
+  function! s:vimshell.hooks.on_source(bundle)
+    let g:vimshell_split_command='belowright split'
+  endfunction
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'danro/rename.vim'
@@ -1031,18 +1036,18 @@
     " let g:javascript_conceal_super      = "Ω"
   endfunction
 
-  NeoBundleLazy 'elzr/vim-json', {
-        \ 'filetypes' : 'json'
-        \ }                                                                     " Json highlight in vim
-  let s:vimjson = neobundle#get("vim-json")
-  function s:vimjson.hooks.on_source(bundle)
-    autocmd FileType json set autoindent |
-          \ set formatoptions=tcq2l |
-          \ set textwidth=78 shiftwidth=2 |
-          \ set softtabstop=2 tabstop=8 |
-          \ set expandtab |
-          \ set foldmethod=syntax
-  endfunction
+  " NeoBundleLazy 'elzr/vim-json', {
+        " \ 'filetypes' : 'json'
+        " \ }                                                                     " Json highlight in vim
+  " let s:vimjson = neobundle#get("vim-json")
+  " function s:vimjson.hooks.on_source(bundle)
+    " autocmd FileType json set autoindent |
+          " \ set formatoptions=tcq2l |
+          " \ set textwidth=78 shiftwidth=2 |
+          " \ set softtabstop=2 tabstop=8 |
+          " \ set expandtab |
+          " \ set foldmethod=syntax
+  " endfunction
   " }}}
 
   call neobundle#end()
@@ -1197,6 +1202,7 @@
     autocmd FileType conf setlocal nospell
     autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal sts=2 | set ft=vim | set foldmethod=marker
     autocmd VimEnter * if expand('%') == "" | exec "ScratchOpen"
+    autocmd BufRead *.json setlocal filetype=json
   augroup END
 
 " }}}
@@ -1244,6 +1250,8 @@
   set showtabline=2                                                             " Always show the tabline
   set smartcase                                                                 " Case sensitive when uppercase present
   set softtabstop=2                                                             " Let backspace delete indent
+  " set splitbelow                                                                " Create the split at the bottom when split horizontally
+  " set splitright                                                                " Create the split on the right when split vertically
   set t_Co=256                                                                  " Set number of colors supported by term
   set tabstop=2                                                                 " An indentation every two columns
   set term=$TERM                                                                " Make arrow and other keys work
