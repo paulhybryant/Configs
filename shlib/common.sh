@@ -30,7 +30,8 @@ export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
 export TERM=screen-256color
-export EDITOR='vim'
+export VISUAL='vim'
+export EDITOR='$VISUAL'
 export GREP_OPTIONS='--color=auto'
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
