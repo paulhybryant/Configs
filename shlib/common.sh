@@ -131,7 +131,9 @@ function tmux_start() {
   \tmux info &> /dev/null
   if [[ $? -eq 1 ]]; then
     echo "Starting tmux server..."
+    touch "$HOME/.tmux_restore"
     \tmux start-server
+    \rm "$HOME/.tmux_restore"
   fi
   if [[ "$#" == 0 ]]; then
     \tmux attach
