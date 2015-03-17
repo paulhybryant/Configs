@@ -18,7 +18,7 @@ function install_powerline_precmd() {
 }
 install_powerline_precmd
 
-expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
+function expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
   echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
   zle expand-or-complete-prefix
   zle redisplay
@@ -41,10 +41,6 @@ setopt complete_aliases
 unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
 
 # Put the cursor at the end of line when using Up / Down for command history
-fpath=($HOME/.zsh-completions/src $fpath)
-autoload -U compinit
-compinit
-# Put the cursor at the end of line when using Up / Down for command history
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -63,6 +59,7 @@ bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^I" expand-or-complete-with-dots
+bindkey -s "OM" 
 
 # Additional configurations to load {{{
 if [ -e "$HOME/.zshrc.local" ]; then
@@ -96,5 +93,9 @@ function config_linux() {
 
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin
 [[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
+
+fpath=($HOME/.zsh-completions/src $fpath)
+autoload -U compinit
+compinit
 
 # }}}
