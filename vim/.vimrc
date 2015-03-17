@@ -236,9 +236,9 @@
   " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'Raimondi/delimitMate'                                              " Automatic close quotes etc, with some syntax awareness
   " NeoBundle 'Shougo/neocomplcache.vim'
-  NeoBundleLazy 'Rip-Rip/clang_complete', {
-        \ 'autoload' : { 'filetypes' : ['cpp', 'c'] }
-        \ }                                                                     " Completion for c-family language
+  " NeoBundleLazy 'Rip-Rip/clang_complete', {
+        " \ 'autoload' : { 'filetypes' : ['cpp', 'c'] }
+        " \ }                                                                     " Completion for c-family language
   NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
       \ 'disabled' : !has('lua'),

@@ -93,11 +93,10 @@ function ta() {
   do
     local value=
     eval value=\$$var
-    echo "export $var=\"$value\"" >> "$setenv"
-    local _var_
-    eval "_val_=\"\${$var}\""
-    echo $_val_
-    \tmux set-environment -t "$1" $var "${_var_}"
+    # local _var_
+    # eval "_val_=\"\${$var}\""
+    # echo $_val_
+    \tmux set-environment -t "$1" $var "$value"
   done
   for window in $(\tmux list-windows -t "$1" -F "#W");
   do
