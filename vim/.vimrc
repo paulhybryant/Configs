@@ -688,9 +688,9 @@
 
   NeoBundle 'tpope/vim-speeddating'
   NeoBundle 'chrisbra/NrrwRgn'
-  NeoBundle 'vitalk/vim-onoff'
+  NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
   NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
-  NeoBundle 'paulhybryant/conque'
+  NeoBundle 'paulhybryant/conque'                                               " Split window for shell command line
   NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
   let s:vimshell = neobundle#get('vimshell.vim')
   function! s:vimshell.hooks.on_source(bundle)
@@ -698,8 +698,8 @@
     let g:vimshell_popup_height = 20
   endfunction
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
-  NeoBundle 'thinca/vim-quickrun'
-  NeoBundle 'danro/rename.vim'
+  NeoBundle 'thinca/vim-quickrun'                                               " Execute whole/part of currently edited file
+  NeoBundle 'danro/rename.vim'                                                  " Rename the underlying filename of the buffer
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc']
         \ }                                                                     " Note taking with vim
@@ -711,7 +711,7 @@
     let g:notes_tagsindex = '~/Notes/notes.tags'
   endfunction
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
-  " NeoBundle 'Keithbsmiley/gist.vim'
+  " NeoBundle 'Keithbsmiley/gist.vim'                                             " Use gist from vim
 
   NeoBundle 'Shougo/vinarise.vim', {
         \ 'recipe' : 'vinarise.vim',
@@ -720,8 +720,8 @@
   NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
   NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
   NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
-  " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
   NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
+  " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
   NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
   NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
   " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
