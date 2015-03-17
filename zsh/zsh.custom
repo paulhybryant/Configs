@@ -1,18 +1,7 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldmarker={{,}} foldlevel=0 foldmethod=marker nospell:
 
-export __SHLIB__=$(dirname $(dirname $(readlink "$HOME/.zshrc")))/shlib
+export __SHLIB__=$HOME/Configs/shlib
 source "$__SHLIB__/common.sh"
-
-# Enalbe Ctrl-R for revert search in vi mode
-bindkey "^R" history-incremental-search-backward
-
-# Put the cursor at the end of line when using Up / Down for command history
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
 
 # Setup powerline for zsh prompt
 function powerline_precmd() {
@@ -27,41 +16,82 @@ function install_powerline_precmd() {
   done
   precmd_functions+=(powerline_precmd)
 }
-
 install_powerline_precmd
 
-unalias ll
-unalias la
-unalias ls
-unalias ta
+expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
+  echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
+  zle expand-or-complete-prefix
+  zle redisplay
+}
 
-if gls --color -d . &>/dev/null 2>&1
-then
-  alias ls='gls --color=tty'
-elif ls --color -d . &>/dev/null 2>&1
-then
-  alias ls='ls --color=tty'
-else
-  alias ls='ls -G'
-fi
+# unalias ll
+# unalias la
+# unalias ls
+# unalias ta
 
+# Set options
+setopt inc_append_history
+setopt share_history
+# Do not complete alias before completion is finished
+# This would allow completion to work for aliases
+# e.g. alias tmux=tmux -2
+setopt complete_aliases
+# Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
+# setopt no_prompt_cr
+unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
+
+# Put the cursor at the end of line when using Up / Down for command history
 fpath=($HOME/.zsh-completions/src $fpath)
 autoload -U compinit
 compinit
+# Put the cursor at the end of line when using Up / Down for command history
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+zle -N expand-or-complete-with-dots
+
+# Key bindings
+bindkey "^[OD" beginning-of-line
+bindkey "^[OC" end-of-line
+# bindkey "^[[3~" delete-char
+# bindkey "^I" expand-or-complete-prefix
+# By default <C-S> is bind to self-insert, which presents vim from getting the combination.
+bindkey -r "^S"
+# Let zsh history search use regex pattern
+bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+bindkey "^I" expand-or-complete-with-dots
 
 # Additional configurations to load {{{
+if [ -e "$HOME/.zshrc.local" ]; then
+  source ~/.zshrc.local
+fi
 
 # Tmuxinator
 if [ -e "$HOME/.tmuxinator.zsh" ]; then
   source ~/.tmuxinator.zsh
 fi
 
+# Platform specific settings
 function config_darwin() {
   alias updatedb="sudo /usr/libexec/locate.updatedb"
+  if gls --color -d . &>/dev/null 2>&1
+  then
+    alias ls="gls --color=tty"
+  else
+    alias ls="ls -G"
+  fi
 }
 
 function config_linux() {
-  :
+  if gls --color -d . &>/dev/null 2>&1
+  then
+    alias ls="gls --color=tty"
+  else
+    alias ls="ls --color=tty"
+  fi
 }
 
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin
