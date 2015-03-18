@@ -477,19 +477,19 @@
         " \ 'depends' : 'kana/vim-textobj-user',
         " \ 'disabled' : PluginDisabled('VimLTextObjects')
         " \ }                                                                     " Text object for vimscript
-  NeoBundle 'Julian/vim-textobj-brace', {
-        \ 'depends' : 'kana/vim-textobj-user',
-        \ 'disabled' : PluginDisabled('vim-textobj-brace')
-        \ }                                                                     " Text object between braces
+  " NeoBundle 'Julian/vim-textobj-brace', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ 'disabled' : PluginDisabled('vim-textobj-brace')
+        " \ }                                                                     " Text object between braces
   " TODO: va' seems to select the space before the quote, need to be fixed.
   NeoBundle 'beloglazov/vim-textobj-quotes', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-quotes')
         \ }                                                                     " Text object between any type of quotes
-  NeoBundle 'reedes/vim-textobj-quote', {
-        \ 'depends' : 'kana/vim-textobj-user',
-        \ 'disabled' : PluginDisabled('vim-textobj-quote')
-        \ }                                                                     " Text object between also typographic ('curly') quote characters
+  " NeoBundle 'reedes/vim-textobj-quote', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ 'disabled' : PluginDisabled('vim-textobj-quote')
+        " \ }                                                                     " Text object between also typographic ('curly') quote characters
   " NeoBundle 'kana/vim-textobj-datetime', {
         " \ 'depends' : 'kana/vim-textobj-user',
         " \ 'disabled' : PluginDisabled('vim-textobj-datetime')
