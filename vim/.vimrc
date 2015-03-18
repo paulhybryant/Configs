@@ -88,20 +88,19 @@
 
   let g:mapleader = ','
   let g:maplocalleader = ',,'
-  " Vim-Support disabled because of the conflicting key mapping C-j with tmux
-  " nativation
   let g:disabled_plugins = {
-        \ 'Vim-Support' : 1
+        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation'
         \ }
 
   let g:google_config = resolve(expand("~/.vimrc.google"))
   if filereadable(g:google_config)
     exec "source " . g:google_config
-    let g:disabled_plugins['vim-maktaba'] = 1
-    let g:disabled_plugins['vim-glaive'] = 1
-    let g:disabled_plugins['vim-codefmt'] = 1
-    let g:disabled_plugins['vim-better-whitespace'] = 1
-    let g:disabled_plugins['vim-trailing-whitespace'] = 1
+    let b:reason = 'Included by customized vim distribution'
+    let g:disabled_plugins['vim-maktaba'] = b:reason
+    let g:disabled_plugins['vim-glaive'] = b:reason
+    let g:disabled_plugins['vim-codefmt'] = b:reason
+    let g:disabled_plugins['vim-better-whitespace'] = b:reason
+    let g:disabled_plugins['vim-trailing-whitespace'] = b:reason
   endif
 
   " Plugin infrastructure {{{
@@ -113,12 +112,10 @@
 
   filetype off
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-
   call neobundle#begin('$HOME/.vim/bundle')
 
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  " NeoBundle 'paulhybryant/neobundle-vim-recipes', { 'force' : 1 }               " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
@@ -136,21 +133,16 @@
   " }}}
 
   " Nativation {{{
-  NeoBundle 'Lokaltog/vim-easymotion'                                     " Display hint for jumping to
-  NeoBundle 'bkad/CamelCaseMotion'                                        " Defines CamelCase text object
-  NeoBundle 'christoomey/vim-tmux-navigator'                              " Allow using the same keymap to move between tmux panes and vim splits seamlessly
-  " NeoBundle 'justinmk/vim-sneak'                                          " Easy motion within one line
+  NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
+  NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
+  NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
+  " NeoBundle 'justinmk/vim-sneak'                                                " Easy motion within one line
   " }}}
 
   " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'mhinz/vim-signify'                                                 " Show the sign at changes from last git commit
-  let s:signify = neobundle#get('vim-signify')
-  function! s:signify.hooks.on_source(bundle)
-    nnoremap <silent> <leader>gg :SignifyToggle<CR>
-  endfunction
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
-
   NeoBundle 'bling/vim-airline'
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
@@ -166,8 +158,13 @@
     " let g:airline#extensions#tmuxline#color_template = 'normal'
   endfunction
 
-  " NeoBundle 'flazz/vim-colorschemes'                                            " Collection of vim colorschemes
   " NeoBundle 'MattesGroeger/vim-bookmarks'
+  " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
+  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  " NeoBundle 'paulhybryant/tmuxline.vim'                                       " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'edkolev/promptline.vim'
+  " let g:tmuxline_theme = 'airline'
+  " let g:tmuxline_preset = 'tmux'
   " NeoBundle 'airblade/vim-gitgutter', {
         " \ 'disabled' : PluginDisabled('vim-gitgutter')
         " \ }                                                                     " Prefer vim-signify
@@ -178,7 +175,7 @@
   " function! s:numbers.hooks.on_source(bundle)
     " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
   " endfunction
-  " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
+  " NeoBundle 'flazz/vim-colorschemes'                                            " Collection of vim colorschemes
   " NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                           " Vim colorscheme github
   " NeoBundle 'itchyny/landscape.vim'                                             " Vim colorscheme landscape
   " NeoBundle 'tomasr/molokai'                                                    " Vim colorscheme molokai
@@ -189,15 +186,8 @@
         " \ }
   " NeoBundle 'Lokaltog/vim-distinguished'                                        " Vim colorscheme distinguished
   " let g:rehash256 = 1
-
   " NeoBundle 'mattn/vim-airline-weather'                                       " Vim airline extension to show weather
   " let g:weather#area='Sunnyvale'
-  " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  " NeoBundle 'paulhybryant/tmuxline.vim'                                       " Change tmux theme to be consistent with vim statusline (Wait for response on PR)
-  " NeoBundle 'edkolev/tmuxline.vim'                                            " Change tmux theme to be consistent with vim statusline
-  " NeoBundle 'edkolev/promptline.vim'
-  " let g:tmuxline_theme = 'airline'
-  " let g:tmuxline_preset = 'tmux'
   " }}}
 
   " Coding assistance {{{
@@ -206,33 +196,32 @@
     let s:ycm = neobundle#get('YouCompleteMe')
     function! s:ycm.hooks.on_source(bundle)
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-      " nnoremap <C-o> :YcmForceCompileAndDiagnostics <CR>
-      let g:Show_diagnostics_ui = 1                                                 " default 1
-      let g:ycm_always_populate_location_list = 1                                   " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 0                             " default 0
-      let g:ycm_collect_identifiers_from_tags_files = 1                             " enable completion from tags
-      let g:ycm_complete_in_strings = 1                                             " default 1
+      let g:Show_diagnostics_ui = 1                                             " default 1
+      let g:ycm_always_populate_location_list = 1                               " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 0                         " default 0
+      let g:ycm_collect_identifiers_from_tags_files = 1                         " enable completion from tags
+      let g:ycm_complete_in_strings = 1                                         " default 1
       let g:ycm_confirm_extra_conf = 1
       let g:ycm_enable_diagnostic_highlighting = 0
       let g:ycm_enable_diagnostic_signs = 1
       let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'python': 1 }
-      let g:ycm_goto_buffer_command = 'same-buffer'                                 " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+      let g:ycm_goto_buffer_command = 'same-buffer'                             " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
       let g:ycm_key_invoke_completion = '<C-Space>'
       let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
       let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-      let g:ycm_open_loclist_on_ycm_diags = 1                                       " default 1
-      let g:ycm_path_to_python_interpreter = ''                                     " default ''
-      let g:ycm_register_as_syntastic_checker = 1                                   " default 1
-      let g:ycm_server_keep_logfiles = 10                                           " keep log files
-      let g:ycm_server_log_level = 'info'                                           " default info
-      let g:ycm_server_use_vim_stdout = 0                                           " default 0 (logging to console)
+      let g:ycm_open_loclist_on_ycm_diags = 1                                   " default 1
+      let g:ycm_path_to_python_interpreter = ''                                 " default ''
+      let g:ycm_register_as_syntastic_checker = 1                               " default 1
+      let g:ycm_server_keep_logfiles = 10                                       " keep log files
+      let g:ycm_server_log_level = 'info'                                       " default info
+      let g:ycm_server_use_vim_stdout = 0                                       " default 0 (logging to console)
     endfunction
   endif
 
   NeoBundle 'kana/vim-operator-user'                                            " User defined operator
-  NeoBundle 'kana/vim-operator-replace', {
-        \ 'depends' : 'kana/vim-operator-user'
-        \ }                                                                     " Vim operator for replace
+  " NeoBundle 'kana/vim-operator-replace', {
+        " \ 'depends' : 'kana/vim-operator-user'
+        " \ }                                                                     " Vim operator for replace
   NeoBundle 'tyru/operator-camelize.vim', {
         \ 'depends' : 'kana/vim-operator-user'
         \ }                                                                     " Convert variable to / from camelcase form
@@ -262,26 +251,18 @@
       \ }
   let s:neocomplete = neobundle#get('neocomplete.vim')
   function! s:neocomplete.hooks.on_source(bundle)
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:acp_enableAtStartup = 0                                               " Disable AutoComplPop.
+    let g:neocomplete#enable_at_startup = 1                                     " Use neocomplete.
+    let g:neocomplete#enable_smart_case = 1                                     " Use smartcase.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3                     " Set minimum syntax keyword length.
     let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-    " Define dictionary.
     let g:neocomplete#sources#dictionary#dictionaries = {
       \   'default' : '',
       \   'vimshell' : $HOME.'/.vimshell_hist',
       \   'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-    " Define keyword.
+      \ }                                                                       " Define dictionary.
     if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
+      let g:neocomplete#keyword_patterns = {}                                   " Define keyword.
     endif
     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -295,7 +276,7 @@
     function! s:my_cr_function()
       return neocomplete#close_popup() . "\<CR>"
       " For no inserting <CR> key.
-      "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+      " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
     endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -304,22 +285,18 @@
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
     " For cursor moving in insert mode(Not recommended)
-    "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-    "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-    "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-    "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+    " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+    " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+    " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+    " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
     " Or set this.
     "let g:neocomplete#enable_cursor_hold_i = 1
     " Or set this.
     "let g:neocomplete#enable_insert_char_pre = 1
-
     " AutoComplPop like behavior.
     "let g:neocomplete#enable_auto_select = 1
-
     " Shell like behavior(not recommended).
     "set completeopt+=longest
     "let g:neocomplete#enable_auto_select = 1
@@ -343,8 +320,9 @@
 
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+    " Do not use NeoComplete for these file types
     autocmd FileType c,cpp,python NeoCompleteLock
   endfunction
 
@@ -370,9 +348,7 @@
           " \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
           " \ }
   " endfunction
-
   " NeoBundle 'sjl/splice.vim'                                                    " Vim three way merge tool
-
   " NeoBundle 'tpope/vim-fugitive', { 'disabled' : !executable('git') }           " Commands for working with git
   " let s:fugitive = neobundle#get('vim-fugitive')
   " function! s:fugitive.hooks.on_source(bundle)
@@ -389,8 +365,8 @@
   " endfunction
 
   " Prefer agit as gitv has some bugs
+  NeoBundle 'cohama/agit.vim'                                                   " Git log viewer (Yet another gitk clone for Vim)
   " NeoBundle 'gregsexton/gitv', { 'depends' : 'tpope/vim-fugitive' }             " Git log viewer (Yet another gitk clone for Vim)
-  " NeoBundle 'cohama/agit.vim'                                                   " Git log viewer (Yet another gitk clone for Vim)
   " }}}
 
   " Auto-formatting {{{
@@ -482,6 +458,7 @@
         " \ 'disabled' : PluginDisabled('vim-textobj-brace')
         " \ }                                                                     " Text object between braces
   " TODO: va' seems to select the space before the quote, need to be fixed.
+  " Also, try to map vi' to viq etc
   NeoBundle 'beloglazov/vim-textobj-quotes', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'disabled' : PluginDisabled('vim-textobj-quotes')
@@ -603,22 +580,22 @@
   " NeoBundle 'kopischke/unite-spell-suggest'
   " NeoBundle 'tyru/unite-screen.sh'
 
-  " NeoBundle 'jistr/vim-nerdtree-tabs', { 'depends' : 'scrooloose/nerdtree' }    " One NERDTree only, shared among buffers / tabs
-  " NeoBundle 'scrooloose/nerdtree'                                               " File explorer inside vim
-  " let s:nerdtree = neobundle#get('nerdtree')
-  " function! s:nerdtree.hooks.on_source(bundle)
-    " let g:NERDShutUp=1
-    " let g:NERDTreeChDirMode=1
-    " let g:NERDTreeIgnore=[
-          " \ '\.pyc', '\~$', '\.swo$', '\.swp$',
-          " \ '\.git', '\.hg', '\.svn', '\.bzr']
-    " let g:NERDTreeMouseMode=2
-    " let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
-    " let g:NERDTreeShowBookmarks=1
-    " let g:NERDTreeShowHidden=1
-    " let g:nerdtree_tabs_open_on_gui_startup=0
-    " noremap <C-e> :NERDTreeToggle %<CR>
-  " endfunction
+  NeoBundle 'jistr/vim-nerdtree-tabs', { 'depends' : 'scrooloose/nerdtree' }    " One NERDTree only, shared among buffers / tabs
+  NeoBundle 'scrooloose/nerdtree'                                               " File explorer inside vim
+  let s:nerdtree = neobundle#get('nerdtree')
+  function! s:nerdtree.hooks.on_source(bundle)
+    let g:NERDShutUp=1
+    let g:NERDTreeChDirMode=1
+    let g:NERDTreeIgnore=[
+          \ '\.pyc', '\~$', '\.swo$', '\.swp$',
+          \ '\.git', '\.hg', '\.svn', '\.bzr']
+    let g:NERDTreeMouseMode=2
+    let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
+    let g:NERDTreeShowBookmarks=1
+    let g:NERDTreeShowHidden=1
+    let g:nerdtree_tabs_open_on_gui_startup=0
+    noremap <C-e> :NERDTreeToggle %<CR>
+  endfunction
 
   " NeoBundle 'tpope/vim-vinegar', { 'disabled' : PluginDisabled('vim-vinegar') } " NERDTree enhancement
   " NeoBundle 'eiginn/netrw'                                                      " NERDTree plugin for network
