@@ -18,8 +18,8 @@ function install_powerline_precmd() {
 }
 install_powerline_precmd
 
-function expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
-  echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
+function expand-or-complete-with-dots() {                                       # This bunch of code displays red dots when autocompleting
+  echo -n "\e[31m......\e[0m"                                                   # a command with the tab key, "Oh-my-zsh"-style.
   zle expand-or-complete-prefix
   zle redisplay
 }
@@ -35,13 +35,13 @@ setopt share_history
 # Do not complete alias before completion is finished
 # This would allow completion to work for aliases
 # e.g. alias tmux=tmux -2
-setopt complete_aliases
+# setopt complete_aliases
 # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
-# setopt no_prompt_cr
-unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
+setopt no_prompt_cr
+# bindkey -s "OM" 
+unsetopt CORRECT                                                                # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
 
-# Put the cursor at the end of line when using Up / Down for command history
-autoload -U up-line-or-beginning-search
+autoload -U up-line-or-beginning-search                                         # Put the cursor at the end of line when using Up / Down for command history
 zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
@@ -59,7 +59,6 @@ bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^I" expand-or-complete-with-dots
-bindkey -s "OM" 
 
 # Additional configurations to load {{{
 if [ -e "$HOME/.zshrc.local" ]; then

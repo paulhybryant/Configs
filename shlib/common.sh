@@ -70,7 +70,7 @@ eval "$GET_DIRCOLORS"
 # alias vim="vim -p"
 
 # tmux
-alias tmux="TERM=screen-256color tmux -2"
+alias tmux="TERM=screen-256color tmux_wrapper"
 
 # Use vimpager to replace less, which is used to view man page
 # export PAGER=/usr/local/bin/vimpager
@@ -86,6 +86,10 @@ alias nvim="NVIM=nvim nvim"
 # }}}
 
 # functions library {{{
+
+function tmux_wrapper() {
+  \tmux -2 "$@"
+}
 
 function ta() {
   local setenv=$(mktemp)
