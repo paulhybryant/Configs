@@ -419,8 +419,8 @@
           \ 'ip'  :0,
           \ 'ie'  :0,
           \ }
-    map L <Plug>(expand_region_expand)
-    map H <Plug>(expand_region_shrink)
+    nnoremap <leader>L <Plug>(expand_region_expand)
+    nnoremap <leader>H <Plug>(expand_region_shrink)
   endfunction
 
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
@@ -1220,7 +1220,7 @@
   set ruler                                                                     " Show the ruler
   set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                            " A ruler on steroids
   set scrolljump=5                                                              " Lines to scroll when cursor leaves screen
-  set scrolloff=3                                                               " Minimum lines to keep above and below cursor
+  set scrolloff=0                                                               " Minimum lines to keep above and below cursor
   set shiftround                                                                " Round indent to multiple of shiftwidth
   set shiftwidth=2                                                              " Use indents of 2 spaces
   set shortmess+=filmnrxoOtT                                                    " Abbrev. of messages (avoids 'hit enter')
