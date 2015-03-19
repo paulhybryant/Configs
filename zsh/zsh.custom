@@ -29,6 +29,8 @@ function expand-or-complete-with-dots() {                                       
 # unalias ls
 # unalias ta
 
+alias tl='tmux list-sessions'
+
 # Set options
 setopt inc_append_history
 setopt share_history

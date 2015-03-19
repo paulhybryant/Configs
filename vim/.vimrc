@@ -647,7 +647,7 @@
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
-  NeoBundle 'aperezdc/vim-template'
+  " NeoBundle 'aperezdc/vim-template'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }
   let s:ultisnips = neobundle#get('ultisnips')
