@@ -70,7 +70,7 @@ eval "$GET_DIRCOLORS"
 # alias vim="vim -p"
 
 # tmux
-alias tmux="TERM=screen-256color tmux_wrapper"
+alias tmux="TERM=screen-256color tmux -2"
 
 # Use vimpager to replace less, which is used to view man page
 # export PAGER=/usr/local/bin/vimpager
@@ -87,10 +87,6 @@ alias nvim="NVIM=nvim nvim"
 
 # functions library {{{
 
-function tmux_wrapper() {
-  \tmux -2 "$@"
-}
-
 function ta() {
   local setenv=$(mktemp)
   : > "$setenv"
@@ -102,7 +98,7 @@ function ta() {
     # eval "_val_=\"\${$var}\""
     # echo $_val_
     \tmux set-environment -t "$1" $var "$value"
-    echo "export $var=$value" >> "$setenv"
+    echo "export $var=\"$value\"" >> "$setenv"
   done
   for window in $(\tmux list-windows -t "$1" -F "#W");
   do
