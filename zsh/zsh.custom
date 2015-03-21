@@ -50,10 +50,11 @@ setopt extended_history
 setopt inc_append_history
 setopt share_history
 
-unsetopt aliases
+# unsetopt aliases
 bindkey -s "OM" ""
 unsetopt CORRECT                                                                # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
-setopt extended_glob
+setopt CLOBBER
+# setopt extended_glob
 setopt interactivecomments
 
 setopt hist_no_store
