@@ -61,6 +61,10 @@ setopt hist_no_store
 setopt hist_save_no_dups
 # }}}
 
+unalias run-help
+autoload run-help
+HELPDIR=/home/yu/.linuxbrew/share/zsh/help
+
 autoload -U up-line-or-beginning-search                                         # Put the cursor at the end of line when using Up / Down for command history
 zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search

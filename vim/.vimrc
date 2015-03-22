@@ -643,6 +643,7 @@
   " NeoBundle 'paulhybryant/vissort'                                              " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   " }}}
 
+  NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
   NeoBundle 'Shougo/vimproc.vim'                                                " Background process for unite.vim
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
