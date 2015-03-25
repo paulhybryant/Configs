@@ -29,17 +29,41 @@ function expand-or-complete-with-dots() {                                       
 # unalias ls
 # unalias ta
 
-# Set options
-setopt inc_append_history
-setopt share_history
+alias tl='tmux list-sessions'
+
+# Set options {{{
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+# setopt always_to_end
+# setopt auto_list
 # Do not complete alias before completion is finished
 # This would allow completion to work for aliases
 # e.g. alias tmux=tmux -2
 # setopt complete_aliases
+
 # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
-# setopt no_prompt_cr
+setopt no_prompt_cr
+
+setopt append_history
+setopt extended_history
+setopt inc_append_history
+setopt share_history
+
+# unsetopt aliases
 bindkey -s "OM" ""
 unsetopt CORRECT                                                                # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
+setopt CLOBBER
+# setopt extended_glob
+setopt interactivecomments
+
+setopt hist_no_store
+setopt hist_save_no_dups
+# }}}
+
+unalias run-help 2>/dev/null
+autoload run-help
+HELPDIR=/home/yu/.linuxbrew/share/zsh/help
 
 autoload -U up-line-or-beginning-search                                         # Put the cursor at the end of line when using Up / Down for command history
 zle -N up-line-or-beginning-search
