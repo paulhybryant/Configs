@@ -89,7 +89,7 @@
   let g:mapleader = ','
   let g:maplocalleader = ',,'
   let g:disabled_plugins = {
-        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation'
+        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation',
         \ 'bash-support.vim' : 'Conflicting key mapping <C-j> with tmux navigation'
         \ }
 
@@ -799,8 +799,8 @@
     nnoremap <leader>mcf :exec 'MultipleCursorsFind \<' . expand("<cword>") . '\>'<CR>
   endfunction
 
-  " NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
-  NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
+  NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
+  " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
   NeoBundle 'mileszs/ack.vim', {
         \ 'disabled' : !executable('ag') && !executable('ack') && !executable('ack-grep')
         \ }
