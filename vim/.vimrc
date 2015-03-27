@@ -175,7 +175,7 @@
   " function! s:numbers.hooks.on_source(bundle)
     " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
   " endfunction
-  " NeoBundle 'flazz/vim-colorschemes'                                            " Collection of vim colorschemes
+  NeoBundle 'flazz/vim-colorschemes'                                            " Collection of vim colorschemes
   " NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                           " Vim colorscheme github
   " NeoBundle 'itchyny/landscape.vim'                                             " Vim colorscheme landscape
   " NeoBundle 'tomasr/molokai'                                                    " Vim colorscheme molokai
@@ -423,79 +423,46 @@
     nnoremap <leader>H <Plug>(expand_region_shrink)
   endfunction
 
-  NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
-  NeoBundle 'paulhybryant/vim-textobj-path', {
-        \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Text object for a file system path
-  NeoBundle 'jceb/vim-textobj-uri', {
-        \ 'depends' : 'kana/vim-textobj-user'
-        \ }                                                                     " Text object for uri
-  " NeoBundle 'kana/vim-textobj-line', {
-        " \ 'depends' : 'kana/vim-textobj-user'
-        " \ }                                                                     " Text object for a line
-  " NeoBundle 'kana/vim-textobj-entire', {
-        " \ 'depends' : 'kana/vim-textobj-user'
-        " \ }                                                                     " Text object for the entire buffer
-  " NeoBundle 'Raimondi/vim_search_objects', {
-        " \ 'depends' : 'kana/vim-textobj-user'
-        " \ }                                                                     " Text object for a search pattern
-  " NeoBundle 'thinca/vim-textobj-between', {
-        " \ 'depends' : 'kana/vim-textobj-user'
-        " \ }                                                                     " Text object between a char
-  " NeoBundle 'thinca/vim-textobj-comment', {
-        " \ 'depends' : 'kana/vim-textobj-user'
-        " \ }                                                                     " Text object  for comments
-  " NeoBundle 'glts/vim-textobj-comment', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-comment')
-        " \ }                                                                     " Text object for comments
-  " NeoBundle 'Raimondi/VimLTextObjects', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('VimLTextObjects')
-        " \ }                                                                     " Text object for vimscript
-  " NeoBundle 'Julian/vim-textobj-brace', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-brace')
-        " \ }                                                                     " Text object between braces
-  " TODO: va' seems to select the space before the quote, need to be fixed.
+  " TODO: For vim-textobj-quotes, va' seems to select the space before the quote, need to be fixed.
   " Also, try to map vi' to viq etc
-  NeoBundle 'beloglazov/vim-textobj-quotes', {
-        \ 'depends' : 'kana/vim-textobj-user',
-        \ 'disabled' : PluginDisabled('vim-textobj-quotes')
-        \ }                                                                     " Text object between any type of quotes
-  " NeoBundle 'reedes/vim-textobj-quote', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-quote')
-        " \ }                                                                     " Text object between also typographic ('curly') quote characters
-  " NeoBundle 'kana/vim-textobj-datetime', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-datetime')
-        " \ }                                                                     " Text object for datetime format
-  " NeoBundle 'kana/vim-textobj-lastpat', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-lastpat')
-        " \ }                                                                     " Text object for last searched pattern
-  " NeoBundle 'kana/vim-textobj-function', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-function')
-        " \ }                                                                     " Text object for function
-  " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
-  " NeoBundle 'kana/vim-textobj-indent', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-indent')
-        " \ }                                                                     " Text object for indent
-  " NeoBundle 'kana/vim-textobj-fold', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-fold')
-        " \ }                                                                     " Text object for fold
-  " NeoBundle 'reedes/vim-textobj-sentence', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-setence')
-        " \ }                                                                     " Text object for a sentence
-  " NeoBundle 'rhysd/vim-textobj-clang', {
-        " \ 'depends' : 'kana/vim-textobj-user',
-        " \ 'disabled' : PluginDisabled('vim-textobj-clang')
-        " \ }                                                                     " Text object for c family languages
+
+  NeoBundle 'kana/vim-textobj-user'                                                                 " Allow defining text object by user
+  " NeoBundle 'Julian/vim-textobj-brace', { 'depends' : 'kana/vim-textobj-user' }                     " Text object between braces
+  " NeoBundle 'Julian/vim-textobj-variable-segment', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'Raimondi/VimLTextObjects', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for vimscript
+  " NeoBundle 'Raimondi/vim_search_objects', { 'depends' : 'kana/vim-textobj-user' }                  " Text object for a search pattern
+  " NeoBundle 'beloglazov/vim-textobj-punctuation', { 'depends' : 'kana/vim-textobj-user' }
+  NeoBundle 'beloglazov/vim-textobj-quotes', { 'depends' : 'kana/vim-textobj-user' }                " Text object between any type of quotes
+  " NeoBundle 'gilligan/textobj-gitgutter', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'glts/vim-textobj-comment', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for comments
+  " NeoBundle 'glts/vim-textobj-indblock', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'jceb/vim-textobj-uri', { 'depends' : 'kana/vim-textobj-user' }                         " Text object for uri
+  " NeoBundle 'kana/vim-textobj-datetime', { 'depends' : 'kana/vim-textobj-user' }                    " Text object for datetime format
+  " NeoBundle 'kana/vim-textobj-diff', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'kana/vim-textobj-entire', { 'depends' : 'kana/vim-textobj-user' }                       " Text object for the entire buffer
+  " NeoBundle 'kana/vim-textobj-fold', { 'depends' : 'kana/vim-textobj-user' }                        " Text object for fold
+  " NeoBundle 'kana/vim-textobj-function', { 'depends' : 'kana/vim-textobj-user' }                    " Text object for function
+  " NeoBundle 'kana/vim-textobj-indent', { 'depends' : 'kana/vim-textobj-user' }                      " Text object for indent
+  " NeoBundle 'kana/vim-textobj-jabraces', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'kana/vim-textobj-lastpat', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for last searched pattern
+  " NeoBundle 'kana/vim-textobj-line', { 'depends' : 'kana/vim-textobj-user' }                        " Text object for a line
+  " NeoBundle 'kana/vim-textobj-syntax', { 'depends' : 'kana/vim-textobj-user' }
+  NeoBundle 'killphi/vim-textobj-signify-hunk', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'lucapette/vim-textobj-underscore', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'mattn/vim-textobj-url', { 'depends' : 'kana/vim-textobj-user' }
+  NeoBundle 'paulhybryant/vim-textobj-path', { 'depends' : 'kana/vim-textobj-user' }                " Text object for a file system path
+  " NeoBundle 'reedes/vim-textobj-quote', { 'depends' : 'kana/vim-textobj-user' }                     " Text object between also typographic ('curly') quote characters
+  " NeoBundle 'reedes/vim-textobj-sentence', { 'depends' : 'kana/vim-textobj-user' }                  " Text object for a sentence
+  " NeoBundle 'rhysd/vim-textobj-clang', { 'depends' : 'kana/vim-textobj-user' }                      " Text object for c family languages
+  " NeoBundle 'rhysd/vim-textobj-continuous-line', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'saaguero/vim-textobj-pastedtext', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'saihoooooooo/vim-textobj-space', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'sgur/vim-textobj-parameter', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'thinca/vim-textobj-between', { 'depends' : 'kana/vim-textobj-user' }                   " Text object between a char
+  " NeoBundle 'thinca/vim-textobj-comment', { 'depends' : 'kana/vim-textobj-user' }                   " Text object  for comments
+  " NeoBundle 'whatyouhide/vim-textobj-erb', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'whatyouhide/vim-textobj-xmlattr', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'michaeljsmith/vim-indent-object'                                                       " Text object based on indent levels
   " NeoBundle 'gcmt/wildfire.vim'
   " }}}
 
@@ -1250,8 +1217,10 @@
 
   if &diff
     set nospell                                                                 " No spellcheck
+    colorscheme putty
   else
     set spell                                                                   " Spellcheck
+    colorscheme solarized
   endif
 
   if has ('x11') && (LINUX() || OSX())                                          " On Linux and mac use + register for copy-paste
@@ -1259,8 +1228,5 @@
   else                                                                          " On Windows, use * register for copy-paste
     set clipboard=unnamed
   endif
-
-  " colorscheme putty
-  colorscheme solarized
 
 " }}}
