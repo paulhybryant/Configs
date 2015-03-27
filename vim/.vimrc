@@ -920,7 +920,7 @@
         \ }                                                                     " Insert mode completion of words in adjacent panes
 
   NeoBundleLazy 'vim-scripts/bash-support.vim', {
-        \ 'autoload' : { 'filetypes' : ['sh'] }
+        \ 'autoload' : { 'filetypes' : ['sh'] },
         \ 'disabled' : PluginDisabled('bash-support.vim'),
         \ }                                                                     " Make vim an IDE for writing bash
   let s:bash_support = neobundle#get('bash-support.vim')
