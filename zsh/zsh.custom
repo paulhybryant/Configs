@@ -65,9 +65,9 @@ unalias run-help 2>/dev/null
 autoload run-help
 HELPDIR=/home/yu/.linuxbrew/share/zsh/help
 
-autoload -U up-line-or-beginning-search                                         # Put the cursor at the end of line when using Up / Down for command history
+autoload -Uz up-line-or-beginning-search                                         # Put the cursor at the end of line when using Up / Down for command history
 zle -N up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 zle -N expand-or-complete-with-dots
 
@@ -118,7 +118,7 @@ function config_linux() {
 [[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
 
 fpath=($HOME/.zsh-completions/src $fpath)
-autoload -U compinit
+autoload -Uz compinit
 compinit
 
 # }}}

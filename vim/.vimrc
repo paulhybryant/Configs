@@ -89,7 +89,8 @@
   let g:mapleader = ','
   let g:maplocalleader = ',,'
   let g:disabled_plugins = {
-        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation'
+        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation',
+        \ 'bash-support.vim' : 'Conflicting key mapping <C-j> with tmux navigation'
         \ }
 
   let g:google_config = resolve(expand("~/.vimrc.google"))
@@ -766,6 +767,7 @@
   endfunction
 
   NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
+  " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
   NeoBundle 'mileszs/ack.vim', {
         \ 'disabled' : !executable('ag') && !executable('ack') && !executable('ack-grep')
         \ }
@@ -885,7 +887,8 @@
         \ }                                                                     " Insert mode completion of words in adjacent panes
 
   NeoBundleLazy 'vim-scripts/bash-support.vim', {
-        \ 'autoload' : { 'filetypes' : ['sh'] }
+        \ 'autoload' : { 'filetypes' : ['sh'] },
+        \ 'disabled' : PluginDisabled('bash-support.vim'),
         \ }                                                                     " Make vim an IDE for writing bash
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
@@ -925,8 +928,8 @@
   " let g:Vim_MapLeader  = g:maplocalleader
   " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                     " Syntax checker for vimscript
   NeoBundleLazy 'vim-scripts/Vim-Support', {
-        \  'autoload' : { 'filetypes' : ['vim'] },
-        \  'disabled' : PluginDisabled('Vim-Support'),
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'disabled' : PluginDisabled('Vim-Support'),
         \ }                                                                     " Make vim an IDE for writing vimscript
   " }}}
 
