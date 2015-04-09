@@ -553,7 +553,7 @@
   endfunction
 
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
-  NeoBundle 'ujihisa/unite-colorscheme'
+  " NeoBundle 'ujihisa/unite-colorscheme'
   " NeoBundle 'ujihisa/unite-locate'
   " NeoBundle 'h1mesuke/unite-outline'
   " NeoBundle 'thinca/vim-unite-history'
