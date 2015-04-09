@@ -20,13 +20,13 @@
 
   " Initialization for undo etc {{{
     function! InitUndoSwapViews()
-      let l:prefix = $HOME . '/.vim'
+      let l:prefix = expand("$HOME/.vim")
       let l:dir_list = {
-        \   'backup': 'backupdir',
-        \   'views': 'viewdir',
-        \   'swap': 'directory',
-        \   'undo': 'undodir'
-        \ }
+            \ 'backup': 'backupdir',
+            \   'views': 'viewdir',
+            \   'swap': 'directory',
+            \   'undo': 'undodir'
+            \ }
       for [dirname, settingname] in items(l:dir_list)
         let l:directory = l:prefix . dirname . '/'
         if !isdirectory(l:directory)
