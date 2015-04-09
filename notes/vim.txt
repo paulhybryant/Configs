@@ -1,7 +1,7 @@
 ﻿vim
 
 # Compile vim for windows with lua and python
-• Install Tortoisehg to download vim source code from https://code.google.com/p/vim/
+• Get vim source code from github
 • Install mingw32 compiler set from tdm gcc at http://tdm-gcc.tdragon.net/download, this is also needed to compile vimproc on windows.
 • Download lua source code from http://www.lua.org/ftp/, check the version needed by vim. Vim uses lua51.dll at the time this is written, but lua 5.2 is also available for download.
 • Install python
