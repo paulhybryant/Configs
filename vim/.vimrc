@@ -904,7 +904,8 @@
         \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Insert mode completion of words in adjacent panes
 
-  NeoBundleLazy 'vim-scripts/bash-support.vim', {
+  " NeoBundleLazy 'vim-scripts/bash-support.vim', {
+  NeoBundle 'vim-scripts/bash-support.vim', {
         \ 'autoload' : { 'filetypes' : ['sh'] },
         \ 'disabled' : PluginDisabled('bash-support.vim'),
         \ }                                                                     " Make vim an IDE for writing bash
@@ -915,9 +916,9 @@
   endfunction
 
   " Vimscript scripting {{{
-  NeoBundleLazy 'kana/vim-vspec', {
-        \ 'autoload' : { 'filetypes' : ['vim'] }
-        \ }                                                                     " Testing framework for vimscript
+  " NeoBundleLazy 'kana/vim-vspec', {
+        " \ 'autoload' : { 'filetypes' : ['vim'] }
+        " \ }                                                                     " Testing framework for vimscript
   " NeoBundleLazy 'thinca/vim-themis', {
         " \ 'autoload' : { 'filetypes' : ['vim'] }
         " \ }                                                                     " Testing framework for vimscript
@@ -945,7 +946,8 @@
         \ }                                                                     " Syntax checker for vimscript
   " let g:Vim_MapLeader  = g:maplocalleader
   " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                     " Syntax checker for vimscript
-  NeoBundleLazy 'vim-scripts/Vim-Support', {
+  " NeoBundleLazy 'vim-scripts/Vim-Support', {
+  NeoBundle 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'disabled' : PluginDisabled('Vim-Support'),
         \ }                                                                     " Make vim an IDE for writing vimscript
