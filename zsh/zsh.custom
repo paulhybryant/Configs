@@ -119,7 +119,7 @@ function config_linux() {
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin
 [[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
 
-fpath=($HOME/.zsh-completions/src $fpath)
+fpath=($BREWHOME/share/zsh-completions $fpath)
 autoload -Uz compinit
 compinit
 
