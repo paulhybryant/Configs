@@ -613,10 +613,11 @@
 
   " Row-/column-wise editing {{{
   NeoBundle 'paulhybryant/Align'                                                " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
+  NeoBundle 'paulhybryant/dotfill', { 'depends' : ['Align'] }                   " Align the texts by repeatedly filling blanks with specified charater.
   NeoBundle 'jlemetay/permut'
   " NeoBundle 'godlygeek/tabular'
   " if filereadable(g:google_config)
-    " NeoBundle 'paulhybryant/foldcol', { 'depends' : ['Align'] }                     " Fold columns selected in visual block mode
+    " NeoBundle 'paulhybryant/foldcol', { 'depends' : ['Align'] }                   " Fold columns selected in visual block mode
   " else
     " NeoBundle 'paulhybryant/foldcol', { 'depends' : ['vim-maktaba', 'Align'] }    " Fold columns selected in visual block mode
   " endif
