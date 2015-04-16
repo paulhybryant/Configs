@@ -630,6 +630,7 @@
   " }}}
 
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
+  NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
   NeoBundle 'Shougo/vimproc.vim'                                                " Background process for unite.vim
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
@@ -699,9 +700,9 @@
   " NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
   " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
   " NeoBundle 'kana/vim-fakeclip'                                                 " Fake clipboard for vim
+  " NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
   NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
-  " NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
   NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
   let s:open_browser = neobundle#get('open-browser.vim')
   function! s:open_browser.hooks.on_source(bundle)
@@ -716,7 +717,6 @@
   " NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
   " NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
   " NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
-
   " NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
   " NeoBundle 'gorodinskiy/vim-coloresque'
   if filereadable(g:google_config)
@@ -810,12 +810,12 @@
       let g:unite_source_grep_recursive_opt=''
     endif
   endfunction
-  " NeoBundle 'jceb/vim-orgmode'
 
   if WINDOWS()
     NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   endif
 
+  " NeoBundle 'jceb/vim-orgmode'
   " NeoBundle 'tyru/winmove.vim'
   " NeoBundle 'tyru/wim'
   " NeoBundle 'tomtom/tcomment_vim', {
@@ -914,8 +914,6 @@
     let g:BASH_MapLeader  = g:maplocalleader
     let g:BASH_GlobalTemplateFile = expand("$HOME/.vim/bundle/bash-support.vim/bash-support/templates/Templates")
   endfunction
-
-  " Vimscript scripting {{{
   " NeoBundleLazy 'kana/vim-vspec', {
         " \ 'autoload' : { 'filetypes' : ['vim'] }
         " \ }                                                                     " Testing framework for vimscript
@@ -945,19 +943,17 @@
         \ 'depends' : 'ynkdir/vim-vimlparser'
         \ }                                                                     " Syntax checker for vimscript
   " let g:Vim_MapLeader  = g:maplocalleader
-  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                     " Syntax checker for vimscript
+  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                   " Syntax checker for vimscript
   NeoBundleLazy 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'disabled' : PluginDisabled('Vim-Support'),
         \ }                                                                     " Make vim an IDE for writing vimscript
-  " }}}
-
-  NeoBundleLazy 'tpope/vim-git', { 'autoload' : { 'filetypes' : ['gitcommit'] } } " Syntax highlight for git
-
+  NeoBundleLazy 'tpope/vim-git', {
+        \ 'autoload' : { 'filetypes' : ['gitcommit'] }
+        \ }                                                                     " Syntax highlight for git
   NeoBundleLazy 'google/vim-ft-vroom', {
         \ 'autoload' : { 'filetypes' : ['vroom'] }
         \ }                                                                     " Filetype plugin for vroom
-
   NeoBundleLazy 'plasticboy/vim-markdown', {
         \ 'autoload' : { 'filetypes' : ['markdown'] }
         \ }                                                                     " Yet another markdown syntax highlighting
@@ -970,7 +966,6 @@
   " NeoBundle 'suan/vim-instant-markdown'
         " \ 'autoload' : { 'filetypes' : ['markdown'] }
         " \ }
-
   NeoBundleLazy 'vim-jp/cpp-vim', { 'autoload' : { 'filetypes' : ['cpp'] } }
   NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', {
         \ 'autoload' : { 'filetypes' : ['cpp'] }
@@ -982,7 +977,6 @@
   function! s:semantic_highlight.hooks.on_source(bundle)
     let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
   endfunction
-
   NeoBundleLazy 'maksimr/vim-jsbeautify', {
         \ 'filetypes' : ['javascript']
         \ }                                                                     " Javascript formatting
@@ -1005,7 +999,6 @@
     " let g:javascript_conceal_static     = "•"
     " let g:javascript_conceal_super      = "Ω"
   endfunction
-
   " NeoBundleLazy 'elzr/vim-json', {
         " \ 'filetypes' : ['json']
         " \ }                                                                     " Json highlight in vim
