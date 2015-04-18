@@ -385,7 +385,7 @@ function link_tmux() {
   backup_and_link "$_tmuxconf_/.tmux-default.conf" "$HOME/.tmux-default.conf"
   backup_and_link "$_tmuxconf_/.tmux.conf" "$HOME/.tmux.conf"
   backup_and_link "$_tmuxconf_/.tmux.extra.conf" "$HOME/.tmux.extra.conf"
-  backup_and_link "$_tmuxconf_/mux-config" "$HOME/.local/bin/mux-config"
+  backup_and_link "$_tmuxconf_/muxcfg" "$HOME/.local/bin/muxcfg"
 
   mkdir -p "$HOME/.tmuxinator" > /dev/null 2>/dev/null
   backup_and_link "$_tmuxconf_/project.yml.template" "$HOME/.tmuxinator/project.yml.template"
