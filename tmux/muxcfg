@@ -5,7 +5,7 @@ source "$__SHLIB__/common.sh"
 
 function usage() {
   cat <<EOF
-Usage: mux-config [arguments] [command] [project]
+Usage: muxcfg [arguments] [command] [project]
 
 Arguments:
   -h or --help          Print the usage information
@@ -113,7 +113,7 @@ MUXDIR=$HOME/.tmuxinator
 
 # NOTE: This requires GNU getopt.  On Mac OS X and FreeBSD, you have to install
 # this separately. On Mac OS X, install it with "port install getopt".
-TEMP=`getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'mux-config' -- "$@"`
+TEMP=`getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@"`
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 # Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
