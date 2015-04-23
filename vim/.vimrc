@@ -161,6 +161,7 @@
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'mhinz/vim-signify'                                                 " Show the sign at changes from last git commit
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
+  NeoBundle 'google/vim-colorscheme-primary'                                    " Vim colorscheme google
   NeoBundle 'bling/vim-airline'
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
