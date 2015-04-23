@@ -96,30 +96,7 @@ if [ -e "$HOME/.tmuxinator.zsh" ]; then
   source ~/.tmuxinator.zsh
 fi
 
-# Platform specific settings
-function config_darwin() {
-  alias updatedb="sudo /usr/libexec/locate.updatedb"
-  if gls --color -d . &>/dev/null 2>&1
-  then
-    alias ls="gls --color=tty"
-  else
-    alias ls="ls -G"
-  fi
-}
-
-function config_linux() {
-  if gls --color -d . &>/dev/null 2>&1
-  then
-    alias ls="gls --color=tty"
-  else
-    alias ls="ls --color=tty"
-  fi
-}
-
-[[ "$OSTYPE" == "darwin"* ]] && config_darwin
-[[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
-
-fpath=($BREWHOME/share/zsh-completions $fpath)
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit
 
