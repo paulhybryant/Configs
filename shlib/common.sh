@@ -449,7 +449,7 @@ function link_zsh() {
   _zshcustom_="$HOME/.zshcustom"
   mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
-  backup_and_link "$_zshconf_/.zshrc" "$HOME/.zshrc"
+  backup_and_link "$_zshconf_/.zshrc.zprezto" "$HOME/.zshrc"
   backup_and_link "$_zshconf_/zsh.custom" "$_zshcustom_/custom.zsh"
   if [[ ! -h "$_zshcustom_/themes" ]]; then
     ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
