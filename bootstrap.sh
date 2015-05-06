@@ -16,6 +16,7 @@ if [[ $? -ne 0 ]]; then
   [[ "$OSTYPE" == "darwin"* ]] && brew tap iveney/mocha && brew install realpath
 fi
 
+echo $SCRIPT_PATH
 which pip > /dev/null 2>/dev/null
 if [[ $? -ne 0 ]]; then
   [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install python-pip && sudo pip install toposort
