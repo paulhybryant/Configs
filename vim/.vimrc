@@ -637,7 +637,6 @@
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
-  " NeoBundle 'aperezdc/vim-template'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }
   let s:ultisnips = neobundle#get('ultisnips')
@@ -645,9 +644,6 @@
     " Remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger="<tab>"
   endfunction
-  " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
-
-  " NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
   NeoBundle 'mhinz/vim-hugefile'                                                " Make edit / view of huge files better
   let s:vimhugefile = neobundle#get('vim-hugefile')
   function! s:vimhugefile.hooks.on_source(bundle)
@@ -655,28 +651,6 @@
     " call l:plugin.Flag('trigger_size', 50)
     let g:hugefile_trigger_size = 50                                            " In MB
   endfunction
-  " NeoBundle 'paulhybryant/vim-LargeFile', {
-        " \ 'disabled' : PluginDisabled('vim-LargeFile')
-        " \ }                                                                     " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
-  " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
-  " NeoBundle 'calebsmith/vim-lambdify'
-  " NeoBundle 'paulhybryant/AnsiEsc.vim'
-  " NeoBundle 'chrisbra/vim-diff-enhanced'                                        " Enhanced vimdiff
-
-  " NeoBundle 'tpope/vim-speeddating'
-  " NeoBundle 'chrisbra/NrrwRgn'
-  " NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
-  " NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
-  " NeoBundle 'paulhybryant/conque'                                               " Split window for shell command line
-  " NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
-  " let s:vimshell = neobundle#get('vimshell.vim')
-  " function! s:vimshell.hooks.on_source(bundle)
-    " let g:vimshell_popup_command = 'belowright split'
-    " let g:vimshell_popup_height = 20
-  " endfunction
-  " NeoBundle 'thinca/vim-quickrun'                                               " Execute whole/part of currently edited file
-  " NeoBundle 'danro/rename.vim'                                                  " Rename the underlying filename of the buffer
-  " NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
   NeoBundle 'xolox/vim-notes', {
         \ 'depends' : ['xolox/vim-misc']
         \ }                                                                     " Note taking with vim
@@ -687,21 +661,6 @@
     let g:notes_indexfile = '~/Notes/notes.idx'
     let g:notes_tagsindex = '~/Notes/notes.tags'
   endfunction
-  " NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
-  " NeoBundle 'Keithbsmiley/gist.vim'                                             " Use gist from vim
-
-  " NeoBundle 'Shougo/vinarise.vim', {
-        " \ 'recipe' : 'vinarise.vim',
-        " \ }                                                                     " Ultimate hex editing system with vim
-  " NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
-  " NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
-  " NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
-  " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
-  " NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
-  " NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
-  " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
-  " NeoBundle 'kana/vim-fakeclip'                                                 " Fake clipboard for vim
-  " NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
   NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
@@ -712,14 +671,6 @@
     nmap <leader>cs <Plug>(openbrowser-smart-search)
     vmap <leader>cs <Plug>(openbrowser-smart-search)
   endfunction
-  " NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
-  " NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
-  " NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
-  " NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
-  " NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
-  " NeoBundle 'gorodinskiy/vim-coloresque'
   if filereadable(g:google_config)
     NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
   else
@@ -777,9 +728,6 @@
     endif
   endfunction
 
-  " NeoBundle 'vim-jp/vital.vim'
-  " NeoBundle 'Shougo/eev.vim'                                                    " Evaluate vimscript one liner
-
   NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simutaneously
   let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
   function! s:vimmulticursors.hooks.on_source(bundle)
@@ -787,7 +735,6 @@
   endfunction
 
   NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
-  " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
   NeoBundle 'mileszs/ack.vim', {
         \ 'disabled' : !executable('ag') && !executable('ack') && !executable('ack-grep')
         \ }
@@ -815,6 +762,57 @@
   if WINDOWS()
     NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   endif
+
+  " Unused {{{
+  " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
+  " NeoBundle 'aperezdc/vim-template'
+  " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
+  " NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
+  " NeoBundle 'paulhybryant/vim-LargeFile', {
+        " \ 'disabled' : PluginDisabled('vim-LargeFile')
+        " \ }                                                                     " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
+  " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
+  " NeoBundle 'calebsmith/vim-lambdify'
+  " NeoBundle 'paulhybryant/AnsiEsc.vim'
+  " NeoBundle 'chrisbra/vim-diff-enhanced'                                        " Enhanced vimdiff
+  " NeoBundle 'tpope/vim-speeddating'
+  " NeoBundle 'chrisbra/NrrwRgn'
+  " NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
+  " NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
+  " NeoBundle 'paulhybryant/conque'                                               " Split window for shell command line
+  " NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
+  " let s:vimshell = neobundle#get('vimshell.vim')
+  " function! s:vimshell.hooks.on_source(bundle)
+    " let g:vimshell_popup_command = 'belowright split'
+    " let g:vimshell_popup_height = 20
+  " endfunction
+  " NeoBundle 'thinca/vim-quickrun'                                               " Execute whole/part of currently edited file
+  " NeoBundle 'danro/rename.vim'                                                  " Rename the underlying filename of the buffer
+  " NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
+  " NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
+  " NeoBundle 'Keithbsmiley/gist.vim'                                             " Use gist from vim
+  " NeoBundle 'Shougo/vinarise.vim', {
+        " \ 'recipe' : 'vinarise.vim',
+        " \ }                                                                     " Ultimate hex editing system with vim
+  " NeoBundle 'glts/vim-radical', { 'disabled' : PluginDisabled('vim-radical') }  " Show number under cursor in hex, octal, binary
+  " NeoBundle 'glts/vim-magnum', { 'disabled' : PluginDisabled('vim-magnum') }    " Big integer library for vim
+  " NeoBundle 'tpope/vim-eunuch'                                                  " Vim sugar for the UNIX shell commands that need it the most
+  " NeoBundle 'vim-scripts/scratch.vim'                                           " Creates a scratch buffer
+  " NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
+  " NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
+  " NeoBundle 'kana/vim-nickblock'                                                " Make visual block mode more useful
+  " NeoBundle 'kana/vim-fakeclip'                                                 " Fake clipboard for vim
+  " NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
+  " NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
+  " NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
+  " NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
+  " NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
+  " NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
+  " NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
+  " NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
+  " NeoBundle 'gorodinskiy/vim-coloresque'
+  " NeoBundle 'vim-jp/vital.vim'
+  " NeoBundle 'Shougo/eev.vim'                                                    " Evaluate vimscript one liner
 
   " NeoBundle 'jceb/vim-orgmode'
   " NeoBundle 'tyru/winmove.vim'
@@ -848,6 +846,7 @@
   " NeoBundle 'thinca/vim-localrc', { 'type' : 'svn', 'disabled' : PluginDisabled('vim-localrc') }          " Enable vim configuration file for each directory
   " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {'script_type' : 'plugin'}    " For ruby development
   " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
+  " }}}
 
   " Lazily load Filetype specific bundles {{{
   NeoBundleLazy 'chiphogg/vim-vtd', {
@@ -1015,9 +1014,7 @@
   " }}}
 
   call neobundle#end()
-
   NeoBundleCheck
-
   " if filereadable(expand("~/.vimrc.local"))
     " source $HOME/.vimrc.local
   " endif
