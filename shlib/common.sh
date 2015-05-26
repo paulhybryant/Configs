@@ -437,8 +437,8 @@ function link_zsh() {
   local _zshconf_="${1:-$HOME/Configs/zsh}"
   _zshconf_="${_zshconf_%/}"
 
-  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
+  if [[ ! -d "$HOME/.zprezto" ]]; then
+    git clone https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
   fi
 
   if [[ -d "$HOME/.zshcustom" ]]; then
@@ -450,7 +450,7 @@ function link_zsh() {
   mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
   backup_and_link "$_zshconf_/.zshrc.zprezto" "$HOME/.zshrc"
-  backup_and_link "$_zshconf_/zsh.custom" "$_zshcustom_/custom.zsh"
+  backup_and_link "$_zshconf_/zsh.custom" "$HOME/.zshrc.custom"
   if [[ ! -h "$_zshcustom_/themes" ]]; then
     ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
   fi
