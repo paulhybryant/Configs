@@ -234,6 +234,7 @@
       let g:ycm_server_keep_logfiles = 10                                       " keep log files
       let g:ycm_server_log_level = 'info'                                       " default info
       let g:ycm_server_use_vim_stdout = 0                                       " default 0 (logging to console)
+      let g:ycm_autoclose_preview_window_after_insertion = 1                    " Automatically close the preview window for completion
     endfunction
   endif
 
