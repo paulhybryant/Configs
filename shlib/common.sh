@@ -67,8 +67,8 @@ export XML_CATALOG_FILES="/usr/local/google/home/yuhuang/.linuxbrew/etc/xml/cata
 HISTCONTROL=ignoreboth:erasedups
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=50000
-HISTFILESIZE=20000
+# HISTSIZE=50000
+# HISTFILESIZE=20000
 
 # Allow pass Ctrl + C(Q) for terminator
 stty ixany

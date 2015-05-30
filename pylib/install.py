@@ -463,7 +463,7 @@ def main():
   if (bool(re.match("^linux", platform.platform(), re.IGNORECASE)) and
       bool(re.match("ubuntu|debian|deepin",
                     platform.linux_distribution()[0], re.IGNORECASE))):
-    BootstrapDebian()
+    BootstrapDebianWithLinuxbrew()
   elif bool(re.match("^darwin", platform.platform(), re.IGNORECASE)):
     BootstrapMac()
   else:

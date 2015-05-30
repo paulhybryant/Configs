@@ -17,10 +17,10 @@ if [[ $? -ne 0 ]]; then
 fi
 
 echo $SCRIPT_PATH
-which pip > /dev/null 2>/dev/null
+which git > /dev/null 2>/dev/null
 if [[ $? -ne 0 ]]; then
-  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install python-pip && sudo pip install toposort
-  [[ "$OSTYPE" == "darwin"* ]] && brew install pip
+  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install git && git clone https://github.com/Homebrew/linuxbrew.git $HOME/.linuxbrew
+  [[ "$OSTYPE" == "darwin"* ]] && echo "Install git first." && exit 1
 fi
 
 source "$SCRIPT_PATH/shlib/common.sh"
@@ -40,4 +40,4 @@ if [[ $? -ne 0 ]]; then
   echo "Need to add ssh identity."
 fi
 
-python "$SCRIPT_PATH/pylib/install.py"
+# python "$SCRIPT_PATH/pylib/install.py"
