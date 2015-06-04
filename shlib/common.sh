@@ -1,18 +1,25 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
+# This depends on the homebrew package coreutils, which provides the gnu
+# coreutils. All commands provided have a prefix 'g'. E.g. ls -> gls
+# TODO: Test existence of homebrew if it is a Mac
+[[ "$OSTYPE" == "darwin"* ]] && CMDPREFIX="g"
+
 # Inclusion guard {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-[[ "$OSTYPE" != "darwin"* ]] && __LIB_COMMON_NEW_VERSION__=$(date -r "$__LIB_COMMON__" +%s)
-[[ "$OSTYPE" == "darwin"* ]] && __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
+# [[ "$OSTYPE" != "darwin"* ]] && __LIB_COMMON_NEW_VERSION__=$(date -r "$__LIB_COMMON__" +%s)
+# [[ "$OSTYPE" == "darwin"* ]] && __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
+__LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
 [[ -n "$__LIB_COMMON_VERSION__" && "$__LIB_COMMON_VERSION__" -eq "$__LIB_COMMON_NEW_VERSION__" ]] && return
 
 __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
 
 if [[ $DEBUG == true ]]; then
-  [[ "$OSTYPE" != "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date --date=@$__LIB_COMMON_NEW_VERSION__)"
-  [[ "$OSTYPE" == "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
+  # [[ "$OSTYPE" != "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date --date=@$__LIB_COMMON_NEW_VERSION__)"
+  # [[ "$OSTYPE" == "darwin"* ]] && echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
+  echo "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
 fi
 RETVAL=
 REPLY=
@@ -79,8 +86,7 @@ stty start undef
 # Force control sequences such as <c-s> and <c-q> to vim
 stty -ixon > /dev/null 2>/dev/null
 
-[[ "$OSTYPE" != "darwin"* ]] && DIRCOLORS_CMD="dircolors"
-[[ "$OSTYPE" == "darwin"* ]] && DIRCOLORS_CMD="gdircolors"
+DIRCOLORS_CMD="${CMDPREFIX}dircolors"
 CONFIG_DIR=$(dirname "$__LIB_COMMON__")
 CONFIG_DIR=$(dirname "$CONFIG_DIR")
 GET_DIRCOLORS=$($DIRCOLORS_CMD "$CONFIG_DIR/third_party/dircolors-solarized/dircolors.256dark")
