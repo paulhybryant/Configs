@@ -105,6 +105,8 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^I" expand-or-complete-with-dots
 
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
+
 # Additional configurations to load {{{
 if [ -e "$HOME/.zshrc.local" ]; then
   source ~/.zshrc.local
@@ -115,8 +117,13 @@ if [ -e "$HOME/.tmuxinator.zsh" ]; then
   source ~/.tmuxinator.zsh
 fi
 
-fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
+autoload -Uz bashcompinit
+bashcompinit
 autoload -Uz compinit
 compinit
+
+if [ -e "/etc/bash_completion.d/g4d" ]; then
+  source /etc/bash_completion.d/g4d
+fi
 
 # }}}
