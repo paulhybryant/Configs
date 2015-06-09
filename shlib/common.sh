@@ -33,9 +33,9 @@ set -o vi
 function config_darwin() {
   export BREWHOME=/usr/local
   alias updatedb="sudo /usr/libexec/locate.updatedb"
-  if gls --color -d . &>/dev/null 2>&1
+  if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
   then
-    alias ls="gls --color=tty"
+    alias ls="${CMDPREFIX}ls --color=tty"
   else
     alias ls="ls -G"
   fi
@@ -43,12 +43,7 @@ function config_darwin() {
 
 function config_linux() {
   export BREWHOME=$HOME/.linuxbrew
-  if gls --color -d . &>/dev/null 2>&1
-  then
-    alias ls="gls --color=tty"
-  else
-    alias ls="ls --color=tty"
-  fi
+  alias ls="ls --color=tty"
 }
 
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin
