@@ -35,9 +35,4 @@ link_zsh "$SCRIPT_PATH/zsh"
 link_x11 "$SCRIPT_PATH/x11"
 link_ctags "$SCRIPT_PATH/ctags"
 
-ssh-add -L | grep "github"
-if [[ $? -ne 0 ]]; then
-  echo "Need to add ssh identity."
-fi
-
 # python "$SCRIPT_PATH/pylib/install.py"
