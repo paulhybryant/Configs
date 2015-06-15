@@ -107,6 +107,11 @@ alias tmux="TERM=screen-256color tmux -2"
 alias pfd="declare -f"
 alias rm="rm -v"
 alias nvim="NVIM=nvim nvim"
+# Usage:
+#   is_port_open 127.0.0.1 80
+#   is_port_open 127.0.0.1 80 90
+#   is_port_open 127.0.0.1 80-90
+alias is_port_open="nc -zv "
 
 # }}}
 
