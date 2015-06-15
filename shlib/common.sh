@@ -268,7 +268,7 @@ function la() {
 }
 
 function myssh() {
-  ssh -X "$@" -t "export SSH_OS=\"`uname`\"; zsh"
+  ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
 
 function histgrep() {
