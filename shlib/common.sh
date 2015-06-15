@@ -112,6 +112,8 @@ alias nvim="NVIM=nvim nvim"
 #   is_port_open 127.0.0.1 80 90
 #   is_port_open 127.0.0.1 80-90
 alias is_port_open="nc -zv "
+alias tl='tmux list-sessions'
+alias ts='tmux_start'
 
 # }}}
 
@@ -470,7 +472,9 @@ function link_x11() {
   local _x11conf_="${1:-$HOME/Configs/x11}"
   _x11conf_="${_x11conf_%/}"
 
-  backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
+  # backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
+  backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xsession"
+  backup_and_link "$_x11conf_/.xbindkeysrc" "$HOME/.xbindkeysrc"
 }
 
 function link_ctags() {

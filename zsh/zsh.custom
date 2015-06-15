@@ -29,8 +29,6 @@ function expand-or-complete-with-dots() {                                       
 # unalias ls
 # unalias ta
 
-alias tl='tmux list-sessions'
-
 # Set options {{{
 setopt auto_cd
 setopt auto_pushd

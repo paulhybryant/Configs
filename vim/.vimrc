@@ -1238,6 +1238,7 @@
   endif
 
   if has ('x11') && (LINUX() || OSX())                                          " On Linux and mac use + register for copy-paste
+    " Remember to install clipit in ubuntu
     set clipboard=unnamedplus
   else                                                                          " On Windows, use * register for copy-paste
     set clipboard=unnamed
