@@ -2,7 +2,6 @@ set NEWPROFILE="D:\Users\Yu"
 
 mklink %USERPROFILE%\.vimrc %~dp0%\vim\.vimrc
 mklink %USERPROFILE%\.gvimrc %~dp0%\vim\.gvimrc
-mklink %USERPROFILE%\.vimrc.local %~dp0%\vim\.vimrc.personal
 mklink %USERPROFILE%\.gitconfig %~dp0%\misc\.gitconfig-windows
 mklink /J %USERPROFILE%\Notes %~dp0%\notes
 mklink /J %USERPROFILE%\.ctagscnf %~dp0%\ctags

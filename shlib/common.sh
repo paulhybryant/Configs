@@ -381,10 +381,6 @@ function link_bash() {
   fi
 
   backup_and_link "$_bashconf_/.bashrc.custom" "$HOME/.bashrc.custom"
-
-  if [[ -f "$HOME/.personal" ]]; then
-    backup_and_link "$_bashconf_/.bashrc.personal" "$HOME/.bashrc.local"
-  fi
 }
 
 function link_misc() {
@@ -449,23 +445,20 @@ function link_zsh() {
     git clone https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
   fi
 
-  if [[ -d "$HOME/.zshcustom" ]]; then
-    echo "$HOME/.zshcustom exists! Nothing done."
-    return
-  fi
+  # if [[ -d "$HOME/.zshcustom" ]]; then
+    # echo "$HOME/.zshcustom exists! Nothing done."
+    # return
+  # fi
 
-  _zshcustom_="$HOME/.zshcustom"
-  mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
+  # _zshcustom_="$HOME/.zshcustom"
+  # mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
   backup_and_link "$_zshconf_/.zshrc.zprezto" "$HOME/.zshrc"
   backup_and_link "$_zshconf_/zsh.custom" "$HOME/.zshrc.custom"
-  if [[ ! -h "$_zshcustom_/themes" ]]; then
-    ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
-  fi
 
-  if [[ -f "$HOME/.personal" ]]; then
-    backup_and_link "$_zshconf_/zsh.personal" "$_zshcustom_/local.zsh"
-  fi
+  # if [[ ! -h "$_zshcustom_/themes" ]]; then
+    # ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
+  # fi
 }
 
 function link_x11() {
