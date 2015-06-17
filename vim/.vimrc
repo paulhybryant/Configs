@@ -899,9 +899,9 @@
   NeoBundleLazy 'tmux-plugins/vim-tmux', {
         \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Vim plugin for editing .tmux.conf
-  NeoBundleLazy 'zaiste/tmux.vim', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] }
-        \ }                                                                     " Tmux syntax highlight
+  " NeoBundleLazy 'zaiste/tmux.vim', {
+        " \ 'autoload' : { 'filetypes' : ['tmux'] }
+        " \ }                                                                     " Tmux syntax highlight
   NeoBundleLazy 'wellle/tmux-complete.vim', {
         \ 'autoload' : { 'filetypes' : ['tmux'] }
         \ }                                                                     " Insert mode completion of words in adjacent panes
