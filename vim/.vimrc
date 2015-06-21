@@ -138,15 +138,17 @@
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
 
-  NeoBundle 'google/vim-maktaba', {
-        \ 'disabled' : PluginDisabled('vim-maktaba'),
-        \ 'force' : 1,
-        \ }
-  NeoBundle 'google/vim-glaive', {
-        \ 'disabled' : PluginDisabled('vim-glaive'),
-        \ 'depends' : 'google/vim-maktaba',
-        \ 'force' : 1
-        \ }
+  if !filereadable(g:google_config)
+    NeoBundle 'google/vim-maktaba', {
+          \ 'disabled' : PluginDisabled('vim-maktaba'),
+          \ 'force' : 1,
+          \ }
+    NeoBundle 'google/vim-glaive', {
+          \ 'disabled' : PluginDisabled('vim-glaive'),
+          \ 'depends' : 'google/vim-maktaba',
+          \ 'force' : 1
+          \ }
+  endif
   call glaive#Install()
   " }}}
 
@@ -210,9 +212,7 @@
 
   " Coding assistance {{{
   if !WINDOWS()
-    NeoBundle 'Valloric/YouCompleteMe'
-    let s:ycm = neobundle#get('YouCompleteMe')
-    function! s:ycm.hooks.on_source(bundle)
+    silent function! ConfigureYcm()
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
       let g:Show_diagnostics_ui = 1                                             " default 1
       let g:ycm_always_populate_location_list = 1                               " default 0
@@ -236,6 +236,15 @@
       let g:ycm_autoclose_preview_window_after_insertion = 1                    " Automatically close the preview window for completion
       let g:ycm_autoclose_preview_window_after_completion = 1                   " Automatically close the preview window for completion
     endfunction
+    if !filereadable(g:google_config)
+      NeoBundle 'Valloric/YouCompleteMe'
+      let s:ycm = neobundle#get('YouCompleteMe')
+      function! s:ycm.hooks.on_source(bundle)
+        call ConfigureYcm()
+      endfunction
+    else
+      call ConfigureYcm()
+    endif
   endif
 
   NeoBundle 'kana/vim-operator-user'                                            " User defined operator
@@ -390,22 +399,24 @@
   " }}}
 
   " Auto-formatting {{{
-  NeoBundle 'google/vim-codefmt', {
-        \ 'disabled' : PluginDisabled('vim-codefmt'),
-        \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive']
-        \ } " Code formating plugin from google
-  let s:vimcodefmt = neobundle#get('vim-codefmt')
-  function! s:vimcodefmt.hooks.on_source(bundle)
-    Glaive codefmt plugin[mappings]
-  endfunction
+  if !filereadable(g:google_config)
+    NeoBundle 'google/vim-codefmt', {
+          \ 'disabled' : PluginDisabled('vim-codefmt'),
+          \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive']
+          \ } " Code formating plugin from google
+    let s:vimcodefmt = neobundle#get('vim-codefmt')
+    function! s:vimcodefmt.hooks.on_source(bundle)
+      Glaive codefmt plugin[mappings]
+    endfunction
+    NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
+    let s:betterws = neobundle#get('vim-better-whitespace')
+    function! s:betterws.hooks.on_source(bundle)
+      let g:strip_whitespace_on_save = 1
+      nnoremap <leader>sw :ToggleStripWhitespaceOnSave<CR>
+    endfunction
+    " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
+  endif
   " NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
-  NeoBundle 'ntpeters/vim-better-whitespace',                                   " Highlight all types of whitespaces
-  let s:betterws = neobundle#get('vim-better-whitespace')
-  function! s:betterws.hooks.on_source(bundle)
-    let g:strip_whitespace_on_save = 1
-    nnoremap <leader>sw :ToggleStripWhitespaceOnSave<CR>
-  endfunction
-  " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
   NeoBundle 'scrooloose/nerdcommenter'                                          " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
@@ -1239,7 +1250,13 @@
 
   if has ('x11') && (LINUX() || OSX())                                          " On Linux and mac use + register for copy-paste
     " Remember to install clipit in ubuntu
-    set clipboard=unnamedplus
+    if $SSH_OS == "Darwin"
+      set clipboard=unnamed
+      " vmap y y:let b:ycmd=printf("echo -n %s \| nc localhost 8377", getreg("*"))<CR>:call system(b:ycmd)<CR>
+      vmap y y:call myutils#YankToRemoteClipboard()<CR>
+    else
+      set clipboard=unnamedplus
+    endif
   else                                                                          " On Windows, use * register for copy-paste
     set clipboard=unnamed
   endif
