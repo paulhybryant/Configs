@@ -1254,6 +1254,8 @@
       set clipboard=unnamed
       " vmap y y:let b:ycmd=printf("echo -n %s \| nc localhost 8377", getreg("*"))<CR>:call system(b:ycmd)<CR>
       vmap y y:call myutils#YankToRemoteClipboard()<CR>
+    elseif $SSH_OS == "Linux"
+      set clipboard=unnamed
     else
       set clipboard=unnamedplus
     endif
