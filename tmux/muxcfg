@@ -70,9 +70,9 @@ function delete() {
     case $REPLY in
       [y]* )
         run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
-        run "cd $HOME/git5repo" "Chdir to $HOME/git5repo"
+        run "cd $GIT_REPO" "Chdir to $GIT_REPO"
         run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
-        run "rm -rf $HOME/git5/$_muxproj_" "Deleting directory $HOME/git5/$_muxproj_"
+        run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
         run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
         ;;
       * )
@@ -98,8 +98,8 @@ DRYRUN=false
 CONFIRM=true
 
 if [[ -e "$HOME/.google" ]]; then
-  GIT_WORKING_DIR_ROOT=$HOME/git5
-  GIT_REPO=$HOME/git5repo
+  GIT_WORKING_DIR_ROOT=$HOME/Projects
+  GIT_REPO=$HOME/Src
   GIT_NEW_WORKDIR_CMD="git5wrapper"
   START_CWD=$GIT_WORKING_DIR_ROOT/__MUXPROJ__/google3
 else

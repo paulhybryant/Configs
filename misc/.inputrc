@@ -1,5 +1,6 @@
 # .inputrc
 
+# zsh does not use readline. It uses its own zle.
 $if Bash
     # Search history back and forward using page-up and page-down
     # "\e[5": history-search-backward
@@ -54,4 +55,7 @@ $if Bash
     set input-meta on
     set output-meta on
     set convert-meta off
+
+    set editing-mode vi
+    set blink-matching-paren on
 $endif

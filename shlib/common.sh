@@ -392,6 +392,9 @@ function link_misc() {
   mkdir -p "$HOME/.config/terminator" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/terminator_config" "$HOME/.config/terminator/config"
 
+  mkdir -p "$HOME/.config/pip" > /dev/null 2>/dev/null
+  backup_and_link "$_miscfong_/pip.conf" "$HOME/.config/pip/pip.conf"
+
   mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/.inputrc" "$HOME/.inputrc"
   backup_and_link "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"

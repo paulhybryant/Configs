@@ -17,7 +17,7 @@ do
 done
 shift $(($OPTIND - 1))
 
-gvim_cmd=/usr/bin/gvim
+gvim_cmd="/usr/bin/env vim -g"
 serverlist=`$gvim_cmd --serverlist`
 serverlist=`echo $serverlist | tr '[:upper:]' '[:lower:]'`
 servername=$PWD
