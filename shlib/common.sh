@@ -5,6 +5,31 @@
 # TODO: Test existence of homebrew if it is a Mac
 [[ "$OSTYPE" == "darwin"* ]] && CMDPREFIX="g"
 
+# Platform specific settings
+function config_darwin() {
+  export BREWHOME=$HOME/.homebrew
+  alias updatedb="sudo /usr/libexec/locate.updatedb"
+  if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
+  then
+    alias ls="${CMDPREFIX}ls --color=tty"
+  else
+    alias ls="ls -G"
+  fi
+}
+
+function config_linux() {
+  export BREWHOME=$HOME/.linuxbrew
+  alias ls="ls --color=tty"
+}
+
+
+[[ "$OSTYPE" == "darwin"* ]] && config_darwin
+[[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
+
+export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
+export MANPATH="$BREWHOME/share/man:$MANPATH"
+export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+
 # Inclusion guard {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
@@ -29,29 +54,6 @@ REPLY=
 # Turn on vi mode by default.
 set -o vi
 
-# Platform specific settings
-function config_darwin() {
-  export BREWHOME=/usr/local
-  alias updatedb="sudo /usr/libexec/locate.updatedb"
-  if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
-  then
-    alias ls="${CMDPREFIX}ls --color=tty"
-  else
-    alias ls="ls -G"
-  fi
-}
-
-function config_linux() {
-  export BREWHOME=$HOME/.linuxbrew
-  alias ls="ls --color=tty"
-}
-
-[[ "$OSTYPE" == "darwin"* ]] && config_darwin
-[[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
-
-export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-export MANPATH="$BREWHOME/share/man:$MANPATH"
-export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
