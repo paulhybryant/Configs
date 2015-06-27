@@ -8,6 +8,7 @@
 # Platform specific settings
 function config_darwin() {
   export BREWHOME=$HOME/.homebrew
+  export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
   alias updatedb="sudo /usr/libexec/locate.updatedb"
   if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
   then
@@ -19,6 +20,7 @@ function config_darwin() {
 
 function config_linux() {
   export BREWHOME=$HOME/.linuxbrew
+  export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
   alias ls="ls --color=tty"
 }
 
@@ -26,7 +28,6 @@ function config_linux() {
 [[ "$OSTYPE" == "darwin"* ]] && config_darwin
 [[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
 
-export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
 export MANPATH="$BREWHOME/share/man:$MANPATH"
 export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 
