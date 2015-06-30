@@ -473,7 +473,7 @@ function link_x11() {
   _x11conf_="${_x11conf_%/}"
 
   # backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
-  backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xsession"
+  backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xsessionrc"
   backup_and_link "$_x11conf_/.xbindkeysrc" "$HOME/.xbindkeysrc"
 }
 

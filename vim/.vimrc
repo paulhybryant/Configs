@@ -117,8 +117,6 @@
     let g:disabled_plugins['vim-maktaba'] = b:reason
     let g:disabled_plugins['vim-glaive'] = b:reason
     let g:disabled_plugins['vim-codefmt'] = b:reason
-    let g:disabled_plugins['vim-better-whitespace'] = b:reason
-    " let g:disabled_plugins['vim-trailing-whitespace'] = b:reason
   endif
 
   " Plugin infrastructure {{{
