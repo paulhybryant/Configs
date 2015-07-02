@@ -9,10 +9,10 @@
 function config_darwin() {
   export BREWHOME=$HOME/.homebrew
   export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-  alias updatedb="sudo /usr/libexec/locate.updatedb"
+  alias updatedb="/usr/libexec/locate.updatedb"
   if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
   then
-    alias ls="${CMDPREFIX}ls --color=tty"
+    alias ls="${CMDPREFIX}ls"
   else
     alias ls="ls -G"
   fi
@@ -21,7 +21,6 @@ function config_darwin() {
 function config_linux() {
   export BREWHOME=$HOME/.linuxbrew
   export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-  alias ls="ls --color=tty"
 }
 
 
@@ -30,6 +29,7 @@ function config_linux() {
 
 export MANPATH="$BREWHOME/share/man:$MANPATH"
 export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 
 # Inclusion guard {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
@@ -65,7 +65,6 @@ export GREP_OPTIONS='--color=auto'
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
-export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -118,6 +117,7 @@ alias is_port_open="nc -zv "
 alias tl='tmux list-sessions'
 alias ts='tmux_start'
 alias grepc='grep -C 5 '
+alias ls="ls --color=tty"
 
 # }}}
 
