@@ -117,7 +117,7 @@ alias is_port_open="nc -zv "
 alias tl='tmux list-sessions'
 alias ts='tmux_start'
 alias grepc='grep -C 5 '
-alias ls="ls --color=tty"
+alias ls="${aliases[ls]} --color=tty"
 
 # }}}
 
