@@ -20,16 +20,23 @@ git clone https://github.com/Homebrew/${BREWVERSION} $BREWHOME
 export PATH=$BREWHOME/bin:$PATH
 
 brew install coreutils
-brew tap paulhybryant/myformulae
-brew install --HEAD paulhybryant/myformulae/powerline-shell
-brew install --HEAD paulhybryant/myformulae/zsh-completions
-brew tap homebrew/x11
-brew tap homebrew/dupes
-brew tap homebrew/completions
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
 current_script_path "$0" "SCRIPT_PATH"
 link_all "$SCRIPT_PATH"
+
+function brew_all() {
+  brew tap paulhybryant/myformulae
+  brew tap homebrew/x11
+  brew tap homebrew/dupes
+  brew tap homebrew/completions
+
+  brew install --HEAD paulhybryant/myformulae/powerline-shell
+  brew install --HEAD paulhybryant/myformulae/zsh-completions
+  brew install curl git ctags clipper the_silver_searcher ctags cmake vim brew-gem vimpager
+  brew gem install tmuxinator
+}
+brew_all
 
 # python "$SCRIPT_PATH/pylib/install.py"
