@@ -449,7 +449,15 @@ function link_zsh() {
   _zshconf_="${_zshconf_%/}"
 
   if [[ ! -d "$HOME/.zprezto" ]]; then
-    git clone https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    done
+    cat << EOF >> $HOME/.zshrc
+if [[ -e "$HOME/.zshrc.custom" ]]; then
+  source ~/.zshrc.custom
+fi
+EOF
   fi
 
   # if [[ -d "$HOME/.zshcustom" ]]; then

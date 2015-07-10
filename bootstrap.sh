@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # set -o nounset                  # Treat unset variables as an error.
 # set -o errexit                  # Exit script when run into the first error.
