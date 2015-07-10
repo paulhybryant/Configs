@@ -22,6 +22,9 @@ export PATH=$BREWHOME/bin:$PATH
 brew install coreutils
 brew tap paulhybryant/myformulae
 brew install --HEAD paulhybryant/myformulae/powerline-shell
+brew install --HEAD paulhybryant/myformulae/zsh-completions
+brew tap homebrew/x11
+brew tap homebrew/dupes
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
