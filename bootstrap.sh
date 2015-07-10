@@ -10,18 +10,14 @@
 # http://blog.ivansiu.com/blog/2014/05/01/os-x-get-full-path-of-file-using-realpath/
 
 SCRIPT_PATH=$(dirname "$0")
-which realpath > /dev/null 2>/dev/null
-if [[ $? -ne 0 ]]; then
-  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install realpath
-  [[ "$OSTYPE" == "darwin"* ]] && brew tap iveney/mocha && brew install realpath
-fi
+[[ "$OSTYPE" != "darwin"* ]] && BREWVERSION="linuxbrew"
+[[ "$OSTYPE" == "darwin"* ]] && BREWVERSION="homebrew"
+BREWHOME="$HOME/.${BREWVERSION}"
+mkdir -p "$BREWHOME"
+git clone https://github.com/Homebrew/${BREWVERSION} $BREWHOME
+export PATH=$BREWHOME/bin:$PATH
 
-echo $SCRIPT_PATH
-which git > /dev/null 2>/dev/null
-if [[ $? -ne 0 ]]; then
-  [[ "$OSTYPE" != "darwin"* ]] && sudo apt-get install git && git clone https://github.com/Homebrew/linuxbrew.git $HOME/.linuxbrew
-  [[ "$OSTYPE" == "darwin"* ]] && echo "Install git first." && exit 1
-fi
+brew install coreutils
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
