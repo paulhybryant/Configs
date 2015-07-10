@@ -424,6 +424,9 @@ function link_tmux() {
 
   mkdir -p "$HOME/.tmuxinator" > /dev/null 2>/dev/null
   backup_and_link "$_tmuxconf_/project.yml.template" "$HOME/.tmuxinator/project.yml.template"
+
+  mkdir -p "$HOME/.tmux"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 function link_utils() {

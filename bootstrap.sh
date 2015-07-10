@@ -25,6 +25,7 @@ brew install --HEAD paulhybryant/myformulae/powerline-shell
 brew install --HEAD paulhybryant/myformulae/zsh-completions
 brew tap homebrew/x11
 brew tap homebrew/dupes
+brew tap homebrew/completions
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
