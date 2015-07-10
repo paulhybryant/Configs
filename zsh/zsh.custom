@@ -33,6 +33,8 @@ function expand-or-complete-with-dots() {                                       
 setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
+# pass through '*' if globbing fails
+setopt nonomatch
 # setopt always_to_end
 # setopt auto_list
 # Do not complete alias before completion is finished
