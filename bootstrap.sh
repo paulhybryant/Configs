@@ -8,6 +8,8 @@
 # brew tap iveney/mocha
 # brew install realpath
 # http://blog.ivansiu.com/blog/2014/05/01/os-x-get-full-path-of-file-using-realpath/
+# or
+# brew install coreutils
 
 SCRIPT_PATH=$(dirname "$0")
 [[ "$OSTYPE" != "darwin"* ]] && BREWVERSION="linuxbrew"
