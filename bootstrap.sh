@@ -18,6 +18,8 @@ git clone https://github.com/Homebrew/${BREWVERSION} $BREWHOME
 export PATH=$BREWHOME/bin:$PATH
 
 brew install coreutils
+brew tap paulhybryant/myformulae
+brew install --HEAD paulhybryant/myformulae/powerline-shell
 
 source "$SCRIPT_PATH/shlib/common.sh"
 
