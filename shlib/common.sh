@@ -393,7 +393,7 @@ function link_misc() {
   local _miscfong_="$1"
   _miscfong_="${_miscfong_%/}"
 
-  backup_and_link "$PWD/notes" "$HOME/Notes"
+  backup_and_link "$_miscfong_/../notes" "$HOME/Notes"
 
   mkdir -p "$HOME/.config/terminator" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/terminator_config" "$HOME/.config/terminator/config"
@@ -502,6 +502,20 @@ function link_ctags() {
 
   backup_and_link "$_ctagsconf_" "$HOME/.ctagscnf"
 }
+
+function link_all() {
+  [[ "$#" == 1 ]] || return 1
+  local _scriptpath_="$1"
+  link_misc "$_scriptpath_/misc"
+  link_tmux "$_scriptpath_/tmux"
+  link_vim "$_scriptpath_/vim"
+  link_bash "$_scriptpath_/bash"
+  link_utils "$_scriptpath_/utils"
+  link_zsh "$_scriptpath_/zsh"
+  link_x11 "$_scriptpath_/x11"
+  link_ctags "$_scriptpath_/ctags"
+}
+
 
 # }}}
 

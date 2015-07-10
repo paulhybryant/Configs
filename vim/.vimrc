@@ -666,10 +666,10 @@
         \ }                                                                     " Note taking with vim
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
-    let g:notes_directories = ['~/Notes']
+    let g:notes_directories = ['~/.myconfigs/notes']
     let g:notes_suffix = '.txt'
-    let g:notes_indexfile = '~/Notes/notes.idx'
-    let g:notes_tagsindex = '~/Notes/notes.tags'
+    let g:notes_indexfile = '~/.myconfigs/notes.idx'
+    let g:notes_tagsindex = '~/.myconfigs/notes.tags'
   endfunction
   NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
