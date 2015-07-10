@@ -374,7 +374,8 @@ function git_branch_exist() {
 # Bootstrap util functions {{{
 
 function link_bash() {
-  local _bashconf_="${1:-$HOME/Configs/bash}"
+  [[ "$#" == 1 ]] || return 1
+  local _bashconf_="$1"
   _bashconf_="${_bashconf_%/}"
 
   [[ -z "$__BASH_CUSTOM__" ]] && echo "source $HOME/.bashrc.custom" >> "$HOME/.bashrc"
@@ -388,7 +389,8 @@ function link_bash() {
 }
 
 function link_misc() {
-  local _miscfong_="${1:-$HOME/Configs/misc}"
+  [[ "$#" == 1 ]] || return 1
+  local _miscfong_="$1"
   _miscfong_="${_miscfong_%/}"
 
   backup_and_link "$PWD/notes" "$HOME/Notes"
@@ -407,7 +409,8 @@ function link_misc() {
 }
 
 function link_tmux() {
-  local _tmuxconf_="${1:-$HOME/Configs/tmux}"
+  [[ "$#" == 1 ]] || return 1
+  local _tmuxconf_="$1"
   _tmuxconf_="${_tmuxconf_%/}"
 
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -430,7 +433,8 @@ function link_tmux() {
 }
 
 function link_utils() {
-  local _utilsconf_="${1:-$HOME/Configs/utils}"
+  [[ "$#" == 1 ]] || return 1
+  local _utilsconf_="$1"
   _utilsconf_="${_utilsconf_%/}"
 
   mkdir -p "$HOME/.local/bin" > /dev/null 2>/dev/null
@@ -439,7 +443,8 @@ function link_utils() {
 }
 
 function link_vim() {
-  local _vimconf_="${1:-$HOME/Configs/vim}"
+  [[ "$#" == 1 ]] || return 1
+  local _vimconf_="$1"
   _vimconf_="${_vimconf_%/}"
 
   backup_and_link "$_vimconf_/.gvim.sh" "$HOME/.gvim.sh"
@@ -448,7 +453,8 @@ function link_vim() {
 }
 
 function link_zsh() {
-  local _zshconf_="${1:-$HOME/Configs/zsh}"
+  [[ "$#" == 1 ]] || return 1
+  local _zshconf_="$1"
   _zshconf_="${_zshconf_%/}"
 
   if [[ ! -d "$HOME/.zprezto" ]]; then
@@ -480,7 +486,8 @@ EOF
 }
 
 function link_x11() {
-  local _x11conf_="${1:-$HOME/Configs/x11}"
+  [[ "$#" == 1 ]] || return 1
+  local _x11conf_="$1"
   _x11conf_="${_x11conf_%/}"
 
   # backup_and_link "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
@@ -489,7 +496,8 @@ function link_x11() {
 }
 
 function link_ctags() {
-  local _ctagsconf_="${1:-$HOME/Configs/ctags}"
+  [[ "$#" == 1 ]] || return 1
+  local _ctagsconf_="$1"
   _ctagsconf_="${_ctagsconf_%/}"
 
   backup_and_link "$_ctagsconf_" "$HOME/.ctagscnf"
