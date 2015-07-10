@@ -393,8 +393,6 @@ function link_misc() {
   local _miscfong_="$1"
   _miscfong_="${_miscfong_%/}"
 
-  backup_and_link "$_miscfong_/../notes" "$HOME/Notes"
-
   mkdir -p "$HOME/.config/terminator" > /dev/null 2>/dev/null
   backup_and_link "$_miscfong_/terminator_config" "$HOME/.config/terminator/config"
 
