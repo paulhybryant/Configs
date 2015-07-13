@@ -16,6 +16,7 @@ function config_darwin() {
   else
     alias ls="ls -G"
   fi
+  alias mktemp="${CMDPREFIX}mktemp"
 }
 
 function config_linux() {
@@ -291,8 +292,7 @@ function myssh() {
       ;;
   esac
 
-  mkfifo "$_ssh_info_"
-  cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null &
+  cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null
   ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
 
