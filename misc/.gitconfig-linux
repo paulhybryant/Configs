@@ -118,8 +118,5 @@
 [github]
   user = paulhybryant@gmail.com
 
-[credential]
-  helper = store
-
 [include]
   path = ~/.gitconfig.local
