@@ -279,7 +279,21 @@ function la() {
 }
 
 function myssh() {
-  ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
+  local _ssh_info_=$(mktemp)
+  case "$(uname -s)" in
+    Linux)
+      ;;
+    Darwin)
+      ;;
+    *)
+      echo 'Unsupported OS'
+      exit
+      ;;
+  esac
+
+  mkfifo "$_ssh_info_"
+  cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null &
+  ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
 
 function histgrep() {
