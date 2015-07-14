@@ -280,20 +280,21 @@ function la() {
 }
 
 function myssh() {
-  local _ssh_info_=$(mktemp)
-  case "$(uname -s)" in
-    Linux)
-      ;;
-    Darwin)
-      ;;
-    *)
-      echo 'Unsupported OS'
-      exit
-      ;;
-  esac
+  # local _ssh_info_=$(mktemp)
+  # case "$(uname -s)" in
+    # Linux)
+      # ;;
+    # Darwin)
+      # ;;
+    # *)
+      # echo 'Unsupported OS'
+      # exit
+      # ;;
+  # esac
 
-  cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null
-  ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
+  # cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null
+  # ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
+  ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
 
 function histgrep() {
@@ -418,6 +419,7 @@ function link_misc() {
   backup_and_link "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"
   backup_and_link "$_miscfong_/.gitignore" "$HOME/.gitignore"
   backup_and_link "$_miscfong_/git-new-workdir" "$HOME/.local/bin/git-new-workdir"
+  backup_and_link "$_miscfong_/assh.config" "$HOME/.ssh/config.advanced"
 }
 
 function link_tmux() {
