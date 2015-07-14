@@ -22,7 +22,6 @@ export PATH=$BREWHOME/bin:$PATH
 brew install coreutils
 
 source "$SCRIPT_PATH/shlib/common.sh"
-
 current_script_path "$0" "SCRIPT_PATH"
 link_all "$SCRIPT_PATH"
 
@@ -34,8 +33,11 @@ function brew_all() {
 
   brew install --HEAD paulhybryant/myformulae/powerline-shell
   brew install --HEAD paulhybryant/myformulae/zsh-completions
-  brew install curl git ctags clipper the_silver_searcher ctags cmake vim brew-gem vimpager
+  brew install brew-gem cmake ctags ctags curl git htop python python3 the_silver_searcher tmux vim vimpager zsh
   brew gem install tmuxinator
+  brew install vimdoc vroom
+
+  [[ "$OSTYPE" == "darwin"* ]] && brew install brew-cask clipper macvim
 }
 brew_all
 
