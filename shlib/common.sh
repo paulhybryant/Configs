@@ -101,7 +101,7 @@ eval "$GET_DIRCOLORS"
 alias tmux="TERM=screen-256color tmux -2"
 
 # Use vimpager to replace less, which is used to view man page
-# export PAGER=/usr/local/bin/vimpager
+export PAGER=vimpager
 # alias less=$PAGER
 # alias zless=$PAGER
 
@@ -247,6 +247,7 @@ function gnome-shell-exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
 
+unalias ll
 function ll() {
   ls -lh "$@"
   awk '/^-/ {
@@ -258,11 +259,12 @@ function ll() {
       split("B KB MB GB TB PB", type)
       for(i = 5; y < 1; i--)
         y = sum / (2^(10*i))
-      printf("Total (files only) %.1f %s, %d files.\n", y, type[i+2], filenum)
+      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
   }' <<< "$(ls -l $@)"
 }
 
+unalias la
 function la() {
   ls -alF "$@"
   awk '/^-/ {
@@ -274,9 +276,25 @@ function la() {
       split("B KB MB GB TB PB", type)
       for(i = 5; y < 1; i--)
         y = sum / (2^(10*i))
-      printf("Total (files only) %.1f %s, %d files.\n", y, type[i+2], filenum)
+      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
   }' <<< "$(ls -laF $@)"
+}
+
+function ldu() {
+  $1
+  awk '/^-/ {
+    sum += $5
+    ++filenum
+  }
+  END {
+    if (filenum > 0) {
+      split("B KB MB GB TB PB", type)
+      for(i = 5; y < 1; i--)
+        y = sum / (2^(10*i))
+      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
+    }
+  }' <<< "$($2 $@)"
 }
 
 function myssh() {
