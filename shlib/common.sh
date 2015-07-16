@@ -247,7 +247,7 @@ function gnome-shell-exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
 
-unalias ll
+unalias ll > /dev/null 2>&1
 function ll() {
   ls -lh "$@"
   awk '/^-/ {
@@ -264,7 +264,7 @@ function ll() {
   }' <<< "$(ls -l $@)"
 }
 
-unalias la
+unalias la > /dev/null 2>&1
 function la() {
   ls -alF "$@"
   awk '/^-/ {

@@ -24,11 +24,6 @@ function expand-or-complete-with-dots() {                                       
   zle redisplay
 }
 
-# unalias ll
-# unalias la
-# unalias ls
-# unalias ta
-
 # Set options {{{
 setopt auto_cd
 setopt auto_pushd
