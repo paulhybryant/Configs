@@ -143,13 +143,15 @@ function ta() {
     do
       local id=${pane_id_command%%:*}
       local cmd=${pane_id_command##*:}
+      \tmux send-keys -t "$1:$window.$id" C-z
+      sleep 0.1
+      \tmux send-keys -t "$1:$window.$id" ENTER
+      sleep 0.1
       if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
         # run "\\tmux send-keys -t \"$1:$window\" C-z"
-        \tmux send-keys -t "$1:$window" C-z
-        sleep 0.2
         # run "\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
         \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
-        sleep 0.2
+        sleep 0.1
         # run "\\tmux send-keys -t \"$1:$window.$id\" fg ENTER"
         \tmux send-keys -t "$1:$window.$id" fg ENTER
       else
