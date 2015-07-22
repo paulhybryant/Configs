@@ -693,9 +693,19 @@
     autocmd BufEnter * call myutils#SyncNTTree()
     inoremap <C-q> <ESC>:Bclose<cr>
     nnoremap <C-q> :Bclose<cr>
-    nnoremap <leader>gc :call myutils#EditCC()<CR>
-    nnoremap <leader>gh :call myutils#EditHeader()<CR>
-    nnoremap <leader>gt :call myutils#EditTest()<CR>
+    if filereadable(g:google_config)
+      for l:key in ['c', 'h', 't', 'b']
+        execute "nnoremap <leader>g" . l:key . " :call relatedfiles#selector#JumpToRelatedFile('" . l:key . "')<CR>"
+      endfor
+      " nnoremap <leader>gc :call relatedfiles#selector#JumpToRelatedFile('c')<CR>
+      " nnoremap <leader>gh :call relatedfiles#selector#JumpToRelatedFile('h')<CR>
+      " nnoremap <leader>gt :call relatedfiles#selector#JumpToRelatedFile('t')<CR>
+      " nnoremap <leader>gb :call relatedfiles#selector#JumpToRelatedFile('b')<CR>
+    else
+      nnoremap <leader>gc :call myutils#EditCC()<CR>
+      nnoremap <leader>gh :call myutils#EditHeader()<CR>
+      nnoremap <leader>gt :call myutils#EditTest()<CR>
+    endif
     nnoremap <leader>hh :call myutils#HexHighlight()<CR>
     nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
     nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>

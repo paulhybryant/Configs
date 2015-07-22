@@ -160,7 +160,7 @@ function ta() {
       fi
     done
   done
-  \tmux attach -t "$1"
+  \tmux attach -d -t "$1"
 }
 
 function tmux_start() {
