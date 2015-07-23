@@ -82,6 +82,7 @@
     endif
   " }}}
 
+  " Converts a file with MS-DOS line ending to UNIX line ending {{{
   function! Dos2unixFunction()
       let _s=@/
       let l = line(".")
@@ -97,7 +98,7 @@
       call cursor(l, c)
   endfun
   command! Dos2Unix keepjumps call Dos2unixFunction()
-  " au BufReadPost * keepjumps call Dos2unixFunction()
+  " }}}
 
 " }}}
 
@@ -641,9 +642,8 @@
   " }}}
 
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
-  NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
-  NeoBundle 'Shougo/vimproc.vim'                                                " Background process for unite.vim
+  NeoBundle 'Shougo/vimproc.vim'                                                " Enable background process and multi-threading
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
@@ -697,10 +697,6 @@
       for l:key in ['c', 'h', 't', 'b']
         execute "nnoremap <leader>g" . l:key . " :call relatedfiles#selector#JumpToRelatedFile('" . l:key . "')<CR>"
       endfor
-      " nnoremap <leader>gc :call relatedfiles#selector#JumpToRelatedFile('c')<CR>
-      " nnoremap <leader>gh :call relatedfiles#selector#JumpToRelatedFile('h')<CR>
-      " nnoremap <leader>gt :call relatedfiles#selector#JumpToRelatedFile('t')<CR>
-      " nnoremap <leader>gb :call relatedfiles#selector#JumpToRelatedFile('b')<CR>
     else
       nnoremap <leader>gc :call myutils#EditCC()<CR>
       nnoremap <leader>gh :call myutils#EditHeader()<CR>
@@ -729,7 +725,7 @@
     command! Fsql call myutils#FormatSql()
 
     " Display-altering option toggles
-    MapToggle <F1> spell
+    MapToggle <F2> spell
 
     if len($SSH_CLIENT) > 0
       if $SSH_OS == "Darwin"
@@ -1235,7 +1231,7 @@
   " set splitright                                                                " Create the split on the right when split vertically
   set t_Co=256                                                                  " Set number of colors supported by term
   set tabstop=2                                                                 " An indentation every two columns
-  set term=$TERM                                                                " Make arrow and other keys work
+  " set term=$TERM                                                                " Make arrow and other keys work
   set undofile                                                                  " Persists undo
   set undolevels=1000                                                           " Maximum number of changes that can be undone
   set undoreload=10000                                                          " Save the whole buffer for undo when reloading it

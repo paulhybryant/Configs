@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-source "$__SHLIB__/common.sh"
+source "$__CONFIGS__/shlib/common.sh"
 
 function usage() {
   cat <<EOF

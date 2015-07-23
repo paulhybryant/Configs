@@ -15,7 +15,7 @@ then
   usage "$0 <repository> <new_workdir> [<branch>]"
 fi
 
-. "$__SHLIB__/common.sh"
+source "$__CONFIGS__/shlib/common.sh"
 
 orig_git=$1
 new_workdir=$2
