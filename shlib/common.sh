@@ -1,37 +1,5 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
-# This depends on the homebrew package coreutils, which provides the gnu
-# coreutils. All commands provided have a prefix 'g'. E.g. ls -> gls
-# TODO: Test existence of homebrew if it is a Mac
-[[ "$OSTYPE" == "darwin"* ]] && CMDPREFIX="g"
-
-# Platform specific settings
-function config_darwin() {
-  export BREWHOME=$HOME/.homebrew
-  export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-  alias updatedb="/usr/libexec/locate.updatedb"
-  if ${CMDPREFIX}ls --color -d . &>/dev/null 2>&1
-  then
-    alias ls="${CMDPREFIX}ls"
-  else
-    alias ls="ls -G"
-  fi
-  alias mktemp="${CMDPREFIX}mktemp"
-}
-
-function config_linux() {
-  export BREWHOME=$HOME/.linuxbrew
-  export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-}
-
-
-[[ "$OSTYPE" == "darwin"* ]] && config_darwin
-[[ "$OSTYPE" == "linux-gnu"* ]] && config_linux
-
-export MANPATH="$BREWHOME/share/man:$MANPATH"
-export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
-
 # Inclusion guard {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
@@ -498,11 +466,6 @@ function link_zsh() {
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
-    cat << EOF >> $HOME/.zshrc
-if [[ -e "$HOME/.zshrc.custom" ]]; then
-  source ~/.zshrc.custom
-fi
-EOF
   fi
 
   # if [[ -d "$HOME/.zshcustom" ]]; then
@@ -513,8 +476,7 @@ EOF
   # _zshcustom_="$HOME/.zshcustom"
   # mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
-  backup_and_link "$_zshconf_/.zshrc.zprezto" "$HOME/.zshrc"
-  backup_and_link "$_zshconf_/zsh.custom" "$HOME/.zshrc.custom"
+  backup_and_link "$_zshconf_/.zshrc.common" "$HOME/.zshrc.common"
 
   # if [[ ! -h "$_zshcustom_/themes" ]]; then
     # ln -s "$_zshconf_/themes" "$_zshcustom_/themes"
