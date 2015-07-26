@@ -68,7 +68,7 @@ esac
 bindkey -s "OM" ""
 unsetopt CORRECT                                                                # Disable autocorrect guesses. Happens when typing a wrong command that may look like an existing one.
 setopt CLOBBER
-# setopt extended_glob
+setopt extended_glob
 setopt interactivecomments
 
 setopt hist_no_store
