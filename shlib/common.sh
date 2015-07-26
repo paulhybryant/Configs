@@ -496,11 +496,6 @@ function link_zsh() {
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
-    cat << EOF >> $HOME/.zshrc
-if [[ -e "$HOME/.zshrc.custom" ]]; then
-  source ~/.zshrc.custom
-fi
-EOF
   fi
 
   # if [[ -d "$HOME/.zshcustom" ]]; then
@@ -511,8 +506,7 @@ EOF
   # _zshcustom_="$HOME/.zshcustom"
   # mkdir -p "$_zshcustom_" > /dev/null 2>/dev/null
 
-  backup_and_link "$_zshconf_/.zshrc.zprezto" "$HOME/.zshrc"
-  backup_and_link "$_zshconf_/zsh.custom" "$HOME/.zshrc.custom"
+  backup_and_link "$_zshconf_/.zshrc.common" "$HOME/.zshrc.common"
 
   # if [[ ! -h "$_zshcustom_/themes" ]]; then
     # ln -s "$_zshconf_/themes" "$_zshcustom_/themes"

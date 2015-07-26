@@ -103,9 +103,6 @@ bindkey "^I" expand-or-complete-with-dots
 fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
 
 # Additional configurations to load {{{
-if [ -e "$HOME/.zshrc.local" ]; then
-  source ~/.zshrc.local
-fi
 
 # Tmuxinator
 if [ -e "$HOME/.tmuxinator.zsh" ]; then
@@ -117,6 +114,7 @@ bashcompinit
 autoload -Uz compinit
 compinit
 
+# g4
 if [ -e "/etc/bash_completion.d/g4d" ]; then
   source /etc/bash_completion.d/g4d
 fi
