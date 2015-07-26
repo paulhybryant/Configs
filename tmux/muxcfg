@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-set -e
+# set -e
 source "$__CONFIGS__/shlib/common.sh"
 
 function usage() {
@@ -50,7 +50,7 @@ function start() {
     confirm "$_muxconfig_ exists, overwrite (y/n)? [n] "
     case $REPLY in
       [y]* )
-        echo "$_muxconfig_ will be overwritten."
+        echo "\n$_muxconfig_ will be overwritten."
         mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
         ;;
       * )

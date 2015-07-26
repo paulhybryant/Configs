@@ -421,9 +421,11 @@
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDSpaceDelims = 1
     let g:NERDCustomDelimiters = {}
-    let g:NERDCreateDefaultMappings = 0
-    nmap <leader>ci <Plug>NERDCommenterInvert
-    xmap <leader>ci <Plug>NERDCommenterInvert
+    let g:NERDCreateDefaultMappings = 1
+    " nmap <leader>ci <Plug>NERDCommenterInvert
+    " xmap <leader>ci <Plug>NERDCommenterInvert
+    " nmap <leader>cc <Plug>NERDCommenterComment
+    " xmap <leader>cc <Plug>NERDCommenterComment
   endfunction
   " }}}
 

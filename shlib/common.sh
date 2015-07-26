@@ -368,7 +368,7 @@ function run() {
       echo "$_ts_ $_cmd_" >> $LOGCMDFILE
     fi
     set -o noglob
-    $_cmd_
+    eval $_cmd_
     set +o noglob
   fi
 }
@@ -384,7 +384,9 @@ function exit_if_not_exist() {
 function confirm() {
   local _question_="$1"
   if [[ $CONFIRM == true ]]; then
-    read -p "$_question_"
+    # bash version:
+    # read -p "$_question_"
+    read -q "REPLY?$_question_"
   else
     REPLY="y"
   fi
