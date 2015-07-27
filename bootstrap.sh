@@ -33,7 +33,9 @@ function brew_all() {
 
   brew install --HEAD paulhybryant/myformulae/powerline-shell
   brew install --HEAD paulhybryant/myformulae/zsh-completions
-  brew install brew-gem cmake ctags ctags curl git htop python python3 the_silver_searcher tmux vim vimpager zsh
+  brew install --with-gssapi --with-libssh2 --with-rtmpdump curl
+  brew install --disable-nls --override-system-vi --with-client-server --with-lua --with-luajit --with-gui vim
+  brew install brew-gem cmake ctags git htop python python3 the_silver_searcher tmux vimpager zsh
   brew gem install tmuxinator
   brew install vimdoc vroom
 
