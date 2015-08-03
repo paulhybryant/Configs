@@ -69,7 +69,7 @@ eval "$GET_DIRCOLORS"
 alias tmux="TERM=screen-256color tmux -2"
 
 # Use vimpager to replace less, which is used to view man page
-export PAGER=vimpager
+# export PAGER=vimpager
 # alias less=$PAGER
 # alias zless=$PAGER
 

@@ -419,9 +419,10 @@
   NeoBundle 'scrooloose/nerdcommenter'                                          " Add comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
-    let g:NERDSpaceDelims = 1
-    let g:NERDCustomDelimiters = {}
     let g:NERDCreateDefaultMappings = 1
+    let g:NERDCustomDelimiters = {}
+    let g:NERDSpaceDelims = 1
+    let g:NERDUsePlaceHolders = 0
     " nmap <leader>ci <Plug>NERDCommenterInvert
     " xmap <leader>ci <Plug>NERDCommenterInvert
     " nmap <leader>cc <Plug>NERDCommenterComment
@@ -594,6 +595,13 @@
     let g:NERDTreeShowHidden=1
     let g:nerdtree_tabs_open_on_gui_startup=0
     noremap <C-e> :NERDTreeToggle %<CR>
+  endfunction
+
+  NeoBundle 'jeetsukumaran/vim-buffergator'
+  let s:buffergator = neobundle#get('vim-buffergator')
+  function! s:buffergator.hooks.on_source(bundle)
+    let g:buffergator_suppress_keymaps=1
+    noremap <leader>bf :BuffergatorOpen<CR>
   endfunction
 
   " NeoBundle 'tpope/vim-vinegar', { 'disabled' : PluginDisabled('vim-vinegar') } " NERDTree enhancement
@@ -1259,7 +1267,7 @@
     if $SSH_OS == "Darwin"
       set clipboard=unnamed
       " vmap y y:let b:ycmd=printf("echo -n %s \| nc localhost 8377", getreg("*"))<CR>:call system(b:ycmd)<CR>
-      vmap y y:call myutils#YankToRemoteClipboard()<CR>
+      vmap Y y:call myutils#YankToRemoteClipboard()<CR>
     elseif $SSH_OS == "Linux"
       set clipboard=unnamed
     else
