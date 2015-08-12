@@ -161,7 +161,11 @@
   " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'mhinz/vim-signify'                                                 " Show the sign at changes from last git commit
+  let g:signify_vcs_list=['git']
+  let g:signify_line_highlight=1
+  let g:signify_sign_show_count=1
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
+  let g:solarized_diffmode="high"
   NeoBundle 'bling/vim-airline'
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
