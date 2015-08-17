@@ -160,10 +160,18 @@
 
   " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
-  NeoBundle 'mhinz/vim-signify'                                                 " Show the sign at changes from last git commit
-  let g:signify_vcs_list=['git']
-  let g:signify_line_highlight=1
-  let g:signify_sign_show_count=1
+  NeoBundle 'paulhybryant/vim-signify'                                          " Show the sign at changes from last git commit
+  let s:signify = neobundle#get('vim-signify')
+  function! s:signify.hooks.on_source(bundle)
+    let g:signify_vcs_list=['git']
+    " let g:signify_line_highlight=1
+    let g:signify_sign_show_count=1
+    nmap <leader>gj <plug>(signify-next-hunk)
+    nmap <leader>gk <plug>(signify-prev-hunk)
+  endfunction
+  NeoBundle 'paulhybryant/vim-diff-indicator', {
+        \ 'depends' : 'paulhybryant/vim-signify'
+        \ }                                                                     " Diff indicator based on vim-signify
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let g:solarized_diffmode="high"
   NeoBundle 'bling/vim-airline'
@@ -600,6 +608,7 @@
     let g:nerdtree_tabs_open_on_gui_startup=0
     noremap <C-e> :NERDTreeToggle %<CR>
   endfunction
+  NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 
   NeoBundle 'jeetsukumaran/vim-buffergator'
   let s:buffergator = neobundle#get('vim-buffergator')
@@ -685,7 +694,7 @@
     let g:notes_indexfile = '~/.myconfigs/notes.idx'
     let g:notes_tagsindex = '~/.myconfigs/notes.tags'
   endfunction
-  NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
+  " NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
   let s:open_browser = neobundle#get('open-browser.vim')
@@ -1192,7 +1201,7 @@
     autocmd BufRead BUILD,*.log setlocal nospell
     autocmd FileType conf setlocal nospell
     autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal sts=2 | set ft=vim | set foldmethod=marker
-    autocmd VimEnter * if expand('%') == "" | exec "ScratchOpen"
+    " autocmd VimEnter * if expand('%') == "" | exec "ScratchOpen"
     autocmd BufRead *.json setlocal filetype=json
   augroup END
 
@@ -1242,7 +1251,7 @@
   set smartcase                                                                 " Case sensitive when uppercase present
   set softtabstop=2                                                             " Let backspace delete indent
   " set splitbelow                                                                " Create the split at the bottom when split horizontally
-  " set splitright                                                                " Create the split on the right when split vertically
+  set splitright                                                                " Create the split on the right when split vertically
   set t_Co=256                                                                  " Set number of colors supported by term
   set tabstop=2                                                                 " An indentation every two columns
   " set term=$TERM                                                                " Make arrow and other keys work
