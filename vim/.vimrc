@@ -160,7 +160,9 @@
 
   " Plugins that change vim UI {{{
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
-  NeoBundle 'paulhybryant/vim-signify'                                          " Show the sign at changes from last git commit
+  NeoBundle 'paulhybryant/vim-signify', {
+        \ 'type__protocol' : 'ssh'
+        \ }                                                                     " Show the sign at changes from last git commit
   let s:signify = neobundle#get('vim-signify')
   function! s:signify.hooks.on_source(bundle)
     let g:signify_vcs_list=['git']
@@ -169,9 +171,26 @@
     nmap <leader>gj <plug>(signify-next-hunk)
     nmap <leader>gk <plug>(signify-prev-hunk)
   endfunction
-  NeoBundle 'paulhybryant/vim-diff-indicator', {
-        \ 'depends' : 'paulhybryant/vim-signify'
-        \ }                                                                     " Diff indicator based on vim-signify
+  if filereadable(g:google_config)
+    NeoBundle 'paulhybryant/vim-diff-indicator', {
+          \ 'depends' : ['paulhybryant/vim-signify'],
+          \ 'type__protocol' : 'ssh'
+          \ }                                                                     " Diff indicator based on vim-signify
+  else
+    NeoBundle 'paulhybryant/vim-diff-indicator', {
+          \ 'depends' : [
+          \   'paulhybryant/vim-signify',
+          \   'google/vim-maktaba',
+          \   'google/vim-glaive'
+          \ ],
+          \ 'type__protocol' : 'ssh'
+          \ }                                                                    " Diff indicator based on vim-signify
+  endif
+  let s:indicator = neobundle#get('vim-diff-indicator')
+  function! s:indicator.hooks.on_source(bundle)
+    Glaive vim-diff-indicator plugin[mappings]
+  endfunction
+
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let g:solarized_diffmode="high"
   NeoBundle 'bling/vim-airline'
@@ -192,7 +211,9 @@
   " NeoBundle 'MattesGroeger/vim-bookmarks'
   " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
   " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  " NeoBundle 'paulhybryant/tmuxline.vim'                                       " Change tmux theme to be consistent with vim statusline
+  " NeoBundle 'paulhybryant/tmuxline.vim', {
+        " \ 'type__protocol' : 'ssh'
+        " \ }                                                                     " Change tmux theme to be consistent with vim statusline
   " NeoBundle 'edkolev/promptline.vim'
   " let g:tmuxline_theme = 'airline'
   " let g:tmuxline_preset = 'tmux'
@@ -495,7 +516,10 @@
   NeoBundle 'killphi/vim-textobj-signify-hunk', { 'depends' : 'kana/vim-textobj-user' }
   " NeoBundle 'lucapette/vim-textobj-underscore', { 'depends' : 'kana/vim-textobj-user' }
   " NeoBundle 'mattn/vim-textobj-url', { 'depends' : 'kana/vim-textobj-user' }
-  NeoBundle 'paulhybryant/vim-textobj-path', { 'depends' : 'kana/vim-textobj-user' }                " Text object for a file system path
+  NeoBundle 'paulhybryant/vim-textobj-path', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ 'type__protocol' : 'ssh'
+        \ }                                                                                         " Text object for a file system path
   " NeoBundle 'reedes/vim-textobj-quote', { 'depends' : 'kana/vim-textobj-user' }                     " Text object between also typographic ('curly') quote characters
   " NeoBundle 'reedes/vim-textobj-sentence', { 'depends' : 'kana/vim-textobj-user' }                  " Text object for a sentence
   " NeoBundle 'rhysd/vim-textobj-clang', { 'depends' : 'kana/vim-textobj-user' }                      " Text object for c family languages
@@ -542,8 +566,12 @@
     " autocmd Syntax * RainbowParenthesesLoadBraces
   " endfunction
 
-  " NeoBundle 'paulhybryant/hilinks'                                              " Show highlight group the item under corsor is linked to
-  " NeoBundle 'paulhybryant/mark'                                                 " Highlight multiple patterns with different color (Host latest version 2.8.5)
+  " NeoBundle 'paulhybryant/hilinks', {
+        " \ 'type__protocol' : 'ssh'
+        " \ }                                                                     " Show highlight group the item under corsor is linked to
+  " NeoBundle 'paulhybryant/mark', {
+        " \ 'type__protocol' : 'ssh'
+        " \ }                                                                     " Highlight multiple patterns with different color (Host latest version 2.8.5)
   " let s:mark = neobundle#get('mark')
   " function! s:mark.hooks.on_source(bundle)
     " nnoremap <leader>mc :MarkClear<CR>
@@ -647,21 +675,32 @@
   " }}}
 
   " Row-/column-wise editing {{{
-  NeoBundle 'paulhybryant/Align'                                                " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
-  NeoBundle 'paulhybryant/dotfill', { 'depends' : ['Align'] }                   " Align the texts by repeatedly filling blanks with specified charater.
+  NeoBundle 'paulhybryant/Align', { 'type__protocol' : 'ssh' }                  " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
+  NeoBundle 'paulhybryant/dotfill', {
+        \ 'depends' : ['Align'],
+        \ 'type__protocol' : 'ssh'
+        \ }                                                                     " Align the texts by repeatedly filling blanks with specified charater.
   NeoBundle 'jlemetay/permut'
   " NeoBundle 'godlygeek/tabular'
   " if filereadable(g:google_config)
-    " NeoBundle 'paulhybryant/foldcol', { 'depends' : ['Align'] }                   " Fold columns selected in visual block mode
+    " NeoBundle 'paulhybryant/foldcol', {
+          " \ 'depends' : ['Align'],
+          " \ 'type__protocol' : 'ssh'
+          " \ }                                                                     " Fold columns selected in visual block mode
   " else
-    " NeoBundle 'paulhybryant/foldcol', { 'depends' : ['vim-maktaba', 'Align'] }    " Fold columns selected in visual block mode
+    " NeoBundle 'paulhybryant/foldcol', {
+          " \ 'depends' : ['vim-maktaba', 'Align'],
+          " \ 'type__protocol' : 'ssh'
+          " \ }                                                                     " Fold columns selected in visual block mode
   " endif
   " let s:foldcol = neobundle#get('foldcol')
   " function! s:foldcol.hooks.on_source(bundle)
     " Glaive foldcol plugin[mappings]
   " endfunction
   " NeoBundle 'junegunn/vim-easy-align'
-  " NeoBundle 'paulhybryant/vissort'                                              " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
+  " NeoBundle 'paulhybryant/vissort', {
+        " \ 'type__protocol' : 'ssh'
+        " \ }                                                                     " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   " }}}
 
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
@@ -669,7 +708,9 @@
   NeoBundle 'Shougo/vimproc.vim'                                                " Enable background process and multi-threading
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode when pasting in insert mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap files and saved file
-  NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
+  NeoBundle 'paulhybryant/file-line', {
+        \ 'type__protocol' : 'ssh'
+        \ }                                                                     " Open files and go to specific line and column (original user not active)
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }
   let s:ultisnips = neobundle#get('ultisnips')
@@ -694,7 +735,9 @@
     let g:notes_indexfile = '~/.myconfigs/notes.idx'
     let g:notes_tagsindex = '~/.myconfigs/notes.tags'
   endfunction
-  " NeoBundle 'paulhybryant/vim-scratch'                                          " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
+  " NeoBundle 'paulhybryant/vim-scratch', {
+        " \ 'type__protocol' : 'ssh'
+        " \ }                                                                     " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
   NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   NeoBundle 'tyru/open-browser.vim'                                             " Open browser and search from within vim
   let s:open_browser = neobundle#get('open-browser.vim')
@@ -705,9 +748,12 @@
     vmap <leader>cs <Plug>(openbrowser-smart-search)
   endfunction
   if filereadable(g:google_config)
-    NeoBundle 'paulhybryant/vim-custom'                                           " My vim customization (utility functions, syntax etc)
+    NeoBundle 'paulhybryant/vim-custom', { 'type__protocol' : 'ssh' }             " My vim customization (utility functions, syntax etc)
   else
-    NeoBundle 'paulhybryant/vim-custom', { 'depends' : 'vim-maktaba' }            " My vim customization (utility functions, syntax etc)
+    NeoBundle 'paulhybryant/vim-custom', {
+          \ 'depends' : 'vim-maktaba',
+          \ 'type__protocol' : 'ssh'
+          \ }                                                                     " My vim customization (utility functions, syntax etc)
   endif
   let s:vimcustom = neobundle#get('vim-custom')
   function! s:vimcustom.hooks.on_source(bundle)
@@ -902,7 +948,8 @@
   endfunction
 
   NeoBundleLazy 'paulhybryant/SQLUtilities', {
-        \ 'autoload' : { 'filetypes' : ['sql'] }
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'type__protocol' : 'ssh'
         \ }                                                                     " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
@@ -970,7 +1017,8 @@
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
   NeoBundleLazy 'paulhybryant/Decho.vim', {
-        \ 'autoload' : { 'filetypes' : ['vim'] }
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'type__protocol' : 'ssh'
         \ }                                                                     " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
   let s:decho = neobundle#get('Decho.vim')
   function! s:decho.hooks.on_source(bundle)
