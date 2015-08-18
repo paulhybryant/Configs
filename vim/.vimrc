@@ -409,7 +409,7 @@
           " \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
           " \ }
   " endfunction
-  NeoBundle 'sjl/spl.vim'                                                    " Vim three way merge tool
+  NeoBundle 'sjl/splice.vim'                                                    " Vim three way merge tool
   " NeoBundle 'tpope/vim-fugitive', { 'disabled' : !executable('git') }           " Commands for working with git
   " let s:fugitive = neobundle#get('vim-fugitive')
   " function! s:fugitive.hooks.on_source(bundle)
