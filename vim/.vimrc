@@ -6,18 +6,6 @@
   set encoding=utf-8                                                            " Set text encoding default to utf-8
   scriptencoding utf-8                                                          " Character encoding used in this script
 
-  " Identify platform {{{
-    silent function! OSX()
-      return has('macunix')
-    endfunction
-    silent function! LINUX()
-      return has('unix') && !has('macunix') && !has('win32unix')
-    endfunction
-    silent function! WINDOWS()
-      return  (has('win16') || has('win32') || has('win64'))
-    endfunction
-  " }}}
-
   " Initialization for undo etc {{{
     function! InitUndoSwapViews()
       let l:prefix = expand("$HOME/.vim/")
@@ -37,7 +25,8 @@
               echo "Error: Failed to create directory: " . l:directory
             endtry
           else
-            echo "Warning: mkdir not available. Unable to create directory: " . l:directory
+            echo "Warning: mkdir not available. Unable to create directory:"
+                  \ l:directory
           endif
         endif
         let l:directory = substitute(l:directory, " ", "\\\\ ", "g")
@@ -53,16 +42,57 @@
     endfunction
   " }}}
 
+" }}}
+
+" Plugins {{{
+
+  let g:mapleader = ','
+  let g:maplocalleader = ',,'
+  let g:disabled_plugins = {
+        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation',
+        \ 'bash-support.vim' : 'Conflicting mapping <C-j> with tmux navigation'
+        \ }
+
+  let g:google_config = resolve(expand("~/.vimrc.google"))
+  if filereadable(g:google_config)
+    exec "source " . g:google_config
+    let b:reason = 'Included by customized vim distribution'
+    let g:disabled_plugins['vim-maktaba'] = b:reason
+    let g:disabled_plugins['vim-glaive'] = b:reason
+    let g:disabled_plugins['vim-codefmt'] = b:reason
+  endif
+
+  " Plugin infrastructure {{{
+  if !isdirectory(expand("$HOME/.vim/bundle/neobundle.vim"))
+    echo "Installing neobundle..."
+    silent !mkdir -p $HOME/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim.git
+          \ $HOME/.vim/bundle/neobundle.vim
+  endif
+
+  filetype off
+  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+  call neobundle#begin('$HOME/.vim/bundle')
+
+  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
+  " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
+  " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
+
+  NeoBundle "Rykka/os.vim", { 'force' : 1 }                                     " Provides consistency across OSes
+  let g:OS = os#init()
+
   " Windows Compatible {{{
-    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-    " across (heterogeneous) systems easier.
-    if WINDOWS()
+    " On Windows, also use '.vim' instead of 'vimfiles'; this makes
+    " synchronization across (heterogeneous) systems easier.
+    if g:OS.is_windows
       source $VIMRUNTIME/mswin.vim
       behave mswin
 
       let $TERM='win32'
-      let $PATH="C:/Users/Yu/AppData/Local/GitHub/PortableGit_ed44d00daa128db527396557813e7b68709ed0e2/bin;" . $PATH
-      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,
+            \$HOME/.vim/after
       " Be nice and check for multi_byte even if the config requires
       " multi_byte support most of the time
       if has("multi_byte")
@@ -81,61 +111,6 @@
       set shell=/bin/sh
     endif
   " }}}
-
-  " Converts a file with MS-DOS line ending to UNIX line ending {{{
-  function! Dos2unixFunction()
-      let _s=@/
-      let l = line(".")
-      let c = col(".")
-      try
-          set ff=unix
-          w!
-          "%s/\%x0d$//e
-      catch /E32:/
-          echo "Sorry, the file is not saved."
-      endtry
-      let @/=_s
-      call cursor(l, c)
-  endfun
-  command! Dos2Unix keepjumps call Dos2unixFunction()
-  " }}}
-
-" }}}
-
-" Plugins {{{
-
-  let g:mapleader = ','
-  let g:maplocalleader = ',,'
-  let g:disabled_plugins = {
-        \ 'Vim-Support' : 'Conflicting key mapping <C-j> with tmux navigation',
-        \ 'bash-support.vim' : 'Conflicting key mapping <C-j> with tmux navigation'
-        \ }
-
-  let g:google_config = resolve(expand("~/.vimrc.google"))
-  if filereadable(g:google_config)
-    exec "source " . g:google_config
-    let b:reason = 'Included by customized vim distribution'
-    let g:disabled_plugins['vim-maktaba'] = b:reason
-    let g:disabled_plugins['vim-glaive'] = b:reason
-    let g:disabled_plugins['vim-codefmt'] = b:reason
-  endif
-
-  " Plugin infrastructure {{{
-  if !isdirectory(expand("$HOME/.vim/bundle/neobundle.vim"))
-    echo "Installing neobundle..."
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-  endif
-
-  filetype off
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-  call neobundle#begin('$HOME/.vim/bundle')
-
-  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
-  " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
-  " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
 
   if !filereadable(g:google_config)
     NeoBundle 'google/vim-maktaba', {
@@ -184,7 +159,7 @@
           \   'google/vim-glaive'
           \ ],
           \ 'type__protocol' : 'ssh'
-          \ }                                                                    " Diff indicator based on vim-signify
+          \ }                                                                     " Diff indicator based on vim-signify
   endif
   let s:indicator = neobundle#get('vim-diff-indicator')
   function! s:indicator.hooks.on_source(bundle)
@@ -225,7 +200,8 @@
         " \ }                                                                     " Automatically toggle line number for certain filetypes
   " let s:numbers = neobundle#get('numbers.vim')
   " function! s:numbers.hooks.on_source(bundle)
-    " let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
+    " let g:numbers_exclude = [
+          " \ 'unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
   " endfunction
   NeoBundle 'flazz/vim-colorschemes'                                            " Collection of vim colorschemes
   " NeoBundle 'Kshitij-Banerjee/vim-github-colorscheme'                           " Vim colorscheme github
@@ -238,12 +214,12 @@
         " \ }
   " NeoBundle 'Lokaltog/vim-distinguished'                                        " Vim colorscheme distinguished
   " let g:rehash256 = 1
-  " NeoBundle 'mattn/vim-airline-weather'                                       " Vim airline extension to show weather
+  " NeoBundle 'mattn/vim-airline-weather'                                         " Vim airline extension to show weather
   " let g:weather#area='Sunnyvale'
   " }}}
 
   " Coding assistance {{{
-  if !WINDOWS()
+  if !g:OS.is_windows
     silent function! ConfigureYcm()
       nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
       let g:Show_diagnostics_ui = 1                                             " default 1
@@ -375,13 +351,17 @@
     if !exists('g:neocomplete#sources#omni#input_patterns')
       let g:neocomplete#sources#omni#input_patterns = {}
     endif
-    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.php =
+          " \ '[^. \t]->\h\w*\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.c =
+          " \ '[^.[:digit:] *\t]\%(\.\|->\)'
+    " let g:neocomplete#sources#omni#input_patterns.cpp =
+          " \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
-    " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.perl =
+          " \ '\h\w*->\h\w*\|\h\w*::'
 
     " Do not use NeoComplete for these file types
     autocmd FileType c,cpp,python NeoCompleteLock
@@ -489,16 +469,28 @@
     nnoremap <leader>H <Plug>(expand_region_shrink)
   endfunction
 
-  " TODO: For vim-textobj-quotes, va' seems to select the space before the quote, need to be fixed.
-  " Also, try to map vi' to viq etc
+  " TODO: For vim-textobj-quotes, va' seems to select the space before the
+  " quote, need to be fixed.  Also, try to map vi' to viq etc
 
-  NeoBundle 'kana/vim-textobj-user'                                                                 " Allow defining text object by user
-  " NeoBundle 'Julian/vim-textobj-brace', { 'depends' : 'kana/vim-textobj-user' }                     " Text object between braces
-  " NeoBundle 'Julian/vim-textobj-variable-segment', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'Raimondi/VimLTextObjects', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for vimscript
-  " NeoBundle 'Raimondi/vim_search_objects', { 'depends' : 'kana/vim-textobj-user' }                  " Text object for a search pattern
-  " NeoBundle 'beloglazov/vim-textobj-punctuation', { 'depends' : 'kana/vim-textobj-user' }
-  NeoBundle 'beloglazov/vim-textobj-quotes', { 'depends' : 'kana/vim-textobj-user' }                " Text object between any type of quotes
+  NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
+  " NeoBundle 'Julian/vim-textobj-brace', {
+        " \ 'depends' : 'kana/vim-textobj-user'
+        " \ }                                                                     " Text object between braces
+  " NeoBundle 'Julian/vim-textobj-variable-segment', {
+        " \ 'depends' : 'kana/vim-textobj-user'
+        " \ }
+  " NeoBundle 'Raimondi/VimLTextObjects', {
+        " \ 'depends' : 'kana/vim-textobj-user'
+        " \ }                                                                     " Text object for vimscript
+  " NeoBundle 'Raimondi/vim_search_objects', {
+        " \ 'depends' : 'kana/vim-textobj-user'
+        " \ }                                                                     " Text object for a search pattern
+  " NeoBundle 'beloglazov/vim-textobj-punctuation', {
+        " \ 'depends' : 'kana/vim-textobj-user'
+        " \ }
+  NeoBundle 'beloglazov/vim-textobj-quotes', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }                                                                     " Text object between any type of quotes
   " NeoBundle 'gilligan/textobj-gitgutter', { 'depends' : 'kana/vim-textobj-user' }
   " NeoBundle 'glts/vim-textobj-comment', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for comments
   " NeoBundle 'glts/vim-textobj-indblock', { 'depends' : 'kana/vim-textobj-user' }
@@ -645,7 +637,7 @@
     noremap <leader>bf :BuffergatorOpen<CR>
   endfunction
 
-  " NeoBundle 'tpope/vim-vinegar', { 'disabled' : PluginDisabled('vim-vinegar') } " NERDTree enhancement
+  NeoBundle 'tpope/vim-vinegar'                                                 " NERDTree enhancement
   " NeoBundle 'eiginn/netrw'                                                      " NERDTree plugin for network
   " let s:netrw = neobundle#get('netrw')
   " function! s:netrw.hooks.on_source(bundle)
@@ -764,7 +756,9 @@
     nnoremap <C-q> :Bclose<cr>
     if filereadable(g:google_config)
       for l:key in ['c', 'h', 't', 'b']
-        execute "nnoremap <leader>g" . l:key . " :call relatedfiles#selector#JumpToRelatedFile('" . l:key . "')<CR>"
+        execute "nnoremap <leader>g" . l:key .
+              \ " :call relatedfiles#selector#JumpToRelatedFile('" .
+              \ l:key . "')<CR>"
       endfor
     else
       nnoremap <leader>gc :call myutils#EditCC()<CR>
@@ -784,7 +778,8 @@
     vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
     vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
 
-    command! -nargs=* -complete=file -bang E call myutils#MultiEdit("<bang>", <f-args>)
+    command! -nargs=* -complete=file -bang E
+          \ call myutils#MultiEdit("<bang>", <f-args>)
     command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
     command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
     command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
@@ -796,19 +791,19 @@
     " Display-altering option toggles
     MapToggle <F2> spell
 
-    if len($SSH_CLIENT) > 0
+    if empty($SSH_CLIENT)
+      if g:OS.is_mac
+        call myutils#SetupTablineMappingForMac()
+      elseif g:OS.is_linux
+        call myutils#SetupTablineMappingForLinux()
+      elseif g:OS.is_windows
+        call myutils#SetupTablineMappingForWindows()
+      endif
+    else
       if $SSH_OS == "Darwin"
         call myutils#SetupTablineMappingForMac()
       elseif $SSH_OS == "Linux"
         call myutils#SetupTablineMappingForLinux()
-      endif
-    else
-      if OSX()
-        call myutils#SetupTablineMappingForMac()
-      elseif LINUX()
-        call myutils#SetupTablineMappingForLinux()
-      elseif WINDOWS()
-        call myutils#SetupTablineMappingForWindows()
       endif
     endif
   endfunction
@@ -816,20 +811,23 @@
   NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simutaneously
   let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
   function! s:vimmulticursors.hooks.on_source(bundle)
-    nnoremap <leader>mcf :exec 'MultipleCursorsFind \<' . expand("<cword>") . '\>'<CR>
+    nnoremap <leader>mcf
+          \ :exec 'MultipleCursorsFind \<' . expand("<cword>") . '\>'<CR>
   endfunction
 
   NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
   NeoBundle 'mileszs/ack.vim', {
-        \ 'disabled' : !executable('ag') && !executable('ack') && !executable('ack-grep')
+        \ 'disabled' : !executable('ag') && !executable('ack') &&
+        \              !executable('ack-grep')
         \ }
   let s:ack = neobundle#get('ack.vim')
   function! s:ack.hooks.on_source(bundle)
     if executable('ag')
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-      let g:unite_source_grep_command='ag'
-      let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-      let g:unite_source_grep_recursive_opt=''
+      let g:unite_source_grep_command = 'ag'
+      let g:unite_source_grep_default_opts =
+            \ '--nocolor --line-numbers --nogroup -S -C4'
+      let g:unite_source_grep_recursive_opt = ''
     elseif executable('ack-grep')
       NeoBundle 'mileszs/ack.vim'
       let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -844,7 +842,7 @@
     endif
   endfunction
 
-  if WINDOWS()
+  if g:OS.is_windows
     NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   endif
 
@@ -909,27 +907,31 @@
   " NeoBundle 'tpope/vim-commentary', {
         " \ 'disabled' : PluginDisabled('vim-commentary')
         " \ }                                                                     " Add comments
-  " NeoBundle 'rhysd/libclang-vim', { 'disabled' : PluginDisabled('libclang-vim') }
+  " NeoBundle 'rhysd/libclang-vim'
   " NeoBundle 'szw/vim-ctrlspace', {
         " \ 'disabled' : PluginDisabled('vim-ctrlspace')
         " \ }                                                                     " Vim workspace manager
   " NeoBundle "Rykka/os.vim"
   " NeoBundle "Rykka/clickable-things"
-  " NeoBundle "Rykka/clickable.vim", { 'depends' : ['Rykka/os.vim', 'Rykka/clickable-things'] }
+  " NeoBundle "Rykka/clickable.vim", {
+        " \ 'depends' : ['Rykka/os.vim','Rykka/clickable-things']
+        " \ }
   " let s:clickable = neobundle#get('clickable.vim')
   " function! s:clickable.hooks.on_source(bundle)
     " call os#init()
     " let g:clickable_browser = "google-chrome"
   " endfunction
   " NeoBundle 'bruno-/vim-vertical-move'                                          " Move in visual block mode as much as possible
-  " NeoBundle 'dhruvasagar/vim-prosession', { 'depends': 'tpope/vim-obsession' , 'disabled' : PluginDisabled('vim-prosession') }
+  " NeoBundle 'dhruvasagar/vim-prosession', { 'depends': 'tpope/vim-obsession' }
   " NeoBundle 'dhruvasagar/vim-dotoo'
   " NeoBundle 'gelguy/Cmd2.vim'
   " NeoBundle 'gcmt/taboo.vim'
   " NeoBundle 'akesling/ondemandhighlight'
   " NeoBundle 'neitanod/vim-ondemandhighlight'
-  " NeoBundle 'thinca/vim-localrc', { 'type' : 'svn', 'disabled' : PluginDisabled('vim-localrc') }          " Enable vim configuration file for each directory
-  " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {'script_type' : 'plugin'}    " For ruby development
+  " NeoBundle 'thinca/vim-localrc', { 'type' : 'svn' }                            " Enable vim configuration file for each directory
+  " NeoBundle 'https://raw.github.com/m2ym/rsense/master/etc/rsense.vim', {
+        " \ 'script_type' : 'plugin'
+        " \ }                                                                     " For ruby development
   " NeoBundle 'vimwiki/vimwiki', { 'rtp': "~/.vim/bundle/vimwiki/src" }
   " }}}
 
@@ -978,7 +980,8 @@
         \ }                                                                     " Automatically close html tags
   let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
   function! s:autoclosetag.hooks.on_source(bundle)
-    autocmd FileType xml,xhtml execute "source " . "$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim"
+    autocmd FileType xml,xhtml execute "source " .
+          \ "$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim"
   endfunction
 
   NeoBundleLazy 'tmux-plugins/vim-tmux', {
@@ -998,7 +1001,9 @@
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
     let g:BASH_MapLeader  = g:maplocalleader
-    let g:BASH_GlobalTemplateFile = expand("$HOME/.vim/bundle/bash-support.vim/bash-support/templates/Templates")
+    let g:BASH_GlobalTemplateFile = expand(
+          \ "$HOME/.vim/bundle/" .
+          \ "bash-support.vim/bash-support/templates/Templates")
   endfunction
   " NeoBundleLazy 'kana/vim-vspec', {
         " \ 'autoload' : { 'filetypes' : ['vim'] }
@@ -1062,7 +1067,8 @@
         \ }                                                                     " General semantic highlighting for vim
   let s:semantic_highlight = neobundle#get('semantic-highlight.vim')
   function! s:semantic_highlight.hooks.on_source(bundle)
-    let g:semanticTermColors = [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+    let g:semanticTermColors =
+          \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
   endfunction
   NeoBundleLazy 'maksimr/vim-jsbeautify', {
         \ 'filetypes' : ['javascript']
@@ -1159,7 +1165,8 @@
   " Replaced by tyru/operator-camelize
   " Mapping for camelcase and underscore variable name conversion Change
   " CamelCase to underscore (camel_case)
-  " noremap <leader>lc viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
+  " noremap <leader>lc
+        " \ viw:s#\C\(\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<CR>
   " Change underscore to CamelCase, first letter not capitalized
   " noremap <leader>lC viw:s#_\(\l\)#\u\1#g<CR>
   " Change underscore to CamelCase, first letter also capitalized
@@ -1200,13 +1207,16 @@
   " inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
   inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
   inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-  inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-  inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+  inoremap <expr> <PageDown>
+        \ pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+  inoremap <expr> <PageUp>
+        \ pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
   inoremap <expr> <C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
   inoremap <expr> <C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
   " Identify the syntax highlighting group used at the cursor
-  map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+        \ . '> trans<'
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -1236,9 +1246,9 @@
 
   " <leader>w= is mapped in Align.vim
   " <leader>w is used by CamelCaseMotion for moving
-  " The mapping from Align make the motion slow because vim needs to wait for some
-  " time in case '=' is pressed after <leader>w. Is that a better way to avoid
-  " this?
+  " The mapping from Align make the motion slow because vim needs to wait for
+  " some time in case '=' is pressed after <leader>w. Is that a better way to
+  " avoid this?
   silent! unmap <leader>w=
   silent! unmap <leader>m=
 
@@ -1248,7 +1258,9 @@
     " Disable spell check for log file and BUILD
     autocmd BufRead BUILD,*.log setlocal nospell
     autocmd FileType conf setlocal nospell
-    autocmd BufRead *.vim setlocal sw=2 | setlocal ts=2 | setlocal sts=2 | set ft=vim | set foldmethod=marker
+    autocmd BufRead *.vim
+          \ setlocal sw=2 | setlocal ts=2 |
+          \ setlocal sts=2 | set ft=vim | set foldmethod=marker
     " autocmd VimEnter * if expand('%') == "" | exec "ScratchOpen"
     autocmd BufRead *.json setlocal filetype=json
   augroup END
@@ -1323,11 +1335,13 @@
     colorscheme solarized
   endif
 
-  if has ('x11') && (LINUX() || OSX())                                          " On Linux and mac use + register for copy-paste
+  if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                          " On Linux and mac use + register for copy-paste
     " Remember to install clipit in ubuntu
     if $SSH_OS == "Darwin"
       set clipboard=unnamed
-      " vmap y y:let b:ycmd=printf("echo -n %s \| nc localhost 8377", getreg("*"))<CR>:call system(b:ycmd)<CR>
+      " vmap y y:let b:ycmd =
+            " \ printf("echo -n %s \| nc localhost 8377", getreg("*"))<CR>
+            " \ :call system(b:ycmd)<CR>
       vmap Y y:call myutils#YankToRemoteClipboard()<CR>
     elseif $SSH_OS == "Linux"
       set clipboard=unnamed
