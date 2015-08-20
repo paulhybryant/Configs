@@ -351,23 +351,23 @@
     " <CR>: close popup and save indent.
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
-      return neocomplete#close_popup() . '\<CR>'
+      return neocomplete#close_popup() . "\<CR>"
       " For no inserting <CR> key.
-      " return pumvisible() ? neocomplete#close_popup() : '\<CR>'
+      " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
     endfunction
     " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? '\<C-n>' : '\<TAB>'
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup().'\<C-h>'
-    inoremap <expr><BS> neocomplete#smart_close_popup().'\<C-h>'
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
 
     " For cursor moving in insert mode(Not recommended)
-    " inoremap <expr><Left>  neocomplete#close_popup() . '\<Left>'
-    " inoremap <expr><Right> neocomplete#close_popup() . '\<Right>'
-    " inoremap <expr><Up>    neocomplete#close_popup() . '\<Up>'
-    " inoremap <expr><Down>  neocomplete#close_popup() . '\<Down>'
+    " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+    " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+    " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+    " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
     " Or set this.
     "let g:neocomplete#enable_cursor_hold_i = 1
     " Or set this.
@@ -378,7 +378,7 @@
     "set completeopt+=longest
     "let g:neocomplete#enable_auto_select = 1
     "let g:neocomplete#disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? '\<Down>' : '\<C-x>\<C-u>'
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -529,39 +529,95 @@
   NeoBundle 'beloglazov/vim-textobj-quotes', {
         \ 'depends' : 'kana/vim-textobj-user'
         \ }                                                                     " Text object between any type of quotes
-  " NeoBundle 'gilligan/textobj-gitgutter', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'glts/vim-textobj-comment', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for comments
-  " NeoBundle 'glts/vim-textobj-indblock', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'jceb/vim-textobj-uri', { 'depends' : 'kana/vim-textobj-user' }                         " Text object for uri
-  " NeoBundle 'kana/vim-textobj-datetime', { 'depends' : 'kana/vim-textobj-user' }                    " Text object for datetime format
-  " NeoBundle 'kana/vim-textobj-diff', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'kana/vim-textobj-entire', { 'depends' : 'kana/vim-textobj-user' }                       " Text object for the entire buffer
-  " NeoBundle 'kana/vim-textobj-fold', { 'depends' : 'kana/vim-textobj-user' }                        " Text object for fold
-  " NeoBundle 'kana/vim-textobj-function', { 'depends' : 'kana/vim-textobj-user' }                    " Text object for function
-  " NeoBundle 'kana/vim-textobj-indent', { 'depends' : 'kana/vim-textobj-user' }                      " Text object for indent
-  " NeoBundle 'kana/vim-textobj-jabraces', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'kana/vim-textobj-lastpat', { 'depends' : 'kana/vim-textobj-user' }                     " Text object for last searched pattern
-  " NeoBundle 'kana/vim-textobj-line', { 'depends' : 'kana/vim-textobj-user' }                        " Text object for a line
-  " NeoBundle 'kana/vim-textobj-syntax', { 'depends' : 'kana/vim-textobj-user' }
-  NeoBundle 'killphi/vim-textobj-signify-hunk', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'lucapette/vim-textobj-underscore', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'mattn/vim-textobj-url', { 'depends' : 'kana/vim-textobj-user' }
+  " NeoBundle 'gilligan/textobj-gitgutter', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'glts/vim-textobj-comment', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for comments
+  " NeoBundle 'glts/vim-textobj-indblock', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'jceb/vim-textobj-uri', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for uri
+  " NeoBundle 'kana/vim-textobj-datetime', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for datetime format
+  " NeoBundle 'kana/vim-textobj-diff', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'kana/vim-textobj-entire', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for the entire buffer
+  " NeoBundle 'kana/vim-textobj-fold', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for fold
+  " NeoBundle 'kana/vim-textobj-function', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for function
+  " NeoBundle 'kana/vim-textobj-indent', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for indent
+  " NeoBundle 'kana/vim-textobj-jabraces', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'kana/vim-textobj-lastpat', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for last searched pattern
+  " NeoBundle 'kana/vim-textobj-line', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for a line
+  " NeoBundle 'kana/vim-textobj-syntax', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  NeoBundle 'killphi/vim-textobj-signify-hunk', {
+        \ 'depends' : 'kana/vim-textobj-user'
+        \ }
+  " NeoBundle 'lucapette/vim-textobj-underscore', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'mattn/vim-textobj-url', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
   NeoBundle 'paulhybryant/vim-textobj-path', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ 'type__protocol' : 'ssh'
-        \ }                                                                                         " Text object for a file system path
-  " NeoBundle 'reedes/vim-textobj-quote', { 'depends' : 'kana/vim-textobj-user' }                     " Text object between also typographic ('curly') quote characters
-  " NeoBundle 'reedes/vim-textobj-sentence', { 'depends' : 'kana/vim-textobj-user' }                  " Text object for a sentence
-  " NeoBundle 'rhysd/vim-textobj-clang', { 'depends' : 'kana/vim-textobj-user' }                      " Text object for c family languages
-  " NeoBundle 'rhysd/vim-textobj-continuous-line', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'saaguero/vim-textobj-pastedtext', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'saihoooooooo/vim-textobj-space', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'sgur/vim-textobj-parameter', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'thinca/vim-textobj-between', { 'depends' : 'kana/vim-textobj-user' }                   " Text object between a char
-  " NeoBundle 'thinca/vim-textobj-comment', { 'depends' : 'kana/vim-textobj-user' }                   " Text object  for comments
-  " NeoBundle 'whatyouhide/vim-textobj-erb', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'whatyouhide/vim-textobj-xmlattr', { 'depends' : 'kana/vim-textobj-user' }
-  " NeoBundle 'michaeljsmith/vim-indent-object'                                                       " Text object based on indent levels
+        \ }                                                                     " Text object for a file system path
+  " NeoBundle 'reedes/vim-textobj-quote', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object between also typographic ('curly') quote characters
+  " NeoBundle 'reedes/vim-textobj-sentence', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for a sentence
+  " NeoBundle 'rhysd/vim-textobj-clang', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object for c family languages
+  " NeoBundle 'rhysd/vim-textobj-continuous-line', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'saaguero/vim-textobj-pastedtext', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'saihoooooooo/vim-textobj-space', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'sgur/vim-textobj-parameter', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'thinca/vim-textobj-between', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object between a char
+  " NeoBundle 'thinca/vim-textobj-comment', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }                                                                     " Text object  for comments
+  " NeoBundle 'whatyouhide/vim-textobj-erb', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'whatyouhide/vim-textobj-xmlattr', {
+        " \ 'depends' : 'kana/vim-textobj-user',
+        " \ }
+  " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
   " NeoBundle 'gcmt/wildfire.vim'
   " }}}
 
@@ -772,7 +828,7 @@
   let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
   function! s:vimmulticursors.hooks.on_source(bundle)
     nnoremap <leader>mcf
-          \ :exec 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
+          \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
   endfunction
 
   NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }
@@ -1286,7 +1342,7 @@
     colorscheme solarized
   endif
 
-  if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                          " On Linux and mac use + register for copy-paste
+  if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                              " On Linux and mac use + register for copy-paste
     " Remember to install clipit in ubuntu
     if $SSH_OS == 'Darwin'
       set clipboard=unnamed
