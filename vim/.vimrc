@@ -471,7 +471,7 @@
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDCreateDefaultMappings = 1
-    let g:NERDCustomDelimiters = {}
+    let g:NERDCustomDelimiters = {'cvim' : {'left': '"', 'leftAlt': ' ', 'rightAlt' : ' '}}
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
     " nmap <leader>ci <Plug>NERDCommenterInvert
