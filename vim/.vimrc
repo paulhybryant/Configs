@@ -56,10 +56,12 @@
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
   call neobundle#begin(expand('~/.vim/bundle'))
 
-  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+  " NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+  NeoBundleFetch 'paulhybryant/neobundle.vim'                                   " Plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
+  " NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
+  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
 
   NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                     " Provides consistency across OSes
@@ -307,6 +309,12 @@
     map <leader>lc <Plug>(operator-camelize)
     map <leader>lC <Plug>(operator-decamelize)
   endfunction
+
+  NeoBundle 'tyru/restart.vim', {
+        \ 'autoload' : { 'commands' : 'Restart' },
+        \ 'gui' : 1,
+        \ 'lazy' : 1,
+        \ }                                                                     " Restart gVim
 
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
   " TODO: Make delimiMate add newline after closing {}, and only close <> in
@@ -653,12 +661,7 @@
     " autocmd Syntax * RainbowParenthesesLoadBraces
   " endfunction
 
-  " NeoBundle 'paulhybryant/hilinks', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Show highlight group the item under corsor is linked to
-  " NeoBundle 'paulhybryant/mark', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Highlight multiple patterns with different color (Host latest version 2.8.5)
+  " NeoBundle 'vim-scripts/mark'                                                  " Highlight multiple patterns with different color
   " let s:mark = neobundle#get('mark')
   " function! s:mark.hooks.on_source(bundle)
     " nnoremap <leader>mc :MarkClear<CR>
@@ -694,7 +697,7 @@
 
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   " NeoBundle 'ujihisa/unite-colorscheme'
-  " NeoBundle 'ujihisa/unite-locate'
+  NeoBundle 'ujihisa/unite-locate'
   " NeoBundle 'h1mesuke/unite-outline'
   " NeoBundle 'thinca/vim-unite-history'
   " NeoBundle 'mattn/unite-gist'
@@ -761,10 +764,12 @@
   " }}}
 
   " Row-/column-wise editing {{{
-  NeoBundle 'paulhybryant/Align', { 'type__protocol' : 'ssh' }                  " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
-  NeoBundle 'paulhybryant/dotfill', {
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Alinghing texts based on specific charater etc
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
         \ 'depends' : ['Align'],
-        \ 'type__protocol' : 'ssh'
+        \ 'type' : 'vba',
         \ }                                                                     " Align the texts by repeatedly filling blanks with specified charater.
   NeoBundle 'jlemetay/permut'
   " NeoBundle 'godlygeek/tabular'
@@ -777,10 +782,37 @@
     " Glaive foldcol plugin[mappings]
   " endfunction
   " NeoBundle 'junegunn/vim-easy-align'
-  " NeoBundle 'paulhybryant/vissort', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   " }}}
+
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ 'type' : 'vba',
+        \ }                                                                     " Debug echo for debuging vim plugins
+  let s:decho = neobundle#get('Decho')
+  function! s:decho.hooks.on_source(bundle)
+    let g:dechofuncname = 1
+    let g:decho_winheight = 10
+  endfunction
+
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Highlight group of item under corsor is linked to
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/manpageview.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Commands for viewing man pages in vim
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vissort.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Allow sorting lines by using a visual block (column)
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/visincr.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Increase integer values in visual block
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/AnsiEsc.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " TODO: Add comments
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
 
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
@@ -870,10 +902,8 @@
   " NeoBundle 'aperezdc/vim-template'
   " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
   " NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
-  " NeoBundle 'paulhybryant/vim-LargeFile'                                        " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
   " NeoBundle 'calebsmith/vim-lambdify'
-  " NeoBundle 'paulhybryant/AnsiEsc.vim'
   " NeoBundle 'chrisbra/vim-diff-enhanced'                                        " Enhanced vimdiff
   " NeoBundle 'tpope/vim-speeddating'
   " NeoBundle 'chrisbra/NrrwRgn'
@@ -907,8 +937,6 @@
   " NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
   " NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
   " NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
-  " NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
   " NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
   " NeoBundle 'gorodinskiy/vim-coloresque'
   " NeoBundle 'vim-jp/vital.vim'
@@ -1047,16 +1075,6 @@
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
-  endfunction
-  NeoBundle 'paulhybryant/Decho.vim', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'lazy' : 1,
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
-  let s:decho = neobundle#get('Decho.vim')
-  function! s:decho.hooks.on_source(bundle)
-    let g:dechofuncname = 1
-    let g:decho_winheight = 10
   endfunction
   NeoBundle 'syngan/vim-vimlint', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
