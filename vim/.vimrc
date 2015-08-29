@@ -863,6 +863,7 @@
   endif
 
   " Unused {{{
+  " NeoBundle 'KabbAmine/vCoolor.vim'                                             " Color picker in gvim
   " NeoBundle 'sheerun/vim-polyglot'                                              " Language packs
   " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
   " NeoBundle 'aperezdc/vim-template'
