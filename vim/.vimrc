@@ -56,10 +56,12 @@
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
   call neobundle#begin(expand('~/.vim/bundle'))
 
-  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+  " NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+  NeoBundleFetch 'paulhybryant/neobundle.vim'                                   " Plugin manager
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
+  " NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
   " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
+  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
   " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
 
   NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                     " Provides consistency across OSes
@@ -308,6 +310,12 @@
     map <leader>lC <Plug>(operator-decamelize)
   endfunction
 
+  NeoBundle 'tyru/restart.vim', {
+        \ 'autoload' : { 'commands' : 'Restart' },
+        \ 'gui' : 1,
+        \ 'lazy' : 1,
+        \ }                                                                     " Restart gVim
+
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
   " TODO: Make delimiMate add newline after closing {}, and only close <> in
   " html / XML
@@ -318,8 +326,9 @@
   endfunction
   " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   " NeoBundle 'Shougo/neocomplcache.vim'
-  " NeoBundleLazy 'Rip-Rip/clang_complete', {
-        " \ 'autoload' : { 'filetypes' : ['cpp', 'c'] }
+  " NeoBundle 'Rip-Rip/clang_complete', {
+        " \ 'autoload' : { 'filetypes' : ['cpp', 'c'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Completion for c-family language
   NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
@@ -471,7 +480,7 @@
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDCreateDefaultMappings = 1
-    let g:NERDCustomDelimiters = {}
+    let g:NERDCustomDelimiters = {'cvim' : {'left': '"', 'leftAlt': ' ', 'rightAlt' : ' '}}
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
     " nmap <leader>ci <Plug>NERDCommenterInvert
@@ -652,12 +661,7 @@
     " autocmd Syntax * RainbowParenthesesLoadBraces
   " endfunction
 
-  " NeoBundle 'paulhybryant/hilinks', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Show highlight group the item under corsor is linked to
-  " NeoBundle 'paulhybryant/mark', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Highlight multiple patterns with different color (Host latest version 2.8.5)
+  " NeoBundle 'vim-scripts/mark'                                                  " Highlight multiple patterns with different color
   " let s:mark = neobundle#get('mark')
   " function! s:mark.hooks.on_source(bundle)
     " nnoremap <leader>mc :MarkClear<CR>
@@ -693,7 +697,7 @@
 
   " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   " NeoBundle 'ujihisa/unite-colorscheme'
-  " NeoBundle 'ujihisa/unite-locate'
+  NeoBundle 'ujihisa/unite-locate'
   " NeoBundle 'h1mesuke/unite-outline'
   " NeoBundle 'thinca/vim-unite-history'
   " NeoBundle 'mattn/unite-gist'
@@ -737,15 +741,16 @@
   " endfunction
 
   " NeoBundle 'Shougo/vimfiler.vim', {
-        " \   'depends' : 'Shougo/unite.vim',
         " \   'commands' : [
         " \     { 'name' : ['VimFiler', 'Edit', 'Write'],
         " \       'complete' : 'customlist,vimfiler#complete' },
         " \     'Read',
         " \     'Source'
         " \   ],
-        " \   'mappings' : '<Plug>',
+        " \   'depends' : 'Shougo/unite.vim',
         " \   'explorer' : 1,
+        " \   'lazy' : 1,
+        " \   'mappings' : '<Plug>',
         " \   'recipe' : 'vimfiler',
         " \ }                                                                     " File explorer inside vim
 
@@ -759,10 +764,12 @@
   " }}}
 
   " Row-/column-wise editing {{{
-  NeoBundle 'paulhybryant/Align', { 'type__protocol' : 'ssh' }                  " Alinghing texts based on specific charater etc (Host up-to-date version from Dr. Chip)
-  NeoBundle 'paulhybryant/dotfill', {
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Alinghing texts based on specific charater etc
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
         \ 'depends' : ['Align'],
-        \ 'type__protocol' : 'ssh'
+        \ 'type' : 'vba',
         \ }                                                                     " Align the texts by repeatedly filling blanks with specified charater.
   NeoBundle 'jlemetay/permut'
   " NeoBundle 'godlygeek/tabular'
@@ -775,10 +782,37 @@
     " Glaive foldcol plugin[mappings]
   " endfunction
   " NeoBundle 'junegunn/vim-easy-align'
-  " NeoBundle 'paulhybryant/vissort', {
-        " \ 'type__protocol' : 'ssh'
-        " \ }                                                                     " Allow sorting lines by using a visual block (column) (Host up-to-date version from Dr. Chip)
   " }}}
+
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ 'type' : 'vba',
+        \ }                                                                     " Debug echo for debuging vim plugins
+  let s:decho = neobundle#get('Decho')
+  function! s:decho.hooks.on_source(bundle)
+    let g:dechofuncname = 1
+    let g:decho_winheight = 10
+  endfunction
+
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Highlight group of item under corsor is linked to
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/manpageview.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Commands for viewing man pages in vim
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vissort.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Allow sorting lines by using a visual block (column)
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/visincr.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Increase integer values in visual block
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/AnsiEsc.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " TODO: Add comments
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz', {
+        \ 'type' : 'vba',
+        \ }                                                                     " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
 
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
@@ -869,10 +903,8 @@
   " NeoBundle 'aperezdc/vim-template'
   " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
   " NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
-  " NeoBundle 'paulhybryant/vim-LargeFile'                                        " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
   " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
   " NeoBundle 'calebsmith/vim-lambdify'
-  " NeoBundle 'paulhybryant/AnsiEsc.vim'
   " NeoBundle 'chrisbra/vim-diff-enhanced'                                        " Enhanced vimdiff
   " NeoBundle 'tpope/vim-speeddating'
   " NeoBundle 'chrisbra/NrrwRgn'
@@ -906,8 +938,6 @@
   " NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
   " NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
   " NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
-  " NeoBundle 'paulhybryant/manpageview'                                          " Commands for viewing man pages in vim (Host up-to-date version from Dr. Chip)
-  " NeoBundle 'paulhybryant/visualincr.vim'                                       " Increase integer values in visual block (Host up-to-date version from Dr. Chip)
   " NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
   " NeoBundle 'gorodinskiy/vim-coloresque'
   " NeoBundle 'vim-jp/vital.vim'
@@ -946,9 +976,9 @@
   " NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
   " }}}
 
-  " Lazily load Filetype specific bundles {{{
-  NeoBundleLazy 'chiphogg/vim-vtd', {
+  NeoBundle 'chiphogg/vim-vtd', {
         \ 'autoload' : { 'filetypes' : ['vtd'] },
+        \ 'lazy' : 1,
         \ }
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
@@ -960,34 +990,41 @@
     endif
   endfunction
 
-  NeoBundleLazy 'paulhybryant/SQLUtilities', {
+  NeoBundle 'paulhybryant/SQLUtilities', {
         \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'lazy' : 1,
         \ 'type__protocol' : 'ssh'
         \ }                                                                     " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
     let g:sqlutil_align_comma=0
   endfunction
-  NeoBundleLazy 'vim-scripts/SQLComplete.vim', {
-        \ 'autoload' : { 'filetypes' : ['sql'] }
+  NeoBundle 'vim-scripts/SQLComplete.vim', {
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'lazy' : 1,
         \ }                                                                     " SQL script completion
-  NeoBundleLazy 'vim-scripts/sql.vim--Stinson', {
-        \ 'autoload' : { 'filetypes' : ['sql'] }
+  NeoBundle 'vim-scripts/sql.vim--Stinson', {
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Better SQL syntax highlighting
 
-  NeoBundleLazy 'rstacruz/sparkup', {
+  NeoBundle 'rstacruz/sparkup', {
+        \ 'autoload' : { 'filetypes' : ['html'] },
+        \ 'lazy' : 1,
         \ 'rtp': 'vim',
-        \ 'autoload' : { 'filetypes' : ['html'] }
         \ }                                                                     " Write HTML code faster
-  NeoBundleLazy 'Valloric/MatchTagAlways', {
+  NeoBundle 'Valloric/MatchTagAlways', {
+        \ 'autoload' : { 'filetypes' : ['html', 'xml'] },
         \ 'disabled' : !has('python'),
-        \ 'autoload' : { 'filetypes' : ['html', 'xml'] }
+        \ 'lazy' : 1,
         \ }
-  NeoBundleLazy 'vim-scripts/closetag.vim', {
-        \ 'autoload' : { 'filetypes' : ['html'] }
+  NeoBundle 'vim-scripts/closetag.vim', {
+        \ 'autoload' : { 'filetypes' : ['html'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Automatically close html/xml tags
-  NeoBundleLazy 'vim-scripts/HTML-AutoCloseTag', {
-        \ 'autoload' : { 'filetypes' : ['html'] }
+  NeoBundle 'vim-scripts/HTML-AutoCloseTag', {
+        \ 'autoload' : { 'filetypes' : ['html'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Automatically close html tags
   let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
   function! s:autoclosetag.hooks.on_source(bundle)
@@ -995,19 +1032,23 @@
           \ '$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim'
   endfunction
 
-  NeoBundleLazy 'tmux-plugins/vim-tmux', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] }
+  NeoBundle 'tmux-plugins/vim-tmux', {
+        \ 'autoload' : { 'filetypes' : ['tmux'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing .tmux.conf
-  " NeoBundleLazy 'zaiste/tmux.vim', {
-        " \ 'autoload' : { 'filetypes' : ['tmux'] }
+  " NeoBundle 'zaiste/tmux.vim', {
+        " \ 'autoload' : { 'filetypes' : ['tmux'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Tmux syntax highlight
-  NeoBundleLazy 'wellle/tmux-complete.vim', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] }
+  NeoBundle 'wellle/tmux-complete.vim', {
+        \ 'autoload' : { 'filetypes' : ['tmux'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Insert mode completion of words in adjacent panes
 
-  NeoBundleLazy 'vim-scripts/bash-support.vim', {
+  NeoBundle 'vim-scripts/bash-support.vim', {
         \ 'autoload' : { 'filetypes' : ['sh'] },
-        \ 'disabled' : 1
+        \ 'disabled' : 1,
+        \ 'lazy' : 1,
         \ }                                                                     " Make vim an IDE for writing bash
   let s:bash_support = neobundle#get('bash-support.vim')
   function! s:bash_support.hooks.on_source(bundle)
@@ -1016,76 +1057,89 @@
           \ '$HOME/.vim/bundle/' .
           \ 'bash-support.vim/bash-support/templates/Templates')
   endfunction
-  " NeoBundleLazy 'kana/vim-vspec', {
-        " \ 'autoload' : { 'filetypes' : ['vim'] }
+  " NeoBundle 'kana/vim-vspec', {
+        " \ 'autoload' : { 'filetypes' : ['vim'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Testing framework for vimscript
-  " NeoBundleLazy 'thinca/vim-themis', {
-        " \ 'autoload' : { 'filetypes' : ['vim'] }
+  " NeoBundle 'thinca/vim-themis', {
+        " \ 'autoload' : { 'filetypes' : ['vim'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Testing framework for vimscript
-  " NeoBundleLazy 'junegunn/vader.vim', {
-        " \ 'autoload' : { 'filetypes' : ['vim'] }
+  " NeoBundle 'junegunn/vader.vim', {
+        " \ 'autoload' : { 'filetypes' : ['vim'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Testing framework for vimscript
-  NeoBundleLazy 'vim-scripts/ReloadScript', {
-        \ 'autoload' : { 'filetypes' : ['vim'] }
+  NeoBundle 'vim-scripts/ReloadScript', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
-  NeoBundleLazy 'paulhybryant/Decho.vim', {
+  NeoBundle 'syngan/vim-vimlint', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'type__protocol' : 'ssh'
-        \ }                                                                     " Debug echo for debuging vim plugins (Host up-to-date version from Dr. Chip, with minor enhancement)
-  let s:decho = neobundle#get('Decho.vim')
-  function! s:decho.hooks.on_source(bundle)
-    let g:dechofuncname = 1
-    let g:decho_winheight = 10
-  endfunction
-  NeoBundleLazy 'syngan/vim-vimlint', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'depends' : 'ynkdir/vim-vimlparser'
+        \ 'depends' : 'ynkdir/vim-vimlparser',
+        \ 'lazy' : 1,
         \ }                                                                     " Syntax checker for vimscript
   " let g:Vim_MapLeader  = g:maplocalleader
-  " NeoBundleLazy 'dbakker/vim-lint', { 'filetypes' : ['vim'] }                   " Syntax checker for vimscript
-  NeoBundleLazy 'vim-scripts/Vim-Support', {
+  " NeoBundle 'dbakker/vim-lint', {
+        " \ 'filetypes' : ['vim'],
+        " \ 'lazy' : 1,
+        " \ }                                                                     " Syntax checker for vimscript
+  NeoBundle 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'disabled' : 1
+        \ 'disabled' : 1,
+        \ 'lazy' : 1,
         \ }                                                                     " Make vim an IDE for writing vimscript
-  NeoBundleLazy 'tpope/vim-git', {
-        \ 'autoload' : { 'filetypes' : ['gitcommit'] }
+  NeoBundle 'tpope/vim-git', {
+        \ 'autoload' : { 'filetypes' : ['gitcommit'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Syntax highlight for git
-  NeoBundleLazy 'google/vim-ft-vroom', {
-        \ 'autoload' : { 'filetypes' : ['vroom'] }
+  NeoBundle 'google/vim-ft-vroom', {
+        \ 'autoload' : { 'filetypes' : ['vroom'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Filetype plugin for vroom
-  NeoBundleLazy 'plasticboy/vim-markdown', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] }
+  NeoBundle 'plasticboy/vim-markdown', {
+        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Yet another markdown syntax highlighting
-  NeoBundleLazy 'isnowfy/python-vim-instant-markdown', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] }
+  NeoBundle 'isnowfy/python-vim-instant-markdown', {
+        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Start a http server and preview markdown instantly
-  " NeoBundleLazy 'tpope/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : ['markdown'] }
+  " NeoBundle 'tpope/vim-markdown', {
+        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'lazy' : 1,
         " \ }                                                                     " Syntax highlighting for markdown
   " NeoBundle 'suan/vim-instant-markdown'
-        " \ 'autoload' : { 'filetypes' : ['markdown'] }
+        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'lazy' : 1,
         " \ }
-  NeoBundleLazy 'vim-jp/cpp-vim', { 'autoload' : { 'filetypes' : ['cpp'] } }
-  NeoBundleLazy 'octol/vim-cpp-enhanced-highlight', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] }
+  NeoBundle 'vim-jp/cpp-vim', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
+        \ }
+  NeoBundle 'octol/vim-cpp-enhanced-highlight', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
         \ }                                                                     " Enhanced vim cpp highlight
-  NeoBundleLazy 'jaxbot/semantic-highlight.vim', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] }
+  NeoBundle 'jaxbot/semantic-highlight.vim', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
         \ }                                                                     " General semantic highlighting for vim
   let s:semantic_highlight = neobundle#get('semantic-highlight.vim')
   function! s:semantic_highlight.hooks.on_source(bundle)
     let g:semanticTermColors =
           \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
   endfunction
-  NeoBundleLazy 'maksimr/vim-jsbeautify', {
-        \ 'filetypes' : ['javascript']
+  NeoBundle 'maksimr/vim-jsbeautify', {
+        \ 'filetypes' : ['javascript'],
+        \ 'lazy' : 1,
         \ }                                                                     " Javascript formatting
-  NeoBundleLazy 'pangloss/vim-javascript', {
-        \ 'filetypes' : ['javascript']
+  NeoBundle 'pangloss/vim-javascript', {
+        \ 'filetypes' : ['javascript'],
+        \ 'lazy' : 1,
         \ }                                                                     " Javascript syntax folding
   let s:jssyntax = neobundle#get('vim-javascript')
   function s:jssyntax.hooks.on_source(bundle)
@@ -1103,8 +1157,9 @@
     " let g:javascript_conceal_static     = '•'
     " let g:javascript_conceal_super      = 'Ω'
   endfunction
-  " NeoBundleLazy 'elzr/vim-json', {
-        " \ 'filetypes' : ['json']
+  " NeoBundle 'elzr/vim-json', {
+        " \ 'filetypes' : ['json'],
+        " \ 'lazy' : 1,
         " \ }                                                                     " Json highlight in vim
   " let s:vimjson = neobundle#get('vim-json')
   " function s:vimjson.hooks.on_source(bundle)
@@ -1115,7 +1170,6 @@
           " \ set expandtab |
           " \ set foldmethod=syntax
   " endfunction
-  " }}}
 
   call neobundle#end()
   NeoBundleCheck
@@ -1263,13 +1317,11 @@
   augroup FiletypeFormat
     autocmd!
     autocmd BufRead *.cc setlocal foldmethod=syntax
-    " Disable spell check for log file and BUILD
     autocmd BufRead BUILD,*.log setlocal nospell
     autocmd FileType conf setlocal nospell
     autocmd BufRead *.vim
           \ setlocal sw=2 | setlocal ts=2 |
           \ setlocal sts=2 | set ft=vim | set foldmethod=marker
-    " autocmd VimEnter * if empty(expand('%')) | :ScratchOpen
     autocmd BufRead *.json setlocal filetype=json
   augroup END
 
