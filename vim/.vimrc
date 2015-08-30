@@ -1,187 +1,137 @@
 " vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=vim nospell:
 
-" Environment {{{
-
-  set nocompatible                                                              " Must be first line
-  set encoding=utf-8                                                            " Set text encoding default to utf-8
-  scriptencoding utf-8                                                          " Character encoding used in this script
-
-  " Initialization for undo etc {{{
-    function! InitUndoSwapViews()
-      let l:prefix = expand('~/.vim/')
-      let l:dir_list = {
-            \ '.vimbackup': 'backupdir',
-            \   '.vimviews': 'viewdir',
-            \   '.vimswap': 'directory',
-            \   '.vimundo': 'undodir'
-            \ }
-      for [dirname, settingname] in items(l:dir_list)
-        let l:directory = l:prefix . dirname . '/'
-        if !isdirectory(l:directory)
-          if exists('*mkdir')
-            try
-              call mkdir(l:directory, 'p')
-            catch /E739:/
-              echo 'Error: Failed to create directory: ' . l:directory
-            endtry
-          else
-            echo 'Warning: mkdir not available. Unable to create directory:'
-                  \ l:directory
-          endif
-        endif
-        let l:directory = substitute(l:directory, ' ', '\\\\ ', 'g')
-        execute 'set' settingname '=' . l:directory
-      endfor
-    endfunction
-    call InitUndoSwapViews()
-  " }}}
-
-" }}}
+set nocompatible                                                                " Must be first line
+set encoding=utf-8                                                              " Set text encoding default to utf-8
+scriptencoding utf-8                                                            " Character encoding used in this script
 
 " Plugins {{{
 
-  let g:mapleader = ','
-  let g:maplocalleader = ',,'
-  let g:google_config = resolve(expand('~/.vimrc.google'))
+let g:mapleader = ','
+let g:maplocalleader = ',,'
+let g:google_config = resolve(expand('~/.vimrc.google'))
 
-  " Plugin infrastructure {{{
-  if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
-    echo 'Installing neobundle...'
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim.git
-          \ $HOME/.vim/bundle/neobundle.vim
+" Plugin infrastructure {{{
+if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
+  echo 'Installing neobundle...'
+  silent !mkdir -p $HOME/.vim/bundle
+  silent !git clone https://github.com/Shougo/neobundle.vim.git
+        \ $HOME/.vim/bundle/neobundle.vim
+endif
+
+filetype off
+set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+NeoBundleFetch 'paulhybryant/neobundle.vim'                                     " Plugin manager
+NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+" NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
+" NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
+" NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
+" NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
+
+NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                       " Provides consistency across OSes
+let g:OS = os#init()
+
+" Windows Compatible {{{
+if g:OS.is_windows
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+
+  let $TERM='win32'
+  " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
+  " across (heterogeneous) systems easier.
+  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,
+        \$HOME/.vim/after
+  " Be nice and check for multi_byte even if the config requires
+  " multi_byte support most of the time
+  if has('multi_byte')
+    " Windows cmd.exe still uses cp850. If Windows ever moved to
+    " Powershell as the primary terminal, this would be utf-8
+    set termencoding=cp850
+    setglobal fileencoding=utf-8
+    " Windows has traditionally used cp1252, so it's probably wise to
+    " fallback into cp1252 instead of eg. iso-8859-15.
+    " Newer Windows files might contain utf-8 or utf-16 LE so we might
+    " want to try them first.
+    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
   endif
+  set shellslash
+else
+  set shell=/bin/sh
+endif
+" }}}
 
-  filetype off
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-  call neobundle#begin(expand('~/.vim/bundle'))
+if filereadable(g:google_config)
+  execute 'source' g:google_config
+  " Register the bundles, but do not add them to rtp as they are already there
+  NeoBundleFetch 'google/vim-maktaba'
+  NeoBundleFetch 'google/vim-glaive'
+else
+  NeoBundle 'google/vim-maktaba', {
+        \ 'force' : 1,
+        \ }
+  NeoBundle 'google/vim-glaive', {
+        \ 'depends' : 'google/vim-maktaba',
+        \ 'force' : 1
+        \ }
+endif
 
-  " NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-  NeoBundleFetch 'paulhybryant/neobundle.vim'                                   " Plugin manager
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-  " NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
-  " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
-  " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
-  " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
-
-  NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                     " Provides consistency across OSes
-  let g:OS = os#init()
-
-  " Windows Compatible {{{
-    " On Windows, also use '.vim' instead of 'vimfiles'; this makes
-    " synchronization across (heterogeneous) systems easier.
-    if g:OS.is_windows
-      source $VIMRUNTIME/mswin.vim
-      behave mswin
-
-      let $TERM='win32'
-      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,
-            \$HOME/.vim/after
-      " Be nice and check for multi_byte even if the config requires
-      " multi_byte support most of the time
-      if has('multi_byte')
-        " Windows cmd.exe still uses cp850. If Windows ever moved to
-        " Powershell as the primary terminal, this would be utf-8
-        set termencoding=cp850
-        setglobal fileencoding=utf-8
-        " Windows has traditionally used cp1252, so it's probably wise to
-        " fallback into cp1252 instead of eg. iso-8859-15.
-        " Newer Windows files might contain utf-8 or utf-16 LE so we might
-        " want to try them first.
-        set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-      endif
-      set shellslash
-    else
-      set shell=/bin/sh
-    endif
-  " }}}
-
-  if filereadable(g:google_config)
-    execute 'source' g:google_config
-    NeoBundle 'google/vim-maktaba', {
-          \ 'disabled' : 1,
-          \ }
-    NeoBundle 'google/vim-glaive', {
-          \ 'depends' : 'google/vim-maktaba',
-          \ 'disabled' : 1
-          \ }
-  else
-    NeoBundle 'google/vim-maktaba', {
-          \ 'force' : 1,
-          \ }
-    NeoBundle 'google/vim-glaive', {
-          \ 'depends' : 'google/vim-maktaba',
-          \ 'force' : 1
-          \ }
-  endif
-
-  NeoBundle 'paulhybryant/vim-custom', {
-        \ 'depends' : 'vim-maktaba',
+function! s:SetupRelatedFiles()
+  for l:key in ['c', 'h', 't', 'b']
+    execute 'nnoremap <leader>g' . l:key .
+          \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
+          \ l:key . '")<CR>'
+  endfor
+endfunction
+if !filereadable(g:google_config)
+  NeoBundle 'paulhybryant/relatedfiles', {
         \ 'type__protocol' : 'ssh',
-        \ }                                                                     " My vim customization (utility functions, syntax etc)
-  let s:vimcustom = neobundle#get('vim-custom')
-  function! s:vimcustom.hooks.on_source(bundle)
-    set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
-    let g:myutils#special_bufvars = ['gistls', 'NERDTreeType']
-    autocmd BufEnter * call myutils#SyncNTTree()
-    inoremap <C-q> <ESC>:Bclose<cr>
-    nnoremap <C-q> :Bclose<cr>
-    if filereadable(g:google_config)
-      for l:key in ['c', 'h', 't', 'b']
-        execute 'nnoremap <leader>g' . l:key .
-              \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
-              \ l:key . '")<CR>'
-      endfor
-    else
-      nnoremap <leader>gc :call myutils#EditCC()<CR>
-      nnoremap <leader>gh :call myutils#EditHeader()<CR>
-      nnoremap <leader>gt :call myutils#EditTest()<CR>
-    endif
-    nnoremap <leader>hh :call myutils#HexHighlight()<CR>
-    nnoremap <leader>kl :call myutils#SetupTablineMappingForLinux()<CR>
-    nnoremap <leader>km :call myutils#SetupTablineMappingForMac()<CR>
-    nnoremap <leader>kw :call myutils#SetupTablineMappingForWindows()<CR>
-    nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
-    nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
-    nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
-    nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
-    noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
-    vmap <leader>y :call myutils#CopyText()<CR>
-    vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
-    vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
-
-    command! -nargs=* -complete=file -bang E
-          \ call myutils#MultiEdit('<bang>', <f-args>)
-    command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
-    command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
-    command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
-    command! -nargs=+ MapToggleVar call myutils#MapToggleVar(<f-args>)
-    command! Bclose call myutils#BufcloseCloseIt(1)
-    " TODO: Integrate this with codefmt
-    command! Fsql call myutils#FormatSql()
-
-    " Display-altering option toggles
-    MapToggle <F2> spell
-
-    if empty($SSH_CLIENT)
-      if g:OS.is_mac
-        call myutils#SetupTablineMappingForMac()
-      elseif g:OS.is_linux
-        call myutils#SetupTablineMappingForLinux()
-      elseif g:OS.is_windows
-        call myutils#SetupTablineMappingForWindows()
-      endif
-    else
-      if $SSH_OS == 'Darwin'
-        call myutils#SetupTablineMappingForMac()
-      elseif $SSH_OS == 'Linux'
-        call myutils#SetupTablineMappingForLinux()
-      endif
-    endif
+        \ }
+  let s:relatedfiles = neobundle#get('relatedfiles')
+  function s:relatedfiles.hooks.on_source(bundle)
+    call s:SetupRelatedFiles()
   endfunction
+endif
 
-  call glaive#Install()
-  " }}}
+NeoBundle 'paulhybryant/vim-custom', {
+      \ 'depends' : 'vim-maktaba',
+      \ 'type__protocol' : 'ssh',
+      \ }                                                                       " My vim customization (utility functions, syntax etc)
+let s:vimcustom = neobundle#get('vim-custom')
+function! s:vimcustom.hooks.on_source(bundle)
+  let g:myutils#special_bufvars = ['gistls', 'NERDTreeType', 'DiffIndicator']
+  set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
+  autocmd BufEnter * call myutils#SyncNTTree()
+  inoremap <C-q> <ESC>:Bclose<cr>
+  nnoremap <C-q> :Bclose<cr>
+  nnoremap <leader>hh :call myutils#HexHighlight()<CR>
+  nnoremap <leader>kb :call myutils#SetupTablineMappings(g:OS)<CR>
+  nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
+  nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
+  nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
+  nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
+  noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
+  vmap <leader>y :call myutils#CopyText()<CR>
+  vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
+  vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
+
+  command! -nargs=* -complete=file -bang E
+        \ call myutils#MultiEdit('<bang>', <f-args>)
+  command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
+  command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
+  command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
+  command! -nargs=+ MapToggleVar call myutils#MapToggleVar(<f-args>)
+  command! Bclose call myutils#BufcloseCloseIt(1)
+  " TODO: Integrate this with codefmt
+  command! Fsql call myutils#FormatSql()
+
+  " Display-altering option toggles
+  MapToggle <F2> spell
+endfunction
+
+call glaive#Install()
+" }}}
 
   " Nativation {{{
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
@@ -1174,6 +1124,7 @@
   call neobundle#end()
   NeoBundleCheck
 
+  call myutils#InitUndoSwapViews()
 " }}}
 
 " Mappings and autocommands {{{
@@ -1311,8 +1262,8 @@
   " The mapping from Align make the motion slow because vim needs to wait for
   " some time in case '=' is pressed after <leader>w. Is that a better way to
   " avoid this?
-  silent! unmap <leader>w=
-  silent! unmap <leader>m=
+  " silent! unmap <leader>w=
+  " silent! unmap <leader>m=
 
   augroup FiletypeFormat
     autocmd!
