@@ -146,7 +146,8 @@ endif
 
 NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
-NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
+" Can also use !neobundle#is_sourced('SQLUtilities')
+NeoBundle 'Raimondi/delimitMate', { 'disabled' : 1 }                            " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
@@ -166,12 +167,13 @@ NeoBundle 'kana/vim-textobj-user'                                               
 NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
 NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
 NeoBundle 'scrooloose/nerdcommenter'                                            " Plugin for adding comments
+NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
 NeoBundle 'scrooloose/nerdtree'                                                 " File explorer inside vim
 NeoBundle 'scrooloose/syntastic'                                                " Check syntax with external syntax checker
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
-" NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
 NeoBundle 'terryma/vim-expand-region'                                           " Expand visual selection by text object
-NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simutaneously
+NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simultaneously
 NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
 NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
 NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
@@ -239,6 +241,15 @@ NeoBundle 'paulhybryant/vim-textobj-path', {
       \ }                                                                       " Text object for a file system path
 
 " Plugin configurations {{{
+let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
+function! s:tmux_navigator.hooks.on_source(bundle)
+  " Allow jumping to other tmux pane in insert mode
+  imap <C-j> <ESC><C-j>
+  imap <C-h> <ESC><C-h>
+  imap <C-l> <ESC><C-l>
+  imap <C-k> <ESC><C-k>
+endfunction
+
 let s:expand_region = neobundle#get('vim-expand-region')
 function! s:expand_region.hooks.on_source(bundle)
   let g:expand_region_text_objects = {
@@ -306,7 +317,7 @@ function! s:nerdtree.hooks.on_source(bundle)
         \ '\.pyc', '\~$', '\.swo$', '\.swp$',
         \ '\.git', '\.hg', '\.svn', '\.bzr']
   let g:NERDTreeMouseMode=2
-  let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
+  let g:NERDTreeQuitOnOpen = 0                                                  " Keep NERDTree open after click
   let g:NERDTreeShowBookmarks=1
   let g:NERDTreeShowHidden=1
   let g:nerdtree_tabs_open_on_gui_startup=0
@@ -332,18 +343,6 @@ function! s:vimcustom.hooks.on_source(bundle)
   let g:myutils#special_bufvars = ['gistls', 'NERDTreeType', 'DiffIndicator']
   set spellfile=$HOME/.vim/bundle/vim-custom/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
-  inoremap <C-q> <ESC>:Bclose<cr>
-  nnoremap <C-q> :Bclose<cr>
-  nnoremap <leader>hh :call myutils#HexHighlight()<CR>
-  nnoremap <leader>kb :call myutils#SetupTablineMappings(g:OS)<CR>
-  nnoremap <leader>ln :<C-u>exe 'call myutils#LocationNext()'<CR>
-  nnoremap <leader>lp :<C-u>exe 'call myutils#LocationPrevious()'<CR>
-  nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
-  nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
-  noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
-  vmap <leader>y :call myutils#CopyText()<CR>
-  vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
-  vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
 
   command! -nargs=* -complete=file -bang E
         \ call myutils#MultiEdit('<bang>', <f-args>)
@@ -352,9 +351,22 @@ function! s:vimcustom.hooks.on_source(bundle)
   command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
   command! -nargs=+ MapToggleVar call myutils#MapToggleVar(<f-args>)
   command! Bclose call myutils#BufcloseCloseIt(1)
-  " TODO: Integrate this with codefmt
-  command! Fsql call myutils#FormatSql()
+
+  inoremap <C-q> <ESC>:Bclose<cr>
+  nnoremap <C-q> :Bclose<cr>
+  nnoremap <leader>hh :call myutils#HexHighlight()<CR>
+  nnoremap <leader>kb :call myutils#SetupTablineMappings(g:OS)<CR>
+  nnoremap <leader>ln :<C-u>execute 'call myutils#LocationNext()'<CR>
+  nnoremap <leader>lp :<C-u>execute 'call myutils#LocationPrevious()'<CR>
+  nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
+  nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
+  noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
+  vmap <leader>y :call myutils#CopyText()<CR>
+  vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
+  vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
+
   " Display-altering option toggles
+  " nnoremap <leader>ts :let &spell = !&spell<CR>
   MapToggle <F2> spell
 endfunction
 function! s:vimcustom.hooks.on_post_source(bundle)
@@ -565,6 +577,14 @@ NeoBundle 'paulhybryant/SQLUtilities', {
 let s:sqlutilities = neobundle#get('SQLUtilities')
 function! s:sqlutilities.hooks.on_source(bundle)
   let g:sqlutil_align_comma=0
+
+  function! s:FormatSql()
+    execute ':SQLUFormatter'
+    execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
+  endfunction
+
+  " TODO: Integrate this with codefmt
+  command! Fsql call s:FormatSql()
 endfunction
 NeoBundle 'vim-scripts/SQLComplete.vim', {
       \ 'autoload' : { 'filetypes' : ['sql'] },
@@ -868,6 +888,7 @@ endfunction
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
+" NeoBundle 'mbbill/undotree'
 " NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'thinca/vim-unite-history'
 " NeoBundle 'mattn/unite-gist'
@@ -1060,6 +1081,7 @@ endfunction
 " NeoBundle 'gabesoft/vim-ags', { 'disabled' : !executable('ag') }
 " NeoBundle 'aperezdc/vim-template'
 " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
+" NeoBundle 'Shougo/neosnippet-snippets', { 'depends' : ['neosnippet.vim'] }
 " NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
 " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
 " NeoBundle 'calebsmith/vim-lambdify'
@@ -1107,7 +1129,6 @@ endfunction
 " NeoBundle 'tomtom/tcomment_vim', {
       " \ 'depends' : 'tomtom/tlib.vim'
       " \ }                                                                     " Add comments
-" NeoBundle 'tpope/vim-commentary'                                              " Add comments
 " NeoBundle 'rhysd/libclang-vim'
 " NeoBundle 'szw/vim-ctrlspace'                                                 " Vim workspace manager
 " NeoBundle 'Rykka/clickable-things'
@@ -1133,9 +1154,11 @@ endfunction
 " NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
 " }}}
 
-  call neobundle#end()
-  NeoBundleCheck
-  call myutils#InitUndoSwapViews()
+call neobundle#end()
+NeoBundleCheck
+" If put in on_post_source, undo will not work.
+" TODO: Figure out why?
+call myutils#InitUndoSwapViews()
 " }}}
 
 " Mappings and autocommands {{{
@@ -1180,7 +1203,7 @@ endif
 noremap <leader>p "0p
 
 " Switch CWD to the directory of the open buffer
-noremap <leader>cd :lcd %:p:h<cr>:pwd<CR>
+noremap <leader>cd :lcd %:p:h<CR>:pwd<CR>
 
 " Print current file's full name (including path)
 noremap <leader>fn :echo expand('%:p')<CR>
@@ -1189,15 +1212,12 @@ noremap <leader>fn :echo expand('%:p')<CR>
 nnoremap <silent> <leader>c/ :let @/=""<CR>
 
 " Save the current window / tab
-nnoremap <c-s> :w<cr>
-inoremap <c-s> <ESC>:w<cr>
+nnoremap <C-s> :w<cr>
+inoremap <C-s> <ESC>:w<cr>
 
 " Some helpers to edit mode http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<CR>
+cnoremap %% <C-r>=expand('%:h').'/'<CR>
 " cabbr %% expand('%:p:h')
-
-" Toggle spell
-nnoremap <leader>ts :let &spell = !&spell<CR>
 
 " For wrap text using textwidth when formatting text
 nnoremap <leader>tw :setlocal formatoptions-=t<CR>
@@ -1227,11 +1247,6 @@ map <F9> :echo 'hi<' . synIDattr(synID(line('.'),col('.'),1),'name')
       \ . synIDattr(synID(line('.'),col('.'),0),'name') . '> lo<'
       \ . synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name') . '>'<CR>
 
-imap <C-j> <ESC><C-j>
-imap <C-h> <ESC><C-h>
-imap <C-l> <ESC><C-l>
-imap <C-k> <ESC><C-k>
-
 " Open all folds in the direct fold that contains current location
 nnoremap zO [zzczO<C-O>
 
@@ -1239,11 +1254,11 @@ augroup FiletypeFormat
   autocmd!
   autocmd BufRead *.cc setlocal foldmethod=syntax
   autocmd BufRead BUILD,*.log setlocal nospell
-  autocmd FileType conf setlocal nospell
   autocmd BufRead *.vim
-        \ setlocal sw=2 | setlocal ts=2 |
-        \ setlocal sts=2 | set ft=vim | set foldmethod=marker
+        \ setlocal filetype=vim sw=2 ts=2 sts=2 et
+        \ tw=80 foldlevel=0 foldmethod=marker nospell
   autocmd BufRead *.json setlocal filetype=json
+  autocmd FileType conf setlocal nospell
 augroup END
 
 " Unsed {{{
