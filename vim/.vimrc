@@ -144,43 +144,43 @@ endif
 " }}}
 " }}}
 
+NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
+NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
+NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
+NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
 NeoBundle 'bkad/CamelCaseMotion'                                                " Defines CamelCase text object
+NeoBundle 'bling/vim-airline'                                                   " Lean & mean status/tabline for vim that's light as air
 NeoBundle 'blueyed/vim-diminactive'                                             " Dim inactive windows
+NeoBundle 'bronson/vim-visual-star-search'                                      " Use * to search for selected text from visual mode
+NeoBundle 'chrisbra/Recover.vim'                                                " Show diff between existing swap files and saved file
 NeoBundle 'christoomey/vim-tmux-navigator'                                      " Allow using the same keymap to move between tmux panes and vim splits seamlessly
 NeoBundle 'cohama/agit.vim'                                                     " Git log viewer (Yet another gitk clone for Vim), prefer agit over gitv as gitv has some bugs
 NeoBundle 'flazz/vim-colorschemes'                                              " Collection of vim colorschemes
-NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
-NeoBundle 'tpope/vim-surround'                                                  " Useful mappings for surrounding text objects with a pair of chars
-NeoBundle 'tpope/vim-unimpaired'                                                " Complementary pairs of mappings
-NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
-NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
-NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
-NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
-NeoBundle 'bling/vim-airline'                                                   " Lean & mean status/tabline for vim that's light as air
-NeoBundle 'kana/vim-operator-user'                                              " User defined operator
-NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
-NeoBundle 'scrooloose/nerdcommenter'                                            " Add comments
-NeoBundle 'scrooloose/syntastic'                                                " Check syntax with external syntax checker
-NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
-NeoBundle 'scrooloose/nerdtree'                                                 " File explorer inside vim
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-NeoBundle 'jeetsukumaran/vim-buffergator'
-NeoBundle 'jlemetay/permut'
-NeoBundle 'bronson/vim-visual-star-search'                                      " Use * to search for selected text from visual mode
-NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
-NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
-NeoBundle 'chrisbra/Recover.vim'                                                " Show diff between existing swap files and saved file
 NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
-NeoBundle 'tyru/capture.vim'                                                    " Capture Ex command output to buffer
-NeoBundle 'tyru/open-browser.vim'                                               " Open browser and search from within vim
-NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simutaneously
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'ujihisa/unite-locate'
-NeoBundle 'terryma/vim-expand-region'                                           " Expand visual selection by text object
+NeoBundle 'jeetsukumaran/vim-buffergator'                                       " Buffer selector in vim
+NeoBundle 'jlemetay/permut'                                                     " Swap fields separated by delimiter
+NeoBundle 'kana/vim-operator-user'                                              " User defined operator
 NeoBundle 'kana/vim-textobj-user'                                               " Allow defining text object by user
 NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
+NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
+NeoBundle 'scrooloose/nerdcommenter'                                            " Plugin for adding comments
+NeoBundle 'scrooloose/nerdtree'                                                 " File explorer inside vim
+NeoBundle 'scrooloose/syntastic'                                                " Check syntax with external syntax checker
+NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
 " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+NeoBundle 'terryma/vim-expand-region'                                           " Expand visual selection by text object
+NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simutaneously
+NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
+NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
+NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
+NeoBundle 'tpope/vim-surround'                                                  " Useful mappings for surrounding text objects with a pair of chars
+NeoBundle 'tpope/vim-unimpaired'                                                " Complementary pairs of mappings
+NeoBundle 'tyru/capture.vim'                                                    " Capture Ex command output to buffer
+NeoBundle 'tyru/open-browser.vim'                                               " Open browser and search from within vim
+NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
+NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
 
 NeoBundle 'paulhybryant/vim-custom', {
       \ 'depends' : ['vim-maktaba', 'os.vim'],
@@ -188,11 +188,11 @@ NeoBundle 'paulhybryant/vim-custom', {
       \ }                                                                       " My vim customization (utility functions, syntax etc)
 NeoBundle 'rking/ag.vim', {
       \ 'disabled' : !executable('ag'),
-      \ }
+      \ }                                                                       " Text based search tool using the silver searcher
 NeoBundle 'mileszs/ack.vim', {
       \ 'disabled' : !executable('ag') && !executable('ack') &&
       \              !executable('ack-grep'),
-      \ }
+      \ }                                                                       " Text based search tool using ack
 NeoBundle 'paulhybryant/vim-signify', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Show the sign at changes from last git commit
@@ -211,7 +211,7 @@ NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
       \ 'disabled' : !has('lua'),
       \ 'vim_version' : '7.3.885',
-      \ }
+      \ }                                                                       " Code completion engine
 NeoBundle 'Shougo/unite.vim', {
       \ 'recipe' : 'unite',
       \ }                                                                       " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
@@ -223,7 +223,7 @@ NeoBundle 'paulhybryant/file-line', {
       \ }                                                                       " Open files and go to specific line and column (original user not active)
 NeoBundle 'SirVer/ultisnips', {
       \ 'disabled' : !has('python'),
-      \ }
+      \ }                                                                       " Define and insert snippets
 NeoBundle 'xolox/vim-notes', {
       \ 'depends' : ['xolox/vim-misc'],
       \ }                                                                       " Note taking with vim
@@ -232,7 +232,7 @@ NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ }                                                                       " Text object between any type of quotes
 NeoBundle 'killphi/vim-textobj-signify-hunk', {
       \ 'depends' : ['kana/vim-textobj-user'],
-      \ }
+      \ }                                                                       " Text object for a hunk of diffs
 NeoBundle 'paulhybryant/vim-textobj-path', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ 'type__protocol' : 'ssh',
