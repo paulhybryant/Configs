@@ -146,8 +146,6 @@ endif
 
 NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
-" Can also use !neobundle#is_sourced('SQLUtilities')
-NeoBundle 'Raimondi/delimitMate', { 'disabled' : 1 }                            " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
@@ -167,13 +165,13 @@ NeoBundle 'kana/vim-textobj-user'                                               
 NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
 NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
 NeoBundle 'scrooloose/nerdcommenter'                                            " Plugin for adding comments
-NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
 NeoBundle 'scrooloose/nerdtree'                                                 " File explorer inside vim
 NeoBundle 'scrooloose/syntastic'                                                " Check syntax with external syntax checker
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
-NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+NeoBundle 'spf13/vim-autoclose'                                                 " Automatically close brackets
 NeoBundle 'terryma/vim-expand-region'                                           " Expand visual selection by text object
 NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simultaneously
+NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
 NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
 NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
 NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
@@ -239,6 +237,8 @@ NeoBundle 'paulhybryant/vim-textobj-path', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Text object for a file system path
+
+NeoBundle 'Raimondi/delimitMate', { 'disabled' : 1 }                            " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 
 " Plugin configurations {{{
 let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
@@ -732,6 +732,11 @@ NeoBundle 'octol/vim-cpp-enhanced-highlight', {
       \ 'autoload' : { 'filetypes' : ['cpp'] },
       \ 'lazy' : 1,
       \ }                                                                       " Enhanced vim cpp highlight
+NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/blockhl.vba.gz', {
+      \ 'autoload' : { 'filetypes' : ['cpp'] },
+      \ 'lazy' : 1,
+      \ 'type' : 'vba',
+      \ }                                                                       " Highlights in block level
 NeoBundle 'jaxbot/semantic-highlight.vim', {
       \ 'autoload' : { 'filetypes' : ['cpp'] },
       \ 'lazy' : 1,
@@ -786,6 +791,20 @@ endfunction
 " }}}
 
 " Unused {{{
+NeoBundle 'Shougo/vimfiler.vim', {
+      \   'commands' : [
+      \     { 'name' : ['VimFiler', 'Edit', 'Write'],
+      \       'complete' : 'customlist,vimfiler#complete' },
+      \     'Read',
+      \     'Source'
+      \   ],
+      \   'depends' : 'Shougo/unite.vim',
+      \   'disabled' : 1,
+      \   'explorer' : 1,
+      \   'lazy' : 1,
+      \   'mappings' : '<Plug>',
+      \   'recipe' : 'vimfiler',
+      \ }                                                                       " File explorer inside vim
 " TextObjects {{{
 " TODO: For vim-textobj-quotes, va' seems to select the space before the
 " quote, need to be fixed.  Also, try to map vi' to viq etc
@@ -888,6 +907,17 @@ endfunction
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
+" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/help.vba.gz', {
+      " \ 'type' : 'vba',
+      " \ }                                                                       " Syntax highlight for help file
+" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hicolors.vba.gz', {
+      " \ 'type' : 'vba',
+      " \ }                                                                       " Shows highlighting colors in their own colors, plus a colorscheme editor
+" NeoBundle 'vim-scripts/ShowMarks'                                               " Use gutter to show location of marks
+" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/HiMarks.vba.gz', {
+      " \ 'depends' : ['ShowMarks'],
+      " \ 'type' : 'vba',
+      " \ }                                                                       " Highlights marks by using the signs feature
 " NeoBundle 'mbbill/undotree'
 " NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'thinca/vim-unite-history'
@@ -904,19 +934,6 @@ endfunction
 " function! s:netrw.hooks.on_source(bundle)
   " let g:netrw_altfile = 1
 " endfunction
-" NeoBundle 'Shougo/vimfiler.vim', {
-      " \   'commands' : [
-      " \     { 'name' : ['VimFiler', 'Edit', 'Write'],
-      " \       'complete' : 'customlist,vimfiler#complete' },
-      " \     'Read',
-      " \     'Source'
-      " \   ],
-      " \   'depends' : 'Shougo/unite.vim',
-      " \   'explorer' : 1,
-      " \   'lazy' : 1,
-      " \   'mappings' : '<Plug>',
-      " \   'recipe' : 'vimfiler',
-      " \ }                                                                     " File explorer inside vim
 " NeoBundle 'osyo-manga/vim-over'                                               " Preview changes to be made
 " let s:vimover = neobundle#get('vim-over')
 " function! s:vimover.hooks.on_source(bundle)
@@ -980,7 +997,6 @@ endfunction
   " nnoremap <leader>mc :MarkClear<CR>
   " nnoremap <leader>m/ :Mark <C-R>/<CR>
 " endfunction
-" NeoBundle 'vim-scripts/ShowMarks'                                             " Use gutter to show location of marks
 " NeoBundle 'vim-scripts/SemanticHL', { 'disabled' : !has('gui_running') }      " Semantic highlighting for C / C++
 " NeoBundle 'nathanaelkane/vim-indent-guides'
 " let s:vimindentguides = neobundle#get('vim-indent-guides')
