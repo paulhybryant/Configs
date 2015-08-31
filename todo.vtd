@@ -11,6 +11,8 @@
   @ Set nospell for DONE item in vtd. (DONE 2014-11-17 20:12)
   @ Update vim-custom, for C-Q, check whether the buffer to be closed is in a split (DONE 2014-11-17 20:12)
   @ Update SQLUtilities to wrap at comma but leave comma with previous line. (DONE 2014-11-17 20:13)
+  @ Documentation for relatedfiles
+  @ Documentation for folddigest
 
 = Tmux @p:2 =
   @ tmux-session.sh (DONE 2015-08-19 16:18)
