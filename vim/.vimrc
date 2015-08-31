@@ -245,7 +245,8 @@ NeoBundle 'Raimondi/delimitMate', { 'disabled' : 1 }                            
 " Plugin configurations {{{2
 let s:folddigest = neobundle#get('folddigest.vim')
 function! s:folddigest.hooks.on_source(bundle)
-  Glaive folddigest.vim vertical closefold flexnumwidth winsize=60
+  Glaive folddigest.vim plugin[mappings]
+        \ vertical closefold flexnumwidth winsize=60 winpos='leftabove'
 endfunction
 
 let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
