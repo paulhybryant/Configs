@@ -24,9 +24,9 @@ filetype off
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle'))
 
-" NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
-NeoBundleFetch 'paulhybryant/neobundle.vim'                                     " Plugin manager
+NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+" NeoBundleFetch 'paulhybryant/neobundle.vim'                                     " Plugin manager
 " NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
 " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
 " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
@@ -65,7 +65,7 @@ else
 endif
 " }}}
 " Shared plugin configurations {{{2
-function! s:SetupRelatedFiles()
+function! s:ConfigureRelatedFiles()
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <leader>g' . l:key .
           \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
@@ -100,12 +100,13 @@ endfunction
 " }}}
 " Google specific setup {{{2
 let s:google_config = resolve(expand('~/.vimrc.google'))
-if filereadable(s:google_config)
+let g:at_google = filereadable(s:google_config)
+if g:at_google
   execute 'source' s:google_config
   " Register the bundles, but do not add them to rtp as they are already there
   NeoBundleFetch 'google/vim-maktaba'
   NeoBundleFetch 'google/vim-glaive'
-  call s:SetupRelatedFiles()
+  call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
 else
   NeoBundle 'google/vim-maktaba', {
@@ -116,28 +117,6 @@ else
         \ 'force' : 1
         \ }
   call glaive#Install()
-
-  NeoBundle 'paulhybryant/relatedfiles', {
-        \ 'type__protocol' : 'ssh',
-        \ }
-  let s:relatedfiles = neobundle#get('relatedfiles')
-  function s:relatedfiles.hooks.on_source(bundle)
-    call s:SetupRelatedFiles()
-  endfunction
-
-  NeoBundle 'Valloric/YouCompleteMe'
-  let s:ycm = neobundle#get('YouCompleteMe')
-  function s:ycm.hooks.on_source(bundle)
-    call s:ConfigureYcm()
-  endfunction
-
-  NeoBundle 'google/vim-codefmt', {
-        \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
-        \ }                                                                     " Code formating plugin from google
-  let s:vimcodefmt = neobundle#get('vim-codefmt')
-  function! s:vimcodefmt.hooks.on_source(bundle)
-    Glaive codefmt plugin[mappings]
-  endfunction
 endif
 " }}}
 
@@ -178,8 +157,11 @@ NeoBundle 'tyru/capture.vim'                                                    
 NeoBundle 'tyru/open-browser.vim'                                               " Open browser and search from within vim
 NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
 NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
-NeoBundle 'h1mesuke/unite-outline'
+" NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
+NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
+
+NeoBundleDisable delimitMate
 
 NeoBundle 'paulhybryant/myutils', {
       \ 'depends' : ['vim-maktaba', 'vim-glaive', 'os.vim'],
@@ -188,13 +170,10 @@ NeoBundle 'paulhybryant/myutils', {
 NeoBundle 'paulhybryant/folddigest.vim', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Outline explorer based on folds
-NeoBundle 'rking/ag.vim', {
-      \ 'disabled' : !executable('ag'),
-      \ }                                                                       " Text based search tool using the silver searcher
-NeoBundle 'mileszs/ack.vim', {
-      \ 'disabled' : !executable('ag') && !executable('ack') &&
-      \              !executable('ack-grep'),
-      \ }                                                                       " Text based search tool using ack
+NeoBundle 'paulhybryant/relatedfiles', {
+      \ 'disabled' : g:at_google,
+      \ 'type__protocol' : 'ssh',
+      \ }
 NeoBundle 'paulhybryant/vim-signify', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Show the sign at changes from last git commit
@@ -206,6 +185,41 @@ NeoBundle 'paulhybryant/vim-diff-indicator', {
       \ ],
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Diff indicator based on vim-signify
+NeoBundle 'paulhybryant/file-line', {
+      \ 'type__protocol' : 'ssh',
+      \ }                                                                       " Open files and go to specific line and column (original user not active)
+NeoBundle 'paulhybryant/vim-textobj-path', {
+      \ 'depends' : ['kana/vim-textobj-user'],
+      \ 'type__protocol' : 'ssh',
+      \ }                                                                       " Text object for a file system path
+NeoBundle 'paulhybryant/foldcol', {
+      \ 'depends' : ['vim-maktaba', 'Align'],
+      \ 'type__protocol' : 'ssh'
+      \ }                                                                       " Fold columns selected in visual block mode
+NeoBundle 'paulhybryant/vim-scratch', {
+      \ 'type__protocol' : 'ssh'
+      \ }                                                                       " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
+" NeoBundle 'paulhybryant/tmuxline.vim', {
+      " \ 'type__protocol' : 'ssh'
+      " \ }                                                                     " Change tmux theme to be consistent with vim statusline
+NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
+      \ 'regular_namne' : 'Align',
+      \ 'type' : 'vba',
+      \ }                                                                       " Alinghing texts based on specific charater etc
+NeoBundle 'Valloric/YouCompleteMe', {
+      \ 'disabled' : g:at_google,
+      \ }
+NeoBundle 'google/vim-codefmt', {
+      \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
+      \ 'disabled' : g:at_google,
+      \ }                                                                       " Code formating plugin from google
+NeoBundle 'rking/ag.vim', {
+      \ 'disabled' : !executable('ag'),
+      \ }                                                                       " Text based search tool using the silver searcher
+NeoBundle 'mileszs/ack.vim', {
+      \ 'disabled' : !executable('ag') && !executable('ack') &&
+      \              !executable('ack-grep'),
+      \ }                                                                       " Text based search tool using ack
 NeoBundle 'tyru/operator-camelize.vim', {
       \ 'depends' : ['kana/vim-operator-user'],
       \ }                                                                       " Convert variable to / from camelcase form
@@ -217,12 +231,27 @@ NeoBundle 'Shougo/neocomplete.vim', {
 NeoBundle 'Shougo/unite.vim', {
       \ 'recipe' : 'unite',
       \ }                                                                       " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+NeoBundle 'junegunn/fzf.vim', {
+      \ 'depends' : ['gunegunn/fzf'],
+      \ }
+NeoBundle 'junegunn/fzf'
 " NeoBundle 'jistr/vim-nerdtree-tabs', {
       " \ 'depends' : ['scrooloose/nerdtree'],
       " \ }                                                                       " One NERDTree only, shared among buffers / tabs
-NeoBundle 'paulhybryant/file-line', {
-      \ 'type__protocol' : 'ssh',
-      \ }                                                                       " Open files and go to specific line and column (original user not active)
+NeoBundle 'Shougo/vimfiler.vim', {
+      \   'commands' : [
+      \     { 'name' : ['VimFiler', 'Edit', 'Write'],
+      \       'complete' : 'customlist,vimfiler#complete' },
+      \     'Read',
+      \     'Source'
+      \   ],
+      \   'depends' : 'Shougo/unite.vim',
+      \   'disabled' : 1,
+      \   'explorer' : 1,
+      \   'lazy' : 1,
+      \   'mappings' : '<Plug>',
+      \   'recipe' : 'vimfiler',
+      \ }                                                                       " File explorer inside vim
 NeoBundle 'SirVer/ultisnips', {
       \ 'disabled' : !has('python'),
       \ }                                                                       " Define and insert snippets
@@ -235,14 +264,28 @@ NeoBundle 'beloglazov/vim-textobj-quotes', {
 NeoBundle 'killphi/vim-textobj-signify-hunk', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object for a hunk of diffs
-NeoBundle 'paulhybryant/vim-textobj-path', {
-      \ 'depends' : ['kana/vim-textobj-user'],
-      \ 'type__protocol' : 'ssh',
-      \ }                                                                       " Text object for a file system path
-
-NeoBundle 'Raimondi/delimitMate', { 'disabled' : 1 }                            " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 
 " Plugin configurations {{{2
+let s:foldcol = neobundle#get('foldcol')
+function! s:foldcol.hooks.on_source(bundle)
+  Glaive foldcol plugin[mappings]
+endfunction
+
+let s:vimcodefmt = neobundle#get('vim-codefmt')
+function! s:vimcodefmt.hooks.on_source(bundle)
+  Glaive codefmt plugin[mappings]
+endfunction
+
+let s:ycm = neobundle#get('YouCompleteMe')
+function s:ycm.hooks.on_source(bundle)
+  call s:ConfigureYcm()
+endfunction
+
+let s:relatedfiles = neobundle#get('relatedfiles')
+function s:relatedfiles.hooks.on_source(bundle)
+  call s:SetupRelatedFiles()
+endfunction
+
 let s:folddigest = neobundle#get('folddigest.vim')
 function! s:folddigest.hooks.on_source(bundle)
   Glaive folddigest.vim plugin[mappings]
@@ -284,8 +327,6 @@ endfunction
 
 let s:vimhugefile = neobundle#get('vim-hugefile')
 function! s:vimhugefile.hooks.on_source(bundle)
-  " let l:plugin = maktaba#plugin#Get('vim-hugefile')
-  " call l:plugin.Flag('trigger_size', 50)
   let g:hugefile_trigger_size = 50                                              " In MB
 endfunction
 
@@ -348,8 +389,10 @@ endfunction
 let s:vimcustom = neobundle#get('myutils')
 function! s:vimcustom.hooks.on_source(bundle)
   " Close vim when the only buffer left is a special type of buffer
-  Glaive myutils plugin[mappings] bufclose_skip_types=`[
-        \ 'gistls', 'NERDTreeType', 'DiffIndicator', 'FoldDigest']`
+  Glaive myutils plugin[mappings]
+        \ bufclose_skip_types=`[
+        \  'gistls', 'nerdtree', 'indicator',
+        \  'FoldDigest', 'Scratch', 'capture' ]`
   set spellfile=$HOME/.vim/bundle/myutils/spell/en.utf-8.add
   autocmd BufEnter * call myutils#SyncNTTree()
 
@@ -574,10 +617,10 @@ function! s:vimvtd.hooks.on_source(bundle)
 endfunction
 " }}}
 " sql {{{3
-NeoBundle 'paulhybryant/SQLUtilities', {
+NeoBundle 'jphustman/SQLUtilities', {
       \ 'autoload' : { 'filetypes' : ['sql'] },
+      \ 'depends' : ['Align'],
       \ 'lazy' : 1,
-      \ 'type__protocol' : 'ssh'
       \ }                                                                       " Utilities for editing SQL scripts (v7.0)
 let s:sqlutilities = neobundle#get('SQLUtilities')
 function! s:sqlutilities.hooks.on_source(bundle)
@@ -795,20 +838,6 @@ endfunction
 " }}}
 " }}}
 " Unused {{{
-NeoBundle 'Shougo/vimfiler.vim', {
-      \   'commands' : [
-      \     { 'name' : ['VimFiler', 'Edit', 'Write'],
-      \       'complete' : 'customlist,vimfiler#complete' },
-      \     'Read',
-      \     'Source'
-      \   ],
-      \   'depends' : 'Shougo/unite.vim',
-      \   'disabled' : 1,
-      \   'explorer' : 1,
-      \   'lazy' : 1,
-      \   'mappings' : '<Plug>',
-      \   'recipe' : 'vimfiler',
-      \ }                                                                       " File explorer inside vim
 " TextObjects {{{
 " TODO: For vim-textobj-quotes, va' seems to select the space before the
 " quote, need to be fixed.  Also, try to map vi' to viq etc
@@ -943,22 +972,11 @@ NeoBundle 'Shougo/vimfiler.vim', {
   " map <leader>o :OverCommandLine<CR>
 " endfunction
 " NeoBundle 'wincent/Command-T'
-" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
-      " \ 'type' : 'vba',
-      " \ }                                                                     " Alinghing texts based on specific charater etc
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
       " \ 'depends' : ['Align'],
       " \ 'type' : 'vba',
       " \ }                                                                     " Align the texts by repeatedly filling blanks with specified charater.
 " NeoBundle 'godlygeek/tabular'
-" NeoBundle 'paulhybryant/foldcol', {
-      " \ 'depends' : ['vim-maktaba', 'Align'],
-      " \ 'type__protocol' : 'ssh'
-      " \ }                                                                     " Fold columns selected in visual block mode
-" let s:foldcol = neobundle#get('foldcol')
-" function! s:foldcol.hooks.on_source(bundle)
-  " Glaive foldcol plugin[mappings]
-" endfunction
 " NeoBundle 'junegunn/vim-easy-align'
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz', {
       " \ 'type' : 'vba',
@@ -1010,9 +1028,6 @@ NeoBundle 'Shougo/vimfiler.vim', {
 " endfunction
 " NeoBundle 'vim-scripts/TagHighlight'
 " NeoBundle 'vim-scripts/utl.vim'
-" NeoBundle 'paulhybryant/vim-scratch', {
-      " \ 'type__protocol' : 'ssh'
-      " \ }                                                                     " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
 " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
 " NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
 " NeoBundle 'xolox/vim-easytags', {
@@ -1069,9 +1084,6 @@ NeoBundle 'Shougo/vimfiler.vim', {
 " NeoBundle 'MattesGroeger/vim-bookmarks'
 " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
 " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-" NeoBundle 'paulhybryant/tmuxline.vim', {
-      " \ 'type__protocol' : 'ssh'
-      " \ }                                                                     " Change tmux theme to be consistent with vim statusline
 " NeoBundle 'edkolev/promptline.vim'
 " let g:tmuxline_theme = 'airline'
 " let g:tmuxline_preset = 'tmux'
@@ -1109,7 +1121,6 @@ NeoBundle 'Shougo/vimfiler.vim', {
 " NeoBundle 'chrisbra/NrrwRgn'
 " NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
 " NeoBundle 'benmills/vimux'                                                    " Interact with tmux from vim
-" NeoBundle 'paulhybryant/conque'                                               " Split window for shell command line
 " NeoBundle 'Shougo/vimshell.vim', { 'recipe' : 'vimshell.vim' }                " Shell implemented with vimscript
 " let s:vimshell = neobundle#get('vimshell.vim')
 " function! s:vimshell.hooks.on_source(bundle)
@@ -1177,6 +1188,9 @@ NeoBundle 'Shougo/vimfiler.vim', {
 " NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
 " }}}
 
+" for bundle in ['delimitMate']
+  " NeoBundleDisable bundle
+" endfor
 call neobundle#end()
 NeoBundleCheck
 " If put in on_post_source, undo will not work.
