@@ -1,14 +1,15 @@
-" vim: set filetype=vim sw=2 ts=2 sts=2 expandtab tw=80 foldlevel=0 foldmethod=marker nospell:
-
+" Modeline {{{1
+" vim: filetype=vim sw=2 ts=2 sts=2 expandtab tw=80
+" vim: foldlevel=0 foldmethod=marker nospell
+" }}}
+" Globals {{{1
 set nocompatible                                                                " Must be first line
 set encoding=utf-8                                                              " Set text encoding default to utf-8
 scriptencoding utf-8                                                            " Character encoding used in this script
-
-" Plugins {{{1
 let g:mapleader = ','
 let g:maplocalleader = ',,'
-
-" Essential Plugins (NeoBundle, Maktaba, Glaive, OS.vim) {{{2
+" }}}
+" Install NeoBundle if needed {{{1
 function! s:InstallNeobundleIfNotPresent() " {{{3
   if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
     echo 'Installing neobundle...'
@@ -19,23 +20,23 @@ function! s:InstallNeobundleIfNotPresent() " {{{3
 endfunction
 " }}}
 call s:InstallNeobundleIfNotPresent()
-
+" }}}
+" Setup NeoBundle and OS.vim {{{1
 filetype off
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'                                         " Plugin manager
+NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-" NeoBundleFetch 'paulhybryant/neobundle.vim'                                     " Plugin manager
+" NeoBundleFetch 'paulhybryant/neobundle.vim'                                   " Plugin manager
 " NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
 " NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
 " NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
 " NeoBundle 'tpope/vim-pathogen'                                                " Yet another vim plugin manager
-
 NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                       " Provides consistency across OSes
 let g:OS = os#init()
-
-" Windows Compatible {{{2
+" }}}
+" Windows Compatible {{{1
 if g:OS.is_windows
   source $VIMRUNTIME/mswin.vim
   behave mswin
@@ -64,7 +65,7 @@ else
   set shell=/bin/sh
 endif
 " }}}
-" Shared plugin configurations {{{2
+" Shared plugin configurations {{{1
 function! s:ConfigureRelatedFiles()
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <leader>g' . l:key .
@@ -98,7 +99,7 @@ function! s:ConfigureYcm()
   let g:ycm_autoclose_preview_window_after_completion = 1                       " Automatically close the preview window for completion
 endfunction
 " }}}
-" Google specific setup {{{2
+" Google specific setup {{{1
 let s:google_config = resolve(expand('~/.vimrc.google'))
 let g:at_google = filereadable(s:google_config)
 if g:at_google
@@ -108,18 +109,9 @@ if g:at_google
   NeoBundleFetch 'google/vim-glaive'
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
-else
-  NeoBundle 'google/vim-maktaba', {
-        \ 'force' : 1,
-        \ }
-  NeoBundle 'google/vim-glaive', {
-        \ 'depends' : ['google/vim-maktaba'],
-        \ 'force' : 1
-        \ }
-  call glaive#Install()
 endif
 " }}}
-
+" General Plugins {{{1
 NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
 NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
@@ -163,6 +155,13 @@ NeoBundle 'Raimondi/delimitMate'                                                
 
 NeoBundleDisable delimitMate
 
+NeoBundle 'google/vim-maktaba', {
+      \ 'disabled' : g:at_google,
+      \ }
+NeoBundle 'google/vim-glaive', {
+      \ 'depends' : ['google/vim-maktaba'],
+      \ 'disabled' : g:at_google,
+      \ }
 NeoBundle 'paulhybryant/myutils', {
       \ 'depends' : ['vim-maktaba', 'vim-glaive', 'os.vim'],
       \ 'type__protocol' : 'ssh',
@@ -264,8 +263,8 @@ NeoBundle 'beloglazov/vim-textobj-quotes', {
 NeoBundle 'killphi/vim-textobj-signify-hunk', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object for a hunk of diffs
-
-" Plugin configurations {{{2
+" }}}
+" Plugin configurations {{{1
 let s:foldcol = neobundle#get('foldcol')
 function! s:foldcol.hooks.on_source(bundle)
   Glaive foldcol plugin[mappings]
@@ -464,6 +463,9 @@ let s:solarized = neobundle#get('vim-colors-solarized')
 function! s:solarized.hooks.on_source(bundle)
   let g:solarized_diffmode="high"
 endfunction
+function! s:solarized.hooks.on_post_source(bundle)
+  colorscheme solarized
+endfunction
 
 let s:airline = neobundle#get('vim-airline')
 function! s:airline.hooks.on_source(bundle)
@@ -600,8 +602,8 @@ function! s:syntastic.hooks.on_source(bundle)
   nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 endfunction
 " }}}
-" Filetype specific plugins {{{2
-" vtd {{{3
+" Filetype specific plugins {{{1
+" vtd {{{2
 NeoBundle 'chiphogg/vim-vtd', {
       \ 'autoload' : { 'filetypes' : ['vtd'] },
       \ 'lazy' : 1,
@@ -616,7 +618,7 @@ function! s:vimvtd.hooks.on_source(bundle)
   endif
 endfunction
 " }}}
-" sql {{{3
+" sql {{{2
 NeoBundle 'jphustman/SQLUtilities', {
       \ 'autoload' : { 'filetypes' : ['sql'] },
       \ 'depends' : ['Align'],
@@ -643,7 +645,7 @@ NeoBundle 'vim-scripts/sql.vim--Stinson', {
       \ 'lazy' : 1,
       \ }                                                                       " Better SQL syntax highlighting
 " }}}
-" html {{{3
+" html {{{2
 NeoBundle 'rstacruz/sparkup', {
       \ 'autoload' : { 'filetypes' : ['html'] },
       \ 'lazy' : 1,
@@ -668,7 +670,7 @@ function! s:autoclosetag.hooks.on_source(bundle)
         \ '$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim'
 endfunction
 " }}}
-" tmux {{{3
+" tmux {{{2
 NeoBundle 'tmux-plugins/vim-tmux', {
       \ 'autoload' : { 'filetypes' : ['tmux'] },
       \ 'lazy' : 1,
@@ -682,7 +684,7 @@ NeoBundle 'wellle/tmux-complete.vim', {
       " \ 'lazy' : 1,
       " \ }                                                                     " Tmux syntax highlight
 " }}}
-" shell {{{3
+" shell {{{2
 NeoBundle 'vim-scripts/bash-support.vim', {
       \ 'autoload' : { 'filetypes' : ['sh'] },
       \ 'disabled' : 1,
@@ -696,7 +698,7 @@ function! s:bash_support.hooks.on_source(bundle)
         \ 'bash-support.vim/bash-support/templates/Templates')
 endfunction
 " }}}
-" vim {{{3
+" vim {{{2
 NeoBundle 'vim-scripts/ReloadScript', {
       \ 'autoload' : { 'filetypes' : ['vim'] },
       \ 'lazy' : 1,
@@ -747,13 +749,13 @@ NeoBundle 'google/vim-ft-vroom', {
       " \ 'lazy' : 1,
       " \ }                                                                     " Syntax checker for vimscript
 " }}}
-" git {{{3
+" git {{{2
 NeoBundle 'tpope/vim-git', {
       \ 'autoload' : { 'filetypes' : ['gitcommit'] },
       \ 'lazy' : 1,
       \ }                                                                       " Syntax highlight for git
 " }}}
-" markdown {{{3
+" markdown {{{2
 NeoBundle 'plasticboy/vim-markdown', {
       \ 'autoload' : { 'filetypes' : ['markdown'] },
       \ 'lazy' : 1,
@@ -771,7 +773,7 @@ NeoBundle 'isnowfy/python-vim-instant-markdown', {
       " \ 'lazy' : 1,
       " \ }
 " }}}
-" cpp {{{3
+" cpp {{{2
 NeoBundle 'vim-jp/cpp-vim', {
       \ 'autoload' : { 'filetypes' : ['cpp'] },
       \ 'lazy' : 1,
@@ -795,7 +797,7 @@ function! s:semantic_highlight.hooks.on_source(bundle)
         \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 endfunction
 " }}}
-" js {{{3
+" js {{{2
 NeoBundle 'maksimr/vim-jsbeautify', {
       \ 'filetypes' : ['javascript'],
       \ 'lazy' : 1,
@@ -821,7 +823,7 @@ function s:jssyntax.hooks.on_source(bundle)
   " let g:javascript_conceal_super      = 'Ω'
 endfunction
 " }}}
-" json {{{3
+" json {{{2
 NeoBundle 'elzr/vim-json', {
       \ 'filetypes' : ['json'],
       \ 'lazy' : 1,
@@ -837,8 +839,8 @@ function s:vimjson.hooks.on_source(bundle)
 endfunction
 " }}}
 " }}}
-" Unused {{{
-" TextObjects {{{
+" Unused plugins {{{1
+" TextObjects {{{2
 " TODO: For vim-textobj-quotes, va' seems to select the space before the
 " quote, need to be fixed.  Also, try to map vi' to viq etc
 " NeoBundle 'Julian/vim-textobj-brace', {
@@ -1187,14 +1189,15 @@ endfunction
       " \ }                                                                     " For ruby development
 " NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
 " }}}
-
+" Disabled plugins {{{1
 " for bundle in ['delimitMate']
   " NeoBundleDisable bundle
 " endfor
+" }}}
+" Wrap up bundle setup {{{1
 call neobundle#end()
 NeoBundleCheck
-" If put in on_post_source, undo will not work.
-" TODO: Figure out why?
+call glaive#Install()
 call myutils#InitUndoSwapViews()
 " }}}
 " Settings {{{1
@@ -1258,10 +1261,9 @@ set comments=sl:/*,mb:*,elx:*/                                                  
 
 if &diff
   set nospell                                                                   " No spellcheck
-  colorscheme putty
+  " colorscheme putty
 else
   set spell                                                                     " Spellcheck
-  colorscheme solarized
 endif
 
 if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                " On Linux and mac use + register for copy-paste
@@ -1269,7 +1271,7 @@ if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                
   if empty($SSH_OS)
     set clipboard=unnamedplus
   else
-    set clipboard=unnamed
+    set clipboard=unnamed                                                       " use * register to pass the content back to ssh client
   endif
 else                                                                            " On Windows, use * register for copy-paste
   set clipboard=unnamed
