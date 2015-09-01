@@ -112,7 +112,6 @@ if g:at_google
 endif
 " }}}
 " General Plugins {{{1
-NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
 NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
@@ -152,6 +151,11 @@ NeoBundle 'ujihisa/unite-locate'                                                
 " NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
+NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
+NeoBundle 'wincent/ferret'                                                      " Enhanced multi-file search for Vim
+" NeoBundle 'wincent/vim-clipper'                                                 " Clipper integratino for Vim
+NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+" NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 
 NeoBundleDisable delimitMate
 
@@ -837,6 +841,7 @@ function s:vimjson.hooks.on_source(bundle)
         \ set expandtab |
         \ set foldmethod=syntax
 endfunction
+NeoBundle 'Quramy/vison'                                                        " For writting JSON with JSON Schema
 " }}}
 " }}}
 " Unused plugins {{{1
