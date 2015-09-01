@@ -56,6 +56,9 @@
   # diff --name-only
   list = ! git diff --name-only | sed -e 's@^google3/@@'
 
+  # dirty
+  dirty = "!gitdirty() { if [[ -d '.git' && -n $(git status --porcelain) ]]; then exit 1; fi }; gitdirty"
+
 [core]
   pager = less -F -X
 
