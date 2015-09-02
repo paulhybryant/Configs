@@ -104,12 +104,18 @@ let s:google_config = resolve(expand('~/.vimrc.google'))
 let g:at_google = filereadable(s:google_config)
 if g:at_google
   execute 'source' s:google_config
-  " Register the bundles, but do not add them to rtp as they are already there
-  NeoBundleFetch 'google/vim-maktaba'
-  NeoBundleFetch 'google/vim-glaive'
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
 endif
+NeoBundle 'google/vim-maktaba', {
+      \ 'disabled' : g:at_google,
+      \ 'force' : 1,
+      \ }                                                                       " Vimscript plugin library from google
+NeoBundle 'google/vim-glaive', {
+      \ 'depends' : ['google/vim-maktaba'],
+      \ 'disabled' : g:at_google,
+      \ 'force' : 1,
+      \ }                                                                       " Plugin for better vim plugin configuration
 " }}}
 " General Plugins {{{1
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
@@ -147,13 +153,6 @@ NeoBundle 'wincent/terminus'                                                    
 NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object between any type of quotes
-NeoBundle 'google/vim-maktaba', {
-      \ 'disabled' : g:at_google,
-      \ }                                                                       " Vimscript plugin library from google
-NeoBundle 'google/vim-glaive', {
-      \ 'depends' : ['google/vim-maktaba'],
-      \ 'disabled' : g:at_google,
-      \ }                                                                       " Plugin for better vim plugin configuration
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
       \ 'regular_namne' : 'Align',
       \ 'type' : 'vba',
@@ -380,7 +379,7 @@ NeoBundle 'paulhybryant/relatedfiles', {
       \ }
 let s:relatedfiles = neobundle#get('relatedfiles')
 function s:relatedfiles.hooks.on_source(bundle)
-  call s:SetupRelatedFiles()
+  call s:ConfigureRelatedFiles()
 endfunction
 " }}}
 " signify {{{2
