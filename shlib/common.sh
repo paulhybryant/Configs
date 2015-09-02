@@ -1,10 +1,13 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
+source ${__MYZSHLIB__}/io.zsh
+source ${__MYZSHLIB__}/os.zsh
+
 # Inclusion guard so that this is sourced only once {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-if [[ 1 -eq $OS['mac'] && -z ${CMDPREFIX} ]]; then
+if os::OSX && -z ${CMDPREFIX}; then
   __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
 else
   __LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
@@ -14,13 +17,11 @@ fi
 __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
 # }}}
 
-source ${__MYZSHLIB__}/io.zsh
-
 if [[ $DEBUG == true ]]; then
-  if [[ 1 -eq $OS['mac'] && -z ${CMDPREFIX} ]]; then
-    echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
+  if os::OSX && -z ${CMDPREFIX}; then
+    io::msg "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
   else
-    echo "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
+    io::msg "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
   fi
 fi
 RETVAL=
@@ -138,12 +139,12 @@ function ta() {
 
 function tmux_start() {
   if [[ ! -z "$TMUX" ]]; then
-    echo "Already in tmux, nothing to be done."
+    io::warn "Already in tmux, nothing to be done."
     return
   fi
   \tmux info &> /dev/null
   if [[ $? -eq 1 ]]; then
-    echo "Starting tmux server..."
+    io::warn "Starting tmux server..."
     touch "$HOME/.tmux_restore"
     \tmux start-server
     \rm "$HOME/.tmux_restore"

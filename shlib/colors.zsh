@@ -2,10 +2,10 @@
 
 source ${__MYZSHLIB__}/base.zsh
 
-base::defined __COLORS__ && return
-__COLORS__='__COLORS__'
+base::should_source ${0:a} $__COLORS__ || return
+__COLORS__=$(base::script_signature ${0:a})
 
-function init_colors() {
+function colors::define() {
   # Reset
   export COLOR_Color_Off='\033[0m'       # Text Reset
 
@@ -79,9 +79,9 @@ function init_colors() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-init_colors
+colors::define
 
-function colorful_manpage() {
+function colors::manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
   # http://superuser.com/questions/452034/bash-colorized-man-page
   #
@@ -115,4 +115,4 @@ function colorful_manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-colorful_manpage
+colors::manpage

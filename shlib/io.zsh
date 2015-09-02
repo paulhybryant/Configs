@@ -3,17 +3,17 @@
 source ${__MYZSHLIB__}/base.zsh
 source ${__MYZSHLIB__}/colors.zsh
 
-base::defined __IO__ && return
-__IO__='__IO__'
+base::should_source ${0:a} $__IO__ || return
+__IO__=$(base::script_signature ${0:a})
 
-function err() {
+function io::err() {
   printf "${COLOR_Red}$*\n"
 }
 
-function warn() {
+function io::warn() {
   printf "${COLOR_Yellow}$*\n"
 }
 
-function msg() {
+function io::msg() {
   printf "${COLOR_Green}$*\n"
 }
