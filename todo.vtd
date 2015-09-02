@@ -20,6 +20,7 @@
   @ Fix the annoying binding 'C-\' (DONE 2014-12-10 12:18)
   @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching. (DONE 2014-12-06 18:09)
   @ Make tmux resurrect automatic. (DONE 2015-08-19 16:18)
+  @ Fix tmux-continuum to kill default session
 
 = Misc @p:2 =
   @ Change tmuxline.vim back after pull request merged.

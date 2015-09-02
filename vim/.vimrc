@@ -120,13 +120,11 @@ NeoBundle 'chase/vim-ansible-yaml'                                              
 NeoBundle 'chrisbra/Recover.vim'                                                " Show diff between existing swap files and saved file
 NeoBundle 'chrisbra/improvedft'                                                 " Improved f and t command for vim
 NeoBundle 'cohama/agit.vim'                                                     " Git log viewer (Yet another gitk clone for Vim), prefer agit over gitv as gitv has some bugs
-NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file
 NeoBundle 'flazz/vim-colorschemes'                                              " Collection of vim colorschemes
 NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
 NeoBundle 'kana/vim-operator-user'                                              " User defined operator
 NeoBundle 'kana/vim-textobj-user'                                               " Allow defining text object by user
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
-NeoBundle 'mattboehm/vim-unstack'                                               " View call stacks in vim
 NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
 NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets, TODO: Make it better support vim
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
@@ -244,6 +242,7 @@ function! s:myutils.hooks.on_post_source(bundle)
   if $SSH_OS == 'Darwin'
     vmap Y y:call myutils#YankToRemoteClipboard()<CR>
   endif
+  call myutils#SetupTablineMappings(g:OS)
 endfunction
 " }}}
 " neocomplete.vim {{{2
@@ -473,9 +472,6 @@ NeoBundle 'altercation/vim-colors-solarized'                                    
 let s:solarized = neobundle#get('vim-colors-solarized')
 function! s:solarized.hooks.on_source(bundle)
   let g:solarized_diffmode="high"
-endfunction
-function! s:solarized.hooks.on_post_source(bundle)
-  colorscheme solarized
 endfunction
 " }}}
 " vim-codefmt {{{2
@@ -792,6 +788,11 @@ endfunction
 NeoBundle 'Quramy/vison'                                                        " For writting JSON with JSON Schema
 " }}}
 " }}}
+" Disabled plugins {{{1
+for bundle in ['delimitMate']
+  execute 'NeoBundleDisable' bundle
+endfor
+" }}}
 " Unused plugins {{{1
 " TextObjects {{{2
 " TODO: For vim-textobj-quotes, va' seems to select the space before the
@@ -892,6 +893,8 @@ NeoBundle 'Quramy/vison'                                                        
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
+" NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file
+" NeoBundle 'mattboehm/vim-unstack'                                               " View call stacks in vim
 " NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
 " let s:vimhugefile = neobundle#get('vim-hugefile')
 " function! s:vimhugefile.hooks.on_source(bundle)
@@ -1220,16 +1223,12 @@ NeoBundle 'Quramy/vison'                                                        
       " \ }                                                                     " For ruby development
 " NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
 " }}}
-" Disabled plugins {{{1
-for bundle in ['delimitMate']
-  execute 'NeoBundleDisable' bundle
-endfor
-" }}}
 " Wrap up bundle setup {{{1
 call neobundle#end()
 NeoBundleCheck
 call glaive#Install()
 call myutils#InitUndoSwapViews()
+colorscheme solarized
 " }}}
 " Settings {{{1
 filetype plugin indent on                                                       " Automatically detect file types.
@@ -1292,7 +1291,6 @@ set comments=sl:/*,mb:*,elx:*/                                                  
 
 if &diff
   set nospell                                                                   " No spellcheck
-  " colorscheme putty
 else
   set spell                                                                     " Spellcheck
 endif
