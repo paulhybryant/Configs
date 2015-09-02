@@ -1,21 +1,13 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
-source ${__MYZSHLIB__}/io.zsh
 source ${__MYZSHLIB__}/base.zsh
+source ${__MYZSHLIB__}/io.zsh
 
-# Inclusion guard so that this is sourced only once {{{
-[[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
-[[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
+base::should_source ${0:a} $__COMMON__ || return
+__COMMON__=$(base::script_signature ${0:a})
 
-if base::OSX && [[ -z ${CMDPREFIX} ]]; then
-  __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
-else
-  __LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
-fi
-[[ -n "$__LIB_COMMON_VERSION__" && "$__LIB_COMMON_VERSION__" -eq "$__LIB_COMMON_NEW_VERSION__" ]] && return
-
-__LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
-# }}}
+# [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
+# [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
 if [[ $DEBUG == true ]]; then
   if base::OSX && [[ -z ${CMDPREFIX} ]]; then
@@ -60,8 +52,7 @@ stty start undef
 stty -ixon > /dev/null 2>/dev/null
 
 DIRCOLORS_CMD="${CMDPREFIX}dircolors"
-CONFIG_DIR=$(dirname "$__LIB_COMMON__")
-CONFIG_DIR=$(dirname "$CONFIG_DIR")
+CONFIG_DIR=$(dirname "$__MYZSHLIB__")
 GET_DIRCOLORS=$($DIRCOLORS_CMD "$CONFIG_DIR/third_party/dircolors-solarized/dircolors.256dark")
 eval "$GET_DIRCOLORS"
 # }}}

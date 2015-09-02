@@ -39,6 +39,7 @@ function _base::config_darwin() {
   alias ls="${CMDPREFIX}ls"
   alias mktemp="${CMDPREFIX}mktemp"
   alias stat="${CMDPREFIX}stat"
+  alias date="${CMDPREFIX}date"
 }
 
 function _base::config_linux() {
@@ -56,7 +57,13 @@ function base::bootstrap() {
 base::bootstrap
 
 function base::script_signature() {
-  echo "$1-$(stat -c "%Y" $1)"
+  if base::OSX && [[ -z ${CMDPREFIX} ]]; then
+    # Fallback to OSX native stat
+    echo "$1-$(stat -f '%m' $1)"
+  else
+    echo "$1-$(stat -c "%Y" $1)"
+    # $(${CMDPREFIX}date -r "$1" +%s)
+  fi
 }
 
 # $1: Filename
@@ -71,4 +78,21 @@ function base::defined() {
   eval "if [[ -n \${$1+1} ]]; then return 0; else return 1; fi"
 }
 
-__BASE__=${0:a}-$("${CMDPREFIX}stat" -c "%Y" ${0:a})
+function base::human_readable_date() {
+  if base::OSX && [[ -z ${CMDPREFIX} ]]; then
+    echo $(date -r $1)
+  else
+    echo $(date --date=@"$1")
+  fi
+}
+
+function base::seconds() {
+  if base::OSX && [[ -z ${CMDPREFIX} ]]; then
+    # TODO:
+    ;
+  else
+    echo $(date +%s)
+  fi
+}
+
+__BASE__=$(base::script_signature ${0:a})
