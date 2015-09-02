@@ -1,13 +1,13 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
 source ${__MYZSHLIB__}/io.zsh
-source ${__MYZSHLIB__}/os.zsh
+source ${__MYZSHLIB__}/base.zsh
 
 # Inclusion guard so that this is sourced only once {{{
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-if os::OSX && -z ${CMDPREFIX}; then
+if base::OSX && -z ${CMDPREFIX}; then
   __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
 else
   __LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
@@ -18,7 +18,7 @@ __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
 # }}}
 
 if [[ $DEBUG == true ]]; then
-  if os::OSX && -z ${CMDPREFIX}; then
+  if base::OSX && -z ${CMDPREFIX}; then
     io::msg "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
   else
     io::msg "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
