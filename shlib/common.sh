@@ -4,7 +4,7 @@
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-if [[ OS['mac'] && ! ${CMDPREFIX} ]]; then
+if [[ 1 -eq $OS['mac'] && -z ${CMDPREFIX} ]]; then
   __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
 else
   __LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
@@ -14,10 +14,10 @@ fi
 __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
 # }}}
 
-source io.zsh
+source ${__MYZSHLIB__}/io.zsh
 
 if [[ $DEBUG == true ]]; then
-  if [[ OS['mac'] && ! ${CMDPREFIX} ]]; then
+  if [[ 1 -eq $OS['mac'] && -z ${CMDPREFIX} ]]; then
     echo "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
   else
     echo "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source "$__CONFIGS__/shlib/common.sh"
+source "${__MYZSHLIB__}/common.sh"
 
 local -a dirty_repos
 dirty_repose=()
