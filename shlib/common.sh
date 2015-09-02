@@ -7,7 +7,7 @@ source ${__MYZSHLIB__}/base.zsh
 [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-if base::OSX && -z ${CMDPREFIX}; then
+if base::OSX && [[ -z ${CMDPREFIX} ]]; then
   __LIB_COMMON_NEW_VERSION__=$(stat -f '%m' "$__LIB_COMMON__")
 else
   __LIB_COMMON_NEW_VERSION__=$(${CMDPREFIX}date -r "$__LIB_COMMON__" +%s)
@@ -18,7 +18,7 @@ __LIB_COMMON_VERSION__="$__LIB_COMMON_NEW_VERSION__"
 # }}}
 
 if [[ $DEBUG == true ]]; then
-  if base::OSX && -z ${CMDPREFIX}; then
+  if base::OSX && [[ -z ${CMDPREFIX} ]]; then
     io::msg "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
   else
     io::msg "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
