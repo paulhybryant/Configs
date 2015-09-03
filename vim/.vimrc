@@ -726,7 +726,7 @@ endfunction
 NeoBundle 'maksimr/vim-jsbeautify', {
       \ 'filetypes' : ['javascript'],
       \ 'lazy' : 1,
-      \ }                                                                     " Javascript formatting
+      \ }                                                                       " Javascript formatting
 NeoBundle 'pangloss/vim-javascript', {
       \ 'filetypes' : ['javascript'],
       \ 'lazy' : 1,
