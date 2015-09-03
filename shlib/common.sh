@@ -1,23 +1,16 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
 source ${__MYZSHLIB__}/base.zsh
-source ${__MYZSHLIB__}/io.zsh
-
 base::should_source ${0:a} $__COMMON__ || return
 __COMMON__=$(base::script_signature ${0:a})
+
+source ${__MYZSHLIB__}/io.zsh
+source ${__MYZSHLIB__}/util.zsh
 
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-if [[ $DEBUG == true ]]; then
-  if base::OSX && [[ -z ${CMDPREFIX} ]]; then
-    io::msg "$__LIB_COMMON__ sourced, modified at $(date -r $__LIB_COMMON_NEW_VERSION__)"
-  else
-    io::msg "$__LIB_COMMON__ sourced, modified at $(${CMDPREFIX}date --date=@$__LIB_COMMON_NEW_VERSION__)"
-  fi
-fi
 RETVAL=
-REPLY=
 
 # Environment {{{
 # Turn on vi mode by default.
@@ -148,7 +141,6 @@ function tmux_start() {
 }
 
 function find_no_git() {
-  find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   # Commands with the same output
   # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
   # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
@@ -159,6 +151,7 @@ function find_no_git() {
   #    will be false whenever find tests each file.
   # 2. find prints the pruned directory
   # So performance of 1 and 3 will be better
+  find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
 }
 
 function start_ssh_agent() {
@@ -308,17 +301,6 @@ function exit_if_not_exist() {
   if [[ $? -ne 0 ]]; then
     echo "$1 not installed." >&2
     exit 1
-  fi
-}
-
-function confirm() {
-  local _question_="$1"
-  if [[ $CONFIRM == true ]]; then
-    # bash version:
-    # read -p "$_question_"
-    read -q "REPLY?$_question_"
-  else
-    REPLY="y"
   fi
 }
 

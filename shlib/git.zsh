@@ -1,10 +1,10 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
 source ${__MYZSHLIB__}/base.zsh
-source ${__MYZSHLIB__}/io.zsh
-
 base::should_source ${0:a} $__GIT__ || return
 __GIT__=$(base::script_signature ${0:a})
+
+source ${__MYZSHLIB__}/io.zsh
 
 # Check subdirs of current directory, and report repos that are dirty
 function git::check_dirty_repos() {

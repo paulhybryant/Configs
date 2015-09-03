@@ -47,7 +47,7 @@ function start() {
   START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
   if [ -e "$_muxconfig_" ];
   then
-    confirm "$_muxconfig_ exists, overwrite (y/n)? [n] "
+    REPLY=$(io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] ")
     case $REPLY in
       [y]* )
         echo "\n$_muxconfig_ will be overwritten."
@@ -66,7 +66,7 @@ function delete() {
   local _muxproj_="$1"
   if [ -e "$MUXDIR/$_muxproj_.yml" ];
   then
-    confirm "Delete project $_muxproj_ (y/n)? [n] "
+    REPLY=$(io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] ")
     case $REPLY in
       [y]* )
         run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"

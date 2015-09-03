@@ -10,21 +10,24 @@ let g:mapleader = ','
 let g:maplocalleader = ',,'
 " }}}
 " Install NeoBundle if needed {{{1
-function! s:InstallNeobundleIfNotPresent() " {{{3
-  if !isdirectory(expand('~/.vim/bundle/neobundle.vim'))
+let s:neobundle_base_path = expand('~/.vim/bundle/')
+let s:neobundle_install_path = s:neobundle_base_path . 'neobundle.vim/'
+function! s:InstallNeobundleIfNotPresent(base_path, path) " {{{3
+  let l:url = 'https://github.com/Shougo/neobundle.vim.git'
+  if !isdirectory(a:path)
     echo 'Installing neobundle...'
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim.git
-          \ $HOME/.vim/bundle/neobundle.vim
+    silent execute '!mkdir -p' a:base_path
+    silent execute '!git clone' l:url a:path
   endif
 endfunction
 " }}}
-call s:InstallNeobundleIfNotPresent()
+call s:InstallNeobundleIfNotPresent(
+      \ s:neobundle_base_path, s:neobundle_install_path)
 " }}}
 " Setup NeoBundle and OS.vim {{{1
 filetype off
-set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle'))
+execute 'set runtimepath+=' . s:neobundle_install_path
+call neobundle#begin(s:neobundle_base_path)
 
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
@@ -44,8 +47,7 @@ if g:OS.is_windows
   let $TERM='win32'
   " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
   " across (heterogeneous) systems easier.
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,
-        \$HOME/.vim/after
+  set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
   " Be nice and check for multi_byte even if the config requires
   " multi_byte support most of the time
   if has('multi_byte')
@@ -211,31 +213,7 @@ function! s:myutils.hooks.on_source(bundle)
         \ bufclose_skip_types=`[
         \  'gistls', 'nerdtree', 'indicator',
         \  'FoldDigest', 'Scratch', 'capture' ]`
-  set spellfile=$HOME/.vim/bundle/myutils/spell/en.utf-8.add
-  autocmd BufEnter * call myutils#SyncNTTree()
-
-  command! -nargs=* -complete=file -bang E
-        \ call myutils#MultiEdit('<bang>', <f-args>)
-  command! -nargs=+ -complete=command DC call myutils#DechoCmd(<q-args>)
-  command! -nargs=+ InsertRepeated call myutils#InsertRepeated(<f-args>)
-
-  nnoremap <leader>hh :call myutils#HexHighlight()<CR>
-  nnoremap <leader>kb :call myutils#SetupTablineMappings(g:OS)<CR>
-  nnoremap <leader>ln :<C-u>execute 'call myutils#LocationNext()'<CR>
-  nnoremap <leader>lp :<C-u>execute 'call myutils#LocationPrevious()'<CR>
-  nnoremap <leader>tc :call myutils#ToggleColorColumn()<CR>
-  nnoremap <leader>is :call myutils#FillWithCharTillN(' ', 80)<CR>
-  noremap <leader>hl :call myutils#HighlightTooLongLines()<CR>
-  vmap <leader>y :call myutils#CopyText()<CR>
-  vnoremap <leader>sn :call myutils#SortWords(' ', 1)<CR>
-  vnoremap <leader>sw :call myutils#SortWords(' ', 0)<CR>
-
-  " Deprecated in favor of vim-onoff
-  " command! -nargs=+ MapToggle call myutils#MapToggle(<f-args>)
-  " command! -nargs=+ MapToggleVar call myutils#MapToggleVar(<f-args>)
-  " Display-altering option toggles
-  " nnoremap <leader>ts :let &spell = !&spell<CR>
-  " MapToggle <F2> spell
+  execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
   if $SSH_OS == 'Darwin'
@@ -259,8 +237,8 @@ function! s:neocomplete.hooks.on_source(bundle)
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
   let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default' : '',
-    \   'vimshell' : $HOME.'/.vimshell_hist',
-    \   'scheme' : $HOME.'/.gosh_completions'
+    \   'vimshell' : expand('~/.vimshell_hist'),
+    \   'scheme' : expand('~/.gosh_completions'),
     \ }                                                                         " Define dictionary.
   if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}                                     " Define keyword.
@@ -414,7 +392,8 @@ NeoBundle 'Shougo/unite.vim', {
       \ }                                                                       " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
 let s:unite = neobundle#get('unite.vim')
 function! s:unite.hooks.on_source(bundle)
-  let g:unite_data_directory = $HOME . '/.cache/unite'
+  let l:cache_dir = expand('~/.cache/unite')
+  let g:unite_data_directory = l:cache_dir
   let g:unite_abbr_highlight = 'Keyword'
   if (!isdirectory(g:unite_data_directory))
     call mkdir(g:unite_data_directory, 'p')
@@ -614,7 +593,7 @@ NeoBundle 'vim-scripts/HTML-AutoCloseTag', {
 let s:autoclosetag = neobundle#get('HTML-AutoCloseTag')
 function! s:autoclosetag.hooks.on_source(bundle)
   autocmd FileType xml,xhtml execute 'source'
-        \ '$HOME/.vim/bundle/HTML-AutoCloseTag/ftplugin/html_autoclosetag.vim'
+        \ a:bundle.path . '/ftplugin/html_autoclosetag.vim'
 endfunction
 " }}}
 " tmux {{{2
@@ -641,8 +620,7 @@ let s:bash_support = neobundle#get('bash-support.vim')
 function! s:bash_support.hooks.on_source(bundle)
   let g:BASH_MapLeader  = g:maplocalleader
   let g:BASH_GlobalTemplateFile = expand(
-        \ '$HOME/.vim/bundle/' .
-        \ 'bash-support.vim/bash-support/templates/Templates')
+        \ a:bundle.path . '/bash-support/templates/Templates')
 endfunction
 " }}}
 " vim {{{2
@@ -1085,7 +1063,7 @@ endfor
         " \     'p:pagerefs:1:0'
         " \   ],
         " \   'sort'  : 0,
-        " \   'deffile' : '$HOME/.ctagscnf/autohotkey.cnf'
+        " \   'deffile' : expand('~/.ctagscnf/autohotkey.cnf'),
         " \ }
 " endfunction
 " NeoBundle 'tpope/vim-fugitive', { 'disabled' : !executable('git') }           " Commands for working with git
