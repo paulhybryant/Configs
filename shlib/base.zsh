@@ -5,7 +5,7 @@ __BASE__="${0:a}"
 
 source ${__MYZSHLIB__}/os.zsh
 
-function _base::config_darwin() {
+function base::_config_darwin() {
   export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
   alias updatedb="/usr/libexec/locate.updatedb"
@@ -16,12 +16,12 @@ function _base::config_darwin() {
   alias date="${CMDPREFIX}date"
 }
 
-function _base::config_linux() {
+function base::_config_linux() {
   export BREWVERSION="linuxbrew"
   export BREWHOME="$HOME/.$BREWVERSION"
 }
 
-function _base::config_brew() {
+function base::_config_brew() {
   export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
   export MANPATH="$BREWHOME/share/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
@@ -33,11 +33,11 @@ function _base::config_brew() {
 
 function base::bootstrap() {
   if os::OSX; then
-    _base::config_darwin
+    base::_config_darwin
   elif os::LINUX; then
-    _base::config_linux
+    base::_config_linux
   fi
-  _base::config_brew
+  base::_config_brew
 }
 base::bootstrap
 
