@@ -1,10 +1,12 @@
-# vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__COMMON__ || return
 __COMMON__="$(base::script_signature ${0:a})"
 
+source ${__MYZSHLIB__}/file.zsh
 source ${__MYZSHLIB__}/io.zsh
+source ${__MYZSHLIB__}/util.zsh
 
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
@@ -49,7 +51,7 @@ GET_DIRCOLORS=$($DIRCOLORS_CMD "$CONFIG_DIR/third_party/dircolors-solarized/dirc
 eval "$GET_DIRCOLORS"
 # }}}
 
-# aliases {{{
+# Aliases {{{
 
 # vi
 # alias vi="vi -p"
@@ -80,7 +82,7 @@ alias ls="${aliases[ls]:-ls} --color=tty"
 
 # }}}
 
-# functions library {{{
+# Functions {{{
 function ta() {
   local setenv=$(mktemp)
   : > "$setenv"
@@ -139,125 +141,8 @@ function tmux_start() {
   fi
 }
 
-function find_no_git() {
-  # Commands with the same output
-  # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
-  # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
-  # find . -type d \( -path './third_party*' -o -path './.git*' \) -prune -o -type f -print
-  # Differences betwee these commands
-  # 1. -prune stops find from descending into a directory. Just specifying
-  #    -not -path will still descend into the skipped directory, but -not -path
-  #    will be false whenever find tests each file.
-  # 2. find prints the pruned directory
-  # So performance of 1 and 3 will be better
-  find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
-}
-
-function start_ssh_agent() {
-  # Start ssh agent if needed
-  # Check to see if SSH Agent is already running
-  agent_pid="$(ps -ef | grep "ssh-agent" | grep -v "grep" | awk '{print($2)}')"
-
-  # If the agent is not running (pid is zero length string)
-  if [[ -z "$agent_pid" ]]; then
-      # Start up SSH Agent
-
-      # this seems to be the proper method as opposed to `exec ssh-agent bash`
-      eval "$(ssh-agent)"
-  fi
-}
-
-function gnome-shell-exts() {
-  grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
-}
-
-unalias ll > /dev/null 2>&1
-function ll() {
-  ls -lh "$@"
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
-        y = sum / (2^(10*i))
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< "$(ls -l $@)"
-}
-
-unalias la > /dev/null 2>&1
-function la() {
-  ls -alF "$@"
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
-        y = sum / (2^(10*i))
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< "$(ls -laF $@)"
-}
-
-function ldu() {
-  $1
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
-        y = sum / (2^(10*i))
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< "$($2 $@)"
-}
-
 function histgrep() {
   tac ${HISTFILE:-~/.bash_history} | grep -m 1 "$@"
-}
-
-function backup_and_link() {
-  local _src_=$1
-  local _target_=$2
-
-  if [[ -h "$_target_" ]]; then
-    rm "$_target_"
-  elif [[ -f "$_target_" ]]; then
-    echo "Please rename or backup $_target_."
-    return
-  fi
-
-  if [[ -d "$_target_" ]]; then
-    echo "Directory $_target_ already exists."
-    return
-  fi
-  ln -s "$_src_" "$_target_"
-}
-
-function current_script_path() {
-  local _dir_=$1
-  local  _resultvar_=$2
-  local _dirname_=$(dirname "$_dir_")
-  local _result_=$(realpath "$_dirname_")
-  if [[ -z "$_resultvar_" ]]; then
-    echo "$_result_"
-  else
-    eval "$_resultvar_='$_result_'"
-  fi
-}
-
-function strip_slash_if_exist() {
-  [[ $1 =~ .*/$ ]] && RETVAL=${1%/}
-  echo "$RETVAL"
 }
 
 function run() {
@@ -276,35 +161,29 @@ function run() {
     set +o noglob
   fi
 }
-
-function exit_if_not_exist() {
-  which "$1" > /dev/null
-  if [[ $? -ne 0 ]]; then
-    echo "$1 not installed." >&2
-    exit 1
-  fi
-}
-
-function escape() {
-  RETVAL=$(printf %q "$1")
-}
-
-function git_branch_exist() {
-  local _branch_="$1"
-  if [[ -n $(git branch --list "$_branch_") ]];
-  then
-    RETVAL=1
-  else
-    RETVAL=0
-  fi
-}
-
 # }}}
 
 # Bootstrap util functions {{{
+function backup_and_link() {
+  local _src_=$1
+  local _target_=$2
+
+  if [[ -h "$_target_" ]]; then
+    rm "$_target_"
+  elif [[ -f "$_target_" ]]; then
+    echo "Please rename or backup $_target_."
+    return
+  fi
+
+  if [[ -d "$_target_" ]]; then
+    echo "Directory $_target_ already exists."
+    return
+  fi
+  ln -s "$_src_" "$_target_"
+}
 
 function link_bash() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _bashconf_="$1"
   _bashconf_="${_bashconf_%/}"
 
@@ -319,7 +198,7 @@ function link_bash() {
 }
 
 function link_misc() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _miscfong_="$1"
   _miscfong_="${_miscfong_%/}"
 
@@ -338,7 +217,7 @@ function link_misc() {
 }
 
 function link_tmux() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _tmuxconf_="$1"
   _tmuxconf_="${_tmuxconf_%/}"
 
@@ -362,7 +241,7 @@ function link_tmux() {
 }
 
 function link_utils() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _utilsconf_="$1"
   _utilsconf_="${_utilsconf_%/}"
 
@@ -372,7 +251,7 @@ function link_utils() {
 }
 
 function link_vim() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _vimconf_="$1"
   _vimconf_="${_vimconf_%/}"
 
@@ -382,7 +261,7 @@ function link_vim() {
 }
 
 function link_zsh() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _zshconf_="$1"
   _zshconf_="${_zshconf_%/}"
 
@@ -409,7 +288,7 @@ function link_zsh() {
 }
 
 function link_x11() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _x11conf_="$1"
   _x11conf_="${_x11conf_%/}"
 
@@ -419,7 +298,7 @@ function link_x11() {
 }
 
 function link_ctags() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _ctagsconf_="$1"
   _ctagsconf_="${_ctagsconf_%/}"
 
@@ -427,7 +306,7 @@ function link_ctags() {
 }
 
 function link_all() {
-  [[ "$#" == 1 ]] || return 1
+  [[ "$#" == 1 ]] || return false
   local _scriptpath_="$1"
   link_misc "$_scriptpath_/misc"
   link_tmux "$_scriptpath_/tmux"
@@ -438,76 +317,6 @@ function link_all() {
   link_x11 "$_scriptpath_/x11"
   link_ctags "$_scriptpath_/ctags"
 }
-
-
 # }}}
 
-############ Start of wrap_alias ############ {{{
-# wrap_alias takes three arguments:
-# $1: The name of the alias
-# $2: The command used in the alias
-# $3: The arguments in the alias all in one string
-# Generate a wrapper completion function (completer) for an alias
-# based on the command and the given arguments, if there is a
-# completer for the command, and set the wrapper as the completer for
-# the alias.
-function wrap_alias() {
-  [[ "$#" == 3 ]] || return 1
-
-  local alias_name="$1"
-  local aliased_command="$2"
-  local alias_arguments="$3"
-  local num_alias_arguments=$(echo "$alias_arguments" | wc -w)
-
-  # The completion currently being used for the aliased command.
-  local completion=$(complete -p "$aliased_command" 2> /dev/null)
-
-  # Only a completer based on a function can be wrapped so look for -F
-  # in the current completion. This check will also catch commands
-  # with no completer for which $completion will be empty.
-  echo "$completion" | grep -q -- -F || return 0
-
-  local namespace=alias_completion::
-
-  # Extract the name of the completion function from a string that
-  # looks like: something -F function_name something
-  # First strip the beginning of the string up to the function name by
-  # removing "* -F " from the front.
-  local completion_function=${completion##* -F }
-  # Then strip " *" from the end, leaving only the function name.
-  completion_function=${completion_function%% *}
-
-  # Try to prevent an infinite loop by not wrapping a function
-  # generated by this function. This can happen when the user runs
-  # this twice for an alias like ls='ls --color=auto' or alias l='ls'
-  # and alias ls='l foo'
-  [[ "${completion_function#$namespace}" != $completion_function ]] && return 0
-
-  local wrapper_name="${namespace}${alias_name}"
-
-  eval "
-function ${wrapper_name}() {
-  let COMP_CWORD+=$num_alias_arguments
-  args=( \"${alias_arguments}\" )
-  COMP_WORDS=( $aliased_command \${args[@]} \${COMP_WORDS[@]:1} )
-  $completion_function
-  }
-"
-
-  # To create the new completion we use the old one with two
-  # replacements:
-  # 1) Replace the function with the wrapper.
-  local new_completion=${completion/-F * /-F $wrapper_name }
-  # 2) Replace the command being completed with the alias.
-  new_completion="${new_completion% *} $alias_name"
-
-  eval "$new_completion"
-}
-############ End of wrap_alias ############ }}}
-
-start_ssh_agent
-
-# RVM
-if [ -f ~/.rvm/scripts/rvm ]; then
-  source ~/.rvm/scripts/rvm
-fi
+util::start_ssh_agent

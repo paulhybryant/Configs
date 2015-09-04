@@ -1,4 +1,4 @@
-# vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 [[ -n "${__BASE__+1}" ]] && return
 __BASE__="${0:a}"
@@ -6,7 +6,8 @@ __BASE__="${0:a}"
 source ${__MYZSHLIB__}/os.zsh
 
 function _base::config_darwin() {
-  export BREWHOME=$HOME/.homebrew
+  export BREWVERSION="hombrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
   alias updatedb="/usr/libexec/locate.updatedb"
   export CMDPREFIX="g"
   alias ls="${CMDPREFIX}ls"
@@ -16,7 +17,8 @@ function _base::config_darwin() {
 }
 
 function _base::config_linux() {
-  export BREWHOME=$HOME/.linuxbrew
+  export BREWVERSION="linuxbrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
 }
 
 function _base::config_brew() {
@@ -49,14 +51,19 @@ function base::script_signature() {
   fi
 }
 
+# Whether a library is modified and should be re-sourced
 # $1: Filename
 # $2: Signature
 function base::should_source() {
   local _signature=$(base::script_signature $1)
-  [[ "$_signature" == "$2" ]] && return 1
-  return 0
+  [[ "$_signature" == "$2" ]]
 }
 
-function base::defined() {
-  eval "if [[ -n \${$1+1} ]]; then return 0; else return 1; fi"
+# Check whether something 'exists'
+# The check order is the following:
+# 1. Binary
+# 2. Variable
+function base::exists() {
+  whence "$1" > /dev/null && return true
+  eval "[[ -n \${$1+1} ]]"
 }

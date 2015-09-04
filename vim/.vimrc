@@ -151,7 +151,7 @@ NeoBundle 'ujihisa/unite-locate'                                                
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+" NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
 NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object between any type of quotes

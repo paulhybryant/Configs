@@ -1,4 +1,4 @@
-# vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__GIT__ || return
@@ -26,4 +26,8 @@ function git::check_dirty_repos() {
       io::err "Repo: ${dir}"
     done
   fi
+}
+
+function git::has_branch() {
+  [[ -n $(git branch --list "$1") ]]
 }

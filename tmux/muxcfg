@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # set -e
-source "${__MYZSHLIB__}/common.sh"
+source "${__MYZSHLIB__}/common.zsh"
 
 function usage() {
   cat <<EOF
