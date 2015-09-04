@@ -24,7 +24,7 @@
   ignored = ls-files --others -i --exclude-standard
 
   # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull; git submodule foreach git pull origin master"
+  p = !"git pull --recurse-submodules; git submodule update --init --recursive"
 
   # Pull from upstream and merge
   pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
@@ -60,6 +60,7 @@
 
   # dirty
   dirty = "!gitdirty() { if [[ -d '.git' && -n $(git status --porcelain) ]]; then exit 1; fi }; gitdirty"
+
 [core]
   pager = less -F -X
 
