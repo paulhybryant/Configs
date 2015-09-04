@@ -6,7 +6,7 @@ __BASE__="${0:a}"
 source ${__MYZSHLIB__}/os.zsh
 
 function _base::config_darwin() {
-  export BREWVERSION="hombrew"
+  export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
   alias updatedb="/usr/libexec/locate.updatedb"
   export CMDPREFIX="g"
