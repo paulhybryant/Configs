@@ -1,8 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 source ${__MYZSHLIB__}/base.zsh
-base::should_source ${0:a} $__COLORS__ || return
-__COLORS__="$(base::script_signature ${0:a})"
+base::sourced ${0:a} && return
 
 function colors::define() {
   # Reset
@@ -78,7 +77,7 @@ function colors::define() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-# colors::define
+colors::define
 
 function colors::manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
@@ -114,4 +113,4 @@ function colors::manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-# colors::manpage
+colors::manpage

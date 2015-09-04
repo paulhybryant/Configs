@@ -38,3 +38,4 @@
   @ Gvim windows shell context extension (DONE 2014-12-06 18:10)
   @ Try out rocket dock in win (DONE 2014-12-06 18:10)
   @ Get safe-paste to work in zsh
+  @ Unit test zsh library

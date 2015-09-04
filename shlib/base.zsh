@@ -2,8 +2,27 @@
 
 [[ -n "${__BASE__+1}" ]] && return
 __BASE__="${0:a}"
+[[ -n "${__VERBOSE__+1}" ]] && echo "${__BASE__} sourced"
 
-source ${__MYZSHLIB__}/os.zsh
+function os::OSX() {
+  [[ "$OSTYPE" == "darwin"* ]] && return 0
+  return 1
+}
+
+function os::LINUX() {
+  [[ "$OSTYPE" == "linux-gnu"* ]] && return 0
+  return 1
+}
+
+function os::CYGWIN() {
+  [[ "$OSTYPE" == "cygwin32"* ]] && return 0
+  return 1
+}
+
+function os::WINDOWS() {
+  [[ "$OSTYPE" == "windows"* ]] && return 0
+  return 1
+}
 
 function base::_config_darwin() {
   export BREWVERSION="homebrew"
@@ -39,33 +58,44 @@ function base::bootstrap() {
   fi
   base::_config_brew
 }
-base::bootstrap
 
-function base::script_signature() {
-  if os::OSX && [[ -z ${CMDPREFIX} ]]; then
-    # Fallback to OSX native stat
-    echo "$1-$(stat -f '%m' $1)"
-  else
-    echo "$1-$(stat -c "%Y" $1)"
-    # $(${CMDPREFIX}date -r "$1" +%s)
-  fi
-}
-
-# Whether a library is modified and should be re-sourced
-# $1: Filename
-# $2: Signature
-function base::should_source() {
-  local _signature=$(base::script_signature $1)
-  [[ "$_signature" == "$2" ]] && return true
-  return false
+# Force reloading base.zsh. Other libraries can be reloaded directly by source
+function base::reload() {
+  local _base=${__BASE__}
+  unset __BASE__
+  source ${_base}
 }
 
 # Check whether something 'exists'
 # The check order is the following:
 # 1. Binary
 # 2. Variable
+# 3. File or Directory
 function base::exists() {
-  whence "$1" > /dev/null && return true
-  eval "[[ -n \${$1+1} ]]" && return true
-  return false
+  whence "$1" > /dev/null && return 0
+  eval "[[ -n \${$1+1} ]]" && return 0
+  [[ -e "$1" || -d "$1" ]] && return 0
+  return 1
+}
+
+# Library include guard
+# $1 library script path
+# $2 guard variable name
+function base::sourced() {
+  # strip the .zsh extension
+  local _var=$(basename ${1%.zsh})
+  local _cur_signature=$(eval "echo \$__${_var}__")
+
+  if os::OSX && [[ -z ${CMDPREFIX} ]]; then
+    # Fallback to OSX native stat
+    local _signature="$1-$(stat -f '%m' $1)"
+  else
+    local _signature="$1-$(stat -c "%Y" $1)"
+    # $(${CMDPREFIX}date -r "$1" +%s)
+  fi
+
+  [[ "${_signature}" == "$_cur_signature" ]] && return 0
+  eval "__${_var}__=\"${_signature}\""
+  [[ -n "${__VERBOSE__+1}" ]] && echo "$1 sourced"
+  return 1
 }

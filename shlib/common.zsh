@@ -1,8 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 source ${__MYZSHLIB__}/base.zsh
-base::should_source ${0:a} $__COMMON__ || return
-__COMMON__="$(base::script_signature ${0:a})"
+base::sourced ${0:a} && return
+# [[ -n "${__VERBOSE__+1}" ]] && echo "${__COMMON__} sourced"
 
 source ${__MYZSHLIB__}/file.zsh
 source ${__MYZSHLIB__}/io.zsh
@@ -181,7 +181,7 @@ function backup_and_link() {
 }
 
 function link_bash() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _bashconf_="$1"
   _bashconf_="${_bashconf_%/}"
 
@@ -196,7 +196,7 @@ function link_bash() {
 }
 
 function link_misc() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _miscfong_="$1"
   _miscfong_="${_miscfong_%/}"
 
@@ -215,7 +215,7 @@ function link_misc() {
 }
 
 function link_tmux() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _tmuxconf_="$1"
   _tmuxconf_="${_tmuxconf_%/}"
 
@@ -239,7 +239,7 @@ function link_tmux() {
 }
 
 function link_utils() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _utilsconf_="$1"
   _utilsconf_="${_utilsconf_%/}"
 
@@ -249,7 +249,7 @@ function link_utils() {
 }
 
 function link_vim() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _vimconf_="$1"
   _vimconf_="${_vimconf_%/}"
 
@@ -259,7 +259,7 @@ function link_vim() {
 }
 
 function link_zsh() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _zshconf_="$1"
   _zshconf_="${_zshconf_%/}"
 
@@ -286,7 +286,7 @@ function link_zsh() {
 }
 
 function link_x11() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _x11conf_="$1"
   _x11conf_="${_x11conf_%/}"
 
@@ -296,7 +296,7 @@ function link_x11() {
 }
 
 function link_ctags() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _ctagsconf_="$1"
   _ctagsconf_="${_ctagsconf_%/}"
 
@@ -304,7 +304,7 @@ function link_ctags() {
 }
 
 function link_all() {
-  [[ "$#" == 1 ]] || return false
+  [[ "$#" == 1 ]] || return 1
   local _scriptpath_="$1"
   link_misc "$_scriptpath_/misc"
   link_tmux "$_scriptpath_/tmux"
@@ -316,5 +316,3 @@ function link_all() {
   link_ctags "$_scriptpath_/ctags"
 }
 # }}}
-
-util::start_ssh_agent

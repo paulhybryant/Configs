@@ -1,8 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 source ${__MYZSHLIB__}/base.zsh
-base::should_source ${0:a} $__GIT__ || return
-__GIT__="$(base::script_signature ${0:a})"
+base::sourced ${0:a} && return
 
 source ${__MYZSHLIB__}/io.zsh
 
@@ -29,6 +28,6 @@ function git::check_dirty_repos() {
 }
 
 function git::has_branch() {
-  [[ -n $(git branch --list "$1") ]] && return true
-  return false
+  [[ -n $(git branch --list "$1") ]] && return 0
+  return 1
 }
