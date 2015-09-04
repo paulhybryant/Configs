@@ -10,3 +10,6 @@
 [submodule "third_party/apt-cyg"]
 	path = third_party/apt-cyg
 	url = https://github.com/transcode-open/apt-cyg.git
+[submodule "third_party/prezto"]
+	path = third_party/prezto
+	url = git@github.com:paulhybryant/prezto.git
