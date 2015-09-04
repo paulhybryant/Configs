@@ -2,10 +2,9 @@
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__COMMON__ || return
-__COMMON__=$(base::script_signature ${0:a})
+__COMMON__="$(base::script_signature ${0:a})"
 
 source ${__MYZSHLIB__}/io.zsh
-source ${__MYZSHLIB__}/util.zsh
 
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
@@ -220,24 +219,6 @@ function ldu() {
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
   }' <<< "$($2 $@)"
-}
-
-function myssh() {
-  # local _ssh_info_=$(mktemp)
-  # case "$(uname -s)" in
-    # Linux)
-      # ;;
-    # Darwin)
-      # ;;
-    # *)
-      # echo 'Unsupported OS'
-      # exit
-      # ;;
-  # esac
-
-  # cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null
-  # ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
-  ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
 
 function histgrep() {

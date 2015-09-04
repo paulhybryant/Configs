@@ -2,7 +2,7 @@
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__GIT__ || return
-__GIT__=$(base::script_signature ${0:a})
+__GIT__="$(base::script_signature ${0:a})"
 
 source ${__MYZSHLIB__}/io.zsh
 

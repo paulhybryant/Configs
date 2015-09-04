@@ -2,7 +2,7 @@
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__COLORS__ || return
-__COLORS__=$(base::script_signature ${0:a})
+__COLORS__="$(base::script_signature ${0:a})"
 
 function colors::define() {
   # Reset

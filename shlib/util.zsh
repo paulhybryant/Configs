@@ -2,4 +2,10 @@
 
 source ${__MYZSHLIB__}/base.zsh
 base::should_source ${0:a} $__UTIL__ || return
-__UTIL__=$(base::script_signature ${0:a})
+__UTIL__="$(base::script_signature ${0:a})"
+
+function util::geo_country() {
+  local _geo="$(curl ipinfo.io 2> /dev/null)"
+  local _country="$(echo ${_geo} | jq '.country')"
+  echo ${_country}
+}

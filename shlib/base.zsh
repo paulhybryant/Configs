@@ -1,7 +1,7 @@
 # vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=sh nospell:
 
 [[ -n "${__BASE__+1}" ]] && return
-__BASE__=${0:a}
+__BASE__="${0:a}"
 
 source ${__MYZSHLIB__}/os.zsh
 
