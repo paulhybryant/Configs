@@ -78,7 +78,7 @@ function colors::define() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-colors::define
+# colors::define
 
 function colors::manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
@@ -114,4 +114,4 @@ function colors::manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-colors::manpage
+# colors::manpage

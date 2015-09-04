@@ -29,5 +29,6 @@ function git::check_dirty_repos() {
 }
 
 function git::has_branch() {
-  [[ -n $(git branch --list "$1") ]]
+  [[ -n $(git branch --list "$1") ]] && return true
+  return false
 }

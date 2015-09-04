@@ -56,7 +56,8 @@ function base::script_signature() {
 # $2: Signature
 function base::should_source() {
   local _signature=$(base::script_signature $1)
-  [[ "$_signature" == "$2" ]]
+  [[ "$_signature" == "$2" ]] && return true
+  return false
 }
 
 # Check whether something 'exists'
@@ -65,5 +66,6 @@ function base::should_source() {
 # 2. Variable
 function base::exists() {
   whence "$1" > /dev/null && return true
-  eval "[[ -n \${$1+1} ]]"
+  eval "[[ -n \${$1+1} ]]" && return true
+  return false
 }

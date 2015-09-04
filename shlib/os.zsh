@@ -4,17 +4,21 @@
 __OS__=${0:a}
 
 function os::OSX() {
-  [[ "$OSTYPE" == "darwin"* ]]
+  [[ "$OSTYPE" == "darwin"* ]] && return true
+  return false
 }
 
 function os::LINUX() {
-  [[ "$OSTYPE" == "linux-gnu"* ]]
+  [[ "$OSTYPE" == "linux-gnu"* ]] && return true
+  return false
 }
 
 function os::CYGWIN() {
-  [[ "$OSTYPE" == "cygwin32"* ]]
+  [[ "$OSTYPE" == "cygwin32"* ]] && return true
+  return false
 }
 
 function os::WINDOWS() {
-  [[ "$OSTYPE" == "windows"* ]]
+  [[ "$OSTYPE" == "windows"* ]] && return true
+  return false
 }

@@ -11,8 +11,6 @@ source ${__MYZSHLIB__}/util.zsh
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
-RETVAL=
-
 # Environment {{{
 # Turn on vi mode by default.
 set -o vi
