@@ -24,7 +24,7 @@
   ignored = ls-files --others -i --exclude-standard
 
   # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull --recurse-submodules"
+  p = !"git pull --recurse-submodules; git submodule update --remote --merge"
 
   # Push changes for submodules also
   pu = push --recurse-submodules=on-demand
