@@ -22,7 +22,7 @@ function file::find_ignore_git() {
 }
 
 function file::ll() {
-  ls -lh "$@"
+  ${aliases[ls]:-ls} -lh "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -34,11 +34,11 @@ function file::ll() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< "$(ls -l $@)"
+  }' <<< "$(${aliases[ls]:-ls} -l $@)"
 }
 
 function file::la() {
-  ls -alF "$@"
+   ${aliases[ls]:-ls} -alF "$@"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -50,21 +50,5 @@ function file::la() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< "$(ls -laF $@)"
-}
-
-function file::ldu() {
-  $1
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
-        y = sum / (2^(10*i))
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< "$($2 $@)"
+  }' <<< "$(${aliases[ls]:-ls} -laF $@)"
 }
