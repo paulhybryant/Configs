@@ -1,6 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 [[ -n "${__BASE__+1}" ]] && return
+# In zsh we can get the script name with ${0:a}, it would contain the function
+# name if this is used within a function.
+# Source: zshexpn(1) man page, section HISTORY EXPANSION, subsection Modifiers
+# (or simply info -f zsh -n Modifiers)
+# More portable way to get this:
+# canonical=$(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")
 __BASE__="${0:a}"
 [[ -n "${__VERBOSE__+1}" ]] && echo "${__BASE__} sourced"
 
@@ -80,7 +86,6 @@ function base::exists() {
 
 # Library include guard
 # $1 library script path
-# $2 guard variable name
 function base::sourced() {
   # strip the .zsh extension
   local _var=$(basename ${1%.zsh})
