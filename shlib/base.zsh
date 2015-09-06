@@ -10,7 +10,7 @@ init::sourced ${0:a} && return
 
 # Check whether something 'exists'
 # The check order is the following:
-# 1. Variable
+# 1. Variable or Function
 # 2. Binary
 # 3. File or Directory
 function base::exists() {
