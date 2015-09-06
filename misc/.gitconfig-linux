@@ -41,6 +41,9 @@
   # Clone a repository including all submodules
   cr = clone --recursive
 
+  # Checkout
+  co = checkout
+
   # Commit all changes
   ca = !git add -A && git commit -av
 
