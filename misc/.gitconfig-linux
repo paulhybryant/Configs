@@ -45,7 +45,7 @@
   co = checkout
 
   # Commit all changes
-  ca = !git add -A && git commit -av
+  ca = !git add -A || git commit -av
 
   # Show verbose output about tags, branches or remotes
   tags = tag -l
