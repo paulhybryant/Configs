@@ -212,7 +212,7 @@ function! s:myutils.hooks.on_source(bundle)
   Glaive myutils plugin[mappings]
         \ bufclose_skip_types=`[
         \  'gistls', 'nerdtree', 'indicator',
-        \  'FoldDigest', 'Scratch', 'capture' ]`
+        \  'folddigest', 'Scratch', 'capture' ]`
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
