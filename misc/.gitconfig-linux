@@ -26,8 +26,11 @@
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull --recurse-submodules"
 
+  # Push changes for submodules also
+  pu = push --recurse-submodules=on-demand
+
   # Pull from upstream and merge
-  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+  mu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
 
   # View abbreviated SHA, description, and history graph of the latest 20 commits
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
