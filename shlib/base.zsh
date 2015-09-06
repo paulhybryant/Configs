@@ -1,34 +1,15 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-[[ -n "${__BASE__+1}" ]] && return
+init::sourced ${0:a} && return
+
+source ${0:h}/os.zsh
+
 # In zsh we can get the script name with ${0:a}, it would contain the function
 # name if this is used within a function.
 # Source: zshexpn(1) man page, section HISTORY EXPANSION, subsection Modifiers
 # (or simply info -f zsh -n Modifiers)
 # More portable way to get this:
 # canonical=$(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")
-__BASE__="${0:a}"
-[[ -n "${__VERBOSE__+1}" ]] && echo "${__BASE__} sourced"
-
-function os::OSX() {
-  [[ "$OSTYPE" == "darwin"* ]] && return 0
-  return 1
-}
-
-function os::LINUX() {
-  [[ "$OSTYPE" == "linux-gnu"* ]] && return 0
-  return 1
-}
-
-function os::CYGWIN() {
-  [[ "$OSTYPE" == "cygwin32"* ]] && return 0
-  return 1
-}
-
-function os::WINDOWS() {
-  [[ "$OSTYPE" == "windows"* ]] && return 0
-  return 1
-}
 
 function base::_config_darwin() {
   export BREWVERSION="homebrew"
@@ -74,33 +55,25 @@ function base::reload() {
 
 # Check whether something 'exists'
 # The check order is the following:
-# 1. Binary
-# 2. Variable
+# 1. Variable
+# 2. Binary
 # 3. File or Directory
 function base::exists() {
-  whence "$1" > /dev/null && return 0
   eval "[[ -n \${$1+1} ]]" && return 0
+  whence "$1" > /dev/null && return 0
   [[ -e "$1" || -d "$1" ]] && return 0
   return 1
 }
 
-# Library include guard
-# $1 library script path
-function base::sourced() {
-  # strip the .zsh extension
-  local _var=$(basename ${1%.zsh})
-  local _cur_signature=$(eval "echo \$__${_var}__")
-
-  if os::OSX && [[ -z ${CMDPREFIX} ]]; then
-    # Fallback to OSX native stat
-    local _signature="$1-$(stat -f '%m' $1)"
-  else
-    local _signature="$1-$(stat -c "%Y" $1)"
-    # $(${CMDPREFIX}date -r "$1" +%s)
-  fi
-
-  [[ "${_signature}" == "$_cur_signature" ]] && return 0
-  eval "__${_var}__=\"${_signature}\""
-  [[ -n "${__VERBOSE__+1}" ]] && echo "$1 sourced"
+function base::_verbose() {
+  base::exists '__VERBOSE__' && return 0
   return 1
+}
+
+function base::verbose_toggle() {
+  if base::_verbose; then
+    __VERBOSE__='true'
+  else
+    unset __VERBOSE__
+  fi
 }

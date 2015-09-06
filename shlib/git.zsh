@@ -1,9 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-source ${__MYZSHLIB__}/base.zsh
-base::sourced ${0:a} && return
+init::sourced ${0:a} && return
 
-source ${__MYZSHLIB__}/io.zsh
+source ${0:h}/io.zsh
 
 # Check subdirs of current directory, and report repos that are dirty
 function git::check_dirty_repos() {

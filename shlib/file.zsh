@@ -1,7 +1,6 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-source ${__MYZSHLIB__}/base.zsh
-base::sourced ${0:a} && return
+init::sourced ${0:a} && return
 
 function file::find_ignore_dir() {
   # Commands with the same output
@@ -37,7 +36,6 @@ function file::ll() {
     }
   }' <<< "$(ls -l $@)"
 }
-alias ll=file::ll
 
 function file::la() {
   ls -alF "$@"
@@ -54,7 +52,6 @@ function file::la() {
     }
   }' <<< "$(ls -laF $@)"
 }
-alias la=file::la
 
 function file::ldu() {
   $1
@@ -71,4 +68,3 @@ function file::ldu() {
     }
   }' <<< "$($2 $@)"
 }
-alias ldu=file::ldu
