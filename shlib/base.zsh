@@ -1,6 +1,6 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-init::sourced ${0:a} && return
+init::sourced "${0:a}" && return
 # In zsh we can get the script name with ${0:a}, it would contain the function
 # name if this is used within a function.
 # Source: zshexpn(1) man page, section HISTORY EXPANSION, subsection Modifiers

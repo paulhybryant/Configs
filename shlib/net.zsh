@@ -1,10 +1,11 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-init::sourced ${0:a} && return
+init::sourced "${0:a}" && return
 
 function net::external_ip() {
-  local _ip="$(curl -x '' ipecho.net/plain 2> /dev/null)"
-  echo ${_ip}
+  local _ip
+  _ip="$(curl -x '' ipecho.net/plain 2> /dev/null)"
+  echo "${_ip}"
 }
 function net::ssh() {
   # local _ssh_info_=$(mktemp)
@@ -28,6 +29,6 @@ function net::ssh() {
 #   is_port_open 127.0.0.1 80 90
 #   is_port_open 127.0.0.1 80-90
 function net::is_port_open() {
-  nc -zv $1 2> /dev/null && return 0
+  nc -zv "$1" 2> /dev/null && return 0
   return 1
 }

@@ -1,16 +1,16 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-init::sourced ${0:a} && return
+init::sourced "${0:a}" && return
 
-source ${0:h}/io.zsh
+source "${0:h}/io.zsh"
 
 # Check subdirs of current directory, and report repos that are dirty
 function git::check_dirty_repos() {
   local -a dirty_repos
-  dirty_repose=()
+  dirty_repos=()
   for dir in */; do
-    io::msg "Checking " ${dir}
-    pushd ${dir}
+    io::msg "Checking ${dir}"
+    pushd "${dir}"
     git dirty
     if [[ $? -ne 0 ]]; then
       dirty_repos+=${dir}
@@ -43,10 +43,11 @@ function git::has_branch() {
 #    indicate how many commits are between the referenced
 #    commit and the branch tip. We don't care. Ignore them.
 function git::parent_branch() {
+  local _branch
   if [[ $# -eq 0 ]]; then
-    local _branch=$(git rev-parse --abbrev-ref HEAD)
+    _branch=$(git rev-parse --abbrev-ref HEAD)
   else
-    local _branch=$1
+    _branch=$1
   fi
   git show-branch | ack '\*' | ack -v "$_branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 }

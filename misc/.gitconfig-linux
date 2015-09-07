@@ -67,6 +67,9 @@
   # dirty
   dirty = "!gitdirty() { if [[ -d '.git' && -n $(git status --porcelain) ]]; then exit 1; fi }; gitdirty"
 
+  # Creates branch and checkout
+  b = checkout -b
+
 [core]
   pager = less -F -X
 

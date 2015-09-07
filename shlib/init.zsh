@@ -7,11 +7,12 @@ function init::sourced() {
   local _var="__SOURCED_${${1:t:u}%.ZSH}__"
   local _cur_signature="${(P)_var}"
 
+  local _signature
   if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
     # Fallback to OSX native stat
-    local _signature="$1-$(stat -f '%m' $1)"
+    _signature="$1-$(stat -f '%m' $1)"
   else
-    local _signature="$1-$(stat -c "%Y" $1)"
+    _signature="$1-$(stat -c "%Y" $1)"
     # $(${CMDPREFIX}date -r "$1" +%s)
   fi
 
