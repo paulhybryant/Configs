@@ -2,3 +2,4 @@
 *.a
 *.o
 doc/tags
+.urchin.log
