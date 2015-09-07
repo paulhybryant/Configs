@@ -45,7 +45,7 @@ function init::sourced() {
     # Fallback to OSX native stat
     _signature="$1-$(stat -f '%m' $1)"
   else
-    _signature="$1-$(stat -c "%Y" $1)"
+    _signature="$1-$(${CMDPREFIX}stat -c "%Y" $1)"
     # $(${CMDPREFIX}date -r "$1" +%s)
   fi
 
