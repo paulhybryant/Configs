@@ -188,7 +188,7 @@ function configs::_config_alias() {
   # alias less=$PAGER
   # alias zless=$PAGER
   alias pfd="whence -f"
-  alias rm="rm -v"
+  alias rm=file::rm
   alias nvim="NVIM=nvim nvim"
   alias tl='tmux list-sessions'
   alias ts=util::tmux_start

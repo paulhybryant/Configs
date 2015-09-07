@@ -19,6 +19,9 @@ function file::find_ignore_dir() {
 function file::find_ignore_git() {
   file::find_ignore_dir ".git"
 }
+function file::rm() {
+  trash $@
+}
 function file::ll() {
   eval "${aliases[ls]:-ls} -lh $*"
   awk '/^-/ {
