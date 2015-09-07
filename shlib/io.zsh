@@ -6,13 +6,13 @@ source "${0:h}/colors.zsh"
 source "${0:h}/mode.zsh"
 
 function io::err() {
-  printf "${COLOR_Red}$*\n"
+  printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
 }
 function io::warn() {
-  printf "${COLOR_Yellow}$*\n"
+  printf "${COLOR_Yellow}$*\n${COLOR_Color_Off}"
 }
 function io::msg() {
-  printf "${COLOR_Green}$*\n"
+  printf "${COLOR_Green}$*\n${COLOR_Color_Off}"
 }
 function io::yes_or_no() {
   read -q "REPLY?$1?(y/n)"

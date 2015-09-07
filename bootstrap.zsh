@@ -3,12 +3,13 @@
 # set -o nounset                  # Treat unset variables as an error.
 set -o errexit                  # Exit script when run into the first error.
 
-MYCONFIGS=${0:h}
-source ${MYCONFIGS}/shlib/init.zsh
-source ${MYCONFIGS}/shlib/base.zsh
-source ${MYCONFIGS}/shlib/os.zsh
-source ${MYCONFIGS}/shlib/io.zsh
-base::bootstrap
+MYCONFIGS="${0:h}"
+source "${MYCONFIGS}/shlib/init.zsh"
+source "${MYCONFIGS}/shlib/base.zsh"
+source "${MYCONFIGS}/shlib/configs.zsh"
+source "${MYCONFIGS}/shlib/io.zsh"
+source "${MYCONFIGS}/shlib/os.zsh"
+configs::bootstrap
 
 # Bootstrap util functions {{{
 function backup_and_link() {
@@ -172,11 +173,11 @@ os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz
 io::msg "Creating dir ${BREWHOME}"
 mkdir -p "${BREWHOME}"
 io::msg "Cloning ${BREWVERSION}"
-git clone https://github.com/Homebrew/${BREWVERSION} ${BREWHOME}
+git clone https://github.com/Homebrew/${BREWVERSION} "${BREWHOME}"
 
 brew install coreutils
-io::msg "Creating symlinks from ${MYCONFIGS}"
-link_all "${MYCONFIGS}"
+# io::msg "Creating symlinks from ${MYCONFIGS}"
+# link_all "${MYCONFIGS}"
 
 io::msg "Tapping extra repositories"
 brew tap paulhybryant/myformulae
