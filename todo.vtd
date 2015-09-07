@@ -45,3 +45,4 @@
   @ Check documentation for all my vim plugins, do not create new before updating existing doc @p:1
   @ Document zsh library, checkout the doc gen tools @p:1
   @ Learn python @p:1
+  @ Fix linuxbrew shellcheck dependency @p:0
