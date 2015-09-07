@@ -16,13 +16,11 @@ function file::find_ignore_dir() {
   # find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   find . -wholename "*/$1" -prune -o "$@" -print
 }
-
 function file::find_ignore_git() {
   file::find_ignore_dir ".git"
 }
-
 function file::ll() {
-  ${aliases[ls]:-ls} -lh "$@"
+  eval "${aliases[ls]:-ls} -lh $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -34,11 +32,10 @@ function file::ll() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< "$(${aliases[ls]:-ls} -l $@)"
+  }' <<< $(eval "${aliases[ls]:-ls} -l $*")
 }
-
 function file::la() {
-   ${aliases[ls]:-ls} -alF "$@"
+  eval "${aliases[ls]:-ls} -alF $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -50,5 +47,5 @@ function file::la() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< "$(${aliases[ls]:-ls} -laF $@)"
+  }' <<< $(eval "${aliases[ls]:-ls} -laF $*")
 }

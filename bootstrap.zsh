@@ -4,10 +4,10 @@
 set -o errexit                  # Exit script when run into the first error.
 
 MYCONFIGS=${0:h}
-source $MYCONFIGS/shlib/init.zsh
-source $MYCONFIGS/shlib/base.zsh
-source $MYCONFIGS/shlib/os.zsh
-source $MYCONFIGS/shlib/io.zsh
+source ${MYCONFIGS}/shlib/init.zsh
+source ${MYCONFIGS}/shlib/base.zsh
+source ${MYCONFIGS}/shlib/os.zsh
+source ${MYCONFIGS}/shlib/io.zsh
 base::bootstrap
 
 # Bootstrap util functions {{{
@@ -166,10 +166,13 @@ function link_all() {
 }
 # }}}
 
-io::msg "Creating dir $BREWHOME"
-mkdir -p "$BREWHOME"
+io::msg "Installing ${BREWVERSION} dependencies..."
+os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+
+io::msg "Creating dir ${BREWHOME}"
+mkdir -p "${BREWHOME}"
 io::msg "Cloning ${BREWVERSION}"
-git clone https://github.com/Homebrew/${BREWVERSION} $BREWHOME
+git clone https://github.com/Homebrew/${BREWVERSION} ${BREWHOME}
 
 brew install coreutils
 io::msg "Creating symlinks from ${MYCONFIGS}"
@@ -192,6 +195,6 @@ brew gem install tmuxinator
 brew install vimdoc vroom
 
 io::msg "Installing extra stuff for OSX"
-os::mac && brew install brew-cask clipper macvim
+os::OSX && brew install brew-cask clipper macvim
 
 io::msg "All Done!"

@@ -25,12 +25,10 @@ function git::check_dirty_repos() {
     done
   fi
 }
-
 function git::has_branch() {
   [[ -n $(git branch --list "$1") ]] && return 0
   return 1
 }
-
 # Get parent branch of a branch, defaults to current branch.
 # How it works:
 # 1| Display a textual history of all commits.

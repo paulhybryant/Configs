@@ -148,10 +148,54 @@ NeoBundle 'tpope/vim-unimpaired'                                                
 NeoBundle 'tyru/capture.vim'                                                    " Capture Ex command output to buffer
 NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
 NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
+NeoBundle 'thinca/vim-unite-history'
+" NeoBundle 'thinca/vim-singleton'
+NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
+NeoBundle 'hujo/ref-doshelp', {
+      \ 'depends' : 'thinca/vim-ref',
+      \ 'disabled' : !g:OS.is_windows,
+      \ }                                                                       " Ref source for windows cmd
+NeoBundle 'eiiches/vim-ref-info', {
+      \ 'depends' : 'thinca/vim-ref',
+      \ }
+NeoBundle 'soh335/vim-ref-jquery', {
+      \ 'autoload' : { 'filetypes' : ['javascript'] },
+      \ 'depends' : 'thinca/vim-ref',
+      \ 'lazy' : 1,
+      \ }
+" NeoBundle 'thinca/vim-vparsec'
+NeoBundle 'thinca/vim-ft-markdown_fold', {
+      \ 'autoload' : { 'filetypes' : ['markdown'] },
+      \ 'lazy' : 1,
+      \ }                                                                       " Fold markdown
+" NeoBundle 'thinca/vim-ft-diff_fold', {
+      " \ 'autoload' : { 'filetypes' : ['markdown'] },
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Fold diff
+NeoBundle 'thinca/vim-ft-help_fold', {
+      \ 'autoload' : { 'filetypes' : ['help'] },
+      \ 'lazy' : 1,
+      \ }                                                                       " Fold help
+" NeoBundle 'thinca/vim-prettyprint'
+" NeoBundle 'thinca/vim-openbuf'
+" NeoBundle 'thinca/vim-editvar'
+" NeoBundle 'thinca/vim-textobj-function-javascript', {
+      " \ 'autoload' : { 'filetypes' : ['javascript'] },
+      " \ 'depends' : 'kana/vim-textobj-user',
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Text object for javascript function
+" NeoBundle 'thinca/vim-textobj-function-perl', {
+      " \ 'autoload' : { 'filetypes' : ['perl'] },
+      " \ 'depends' : 'kana/vim-textobj-user',
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Text object for perl function
+" NeoBundle 'thinca/vim-auto_source'
+" NeoBundle 'tsukkee/unite-help'
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-" NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+" NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object between any type of quotes
@@ -380,8 +424,8 @@ function! s:syntastic.hooks.on_source(bundle)
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_mode_map = {
         \ 'mode': 'passive',
-        \ 'active_filetypes': [],
-        \ 'passive_filetypes': ['vim']
+        \ 'active_filetypes': [ 'zsh' ],
+        \ 'passive_filetypes': [ 'vim' ]
         \ }
   nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 endfunction
@@ -960,18 +1004,15 @@ endfor
       " \ 'type' : 'vba',
       " \ }                                                                       " Highlights marks by using the signs feature
 " NeoBundle 'bronson/vim-visual-star-search'                                      " Use * to search for selected text from visual mode
-" NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 " NeoBundle 'wincent/ferret'                                                      " Enhanced multi-file search for Vim
 " NeoBundle 'wincent/vim-clipper'                                                 " Clipper integratino for Vim
 " NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 " NeoBundle 'mbbill/undotree'
-" NeoBundle 'thinca/vim-unite-history'
 " NeoBundle 'mattn/unite-gist'
 " NeoBundle 'Shougo/unite-build'
 " NeoBundle 'Shougo/unite-sudo'
 " NeoBundle 'Shougo/unite-ssh'
-" NeoBundle 'tsukkee/unite-help'
 " NeoBundle 'kopischke/unite-spell-suggest'
 " NeoBundle 'tyru/unite-screen.sh'
 " NeoBundle 'tpope/vim-vinegar'                                                 " NERDTree enhancement
@@ -997,7 +1038,7 @@ endfor
       " \ }                                                                     " Highlight group of item under corsor is linked to
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/manpageview.vba.gz', {
       " \ 'type' : 'vba',
-      " \ }                                                                     " Commands for viewing man pages in vim
+      " \ }                                                                     " Commands for viewing man pages in vim, favor ref.vim and ref-man over this plugin
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vissort.vba.gz', {
       " \ 'type' : 'vba',
       " \ }                                                                     " Allow sorting lines by using a visual block (column)
@@ -1082,6 +1123,9 @@ endfor
 " endfunction
 " NeoBundle 'gregsexton/gitv', { 'depends' : 'tpope/vim-fugitive' }             " Git log viewer (Yet another gitk clone for Vim)
 " NeoBundle 'kana/vim-operator-replace', {
+      " \ 'depends' : 'kana/vim-operator-user'
+      " \ }                                                                     " Vim operator for replace
+" NeoBundle 'thinca/vim-operator-sequence', {
       " \ 'depends' : 'kana/vim-operator-user'
       " \ }                                                                     " Vim operator for replace
 " NeoBundle 'Shougo/neocomplcache.vim'
@@ -1217,6 +1261,7 @@ set background=dark                                                             
 set backspace=indent,eol,start                                                  " Backspace for dummies
 set backup                                                                      " Whether saves a backup before editing
 set cursorline                                                                  " Highlight current line
+set cursorcolumn                                                                " Highlight current line
 set expandtab                                                                   " Tabs are spaces, not tabs
 set foldenable                                                                  " Auto fold code
 set hidden                                                                      " Allow buffer switching without saving

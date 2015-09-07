@@ -100,8 +100,8 @@ function configs::_config_env() {
   # setopt auto_list
   setopt vi                                                                     # Use vi key bindings in ZSH
   setopt append_history
-  setopt correct
-  setopt correctall
+  # setopt correct
+  # setopt correctall
   setopt extended_history
   setopt hist_expire_dups_first
   setopt hist_ignore_dups                                                       # ignore duplication command history list

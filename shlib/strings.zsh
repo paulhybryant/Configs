@@ -3,5 +3,9 @@
 init::sourced ${0:a} && return
 
 function strings::strip_slash() {
-  [[ $1 =~ .*/$ ]] && echo ${1%/}
+  if [[ $1 =~ .*/$ ]]; then
+    echo ${1%/}
+  else
+    echo $1
+  fi
 }

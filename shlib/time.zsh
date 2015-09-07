@@ -2,14 +2,16 @@
 
 init::sourced ${0:a} && return
 
+source ${0:h}/io.zsh
+
 function time::human_readable_date() {
   if os::OSX && [[ -z ${CMDPREFIX} ]]; then
-    echo $(date -r $1)
+    io::msg $(date -r $1)
   else
-    echo $(date --date=@"$1")
+    io::msg $(date --date=@"$1")
   fi
 }
 
 function time::seconds() {
-  echo $(date +%s)
+  io::msg $(date +%s)
 }

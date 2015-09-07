@@ -1,0 +1,5 @@
+Running tests at 2015-09-07T12:32:10
+base::exists_function.zsh passed
+base::exists_variable.zsh passed
+strings::strip_slash1.zsh passed
+strings::strip_slash2.zsh passed

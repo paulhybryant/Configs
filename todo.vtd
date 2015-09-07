@@ -13,6 +13,7 @@
   @ Update SQLUtilities to wrap at comma but leave comma with previous line. (DONE 2014-11-17 20:13)
   @ Documentation for relatedfiles
   @ Documentation for folddigest
+  @ Use verbose to find out what cause the autofold when terminus is enabled
 
 * tmux related tasks
 = Tmux @p:2 =
