@@ -1,5 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: io.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 
 source "${0:h}/colors.zsh"
@@ -26,3 +42,7 @@ function io::vlog() {
   mode::verbose "$1" && io::msg "$2"
   return 0
 }
+
+: <<=cut
+=back
+=cut

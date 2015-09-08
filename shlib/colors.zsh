@@ -1,5 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: colors.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 
 function colors::define() {
@@ -113,3 +129,7 @@ function colors::manpage() {
   #########################################
 }
 colors::manpage
+
+: <<=cut
+=back
+=cut

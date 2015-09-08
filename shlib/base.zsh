@@ -1,5 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: base.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 # Public: Source a library file automatically if file modified since last
 # source.
@@ -29,3 +45,7 @@ function base::exists() {
   [[ -e "$1" || -d "$1" ]] && return 0
   return 1
 }
+
+: <<=cut
+=back
+=cut

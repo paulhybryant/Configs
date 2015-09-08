@@ -1,5 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: net.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 
 function net::external_ip() {
@@ -32,3 +48,7 @@ function net::is_port_open() {
   nc -zv "$1" 2> /dev/null && return 0
   return 1
 }
+
+: <<=cut
+=back
+=cut

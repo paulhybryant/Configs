@@ -1,8 +1,27 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: git.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 
 source "${0:h}/io.zsh"
+
+export GIT_CURL_VERBOSE=1
+export GIT_EDITOR='vim'
 
 # Check subdirs of current directory, and report repos that are dirty
 function git::check_dirty_repos() {
@@ -51,3 +70,7 @@ function git::parent_branch() {
   fi
   git show-branch | ack '\*' | ack -v "$_branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 }
+
+: <<=cut
+=back
+=cut

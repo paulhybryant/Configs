@@ -1,10 +1,26 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-source ${0:h}/init.zsh
-source ${0:h}/file.zsh
-source ${0:h}/os.zsh
-source ${0:h}/io.zsh
-source ${0:h}/util.zsh
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: configs.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
+source "${0:h}/init.zsh"
+source "${0:h}/file.zsh"
+source "${0:h}/os.zsh"
+source "${0:h}/io.zsh"
+source "${0:h}/util.zsh"
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
@@ -24,7 +40,7 @@ function configs::_config_linux() {
 }
 function configs::_config_brew() {
   export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-  export MANPATH="$BREWHOME/share/man:$MANPATH"
+  export MANPATH="$BREWHOME/share/man:${__MYCONFIGS__}/shlib/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
   export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
   unalias run-help 2>/dev/null
@@ -40,8 +56,7 @@ function configs::bootstrap() {
   configs::_config_brew
 }
 function configs::_config_env() {
-  export EDITOR="$VISUAL"
-  export GIT_EDITOR="$VISUAL"
+  export EDITOR='vim'
   export GREP_OPTIONS='--color=auto'
   # Don't enable the following line, it will screw up HOME and END key in tmux
   # export TERM=xterm-256color
@@ -61,10 +76,10 @@ function configs::_config_env() {
   # See bash(1) for more options
   HISTCONTROL=ignoreboth:erasedups
   # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-  HISTSIZE=50000
-  SAVEHIST=$HISTSIZE
+  export HISTSIZE=50000
+  export SAVEHIST=$HISTSIZE
   if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh_history
+    export HISTFILE=$HOME/.zsh_history
   fi
   # Show history
   case $HIST_STAMPS in
@@ -144,7 +159,7 @@ function configs::_config_env() {
   # case-insensitive (uppercase from lowercase) completion
   zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
   # process completion
-  zstyle ':completion:*:processes' command 'ps -au$USER'
+  zstyle ':completion:*:processes' command "ps -au$USER"
   zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
   # }}}
   # zle {{{
@@ -208,3 +223,7 @@ function configs::end() {
   compinit
   promptinit
 }
+
+: <<=cut
+=back
+=cut

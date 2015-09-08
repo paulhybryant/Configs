@@ -1,5 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: time.zsh -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 init::sourced "${0:a}" && return
 
 function time::human_readable_date() {
@@ -17,3 +33,7 @@ function time::seconds() {
   _time_str=$(date +%s)
   echo "${_time_str}"
 }
+
+: <<=cut
+=back
+=cut

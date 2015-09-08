@@ -2,38 +2,36 @@
 
 : <<=cut
 =pod
+
 =head1 NAME
 
-init.zsh - Library source guard.
+File: init.zsh - Library source guard implementation.
 
 =head1 SYNOPSIS
 
-    Put the following at the start of all library files.
+Put the following boilerplate at the start of all library files.
 
     source init.zsh
     init::sourced "${0:a}" && return
 
 =head1 DESCRIPTION
 
-Library source guard.
+The library file will be sourced, if it has not been sourced before or modified
+since last time it was sourced. A guard variable will be defined, with the value
+of the concatenation of the file path and modification time (kind of as a
+signature) when this file is sourced to avoid sourcing it repetitively.
 
 =head2 Methods
 
-=over 12
+=over 4
+=cut
 
-=item C<init::sourced>
+: <<=cut
+=item Function C<init::sourced>
 
-Returns a status indicating whether the library file is already sourced and have
-not changed since then.
+$1 Absolute path to the file to be sourced.
 
-=back
-
-=head1 LICENSE
-
-=head1 AUTHOR
-
-Yu Huang
-
+@return 0 or 1, indicates whether latest version of this file is sourced.
 =cut
 function init::sourced() {
   # strip the .zsh extension
@@ -56,3 +54,7 @@ function init::sourced() {
     return 1
   fi
 }
+
+: <<=cut
+=back
+=cut

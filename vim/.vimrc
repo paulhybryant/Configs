@@ -149,7 +149,6 @@ NeoBundle 'tyru/capture.vim'                                                    
 NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
 NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
 NeoBundle 'thinca/vim-unite-history'
-" NeoBundle 'thinca/vim-singleton'
 NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
 NeoBundle 'hujo/ref-doshelp', {
       \ 'depends' : 'thinca/vim-ref',
@@ -158,39 +157,6 @@ NeoBundle 'hujo/ref-doshelp', {
 NeoBundle 'eiiches/vim-ref-info', {
       \ 'depends' : 'thinca/vim-ref',
       \ }
-NeoBundle 'soh335/vim-ref-jquery', {
-      \ 'autoload' : { 'filetypes' : ['javascript'] },
-      \ 'depends' : 'thinca/vim-ref',
-      \ 'lazy' : 1,
-      \ }
-" NeoBundle 'thinca/vim-vparsec'
-NeoBundle 'thinca/vim-ft-markdown_fold', {
-      \ 'autoload' : { 'filetypes' : ['markdown'] },
-      \ 'lazy' : 1,
-      \ }                                                                       " Fold markdown
-" NeoBundle 'thinca/vim-ft-diff_fold', {
-      " \ 'autoload' : { 'filetypes' : ['markdown'] },
-      " \ 'lazy' : 1,
-      " \ }                                                                       " Fold diff
-NeoBundle 'thinca/vim-ft-help_fold', {
-      \ 'autoload' : { 'filetypes' : ['help'] },
-      \ 'lazy' : 1,
-      \ }                                                                       " Fold help
-" NeoBundle 'thinca/vim-prettyprint'
-" NeoBundle 'thinca/vim-openbuf'
-" NeoBundle 'thinca/vim-editvar'
-" NeoBundle 'thinca/vim-textobj-function-javascript', {
-      " \ 'autoload' : { 'filetypes' : ['javascript'] },
-      " \ 'depends' : 'kana/vim-textobj-user',
-      " \ 'lazy' : 1,
-      " \ }                                                                       " Text object for javascript function
-" NeoBundle 'thinca/vim-textobj-function-perl', {
-      " \ 'autoload' : { 'filetypes' : ['perl'] },
-      " \ 'depends' : 'kana/vim-textobj-user',
-      " \ 'lazy' : 1,
-      " \ }                                                                       " Text object for perl function
-" NeoBundle 'thinca/vim-auto_source'
-" NeoBundle 'tsukkee/unite-help'
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
@@ -733,6 +699,10 @@ NeoBundle 'isnowfy/python-vim-instant-markdown', {
       \ 'autoload' : { 'filetypes' : ['markdown'] },
       \ 'lazy' : 1,
       \ }                                                                       " Start a http server and preview markdown instantly
+NeoBundle 'thinca/vim-ft-markdown_fold', {
+      \ 'autoload' : { 'filetypes' : ['markdown'] },
+      \ 'lazy' : 1,
+      \ }                                                                       " Fold markdown
 " NeoBundle 'tpope/vim-markdown', {
       " \ 'autoload' : { 'filetypes' : ['markdown'] },
       " \ 'lazy' : 1,
@@ -766,7 +736,7 @@ function! s:semantic_highlight.hooks.on_source(bundle)
         \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 endfunction
 " }}}
-" js {{{2
+" javascript {{{2
 NeoBundle 'maksimr/vim-jsbeautify', {
       \ 'filetypes' : ['javascript'],
       \ 'lazy' : 1,
@@ -791,6 +761,16 @@ function s:jssyntax.hooks.on_source(bundle)
   " let g:javascript_conceal_static     = '•'
   " let g:javascript_conceal_super      = 'Ω'
 endfunction
+NeoBundle 'soh335/vim-ref-jquery', {
+      \ 'autoload' : { 'filetypes' : ['javascript'] },
+      \ 'depends' : 'thinca/vim-ref',
+      \ 'lazy' : 1,
+      \ }
+" NeoBundle 'thinca/vim-textobj-function-javascript', {
+      " \ 'autoload' : { 'filetypes' : ['javascript'] },
+      " \ 'depends' : 'kana/vim-textobj-user',
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Text object for javascript function
 " }}}
 " json {{{2
 NeoBundle 'elzr/vim-json', {
@@ -808,6 +788,24 @@ function s:vimjson.hooks.on_source(bundle)
 endfunction
 NeoBundle 'Quramy/vison'                                                        " For writting JSON with JSON Schema
 " }}}
+" help {{{2
+NeoBundle 'thinca/vim-ft-help_fold', {
+      \ 'autoload' : { 'filetypes' : ['help'] },
+      \ 'lazy' : 1,
+      \ }                                                                       " Fold help
+" }}}
+" python {{{2
+" NeoBundle 'klen/python-mode', {
+      " \ 'filetypes' : ['python'],
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Python dev env
+" }}}
+" perl {{{
+" NeoBundle 'thinca/vim-textobj-function-perl', {
+      " \ 'autoload' : { 'filetypes' : ['perl'] },
+      " \ 'depends' : 'kana/vim-textobj-user',
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Text object for perl function
 " }}}
 " Disabled plugins {{{1
 for bundle in ['delimitMate']
@@ -914,6 +912,17 @@ endfor
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
+" NeoBundle 'thinca/vim-singleton'
+" NeoBundle 'thinca/vim-prettyprint'
+" NeoBundle 'thinca/vim-openbuf'
+" NeoBundle 'thinca/vim-editvar'
+" NeoBundle 'thinca/vim-auto_source'
+" NeoBundle 'tsukkee/unite-help'
+" NeoBundle 'thinca/vim-vparsec'
+" NeoBundle 'thinca/vim-ft-diff_fold', {
+      " \ 'autoload' : { 'filetypes' : ['diff'] },
+      " \ 'lazy' : 1,
+      " \ }                                                                       " Fold diff
 " NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file
 " NeoBundle 'mattboehm/vim-unstack'                                               " View call stacks in vim
 " NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
