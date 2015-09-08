@@ -18,6 +18,9 @@ File: file.zsh -
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/io.zsh"
+source "${0:h}/os.zsh"
+
 function file::find_ignore_dir() {
   # Commands with the same output
   # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
@@ -36,7 +39,23 @@ function file::find_ignore_git() {
   file::find_ignore_dir ".git"
 }
 function file::rm() {
-  trash $@
+  local _args='-'
+  while getopts fivrdh opt
+  do
+    case "${opt}" in
+      f|i|r|d|h)
+        os::LINUX && _args="${_args}${opt}"
+        ;;
+      v)
+        _args="${_args}${opt}"
+        ;;
+      *)
+        trash -h
+        ;;
+    esac
+  done
+  shift $OPTIND-1
+  trash "${_args}" "$@"
 }
 function file::ll() {
   eval "${aliases[ls]:-ls} -lh $*"

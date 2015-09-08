@@ -106,7 +106,7 @@ function link_all() {
 # }}}
 
 io::msg "Installing ${BREWVERSION} dependencies..."
-os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev trash-cli
 
 if ! base::exists "${BREWHOME}"; then
   io::msg "Cloning ${BREWVERSION}"
@@ -130,10 +130,10 @@ brew install --HEAD paulhybryant/myformulae/zsh-completions
 brew install --with-gssapi --with-libssh2 --with-rtmpdump curl
 brew install --disable-nls --override-system-vi --with-client-server --with-lua --with-luajit --with-gui vim
 brew install brew-gem cmake ctags git htop python python3 the_silver_searcher tmux vimpager zsh
-brew gem install tmuxinator npm trash
+brew gem install tmuxinator npm
 brew install --HEAD vimdoc vroom
 npm install -g urchin
 
-os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim
+os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim trash
 
 io::msg "All Done!"

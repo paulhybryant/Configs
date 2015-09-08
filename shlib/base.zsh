@@ -17,6 +17,7 @@ File: base.zsh -
 =cut
 
 init::sourced "${0:a}" && return
+
 # Public: Source a library file automatically if file modified since last
 # source.
 #
