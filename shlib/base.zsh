@@ -1,6 +1,9 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 init::sourced "${0:a}" && return
+# Public: Source a library file automatically if file modified since last
+# source.
+#
 # In zsh we can get the script name with ${0:a}, it would contain the function
 # name if this is used within a function.
 # Source: zshexpn(1) man page, section HISTORY EXPANSION, subsection Modifiers
@@ -13,6 +16,13 @@ init::sourced "${0:a}" && return
 # 1. Variable or Function
 # 2. Binary
 # 3. File or Directory
+#
+# $1 The thing to be checked whether it exists.
+#
+# Examples
+#   base::exists "VAR"
+#
+# Returns the exist code to indicator the existence.
 function base::exists() {
   eval "[[ -n \${$1+1} ]]" && return 0
   whence "$1" > /dev/null && return 0

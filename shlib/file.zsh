@@ -52,3 +52,16 @@ function file::la() {
     }
   }' <<< $(eval "${aliases[ls]:-ls} -laF $*")
 }
+function file::softlink() {
+  local _src=$1
+  local _target=$2
+
+  if [[ -h "${_target}" ]]; then
+    # Remove existing symlink
+    rm "${_target}"
+  elif [[ -f "${_target}" || -d "${_target}" ]]; then
+    echo "${_target} is an existing file / directory."
+    return 1
+  fi
+  ln -s "${_src}" "$_target"
+}
