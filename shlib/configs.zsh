@@ -151,7 +151,7 @@ function configs::_config_env() {
   # e.g. without this set, bb can be completed as blaze build, because bb is
   # expanded to blaze build before completion. With this set, bb will not be
   # expanded and there will be no completion for that.
-  # setopt complete_aliases
+  setopt complete_aliases
   # unsetopt correct                                                            # Disable autocorrect guesses.
   # unsetopt CORRECT
   # }}}

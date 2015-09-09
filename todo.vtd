@@ -13,7 +13,8 @@
   @ Update SQLUtilities to wrap at comma but leave comma with previous line. (DONE 2014-11-17 20:13)
   @ Documentation for relatedfiles
   @ Documentation for folddigest
-  @ Use verbose to find out what cause the autofold when terminus is enabled
+  @ Use verbose to find out what cause the autofold when terminus is enabled @p:0
+  @ Snippets for adding POD documentations in vim.
 
 * tmux related tasks
 = Tmux @p:2 =
@@ -23,14 +24,15 @@
   @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching. (DONE 2014-12-06 18:09)
   @ Make tmux resurrect automatic. (DONE 2015-08-19 16:18)
   @ Fix tmux-continuum to kill default session
+  @ Migrate muxcfg
 
 * misc
 = Misc @p:2 =
   @ Change tmuxline.vim back after pull request merged.
-  @ Map Fn key to control in autohotkey.
+  @ Map Fn key to control in autohotkey. @p:3
   @ Copy and then 'p' does not work in vim for mac. (DONE 2014-12-09 16:03)
-  @ Completion for .cvimrc
-  @ Vtd syntax highlight fix on windows
+  @ Completion for .cvimrc @p:3
+  @ Vtd syntax highlight fix on windows @p:3
   @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
   @ Reinstall bundle (vim-nerdtree-tabs, ReloadScript) (DONE 2014-11-28 10:55)
   @ Make the key map from Caps_Lock to ESC universal (DONE 2014-11-21 20:00)
@@ -45,4 +47,4 @@
   @ Check documentation for all my vim plugins, do not create new before updating existing doc @p:1
   @ Document zsh library, checkout the doc gen tools @p:1
   @ Learn python @p:1
-  @ Fix linuxbrew shellcheck dependency @p:0
+  @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)

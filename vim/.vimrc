@@ -26,9 +26,10 @@ call s:InstallNeobundleIfNotPresent(
 " }}}
 " Setup NeoBundle and OS.vim {{{1
 filetype off
-execute 'set runtimepath+=' . s:neobundle_install_path
+if has('vim_starting')
+  execute 'set runtimepath+=' . s:neobundle_install_path
+endif
 call neobundle#begin(s:neobundle_base_path)
-
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " NeoBundleFetch 'paulhybryant/neobundle.vim'                                   " Plugin manager
@@ -104,7 +105,7 @@ endfunction
 " Google specific setup {{{1
 let s:google_config = resolve(expand('~/.vimrc.google'))
 let g:at_google = filereadable(s:google_config)
-if g:at_google
+if g:at_google && has('vim_starting')
   execute 'source' s:google_config
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
@@ -129,7 +130,7 @@ NeoBundle 'chrisbra/Recover.vim'                                                
 NeoBundle 'chrisbra/improvedft'                                                 " Improved f and t command for vim
 NeoBundle 'cohama/agit.vim'                                                     " Git log viewer (Yet another gitk clone for Vim), prefer agit over gitv as gitv has some bugs
 NeoBundle 'flazz/vim-colorschemes'                                              " Collection of vim colorschemes
-NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
+" NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
 NeoBundle 'kana/vim-operator-user'                                              " User defined operator
 NeoBundle 'kana/vim-textobj-user'                                               " Allow defining text object by user
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
@@ -149,6 +150,7 @@ NeoBundle 'tyru/capture.vim'                                                    
 NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
 NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
 NeoBundle 'thinca/vim-unite-history'
+NeoBundle 'skeept/Ultisnips-neocomplete-unite'
 NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
 NeoBundle 'hujo/ref-doshelp', {
       \ 'depends' : 'thinca/vim-ref',
@@ -421,7 +423,10 @@ NeoBundle 'SirVer/ultisnips', {
 let s:ultisnips = neobundle#get('ultisnips')
 function! s:ultisnips.hooks.on_source(bundle)
   " Remap Ultisnips for compatibility for YCM
-  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsExpandTrigger = "<tab>"
+  " If there are multiple ft.snippet files, UltiSnips will only load the first
+  " one found.
+  " let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnippets"]
 endfunction
 " }}}
 " vim-airline {{{2
@@ -546,7 +551,7 @@ NeoBundle 'chiphogg/vim-vtd', {
       \ }
 let s:vimvtd = neobundle#get('vim-vtd')
 function! s:vimvtd.hooks.on_source(bundle)
-  Glaive vtd plugin[mappings]='vtd' files+=`[expand('%:p')]`
+  Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
   if &background == 'light'
     hi! Ignore guifg=#FDF6E3
   else
@@ -912,6 +917,7 @@ endfor
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
+" NeoBundle 'vim-scripts/CmdlineComplete'
 " NeoBundle 'thinca/vim-singleton'
 " NeoBundle 'thinca/vim-prettyprint'
 " NeoBundle 'thinca/vim-openbuf'
@@ -1255,13 +1261,13 @@ endfor
 " }}}
 " Wrap up bundle setup {{{1
 call neobundle#end()
+filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
 call glaive#Install()
 call myutils#InitUndoSwapViews()
 colorscheme solarized
 " }}}
 " Settings {{{1
-filetype plugin indent on                                                       " Automatically detect file types.
 syntax on                                                                       " Syntax highlighting
 set autoindent                                                                  " Indent at the same level of the previous line
 set autoread                                                                    " Automatically load changed files

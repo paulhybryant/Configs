@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # set -e
-source "${__MYZSHLIB__}/common.zsh"
+source "${__MYCONFIGS__}/shlib/git.zsh"
 
 function usage() {
   cat <<EOF
@@ -105,7 +105,7 @@ if [[ -e "$HOME/.google" ]]; then
 else
   GIT_WORKING_DIR_ROOT=$HOME/Workspace
   GIT_REPO=$HOME/gitrepo
-  GIT_NEW_WORKDIR_CMD="git-new-workdir"
+  GIT_NEW_WORKDIR_CMD="git::new_workdir"
   START_CWD=$GIT_WORKING_DIR_ROOT/__MUXPROJ__
   exit_if_not_exist $GIT_NEW_WORKDIR_CMD
 fi

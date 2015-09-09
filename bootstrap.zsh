@@ -28,7 +28,6 @@ function link_misc() {
   file::softlink "$_miscfong_/.inputrc" "$HOME/.inputrc"
   file::softlink "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"
   file::softlink "$_miscfong_/.gitignore" "$HOME/.gitignore"
-  file::softlink "$_miscfong_/git-new-workdir" "$HOME/.local/bin/git-new-workdir"
   file::softlink "$_miscfong_/assh.config" "$HOME/.ssh/config.advanced"
 }
 function link_tmux() {
@@ -135,5 +134,8 @@ brew install --HEAD vimdoc vroom
 npm install -g urchin
 
 os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim trash
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+pip install powerline-status advanced-ssh-config neovim Terminator
 
 io::msg "All Done!"

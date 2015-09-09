@@ -55,7 +55,8 @@ function file::rm() {
     esac
   done
   shift $OPTIND-1
-  trash "${_args}" "$@"
+  [[ "${_args}" == "-" ]] && _args=''
+  trash ${_args} "$@"
 }
 function file::ll() {
   eval "${aliases[ls]:-ls} -lh $*"

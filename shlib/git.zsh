@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: git.zsh -
+File: git.zsh - Git related utility functions.
 
 =head1 SYNOPSIS
 
@@ -69,6 +69,81 @@ function git::parent_branch() {
     _branch=$1
   fi
   git show-branch | ack '\*' | ack -v "$_branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
+}
+function git::new_workdir() {
+  if [[ $# -lt 2 || $# -gt 3 ]]; then
+    return 1
+  fi
+
+  local _orig_git=$1
+  local _new_workdir=$2
+  local _branch=$3
+
+  # want to make sure that what is pointed to has a .git directory ...
+  local _git_dir=$(cd "${_orig_git}" && git rev-parse --git-dir)
+
+  case "${_git_dir}" in
+  .git)
+    _git_dir="${_orig_git}/.git"
+    ;;
+  .)
+    _git_dir=${_orig_git}
+    ;;
+  esac
+
+  # don't link to a configured bare repository
+  if git --git-dir="${_git_dir}" config --bool --get core.bare; then
+    io::err "\"${_git_dir}\" has core.bare set to true," \
+      " remove from \"${_git_dir}/config\" to continue."
+    return 1
+  fi
+
+  # don't link to a workdir
+  if [[ -h "${_git_dir}/config" ]]; then
+    io:err "\"${_orig_git}\" is a working directory only, please specify" \
+      "a complete repository."
+    return 1
+  fi
+
+  # don't recreate a workdir over an existing repository
+  if [[ -e "${_new_workdir}" ]]; then
+    io::err "destination directory '${_new_workdir}' already exists."
+    return 1
+  fi
+
+  # make sure the links use full paths
+  {_git_dir}=$(cd "${_git_dir}"; pwd)
+
+  # create the workdir
+  mkdir -p "${_new_workdir}/.git" || return 1
+
+  # create the links to the original repo.  explicitly exclude index, HEAD and
+  # logs/HEAD from the list since they are purely related to the current working
+  # directory, and should not be shared.
+  for x in config refs logs/refs objects info hooks packed-refs remotes rr-cache svn
+  do
+    case $x in
+    */*)
+      mkdir -p "$(dirname "${_new_workdir}/.git/$x")"
+      ;;
+    esac
+    ln -s "${_git_dir}/$x" "${_new_workdir}/.git/$x"
+  done
+
+  # now setup the workdir
+  cd "${_new_workdir}"
+  # copy the HEAD from the original repository as a default branch
+  cp "${_git_dir}/HEAD" .git/HEAD
+  # checkout the branch (either the same as HEAD from the original repository, or
+  # the one that was asked for)
+  if [[ -z "${_branch}" ]]; then
+    _branch=$(basename "${_new_workdir}")
+  fi
+  if git::has{_branch} "${_branch}"; then
+    git checkout -f "${_branch}"
+  else
+    git checkout -f -b "${_branch}"
+  fi
 }
 
 : <<=cut
