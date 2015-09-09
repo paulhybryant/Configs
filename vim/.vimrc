@@ -121,6 +121,7 @@ NeoBundle 'google/vim-glaive', {
       \ }                                                                       " Plugin for better vim plugin configuration
 " }}}
 " General Plugins {{{1
+NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'Lokaltog/vim-easymotion'                                             " Display hint for jumping to
 NeoBundle 'Shougo/vimproc.vim'                                                  " Enable background process and multi-threading
 NeoBundle 'bkad/CamelCaseMotion'                                                " Defines CamelCase text object
@@ -136,8 +137,11 @@ NeoBundle 'kana/vim-textobj-user'                                               
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
 NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets, TODO: Make it better support vim
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
+NeoBundle 'skeept/Ultisnips-neocomplete-unite'
 NeoBundle 'spf13/vim-autoclose'                                                 " Automatically close brackets
 NeoBundle 'thinca/vim-quickrun'                                                 " Execute whole/part of currently edited file
+NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
+NeoBundle 'thinca/vim-unite-history'
 NeoBundle 'thinca/vim-visualstar'                                               " Allow searching using '*' with visually selected text
 NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
 NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
@@ -148,44 +152,58 @@ NeoBundle 'tpope/vim-unimpaired'                                                
 NeoBundle 'tyru/capture.vim'                                                    " Capture Ex command output to buffer
 NeoBundle 'ujihisa/unite-colorscheme'                                           " Browser colorscheme with unite
 NeoBundle 'ujihisa/unite-locate'                                                " Use locate to find files with unite
-NeoBundle 'thinca/vim-unite-history'
-NeoBundle 'skeept/Ultisnips-neocomplete-unite'
-NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
+NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
+NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
+NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
+NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+" {{{2
 NeoBundle 'hujo/ref-doshelp', {
       \ 'depends' : 'thinca/vim-ref',
       \ 'disabled' : !g:OS.is_windows,
       \ }                                                                       " Ref source for windows cmd
+" }}}
+" {{{2
 NeoBundle 'eiiches/vim-ref-info', {
       \ 'depends' : 'thinca/vim-ref',
       \ }
-NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
-NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
-NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-" NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
-NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
+" }}}
+" {{{2
 NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object between any type of quotes
+" }}}
+" {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
       \ 'regular_namne' : 'Align',
       \ 'type' : 'vba',
       \ }                                                                       " Alinghing texts based on specific charater etc
+" }}}
+" {{{2
 NeoBundle 'kana/vim-textobj-fold', {
       \ 'depends' : 'kana/vim-textobj-user',
       \ }                                                                       " Text object for fold
+" }}}
+" {{{2
 NeoBundle 'paulhybryant/file-line', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Open files and go to specific line and column (original user not active)
+" }}}
+" {{{2
 NeoBundle 'paulhybryant/vim-scratch', {
       \ 'type__protocol' : 'ssh'
       \ }                                                                       " Creates a scratch buffer, fork of DeaR/vim-scratch, which is a fork of kana/vim-scratch
+" }}}
+" {{{2
 NeoBundle 'paulhybryant/vim-textobj-path', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Text object for a file system path
+" }}}
+" {{{2
 NeoBundle 'rking/ag.vim', {
       \ 'disabled' : !executable('ag'),
       \ }                                                                       " Text based search tool using the silver searcher
+" }}}
 " {{{2
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'disabled' : g:at_google,
@@ -227,7 +245,7 @@ function! s:myutils.hooks.on_source(bundle)
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
-  if $SSH_OS == 'Darwin'
+  if g:OS.is_mac || $SSH_OS == 'Darwin'
     vmap Y y:call myutils#YankToRemoteClipboard()<CR>
   endif
   call myutils#SetupTablineMappings(g:OS)
@@ -552,6 +570,12 @@ function! s:vimnotes.hooks.on_source(bundle)
 endfunction
 " }}}
 " {{{2
+NeoBundle 'xolox/vim-easytags', {
+      \ 'depends' : 'xolox/vim-misc',
+      \ 'disabled' : executable('ctags')
+      \ }                                                                       " Vim integration with ctags
+" }}}
+" {{{2
 NeoBundle 'christoomey/vim-tmux-navigator'                                      " Allow using the same keymap to move between tmux panes and vim splits seamlessly
 let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
 function! s:tmux_navigator.hooks.on_source(bundle)
@@ -833,7 +857,7 @@ NeoBundle 'thinca/vim-ft-help_fold', {
       " \ }                                                                       " Text object for perl function
 " }}}
 " Disabled plugins {{{1
-for bundle in ['delimitMate']
+for bundle in [ 'delimitMate', 'terminus' ]
   execute 'NeoBundleDisable' bundle
 endfor
 " }}}
@@ -1120,10 +1144,6 @@ endfor
 " NeoBundle 'vim-scripts/utl.vim'
 " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
 " NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
-" NeoBundle 'xolox/vim-easytags', {
-      " \ 'depends' : 'xolox/vim-misc',
-      " \ 'disabled' : executable('ctags')
-      " \ }                                                                     " Vim integration with ctags
 " NeoBundle 'tpope/vim-fugitive', { 'disabled' : !executable('git') }           " Commands for working with git
 " let s:fugitive = neobundle#get('vim-fugitive')
 " function! s:fugitive.hooks.on_source(bundle)
@@ -1336,7 +1356,7 @@ endif
 
 if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                " On Linux and mac use + register for copy-paste
   " Remember to install clipit in ubuntu
-  if empty($SSH_OS)
+  if g:OS.is_linux && empty($SSH_OS)
     set clipboard=unnamedplus
   else
     set clipboard=unnamed                                                       " use * register to pass the content back to ssh client
