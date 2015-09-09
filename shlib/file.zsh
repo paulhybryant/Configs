@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: file.zsh -
+File: file.zsh - File system related utility functions.
 
 =head1 DESCRIPTION
 
