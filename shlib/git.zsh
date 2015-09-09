@@ -110,7 +110,7 @@ function git::new_workdir() {
   fi
 
   # make sure the links use full paths
-  {_git_dir}=$(cd "${_git_dir}"; pwd)
+  _git_dir=$(cd "${_git_dir}"; pwd)
 
   # create the workdir
   mkdir -p "${_new_workdir}/.git" || return 1
