@@ -7,19 +7,17 @@
 
 File: init.zsh - Library source guard implementation.
 
-=head1 SYNOPSIS
-
-Put the following boilerplate at the start of all library files.
-
-    source init.zsh
-    init::sourced "${0:a}" && return
-
 =head1 DESCRIPTION
 
 The library file will be sourced, if it has not been sourced before or modified
 since last time it was sourced. A guard variable will be defined, with the value
 of the concatenation of the file path and modification time (kind of as a
 signature) when this file is sourced to avoid sourcing it repetitively.
+
+Put the following boilerplate at the start of all library files.
+
+    source init.zsh
+    init::sourced "${0:a}" && return
 
 =head2 Methods
 

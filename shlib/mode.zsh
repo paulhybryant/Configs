@@ -7,8 +7,6 @@
 
 File: mode.zsh -
 
-=head1 SYNOPSIS
-
 =head1 DESCRIPTION
 
 =head2 Methods

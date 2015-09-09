@@ -7,8 +7,6 @@
 
 File: git.zsh - Git related utility functions.
 
-=head1 SYNOPSIS
-
 =head1 DESCRIPTION
 
 =head2 Methods

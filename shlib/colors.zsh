@@ -7,8 +7,6 @@
 
 File: colors.zsh - Colorful terminal output.
 
-=head1 SYNOPSIS
-
 =head1 DESCRIPTION
 
 =head2 Methods
