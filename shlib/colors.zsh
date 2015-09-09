@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: colors.zsh -
+File: colors.zsh - Colorful terminal output.
 
 =head1 SYNOPSIS
 
@@ -18,6 +18,13 @@ File: colors.zsh -
 
 init::sourced "${0:a}" && return
 
+: <<=cut
+=item Function C<colors::define>
+
+Define color env variables.
+
+@return NULL
+=cut
 function colors::define() {
   # Reset
   export COLOR_Color_Off='\033[0m'       # Text Reset
@@ -94,6 +101,13 @@ function colors::define() {
 }
 colors::define
 
+: <<=cut
+=item Function C<colors::manpage>
+
+Make man page colorful.
+
+@return NULL
+=cut
 function colors::manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
   # http://superuser.com/questions/452034/bash-colorized-man-page

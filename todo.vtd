@@ -14,7 +14,8 @@
   @ Documentation for relatedfiles
   @ Documentation for folddigest
   @ Use verbose to find out what cause the autofold when terminus is enabled @p:0
-  @ Snippets for adding POD documentations in vim.
+  @ Snippets for adding POD documentations in vim. (DONE 2015-09-09 14:47)
+  @ Sort block by foldtext @p:1
 
 * tmux related tasks
 = Tmux @p:2 =

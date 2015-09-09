@@ -133,16 +133,31 @@
 .\" ========================================================================
 .\"
 .IX Title "BASE.ZSH 1"
-.TH BASE.ZSH 1 "2015-09-08" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH BASE.ZSH 1 "2015-09-09" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: base.zsh \-
+File: base.zsh \- Basic utiliti functions.
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
+.ie n .IP "Function ""base::exists""" 4
+.el .IP "Function \f(CWbase::exists\fR" 4
+.IX Item "Function base::exists"
+Examples
+  base::exists \*(L"\s-1VAR\*(R"\s0
+.Sp
+Check whether something 'exists'
+The check order is the following:
+1. Variable or Function
+2. Binary
+3. File or Directory
+.Sp
+\&\f(CW$1\fR The thing to be checked whether it exists.
+.Sp
+\&\f(CW@return\fR 0 or 1. 0 exists, 1 not exists.

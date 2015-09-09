@@ -21,6 +21,16 @@ init::sourced "${0:a}" && return
 source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"
 
+: <<=cut
+=item Function C<file::find_ignore_dir>
+
+Find in current directory, with dir $1 ignored.
+TODO: Make $1 an array, and ignore a list of dirs.
+
+$1 The directory to ignore.
+
+@return NULL
+=cut
 function file::find_ignore_dir() {
   # Commands with the same output
   # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
@@ -35,9 +45,35 @@ function file::find_ignore_dir() {
   # find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
   find . -wholename "*/$1" -prune -o "$@" -print
 }
+
+: <<=cut
+=item Function C<file::find_ignore_git>
+
+Find in current directory, with dir .git ignored.
+A shortcut for file::find_ignore_dir for git.
+
+@return NULL
+=cut
 function file::find_ignore_git() {
   file::find_ignore_dir ".git"
 }
+
+: <<=cut
+=item Function C<file::rm>
+
+Use trash to remove files so it can be recovered!
+Accepts rm arguments to be compatible wit rm.
+Usually we define alias for it.
+
+Examples
+  source file.zsh
+  alias rm=file::rm
+
+Arguments
+  Same as rm
+
+@return NULL
+=cut
 function file::rm() {
   local _args='-'
   while getopts fivrdh opt
@@ -58,6 +94,14 @@ function file::rm() {
   [[ "${_args}" == "-" ]] && _args=''
   trash ${_args} "$@"
 }
+
+: <<=cut
+=item Function C<file::ll>
+
+List files in long format.
+
+@return NULL
+=cut
 function file::ll() {
   eval "${aliases[ls]:-ls} -lh $*"
   awk '/^-/ {
@@ -73,6 +117,14 @@ function file::ll() {
     }
   }' <<< $(eval "${aliases[ls]:-ls} -l $*")
 }
+
+: <<=cut
+=item Function C<file::la>
+
+List all files, including hidden files.
+
+@return NULL
+=cut
 function file::la() {
   eval "${aliases[ls]:-ls} -alF $*"
   awk '/^-/ {
@@ -88,6 +140,17 @@ function file::la() {
     }
   }' <<< $(eval "${aliases[ls]:-ls} -laF $*")
 }
+
+: <<=cut
+=item Function C<file::softlink>
+
+Creates softlink, do some checking before doing that.
+
+$1 source
+$2 target
+
+@return NULL
+=cut
 function file::softlink() {
   local _src=$1
   local _target=$2

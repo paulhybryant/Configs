@@ -17,6 +17,7 @@ File: base.zsh - Basic utiliti functions.
 =cut
 
 init::sourced "${0:a}" && return
+
 : <<=cut
 =item Function C<base::exists>
 

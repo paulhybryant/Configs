@@ -130,11 +130,10 @@ NeoBundle 'chrisbra/Recover.vim'                                                
 NeoBundle 'chrisbra/improvedft'                                                 " Improved f and t command for vim
 NeoBundle 'cohama/agit.vim'                                                     " Git log viewer (Yet another gitk clone for Vim), prefer agit over gitv as gitv has some bugs
 NeoBundle 'flazz/vim-colorschemes'                                              " Collection of vim colorschemes
-" NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
+NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
 NeoBundle 'kana/vim-operator-user'                                              " User defined operator
 NeoBundle 'kana/vim-textobj-user'                                               " Allow defining text object by user
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
-NeoBundle 'ntpeters/vim-better-whitespace',                                     " Highlight all types of whitespaces
 NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets, TODO: Make it better support vim
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
 NeoBundle 'spf13/vim-autoclose'                                                 " Automatically close brackets
@@ -162,8 +161,8 @@ NeoBundle 'eiiches/vim-ref-info', {
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
-" NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
+" NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode when pasting in insert mode
 NeoBundle 'beloglazov/vim-textobj-quotes', {
       \ 'depends' : ['kana/vim-textobj-user'],
       \ }                                                                       " Text object between any type of quotes
@@ -187,23 +186,23 @@ NeoBundle 'paulhybryant/vim-textobj-path', {
 NeoBundle 'rking/ag.vim', {
       \ 'disabled' : !executable('ag'),
       \ }                                                                       " Text based search tool using the silver searcher
-" YouCompleteMe {{{2
+" {{{2
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'disabled' : g:at_google,
-      \ }
+      \ }                                                                       " Python based multi-language completion engine
 let s:ycm = neobundle#get('YouCompleteMe')
 function s:ycm.hooks.on_source(bundle)
   call s:ConfigureYcm()
 endfunction
 " }}}
-" delimitMate {{{2
+" {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 let s:delimitmate = neobundle#get('delimitMate')
 function s:delimitmate.hooks.on_source(bundle)
   let g:delimitMate_expand_cr = 1
 endfunction
 " }}}
-" folddigest.vim {{{2
+" {{{2
 NeoBundle 'paulhybryant/folddigest.vim', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Outline explorer based on folds
@@ -213,7 +212,7 @@ function! s:folddigest.hooks.on_source(bundle)
         \ vertical closefold flexnumwidth winsize=60 winpos='leftabove'
 endfunction
 " }}}
-" myutils {{{2
+" {{{2
 NeoBundle 'paulhybryant/myutils', {
       \ 'depends' : ['vim-maktaba', 'vim-glaive', 'os.vim'],
       \ 'type__protocol' : 'ssh',
@@ -234,7 +233,7 @@ function! s:myutils.hooks.on_post_source(bundle)
   call myutils#SetupTablineMappings(g:OS)
 endfunction
 " }}}
-" neocomplete.vim {{{2
+" {{{2
 NeoBundle 'Shougo/neocomplete.vim', {
       \ 'depends' : 'Shougo/context_filetype.vim',
       \ 'disabled' : !has('lua'),
@@ -319,7 +318,7 @@ function! s:neocomplete.hooks.on_source(bundle)
   autocmd FileType c,cpp,python NeoCompleteLock
 endfunction
 " }}}
-" nerdcommenter {{{2
+" {{{2
 NeoBundle 'scrooloose/nerdcommenter'                                            " Plugin for adding comments
 let s:nerdcommenter = neobundle#get('nerdcommenter')
 function! s:nerdcommenter.hooks.on_source(bundle)
@@ -335,7 +334,7 @@ function! s:nerdcommenter.hooks.on_source(bundle)
   " xmap <leader>cc <Plug>NERDCommenterComment
 endfunction
 " }}}
-" nerdtree {{{2
+" {{{2
 NeoBundle 'scrooloose/nerdtree'                                                 " File explorer inside vim
 let s:nerdtree = neobundle#get('nerdtree')
 function! s:nerdtree.hooks.on_source(bundle)
@@ -352,7 +351,7 @@ function! s:nerdtree.hooks.on_source(bundle)
   nnoremap <C-e> :NERDTreeToggle %<CR>
 endfunction
 " }}}
-" operator-camelize {{{2
+" {{{2
 NeoBundle 'tyru/operator-camelize.vim', {
       \ 'depends' : ['kana/vim-operator-user'],
       \ }                                                                       " Convert variable to / from camelcase form
@@ -362,17 +361,17 @@ function! s:camelize.hooks.on_source(bundle)
   map <leader>lC <Plug>(operator-decamelize)
 endfunction
 " }}}
-" relatedfiles {{{2
+" {{{2
 NeoBundle 'paulhybryant/relatedfiles', {
       \ 'disabled' : g:at_google,
       \ 'type__protocol' : 'ssh',
-      \ }
+      \ }                                                                       " Open related files in C++
 let s:relatedfiles = neobundle#get('relatedfiles')
 function s:relatedfiles.hooks.on_source(bundle)
   call s:ConfigureRelatedFiles()
 endfunction
 " }}}
-" signify {{{2
+" {{{2
 NeoBundle 'paulhybryant/vim-signify', {
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Show the sign at changes from last git commit
@@ -385,7 +384,7 @@ function! s:signify.hooks.on_source(bundle)
   nmap <leader>gk <plug>(signify-prev-hunk)
 endfunction
 " }}}
-" syntastic {{{2
+" {{{2
 NeoBundle 'scrooloose/syntastic'                                                " Check syntax with external syntax checker
 let s:syntastic = neobundle#get('syntastic')
 function! s:syntastic.hooks.on_source(bundle)
@@ -398,7 +397,27 @@ function! s:syntastic.hooks.on_source(bundle)
   nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 endfunction
 " }}}
-" unite.vim {{{2
+" {{{2
+NeoBundle 'majutsushi/tagbar', {
+      \ 'disabled' : !executable('ctags')
+      \ }                                                                       " Ctags integration with vim
+let s:tagbar = neobundle#get('tagbar')
+function! s:tagbar.hooks.on_source(bundle)
+  let g:tagbar_type_autohotkey = {
+        \ 'ctagstype' : 'autohotkey',
+        \   'kinds' : [
+        \     's:sections',
+        \     'g:graphics:0:0',
+        \     'l:labels',
+        \     'r:refs:1:0',
+        \     'p:pagerefs:1:0'
+        \   ],
+        \   'sort'  : 0,
+        \   'deffile' : expand('~/.ctagscnf/autohotkey.cnf'),
+        \ }
+endfunction
+" }}}
+" {{{2
 NeoBundle 'Shougo/unite.vim', {
       \ 'recipe' : 'unite',
       \ }                                                                       " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
@@ -416,7 +435,7 @@ function! s:unite.hooks.on_source(bundle)
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 endfunction
 " }}}
-" ultisnips {{{2
+" {{{2
 NeoBundle 'SirVer/ultisnips', {
       \ 'disabled' : !has('python'),
       \ }                                                                       " Define and insert snippets
@@ -429,7 +448,7 @@ function! s:ultisnips.hooks.on_source(bundle)
   " let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnippets"]
 endfunction
 " }}}
-" vim-airline {{{2
+" {{{2
 NeoBundle 'bling/vim-airline'                                                   " Lean & mean status/tabline for vim that's light as air
 let s:airline = neobundle#get('vim-airline')
 function! s:airline.hooks.on_source(bundle)
@@ -445,14 +464,15 @@ function! s:airline.hooks.on_source(bundle)
   " let g:airline#extensions#tmuxline#color_template = 'normal'
 endfunction
 " }}}
-" vim-better-whitespace {{{2
+" {{{2
+NeoBundle 'ntpeters/vim-better-whitespace'                                      " Highlight all types of whitespaces
 let s:betterws = neobundle#get('vim-better-whitespace')
 function! s:betterws.hooks.on_source(bundle)
   let g:strip_whitespace_on_save = 1
   nnoremap <leader>sw :ToggleStripWhitespaceOnSave<CR>
 endfunction
 " }}}
-" vim-buffergator {{{2
+" {{{2
 NeoBundle 'jeetsukumaran/vim-buffergator'                                       " Buffer selector in vim
 let s:buffergator = neobundle#get('vim-buffergator')
 function! s:buffergator.hooks.on_source(bundle)
@@ -460,14 +480,14 @@ function! s:buffergator.hooks.on_source(bundle)
   noremap <leader>bf :BuffergatorOpen<CR>
 endfunction
 " }}}
-" vim-colors-solarized {{{2
+" {{{2
 NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
 let s:solarized = neobundle#get('vim-colors-solarized')
 function! s:solarized.hooks.on_source(bundle)
   let g:solarized_diffmode="high"
 endfunction
 " }}}
-" vim-codefmt {{{2
+" {{{2
 NeoBundle 'google/vim-codefmt', {
       \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
       \ 'disabled' : g:at_google,
@@ -477,7 +497,7 @@ function! s:vimcodefmt.hooks.on_source(bundle)
   Glaive codefmt plugin[mappings]
 endfunction
 " }}}
-" vim-diff-indicator {{{2
+" {{{2
 NeoBundle 'paulhybryant/vim-diff-indicator', {
       \ 'depends' : [
       \   'paulhybryant/vim-signify',
@@ -491,7 +511,7 @@ function! s:indicator.hooks.on_source(bundle)
   Glaive vim-diff-indicator plugin[mappings]
 endfunction
 " }}}
-" vim-expand-region {{{2
+" {{{2
 NeoBundle 'terryma/vim-expand-region'                                           " Expand visual selection by text object
 let s:expand_region = neobundle#get('vim-expand-region')
 function! s:expand_region.hooks.on_source(bundle)
@@ -511,7 +531,7 @@ function! s:expand_region.hooks.on_source(bundle)
   nnoremap <leader>hh <Plug>(expand_region_shrink)
 endfunction
 " }}}
-" vim-multiple-cursors {{{2
+" {{{2
 NeoBundle 'terryma/vim-multiple-cursors'                                        " Insert words at multiple places simultaneously
 let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
 function! s:vimmulticursors.hooks.on_source(bundle)
@@ -519,7 +539,7 @@ function! s:vimmulticursors.hooks.on_source(bundle)
         \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
 endfunction
 " }}}
-" vim-notes {{{2
+" {{{2
 NeoBundle 'xolox/vim-notes', {
       \ 'depends' : ['xolox/vim-misc'],
       \ }                                                                       " Note taking with vim
@@ -531,7 +551,7 @@ function! s:vimnotes.hooks.on_source(bundle)
   let g:notes_tagsindex = '~/.myconfigs/notes.tags'
 endfunction
 " }}}
-" vim-tmux-navigator {{{2
+" {{{2
 NeoBundle 'christoomey/vim-tmux-navigator'                                      " Allow using the same keymap to move between tmux panes and vim splits seamlessly
 let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
 function! s:tmux_navigator.hooks.on_source(bundle)
@@ -1104,24 +1124,6 @@ endfor
       " \ 'depends' : 'xolox/vim-misc',
       " \ 'disabled' : executable('ctags')
       " \ }                                                                     " Vim integration with ctags
-" NeoBundle 'majutsushi/tagbar', {
-      " \ 'disabled' : executable('ctags')
-      " \ }
-" let s:tagbar = neobundle#get('tagbar')
-" function! s:tagbar.hooks.on_source(bundle)
-  " let g:tagbar_type_autohotkey = {
-        " \ 'ctagstype' : 'autohotkey',
-        " \   'kinds' : [
-        " \     's:sections',
-        " \     'g:graphics:0:0',
-        " \     'l:labels',
-        " \     'r:refs:1:0',
-        " \     'p:pagerefs:1:0'
-        " \   ],
-        " \   'sort'  : 0,
-        " \   'deffile' : expand('~/.ctagscnf/autohotkey.cnf'),
-        " \ }
-" endfunction
 " NeoBundle 'tpope/vim-fugitive', { 'disabled' : !executable('git') }           " Commands for working with git
 " let s:fugitive = neobundle#get('vim-fugitive')
 " function! s:fugitive.hooks.on_source(bundle)
