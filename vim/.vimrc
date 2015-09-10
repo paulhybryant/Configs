@@ -10,19 +10,21 @@ let g:mapleader = ','
 let g:maplocalleader = ',,'
 " }}}
 " Install NeoBundle if needed {{{1
-let s:neobundle_base_path = expand('~/.vim/bundle/')
-let s:neobundle_install_path = s:neobundle_base_path . 'neobundle.vim/'
-function! s:InstallNeobundleIfNotPresent(base_path, path) " {{{3
-  let l:url = 'https://github.com/Shougo/neobundle.vim.git'
-  if !isdirectory(a:path)
-    echo 'Installing neobundle...'
-    silent execute '!mkdir -p' a:base_path
-    silent execute '!git clone' l:url a:path
-  endif
-endfunction
-" }}}
-call s:InstallNeobundleIfNotPresent(
-      \ s:neobundle_base_path, s:neobundle_install_path)
+if has('vim_starting')
+  let s:neobundle_base_path = expand('~/.vim/bundle/')
+  let s:neobundle_install_path = s:neobundle_base_path . 'neobundle.vim/'
+  function! s:InstallNeobundleIfNotPresent(base_path, path) " {{{3
+    let l:url = 'https://github.com/Shougo/neobundle.vim.git'
+    if !isdirectory(a:path)
+      echo 'Installing neobundle...'
+      silent execute '!mkdir -p' a:base_path
+      silent execute '!git clone' l:url a:path
+    endif
+  endfunction
+  " }}}
+  call s:InstallNeobundleIfNotPresent(
+        \ s:neobundle_base_path, s:neobundle_install_path)
+endif
 " }}}
 " Setup NeoBundle and OS.vim {{{1
 filetype off
@@ -105,20 +107,42 @@ endfunction
 " Google specific setup {{{1
 let s:google_config = resolve(expand('~/.vimrc.google'))
 let g:at_google = filereadable(s:google_config)
-if g:at_google && has('vim_starting')
-  execute 'source' s:google_config
+if g:at_google
+  let g:depends = []
+  if has('vim_starting')
+    execute 'source' s:google_config
+  endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
+else
+  let g:depends = ['vim-maktaba', 'vim-glaive']
+  NeoBundle 'google/vim-maktaba', {
+        \ 'force' : 1,
+        \ }                                                                     " Vimscript plugin library from google
+  NeoBundle 'google/vim-glaive', {
+        \ 'depends' : ['google/vim-maktaba'],
+        \ 'force' : 1,
+        \ }                                                                     " Plugin for better vim plugin configuration
+  NeoBundle 'Valloric/YouCompleteMe'                                            " Python based multi-language completion engine
+  let s:ycm = neobundle#get('YouCompleteMe')
+  function s:ycm.hooks.on_source(bundle)
+    call s:ConfigureYcm()
+  endfunction
+  NeoBundle 'google/vim-codefmt', {
+        \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
+        \ }                                                                     " Code formating plugin from google
+  let s:vimcodefmt = neobundle#get('vim-codefmt')
+  function! s:vimcodefmt.hooks.on_source(bundle)
+    Glaive codefmt plugin[mappings]
+  endfunction
+  NeoBundle 'paulhybryant/relatedfiles', {
+        \ 'type__protocol' : 'ssh',
+        \ }                                                                     " Open related files in C++
+  let s:relatedfiles = neobundle#get('relatedfiles')
+  function s:relatedfiles.hooks.on_source(bundle)
+    call s:ConfigureRelatedFiles()
+  endfunction
 endif
-NeoBundle 'google/vim-maktaba', {
-      \ 'disabled' : g:at_google,
-      \ 'force' : 1,
-      \ }                                                                       " Vimscript plugin library from google
-NeoBundle 'google/vim-glaive', {
-      \ 'depends' : ['google/vim-maktaba'],
-      \ 'disabled' : g:at_google,
-      \ 'force' : 1,
-      \ }                                                                       " Plugin for better vim plugin configuration
 " }}}
 " General Plugins {{{1
 NeoBundle 'ConradIrwin/vim-bracketed-paste'                                     " Automatically toggle paste mode
@@ -281,15 +305,6 @@ function! s:ultisnips.hooks.on_source(bundle)
 endfunction
 " }}}
 " {{{2
-NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'disabled' : g:at_google,
-      \ }                                                                       " Python based multi-language completion engine
-let s:ycm = neobundle#get('YouCompleteMe')
-function s:ycm.hooks.on_source(bundle)
-  call s:ConfigureYcm()
-endfunction
-" }}}
-" {{{2
 NeoBundle 'altercation/vim-colors-solarized'                                    " Vim colorscheme solarized
 let s:solarized = neobundle#get('vim-colors-solarized')
 function! s:solarized.hooks.on_source(bundle)
@@ -334,14 +349,6 @@ NeoBundle 'eiiches/vim-ref-info', {
       \ }
 " }}}
 " {{{2
-NeoBundle 'google/vim-codefmt', {
-      \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
-      \ 'disabled' : g:at_google,
-      \ }                                                                       " Code formating plugin from google
-let s:vimcodefmt = neobundle#get('vim-codefmt')
-function! s:vimcodefmt.hooks.on_source(bundle)
-  Glaive codefmt plugin[mappings]
-endfunction
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
@@ -413,7 +420,7 @@ endfunction
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/myutils', {
-      \ 'depends' : ['vim-maktaba', 'vim-glaive', 'os.vim'],
+      \ 'depends' : extend(['os.vim'], g:depends),
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " My vim customization (utility functions, syntax etc)
 let s:myutils = neobundle#get('myutils')
@@ -439,22 +446,10 @@ function! s:myutils.hooks.on_post_source(bundle)
 endfunction
 " }}}
 " {{{2
-NeoBundle 'paulhybryant/relatedfiles', {
-      \ 'disabled' : g:at_google,
-      \ 'type__protocol' : 'ssh',
-      \ }                                                                       " Open related files in C++
-let s:relatedfiles = neobundle#get('relatedfiles')
-function s:relatedfiles.hooks.on_source(bundle)
-  call s:ConfigureRelatedFiles()
-endfunction
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/vim-diff-indicator', {
-      \ 'depends' : [
-      \   'paulhybryant/vim-signify',
-      \   'google/vim-maktaba',
-      \   'google/vim-glaive'
-      \ ],
+      \ 'depends' : extend(['paulhybryant/vim-signify'], g:depends),
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Diff indicator based on vim-signify
 let s:indicator = neobundle#get('vim-diff-indicator')
@@ -1293,9 +1288,11 @@ endfor
 call neobundle#end()
 filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
-call glaive#Install()
-call myutils#InitUndoSwapViews()
-colorscheme solarized
+if has('vim_starting')
+  call glaive#Install()
+  call myutils#InitUndoSwapViews()
+  colorscheme solarized
+endif
 " }}}
 " Settings {{{1
 syntax on                                                                       " Syntax highlighting

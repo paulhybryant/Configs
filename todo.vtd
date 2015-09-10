@@ -19,6 +19,7 @@
   @ Fix yanking multiline stuff in OSX. @p:2
   @ Finish all of learn vimscript the hard way @p:1
   @ Learn vim syntax fold @p:2
+  @ Make .vimrc resourceable @p:1
 
 * tmux related tasks
 = Tmux @p:2 =
