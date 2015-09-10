@@ -18,7 +18,6 @@ init::sourced "${0:a}" && return
 
 source "${0:h}/io.zsh"
 
-export GIT_CURL_VERBOSE=1
 export GIT_EDITOR='vim'
 
 # Check subdirs of current directory, and report repos that are dirty

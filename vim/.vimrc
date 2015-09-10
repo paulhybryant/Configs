@@ -156,6 +156,7 @@ NeoBundle 'vasconcelloslf/vim-foldfocus'                                        
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration for Vim (including bracketed-paste)
+NeoBundle 'vim-scripts/ExtractMatches'                                          " Yank matches from range into a register
 " {{{2
 NeoBundle 'hujo/ref-doshelp', {
       \ 'depends' : 'thinca/vim-ref',
@@ -243,8 +244,14 @@ function! s:myutils.hooks.on_source(bundle)
         \  'gistls', 'nerdtree', 'indicator',
         \  'folddigest', 'Scratch', 'capture' ]`
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
+  if exists('g:syntastic_extra_filetypes')
+    call add(g:syntastic_extra_filetypes, 'zsh')
+  else
+    let g:syntastic_extra_filetypes = [ 'zsh' ]
+  endif
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
+  " Only use this when running in OSX or ssh from OSX
   if g:OS.is_mac || $SSH_OS == 'Darwin'
     vmap Y y:call myutils#YankToRemoteClipboard()<CR>
   endif
@@ -1345,7 +1352,7 @@ set wildmenu                                                                    
 set wildmode=list:longest,full                                                  " Command <Tab> completion, list matches, then longest common part, then all
 set winminheight=0                                                              " Windows can be 0 line high
 set wrap                                                                        " Wrap long lines
-set wrapscan                                                                    " Make regex search wrap to the start of the file
+set nowrapscan                                                                    " Make regex search wrap to the start of the file
 set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
 
 if &diff

@@ -25,6 +25,11 @@ function mode::verbose() {
 }
 function mode::set_verbose() {
   __VERBOSE__=$1
+  if [[ $1 -gt 0 ]]; then
+    export GIT_CURL_VERBOSE=1
+  else
+    unset GIT_CURL_VERBOSE
+  fi
 }
 
 : <<=cut

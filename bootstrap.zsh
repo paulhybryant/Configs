@@ -105,7 +105,7 @@ function link_all() {
 # }}}
 
 io::msg "Installing ${BREWVERSION} dependencies..."
-os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev trash-cli
+os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev trash-cli clipit xclip x11-xkb-utils
 
 if ! base::exists "${BREWHOME}"; then
   io::msg "Cloning ${BREWVERSION}"

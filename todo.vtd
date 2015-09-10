@@ -16,6 +16,9 @@
   @ Use verbose to find out what cause the autofold when terminus is enabled @p:0 (DONE 2015-09-09 22:00)
   @ Snippets for adding POD documentations in vim. (DONE 2015-09-09 14:47)
   @ Sort block by foldtext @p:1
+  @ Fix yanking multiline stuff in OSX. @p:2
+  @ Finish all of learn vimscript the hard way @p:1
+  @ Learn vim syntax fold @p:2
 
 * tmux related tasks
 = Tmux @p:2 =
@@ -43,10 +46,8 @@
   @ Build vim on windows (DONE 2014-12-02 21:13)
   @ Gvim windows shell context extension (DONE 2014-12-06 18:10)
   @ Try out rocket dock in win (DONE 2014-12-06 18:10)
-  @ Get safe-paste to work in zsh.
   @ Unit test zsh library. @p:1
   @ Check documentation for all my vim plugins, do not create new before updating existing doc @p:1
   @ Document zsh library, checkout the doc gen tools @p:1
   @ Learn python @p:1
   @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)
-  @ Add zsh library for copying to clipboard. @p:0
