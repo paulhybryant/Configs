@@ -71,6 +71,8 @@
   # Creates branch and checkout
   b = checkout -b
 
+  rau = remote add upstream
+
 [core]
   pager = less -F -X
 
@@ -87,7 +89,6 @@
   # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   trustctime = false
   autocrlf = input
-
 
 [merge]
   tool = splice

@@ -111,6 +111,28 @@ function util::run() {
     set +o noglob
   fi
 }
+function util::setup_abbrev() {
+  # This can get around the problem where complete_aliases is set and zsh will
+  # not expand the alias when doing the completion.
+  # source: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
+  typeset -Ag abbreviations
+  abbreviations=()
+
+  function util::magic-abbrev-expand() {
+      local left prefix
+      left=$(echo -nE "$LBUFFER" | sed -e "s/[_a-zA-Z0-9]*$//")
+      prefix=$(echo -nE "$LBUFFER" | sed -e "s/.*[^_a-zA-Z0-9]\([_a-zA-Z0-9]*\)$/\1/")
+      LBUFFER=$left${abbreviations[$prefix]:-$prefix}" "
+  }
+  function util::no-magic-abbrev-expand() {
+      LBUFFER+=' '
+  }
+
+  zle -N util::magic-abbrev-expand
+  zle -N util::no-magic-abbrev-expand
+  bindkey " " util::magic-abbrev-expand
+  bindkey "^x " util::no-magic-abbrev-expand
+}
 
 : <<=cut
 =back

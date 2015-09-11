@@ -18,8 +18,12 @@
   @ Sort block by foldtext @p:1 (DONE 2015-09-10 15:25)
   @ Fix yanking multiline stuff in OSX. @p:2
   @ Finish all of learn vimscript the hard way @p:1
-  @ Learn vim syntax fold @p:2
+  @ Learn vim syntax fold, convert zsh fold to syntax fold if possible @p:2
   @ Make .vimrc resourceable @p:1
+  @ Make shellcheck for zsh work as external checker @p:0
+  @ Integrate gtags with vim better (tagbar) @p:1
+  @ Learn to write unite sources @p:3
+  @ Learn maktaba libraries @p:3
 
 * tmux related tasks
 = Tmux @p:2 =
@@ -30,6 +34,11 @@
   @ Make tmux resurrect automatic. (DONE 2015-08-19 16:18)
   @ Fix tmux-continuum to kill default session
   @ Migrate muxcfg
+
+* zsh related tasks
+= Zsh @p:2 =
+  @ Redirect completion of bb to blaze subcommand, when complete_aliases is set
+  @ Learn zsh completions
 
 * misc
 = Misc @p:2 =

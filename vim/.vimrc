@@ -8,6 +8,7 @@ set encoding=utf-8                                                              
 scriptencoding utf-8                                                            " Character encoding used in this script
 let g:mapleader = ','
 let g:maplocalleader = ',,'
+let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 " }}}
 " Install NeoBundle if needed {{{1
 if has('vim_starting')
@@ -161,13 +162,15 @@ NeoBundle 'kana/vim-textobj-user'                                               
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
 NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets, TODO: Make it better support vim arguments
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
-NeoBundle 'skeept/Ultisnips-neocomplete-unite'
+NeoBundle 'skeept/Ultisnips-neocomplete-unite'                                  " Ultisnips source for unite
 NeoBundle 'spf13/vim-autoclose'                                                 " Automatically close brackets
 NeoBundle 'thinca/vim-quickrun'                                                 " Execute whole/part of currently edited file
 NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
-NeoBundle 'thinca/vim-unite-history'
+NeoBundle 'thinca/vim-unite-history'                                            " History source for unite
 NeoBundle 'thinca/vim-visualstar'                                               " Allow searching using '*' with visually selected text
+NeoBundle 'Bozar/foldMarker'                                                    " Plugin for wrapping texts in folds quickly
 NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
+NeoBundle 'tpope/vim-dispatch'                                                  " Run command asyncroneously in vim
 NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
 NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
 NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
@@ -180,7 +183,7 @@ NeoBundle 'vasconcelloslf/vim-foldfocus'                                        
 NeoBundle 'vim-scripts/ExtractMatches'                                          " Yank matches from range into a register
 NeoBundle 'vitalk/vim-onoff'                                                    " Toggle vim options
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
+" NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
 " {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
 let s:delimitmate = neobundle#get('delimitMate')
@@ -356,6 +359,12 @@ NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
       \ 'type' : 'vba',
       \ }                                                                       " Alinghing texts based on specific charater etc
 " }}}
+" {{{2
+NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vis.vba.gz', {
+      \ 'regular_name' : 'VisualBlockCommand',
+      \ 'type' : 'vba',
+      \ }                                                                       " Performs an Ex command on a visual block (e.g. search pattern in visual block)
+" }}}2
 " {{{2
 NeoBundle 'hujo/ref-doshelp', {
       \ 'depends' : 'thinca/vim-ref',
@@ -860,9 +869,9 @@ endfunction
 " }}}
 " }}}
 " Disabled plugins {{{1
-for bundle in [ 'delimitMate', 'terminus' ]
-  execute 'NeoBundleDisable' bundle
-endfor
+" for bundle in [ 'terminus' ]
+  " execute 'NeoBundleDisable' bundle
+" endfor
 " }}}
 " Unused plugins {{{1
 " TextObjects {{{2
@@ -1211,7 +1220,6 @@ endfor
 " NeoBundle 'aperezdc/vim-template'
 " NeoBundle 'Shougo/neosnippet.vim', { 'disabled' : has('python') }             " Snippet support for vim
 " NeoBundle 'Shougo/neosnippet-snippets', { 'depends' : ['neosnippet.vim'] }
-" NeoBundle 'tpope/vim-dispatch'                                                " Run command asyncroneously in vim
 " NeoBundle 'janko-m/vim-test'                                                  " Run tests at different granularity for different languages
 " NeoBundle 'calebsmith/vim-lambdify'
 " NeoBundle 'chrisbra/vim-diff-enhanced'                                        " Enhanced vimdiff
@@ -1305,6 +1313,7 @@ set backup                                                                      
 set cursorline                                                                  " Highlight current line
 set cursorcolumn                                                                " Highlight current line
 set expandtab                                                                   " Tabs are spaces, not tabs
+set foldcolumn=5                                                                " Fold indicators on the left
 set foldenable                                                                  " Auto fold code
 set hidden                                                                      " Allow buffer switching without saving
 set history=1000                                                                " Store a ton of history (default is 20)

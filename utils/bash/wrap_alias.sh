@@ -62,4 +62,3 @@ function ${wrapper_name}() {
   eval "$new_completion"
 }
 ############ End of wrap_alias ############ }}}
-
