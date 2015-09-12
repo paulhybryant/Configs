@@ -17,7 +17,6 @@ File: util.zsh -
 init::sourced "${0:a}" && return
 
 source "${0:h}/io.zsh"
-source ${0:h}/io.zsh
 
 function util::geo_country() {
   local _geo="$(curl ipinfo.io 2> /dev/null)"

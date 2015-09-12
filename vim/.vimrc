@@ -565,11 +565,6 @@ function! s:myutils.hooks.on_source(bundle)
         \  'folddigest', 'Scratch', 'capture' ]`
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
   call myutils#InitUndoSwapViews()
-  " if exists('g:syntastic_extra_filetypes')
-    " call add(g:syntastic_extra_filetypes, 'zsh')
-  " else
-    " let g:syntastic_extra_filetypes = [ 'zsh' ]
-  " endif
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
   " Only use this when running in OSX or ssh from OSX
