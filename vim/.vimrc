@@ -161,7 +161,7 @@ NeoBundle 'cohama/agit.vim'                                                     
 NeoBundle 'flazz/vim-colorschemes'                                              " Collection of vim colorschemes
 NeoBundle 'honza/vim-snippets'                                                  " Collection of vim snippets
 NeoBundle 'jlemetay/permut'                                                     " Swap fields separated by delimiter
-NeoBundle 'junegunn/fzf'
+NeoBundle 'junegunn/fzf'                                                        " Fuzzy finder
 NeoBundle 'kana/vim-altercmd'                                                   " Alter built-in Ex commands by your own ones
 NeoBundle 'kana/vim-arpeggio'                                                   " Define keymappings start with simultaneous key presses
 NeoBundle 'kana/vim-fakeclip'                                                   " Provide pseudo clipboard registers
@@ -170,7 +170,7 @@ NeoBundle 'kana/vim-gf-user'                                                    
 NeoBundle 'kana/vim-idwintab'                                                   " Assign unique id for windows
 NeoBundle 'kana/vim-narrow'                                                     " Emulate Emacs's narrow feature
 NeoBundle 'kana/vim-niceblock'                                                  " Make visual block mode more useful
-NeoBundle 'kana/vim-operator-siege'
+NeoBundle 'kana/vim-operator-siege'                                             " Operator to siege (surround) texts
 NeoBundle 'kana/vim-operator-user'                                              " User defined operator
 NeoBundle 'kana/vim-smartinput'                                                 " Provide smart input assistance
 NeoBundle 'kana/vim-submode'                                                    " Supporting defining submode in vim
@@ -186,14 +186,14 @@ NeoBundle 'thinca/vim-quickrun'                                                 
 NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
 NeoBundle 'thinca/vim-unite-history'                                            " History source for unite
 NeoBundle 'thinca/vim-visualstar'                                               " Allow searching using '*' with visually selected text
-NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
+NeoBundle 'tpope/vim-abolish.git'                                               " Creates set of abbreviations for spell correction easily
 NeoBundle 'tpope/vim-commentary'                                                " Plugin for adding comments
 NeoBundle 'tpope/vim-dispatch'                                                  " Run command asyncroneously in vim
 NeoBundle 'tpope/vim-endwise'                                                   " Automatically put end construct (e.g. endfunction)
 NeoBundle 'tpope/vim-eunuch'                                                    " Vim sugar for the UNIX shell commands that need it the most
 NeoBundle 'tpope/vim-repeat'                                                    " Repeat any command with '.'
 NeoBundle 'tpope/vim-scriptease'                                                " Plugin for developing vim plugins
-NeoBundle 'tpope/vim-speeddating'
+NeoBundle 'tpope/vim-speeddating'                                               " Quickly input dates
 NeoBundle 'tpope/vim-surround'                                                  " Useful mappings for surrounding text objects with a pair of chars
 NeoBundle 'tpope/vim-unimpaired'                                                " Complementary pairs of mappings
 NeoBundle 'tsukkee/unite-help'                                                  " Help source for unite.vim
@@ -204,7 +204,7 @@ NeoBundle 'vasconcelloslf/vim-foldfocus'                                        
 NeoBundle 'vim-scripts/ExtractMatches'                                          " Yank matches from range into a register
 NeoBundle 'vitalk/vim-onoff'                                                    " Mapping for toggle vim option on and off
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-NeoBundle 'thinca/vim-auto_source'
+NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
 " {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
