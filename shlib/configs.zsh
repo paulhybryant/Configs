@@ -16,8 +16,9 @@ File: configs.zsh -
 
 source "${0:h}/init.zsh"
 source "${0:h}/file.zsh"
-source "${0:h}/os.zsh"
+source "${0:h}/git.zsh"
 source "${0:h}/io.zsh"
+source "${0:h}/os.zsh"
 source "${0:h}/util.zsh"
 # [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
 # [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
@@ -215,28 +216,30 @@ function configs::_config_env() {
   # }}}
 }
 function configs::_config_alias() {
+  alias grepc='grep -C 5 '
+  alias la=file::la
+  alias ll=file::ll
+  alias ls="${aliases[ls]:-ls} --color=tty"
+  alias nvim="NVIM=nvim nvim"
+  alias pfd="whence -f"
+  alias rm=file::rm
+  alias ta=util::ta
+  alias tl='tmux list-sessions'
+  alias tmux="TERM=screen-256color tmux -2"
+  alias ts=util::tmux_start
+  alias vi=util::vim
+  alias vim=util::vim
   # alias vi="vi -p"
   # alias vim="vim -p"
-  alias tmux="TERM=screen-256color tmux -2"
   # Use vimpager to replace less, which is used to view man page
   # export PAGER=vimpager
   # alias less=$PAGER
   # alias zless=$PAGER
-  alias pfd="whence -f"
-  alias rm=file::rm
-  alias nvim="NVIM=nvim nvim"
-  alias tl='tmux list-sessions'
-  alias ts=util::tmux_start
-  alias ta=util::ta
-  alias grepc='grep -C 5 '
-  alias ls="${aliases[ls]:-ls} --color=tty"
-  alias ll=file::ll
-  alias la=file::la
 }
 function configs::config() {
   configs::_config_env
   configs::_config_alias
-  util::start_ssh_agent
+  util::start_ssh_agent "ssh-agent"
 }
 function configs::end() {
   # Create global aliases from the abbreviations.

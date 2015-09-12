@@ -112,6 +112,7 @@ if g:at_google
   let g:depends = []
   if has('vim_starting')
     execute 'source' s:google_config
+    call glaive#Install()
   endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
@@ -124,6 +125,9 @@ else
         \ 'depends' : ['google/vim-maktaba'],
         \ 'force' : 1,
         \ }                                                                     " Plugin for better vim plugin configuration
+  if has('vim_starting')
+    call glaive#Install()
+  endif
   NeoBundle 'Valloric/YouCompleteMe'                                            " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
@@ -347,11 +351,16 @@ function! s:tmux_navigator.hooks.on_source(bundle)
 endfunction
 " }}}
 " {{{2
+NeoBundle 'edkolev/tmuxline.vim'                                                " Change tmux theme to be consistent with vim statusline
+let s:tmuxline = neobundle#get('tmuxline.vim')
+function s:tmuxline.hooks.on_source(bundle)
+  let g:tmuxline_theme = 'airline_tabeline'
+endfunction
+" }}}
+" {{{2
 NeoBundle 'eiiches/vim-ref-info', {
       \ 'depends' : 'thinca/vim-ref',
       \ }
-" }}}
-" {{{2
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
@@ -440,11 +449,12 @@ function! s:myutils.hooks.on_source(bundle)
         \  'gistls', 'nerdtree', 'indicator',
         \  'folddigest', 'Scratch', 'capture' ]`
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
-  if exists('g:syntastic_extra_filetypes')
-    call add(g:syntastic_extra_filetypes, 'zsh')
-  else
-    let g:syntastic_extra_filetypes = [ 'zsh' ]
-  endif
+  call myutils#InitUndoSwapViews()
+  " if exists('g:syntastic_extra_filetypes')
+    " call add(g:syntastic_extra_filetypes, 'zsh')
+  " else
+    " let g:syntastic_extra_filetypes = [ 'zsh' ]
+  " endif
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
   " Only use this when running in OSX or ssh from OSX
@@ -453,8 +463,6 @@ function! s:myutils.hooks.on_post_source(bundle)
   endif
   call myutils#SetupTablineMappings(g:OS)
 endfunction
-" }}}
-" {{{2
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/vim-diff-indicator', {
@@ -535,7 +543,7 @@ function! s:syntastic.hooks.on_source(bundle)
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_mode_map = {
         \ 'mode': 'passive',
-        \ 'active_filetypes': [ 'zsh' ],
+        \ 'active_filetypes': [ 'zsh', 'sh' ],
         \ 'passive_filetypes': [ 'vim' ]
         \ }
   nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
@@ -974,7 +982,13 @@ endfunction
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
 " NeoBundle 'vim-scripts/CmdlineComplete'
-" NeoBundle 'thinca/vim-singleton'
+" {{{2
+" NeoBundle 'thinca/vim-singleton'                                                " Edit files in a single vim instance
+" let s:singleton = neobundle#get('vim-singleton')
+" function s:singleton.hooks.on_source(bundle)
+  " call singleton#enable()
+" endfunction
+" }}}
 " NeoBundle 'thinca/vim-prettyprint'
 " NeoBundle 'thinca/vim-openbuf'
 " NeoBundle 'thinca/vim-editvar'
@@ -1011,9 +1025,6 @@ endfunction
 " function! s:foldcol.hooks.on_source(bundle)
   " Glaive foldcol plugin[mappings]
 " endfunction
-" NeoBundle 'paulhybryant/tmuxline.vim', {
-      " \ 'type__protocol' : 'ssh'
-      " \ }                                                                     " Change tmux theme to be consistent with vim statusline
 " NeoBundle 'mileszs/ack.vim', {
       " \ 'disabled' : !executable('ag') && !executable('ack') &&
       " \              !executable('ack-grep'),
@@ -1297,8 +1308,6 @@ call neobundle#end()
 filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
 if has('vim_starting')
-  call glaive#Install()
-  call myutils#InitUndoSwapViews()
   colorscheme solarized
 endif
 " }}}

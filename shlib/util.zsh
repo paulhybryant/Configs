@@ -16,21 +16,27 @@ File: util.zsh -
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/io.zsh"
+source ${0:h}/io.zsh
+
 function util::geo_country() {
   local _geo="$(curl ipinfo.io 2> /dev/null)"
   local _country="$(echo ${_geo} | jq '.country')"
   echo ${_country}
 }
 function util::start_ssh_agent() {
+  local _agent
+  _agent=$1
   # Start ssh agent if needed
   # Check to see if SSH Agent is already running
-  agent_pid="$(ps -ef | grep "ssh-agent" | grep -v "grep" | awk '{print($2)}')"
+  # agent_pid="$(ps -ef | grep "${_agent}" | grep -v "grep" | awk '{print($2)}')"
+  agent_pid=$(pgrep "${_agent}")
 
   # If the agent is not running (pid is zero length string)
-  if [[ -z "$agent_pid" ]]; then
+  if [[ -z "${agent_pid}" ]]; then
       # Start up SSH Agent
       # this seems to be the proper method as opposed to `exec ssh-agent bash`
-      eval "$(ssh-agent)"
+      eval "$(${_agent})"
   fi
 }
 function util::installed_gnome_shell_exts() {
@@ -132,6 +138,15 @@ function util::setup_abbrev() {
   zle -N util::no-magic-abbrev-expand
   bindkey " " util::magic-abbrev-expand
   bindkey "^x " util::no-magic-abbrev-expand
+}
+function util::vim() {
+  local _server=$(\vim --serverlist)
+  local _server_name=$(tmux display-message -p '#S-#W')
+  if [[ "${_server}" == "" ]]; then
+    \vim --servername "${_server_name}" "$@"
+  else
+    \vim --servername ${_server_name} --remote "$@"
+  fi
 }
 
 : <<=cut
