@@ -176,12 +176,13 @@ NeoBundle 'kana/vim-smartinput'                                                 
 NeoBundle 'kana/vim-submode'                                                    " Supporting defining submode in vim
 NeoBundle 'kana/vim-textobj-user'                                               " Allow defining text object by user
 NeoBundle 'kshenoy/vim-signature'                                               " Place, toggle and display marks
-NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets, TODO: Make it better support vim arguments
+NeoBundle 'paulhybryant/vim-argwrap'                                            " Automatically wrap arguments between brackets
+NeoBundle 'powerman/vim-plugin-AnsiEsc'                                         " Improved version of AnsiEsc
 NeoBundle 'sjl/splice.vim'                                                      " Vim three way merge tool
 NeoBundle 'skeept/Ultisnips-neocomplete-unite'                                  " Ultisnips source for unite
 NeoBundle 'spf13/vim-autoclose'                                                 " Automatically close brackets
-NeoBundle 'thinca/vim-editvar'
-NeoBundle 'thinca/vim-prettyprint'
+NeoBundle 'thinca/vim-editvar'                                                  " Open a buffer to edit a variable and set its value
+NeoBundle 'thinca/vim-prettyprint'                                              " Pretty print vim variable for debugging
 NeoBundle 'thinca/vim-quickrun'                                                 " Execute whole/part of currently edited file
 NeoBundle 'thinca/vim-ref'                                                      " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
 NeoBundle 'thinca/vim-unite-history'                                            " History source for unite
@@ -207,10 +208,13 @@ NeoBundle 'wincent/loupe'                                                       
 NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
 " {{{2
-NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc. TODO: Make it add newline after {}, and only close <> in html / XML
+NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc.
 let s:delimitmate = neobundle#get('delimitMate')
 function s:delimitmate.hooks.on_source(bundle)
   let g:delimitMate_expand_cr = 1
+  augroup DelimitMate
+    autocmd!
+  augroup END
 endfunction
 " }}}
 " {{{2
@@ -355,11 +359,12 @@ function! s:airline.hooks.on_source(bundle)
   let g:airline#extensions#tabline#left_sep = ''
   let g:airline#extensions#tabline#left_alt_sep = ''
   let g:airline#extensions#tabline#buffer_idx_mode = 1
+  let g:airline_theme = 'powerlineish'
   " let g:airline#extensions#tabline#formatter = 'customtab'
   " let g:airline#extensions#taboo#enabled = 1
-  " Disable this for plugin Tmuxline
-  " let g:airline#extensions#tmuxline#enabled = 1
-  " let g:airline#extensions#tmuxline#color_template = 'normal'
+  let g:airline#extensions#tmuxline#enabled = 1                                 " Disable this for plugin tmuxline.vim
+  let g:airline#extensions#tmuxline#color_template = 'normal'
+  let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
 endfunction
 " }}}
 " {{{2
@@ -376,8 +381,8 @@ endfunction
 " {{{2
 NeoBundle 'edkolev/tmuxline.vim'                                                " Change tmux theme to be consistent with vim statusline
 let s:tmuxline = neobundle#get('tmuxline.vim')
-function s:tmuxline.hooks.on_source(bundle)
-  let g:tmuxline_theme = 'airline_tabeline'
+function s:tmuxline.hooks.on_post_source(bundle)
+  execute "Tmuxline airline_tabline"
 endfunction
 " }}}
 " {{{2
@@ -405,11 +410,6 @@ NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
       \ 'regular_namne' : 'Align',
       \ 'type' : 'vba',
       \ }                                                                       " Alinghing texts based on specific charater etc
-" }}}
-" {{{2
-NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/AnsiEsc.vba.gz', {
-      \ 'type' : 'vba',
-      \ }                                                                     " TODO: Add comments
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz', {
@@ -553,7 +553,7 @@ endfunction
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/myutils', {
-      \ 'depends' : extend(['os.vim'], g:depends),
+      \ 'depends' : extend(['os.vim', 'vim-codefmt'], g:depends),
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " My vim customization (utility functions, syntax etc)
 let s:myutils = neobundle#get('myutils')
@@ -565,6 +565,8 @@ function! s:myutils.hooks.on_source(bundle)
         \  'folddigest', 'Scratch', 'capture' ]`
   execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
   call myutils#InitUndoSwapViews()
+  let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+  call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
 endfunction
 function! s:myutils.hooks.on_post_source(bundle)
   " Only use this when running in OSX or ssh from OSX
@@ -927,14 +929,10 @@ NeoBundle 'jphustman/SQLUtilities', {
 let s:sqlutilities = neobundle#get('SQLUtilities')
 function! s:sqlutilities.hooks.on_source(bundle)
   let g:sqlutil_align_comma=0
-
-  function! s:FormatSql()
-    execute ':SQLUFormatter'
-    execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
-  endfunction
-
-  " TODO: Integrate this with codefmt
-  command! Fsql call s:FormatSql()
+  " function! s:FormatSql()
+    " execute ':SQLUFormatter'
+    " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
+  " endfunction
 endfunction
 NeoBundle 'vim-scripts/SQLComplete.vim', {
       \ 'autoload' : { 'filetypes' : ['sql'] },
@@ -1027,7 +1025,7 @@ endfunction
 " }}}
 " }}}
 " Disabled plugins {{{1
-for bundle in [ 'terminus' ]
+for bundle in [ 'terminus', 'vim-auto_source' ]
   execute 'NeoBundleDisable' bundle
 endfor
 " }}}
@@ -1142,6 +1140,9 @@ endfor
 " NeoBundle 'thinca/vim-openbuf'
 " NeoBundle 'thinca/vim-vparsec'
 " NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file
+" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/AnsiEsc.vba.gz', {
+      " \ 'type' : 'vba',
+      " \ }                                                                       " Conceal ansi escape sequence
 " NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
 " let s:vimhugefile = neobundle#get('vim-hugefile')
 " function! s:vimhugefile.hooks.on_source(bundle)
@@ -1243,8 +1244,6 @@ endfor
 " NeoBundle 'sjl/gundo.vim'                                                     " Visualize undo tree
 " NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
 " NeoBundle 'edkolev/promptline.vim'
-" let g:tmuxline_theme = 'airline'
-" let g:tmuxline_preset = 'tmux'
 " NeoBundle 'airblade/vim-gitgutter'}                                           " Prefer vim-signify
 " NeoBundle 'myusuf3/numbers.vims'                                              " Automatically toggle line number for certain filetypes
 " let s:numbers = neobundle#get('numbers.vim')

@@ -95,7 +95,7 @@ function configs::_config_env() {
   stty start undef
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
-  util::setup_abbrev
+  # util::setup_abbrev
 
   # Setup powerline for zsh prompt {{{
   function powerline_precmd() {

@@ -19,11 +19,15 @@
   @ Fix yanking multiline stuff in OSX. @p:2
   @ Finish all of learn vimscript the hard way @p:1
   @ Learn vim syntax fold, convert zsh fold to syntax fold if possible @p:2
-  @ Make .vimrc resourceable @p:1
-  @ Make shellcheck for zsh work as external checker @p:0
+  @ Make .vimrc resourceable @p:1 (DONE 2015-09-13 11:07)
+  @ Make shellcheck for zsh work as external checker @p:0 (DONE 2015-09-13 11:07)
   @ Integrate gtags with vim better (tagbar) @p:1
   @ Learn to write unite sources @p:3
   @ Learn maktaba libraries @p:3
+  @ Integrate SQLUtilities with codefmt @p:2 (DONE 2015-09-13 19:10)
+  @ Configure delimitMate to add newline after {}, and only close <> in html / XML
+  @ Add vroom tests for all my plugins @p:2
+  @ Make vim-argwrap handle vimscript better
 
 * tmux related tasks
 = Tmux @p:2 =
@@ -39,10 +43,11 @@
 = Zsh @p:2 =
   @ Redirect completion of bb to blaze subcommand, when complete_aliases is set
   @ Learn zsh completions
+  @ Abbreviation breaks history search, fix it.
 
 * misc
 = Misc @p:2 =
-  @ Change tmuxline.vim back after pull request merged. @p:1
+  @ Change tmuxline.vim back after pull request merged. @p:1 (DONE 2015-09-13 11:07)
   @ Map Fn key to control in autohotkey. @p:3
   @ Copy and then 'p' does not work in vim for mac. (DONE 2014-12-09 16:03)
   @ Completion for .cvimrc @p:3
