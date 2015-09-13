@@ -3,3 +3,4 @@
 *.o
 doc/tags
 .urchin.log
+.DS_Store

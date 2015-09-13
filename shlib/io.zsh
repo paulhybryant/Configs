@@ -28,17 +28,33 @@ function io::warn() {
 function io::msg() {
   printf "${COLOR_Green}$*\n${COLOR_Color_Off}"
 }
+
+: <<=cut
+=item Function C<io::yes_or_no>
+
+Gets yes or no reply from user.
+
+@return 0 if yes, 1 otherwise.
+=cut
 function io::yes_or_no() {
   read -q "REPLY?$1?(y/n)"
-  echo "$REPLY"
+  io::vlog 1 "${REPLY}"
+  [[ "$REPLY" =~ y\|Y ]] && return 0
+  return 1
 }
-# Verbose log
-# Output log based on current verbose level
-# $1 verbose level
-# $2 message
+
+: <<=cut
+=item Function C<io::vlog>
+
+Print log message based on verbose level.
+
+$1 verbose level
+$2 message
+
+@return NULL
+=cut
 function io::vlog() {
   mode::verbose "$1" && io::msg "$2"
-  return 0
 }
 
 : <<=cut

@@ -47,16 +47,12 @@ function start() {
   START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
   if [ -e "$_muxconfig_" ];
   then
-    REPLY=$(io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] ")
-    case $REPLY in
-      [y]* )
-        echo "\n$_muxconfig_ will be overwritten."
-        mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
-        ;;
-      * )
-        sed -e "s#\${SESSION}#$_muxproj_#" "$MUXDIR/project.yml.template"
-        ;;
-    esac
+    if io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] "; then
+      echo "\n$_muxconfig_ will be overwritten."
+      mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
+    else
+      sed -e "s#\${SESSION}#$_muxproj_#" "$MUXDIR/project.yml.template"
+    fi
   else
     mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
   fi
@@ -64,20 +60,14 @@ function start() {
 
 function delete() {
   local _muxproj_="$1"
-  if [ -e "$MUXDIR/$_muxproj_.yml" ];
-  then
-    REPLY=$(io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] ")
-    case $REPLY in
-      [y]* )
-        run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
-        run "cd $GIT_REPO" "Chdir to $GIT_REPO"
-        run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
-        run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
-        run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
-        ;;
-      * )
-        ;;
-    esac
+  if [[ -e "$MUXDIR/$_muxproj_.yml" &&
+    \ io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "; then
+      run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
+      run "cd $GIT_REPO" "Chdir to $GIT_REPO"
+      run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
+      run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
+      run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
+    fi
   else
     echo "No project named $_muxproj_ exists."
   fi

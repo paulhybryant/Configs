@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-source ../../init.zsh
-source ../../base.zsh
+source "../../init.zsh"
+source "../../base.zsh"
 
 set -x
 

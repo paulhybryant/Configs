@@ -208,6 +208,16 @@ NeoBundle 'wincent/loupe'                                                       
 NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
 " {{{2
+NeoBundle 'nathanaelkane/vim-indent-guides'
+let s:vimindentguides = neobundle#get('vim-indent-guides')
+function! s:vimindentguides.hooks.on_source(bundle)
+  let g:indent_guides_auto_colors = 0
+  let g:indent_guides_start_level = 1
+  " hi IndentGuidesOdd  guibg=red   ctermbg=3
+  " hi IndentGuidesEven guibg=green ctermbg=4
+endfunction
+" }}}
+" {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc.
 let s:delimitmate = neobundle#get('delimitMate')
 function s:delimitmate.hooks.on_source(bundle)
@@ -379,7 +389,10 @@ function! s:tmux_navigator.hooks.on_source(bundle)
 endfunction
 " }}}
 " {{{2
-NeoBundle 'edkolev/tmuxline.vim'                                                " Change tmux theme to be consistent with vim statusline
+NeoBundle 'edkolev/tmuxline.vim', {
+      \ 'gui' : 0,
+      \ 'lazy' : 1,
+      \ }                                                                       " Change tmux theme to be consistent with vim statusline
 let s:tmuxline = neobundle#get('tmuxline.vim')
 function s:tmuxline.hooks.on_post_source(bundle)
   execute "Tmuxline airline_tabline"
@@ -702,6 +715,7 @@ NeoBundle 'thinca/vim-operator-sequence', {
 " {{{2
 NeoBundle 'thinca/vim-singleton', {
       \ 'gui' : 1,
+      \ 'lazy' : 1,
       \ }                                                                       " Edit files in a single vim instance
 let s:singleton = neobundle#get('vim-singleton')
 function s:singleton.hooks.on_source(bundle)
@@ -1207,14 +1221,7 @@ endfor
   " nnoremap <leader>mc :MarkClear<CR>
   " nnoremap <leader>m/ :Mark <C-R>/<CR>
 " endfunction
-" NeoBundle 'vim-scripts/SemanticHL', { 'gui' : 1 }      " Semantic highlighting for C / C++
-" NeoBundle 'nathanaelkane/vim-indent-guides'
-" let s:vimindentguides = neobundle#get('vim-indent-guides')
-" function! s:vimindentguides.hooks.on_source(bundle)
-  " let g:indent_guides_auto_colors = 0
-  " hi IndentGuidesOdd  guibg=red   ctermbg=3
-  " hi IndentGuidesEven guibg=green ctermbg=4
-" endfunction
+" NeoBundle 'vim-scripts/SemanticHL', { 'gui' : 1, 'lazy' : 1, }      " Semantic highlighting for C / C++
 " NeoBundle 'vim-scripts/TagHighlight'
 " NeoBundle 'vim-scripts/utl.vim'
 " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces

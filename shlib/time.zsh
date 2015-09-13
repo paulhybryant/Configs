@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: time.zsh -
+File: time.zsh - Time related utility functions
 
 =head1 DESCRIPTION
 
@@ -16,19 +16,35 @@ File: time.zsh -
 
 init::sourced "${0:a}" && return
 
+: <<=cut
+=item Function C<time::human_readable_date>
+
+Print time in human readable format.
+
+$1 Current time in seconds since epoch
+
+@return string in human readable format for the specified time.
+=cut
 function time::human_readable_date() {
   local _time_str
   if os::OSX && [[ -z ${CMDPREFIX} ]]; then
     _time_str=$(date -r "$1")
   else
-    _time_str=$(date --date=@"$1")
+    _time_str=$("${CMDPREFIX}date" --date=@"$1")
   fi
   echo "${_time_str}"
 }
 
+: <<=cut
+=item Function C<time::seconds>
+
+Print current time in seconds since epoch.
+
+@return string of current time in seconds since epoch
+=cut
 function time::seconds() {
   local _time_str
-  _time_str=$(date +%s)
+  _time_str=$("${CMDPREFIX}"date +%s)
   echo "${_time_str}"
 }
 
