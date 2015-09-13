@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: net.zsh -
+File: net.zsh - Utility functions related to network access.
 
 =head1 DESCRIPTION
 
@@ -16,32 +16,46 @@ File: net.zsh -
 
 init::sourced "${0:a}" && return
 
+: <<=cut
+=item Function C<net::external_ip>
+
+Get the external ip address for current host.
+
+@return string of external ip address.
+=cut
 function net::external_ip() {
   local _ip
   _ip="$(curl -x '' ipecho.net/plain 2> /dev/null)"
   echo "${_ip}"
 }
-function net::ssh() {
-  # local _ssh_info_=$(mktemp)
-  # case "$(uname -s)" in
-    # Linux)
-      # ;;
-    # Darwin)
-      # ;;
-    # *)
-      # echo 'Unsupported OS'
-      # exit
-      # ;;
-  # esac
 
-  # cat ~/.ssh/config ~/.ssh/config.* > "$_ssh_info_" 2>/dev/null
-  # ssh -F "$_ssh_info_" -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
+: <<=cut
+=item Function C<net::ssh>
+
+Utility function that set some env variables by default when connected through ssh.
+Arguments will be passed through to ssh
+
+@return NULL
+=cut
+function net::ssh() {
   ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"
 }
-# Usage:
-#   is_port_open 127.0.0.1 80
-#   is_port_open 127.0.0.1 80 90
-#   is_port_open 127.0.0.1 80-90
+
+: <<=cut
+=item Function C<net::is_port_open>
+
+Test whether a port / range of ports is / are open.
+
+$1 Host address
+$2 Port number
+
+Example:
+  net::is_port_open 127.0.0.1 80
+  net::is_port_open 127.0.0.1 80 90
+  net::is_port_open 127.0.0.1 80-90
+
+@return 0 if the port is open on specified host, 1 otherwise.
+=cut
 function net::is_port_open() {
   nc -zv "$1" 2> /dev/null && return 0
   return 1

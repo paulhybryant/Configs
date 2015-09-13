@@ -48,8 +48,8 @@ function io::yes_or_no() {
 
 Print log message based on verbose level.
 
-$1 verbose level
-$2 message
+$1 Verbose level
+$2 Message
 
 @return NULL
 =cut

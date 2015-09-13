@@ -1,7 +1,5 @@
-" Modeline {{{1
-" vim: filetype=vim sw=2 ts=2 sts=2 expandtab tw=80
+" vim: filetype=vim shiftwidth=2 tabstop=2 softtabstop=2 expandtab textwidth=80
 " vim: foldlevel=0 foldmethod=marker nospell
-" }}}
 " Globals {{{1
 set nocompatible                                                                " Must be first line
 set encoding=utf-8                                                              " Set text encoding default to utf-8
