@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: os.zsh -
+File: os.zsh - Identify current OS.
 
 =head1 DESCRIPTION
 

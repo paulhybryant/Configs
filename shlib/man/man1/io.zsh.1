@@ -133,14 +133,29 @@
 .\" ========================================================================
 .\"
 .IX Title "IO.ZSH 1"
-.TH IO.ZSH 1 "2015-09-09" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH IO.ZSH 1 "2015-09-13" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: io.zsh \-
+File: io.zsh \- IO related utility functions.
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
+.ie n .IP "Function ""io::yes_or_no""" 4
+.el .IP "Function \f(CWio::yes_or_no\fR" 4
+.IX Item "Function io::yes_or_no"
+Gets yes or no reply from user.
+.Sp
+\&\f(CW@return\fR 0 if yes, 1 otherwise.
+.ie n .IP "Function ""io::vlog""" 4
+.el .IP "Function \f(CWio::vlog\fR" 4
+.IX Item "Function io::vlog"
+Print log message based on verbose level.
+.Sp
+\&\f(CW$1\fR Verbose level
+\&\f(CW$2\fR Message
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0

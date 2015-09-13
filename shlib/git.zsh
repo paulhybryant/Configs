@@ -20,7 +20,13 @@ source "${0:h}/io.zsh"
 
 export GIT_EDITOR='vim'
 
-# Check subdirs of current directory, and report repos that are dirty
+: <<=cut
+=item Function C<git::check_dirty_repos>
+
+Check subdirs of current directory, and report repos that are dirty
+
+@return NULLPTR
+=cut
 function git::check_dirty_repos() {
   local -a dirty_repos
   dirty_repos=()
@@ -41,10 +47,22 @@ function git::check_dirty_repos() {
     done
   fi
 }
+
+: <<=cut
+=item Function C<git::has_branch>
+
+Whether a branch exists in current depo.
+
+@return 0 if exists, 1 otherwise.
+=cut
 function git::has_branch() {
   [[ -n $(git branch --list "$1") ]] && return 0
   return 1
 }
+
+: <<=cut
+=item Function C<git::parent_branch>
+
 # Get parent branch of a branch, defaults to current branch.
 # How it works:
 # 1| Display a textual history of all commits.
@@ -58,6 +76,9 @@ function git::has_branch() {
 # 6| Sometimes the branch name will include a ~2 or ^1 to
 #    indicate how many commits are between the referenced
 #    commit and the branch tip. We don't care. Ignore them.
+
+@return NULL
+=cut
 function git::parent_branch() {
   local _branch
   if [[ $# -eq 0 ]]; then
@@ -67,6 +88,19 @@ function git::parent_branch() {
   fi
   git show-branch | ack '\*' | ack -v "$_branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 }
+
+: <<=cut
+=item Function C<git::new_workdir>
+
+Create a new git working dir based on existing repo, and create a new branch in
+the new workign dir.
+
+$1 Source git working directory
+$2 New git working directory
+$3 New branch name
+
+@return NULL
+=cut
 function git::new_workdir() {
   if [[ $# -lt 2 || $# -gt 3 ]]; then
     return 1
@@ -77,7 +111,8 @@ function git::new_workdir() {
   local _branch=$3
 
   # want to make sure that what is pointed to has a .git directory ...
-  local _git_dir=$(cd "${_orig_git}" && git rev-parse --git-dir)
+  local _git_dir
+  _git_dir=$(cd "${_orig_git}" && git rev-parse --git-dir)
 
   case "${_git_dir}" in
   .git)

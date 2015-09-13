@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: io.zsh -
+File: io.zsh - IO related utility functions.
 
 =head1 DESCRIPTION
 
