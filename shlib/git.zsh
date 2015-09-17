@@ -29,22 +29,29 @@ Check subdirs of current directory, and report repos that are dirty
 =cut
 function git::check_dirty_repos() {
   local -a dirty_repos
+  local _check_detached
+  if [[ $# -ge 1 ]]; then
+    io::vlog 1 "Considering repo with DETACHED head as dirty."
+    _check_detached=$1
+  fi
   dirty_repos=()
   for dir in */; do
-    io::msg "Checking ${dir}"
+    io::vlog 2 "Checking ${dir}"
     pushd "${dir}"
-    git dirty
-    if [[ $? -ne 0 ]]; then
+    if [[ -d '.git' && (-n $(git status --porcelain) || \
+      (-n ${_check_detached} && "$(git status)" =~ '^HEAD detached.*')) ]]; then
       dirty_repos+=${dir}
     fi
     popd
   done
 
   if [[ ${#dirty_repos} -gt 0 ]]; then
-    io::err "Dirty repos found!"
+    io::err "${#dirty_repos} dirty repo(s) found!"
     for dir in ${dirty_repos}; do
-      io::err "Repo: ${dir}"
+      io::err "Dirty repo: ${dir}"
     done
+  else
+    io::msg "All clean!"
   fi
 }
 
