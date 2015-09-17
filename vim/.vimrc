@@ -113,6 +113,7 @@ if g:at_google
         \ }
   if has('vim_starting')
     execute 'source' s:google_config
+    call glaive#Install()
   endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
@@ -124,6 +125,9 @@ else
         \ 'depends' : ['google/vim-maktaba'],
         \ 'force' : 1,
         \ }                                                                     " Plugin for better vim plugin configuration
+  if has('vim_starting')
+    call glaive#Install()
+  endif
   NeoBundle 'Valloric/YouCompleteMe'                                            " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
@@ -143,9 +147,6 @@ else
   function s:relatedfiles.hooks.on_source(bundle)
     call s:ConfigureRelatedFiles()
   endfunction
-endif
-if has('vim_starting')
-  call glaive#Install()
 endif
 " }}}
 " General Plugins {{{1
@@ -207,7 +208,6 @@ NeoBundle 'ujihisa/unite-locate'                                                
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                        " Edit and read fold in a separate buffer
 NeoBundle 'vim-scripts/ExtractMatches'                                          " Yank matches from range into a register
 NeoBundle 'vitalk/vim-onoff'                                                    " Mapping for toggle vim option on and off
-NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
 " {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc.
@@ -385,10 +385,10 @@ NeoBundle 'edkolev/tmuxline.vim', {
       \ 'gui' : 0,
       \ 'lazy' : 1,
       \ }                                                                       " Change tmux theme to be consistent with vim statusline
-let s:tmuxline = neobundle#get('tmuxline.vim')
-function s:tmuxline.hooks.on_post_source(bundle)
-  execute "Tmuxline airline_tabline"
-endfunction
+" let s:tmuxline = neobundle#get('tmuxline.vim')
+" function s:tmuxline.hooks.on_post_source(bundle)
+  " Tmuxline airline_tabline
+" endfunction
 " }}}
 " {{{2
 NeoBundle 'eiginn/netrw'                                                        " NERDTree plugin for network
@@ -403,11 +403,38 @@ NeoBundle 'eiiches/vim-ref-info', {
       \ }                                                                       " Info help page source for vim-ref
 " }}}
 " {{{2
-NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
+NeoBundle 'google/vim-syncopate'                                                " Makes it easy to copy syntax highlighted code and paste in emails
 let s:vimsyncopate = neobundle#get('vim-syncopate')
 function! s:vimsyncopate.hooks.on_source(bundle)
   Glaive syncopate plugin[mappings] colorscheme=putty
   let g:html_number_lines = 0
+endfunction
+" }}}
+" {{{2
+NeoBundle 'gelguy/Cmd2.vim'                                                     " Cmdline-mode enhancement for vim
+let s:cmd2 = neobundle#get('Cmd2.vim')
+function s:cmd2.hooks.on_source(bundle)
+  let g:Cmd2_cmd_mappings = {
+    \ 'iw': {'command': 'iw', 'type': 'text', 'flags': 'Cpv'},
+    \ 'ap': {'command': 'ap', 'type': 'line', 'flags': 'pv'},
+    \ '^': {'command': '^', 'type': 'normal!', 'flags': 'r'},
+    \ 'w': {'command': 'Cmd2#functions#Cword',
+        \ 'type': 'function', 'flags': 'Cr'},
+    \ }
+
+  let g:Cmd2_options = {
+    \ '_complete_ignorecase': 1,
+    \ '_complete_uniq_ignorecase': 0,
+    \ '_quicksearch_ignorecase': 1,
+    \ '_complete_start_pattern': '\<\(\k\+\(_\|\#\)\)\?',
+    \ '_complete_fuzzy': 1,
+    \ }
+
+  nmap / /<Plug>(Cmd2Suggest)
+  " cmap <expr> <Tab>
+        " \ Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
+
+  " set wildcharm=<Tab>
 endfunction
 " }}}
 " {{{2
@@ -418,8 +445,9 @@ NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz', {
+      \ 'disabled' : 1,
       \ 'type' : 'vba',
-      \ }                                                                     " Allows much quicker editing of large files, at the price of turning off events, undo, syntax highlighting, etc.
+      \ }                                                                       " Quicker editing of large files, turning off events, undo, highlight etc.
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/help.vba.gz', {
@@ -427,9 +455,14 @@ NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/help.vba.gz', {
       \ }                                                                       " Syntax highlight for help file
 " }}}
 " {{{2
+NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hicolors.vba.gz', {
+      \ 'type' : 'vba',
+      \ }                                                                       " Shows highlighting colors in their own colors, plus a colorscheme editor
+" }}}
+" {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz', {
       \ 'type' : 'vba',
-      \ }                                                                     " Highlight group of item under corsor is linked to
+      \ }                                                                       " Highlight group of item under corsor is linked to
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vis.vba.gz', {
@@ -440,12 +473,12 @@ NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vis.vba.gz', {
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/visincr.vba.gz', {
       \ 'type' : 'vba',
-      \ }                                                                     " Increase integer values in visual block
+      \ }                                                                       " Increase integer values in visual block
 " }}}
 " {{{2
 NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vissort.vba.gz', {
       \ 'type' : 'vba',
-      \ }                                                                     " Allow sorting lines by using a visual block (column)
+      \ }                                                                       " Allow sorting lines by using a visual block (column)
 " }}}
 " {{{2
 NeoBundle 'hujo/ref-doshelp', {
@@ -469,7 +502,7 @@ NeoBundle 'junegunn/fzf.vim', {
 " {{{2
 NeoBundle 'kana/vim-operator-replace', {
       \ 'depends' : 'kana/vim-operator-user'
-      \ }                                                                     " Vim operator for replace
+      \ }                                                                       " Vim operator for replace
 " }}}
 " {{{2
 NeoBundle 'kana/vim-textobj-fold', {
@@ -494,6 +527,13 @@ function! s:tagbar.hooks.on_source(bundle)
         \   'sort'  : 0,
         \   'deffile' : expand('~/.ctagscnf/autohotkey.cnf'),
         \ }
+endfunction
+" }}}
+" {{{2
+NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
+let s:vimhugefile = neobundle#get('vim-hugefile')
+function! s:vimhugefile.hooks.on_source(bundle)
+  let g:hugefile_trigger_size = 10                                              " In MB
 endfunction
 " }}}
 " {{{2
@@ -718,7 +758,7 @@ NeoBundle 'thinca/vim-ft-diff_fold', {
 " {{{2
 NeoBundle 'thinca/vim-operator-sequence', {
       \ 'depends' : 'kana/vim-operator-user'
-      \ }                                                                     " Vim operator for replace
+      \ }                                                                       " Vim operator for replace
 " }}}
 " {{{2
 NeoBundle 'thinca/vim-singleton', {
@@ -763,6 +803,13 @@ NeoBundle 'tyru/restart.vim', {
       \ }                                                                       " Restart gVim
 " }}}
 " {{{2
+NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
+let s:loupe = neobundle#get('loupe')
+function! s:loupe.hooks.on_source(bundle)
+  let g:LoupeVeryMagic = 0                                                      " Disable to avoid conflict mapping with Cmd2
+endfunction
+" }}}
+" {{{2
 NeoBundle 'xolox/vim-easytags', {
       \ 'depends' : 'xolox/vim-misc',
       \ 'disabled' : executable('ctags')
@@ -805,6 +852,10 @@ function! s:semantic_highlight.hooks.on_source(bundle)
   let g:semanticTermColors =
         \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
 endfunction
+NeoBundle 'vim-scripts/SemanticHL', {
+      \ 'gui' : 1,
+      \ 'lazy' : 1,
+      \ }                                                                       " Semantic highlighting for C / C++
 " }}}
 " git {{{2
 NeoBundle 'tpope/vim-git', {
@@ -1052,7 +1103,7 @@ endfunction
 " }}}
 " }}}
 " Disabled plugins {{{1
-for bundle in [ 'terminus' ]
+for bundle in [ 'loupe', 'terminus' ]
   execute 'NeoBundleDisable' bundle
 endfor
 " }}}
@@ -1163,23 +1214,17 @@ endfor
 " NeoBundle 'michaeljsmith/vim-indent-object'                                   " Text object based on indent levels
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
-" NeoBundle 'vim-scripts/CmdlineComplete'
-" NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
+" NeoBundle 'thinca/vim-auto_source'                                            " Automatically source registered file
 " NeoBundle 'thinca/vim-openbuf'
 " NeoBundle 'thinca/vim-vparsec'
-" NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file
+" NeoBundle 'embear/vim-localvimrc'                                             " Load local vimrc in parent dirs of currently opened file
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/AnsiEsc.vba.gz', {
       " \ 'type' : 'vba',
-      " \ }                                                                       " Conceal ansi escape sequence
-" NeoBundle 'mhinz/vim-hugefile'                                                  " Make edit / view of huge files better
-" let s:vimhugefile = neobundle#get('vim-hugefile')
-" function! s:vimhugefile.hooks.on_source(bundle)
-  " let g:hugefile_trigger_size = 50                                              " In MB
-" endfunction
+      " \ }                                                                     " Conceal ansi escape sequence
 " NeoBundle 'mattn/emmet-vim'
 " NeoBundle 'jistr/vim-nerdtree-tabs', {
       " \ 'depends' : ['scrooloose/nerdtree'],
-      " \ }                                                                       " One NERDTree only, shared among buffers / tabs
+      " \ }                                                                     " One NERDTree only, shared among buffers / tabs
 " NeoBundle 'Shougo/vimfiler.vim', {
       " \   'commands' : [
       " \     { 'name' : ['VimFiler', 'Edit', 'Write'],
@@ -1193,21 +1238,18 @@ endfor
       " \   'lazy' : 1,
       " \   'mappings' : '<Plug>',
       " \   'recipe' : 'vimfiler',
-      " \ }                                                                       " File explorer inside vim
+      " \ }                                                                     " File explorer inside vim
 " NeoBundle 'killphi/vim-textobj-signify-hunk', {
       " \ 'depends' : ['kana/vim-textobj-user'],
-      " \ }                                                                       " Text object for a hunk of diffs
-" NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hicolors.vba.gz', {
-      " \ 'type' : 'vba',
-      " \ }                                                                       " Shows highlighting colors in their own colors, plus a colorscheme editor
-" NeoBundle 'vim-scripts/ShowMarks'                                               " Use gutter to show location of marks
+      " \ }                                                                     " Text object for a hunk of diffs
+" NeoBundle 'vim-scripts/ShowMarks'                                             " Use gutter to show location of marks
 " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/HiMarks.vba.gz', {
       " \ 'depends' : ['ShowMarks'],
       " \ 'type' : 'vba',
-      " \ }                                                                       " Highlights marks by using the signs feature
-" NeoBundle 'bronson/vim-visual-star-search'                                      " Use * to search for selected text from visual mode
-" NeoBundle 'wincent/ferret'                                                      " Enhanced multi-file search for Vim
-" NeoBundle 'wincent/vim-clipper'                                                 " Clipper integratino for Vim
+      " \ }                                                                     " Highlights marks by using the signs feature
+" NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
+" NeoBundle 'wincent/ferret'                                                    " Enhanced multi-file search for Vim
+" NeoBundle 'wincent/vim-clipper'                                               " Clipper integratino for Vim
 " NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 " NeoBundle 'mbbill/undotree'
@@ -1235,7 +1277,6 @@ endfor
   " nnoremap <leader>mc :MarkClear<CR>
   " nnoremap <leader>m/ :Mark <C-R>/<CR>
 " endfunction
-" NeoBundle 'vim-scripts/SemanticHL', { 'gui' : 1, 'lazy' : 1, }      " Semantic highlighting for C / C++
 " NeoBundle 'vim-scripts/TagHighlight'
 " NeoBundle 'vim-scripts/utl.vim'
 " NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
@@ -1297,7 +1338,6 @@ endfor
 " NeoBundle 'kana/vim-surround'
 " NeoBundle 'kana/vim-repeat'
 " NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
-" NeoBundle 'calebsmith/vim-lambdify'
 " NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
 " NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
 " NeoBundle 'Shougo/echodoc.vim'                                                " Displays information in echo area from echodoc plugin
@@ -1312,7 +1352,7 @@ endfor
 " NeoBundle 'tomtom/tlib_vim'
 " NeoBundle 'tomtom/ttoc_vim', {
       " \ 'depends' : 'tomtom/tlib_vim'
-      " \ }                                                                       " A regexp-based table of contents of the current buffer for vim
+      " \ }                                                                     " A regexp-based table of contents of the current buffer for vim
 " NeoBundle 'tomtom/tcomment_vim', {
       " \ 'depends' : 'tomtom/tlib_vim'
       " \ }                                                                     " Add comments
@@ -1330,7 +1370,6 @@ endfor
 " NeoBundle 'bruno-/vim-vertical-move'                                          " Move in visual block mode as much as possible
 " NeoBundle 'dhruvasagar/vim-prosession', { 'depends': 'tpope/vim-obsession' }
 " NeoBundle 'dhruvasagar/vim-dotoo'
-" NeoBundle 'gelguy/Cmd2.vim'                                                   " cmdline-mode enhancement for vim
 " NeoBundle 'gcmt/taboo.vim'
 " NeoBundle 'akesling/ondemandhighlight'
 " NeoBundle 'neitanod/vim-ondemandhighlight'
@@ -1405,7 +1444,7 @@ set wildmenu                                                                    
 set wildmode=list:longest,full                                                  " Command <Tab> completion, list matches, then longest common part, then all
 set winminheight=0                                                              " Windows can be 0 line high
 set wrap                                                                        " Wrap long lines
-set nowrapscan                                                                    " Make regex search wrap to the start of the file
+set nowrapscan                                                                  " Make regex search wrap to the start of the file
 set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
 
 if &diff

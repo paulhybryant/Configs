@@ -139,16 +139,21 @@ function util::setup_abbrev() {
   bindkey "^x " util::no-magic-abbrev-expand
 }
 function util::vim() {
+  local _server
+  local _server_name
   if [[ -z "$TMUX" ]]; then
+    io::vlog 1 "Not in tmux, invoking vim without server name."
     \vim "$@"
-    return
-  fi
-  local _server=$(\vim --serverlist)
-  local _server_name=$(tmux display-message -p '#S-#W')
-  if [[ "${_server}" == "" ]]; then
-    \vim --servername "${_server_name}" "$@"
   else
-    \vim --servername ${_server_name} --remote "$@"
+    _server=$(\vim --serverlist)
+    _server_name=$(tmux display-message -p '#S-#W')
+    if [[ "${_server}" == "" ]]; then
+      io::vlog 1 "Starting vim with server name: ${_server_name}"
+      \vim --servername "${_server_name}" "$@"
+    else
+      io::vlog 1 "Connecting to vim server: ${_server_name}"
+      \vim --servername ${_server_name} --remote "$@"
+    fi
   fi
 }
 
