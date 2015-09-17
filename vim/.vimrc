@@ -106,7 +106,6 @@ if g:at_google
   let g:depends = []
   if has('vim_starting')
     execute 'source' s:google_config
-    call glaive#Install()
   endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
@@ -119,9 +118,6 @@ else
         \ 'depends' : ['google/vim-maktaba'],
         \ 'force' : 1,
         \ }                                                                     " Plugin for better vim plugin configuration
-  if has('vim_starting')
-    call glaive#Install()
-  endif
   NeoBundle 'Valloric/YouCompleteMe'                                            " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
@@ -141,6 +137,9 @@ else
   function s:relatedfiles.hooks.on_source(bundle)
     call s:ConfigureRelatedFiles()
   endfunction
+endif
+if has('vim_starting')
+  call glaive#Install()
 endif
 " }}}
 " General Plugins {{{1
@@ -203,18 +202,7 @@ NeoBundle 'vasconcelloslf/vim-foldfocus'                                        
 NeoBundle 'vim-scripts/ExtractMatches'                                          " Yank matches from range into a register
 NeoBundle 'vitalk/vim-onoff'                                                    " Mapping for toggle vim option on and off
 NeoBundle 'wincent/loupe'                                                       " Enhanced in-file search for Vim
-NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
 NeoBundle 'wincent/terminus'                                                    " Enhanced terminal integration (e.g bracketed-paste)
-" {{{2
-NeoBundle 'nathanaelkane/vim-indent-guides'
-let s:vimindentguides = neobundle#get('vim-indent-guides')
-function! s:vimindentguides.hooks.on_source(bundle)
-  let g:indent_guides_auto_colors = 0
-  let g:indent_guides_start_level = 1
-  " hi IndentGuidesOdd  guibg=red   ctermbg=3
-  " hi IndentGuidesEven guibg=green ctermbg=4
-endfunction
-" }}}
 " {{{2
 NeoBundle 'Raimondi/delimitMate'                                                " Automatic close of quotes etc.
 let s:delimitmate = neobundle#get('delimitMate')
@@ -530,6 +518,16 @@ function! s:ack.hooks.on_source(bundle)
 endfunction
 " }}}
 " {{{2
+NeoBundle 'nathanaelkane/vim-indent-guides'                                     " Highlight indents
+let s:vimindentguides = neobundle#get('vim-indent-guides')
+function! s:vimindentguides.hooks.on_source(bundle)
+  let g:indent_guides_auto_colors = 0
+  let g:indent_guides_start_level = 1
+  " hi IndentGuidesOdd  guibg=red   ctermbg=3
+  " hi IndentGuidesEven guibg=green ctermbg=4
+endfunction
+" }}}
+" {{{2
 NeoBundle 'ntpeters/vim-better-whitespace'                                      " Highlight all types of whitespaces
 let s:betterws = neobundle#get('vim-better-whitespace')
 function! s:betterws.hooks.on_source(bundle)
@@ -739,6 +737,11 @@ function! s:camelize.hooks.on_source(bundle)
   map <leader>lc <Plug>(operator-camelize)
   map <leader>lC <Plug>(operator-decamelize)
 endfunction
+" }}}
+" {{{2
+NeoBundle 'tyru/operator-html-escape.vim', {
+      \ 'depends' : ['kana/vim-operator-user'],
+      \ }                                                                       " Operators to escape HTML entities
 " }}}
 " {{{2
 NeoBundle 'tyru/restart.vim', {
@@ -1037,7 +1040,7 @@ endfunction
 " }}}
 " }}}
 " Disabled plugins {{{1
-for bundle in [ 'terminus', 'vim-auto_source' ]
+for bundle in [ 'terminus' ]
   execute 'NeoBundleDisable' bundle
 endfor
 " }}}
@@ -1149,6 +1152,7 @@ endfor
 " NeoBundle 'gcmt/wildfire.vim'
 " }}}
 " NeoBundle 'vim-scripts/CmdlineComplete'
+" NeoBundle 'thinca/vim-auto_source'                                              " Automatically source registered file
 " NeoBundle 'thinca/vim-openbuf'
 " NeoBundle 'thinca/vim-vparsec'
 " NeoBundle 'embear/vim-localvimrc'                                               " Load local vimrc in parent dirs of currently opened file

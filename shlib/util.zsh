@@ -139,6 +139,10 @@ function util::setup_abbrev() {
   bindkey "^x " util::no-magic-abbrev-expand
 }
 function util::vim() {
+  if [[ -z "$TMUX" ]]; then
+    \vim "$@"
+    return
+  fi
   local _server=$(\vim --serverlist)
   local _server_name=$(tmux display-message -p '#S-#W')
   if [[ "${_server}" == "" ]]; then
