@@ -102,15 +102,21 @@ endfunction
 " Google specific setup {{{1
 let s:google_config = resolve(expand('~/.vimrc.google'))
 let g:at_google = filereadable(s:google_config)
+let g:provided = {}
 if g:at_google
-  let g:depends = []
+  let g:provided = {
+        \ 'YouCompleteMe' : '',
+        \ 'relatedfiles' : '',
+        \ 'vim-codefmt' : '',
+        \ 'vim-glaive' : '',
+        \ 'vim-maktaba' : '',
+        \ }
   if has('vim_starting')
     execute 'source' s:google_config
   endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
 else
-  let g:depends = ['vim-maktaba', 'vim-glaive']
   NeoBundle 'google/vim-maktaba', {
         \ 'force' : 1,
         \ }                                                                     " Vimscript plugin library from google
@@ -124,7 +130,7 @@ else
     call s:ConfigureYcm()
   endfunction
   NeoBundle 'google/vim-codefmt', {
-        \ 'depends' : ['google/vim-codefmtlib', 'google/vim-glaive'],
+        \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
         \ }                                                                     " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
@@ -542,7 +548,9 @@ NeoBundle 'paulhybryant/file-line', {
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/foldcol', {
-      \ 'depends' : ['vim-maktaba', 'Align'],
+      \ 'depends' : filter(
+      \   ['Align', 'vim-codefmt', 'vim-glaive', 'vim-maktaba'],
+      \   '!has_key(g:provided, v:val)'),
       \ 'type__protocol' : 'ssh'
       \ }                                                                       " Fold columns selected in visual block mode
 let s:foldcol = neobundle#get('foldcol')
@@ -562,7 +570,9 @@ endfunction
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/myutils', {
-      \ 'depends' : extend(['os.vim', 'vim-codefmt'], g:depends),
+      \ 'depends' : filter(
+      \   ['os.vim', 'vim-codefmt', 'vim-glaive', 'vim-maktaba'],
+      \   '!has_key(g:provided, v:val)'),
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " My vim customization (utility functions, syntax etc)
 let s:myutils = neobundle#get('myutils')
@@ -587,7 +597,9 @@ endfunction
 " }}}
 " {{{2
 NeoBundle 'paulhybryant/vim-diff-indicator', {
-      \ 'depends' : extend(['paulhybryant/vim-signify'], g:depends),
+      \ 'depends' : filter(
+      \   ['paulhybryant/vim-signify', 'vim-glaive', 'vim-maktaba'],
+      \   '!has_key(g:provided, v:val)'),
       \ 'type__protocol' : 'ssh',
       \ }                                                                       " Diff indicator based on vim-signify
 let s:indicator = neobundle#get('vim-diff-indicator')
