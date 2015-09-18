@@ -136,6 +136,7 @@ function configs::_config_env() {
   # Expansion and Globbing
   setopt extended_glob                                                          # Weird &amp; wacky pattern matching - yay zsh!
   setopt nonomatch                                                              # pass through '*' if globbing fails
+  # setopt nocasematch                                                          # Whether the regex comparison (e.g. =~) will match case
 
   # History
   setopt append_history
