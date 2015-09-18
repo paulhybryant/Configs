@@ -24,6 +24,8 @@ export GIT_EDITOR='vim'
 =item Function C<git::check_dirty_repos>
 
 Check subdirs of current directory, and report repos that are dirty
+Number of arguments accepted: 1
+$check_detached 0 or 1
 
 @return NULLPTR
 =cut

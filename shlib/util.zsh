@@ -177,6 +177,13 @@ function util::vim() {
   fi
 }
 
+: <<=cut
+=item Function C<util::vim>
+
+Open files with gvim in a single gvim instance.
+
+@return NULL
+=cut
 function util::gvim() {
   local -a _servers_list
   _servers_list=($(\vim --serverlist))
