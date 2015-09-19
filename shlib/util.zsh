@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: util.zsh -
+File: util.zsh - Various utility functions.
 
 =head1 DESCRIPTION
 

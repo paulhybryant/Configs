@@ -184,7 +184,6 @@ call glaive#Install()
 " Level 0 Plugins {{{1
 if s:vimplugin_size >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'Shougo/vimproc.vim'                                                " Enable background process and multi-threading
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
@@ -196,7 +195,6 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Useful mappings for surrounding text objects with a pair of chars
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
-  NeoBundle 'tyru/capture.vim'                                                  " Capture Ex command output to buffer
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
         \ 'depends' : 'Shougo/context_filetype.vim',
@@ -301,6 +299,17 @@ if s:vimplugin_size >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'Shougo/vimproc.vim', {
+        \   'build' : {
+        \     'windows' : 'tools\\update-dll-mingw',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make -f make_mac.mak',
+        \     'linux' : 'make',
+        \     'unix' : 'gmake',
+        \   }
+        \ }                                                                     " Enable background process and multi-threading
+  " }}}
+  " {{{2
   NeoBundle 'SirVer/ultisnips', {
         \ 'disabled' : !has('python'),
         \ }                                                                     " Define and insert snippets
@@ -370,7 +379,11 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
-  NeoBundle 'jeetsukumaran/vim-buffergator'                                     " Buffer selector in vim
+  NeoBundle 'jeetsukumaran/vim-buffergator', {
+        \   'autoload' : {
+        \     'commands' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
+        \   },
+        \ }                                                                     " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
     let g:buffergator_suppress_keymaps=1
@@ -518,6 +531,32 @@ if s:vimplugin_size >= 0
   function! s:vimmulticursors.hooks.on_source(bundle)
     nnoremap <leader>mcf
           \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'tyru/capture.vim', {
+        \ 'autoload' : { 'commands' : ['Capture'] },
+        \ }                                                                     " Capture Ex command output to buffer
+  " }}}
+  " {{{2
+  NeoBundle 'xolox/vim-notes', {
+        \ 'autoload' : {
+        \     'commands' : [
+        \       {
+        \         'name' : [ 'Note' ],
+        \         'complete' : 'customlist,xolox#notes#cmd_complete'
+        \       },
+        \     ]
+        \   },
+        \ 'lazy' : 1,
+        \ 'depends' : ['xolox/vim-misc'],
+        \ }                                                                     " Note taking with vim
+  let s:vimnotes = neobundle#get('vim-notes')
+  function! s:vimnotes.hooks.on_source(bundle)
+    let g:notes_directories = ['~/.myconfigs/notes']
+    let g:notes_suffix = '.txt'
+    let g:notes_indexfile = '~/.myconfigs/notes/notes.idx'
+    let g:notes_tagsindex = '~/.myconfigs/notes/notes.tags'
   endfunction
   " }}}
   " ft-cpp {{{2
@@ -704,7 +743,7 @@ if s:vimplugin_size >= 1
   NeoBundle 'xolox/vim-misc'                                                    " Dependency for vim-notes
   " {{{2
   NeoBundle 'Bozar/foldMarker', {
-        \ 'autoload' : { 'commands' : 'FoldMarker' },
+        \ 'autoload' : { 'commands' : ['FoldMarker'] },
         \ 'lazy' : 1,
         \ }                                                                     " Plugin for wrapping texts in folds quickly
   " }}}
@@ -896,7 +935,7 @@ if s:vimplugin_size >= 1
   " }}}
   " {{{2
   NeoBundle 'mtth/scratch.vim', {
-        \ 'autoload' : { 'commands' : 'Scratch' },
+        \ 'autoload' : { 'commands' : ['Scratch'] },
         \ 'lazy' : 1,
         \ }                                                                     " Creates a scratch buffer
   " }}}
@@ -946,7 +985,7 @@ if s:vimplugin_size >= 1
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/vim-scratch', {
-        \ 'autoload' : { 'commands' : 'ScratchOpen' },
+        \ 'autoload' : { 'commands' : ['ScratchOpen'] },
         \ 'lazy' : 1,
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
@@ -1011,7 +1050,7 @@ if s:vimplugin_size >= 1
   " }}}
   " {{{2
   NeoBundle 'tyru/restart.vim', {
-        \ 'autoload' : { 'commands' : 'Restart' },
+        \ 'autoload' : { 'commands' : ['Restart'] },
         \ 'gui' : 1,
         \ 'lazy' : 1,
         \ }                                                                     " Restart gVim
@@ -1028,20 +1067,6 @@ if s:vimplugin_size >= 1
         \ 'depends' : 'xolox/vim-misc',
         \ 'disabled' : executable('ctags')
         \ }                                                                     " Vim integration with ctags
-  " }}}
-  " {{{2
-  NeoBundle 'xolox/vim-notes', {
-        \ 'autoload' : { 'commands' : ['Note'] },
-        \ 'lazy' : 1,
-        \ 'depends' : ['xolox/vim-misc'],
-        \ }                                                                     " Note taking with vim
-  let s:vimnotes = neobundle#get('vim-notes')
-  function! s:vimnotes.hooks.on_source(bundle)
-    let g:notes_directories = ['~/.myconfigs/notes']
-    let g:notes_suffix = '.txt'
-    let g:notes_indexfile = '~/.myconfigs/notes.idx'
-    let g:notes_tagsindex = '~/.myconfigs/notes.tags'
-  endfunction
   " }}}
   " ft-git {{{2
   NeoBundle 'tpope/vim-git', {
@@ -1304,8 +1329,10 @@ if s:vimplugin_size >= 99
         \ }                                                                     " One NERDTree only, shared among buffers / tabs
   NeoBundle 'Shougo/vimfiler.vim', {
         \   'commands' : [
-        \     { 'name' : ['VimFiler', 'Edit', 'Write'],
-        \       'complete' : 'customlist,vimfiler#complete' },
+        \     {
+        \       'name' : [ 'VimFiler', 'Edit', 'Write' ],
+        \       'complete' : 'customlist,vimfiler#complete'
+        \     },
         \     'Read',
         \     'Source'
         \   ],
