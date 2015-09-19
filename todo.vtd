@@ -44,6 +44,7 @@
   @ Redirect completion of bb to blaze subcommand, when complete_aliases is set
   @ Learn zsh completions
   @ Abbreviation breaks history search, fix it.
+  @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params.
 
 * misc
 = Misc @p:2 =

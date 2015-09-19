@@ -116,69 +116,70 @@ function configs::_config_env() {
   # Options are not ordered alphabetically, but the same as their order in the
   # zsh man pages.
   # Changing Directories
-  setopt auto_cd                                                                # Switching directories for lazy people
-  setopt auto_pushd
-  setopt pushd_ignore_dups
-  setopt pushd_minus
-  setopt pushd_silent
+  setopt AUTO_CD                                                                # Switching directories for lazy people
+  setopt AUTO_PUSHD
+  setopt PUSHD_IGNORE_DUPS
+  setopt PUSHD_MINUS
+  setopt PUSHD_SILENT
 
   # Completion
-  setopt always_to_end                                                          # When complete from middle, move cursor
-  setopt auto_list
-  setopt auto_menu                                                              # Automatically use menu completion after the second consecutive request for completion
-  setopt auto_param_slash
-  setopt complete_aliases                                                       # Prevent aliases from being internally substituted before completion is attempted
-  setopt complete_in_word                                                       # Not just at the end
-  setopt glob_complete
-  setopt list_ambiguous
-  setopt list_types
-
-  setopt local_options
+  setopt ALWAYS_TO_END                                                          # When complete from middle, move cursor
+  setopt AUTO_LIST
+  setopt AUTO_MENU                                                              # Automatically use menu completion after the second consecutive request for completion
+  setopt AUTO_PARAM_SLASH
+  setopt COMPLETE_ALIASES                                                       # Prevent aliases from being internally substituted before completion is attempted
+  setopt COMPLETE_IN_WORD                                                       # Not just at the end
+  setopt GLOB_COMPLETE
+  setopt LIST_AMBIGUOUS
+  setopt LIST_TYPES
 
   # Expansion and Globbing
-  setopt extended_glob                                                          # Weird &amp; wacky pattern matching - yay zsh!
-  setopt nonomatch                                                              # pass through '*' if globbing fails
-  # setopt nocasematch                                                          # Whether the regex comparison (e.g. =~) will match case
+  setopt EXTENDED_GLOB                                                          # Weird &amp; wacky pattern matching - yay zsh!
+  setopt NONOMATCH                                                              # pass through '*' if globbing fails
+  # setopt NOCASEMATCH                                                          # Whether the regex comparison (e.g. =~) will match case
 
   # History
-  setopt append_history
-  setopt bang_hist
-  setopt extended_history
-  setopt hist_expire_dups_first
-  setopt hist_find_no_dups
-  setopt hist_ignore_all_dups                                                   # Do not enter command lines into the history list if they are duplicates of the previous event
-  setopt hist_ignore_dups                                                       # ignore duplication command history list
-  setopt hist_ignore_space                                                      # Remove command lines from the history list when the first character on the line is a space, or when one of the expanded aliases contains a leading space
-  setopt hist_no_store
-  setopt hist_reduce_blanks                                                     # Remove superfluous blanks from each command line being added to the history list
-  setopt hist_save_no_dups
-  setopt hist_verify                                                            # When using ! cmds, confirm first
-  setopt inc_append_history
-  setopt share_history                                                          # share command history data
+  setopt APPEND_HISTORY
+  setopt BANG_HIST
+  setopt EXTENDED_HISTORY
+  setopt HIST_EXPIRE_DUPS_FIRST
+  setopt HIST_FIND_NO_DUPS
+  setopt HIST_IGNORE_ALL_DUPS                                                   # Do not enter command lines into the history list if they are duplicates of the previous event
+  setopt HIST_IGNORE_DUPS                                                       # ignore duplication command history list
+  setopt HIST_IGNORE_SPACE                                                      # Remove command lines from the history list when the first character on the line is a space, or when one of the expanded aliases contains a leading space
+  setopt HIST_NO_STORE
+  setopt HIST_REDUCE_BLANKS                                                     # Remove superfluous blanks from each command line being added to the history list
+  setopt HIST_SAVE_NO_DUPS
+  setopt HIST_VERIFY                                                            # When using ! cmds, confirm first
+  setopt INC_APPEND_HISTORY
+  setopt SHARE_HISTORY                                                          # share command history data
 
   # Input/Output
-  setopt aliases
-  setopt clobber
-  setopt correct
-  setopt interactive_comments                                                   # Escape commands so I can use them later
-  setopt print_exit_value                                                       # Alert me if something's failed
-  setopt short_loops
+  setopt ALIASES
+  setopt CLOBBER
+  setopt CORRECT
+  setopt INTERACTIVE_COMMENTS                                                   # Escape commands so I can use them later
+  setopt PRINT_EXIT_VALUE                                                       # Alert me if something's failed
+  setopt SHORT_LOOPS
 
   # Job Control
-  setopt check_jobs
-  setopt nohup                                                                  # Don't kill background jobs when I logout
+  setopt CHECK_JOBS
+  setopt NOHUP                                                                  # Don't kill background jobs when I logout
 
   # Prompting
-  setopt prompt_bang
-  # setopt no_prompt_cr                                                         # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
-  setopt prompt_percent
-  setopt prompt_subst
+  setopt PROMPT_BANG
+  # setopt NO_PROMPT_CR                                                         # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
+  setopt PROMPT_PERCENT
+  setopt PROMPT_SUBST
+
+  # Scripts and Functions
+  setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
 
   # Shell Emulation
-  setopt nocontinue_on_error
+  setopt NOCONTINUE_ON_ERROR
 
   # Shell State
-  setopt vi                                                                     # Use vi key bindings in ZSH
+  setopt VI                                                                     # Use vi key bindings in ZSH
   # }}}
   # zstyle {{{
   # case-insensitive (uppercase from lowercase) completion
