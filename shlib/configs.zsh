@@ -133,6 +133,8 @@ function configs::_config_env() {
   setopt list_ambiguous
   setopt list_types
 
+  setopt local_options
+
   # Expansion and Globbing
   setopt extended_glob                                                          # Weird &amp; wacky pattern matching - yay zsh!
   setopt nonomatch                                                              # pass through '*' if globbing fails
