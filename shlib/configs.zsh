@@ -172,9 +172,6 @@ function configs::_config_env() {
   setopt PROMPT_PERCENT
   setopt PROMPT_SUBST
 
-  # Scripts and Functions
-  setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
-
   # Shell Emulation
   setopt NOCONTINUE_ON_ERROR
 
@@ -252,6 +249,8 @@ function configs::end() {
     # alias $abbr="${abbreviations[$abbr]}"
     # alias -g $abbr="${abbreviations[$abbr]}"
   # done
+
+  setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
 
   bashcompinit
   compinit

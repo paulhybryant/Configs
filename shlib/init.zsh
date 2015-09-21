@@ -24,6 +24,16 @@ Put the following boilerplate at the start of all library files.
 =over 4
 =cut
 
+function init::runonce() {
+  if [[ -n "${__RUNONCE__+1}" ]]; then
+    return
+  else
+    export __RUNONCE__="yes"
+  fi
+  typeset -Ag __lib_registry__
+}
+init::runonce
+
 : <<=cut
 =item Function C<init::sourced>
 
@@ -41,7 +51,7 @@ function init::sourced() {
     # Fallback to OSX native stat
     _signature="$1-$(stat -f '%m' $1)"
   else
-    _signature="$1-$(${CMDPREFIX}stat -c "%Y" $1)"
+    _signature="$1-$(${CMDPREFIX}stat -c '%Y' $1)"
     # $(${CMDPREFIX}date -r "$1" +%s)
   fi
 
@@ -51,6 +61,44 @@ function init::sourced() {
     eval "${_var}=\"${_signature}\""
     return 1
   fi
+}
+
+: <<=cut
+=item Function C<init::registered>
+
+Check if a file is registered (sourced), if not register it.
+$1 Absolute path to the file to check.
+
+@return 0 or 1, indicates whether latest version of this file is registered.
+=cut
+function init::registered() {
+  local _mtime
+  _mtime="$(time::getmtime $1)"
+  if [[ -z ${__lib_registry__["$1"]} || \
+      ${__lib_registry__["$1"]} != "${_mtime}" ]]; then
+    __lib_registry__["$1"]="${_mtime}"
+    return 1
+  else
+    return 0
+  fi
+}
+
+: <<=cut
+=item Function C<time::getmtime>
+
+Get last modification time of a file.
+$1 Filename
+
+@return string of the last modified time of a file.
+=cut
+function time::getmtime() {
+  local _mtime
+  if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
+    _mtime="$(stat -f '%m' $1)"
+  else
+    _mtime="$(${CMDPREFIX}stat -c '%Y' $1)"
+  fi
+  echo "${_mtime}"
 }
 
 : <<=cut
