@@ -19,8 +19,12 @@ init::sourced "${0:a}" && return
 source "${0:h}/colors.zsh"
 source "${0:h}/mode.zsh"
 
-function io::err() {
+function io::hl() {
   printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
+}
+function io::err() {
+  io::hl "$*"
+  return 1
 }
 function io::warn() {
   printf "${COLOR_Yellow}$*\n${COLOR_Color_Off}"

@@ -48,9 +48,9 @@ function git::check_dirty_repos() {
   done
 
   if [[ ${#dirty_repos} -gt 0 ]]; then
-    io::err "${#dirty_repos} dirty repo(s) found!"
+    io::hl "${#dirty_repos} dirty repo(s) found!"
     for dir in ${dirty_repos}; do
-      io::err "Dirty repo: ${dir}"
+      io::hl "Dirty repo: ${dir}"
     done
   else
     io::msg "All clean!"
@@ -141,7 +141,7 @@ function git::new_workdir() {
 
   # don't link to a workdir
   if [[ -h "${_git_dir}/config" ]]; then
-    io:err "\"${_orig_git}\" is a working directory only, please specify" \
+    io::err "\"${_orig_git}\" is a working directory only, please specify" \
       "a complete repository."
     return 1
   fi
