@@ -7,6 +7,7 @@ scriptencoding utf-8                                                            
 let g:mapleader = ','
 let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
+let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 let s:vimplugin_size = str2nr($VIMPLUGINS)
 " }}}
 " Setup NeoBundle and OS.vim {{{1
@@ -195,6 +196,13 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Useful mappings for surrounding text objects with a pair of chars
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
+  if g:OS.is_mac
+    NeoBundle 'wincent/vim-clipper'                                               " Clipper integratino for Vim
+    let s:vimclipper = neobundle#get('vim-clipper')
+    function s:vimclipper.hooks.on_source(bundle)
+      vmap y y<Plug>(ClipperClip)
+    endfunction
+  endif
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
         \ 'depends' : 'Shougo/context_filetype.vim',
@@ -1347,7 +1355,6 @@ if s:vimplugin_size >= 99
         \ }                                                                     " Text object for a hunk of diffs
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
   NeoBundle 'wincent/ferret'                                                    " Enhanced multi-file search for Vim
-  NeoBundle 'wincent/vim-clipper'                                               " Clipper integratino for Vim
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'Xuyuanp/nerdtree-git-plugin'
   NeoBundle 'mbbill/undotree'

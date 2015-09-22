@@ -35,9 +35,9 @@ function link_tmux() {
   local _tmuxconf_="$1"
   _tmuxconf_="${_tmuxconf_%/}"
 
-  if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  if os::LINUX; then
     file::softlink "$_tmuxconf_/.tmux.conf.linux" "$HOME/.tmux.conf.local"
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
+  elif os::OSX; then
     file::softlink "$_tmuxconf_/.tmux.conf.mac" "$HOME/.tmux.conf.local"
   fi
 
@@ -45,13 +45,15 @@ function link_tmux() {
   file::softlink "$_tmuxconf_/.tmux-default.conf" "$HOME/.tmux-default.conf"
   file::softlink "$_tmuxconf_/.tmux.conf" "$HOME/.tmux.conf"
   file::softlink "$_tmuxconf_/.tmux.extra.conf" "$HOME/.tmux.extra.conf"
-  file::softlink "$_tmuxconf_/muxcfg" "$HOME/.local/bin/muxcfg"
+  # file::softlink "$_tmuxconf_/muxcfg" "$HOME/.local/bin/muxcfg"
 
   mkdir -p "$HOME/.tmuxinator" > /dev/null 2>/dev/null
   file::softlink "$_tmuxconf_/project.yml.template" "$HOME/.tmuxinator/project.yml.template"
 
-  mkdir -p "$HOME/.tmux"
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  if [[ ! -d "$HOME/.tmux" ]]; then
+    mkdir -p "$HOME/.tmux"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 }
 function link_utils() {
   [[ "$#" == 1 ]] || return 1
@@ -67,7 +69,6 @@ function link_vim() {
   local _vimconf_="$1"
   _vimconf_="${_vimconf_%/}"
 
-  file::softlink "$_vimconf_/.gvim.sh" "$HOME/.gvim.sh"
   file::softlink "$_vimconf_/.gvimrc" "$HOME/.gvimrc"
   file::softlink "$_vimconf_/.vimrc" "$HOME/.vimrc"
 }
@@ -90,12 +91,12 @@ function link_ctags() {
 function link_all() {
   [[ "$#" == 1 ]] || return 1
   local _configpath="$1"
-  link_misc "$_configpath/misc"
-  link_tmux "$_configpath/tmux"
-  link_vim "$_configpath/vim"
-  # link_utils "$_configpath/utils"
-  link_x11 "$_configpath/x11"
-  # link_ctags "$_configpath/ctags"
+  link_misc "${_configpath}/misc"
+  link_tmux "${_configpath}/tmux"
+  link_vim "${_configpath}/vim"
+  # link_utils "${_configpath}/utils"
+  link_x11 "${_configpath}/x11"
+  # link_ctags "${_configpath}/ctags"
 
   [[ ! -d "$HOME/.zprezto" ]] && return 1
   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
@@ -113,8 +114,8 @@ if ! base::exists "${BREWHOME}"; then
 fi
 
 brew install coreutils
-# io::msg "Creating symlinks from ${MYCONFIGS}"
-# link_all "${MYCONFIGS}"
+io::msg "Creating symlinks from ${MYCONFIGS}"
+link_all "${MYCONFIGS}"
 
 io::msg "Tapping extra repositories"
 brew tap paulhybryant/myformulae
@@ -128,12 +129,12 @@ brew install --HEAD paulhybryant/myformulae/powerline-shell
 brew install --HEAD paulhybryant/myformulae/zsh-completions
 brew install --with-gssapi --with-libssh2 --with-rtmpdump curl
 brew install --disable-nls --override-system-vi --with-client-server --with-lua --with-luajit --with-gui vim
-brew install brew-gem cmake ctags git htop python python3 the_silver_searcher tmux vimpager zsh
+brew install brew-gem cmake ctags git htop python python3 the_silver_searcher tmux vimpager zsh netcat
 brew gem install tmuxinator npm
 brew install --HEAD vimdoc vroom
 npm install -g urchin
 
-os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim trash
+os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim trash lsof reattach-to-user-namespace
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 pip install powerline-status advanced-ssh-config neovim Terminator

@@ -57,7 +57,7 @@ Example:
 @return 0 if the port is open on specified host, 1 otherwise.
 =cut
 function net::is_port_open() {
-  nc -zv "$1" 2> /dev/null && return 0
+  nc -zv "$1" "$2" 2> /dev/null && return 0
   return 1
 }
 
