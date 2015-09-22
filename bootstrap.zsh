@@ -3,7 +3,7 @@
 # set -o nounset                  # Treat unset variables as an error.
 set -o errexit                  # Exit script when run into the first error.
 
-MYCONFIGS="${0:h}"
+MYCONFIGS="${0:a:h}"
 source "${MYCONFIGS}/shlib/init.zsh"
 source "${MYCONFIGS}/shlib/base.zsh"
 source "${MYCONFIGS}/shlib/configs.zsh"
