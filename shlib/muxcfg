@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-# set -e
+source "${__MYCONFIGS__}/shlib/base.zsh"
 source "${__MYCONFIGS__}/shlib/git.zsh"
 
-function usage() {
+function util::muxcfg_usage() {
   cat <<EOF
 Usage: muxcfg [arguments] [command] [project]
 
@@ -18,6 +18,7 @@ Commands:
   start                 Create project repository, branch and config, start tmux session
   delete                Delete project repository, branch and config, kill tmux session
 EOF
+  return 1
 }
 
 function mirror_and_start() {
@@ -73,33 +74,39 @@ function delete() {
   fi
 }
 
-function git5wrapper() {
-  if [[ $# -ne 3 ]]; then
-    echo "Require 3 parameters"
-    exit 1
-  fi
+function util::_git5wrapper() {
   git5 mirror $1 $2 --allow_existing_branch --branch=$3
 }
 
-exit_if_not_exist tmuxinator
+function util::muxcfg() {
+  setopt localoptions nounset err_return
+  base::exists tmuxinator
+  case "$1" in
+    start|delete )
+      $1 "$2"
+      ;;
+    * )
+      echo "Invalid command: $1" >&2
+      util::muxcfg_usage
+  esac
+  if [[ -e "$HOME/.google" ]]; then
+    git_working_dir_root=$HOME/Projects
+    git_repo=$HOME/Src
+    git_new_workdir_cmd="util::_git5wrapper"
+    start_cwd=$git_working_dir_root/__MUXPROJ__/google3
+  else
+    git_working_dir_root=$HOME/Workspace
+    git_repo=$HOME/gitrepo
+    git_new_workdir_cmd="git::new_workdir"
+    start_cwd=$git_working_dir_root/__MUXPROJ__
+    base::exists $git_new_workdir_cmd
+  fi
+  MUXDIR=$HOME/.tmuxinator
+}
 
-VERBOSE=false
 DRYRUN=false
 CONFIRM=true
 
-if [[ -e "$HOME/.google" ]]; then
-  GIT_WORKING_DIR_ROOT=$HOME/Projects
-  GIT_REPO=$HOME/Src
-  GIT_NEW_WORKDIR_CMD="git5wrapper"
-  START_CWD=$GIT_WORKING_DIR_ROOT/__MUXPROJ__/google3
-else
-  GIT_WORKING_DIR_ROOT=$HOME/Workspace
-  GIT_REPO=$HOME/gitrepo
-  GIT_NEW_WORKDIR_CMD="git::new_workdir"
-  START_CWD=$GIT_WORKING_DIR_ROOT/__MUXPROJ__
-  exit_if_not_exist $GIT_NEW_WORKDIR_CMD
-fi
-MUXDIR=$HOME/.tmuxinator
 
 # NOTE: This requires GNU getopt.  On Mac OS X and FreeBSD, you have to install
 # this separately. On Mac OS X, install it with "port install getopt".
@@ -119,17 +126,3 @@ while true; do
   esac
 done
 
-if [[ $VERBOSE == true ]]; then
-  echo "Verbose mode..."
-  echo "Options: DRYRUN:$DRYRUN, CONFIRM:$CONFIRM, CMD:$1"
-fi
-
-case "$1" in
-  start|delete )
-    $1 "$2"
-    ;;
-  * )
-    echo "Invalid command: $1" >&2
-    usage
-    exit 1
-esac

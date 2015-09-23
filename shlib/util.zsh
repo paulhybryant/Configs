@@ -198,10 +198,10 @@ function util::vim() {
     done
     if [[ -z "${_server_exists}" ]]; then
       io::vlog 1 "Starting vim with server name: ${_server_name}"
-      \vim --servername "${_server_name}" "$@"
+      \vim -X --servername "${_server_name}" "$@"
     else
       io::vlog 1 "Connecting to vim server: ${_server_name}"
-      \vim --servername ${_server_name} --remote "$@"
+      \vim -X --servername ${_server_name} --remote "$@"
     fi
   fi
 }
