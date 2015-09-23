@@ -28,6 +28,7 @@
   @ Configure delimitMate to add newline after {}, and only close <> in html / XML
   @ Add vroom tests for all my plugins @p:2
   @ Make vim-argwrap handle vimscript better
+  @ Try to write a vim plugin with python @p:2
 
 * tmux related tasks
 = Tmux @p:2 =

@@ -243,13 +243,6 @@ function configs::config() {
   util::start_ssh_agent "ssh-agent"
 }
 function configs::end() {
-  # Create global aliases from the abbreviations.
-  # Note the difference between alias and alias -g
-  # for abbr in ${(k)abbreviations}; do
-    # alias $abbr="${abbreviations[$abbr]}"
-    # alias -g $abbr="${abbreviations[$abbr]}"
-  # done
-
   setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
 
   bashcompinit

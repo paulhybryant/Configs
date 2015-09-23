@@ -182,7 +182,7 @@ else
 endif
 call glaive#Install()
 " }}}
-" Level 0 Plugins {{{1
+" Priority 0 Plugins {{{1
 if s:vimplugin_size >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
@@ -196,13 +196,6 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Useful mappings for surrounding text objects with a pair of chars
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
-  if g:OS.is_mac
-    NeoBundle 'wincent/vim-clipper'                                               " Clipper integratino for Vim
-    let s:vimclipper = neobundle#get('vim-clipper')
-    function s:vimclipper.hooks.on_source(bundle)
-      vmap y y<Plug>(ClipperClip)
-    endfunction
-  endif
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
         \ 'depends' : 'Shougo/context_filetype.vim',
@@ -547,6 +540,15 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Capture Ex command output to buffer
   " }}}
   " {{{2
+  NeoBundle 'wincent/vim-clipper', {
+        \ 'disabled' : !g:OS.is_mac,
+        \ }                                                                     " Clipper integratino for Vim
+  let s:vimclipper = neobundle#get('vim-clipper')
+  function s:vimclipper.hooks.on_source(bundle)
+    vmap y y<Plug>(ClipperClip)
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'xolox/vim-notes', {
         \ 'autoload' : {
         \     'commands' : [
@@ -627,14 +629,13 @@ if s:vimplugin_size >= 0
         \ 'autoload' : { 'filetypes' : ['tmux'] },
         \ 'lazy' : 1,
         \ }                                                                     " Insert mode completion of words in adjacent panes
-  " NeoBundle 'zaiste/tmux.vim', {
-        " \ 'autoload' : { 'filetypes' : ['tmux'] },
-        " \ 'lazy' : 1,
-        " \ }                                                                   " Tmux syntax highlight
   " }}}
   " ft-vim {{{2
   NeoBundle 'vim-scripts/ReloadScript', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'autoload' : {
+        \     'commands' : ['ReloadScript'],
+        \     'filetypes' : ['vim'],
+        \   },
         \ 'lazy' : 1,
         \ }                                                                     " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
@@ -642,7 +643,10 @@ if s:vimplugin_size >= 0
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
-        \ 'autoload' : { 'filetypes' : ['vim'], 'commands' : ['Decho'] },
+        \ 'autoload' : {
+        \     'commands' : ['Decho'],
+        \     'filetypes' : ['vim'],
+        \   },
         \ 'lazy' : 1,
         \ 'type' : 'vba',
         \ }                                                                     " Debug echo for debuging vim plugins
@@ -651,37 +655,27 @@ if s:vimplugin_size >= 0
     let g:dechofuncname = 1
     let g:decho_winheight = 10
   endfunction
-  NeoBundle 'syngan/vim-vimlint', {
+  NeoBundle 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Make vim an IDE for writing vimscript
+  NeoBundle 'dbakker/vim-lint', {
+        \ 'depends' : 'syngan/vim-vimlint',
+        \ 'filetypes' : ['vim'],
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax checker for vimscript
+  NeoBundle 'syngan/vim-vimlint', {
+        \ 'autoload' : {
+        \    'commands' : ['VimLint'],
+        \    'filetypes' : ['vim'],
+        \  },
         \ 'depends' : 'ynkdir/vim-vimlparser',
         \ 'lazy' : 1,
         \ }                                                                     " Syntax checker for vimscript
-  NeoBundle 'vim-scripts/Vim-Support', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'disabled' : 1,
-        \ 'lazy' : 1,
-        \ }                                                                     " Make vim an IDE for writing vimscript
   NeoBundle 'google/vim-ft-vroom', {
         \ 'autoload' : { 'filetypes' : ['vroom'] },
         \ 'lazy' : 1,
         \ }                                                                     " Filetype plugin for vroom
-  NeoBundle 'kana/vim-vspec', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Testing framework for vimscript
-  NeoBundle 'thinca/vim-themis', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Testing framework for vimscript
-  NeoBundle 'junegunn/vader.vim', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Testing framework for vimscript
-  " let g:Vim_MapLeader  = g:maplocalleader
-  " NeoBundle 'dbakker/vim-lint', {
-        " \ 'filetypes' : ['vim'],
-        " \ 'lazy' : 1,
-        " \ }                                                                   " Syntax checker for vimscript
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
@@ -700,7 +694,7 @@ if s:vimplugin_size >= 0
   " }}}
 endif
 " }}}
-" Level 1 Plugins {{{1
+" Priority 1 Plugins {{{1
 if s:vimplugin_size >= 1
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
@@ -956,6 +950,11 @@ if s:vimplugin_size >= 1
     " hi IndentGuidesOdd  guibg=red   ctermbg=3
     " hi IndentGuidesEven guibg=green ctermbg=4
   endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'osyo-manga/vim-watchdogs', {
+        \ 'depends' : ['Shougo/vimproc.vim', 'thinca/vim-quickrun'],
+        \ }                                                                     " Async syntax checking
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/foldcol', {
@@ -1221,12 +1220,29 @@ if s:vimplugin_size >= 1
         \ 'lazy' : 1,
         \ }                                                                     " Better SQL syntax highlighting
   " }}}
+  " ft-vim {{{2
+  NeoBundle 'kana/vim-vspec', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Testing framework for vimscript
+  NeoBundle 'thinca/vim-themis', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Testing framework for vimscript
+  NeoBundle 'junegunn/vader.vim', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Testing framework for vimscript
+  " }}}
   " ft-yaml {{{2
-  NeoBundle 'chase/vim-ansible-yaml'                                            " Syntax, formatting for ansible's YAML dialect
+  NeoBundle 'chase/vim-ansible-yaml', {
+        \ 'autoload' : { 'filetypes' : ['yaml'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax, formatting for ansible's YAML dialect
   " }}}
 endif
 " }}}
-" Level 99 Plugins {{{1
+" Priority 99 Plugins {{{1
 if s:vimplugin_size >= 99
   NeoBundle 'paulhybryant/neobundle.vim'                                        " Plugin manager
   NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager

@@ -117,26 +117,55 @@ function util::run() {
   fi
 }
 function util::setup_abbrev() {
-  # This can get around the problem where complete_aliases is set and zsh will
-  # not expand the alias when doing the completion.
-  # source: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
-  typeset -Ag abbreviations
-  abbreviations=()
+  # source: http://hackerific.net/2009/01/23/zsh-abbreviations/
+  # another impl: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
+  typeset -Ag abbrevs
+  abbrevs=('...' '../..'
+          '....' '../../..'
+          'cx' 'chmod +x'
+          'da' 'du -sch'
+          'e'  'print -l'
+          'j' 'jobs -l'
+          'lad' $'ls -d .*(/)\n# only show dot-directories'
+          'lb' 'listabbrevs'
+          'lsa' $'ls -a .*(.)\n# only show dot-files'
+          'lsbig' $'ls -flh *(.OL[1,10])\n# display the biggest files'
+          'lsd' $'ls -d *(/)\n# only show directories'
+          'lse' $'ls -d *(/^F)\n# only show empty directories'
+          'lsl' $'ls -l *(@[1,10])\n# only symlinks'
+          'lsnew' $'ls -rl *(D.om[1,10])\n# display the newest files'
+          'lsold' $'ls -rtlh *(D.om[-11,-1])\n# display the oldest files'
+          'lss' $'ls -l *(s,S,t)\n# only files with setgid/setuid/sticky flag'
+          'lssmall' $'ls -Srl *(.oL[1,10])\n# display the smallest files'
+          'lsw' $'ls -ld *(R,W,X.^ND/)\n# world-{readable,writable,executable} files'
+          'lsx' $'ls -l *(*[1,10])\n# only executables'
+          'md' 'mkdir -p '
+  )
 
-  function util::magic-abbrev-expand() {
-      local left prefix
-      left=$(echo -nE "$LBUFFER" | sed -e "s/[_a-zA-Z0-9]*$//")
-      prefix=$(echo -nE "$LBUFFER" | sed -e "s/.*[^_a-zA-Z0-9]\([_a-zA-Z0-9]*\)$/\1/")
-      LBUFFER=$left${abbreviations[$prefix]:-$prefix}" "
+  # Create global aliases from the abbreviations.
+  for abbr in ${(k)abbrevs}; do
+    alias -g $abbr="${abbrevs[$abbr]}"
+  done
+
+  function globalias() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[_a-zA-Z0-9]#}
+    LBUFFER+=${abbrevs[$MATCH]:-$MATCH}
+    zle self-insert
   }
-  function util::no-magic-abbrev-expand() {
-      LBUFFER+=' '
+  zle -N globalias
+  # List abbreviations and abbr binding, picks out help in green.
+  function listabbrevs() {
+    echo "Displaying shell abbreviations"
+    for abbr in ${(ok)abbrevs}; do
+      printf "%-20s: %s" $abbr ${abbrevs[$abbr]:s/
+  /$fg[green] /} # Replaces newlines with spaces
+      print -l $reset_color
+    done
   }
 
-  zle -N util::magic-abbrev-expand
-  zle -N util::no-magic-abbrev-expand
-  bindkey " " util::magic-abbrev-expand
-  bindkey "^x " util::no-magic-abbrev-expand
+  bindkey "  " globalias
+  bindkey " " magic-space
 }
 
 : <<=cut

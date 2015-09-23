@@ -13,6 +13,28 @@ source "${MYCONFIGS}/shlib/os.zsh"
 configs::bootstrap
 
 # Bootstrap util functions {{{
+function link_all() {
+  [[ "$#" == 1 ]] || return 1
+  local _configpath="$1"
+  link_misc "${_configpath}/misc"
+  link_tmux "${_configpath}/tmux"
+  link_vim "${_configpath}/vim"
+  # link_utils "${_configpath}/utils"
+  link_x11 "${_configpath}/x11"
+  # link_ctags "${_configpath}/ctags"
+
+  [[ ! -d "$HOME/.zprezto" ]] && return 1
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+}
+function link_ctags() {
+  [[ "$#" == 1 ]] || return 1
+  local _ctagsconf_="$1"
+  _ctagsconf_="${_ctagsconf_%/}"
+
+  file::softlink "$_ctagsconf_" "$HOME/.ctagscnf"
+}
 function link_misc() {
   [[ "$#" == 1 ]] || return 1
   local _miscfong_="$1"
@@ -28,7 +50,7 @@ function link_misc() {
   file::softlink "$_miscfong_/.inputrc" "$HOME/.inputrc"
   file::softlink "$_miscfong_/.gitconfig-linux" "$HOME/.gitconfig"
   file::softlink "$_miscfong_/.gitignore" "$HOME/.gitignore"
-  file::softlink "$_miscfong_/assh.config" "$HOME/.ssh/config.advanced"
+  # file::softlink "$_miscfong_/assh.config" "$HOME/.ssh/config.advanced"
 }
 function link_tmux() {
   [[ "$#" == 1 ]] || return 1
@@ -80,28 +102,6 @@ function link_x11() {
   # file::softlink "$_x11conf_/.xinitrc" "$HOME/.xinitrc"
   file::softlink "$_x11conf_/.xinitrc" "$HOME/.xsessionrc"
   file::softlink "$_x11conf_/.xbindkeysrc" "$HOME/.xbindkeysrc"
-}
-function link_ctags() {
-  [[ "$#" == 1 ]] || return 1
-  local _ctagsconf_="$1"
-  _ctagsconf_="${_ctagsconf_%/}"
-
-  file::softlink "$_ctagsconf_" "$HOME/.ctagscnf"
-}
-function link_all() {
-  [[ "$#" == 1 ]] || return 1
-  local _configpath="$1"
-  link_misc "${_configpath}/misc"
-  link_tmux "${_configpath}/tmux"
-  link_vim "${_configpath}/vim"
-  # link_utils "${_configpath}/utils"
-  link_x11 "${_configpath}/x11"
-  # link_ctags "${_configpath}/ctags"
-
-  [[ ! -d "$HOME/.zprezto" ]] && return 1
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  done
 }
 # }}}
 
