@@ -180,7 +180,7 @@ function util::vim() {
   local _server_name
   if [[ -z "$TMUX" ]]; then
     io::vlog 1 "Not in tmux, invoking vim without server name."
-    \vim "$@"
+    \vim -X "$@"
   else
     _servers_list=($(\vim --serverlist))
     io::vlog 1 "Vim servers: ${_servers_list}"
