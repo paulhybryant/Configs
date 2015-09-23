@@ -72,7 +72,11 @@ function base::parseargs() {
     else
       _arg=${arg}
     fi
-    [[ -n ${+_fn_options[${_arg}]} ]]
+    if [[ ${+_fn_options[${_arg}]} -eq 0 ]]; then
+      printf "Available options: ${(k)_fn_options}\n"
+      printf "${COLOR_Red}Invalid options: ${_arg}\n${COLOR_Color_Off}"
+      return 1
+    fi
     if [[ -z "${_argv}" ]]; then
       _fn_options[${_arg}]="true"
     else

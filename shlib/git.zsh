@@ -33,10 +33,10 @@ $check_detached 0 or 1
 function git::check_dirty_repos() {
   setopt localoptions err_return
   local -A _fn_options
-  _fn_options=(-no-detached 'false')
+  _fn_options=(-no-detached '')
   local -a _fn_args
   _fn_args=("${(@M)@:#-*}")
-  base::parseargs || echo "Available options: ${(k)_fn_options}" && io::err "Invalid options: ${arg}"
+  base::parseargs
 
   setopt localoptions nounset
   [[ "${_fn_options[-no-detached]}" == "true" ]] && \
@@ -72,8 +72,8 @@ Whether a branch exists in current depo.
 @return 0 if exists, 1 otherwise.
 =cut
 function git::has_branch() {
-  [[ -n $(git branch --list "$1") ]] && return 0
-  return 1
+  setopt localoptions err_return
+  [[ -n $(git branch --list "$1") ]]
 }
 
 : <<=cut
@@ -118,13 +118,19 @@ $3 New branch name
 @return NULL
 =cut
 function git::new_workdir() {
-  if [[ $# -lt 2 || $# -gt 3 ]]; then
-    return 1
-  fi
+  setopt localoptions err_return
+  local -A _fn_options
+  _fn_options=(-src '' -dst '' -branch '')
+  local -a _fn_args
+  _fn_args=("${(@M)@:#-*}")
+  base::parseargs
 
-  local _orig_git=$1
-  local _new_workdir=$2
-  local _branch=$3
+  for arg in ${(k)_fn_options}; do
+    [[ -z ${_fn_options[${arg}]} ]] && io::err "Missing required argument ${arg}"
+  done
+  local _orig_git=${_fn_options[-src]}
+  local _new_workdir=${_fn_options[-dst]}
+  local _branch=${_fn_options[-branch]}
 
   # want to make sure that what is pointed to has a .git directory ...
   local _git_dir
