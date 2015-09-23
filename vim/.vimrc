@@ -570,33 +570,10 @@ if s:vimplugin_size >= 0
   endfunction
   " }}}
   " ft-cpp {{{2
-  NeoBundle 'vim-jp/cpp-vim', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] },
-        \ 'lazy' : 1,
-        \ }
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {
         \ 'autoload' : { 'filetypes' : ['cpp'] },
         \ 'lazy' : 1,
         \ }                                                                     " Enhanced vim cpp highlight
-  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/blockhl.vba.gz', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] },
-        \ 'lazy' : 1,
-        \ 'regular_name' : 'blockhl',
-        \ 'type' : 'vba',
-        \ }                                                                     " Highlights in block level
-  NeoBundle 'jaxbot/semantic-highlight.vim', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " General semantic highlighting for vim
-  let s:semantic_highlight = neobundle#get('semantic-highlight.vim')
-  function! s:semantic_highlight.hooks.on_source(bundle)
-    let g:semanticTermColors =
-          \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
-  endfunction
-  NeoBundle 'vim-scripts/SemanticHL', {
-        \ 'gui' : 1,
-        \ 'lazy' : 1,
-        \ }                                                                     " Semantic highlighting for C / C++
   " }}}
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
@@ -659,6 +636,10 @@ if s:vimplugin_size >= 0
         \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'lazy' : 1,
         \ }                                                                     " Make vim an IDE for writing vimscript
+  let s:vimsupport = neobundle#get('Vim-Support')
+  function! s:vimsupport.hooks.on_source(bundle)
+    let g:Vim_MapLeader  = g:mapleader
+  endfunction
   NeoBundle 'dbakker/vim-lint', {
         \ 'depends' : 'syngan/vim-vimlint',
         \ 'filetypes' : ['vim'],
@@ -1074,6 +1055,31 @@ if s:vimplugin_size >= 1
         \ 'depends' : 'xolox/vim-misc',
         \ 'disabled' : executable('ctags')
         \ }                                                                     " Vim integration with ctags
+  " }}}
+  " ft-cpp {{{2
+  NeoBundle 'vim-jp/cpp-vim', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
+        \ }
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/blockhl.vba.gz', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
+        \ 'regular_name' : 'blockhl',
+        \ 'type' : 'vba',
+        \ }                                                                     " Highlights in block level
+  NeoBundle 'jaxbot/semantic-highlight.vim', {
+        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " General semantic highlighting for vim
+  let s:semantic_highlight = neobundle#get('semantic-highlight.vim')
+  function! s:semantic_highlight.hooks.on_source(bundle)
+    let g:semanticTermColors =
+          \ [1,2,3,5,6,7,9,10,11,13,14,15,33,34,46,124,125,166,219,226]
+  endfunction
+  NeoBundle 'vim-scripts/SemanticHL', {
+        \ 'gui' : 1,
+        \ 'lazy' : 1,
+        \ }                                                                     " Semantic highlighting for C / C++
   " }}}
   " ft-git {{{2
   NeoBundle 'tpope/vim-git', {

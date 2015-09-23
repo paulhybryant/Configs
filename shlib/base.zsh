@@ -40,5 +40,47 @@ function base::exists() {
 }
 
 : <<=cut
+=item Function C<base::parseargs>
+
+Parse arguments passed to functions.
+Assuming the existence of two variables:
+  _fn_options - Containing the default options and default option values for this function
+  _fn_args - Arguments passed to this function
+
+Example:
+  local -A _fn_options
+  _fn_options=(-no-detached 'null' -foo 'null' -unset 'empty')
+  local -a _fn_args
+  _fn_args=(-no-detached -foo=y)
+  base::parseargs || echo "Available options: ${(k)_fn_options}" && echo "Invalid options: ${arg}"
+  [[ ${_fn_options[-no-detached]} == "true" ]]
+  [[ ${_fn_options[-foo]} == "y" ]]
+  [[ ${_fn_options[-unset]} == "empty" ]]
+
+@return NULL
+=cut
+function base::parseargs() {
+  setopt localoptions err_return
+  local _arg _argv _kv
+  for arg in ${_fn_args}; do
+    _arg=
+    _argv=
+    if [[ "${arg}" =~ '.*=.*' ]]; then
+      _kv=("${(s/=/)arg}")
+      _arg=${_kv[1]}
+      _argv=${_kv[2]}
+    else
+      _arg=${arg}
+    fi
+    [[ -n ${+_fn_options[${_arg}]} ]]
+    if [[ -z "${_argv}" ]]; then
+      _fn_options[${_arg}]="true"
+    else
+      _fn_options[${_arg}]="${_argv}"
+    fi
+  done
+}
+
+: <<=cut
 =back
 =cut

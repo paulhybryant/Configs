@@ -16,6 +16,7 @@ File: git.zsh - Git related utility functions.
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/base.zsh"
 source "${0:h}/io.zsh"
 
 export GIT_EDITOR='vim'
@@ -30,18 +31,24 @@ $check_detached 0 or 1
 @return NULLPTR
 =cut
 function git::check_dirty_repos() {
+  setopt localoptions err_return
+  local -A _fn_options
+  _fn_options=(-no-detached 'false')
+  local -a _fn_args
+  _fn_args=("${(@M)@:#-*}")
+  base::parseargs || echo "Available options: ${(k)_fn_options}" && io::err "Invalid options: ${arg}"
+
+  setopt localoptions nounset
+  [[ "${_fn_options[-no-detached]}" == "true" ]] && \
+    io::msg "Considering detached as dirty."
   local -a dirty_repos
-  local _check_detached
-  if [[ $# -ge 1 ]]; then
-    io::vlog 1 "Considering repo with DETACHED head as dirty."
-    _check_detached=$1
-  fi
   dirty_repos=()
   for dir in */; do
     io::vlog 2 "Checking ${dir}"
     pushd "${dir}"
     if [[ -d '.git' && (-n $(git status --porcelain) || \
-      (-n ${_check_detached} && "$(git status)" =~ '^HEAD detached.*')) ]]; then
+      ("${_fn_options[-no-detached]}" == "true" && \
+       "$(git status)" =~ '^HEAD detached.*')) ]]; then
       dirty_repos+=${dir}
     fi
     popd
