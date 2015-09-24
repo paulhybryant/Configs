@@ -25,7 +25,7 @@
 
   # Pull in remote changes for the current repository and all its submodules
   ; p = !"git pull --recurse-submodules; git submodule update --remote --merge"
-  p = !"git pull --recurse-submodules"
+  p = !"git submodule update --init --recursive; git pull --recurse-submodules"
 
   # Push changes for submodules also
   pu = push --recurse-submodules=on-demand

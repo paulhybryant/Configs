@@ -1,12 +1,6 @@
-[submodule "third_party/terminator-solarized"]
-	path = third_party/terminator-solarized
-	url = https://github.com/ghuntley/terminator-solarized.git
 [submodule "third_party/solarized"]
 	path = third_party/solarized
 	url = https://github.com/altercation/solarized.git
-[submodule "third_party/apt-cyg"]
-	path = third_party/apt-cyg
-	url = https://github.com/transcode-open/apt-cyg.git
 [submodule "zsh/.zprezto"]
 	path = zsh/.zprezto
 	url = git@github.com:paulhybryant/prezto.git
