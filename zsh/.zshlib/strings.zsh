@@ -16,6 +16,8 @@ File: strings.zsh - Utility functions for string manipulation.
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/base.zsh"
+
 : <<=cut
 =item Function C<strings::strip_slash>
 
@@ -31,6 +33,27 @@ function strings::strip_slash() {
   else
     echo "$1"
   fi
+}
+
+function strings::join() {
+  setopt localoptions err_return
+  local -A _fn_options
+  _fn_options=(-delim ',' -prefix '')
+  local -a _fn_args
+  _fn_args=("${(@M)@:#-*}")
+  base::parseargs
+
+  _args=("${(@)@:#-*}")
+  setopt localoptions nounset
+  local _result
+  for part in ${_args}; do
+    if [[ -z "${_result}" ]]; then
+      _result="${_fn_options[-prefix]}${part}"
+    else
+      _result="${_result}${_fn_options[-delim]}${_fn_options[-prefix]}${part}"
+    fi
+  done
+  echo "${_result}"
 }
 
 : <<=cut

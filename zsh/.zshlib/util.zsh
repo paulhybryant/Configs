@@ -17,11 +17,13 @@ File: util.zsh - Various utility functions.
 init::sourced "${0:a}" && return
 
 source "${0:h}/io.zsh"
+source "${0:h}/strings.zsh"
 
-function util::geo_country() {
-  local _geo="$(curl ipinfo.io 2> /dev/null)"
-  local _country="$(echo ${_geo} | jq '.country')"
-  echo ${_country}
+function util::geoinfo() {
+  # ip, hostname, city, region, country, loc, org
+  local _filter
+  _filter=$(strings::join -prefix=. -delim=, "$@")
+  echo $(curl -x '' ipinfo.io 2> /dev/null | jq "${_filter}")
 }
 function util::start_ssh_agent() {
   local _agent
