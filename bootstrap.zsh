@@ -113,9 +113,16 @@ if ! base::exists "${BREWHOME}"; then
   git clone https://github.com/Homebrew/${BREWVERSION} "${BREWHOME}"
 fi
 
-brew install coreutils
+brew install coreutils stow
 io::msg "Creating symlinks from ${MYCONFIGS}"
-link_all "${MYCONFIGS}"
+function bootstrap::stow() {
+  for module in vim tmux x11 misc;
+  do
+    stow "${module}"
+  done
+  # stow -d "${MYCONFIGS}/third_party/prezto" -t "$HOME" "runcoms"
+}
+# bootstrap::stow
 
 io::msg "Tapping extra repositories"
 brew tap paulhybryant/myformulae

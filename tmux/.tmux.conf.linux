@@ -1,7 +1,0 @@
-# vim: set sw=4 ts=4 sts=4 et tw=80 foldmarker={{,}} foldlevel=0 foldmethod=marker filetype=tmux nospell:
-source-file $HOME/.linuxbrew/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-if-shell "[[ `tmux -V` == *1.8 ]]" \
-    "source-file $HOME/.linuxbrew/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8.conf"
-if-shell "[[ `tmux -V` == *1.9 ]] " \
-    "source-file $HOME/.linuxbrew/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf" \
-    "source-file $HOME/.linuxbrew/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.9_plus.conf"
