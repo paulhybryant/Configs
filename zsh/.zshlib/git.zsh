@@ -200,6 +200,18 @@ function git::new_workdir() {
   fi
 }
 
+function git::submodule-url() {
+  git config --list | sed -n "s@^submodule\.$1.*\.url=\(.*\)@\1@p"
+}
+
+function git::submodule-mv() {
+  git submodule deinit "$1"
+  git rm "$1"
+  local _url
+  _url=$(git::submodule-url "$1")
+  git submodule add "${_url}" "$2"
+}
+
 : <<=cut
 =back
 =cut
