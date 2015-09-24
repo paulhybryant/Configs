@@ -24,6 +24,7 @@ function bootstrap() {
 
   brew install coreutils stow
   io::msg "Creating symlinks with stow"
+  mkdir -p "$HOME/.tmux/plugins"
   for module in misc tmux tmuxinator vim x11 zsh; do
     stow "${module}"
   done
@@ -42,7 +43,7 @@ function bootstrap() {
   brew install --disable-nls --override-system-vi --with-client-server \
     --with-lua --with-luajit --with-gui vim
   brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat
+    the_silver_searcher tmux vimpager zsh netcat dos2unix
   brew gem install tmuxinator npm
   brew install --HEAD vimdoc vroom
   npm install -g urchin
