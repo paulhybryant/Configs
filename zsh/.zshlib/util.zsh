@@ -44,11 +44,11 @@ function util::installed_gnome_shell_exts() {
 function util::ta() {
   for var in ${__tmux_vars__};
   do
-    local value=
-    eval value=\$$var
-    \tmux set-environment $var "$value"
-    echo "export $var=\"$value\"" >> "$setenv"
+    local _value=
+    eval _value=\$${var}
+    \tmux set-environment ${var} "${_value}"
   done
+  tmux attach -t "$1"
 }
 function util::tmux-attach() {
   local setenv=$(mktemp)
