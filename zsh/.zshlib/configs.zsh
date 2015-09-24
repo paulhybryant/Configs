@@ -104,22 +104,24 @@ function configs::_config_env() {
   # setup pre-command {{{
   function configs::_myprecmd() {
     export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
-    local _pat
-    for var in ${__tmux_vars__};
-    do
-      if [[ -z "${_pat}" ]]; then
-        _pat="^${var}"
-      else
-        _pat="${_pat}\|^${var}"
-      fi
-    done
-    local _vars
-    _vars="$(tmux show-environment | grep \"${_pat}\")"
-    for var in ${_vars};
-    do
-      io::vlog 1 "export $var"
-      export $var
-    done
+    if [[ ! -z "$TMUX" ]]; then
+      local _pat
+      for var in ${__tmux_vars__};
+      do
+        if [[ -z "${_pat}" ]]; then
+          _pat="^${var}"
+        else
+          _pat="${_pat}\|^${var}"
+        fi
+      done
+      local _vars
+      _vars="$(tmux show-environment | grep \"${_pat}\")"
+      for var in ${_vars};
+      do
+        io::vlog 1 "export $var"
+        export $var
+      done
+    fi
   }
   function configs::_install_precmd() {
     for s in "${precmd_functions[@]}"; do
