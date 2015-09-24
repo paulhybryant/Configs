@@ -1,4 +1,4 @@
-﻿vim
+vim
 
 # Compile vim for windows with lua and python
 • Get vim source code from github
