@@ -80,7 +80,7 @@ function configs::_config_env() {
   # If it is really need for program foo, create an alias like this
   # alias foo='TERM=xterm-256color foo'
 
-  eval "$(${CMDPREFIX}dircolors ${__MYCONFIGS__}/third_party/dircolors-solarized/dircolors.256dark)"
+  eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
 
   export HISTSIZE=50000
   export SAVEHIST=60000
