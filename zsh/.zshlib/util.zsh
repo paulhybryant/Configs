@@ -176,6 +176,11 @@ function util::setup_abbrev() {
   bindkey "  " globalias
   bindkey " " magic-space
 }
+function util::update() {
+  brew update
+  brew upgrade $(brew outdated)
+  # Update pip
+}
 
 : <<=cut
 =item Function C<util::vim>
