@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-File: configs.zsh -
+File: configs.zsh - Setup environment for workspace.
 
 =head1 DESCRIPTION
 
@@ -20,9 +20,30 @@ source "${0:h}/git.zsh"
 source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"
 source "${0:h}/util.zsh"
-# [[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
-# [[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")
 
+# Public {{{
+function configs::bootstrap() {
+  if os::OSX; then
+    configs::_config_darwin
+  elif os::LINUX; then
+    configs::_config_linux
+  fi
+  configs::_config_brew
+}
+function configs::config() {
+  configs::_config_env
+  configs::_config_alias
+  util::start_ssh_agent "ssh-agent"
+}
+function configs::end() {
+  setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
+
+  bashcompinit
+  compinit
+  promptinit
+}
+# }}}
+# Private {{{
 function configs::_config_darwin() {
   export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
@@ -46,41 +67,24 @@ function configs::_config_brew() {
   autoload run-help
   export HELPDIR=$BREWHOME/share/zsh/help
 }
-function configs::bootstrap() {
-  if os::OSX; then
-    configs::_config_darwin
-  elif os::LINUX; then
-    configs::_config_linux
-  fi
-  configs::_config_brew
-}
 function configs::_config_env() {
   export EDITOR='vim'
   export GREP_OPTIONS='--color=auto'
-  # Don't enable the following line, it will screw up HOME and END key in tmux
-  # export TERM=xterm-256color
-  # If it is really need for program foo, create an alias like this
-  # alias foo='TERM=xterm-256color foo'
   export TERM=screen-256color
   export VISUAL='vim'
   export XDG_CACHE_HOME=$HOME/.cache
   export XDG_CONFIG_HOME=$HOME/.config
   export XDG_DATA_HOME=$HOME/.local/share
+  # Don't enable the following line, it will screw up HOME and END key in tmux
+  # export TERM=xterm-256color
+  # If it is really need for program foo, create an alias like this
+  # alias foo='TERM=xterm-256color foo'
 
-  # Setup directory colors
-  GET_DIRCOLORS=$(${CMDPREFIX}dircolors "${__MYCONFIGS__}/third_party/dircolors-solarized/dircolors.256dark")
-  eval "$GET_DIRCOLORS"
+  eval "$(${CMDPREFIX}dircolors ${__MYCONFIGS__}/third_party/dircolors-solarized/dircolors.256dark)"
 
-  # Don't put duplicate lines or lines starting with space in the history.
-  # See bash(1) for more options
-  HISTCONTROL=ignoreboth:erasedups
-  # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
   export HISTSIZE=50000
-  export SAVEHIST=$HISTSIZE
-  if [ -z "$HISTFILE" ]; then
-    export HISTFILE=$HOME/.zsh_history
-  fi
-  # Show history
+  export SAVEHIST=60000
+  export HISTFILE=$HOME/.zsh_history
   case $HIST_STAMPS in
     "mm/dd/yyyy") alias history='fc -fl 1' ;;
     "dd.mm.yyyy") alias history='fc -El 1' ;;
@@ -95,9 +99,9 @@ function configs::_config_env() {
   stty start undef
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
-  # util::setup_abbrev
+  util::setup_abbrev
 
-  # Setup pre-command {{{
+  # setup pre-command {{{
   function configs::_myprecmd() {
     export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
     local _pat
@@ -109,12 +113,14 @@ function configs::_config_env() {
         _pat="${_pat}\|^${var}"
       fi
     done
-    for var in $(tmux show-environment | grep "${_pat}");
+    local _vars
+    _vars="$(tmux show-environment | grep \"${_pat}\")"
+    for var in ${_vars};
     do
+      io::vlog 1 "export $var"
       export $var
     done
   }
-
   function configs::_install_precmd() {
     for s in "${precmd_functions[@]}"; do
       if [ "$s" = "configs::_myprecmd" ]; then
@@ -159,7 +165,7 @@ function configs::_config_env() {
   setopt HIST_FIND_NO_DUPS
   setopt HIST_IGNORE_ALL_DUPS                                                   # Do not enter command lines into the history list if they are duplicates of the previous event
   setopt HIST_IGNORE_DUPS                                                       # ignore duplication command history list
-  setopt HIST_IGNORE_SPACE                                                      # Remove command lines from the history list when the first character on the line is a space, or when one of the expanded aliases contains a leading space
+  setopt HIST_IGNORE_SPACE                                                      # Remove command lines from the history list when the first character on the line is a space
   setopt HIST_NO_STORE
   setopt HIST_REDUCE_BLANKS                                                     # Remove superfluous blanks from each command line being added to the history list
   setopt HIST_SAVE_NO_DUPS
@@ -250,18 +256,7 @@ function configs::_config_alias() {
   # alias less=$PAGER
   # alias zless=$PAGER
 }
-function configs::config() {
-  configs::_config_env
-  configs::_config_alias
-  util::start_ssh_agent "ssh-agent"
-}
-function configs::end() {
-  setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
-
-  bashcompinit
-  compinit
-  promptinit
-}
+# }}}
 
 : <<=cut
 =back
