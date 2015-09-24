@@ -86,5 +86,32 @@ function base::parseargs() {
 }
 
 : <<=cut
+=item Function C<WIP DO NOT USE YET>
+
+
+
+@return
+=cut
+function base::parseargs_getopt() {
+  setopt localoptions err_return
+  local _opts
+  # _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@")
+  _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -- "$@")
+  # Note the quotes around '$_opts': they are essential!
+  eval set -- "${_opts}"
+
+  while true; do
+    case "$1" in
+      -h | -u | --help | --usage ) usage; exit 0 ;;
+      -v | --verbose ) VERBOSE=true; shift ;;
+      -n | --dryrun ) DRYRUN=true; shift ;;
+      -y | --noconfirm ) CONFIRM=false; shift ;;
+      -- ) shift; break ;;
+      * ) echo "Unknown option $FLAG"; usage; exit 1 ;;
+    esac
+  done
+}
+
+: <<=cut
 =back
 =cut

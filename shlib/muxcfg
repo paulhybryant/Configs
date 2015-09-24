@@ -1,25 +1,4 @@
-#!/usr/bin/env zsh
-
-source "${__MYCONFIGS__}/shlib/base.zsh"
-source "${__MYCONFIGS__}/shlib/git.zsh"
-
-function util::muxcfg_usage() {
-  cat <<EOF
-Usage: muxcfg [arguments] [command] [project]
-
-Arguments:
-  -h or --help          Print the usage information
-  -u or --usage         Print the usage information
-  -v or --verbose       Print additional information
-  -n or --dryrun        Only print the command to be executed
-  -y or --noconfirm     Skip confirmation
-
-Commands:
-  start                 Create project repository, branch and config, start tmux session
-  delete                Delete project repository, branch and config, kill tmux session
-EOF
-  return 1
-}
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 function mirror_and_start() {
   local _muxproj_="$1"
@@ -41,7 +20,6 @@ function mirror_and_start() {
     mux start "$_muxproj_"
   fi
 }
-
 function start() {
   local _muxproj_="$1"
   local _muxconfig_="$MUXDIR/$_muxproj_.yml"
@@ -58,7 +36,6 @@ function start() {
     mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
   fi
 }
-
 function delete() {
   local _muxproj_="$1"
   if [[ -e "$MUXDIR/$_muxproj_.yml" &&
@@ -73,11 +50,9 @@ function delete() {
     echo "No project named $_muxproj_ exists."
   fi
 }
-
 function util::_git5wrapper() {
   git5 mirror $1 $2 --allow_existing_branch --branch=$3
 }
-
 function util::muxcfg() {
   setopt localoptions nounset err_return
   base::exists tmuxinator
@@ -87,8 +62,22 @@ function util::muxcfg() {
       ;;
     * )
       echo "Invalid command: $1" >&2
-      util::muxcfg_usage
+  cat <<EOF
+Usage: muxcfg [arguments] [command] [project]
+
+Arguments:
+  -h or --help          Print the usage information
+  -u or --usage         Print the usage information
+  -v or --verbose       Print additional information
+  -n or --dryrun        Only print the command to be executed
+  -y or --noconfirm     Skip confirmation
+
+Commands:
+  start                 Create project repository, branch and config, start tmux session
+  delete                Delete project repository, branch and config, kill tmux session
+EOF
   esac
+
   if [[ -e "$HOME/.google" ]]; then
     git_working_dir_root=$HOME/Projects
     git_repo=$HOME/Src
@@ -103,26 +92,3 @@ function util::muxcfg() {
   fi
   MUXDIR=$HOME/.tmuxinator
 }
-
-DRYRUN=false
-CONFIRM=true
-
-
-# NOTE: This requires GNU getopt.  On Mac OS X and FreeBSD, you have to install
-# this separately. On Mac OS X, install it with "port install getopt".
-TEMP=`getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@"`
-if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
-# Note the quotes around `$TEMP': they are essential!
-eval set -- "$TEMP"
-
-while true; do
-  case "$1" in
-    -h | -u | --help | --usage ) usage; exit 0 ;;
-    -v | --verbose ) VERBOSE=true; shift ;;
-    -n | --dryrun ) DRYRUN=true; shift ;;
-    -y | --noconfirm ) CONFIRM=false; shift ;;
-    -- ) shift; break ;;
-    * ) echo "Unknown option $FLAG"; usage; exit 1 ;;
-  esac
-done
-

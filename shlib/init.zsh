@@ -31,6 +31,8 @@ function init::runonce() {
     export __RUNONCE__="yes"
   fi
   typeset -Ag __lib_registry__
+  typeset -ag __tmux_vars__
+  __tmux_vars__=(DISPLAY SSH_AUTH_SOCK SSH_CLIENT SSH_OS)
 }
 init::runonce
 

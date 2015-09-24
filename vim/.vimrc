@@ -190,6 +190,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap and saved file
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
+  NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
@@ -688,7 +689,6 @@ if s:vimplugin_size >= 1
   NeoBundle 'jlemetay/permut'                                                   " Swap fields separated by delimiter
   NeoBundle 'kana/vim-altercmd'                                                 " Alter built-in Ex commands by your own ones
   NeoBundle 'kana/vim-arpeggio'                                                 " Define keymappings start with simultaneous key presses
-  NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'kana/vim-gf-diff'                                                  " Go to changed block under cursor from diff output
   NeoBundle 'kana/vim-gf-user'                                                  " Framework for customizing gf
   NeoBundle 'kana/vim-idwintab'                                                 " Assign unique id for windows

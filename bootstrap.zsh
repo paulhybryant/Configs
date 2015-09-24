@@ -134,7 +134,8 @@ brew gem install tmuxinator npm
 brew install --HEAD vimdoc vroom
 npm install -g urchin
 
-os::OSX && io::msg "Installing extra stuff for OSX" && brew install brew-cask clipper macvim trash lsof reattach-to-user-namespace
+os::OSX && io::msg "Installing extra stuff for OSX" && \
+  brew install brew-cask clipper macvim trash lsof reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 pip install powerline-status advanced-ssh-config neovim Terminator

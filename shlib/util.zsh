@@ -42,6 +42,15 @@ function util::installed_gnome_shell_exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
 function util::ta() {
+  for var in ${__tmux_vars__};
+  do
+    local value=
+    eval value=\$$var
+    \tmux set-environment $var "$value"
+    echo "export $var=\"$value\"" >> "$setenv"
+  done
+}
+function util::tmux-attach() {
   local setenv=$(mktemp)
   : > "$setenv"
   for var in SSH_OS SSH_CLIENT DISPLAY;
@@ -51,7 +60,7 @@ function util::ta() {
     # local _var_
     # eval "_val_=\"\${$var}\""
     # echo $_val_
-    \tmux set-environment -t "$1" $var "$value"
+    \tmux set-environment $var "$value"
     echo "export $var=\"$value\"" >> "$setenv"
   done
   for window in $(\tmux list-windows -t "$1" -F "#W");
@@ -79,7 +88,7 @@ function util::ta() {
   done
   \tmux attach -d -t "$1"
 }
-function util::tmux_start() {
+function util::tmux-start() {
   if [[ ! -z "$TMUX" ]]; then
     io::warn "Already in tmux, nothing to be done."
     return
@@ -178,9 +187,13 @@ Open files with vim in a single vim instance in one tmux window.
 function util::vim() {
   local -a _servers_list
   local _server_name
+  local _vimflags
+  # if [[ ! -z "$SSH_OS" ]]; then
+    # _vimflags='-X'
+  # fi
   if [[ -z "$TMUX" ]]; then
     io::vlog 1 "Not in tmux, invoking vim without server name."
-    \vim -X "$@"
+    \vim ${_vimflags} "$@"
   else
     _servers_list=($(\vim --serverlist))
     io::vlog 1 "Vim servers: ${_servers_list}"
@@ -198,10 +211,10 @@ function util::vim() {
     done
     if [[ -z "${_server_exists}" ]]; then
       io::vlog 1 "Starting vim with server name: ${_server_name}"
-      \vim -X --servername "${_server_name}" "$@"
+      \vim ${_vimflags} --servername "${_server_name}" "$@"
     else
       io::vlog 1 "Connecting to vim server: ${_server_name}"
-      \vim -X --servername ${_server_name} --remote "$@"
+      \vim ${_vimflags} --servername ${_server_name} --remote "$@"
     fi
   fi
 }

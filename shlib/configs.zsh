@@ -97,20 +97,33 @@ function configs::_config_env() {
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
   # util::setup_abbrev
 
-  # Setup powerline for zsh prompt {{{
-  function powerline_precmd() {
+  # Setup pre-command {{{
+  function configs::_myprecmd() {
     export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
+    local _pat
+    for var in ${__tmux_vars__};
+    do
+      if [[ -z "${_pat}" ]]; then
+        _pat="^${var}"
+      else
+        _pat="${_pat}\|^${var}"
+      fi
+    done
+    for var in $(tmux show-environment | grep "${_pat}");
+    do
+      export $var
+    done
   }
 
-  function install_powerline_precmd() {
+  function configs::_install_precmd() {
     for s in "${precmd_functions[@]}"; do
-      if [ "$s" = "powerline_precmd" ]; then
+      if [ "$s" = "configs::_myprecmd" ]; then
         return
       fi
     done
-    precmd_functions+=(powerline_precmd)
+    precmd_functions+=(configs::_myprecmd)
   }
-  install_powerline_precmd
+  configs::_install_precmd
   # }}}
   # zsh options {{{
   # Options are not ordered alphabetically, but the same as their order in the
@@ -224,10 +237,10 @@ function configs::_config_alias() {
   alias nvim="NVIM=nvim nvim"
   alias pfd="whence -f"
   alias rm=file::rm
-  alias ta=util::ta
+  alias ta="util::ta"
   alias tl='tmux list-sessions'
   alias tmux="TERM=screen-256color tmux -2"
-  alias ts=util::tmux_start
+  alias ts=util::tmux-start
   alias vi=util::vim
   alias vim=util::vim
   # alias vi="vi -p"
