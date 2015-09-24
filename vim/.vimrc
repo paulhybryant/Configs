@@ -564,10 +564,10 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Note taking with vim
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
-    let g:notes_directories = ['~/.myconfigs/notes']
+    let g:notes_directories = ['~/.vimnotes']
     let g:notes_suffix = '.txt'
-    let g:notes_indexfile = '~/.myconfigs/notes/notes.idx'
-    let g:notes_tagsindex = '~/.myconfigs/notes/notes.tags'
+    let g:notes_indexfile = '~/.vimnotes/notes.idx'
+    let g:notes_tagsindex = '~/.vimnotes/notes.tags'
   endfunction
   " }}}
   " ft-cpp {{{2

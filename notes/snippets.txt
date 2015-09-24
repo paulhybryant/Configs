@@ -1,5 +1,0 @@
-snippets
-
-# Shell
-   • Find files in the current directory excluding directory “.git”
-     find . -type d -name .git -prune -o -type f -print
