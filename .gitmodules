@@ -1,6 +1,3 @@
-[submodule "third_party/solarized"]
-	path = third_party/solarized
-	url = https://github.com/altercation/solarized.git
 [submodule "zsh/.zprezto"]
 	path = zsh/.zprezto
 	url = git@github.com:paulhybryant/prezto.git
