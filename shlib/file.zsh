@@ -113,7 +113,7 @@ function file::ll() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(eval "${aliases[ls]:-ls} -l $*")
+  }' <<< $(${CMDPREFIX}ls -lh $*)
 }
 
 : <<=cut
@@ -136,7 +136,7 @@ function file::la() {
         y = sum / (2^(10*i))
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(eval "${aliases[ls]:-ls} -laF $*")
+  }' <<< $(${CMDPREFIX}ls -alF $*)
 }
 
 : <<=cut
