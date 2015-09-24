@@ -1,15 +1,15 @@
 #!/usr/bin/env zsh
 
-# set -o nounset                  # Treat unset variables as an error.
-set -o errexit                  # Exit script when run into the first error.
+set -o err_exit                  # Exit script when run into the first error.
 
 MYCONFIGS="${0:a:h}"
-source "${MYCONFIGS}/shlib/init.zsh"
-source "${MYCONFIGS}/shlib/base.zsh"
-source "${MYCONFIGS}/shlib/configs.zsh"
-source "${MYCONFIGS}/shlib/file.zsh"
-source "${MYCONFIGS}/shlib/io.zsh"
-source "${MYCONFIGS}/shlib/os.zsh"
+pushd ${MYCONFIGS}
+source "zsh/.zshlib/init.zsh"
+source "zsh/.zshlib/base.zsh"
+source "zsh/.zshlib/configs.zsh"
+source "zsh/.zshlib/file.zsh"
+source "zsh/.zshlib/io.zsh"
+source "zsh/.zshlib/os.zsh"
 configs::bootstrap
 
 # Bootstrap util functions {{{
@@ -114,13 +114,12 @@ if ! base::exists "${BREWHOME}"; then
 fi
 
 brew install coreutils stow
-io::msg "Creating symlinks from ${MYCONFIGS}"
+io::msg "Creating symlinks"
 function bootstrap::stow() {
   for module in vim tmux x11 misc;
   do
     stow "${module}"
   done
-  # stow -d "${MYCONFIGS}/third_party/prezto" -t "$HOME" "runcoms"
 }
 # bootstrap::stow
 
@@ -148,3 +147,4 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 pip install powerline-status advanced-ssh-config neovim Terminator
 
 io::msg "All Done!"
+popd
