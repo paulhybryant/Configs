@@ -1,0 +1,6 @@
+homebrew
+
+• cario and harfbuzz installation failure
+  This is due to the header files in /usr/include/X11 or /usr/local/include/X11
+  is interfering with the X11 files installed in homebrew. The solution is to
+  temporarily rename the X11 folder when compiling cairo and harfbuzz.

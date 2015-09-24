@@ -1,0 +1,12 @@
+zsh
+
+In zsh we can get the script name with ${0:a}, it would contain the function
+name if this is used within a function.
+Source: zshexpn(1) man page, section HISTORY EXPANSION, subsection Modifiers
+(or simply info -f zsh -n Modifiers)
+More portable way to get this:
+canonical=$(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")
+
+Some random notes
+[[ -n "$BASH" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${BASH_SOURCE}")
+[[ -n "$ZSH_NAME" && -z "$__LIB_COMMON__" ]] && readonly __LIB_COMMON__=$(realpath "${(%):-%N}")

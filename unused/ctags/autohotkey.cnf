@@ -1,0 +1,21 @@
+--langdef=autohotkey
+--langmap=autohotkey:.ahk
+--regex-autohotkey=/^[ \t]*([a-zA-Z0-9_]+)\:\s*$/\1/l,label/
+--regex-autohotkey=/^[ \t]*([a-zA-Z0-9_]+)[ |\t]*:?=/\1/v,Variable/
+--regex-autohotkey=/^[ \t]*(NOTE|note|Note)[ \t]*\:[ \t]*(.*)/\2/n,Note/
+--regex-autohotkey=/^[ \t]*(TODO|todo|Todo)[ \t]*\:[ \t]*(.*)/\2/t,Todo/
+--regex-autohotkey=/^([a-zA-Z0-9_@]+)[ \t]*\(.*\)[ \t]*\{/\1/f,function/
+
+--regex-autohotkey=/^[[:blank:]]*(\w+:)$/\1/l,Label,AutoHotkey Labels/
+--regex-autohotkey=/^[[:blank:]]*(\w+:)[^:=]/\1/l,Label,AutoHotkey Labels/
+
+--regex-autohotkey=/^[[:blank:]]*([^:;].{0,24}::)/\1/k,Hotkey,AutoHotkey Hotkeys/
+--regex-autohotkey=/^[[:blank:]]*(#If(Win(Not)?(Active|Exist))?)[[:blank:]]*$/\1/k,Hotkey,AutoHotkey Hotkeys/i
+--regex-autohotkey=/^[[:blank:]]*(#If(Win(Not)?(Active|Exist))?[[:blank:]].*)/\1/k,Hotkey,AutoHotkey Hotkeys/i
+
+--regex-autohotkey=/^[[:blank:]]*(:[^:]*:[[:print:]]+::)/\1/s,Hot_String,AutoHotkey HotStrings/
+
+--regex-autohotkey=/^(\w+\([[:blank:]]+\))$/\1/f,Functions,AutoHotkey Functions/
+--regex-autohotkey=/^(\w+\([[:space:]]*[[:alpha:]].*\))$/\1/f,Functions,AutoHotkey Functions/
+--regex-autohotkey=/^(\w+\()[^)]+$/\1...)/f,Functions,AutoHotkey Functions/
+--regex-autohotkey=/^[[:space:]]*(\w+\([[:print:]]*\))[[:blank:]]*\{/\1/f,Functions,AutoHotkey Functions/
