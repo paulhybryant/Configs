@@ -49,13 +49,13 @@ Assuming the existence of two variables:
 
 Example:
   local -A _fn_options
-  _fn_options=(-no-detached 'null' -foo 'null' -unset 'empty')
+  _fn_options=(--no-detached 'null' --foo 'null' --unset 'empty')
   local -a _fn_args
-  _fn_args=(-no-detached -foo=y)
-  base::parseargs || echo "Available options: ${(k)_fn_options}" && echo "Invalid options: ${arg}"
-  [[ ${_fn_options[-no-detached]} == "true" ]]
-  [[ ${_fn_options[-foo]} == "y" ]]
-  [[ ${_fn_options[-unset]} == "empty" ]]
+  _fn_args=(--no-detached --foo=y)
+  base::parseargs
+  [[ ${_fn_options[--no-detached]} == "true" ]]
+  [[ ${_fn_options[--foo]} == "y" ]]
+  [[ ${_fn_options[--unset]} == "empty" ]]
 
 @return NULL
 =cut
@@ -86,29 +86,40 @@ function base::parseargs() {
 }
 
 : <<=cut
-=item Function C<WIP DO NOT USE YET>
+=item Function C<base::getopt>
 
+Use gnu getopt to parse function arguments.
 
+Example:
+  foo -d -f x
+  base::parseargs "$@"
+  [[ ${_fn_options[d]} == "true" ]]
+  [[ ${_fn_options[no-detached]} == "true" ]]
+  [[ ${_fn_options[f]} == "y" ]]
+  [[ ${_fn_options[foo]} == "y" ]]
+  [[ ${_fn_options[u]} == "" ]]
+  [[ ${_fn_options[unset]} == "" ]]
 
-@return
+@return NULL
 =cut
-function base::parseargs_getopt() {
+function base::getopt() {
   setopt localoptions err_return
-  local _opts
+  local _opts _short _long
+  _short="$1"
+  _long="$2"
+  shift 2
   # _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@")
-  _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -- "$@")
+  _opts=$(${CMDPREFIX}getopt -o "${_short}" --long "${_long}" -- "$@")
   # Note the quotes around '$_opts': they are essential!
   eval set -- "${_opts}"
-
+  local _var
+  _fn_options=()
   while true; do
     case "$1" in
-      -h | -u | --help | --usage ) usage; exit 0 ;;
-      -v | --verbose ) VERBOSE=true; shift ;;
-      -n | --dryrun ) DRYRUN=true; shift ;;
-      -y | --noconfirm ) CONFIRM=false; shift ;;
       -- ) shift; break ;;
-      * ) echo "Unknown option $FLAG"; usage; exit 1 ;;
-    esac
+      -* ) _var="$1"; _fn_options[${_var}]="true"; shift ;;
+      * ) [[ -z ${_var} ]] && break; _fn_options[${_var}]="$1" && _var=''; shift ;;
+   esac
   done
 }
 

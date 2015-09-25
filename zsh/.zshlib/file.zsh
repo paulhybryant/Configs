@@ -16,9 +16,6 @@ File: file.zsh - File system related utility functions.
 
 init::sourced "${0:a}" && return
 
-source "${0:h}/io.zsh"
-source "${0:h}/os.zsh"
-
 : <<=cut
 =item Function C<file::find_ignore_dir>
 

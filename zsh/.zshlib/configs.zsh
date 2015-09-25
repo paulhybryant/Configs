@@ -15,10 +15,16 @@ File: configs.zsh - Setup environment for workspace.
 =cut
 
 source "${0:h}/init.zsh"
+source "${0:h}/base.zsh"
+source "${0:h}/colors.zsh"
 source "${0:h}/file.zsh"
 source "${0:h}/git.zsh"
+source "${0:h}/mode.zsh"
+source "${0:h}/net.zsh"
 source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"
+source "${0:h}/strings.zsh"
+source "${0:h}/time.zsh"
 source "${0:h}/util.zsh"
 
 # Public {{{

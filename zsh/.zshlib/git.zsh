@@ -16,9 +16,6 @@ File: git.zsh - Git related utility functions.
 
 init::sourced "${0:a}" && return
 
-source "${0:h}/base.zsh"
-source "${0:h}/io.zsh"
-
 export GIT_EDITOR='vim'
 
 : <<=cut
@@ -33,21 +30,21 @@ $check_detached 0 or 1
 function git::check_dirty_repos() {
   setopt localoptions err_return
   local -A _fn_options
-  _fn_options=(-no-detached '')
+  _fn_options=(--no-detached '')
   local -a _fn_args
   _fn_args=("${(@M)@:#-*}")
   base::parseargs
 
   setopt localoptions nounset
-  [[ "${_fn_options[-no-detached]}" == "true" ]] && \
+  [[ "${_fn_options[--no-detached]}" == "true" ]] && \
     io::msg "Considering detached as dirty."
   local -a dirty_repos
   dirty_repos=()
   for dir in */; do
-    io::vlog 2 "Checking ${dir}"
+    io::vlog 2 "[${0:t}] Checking ${dir}"
     pushd "${dir}"
     if [[ -d '.git' && (-n $(git status --porcelain) || \
-      ("${_fn_options[-no-detached]}" == "true" && \
+      ("${_fn_options[--no-detached]}" == "true" && \
        "$(git status)" =~ '^HEAD detached.*')) ]]; then
       dirty_repos+=${dir}
     fi

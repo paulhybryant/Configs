@@ -16,9 +16,6 @@ File: io.zsh - IO related utility functions.
 
 init::sourced "${0:a}" && return
 
-source "${0:h}/colors.zsh"
-source "${0:h}/mode.zsh"
-
 function io::hl() {
   printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
 }
@@ -42,7 +39,7 @@ Gets yes or no reply from user.
 =cut
 function io::yes_or_no() {
   read -q "REPLY?$1?(y/n)"
-  io::vlog 1 "${REPLY}"
+  io::vlog 1 "[${0:t}] ${REPLY}"
   [[ "$REPLY" =~ y\|Y ]] && return 0
   return 1
 }
