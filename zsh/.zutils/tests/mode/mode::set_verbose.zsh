@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-source "../../init.zsh"
-source "../../mode.zsh"
+source "../../lib/init.zsh"
+source "../../lib/mode.zsh"
 
 set -x
 

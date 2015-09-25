@@ -132,29 +132,23 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "MODE.ZSH 1"
-.TH MODE.ZSH 1 "2015-09-13" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "STRINGS.ZSH 1"
+.TH STRINGS.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: mode.zsh \- Set or get the variables modes for the shell.
+File: strings.zsh \- Utility functions for string manipulation.
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""mode::verbose""" 4
-.el .IP "Function \f(CWmode::verbose\fR" 4
-.IX Item "Function mode::verbose"
-Whether the specified verbose level is satisfied
+.ie n .IP "Function ""strings::strip_slash""" 4
+.el .IP "Function \f(CWstrings::strip_slash\fR" 4
+.IX Item "Function strings::strip_slash"
+Strip trailing slash in the string.
 .Sp
-\&\f(CW$1\fR Verbose level
+\&\f(CW$1\fR The string to apply the strip operation
 .Sp
-\&\f(CW@return\fR 0 if satisfied, 1 otherwise
-.ie n .IP "Function ""mode::set_verbose""" 4
-.el .IP "Function \f(CWmode::set_verbose\fR" 4
-.IX Item "Function mode::set_verbose"
-Set verbose level of shell.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
+\&\f(CW@return\fR the result string after stripping

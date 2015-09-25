@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-source "../../init.zsh"
-source "../../time.zsh"
+source "../../lib/init.zsh"
+source "../../lib/time.zsh"
 
 set -x
 

@@ -132,56 +132,65 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "GIT.ZSH 1"
-.TH GIT.ZSH 1 "2015-09-13" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "BASE.ZSH 1"
+.TH BASE.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: git.zsh \- Git related utility functions.
+File: base.zsh \- Basic utiliti functions.
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""git::check_dirty_repos""" 4
-.el .IP "Function \f(CWgit::check_dirty_repos\fR" 4
-.IX Item "Function git::check_dirty_repos"
-Check subdirs of current directory, and report repos that are dirty
+.ie n .IP "Function ""base::exists""" 4
+.el .IP "Function \f(CWbase::exists\fR" 4
+.IX Item "Function base::exists"
+Examples
+  base::exists \*(L"\s-1VAR\*(R"\s0
 .Sp
-\&\f(CW@return\fR \s-1NULLPTR\s0
-.ie n .IP "Function ""git::has_branch""" 4
-.el .IP "Function \f(CWgit::has_branch\fR" 4
-.IX Item "Function git::has_branch"
-Whether a branch exists in current depo.
+Check whether something 'exists'
+The check order is the following:
+1. Variable or Function
+2. Binary
+3. File or Directory
 .Sp
-\&\f(CW@return\fR 0 if exists, 1 otherwise.
-.ie n .IP "Function ""git::parent_branch""" 4
-.el .IP "Function \f(CWgit::parent_branch\fR" 4
-.IX Item "Function git::parent_branch"
-# Get parent branch of a branch, defaults to current branch.
-# How it works:
-# 1| Display a textual history of all commits.
-# 2| Ancestors of the current commit are indicated
-#    by a star. Filter out everything else.
-# 3| Ignore all the commits in the current branch.
-# 4| The first result will be the nearest ancestor branch.
-#    Ignore the other results.
-# 5| Branch names are displayed [in brackets]. Ignore
-#    everything outside the brackets, and the brackets.
-# 6| Sometimes the branch name will include a ~2 or ^1 to
-#    indicate how many commits are between the referenced
-#    commit and the branch tip. We don't care. Ignore them.
+\&\f(CW$1\fR The thing to be checked whether it exists.
+.Sp
+\&\f(CW@return\fR 0 or 1. 0 exists, 1 not exists.
+.ie n .IP "Function ""base::parseargs""" 4
+.el .IP "Function \f(CWbase::parseargs\fR" 4
+.IX Item "Function base::parseargs"
+Parse arguments passed to functions.
+Assuming the existence of two variables:
+  _fn_options \- Containing the default options and default option values for this function
+  _fn_args \- Arguments passed to this function
+.Sp
+Example:
+  local \-A _fn_options
+  _fn_options=(\-\-no\-detached 'null' \-\-foo 'null' \-\-unset 'empty')
+  local \-a _fn_args
+  _fn_args=(\-\-no\-detached \-\-foo=y)
+  base::parseargs
+  [[ ${_fn_options[\-\-no\-detached]} == \*(L"true\*(R" ]]
+  [[ ${_fn_options[\-\-foo]} == \*(L"y\*(R" ]]
+  [[ ${_fn_options[\-\-unset]} == \*(L"empty\*(R" ]]
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""git::new_workdir""" 4
-.el .IP "Function \f(CWgit::new_workdir\fR" 4
-.IX Item "Function git::new_workdir"
-Create a new git working dir based on existing repo, and create a new branch in
-the new workign dir.
+.ie n .IP "Function ""base::getopt""" 4
+.el .IP "Function \f(CWbase::getopt\fR" 4
+.IX Item "Function base::getopt"
+Use gnu getopt to parse function arguments.
 .Sp
-\&\f(CW$1\fR Source git working directory
-\&\f(CW$2\fR New git working directory
-\&\f(CW$3\fR New branch name
+Example:
+  foo \-d \-f x
+  base::parseargs \*(L"$@\*(R"
+  [[ ${_fn_options[d]} == \*(L"true\*(R" ]]
+  [[ ${_fn_options[no\-detached]} == \*(L"true\*(R" ]]
+  [[ ${_fn_options[f]} == \*(L"y\*(R" ]]
+  [[ ${_fn_options[foo]} == \*(L"y\*(R" ]]
+  [[ ${_fn_options[u]} == "\*(L" ]]
+  [[ ${_fn_options[unset]} == \*(R"" ]]
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0

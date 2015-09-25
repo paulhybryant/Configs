@@ -1,6 +1,6 @@
 all: pod2man runtests
 
-ZSHFILES = $(wildcard *.zsh)
+ZSHFILES = $(wildcard lib/*.zsh)
 
 pod2man:
 	@$(foreach f,$(ZSHFILES),pod2man $(f) > man/man1/$(f).1;)

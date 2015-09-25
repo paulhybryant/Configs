@@ -132,15 +132,67 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "UTIL.ZSH 1"
-.TH UTIL.ZSH 1 "2015-09-12" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "FILE.ZSH 1"
+.TH FILE.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: util.zsh \-
+File: file.zsh \- File system related utility functions.
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
+.ie n .IP "Function ""file::find_ignore_dir""" 4
+.el .IP "Function \f(CWfile::find_ignore_dir\fR" 4
+.IX Item "Function file::find_ignore_dir"
+Find in current directory, with dir \f(CW$1\fR ignored.
+\&\s-1TODO:\s0 Make \f(CW$1\fR an array, and ignore a list of dirs.
+.Sp
+\&\f(CW$1\fR The directory to ignore.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::find_ignore_git""" 4
+.el .IP "Function \f(CWfile::find_ignore_git\fR" 4
+.IX Item "Function file::find_ignore_git"
+Find in current directory, with dir .git ignored.
+A shortcut for file::find_ignore_dir for git.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::rm""" 4
+.el .IP "Function \f(CWfile::rm\fR" 4
+.IX Item "Function file::rm"
+Use trash to remove files so it can be recovered!
+Accepts rm arguments to be compatible wit rm.
+Usually we define alias for it.
+.Sp
+Examples
+  source file.zsh
+  alias rm=file::rm
+.Sp
+Arguments
+  Same as rm
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::ll""" 4
+.el .IP "Function \f(CWfile::ll\fR" 4
+.IX Item "Function file::ll"
+List files in long format.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::la""" 4
+.el .IP "Function \f(CWfile::la\fR" 4
+.IX Item "Function file::la"
+List all files, including hidden files.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::softlink""" 4
+.el .IP "Function \f(CWfile::softlink\fR" 4
+.IX Item "Function file::softlink"
+Creates softlink, do some checking before doing that.
+.Sp
+\&\f(CW$1\fR source
+\&\f(CW$2\fR target
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
