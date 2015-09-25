@@ -1,6 +1,6 @@
-# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+#!/usr/bin/env zsh
 
-function mirror_and_start() {
+function muxcfg::mirror_and_start() {
   local _muxproj_="$1"
   local _muxconfig_="$2"
   local _startcwd_="$3"
@@ -20,7 +20,7 @@ function mirror_and_start() {
     mux start "$_muxproj_"
   fi
 }
-function start() {
+function muxcfg::start() {
   local _muxproj_="$1"
   local _muxconfig_="$MUXDIR/$_muxproj_.yml"
   START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
@@ -36,7 +36,7 @@ function start() {
     mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
   fi
 }
-function delete() {
+function muxcfg::delete() {
   local _muxproj_="$1"
   if [[ -e "$MUXDIR/$_muxproj_.yml" &&
     \ io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "; then
@@ -50,18 +50,10 @@ function delete() {
     echo "No project named $_muxproj_ exists."
   fi
 }
-function util::_git5wrapper() {
+function muxcfg::git5wrapper() {
   git5 mirror $1 $2 --allow_existing_branch --branch=$3
 }
-function util::muxcfg() {
-  setopt localoptions nounset err_return
-  base::exists tmuxinator
-  case "$1" in
-    start|delete )
-      $1 "$2"
-      ;;
-    * )
-      echo "Invalid command: $1" >&2
+function muxcfg::usage() {
   cat <<EOF
 Usage: muxcfg [arguments] [command] [project]
 
@@ -76,6 +68,18 @@ Commands:
   start                 Create project repository, branch and config, start tmux session
   delete                Delete project repository, branch and config, kill tmux session
 EOF
+}
+function muxcfg() {
+  setopt localoptions nounset err_return
+  base::exists tmuxinator
+  base::exists "$HOME/.tmuxinator"
+  case "$1" in
+    start|delete )
+      muxcfg::$1 "$2"
+      ;;
+    * )
+      echo "Invalid command: $1" >&2
+      muxcfg::usage
   esac
 
   if [[ -e "$HOME/.google" ]]; then
@@ -90,5 +94,6 @@ EOF
     start_cwd=$git_working_dir_root/__MUXPROJ__
     base::exists $git_new_workdir_cmd
   fi
-  MUXDIR=$HOME/.tmuxinator
 }
+muxcfg "$@"
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
