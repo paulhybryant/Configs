@@ -66,7 +66,7 @@ function configs::_config_linux() {
 }
 function configs::_config_brew() {
   export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
-  export MANPATH="$BREWHOME/share/man:$HOME/.zshlib/man:$MANPATH"
+  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
   export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
   unalias run-help 2>/dev/null
