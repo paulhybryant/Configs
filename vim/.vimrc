@@ -9,6 +9,7 @@ let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 let s:vimplugin_size = str2nr($VIMPLUGINS)
+" let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
 " Setup NeoBundle and OS.vim {{{1
 filetype off
@@ -585,6 +586,7 @@ if s:vimplugin_size >= 0
         \ 'filetypes' : ['python'],
         \ 'lazy' : 1,
         \ }                                                                     " View call stacks in vim
+  NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
   " }}}
   " ft-shell {{{2
   NeoBundle 'vim-scripts/bash-support.vim', {
