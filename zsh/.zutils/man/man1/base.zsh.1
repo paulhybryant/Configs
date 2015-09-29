@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "BASE.ZSH 1"
-.TH BASE.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH BASE.ZSH 1 "2015-09-29" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -184,13 +184,13 @@ Example:
 Use gnu getopt to parse function arguments.
 .Sp
 Example:
-  foo \-d \-f x
-  base::parseargs \*(L"$@\*(R"
-  [[ ${_fn_options[d]} == \*(L"true\*(R" ]]
-  [[ ${_fn_options[no\-detached]} == \*(L"true\*(R" ]]
-  [[ ${_fn_options[f]} == \*(L"y\*(R" ]]
-  [[ ${_fn_options[foo]} == \*(L"y\*(R" ]]
-  [[ ${_fn_options[u]} == "\*(L" ]]
-  [[ ${_fn_options[unset]} == \*(R"" ]]
+  local \-A _fn_options
+  base::getopt df:u: no\-detached,foo:,unset: \-\-no\-detached \-f yo
+  [[ ${_fn_options[\-\-no\-detached]} == \*(L"true\*(R" ]]
+  [[ ${_fn_options[\-\-foo]} == \*(L"yo\*(R" ]]
+  [[ ${_fn_options[\-\-unset]} == "\*(L" ]]
+  [[ ${_fn_options[\-d]} == \*(R"true\*(L" ]]
+  [[ ${_fn_options[\-f]} == \*(R"yo\*(L" ]]
+  [[ ${_fn_options[\-u]} == \*(R"" ]]
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0

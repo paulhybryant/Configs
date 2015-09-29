@@ -16,12 +16,27 @@ File: util.zsh - Various utility functions.
 
 init::sourced "${0:a}" && return
 
+: <<=cut
+=item Function C<util::_geoinfo>
+
+Get the geo location information.
+
+@return list of values for requested fields.
+=cut
 function util::_geoinfo() {
   # ip, hostname, city, region, country, loc, org
   local _filter
   _filter=$(strings::join --prefix=. --delim=, "$@")
   echo $(curl -x '' ipinfo.io 2> /dev/null | jq "${_filter}")
 }
+
+: <<=cut
+=item Function C<util::_start_ssh_agent>
+
+Start ssh agent if not yet.
+
+@return NULL
+=cut
 function util::_start_ssh_agent() {
   local _agent
   _agent=$1
@@ -37,9 +52,25 @@ function util::_start_ssh_agent() {
       eval "$(${_agent})"
   fi
 }
+
+: <<=cut
+=item Function C<util::_installed_gnome_shell_exts>
+
+List installed gnome shell extensions
+
+@return NULL
+=cut
 function util::_installed_gnome_shell_exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
+
+: <<=cut
+=item Function C<util::_ta>
+
+Tmux attach wrapper, which updates tmux environment as configured.
+
+@return NULL
+=cut
 function util::_ta() {
   for var in ${__tmux_vars__};
   do
@@ -49,6 +80,7 @@ function util::_ta() {
   done
   tmux attach -t "$1"
 }
+
 function util::_tmux_attach() {
   local setenv=$(mktemp)
   : > "$setenv"
@@ -108,22 +140,30 @@ function util::_tmux_start() {
 function util::_histgrep() {
   tac ${HISTFILE:-~/.bash_history} | grep -m 1 "$@"
 }
-function util::_run() {
-  local _cmd_="$1"
-  local _msg_="$2"
-  [[ $VERBOSE == true ]] && echo "$_msg_"
-  if [[ $DRYRUN == true ]]; then
-    echo "$_cmd_"
+
+: <<=cut
+=item Function C<util::eval>
+
+Eval the strings, and output logs based on verbose level.
+
+@return NULL
+=cut
+function util::eval() {
+  setopt localoptions err_return nounset
+  if mode::dryrun; then
+    io::msg "$*"
   else
-    if [[ $LOGCMD == true && -n "$LOGCMDFILE" ]]; then
-      local _ts_=$(date "+%Y-%m-%d %T:")
-      echo "$_ts_ $_cmd_" >> $LOGCMDFILE
-    fi
-    set -o noglob
-    eval $_cmd_
-    set +o noglob
+    eval $*
   fi
 }
+
+: <<=cut
+=item Function C<util::_setup_abbrev>
+
+Setup zsh abbreviations.
+
+@return NULL
+=cut
 function util::_setup_abbrev() {
   # source: http://hackerific.net/2009/01/23/zsh-abbreviations/
   # another impl: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
@@ -175,6 +215,14 @@ function util::_setup_abbrev() {
   bindkey "  " globalias
   bindkey " " magic-space
 }
+
+: <<=cut
+=item Function C<util::_brew_upgrade>
+
+Upgrade outdated brew packages.
+
+@return NULL
+=cut
 function util::_brew_upgrade() {
   brew update
   brew upgrade $(brew outdated)
@@ -253,6 +301,13 @@ function util::_gvim() {
   fi
 }
 
+: <<=cut
+=item Function C<util::_check_test_coverage>
+
+Check test coverage for zsh functions.
+
+@return NULL
+=cut
 function util::_check_test_coverage() {
   setopt localoptions err_return nounset
   local -a _functions _tests

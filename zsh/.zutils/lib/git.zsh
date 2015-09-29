@@ -196,10 +196,24 @@ function git::_new_workdir() {
   fi
 }
 
+: <<=cut
+=item Function C<git::_submodule_url>
+
+List of url of all submodules.
+
+@return NULL
+=cut
 function git::_submodule_url() {
   git config --list | sed -n "s@^submodule\.$1.*\.url=\(.*\)@\1@p"
 }
 
+: <<=cut
+=item Function C<git::_submodule_mv>
+
+Move submodule with a single command.
+
+@return NULL
+=cut
 function git::_submodule_mv() {
   git submodule deinit "$1"
   git rm "$1"

@@ -144,6 +144,48 @@ File: util.zsh \- Various utility functions.
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
+.ie n .IP "Function ""util::_geoinfo""" 4
+.el .IP "Function \f(CWutil::_geoinfo\fR" 4
+.IX Item "Function util::_geoinfo"
+Get the geo location information.
+.Sp
+\&\f(CW@return\fR list of values for requested fields.
+.ie n .IP "Function ""util::_start_ssh_agent""" 4
+.el .IP "Function \f(CWutil::_start_ssh_agent\fR" 4
+.IX Item "Function util::_start_ssh_agent"
+Start ssh agent if not yet.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::_installed_gnome_shell_exts""" 4
+.el .IP "Function \f(CWutil::_installed_gnome_shell_exts\fR" 4
+.IX Item "Function util::_installed_gnome_shell_exts"
+List installed gnome shell extensions
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::_ta""" 4
+.el .IP "Function \f(CWutil::_ta\fR" 4
+.IX Item "Function util::_ta"
+Tmux attach wrapper, which updates tmux environment as configured.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::eval""" 4
+.el .IP "Function \f(CWutil::eval\fR" 4
+.IX Item "Function util::eval"
+Eval the strings, and output logs based on verbose level.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::_setup_abbrev""" 4
+.el .IP "Function \f(CWutil::_setup_abbrev\fR" 4
+.IX Item "Function util::_setup_abbrev"
+Setup zsh abbreviations.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::_brew_upgrade""" 4
+.el .IP "Function \f(CWutil::_brew_upgrade\fR" 4
+.IX Item "Function util::_brew_upgrade"
+Upgrade outdated brew packages.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""util::_vim""" 4
 .el .IP "Function \f(CWutil::_vim\fR" 4
 .IX Item "Function util::_vim"
@@ -154,5 +196,11 @@ Open files with vim in a single vim instance in one tmux window.
 .el .IP "Function \f(CWutil::_gvim\fR" 4
 .IX Item "Function util::_gvim"
 Open files with gvim in a single gvim instance.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::_check_test_coverage""" 4
+.el .IP "Function \f(CWutil::_check_test_coverage\fR" 4
+.IX Item "Function util::_check_test_coverage"
+Check test coverage for zsh functions.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0

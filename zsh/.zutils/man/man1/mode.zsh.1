@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "MODE.ZSH 1"
-.TH MODE.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH MODE.ZSH 1 "2015-09-29" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -156,5 +156,17 @@ Whether the specified verbose level is satisfied
 .el .IP "Function \f(CWmode::set_verbose\fR" 4
 .IX Item "Function mode::set_verbose"
 Set verbose level of shell.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""mode::dryrun""" 4
+.el .IP "Function \f(CWmode::dryrun\fR" 4
+.IX Item "Function mode::dryrun"
+Whether it is in dryrun mode.
+.Sp
+\&\f(CW@return\fR 0 if it is dryrun mode, 1 otherwise.
+.ie n .IP "Function ""mode::toggle_dryrun""" 4
+.el .IP "Function \f(CWmode::toggle_dryrun\fR" 4
+.IX Item "Function mode::toggle_dryrun"
+Toggle dryrun mode
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0

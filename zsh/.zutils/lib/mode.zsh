@@ -48,5 +48,32 @@ function mode::set_verbose() {
 }
 
 : <<=cut
+=item Function C<mode::dryrun>
+
+Whether it is in dryrun mode.
+
+@return 0 if it is dryrun mode, 1 otherwise.
+=cut
+function mode::dryrun() {
+  base::exists '__DRYRUN__' && return 0
+  return 1
+}
+
+: <<=cut
+=item Function C<mode::toggle_dryrun>
+
+Toggle dryrun mode
+
+@return NULL
+=cut
+function mode::toggle_dryrun() {
+  if base::exists '__DRYRUN__'; then
+    unset __DRYRUN__
+  else
+    export __DRYRUN__=
+  fi
+}
+
+: <<=cut
 =back
 =cut
