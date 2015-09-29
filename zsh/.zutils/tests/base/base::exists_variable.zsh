@@ -7,8 +7,8 @@ set -x
 
 # 2. Binary
 # 3. File or Directory
-function test::base::variable_exists() {
+function test::base::exists() {
   declare __TEST_FOO__
   base::exists __TEST_FOO__
 }
-test::base::variable_exists
+test::base::exists

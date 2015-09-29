@@ -50,7 +50,7 @@ function muxcfg::delete() {
     echo "No project named $_muxproj_ exists."
   fi
 }
-function muxcfg::git5wrapper() {
+function muxcfg::_git5wrapper() {
   git5 mirror $1 $2 --allow_existing_branch --branch=$3
 }
 function muxcfg::usage() {
@@ -85,7 +85,7 @@ function muxcfg() {
   if [[ -e "$HOME/.google" ]]; then
     git_working_dir_root=$HOME/Projects
     git_repo=$HOME/Src
-    git_new_workdir_cmd="util::_git5wrapper"
+    git_new_workdir_cmd="muxcfg::_git5wrapper"
     start_cwd=$git_working_dir_root/__MUXPROJ__/google3
   else
     git_working_dir_root=$HOME/Workspace

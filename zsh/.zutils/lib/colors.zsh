@@ -17,13 +17,13 @@ File: colors.zsh - Colorful terminal output.
 init::sourced "${0:a}" && return
 
 : <<=cut
-=item Function C<colors::define>
+=item Function C<colors::_define>
 
 Define color env variables.
 
 @return NULL
 =cut
-function colors::define() {
+function colors::_define() {
   # Reset
   export COLOR_Color_Off='\033[0m'       # Text Reset
 
@@ -97,16 +97,16 @@ function colors::define() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-colors::define
+colors::_define
 
 : <<=cut
-=item Function C<colors::manpage>
+=item Function C<colors::_manpage>
 
 Make man page colorful.
 
 @return NULL
 =cut
-function colors::manpage() {
+function colors::_manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
   # http://superuser.com/questions/452034/bash-colorized-man-page
   #
@@ -115,18 +115,18 @@ function colors::manpage() {
 
   # CHANGE FIRST NUMBER PAIR FOR COMMAND AND FLAG COLOR
   # currently 0;33 a.k.a. brown, which is dark yellow for me
-    export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
+  export LESS_TERMCAP_md=$'\E[0;33;5;74m'                                       # begin bold
 
   # CHANGE FIRST NUMBER PAIR FOR PARAMETER COLOR
   # currently 0;36 a.k.a. cyan
-    export LESS_TERMCAP_us=$'\E[0;36;5;146m' # begin underline
+  export LESS_TERMCAP_us=$'\E[0;36;5;146m'                                      # begin underline
 
   # don't change anything here
-    export LESS_TERMCAP_mb=$'\E[1;31m'       # begin blinking
-    export LESS_TERMCAP_me=$'\E[0m'           # end mode
-    export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-    export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
-    export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+  export LESS_TERMCAP_mb=$'\E[1;31m'                                            # begin blinking
+  export LESS_TERMCAP_me=$'\E[0m'                                               # end mode
+  export LESS_TERMCAP_se=$'\E[0m'                                               # end standout-mode
+  export LESS_TERMCAP_so=$'\E[38;5;246m'                                        # begin standout-mode - info box
+  export LESS_TERMCAP_ue=$'\E[0m'                                               # end underline
 
   #########################################
   # Colorcodes:
@@ -140,7 +140,7 @@ function colors::manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-colors::manpage
+colors::_manpage
 
 : <<=cut
 =back

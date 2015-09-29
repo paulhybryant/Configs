@@ -5,10 +5,10 @@ source "../../lib/base.zsh"
 
 set -x
 
-function test::base::function_exists() {
-  function test::__foo__() {
+function test::base::exists() {
+  function test::_foo_() {
     ;
   }
-  base::exists test::__foo__
+  base::exists test::_foo_
 }
-test::base::function_exists
+test::base::exists

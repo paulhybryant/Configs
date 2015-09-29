@@ -19,15 +19,14 @@ init::sourced "${0:a}" && return
 export GIT_EDITOR='vim'
 
 : <<=cut
-=item Function C<git::check_dirty_repos>
+=item Function C<git::_check_dirty_repos>
 
 Check subdirs of current directory, and report repos that are dirty
-Number of arguments accepted: 1
-$check_detached 0 or 1
+Number of arguments accepted: --no-detached
 
 @return NULLPTR
 =cut
-function git::check_dirty_repos() {
+function git::_check_dirty_repos() {
   setopt localoptions err_return
   local -A _fn_options
   _fn_options=(--no-detached '')
@@ -62,19 +61,19 @@ function git::check_dirty_repos() {
 }
 
 : <<=cut
-=item Function C<git::has_branch>
+=item Function C<git::_has_branch>
 
 Whether a branch exists in current depo.
 
 @return 0 if exists, 1 otherwise.
 =cut
-function git::has_branch() {
+function git::_has_branch() {
   setopt localoptions err_return
   [[ -n $(git branch --list "$1") ]]
 }
 
 : <<=cut
-=item Function C<git::parent_branch>
+=item Function C<git::_parent_branch>
 
 # Get parent branch of a branch, defaults to current branch.
 # How it works:
@@ -92,7 +91,7 @@ function git::has_branch() {
 
 @return NULL
 =cut
-function git::parent_branch() {
+function git::_parent_branch() {
   local _branch
   if [[ $# -eq 0 ]]; then
     _branch=$(git rev-parse --abbrev-ref HEAD)
@@ -103,7 +102,7 @@ function git::parent_branch() {
 }
 
 : <<=cut
-=item Function C<git::new_workdir>
+=item Function C<git::_new_workdir>
 
 Create a new git working dir based on existing repo, and create a new branch in
 the new workign dir.
@@ -114,7 +113,7 @@ $3 New branch name
 
 @return NULL
 =cut
-function git::new_workdir() {
+function git::_new_workdir() {
   setopt localoptions err_return
   local -A _fn_options
   _fn_options=(-src '' -dst '' -branch '')
@@ -197,15 +196,15 @@ function git::new_workdir() {
   fi
 }
 
-function git::submodule-url() {
+function git::_submodule_url() {
   git config --list | sed -n "s@^submodule\.$1.*\.url=\(.*\)@\1@p"
 }
 
-function git::submodule-mv() {
+function git::_submodule_mv() {
   git submodule deinit "$1"
   git rm "$1"
   local _url
-  _url=$(git::submodule-url "$1")
+  _url=$(git::_submodule_url "$1")
   git submodule add "${_url}" "$2"
 }
 

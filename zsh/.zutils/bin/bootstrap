@@ -11,7 +11,7 @@ function bootstrap() {
   source "$1/io.zsh"
   source "$1/os.zsh"
 
-  configs::bootstrap
+  configs::_bootstrap
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo \
     libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev \
@@ -43,7 +43,8 @@ function bootstrap() {
   brew install --disable-nls --override-system-vi --with-client-server \
     --with-lua --with-luajit --with-gui vim
   brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat dos2unix
+    the_silver_searcher tmux vimpager zsh netcat dos2unix \
+    most stdman
   brew gem install tmuxinator npm
   brew install --HEAD vimdoc vroom
   npm install -g urchin

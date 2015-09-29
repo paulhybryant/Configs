@@ -16,13 +16,13 @@ File: util.zsh - Various utility functions.
 
 init::sourced "${0:a}" && return
 
-function util::geoinfo() {
+function util::_geoinfo() {
   # ip, hostname, city, region, country, loc, org
   local _filter
   _filter=$(strings::join --prefix=. --delim=, "$@")
   echo $(curl -x '' ipinfo.io 2> /dev/null | jq "${_filter}")
 }
-function util::start_ssh_agent() {
+function util::_start_ssh_agent() {
   local _agent
   _agent=$1
   # Start ssh agent if needed
@@ -37,10 +37,10 @@ function util::start_ssh_agent() {
       eval "$(${_agent})"
   fi
 }
-function util::installed_gnome_shell_exts() {
+function util::_installed_gnome_shell_exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
-function util::ta() {
+function util::_ta() {
   for var in ${__tmux_vars__};
   do
     local _value=
@@ -49,7 +49,7 @@ function util::ta() {
   done
   tmux attach -t "$1"
 }
-function util::tmux-attach() {
+function util::_tmux_attach() {
   local setenv=$(mktemp)
   : > "$setenv"
   for var in SSH_OS SSH_CLIENT DISPLAY;
@@ -87,7 +87,7 @@ function util::tmux-attach() {
   done
   \tmux attach -d -t "$1"
 }
-function util::tmux-start() {
+function util::_tmux_start() {
   if [[ ! -z "$TMUX" ]]; then
     io::warn "Already in tmux, nothing to be done."
     return
@@ -105,10 +105,10 @@ function util::tmux-start() {
     \tmux "$@"
   fi
 }
-function util::histgrep() {
+function util::_histgrep() {
   tac ${HISTFILE:-~/.bash_history} | grep -m 1 "$@"
 }
-function util::run() {
+function util::_run() {
   local _cmd_="$1"
   local _msg_="$2"
   [[ $VERBOSE == true ]] && echo "$_msg_"
@@ -124,7 +124,7 @@ function util::run() {
     set +o noglob
   fi
 }
-function util::setup_abbrev() {
+function util::_setup_abbrev() {
   # source: http://hackerific.net/2009/01/23/zsh-abbreviations/
   # another impl: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
   typeset -Ag abbrevs
@@ -175,20 +175,20 @@ function util::setup_abbrev() {
   bindkey "  " globalias
   bindkey " " magic-space
 }
-function util::update() {
+function util::_brew_upgrade() {
   brew update
   brew upgrade $(brew outdated)
   # Update pip
 }
 
 : <<=cut
-=item Function C<util::vim>
+=item Function C<util::_vim>
 
 Open files with vim in a single vim instance in one tmux window.
 
 @return NULL
 =cut
-function util::vim() {
+function util::_vim() {
   local -a _servers_list
   local _server_name
   local _vimflags
@@ -224,13 +224,13 @@ function util::vim() {
 }
 
 : <<=cut
-=item Function C<util::vim>
+=item Function C<util::_gvim>
 
 Open files with gvim in a single gvim instance.
 
 @return NULL
 =cut
-function util::gvim() {
+function util::_gvim() {
   local -a _servers_list
   _servers_list=($(\vim --serverlist))
   io::vlog 1 "Vim servers: ${_servers_list}"
@@ -251,6 +251,34 @@ function util::gvim() {
     io::vlog 1 "Connecting to gVim server: ${_server_name}"
     \vim -g --servername ${_server_name} --remote "$@"
   fi
+}
+
+function util::_check_test_coverage() {
+  setopt localoptions err_return nounset
+  local -a _functions _tests
+  local -A _test_cases
+  local _ignore
+  _ignore=$(cat lib/.ignore)
+  io::vlog 1 "Ignored files: ${_ignore}"
+  _tests=($(find tests/ -name "*.zsh" | grep -v ${_ignore} | xargs grep -h -o "^function test::.*()" | sed -e 's/^function \(.*\)()/\1/'))
+  io::vlog 1 "Tests:\n${_tests}"
+  for t in ${_tests}; do
+    io::vlog 1 ${t/test::/}
+    _test_cases[${t/test::/}]=$t
+  done
+  io::vlog 2 "Testcases:\n${(kv)_test_cases}"
+
+  _functions=($(find lib/ -name "*.zsh" | grep -v ${_ignore} | xargs grep -h -o "^function .*()" | sed -e 's/^function \(.*\)()/\1/'))
+  io::vlog 1 "Functions:\n${_functions}"
+  for f in ${_functions}; do
+    if [[ "$f" =~ '[^:]*::_.*' ]]; then
+      io::vlog 2 "Skipping whitelisted function $f"
+    elif [[ ${+_test_cases[${f}]} -eq 0 ]]; then
+      io::hl "✗ $f"
+    else
+      io::msg "✓ $f : ${_test_cases[${f}]}"
+    fi
+  done
 }
 
 : <<=cut

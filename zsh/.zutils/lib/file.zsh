@@ -137,29 +137,5 @@ function file::la() {
 }
 
 : <<=cut
-=item Function C<file::softlink>
-
-Creates softlink, do some checking before doing that.
-
-$1 source
-$2 target
-
-@return NULL
-=cut
-function file::softlink() {
-  local _src=$1
-  local _target=$2
-
-  if [[ -h "${_target}" ]]; then
-    # Remove existing symlink
-    rm "${_target}"
-  elif [[ -f "${_target}" || -d "${_target}" ]]; then
-    echo "${_target} is an existing file / directory."
-    return 1
-  fi
-  ln -s "${_src}" "$_target"
-}
-
-: <<=cut
 =back
 =cut

@@ -33,6 +33,13 @@ function strings::strip_slash() {
   fi
 }
 
+: <<=cut
+=item Function C<strings::join>
+
+Join string with delimiter and prefix.
+
+@return The resulting string after joining.
+=cut
 function strings::join() {
   setopt localoptions err_return
   local -A _fn_options

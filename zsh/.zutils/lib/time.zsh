@@ -36,13 +36,13 @@ function time::human_readable_date() {
 }
 
 : <<=cut
-=item Function C<time::seconds>
+=item Function C<time::_seconds>
 
 Print current time in seconds since epoch.
 
 @return string of current time in seconds since epoch
 =cut
-function time::seconds() {
+function time::_seconds() {
   local _time_str
   _time_str=$("${CMDPREFIX}"date +%s)
   echo "${_time_str}"

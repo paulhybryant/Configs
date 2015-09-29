@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "STRINGS.ZSH 1"
-.TH STRINGS.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH STRINGS.ZSH 1 "2015-09-29" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -152,3 +152,9 @@ Strip trailing slash in the string.
 \&\f(CW$1\fR The string to apply the strip operation
 .Sp
 \&\f(CW@return\fR the result string after stripping
+.ie n .IP "Function ""strings::join""" 4
+.el .IP "Function \f(CWstrings::join\fR" 4
+.IX Item "Function strings::join"
+Join string with delimiter and prefix.
+.Sp
+\&\f(CW@return\fR The resulting string after joining.

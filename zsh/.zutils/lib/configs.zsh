@@ -28,7 +28,7 @@ source "${0:h}/time.zsh"
 source "${0:h}/util.zsh"
 
 # Public {{{
-function configs::bootstrap() {
+function configs::_bootstrap() {
   if os::OSX; then
     configs::_config_darwin
   elif os::LINUX; then
@@ -36,12 +36,12 @@ function configs::bootstrap() {
   fi
   configs::_config_brew
 }
-function configs::config() {
+function configs::_config() {
   configs::_config_env
   configs::_config_alias
-  util::start_ssh_agent "ssh-agent"
+  util::_start_ssh_agent "ssh-agent"
 }
-function configs::end() {
+function configs::_end() {
   setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
 
   bashcompinit
@@ -65,7 +65,7 @@ function configs::_config_linux() {
   export BREWHOME="$HOME/.$BREWVERSION"
 }
 function configs::_config_brew() {
-  export PATH=$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
+  export PATH=$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH
   export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
   export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
@@ -76,6 +76,8 @@ function configs::_config_brew() {
 function configs::_config_env() {
   export EDITOR='vim'
   export GREP_OPTIONS='--color=auto'
+  export PAGER=most
+  export MANPAGER=$PAGER
   export TERM=screen-256color
   export VISUAL='vim'
   export XDG_CACHE_HOME=$HOME/.cache
@@ -105,7 +107,7 @@ function configs::_config_env() {
   stty start undef
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
-  util::setup_abbrev
+  util::_setup_abbrev
 
   # setup pre-command {{{
   function configs::_myprecmd() {
@@ -251,12 +253,12 @@ function configs::_config_alias() {
   alias nvim="NVIM=nvim nvim"
   alias pfd="whence -f"
   alias rm=file::rm
-  alias ta="util::ta"
+  alias ta="util::_ta"
   alias tl='tmux list-sessions'
   alias tmux="TERM=screen-256color tmux -2"
-  alias ts=util::tmux-start
-  alias vi=util::vim
-  alias vim=util::vim
+  alias ts=util::_tmux_start
+  alias vi=util::_vim
+  alias vim=util::_vim
   # alias vi="vi -p"
   # alias vim="vim -p"
   # Use vimpager to replace less, which is used to view man page

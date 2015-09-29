@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GIT.ZSH 1"
-.TH GIT.ZSH 1 "2015-09-25" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH GIT.ZSH 1 "2015-09-29" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -144,23 +144,22 @@ File: git.zsh \- Git related utility functions.
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""git::check_dirty_repos""" 4
-.el .IP "Function \f(CWgit::check_dirty_repos\fR" 4
-.IX Item "Function git::check_dirty_repos"
+.ie n .IP "Function ""git::_check_dirty_repos""" 4
+.el .IP "Function \f(CWgit::_check_dirty_repos\fR" 4
+.IX Item "Function git::_check_dirty_repos"
 Check subdirs of current directory, and report repos that are dirty
-Number of arguments accepted: 1
-\&\f(CW$check_detached\fR 0 or 1
+Number of arguments accepted: \-\-no\-detached
 .Sp
 \&\f(CW@return\fR \s-1NULLPTR\s0
-.ie n .IP "Function ""git::has_branch""" 4
-.el .IP "Function \f(CWgit::has_branch\fR" 4
-.IX Item "Function git::has_branch"
+.ie n .IP "Function ""git::_has_branch""" 4
+.el .IP "Function \f(CWgit::_has_branch\fR" 4
+.IX Item "Function git::_has_branch"
 Whether a branch exists in current depo.
 .Sp
 \&\f(CW@return\fR 0 if exists, 1 otherwise.
-.ie n .IP "Function ""git::parent_branch""" 4
-.el .IP "Function \f(CWgit::parent_branch\fR" 4
-.IX Item "Function git::parent_branch"
+.ie n .IP "Function ""git::_parent_branch""" 4
+.el .IP "Function \f(CWgit::_parent_branch\fR" 4
+.IX Item "Function git::_parent_branch"
 # Get parent branch of a branch, defaults to current branch.
 # How it works:
 # 1| Display a textual history of all commits.
@@ -176,9 +175,9 @@ Whether a branch exists in current depo.
 #    commit and the branch tip. We don't care. Ignore them.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""git::new_workdir""" 4
-.el .IP "Function \f(CWgit::new_workdir\fR" 4
-.IX Item "Function git::new_workdir"
+.ie n .IP "Function ""git::_new_workdir""" 4
+.el .IP "Function \f(CWgit::_new_workdir\fR" 4
+.IX Item "Function git::_new_workdir"
 Create a new git working dir based on existing repo, and create a new branch in
 the new workign dir.
 .Sp
