@@ -91,14 +91,14 @@ function base::parseargs() {
 Use gnu getopt to parse function arguments.
 
 Example:
-  foo -d -f x
-  base::parseargs "$@"
-  [[ ${_fn_options[d]} == "true" ]]
-  [[ ${_fn_options[no-detached]} == "true" ]]
-  [[ ${_fn_options[f]} == "y" ]]
-  [[ ${_fn_options[foo]} == "y" ]]
-  [[ ${_fn_options[u]} == "" ]]
-  [[ ${_fn_options[unset]} == "" ]]
+  local -A _fn_options
+  base::getopt df:u: no-detached,foo:,unset: --no-detached -f yo
+  [[ ${_fn_options[--no-detached]} == "true" ]]
+  [[ ${_fn_options[--foo]} == "yo" ]]
+  [[ ${_fn_options[--unset]} == "" ]]
+  [[ ${_fn_options[-d]} == "true" ]]
+  [[ ${_fn_options[-f]} == "yo" ]]
+  [[ ${_fn_options[-u]} == "" ]]
 
 @return NULL
 =cut
