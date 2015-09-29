@@ -81,64 +81,15 @@ function util::_ta() {
   tmux attach -t "$1"
 }
 
-function util::_tmux_attach() {
-  local setenv=$(mktemp)
-  : > "$setenv"
-  for var in SSH_OS SSH_CLIENT DISPLAY;
-  do
-    local value=
-    eval value=\$$var
-    # local _var_
-    # eval "_val_=\"\${$var}\""
-    # echo $_val_
-    \tmux set-environment $var "$value"
-    echo "export $var=\"$value\"" >> "$setenv"
-  done
-  for window in $(\tmux list-windows -t "$1" -F "#W");
-  do
-    for pane_id_command in $(\tmux list-panes -t "$1:$window" -F "#P:#{pane_current_command}");
-    do
-      local id=${pane_id_command%%:*}
-      local cmd=${pane_id_command##*:}
-      \tmux send-keys -t "$1:$window.$id" C-z
-      sleep 0.1
-      \tmux send-keys -t "$1:$window.$id" ENTER
-      sleep 0.1
-      if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
-        # run "\\tmux send-keys -t \"$1:$window\" C-z"
-        # run "\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
-        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
-        sleep 0.1
-        # run "\\tmux send-keys -t \"$1:$window.$id\" fg ENTER"
-        \tmux send-keys -t "$1:$window.$id" fg ENTER
-      else
-        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
-        # run "\\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
-      fi
-    done
-  done
-  \tmux attach -d -t "$1"
-}
-function util::_tmux_start() {
-  if [[ ! -z "$TMUX" ]]; then
-    io::warn "Already in tmux, nothing to be done."
-    return
-  fi
-  \tmux info &> /dev/null
-  if [[ $? -eq 1 ]]; then
-    io::warn "Starting tmux server..."
-    touch "$HOME/.tmux_restore"
-    \tmux start-server
-    \rm "$HOME/.tmux_restore"
-  fi
-  if [[ "$#" == 0 ]]; then
-    \tmux attach
-  else
-    \tmux "$@"
-  fi
-}
+: <<=cut
+=item Function C<util::_histgrep>
+
+Grep in reverse order in history.
+
+@return NULL
+=cut
 function util::_histgrep() {
-  tac ${HISTFILE:-~/.bash_history} | grep -m 1 "$@"
+  ${CMDPREFIX}tac ${HISTFILE:-~/.zsh_history} | grep -m 1 "$@"
 }
 
 : <<=cut
@@ -334,6 +285,45 @@ function util::_check_test_coverage() {
       io::msg "✓ $f : ${_test_cases[${f}]}"
     fi
   done
+}
+
+function util::_tmux_attach() {
+  local setenv=$(mktemp)
+  : > "$setenv"
+  for var in SSH_OS SSH_CLIENT DISPLAY;
+  do
+    local value=
+    eval value=\$$var
+    # local _var_
+    # eval "_val_=\"\${$var}\""
+    # echo $_val_
+    \tmux set-environment $var "$value"
+    echo "export $var=\"$value\"" >> "$setenv"
+  done
+  for window in $(\tmux list-windows -t "$1" -F "#W");
+  do
+    for pane_id_command in $(\tmux list-panes -t "$1:$window" -F "#P:#{pane_current_command}");
+    do
+      local id=${pane_id_command%%:*}
+      local cmd=${pane_id_command##*:}
+      \tmux send-keys -t "$1:$window.$id" C-z
+      sleep 0.1
+      \tmux send-keys -t "$1:$window.$id" ENTER
+      sleep 0.1
+      if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
+        # run "\\tmux send-keys -t \"$1:$window\" C-z"
+        # run "\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
+        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        sleep 0.1
+        # run "\\tmux send-keys -t \"$1:$window.$id\" fg ENTER"
+        \tmux send-keys -t "$1:$window.$id" fg ENTER
+      else
+        \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
+        # run "\\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
+      fi
+    done
+  done
+  \tmux attach -d -t "$1"
 }
 
 : <<=cut
