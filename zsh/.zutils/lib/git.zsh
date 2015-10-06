@@ -19,14 +19,14 @@ init::sourced "${0:a}" && return
 export GIT_EDITOR='vim'
 
 : <<=cut
-=item Function C<git::_check_dirty_repos>
+=item Function C<git::check_dirty_repos>
 
 Check subdirs of current directory, and report repos that are dirty
 Number of arguments accepted: --no-detached
 
 @return NULLPTR
 =cut
-function git::_check_dirty_repos() {
+function git::check_dirty_repos() {
   setopt localoptions err_return
   local -A _fn_options
   _fn_options=(--no-detached '')
@@ -61,19 +61,19 @@ function git::_check_dirty_repos() {
 }
 
 : <<=cut
-=item Function C<git::_has_branch>
+=item Function C<git::has_branch>
 
 Whether a branch exists in current depo.
 
 @return 0 if exists, 1 otherwise.
 =cut
-function git::_has_branch() {
+function git::has_branch() {
   setopt localoptions err_return
   [[ -n $(git branch --list "$1") ]]
 }
 
 : <<=cut
-=item Function C<git::_parent_branch>
+=item Function C<git::parent_branch>
 
 # Get parent branch of a branch, defaults to current branch.
 # How it works:
@@ -91,7 +91,7 @@ function git::_has_branch() {
 
 @return NULL
 =cut
-function git::_parent_branch() {
+function git::parent_branch() {
   local _branch
   if [[ $# -eq 0 ]]; then
     _branch=$(git rev-parse --abbrev-ref HEAD)
@@ -102,7 +102,7 @@ function git::_parent_branch() {
 }
 
 : <<=cut
-=item Function C<git::_new_workdir>
+=item Function C<git::new_workdir>
 
 Create a new git working dir based on existing repo, and create a new branch in
 the new workign dir.
@@ -113,7 +113,7 @@ $3 New branch name
 
 @return NULL
 =cut
-function git::_new_workdir() {
+function git::new_workdir() {
   setopt localoptions err_return
   local -A _fn_options
   _fn_options=(-src '' -dst '' -branch '')
@@ -197,28 +197,28 @@ function git::_new_workdir() {
 }
 
 : <<=cut
-=item Function C<git::_submodule_url>
+=item Function C<git::submodule_url>
 
 List of url of all submodules.
 
 @return NULL
 =cut
-function git::_submodule_url() {
+function git::submodule_url() {
   git config --list | sed -n "s@^submodule\.$1.*\.url=\(.*\)@\1@p"
 }
 
 : <<=cut
-=item Function C<git::_submodule_mv>
+=item Function C<git::submodule_mv>
 
 Move submodule with a single command.
 
 @return NULL
 =cut
-function git::_submodule_mv() {
+function git::submodule_mv() {
   git submodule deinit "$1"
   git rm "$1"
   local _url
-  _url=$(git::_submodule_url "$1")
+  _url=$(git::submodule_url "$1")
   git submodule add "${_url}" "$2"
 }
 

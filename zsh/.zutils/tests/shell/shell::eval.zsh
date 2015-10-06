@@ -1,21 +1,22 @@
 #!/usr/bin/env zsh
 
 source "../../lib/init.zsh"
+source "../../lib/io.zsh"
 source "../../lib/mode.zsh"
-source "../../lib/util.zsh"
+source "../../lib/shell.zsh"
 
 set -x
 
-function test::util::eval() {
+function test::shell::eval() {
   local _cmd _expected _actual
   _cmd='echo "hello world"'
   _expected='echo "hello world"'
-  _actual=$(util::eval ${_cmd})
+  _actual=$(shell::eval ${_cmd})
   [[ "${_expected}" == "${_actual}" ]]
 
   mode::toggle_dryrun
   _expected='hello world'
-  _actual=$(util::eval ${_cmd})
+  _actual=$(shell::eval ${_cmd})
   [[ "${_expected}" == "${_actual}" ]]
 }
-test::util::eval
+test::shell::eval

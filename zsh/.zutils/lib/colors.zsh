@@ -17,13 +17,13 @@ File: colors.zsh - Colorful terminal output.
 init::sourced "${0:a}" && return
 
 : <<=cut
-=item Function C<colors::_define>
+=item Function C<colors::define>
 
 Define color env variables.
 
 @return NULL
 =cut
-function colors::_define() {
+function colors::define() {
   # Reset
   export COLOR_Color_Off='\033[0m'       # Text Reset
 
@@ -97,16 +97,16 @@ function colors::_define() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-colors::_define
+colors::define
 
 : <<=cut
-=item Function C<colors::_manpage>
+=item Function C<colors::manpage>
 
 Make man page colorful.
 
 @return NULL
 =cut
-function colors::_manpage() {
+function colors::manpage() {
   # The following won't have effect unless less is used (instead of vimpager)
   # http://superuser.com/questions/452034/bash-colorized-man-page
   #
@@ -140,7 +140,7 @@ function colors::_manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-colors::_manpage
+colors::manpage
 
 : <<=cut
 =back

@@ -17,13 +17,13 @@ File: util.zsh - Various utility functions.
 init::sourced "${0:a}" && return
 
 : <<=cut
-=item Function C<util::_geoinfo>
+=item Function C<util::geoinfo>
 
 Get the geo location information.
 
 @return list of values for requested fields.
 =cut
-function util::_geoinfo() {
+function util::geoinfo() {
   # ip, hostname, city, region, country, loc, org
   local _filter
   _filter=$(strings::join --prefix=. --delim=, "$@")
@@ -31,13 +31,13 @@ function util::_geoinfo() {
 }
 
 : <<=cut
-=item Function C<util::_start_ssh_agent>
+=item Function C<util::start_ssh_agent>
 
 Start ssh agent if not yet.
 
 @return NULL
 =cut
-function util::_start_ssh_agent() {
+function util::start_ssh_agent() {
   local _agent
   _agent=$1
   # Start ssh agent if needed
@@ -54,24 +54,24 @@ function util::_start_ssh_agent() {
 }
 
 : <<=cut
-=item Function C<util::_installed_gnome_shell_exts>
+=item Function C<util::installed_gnome_shell_exts>
 
 List installed gnome shell extensions
 
 @return NULL
 =cut
-function util::_installed_gnome_shell_exts() {
+function util::installed_gnome_shell_exts() {
   grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
 }
 
 : <<=cut
-=item Function C<util::_ta>
+=item Function C<util::ta>
 
 Tmux attach wrapper, which updates tmux environment as configured.
 
 @return NULL
 =cut
-function util::_ta() {
+function util::ta() {
   for var in ${__tmux_vars__};
   do
     local _value=
@@ -82,40 +82,24 @@ function util::_ta() {
 }
 
 : <<=cut
-=item Function C<util::_histgrep>
+=item Function C<util::histgrep>
 
 Grep in reverse order in history.
 
 @return NULL
 =cut
-function util::_histgrep() {
+function util::histgrep() {
   ${CMDPREFIX}tac ${HISTFILE:-~/.zsh_history} | grep -m 1 "$@"
 }
 
 : <<=cut
-=item Function C<util::eval>
-
-Eval the strings, and output logs based on verbose level.
-
-@return NULL
-=cut
-function util::eval() {
-  setopt localoptions err_return nounset
-  if mode::dryrun; then
-    io::msg "$*"
-  else
-    eval $*
-  fi
-}
-
-: <<=cut
-=item Function C<util::_setup_abbrev>
+=item Function C<util::setup_abbrev>
 
 Setup zsh abbreviations.
 
 @return NULL
 =cut
-function util::_setup_abbrev() {
+function util::setup_abbrev() {
   # source: http://hackerific.net/2009/01/23/zsh-abbreviations/
   # another impl: https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
   typeset -Ag abbrevs
@@ -168,26 +152,26 @@ function util::_setup_abbrev() {
 }
 
 : <<=cut
-=item Function C<util::_brew_upgrade>
+=item Function C<util::brew_upgrade>
 
 Upgrade outdated brew packages.
 
 @return NULL
 =cut
-function util::_brew_upgrade() {
+function util::brew_upgrade() {
   brew update
   brew upgrade $(brew outdated)
   # Update pip
 }
 
 : <<=cut
-=item Function C<util::_vim>
+=item Function C<util::vim>
 
 Open files with vim in a single vim instance in one tmux window.
 
 @return NULL
 =cut
-function util::_vim() {
+function util::vim() {
   local -a _servers_list
   local _server_name
   local _vimflags
@@ -223,13 +207,13 @@ function util::_vim() {
 }
 
 : <<=cut
-=item Function C<util::_gvim>
+=item Function C<util::gvim>
 
 Open files with gvim in a single gvim instance.
 
 @return NULL
 =cut
-function util::_gvim() {
+function util::gvim() {
   local -a _servers_list
   _servers_list=($(\vim --serverlist))
   io::vlog 1 "Vim servers: ${_servers_list}"
@@ -253,18 +237,19 @@ function util::_gvim() {
 }
 
 : <<=cut
-=item Function C<util::_check_test_coverage>
+=item Function C<util::check_test_coverage>
 
 Check test coverage for zsh functions.
 
 @return NULL
 =cut
-function util::_check_test_coverage() {
+function util::check_test_coverage() {
   setopt localoptions err_return nounset
   local -a _functions _tests
   local -A _test_cases
   local _ignore
-  _ignore=$(cat lib/.ignore)
+  _ignore=($(cat lib/.ignore | xargs echo))
+  _ignore=$(strings::join --delim='\|' ${_ignore})
   io::vlog 1 "Ignored files: ${_ignore}"
   _tests=($(find tests/ -name "*.zsh" | grep -v ${_ignore} | xargs grep -h -o "^function test::.*()" | sed -e 's/^function \(.*\)()/\1/'))
   io::vlog 1 "Tests:\n${_tests}"
@@ -287,7 +272,7 @@ function util::_check_test_coverage() {
   done
 }
 
-function util::_tmux_attach() {
+function util::tmux_attach() {
   local setenv=$(mktemp)
   : > "$setenv"
   for var in SSH_OS SSH_CLIENT DISPLAY;

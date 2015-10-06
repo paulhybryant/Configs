@@ -27,8 +27,7 @@ source "${0:h}/strings.zsh"
 source "${0:h}/time.zsh"
 source "${0:h}/util.zsh"
 
-# Public {{{
-function configs::_bootstrap() {
+function configs::bootstrap() {
   if os::OSX; then
     configs::_config_darwin
   elif os::LINUX; then
@@ -36,20 +35,18 @@ function configs::_bootstrap() {
   fi
   configs::_config_brew
 }
-function configs::_config() {
+function configs::config() {
   configs::_config_env
   configs::_config_alias
   util::_start_ssh_agent "ssh-agent"
 }
-function configs::_end() {
+function configs::end() {
   setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
 
   bashcompinit
   compinit
   promptinit
 }
-# }}}
-# Private {{{
 function configs::_config_darwin() {
   export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
@@ -266,7 +263,6 @@ function configs::_config_alias() {
   # alias less=$PAGER
   # alias zless=$PAGER
 }
-# }}}
 
 : <<=cut
 =back

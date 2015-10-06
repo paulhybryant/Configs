@@ -1,1 +1,9 @@
-file.zsh\|init.zsh\|io.zsh\|os.zsh
+colors.zsh
+configs.zsh
+file.zsh
+git.zsh
+init.zsh
+io.zsh
+net.zsh
+os.zsh
+util.zsh

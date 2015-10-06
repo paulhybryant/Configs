@@ -5,6 +5,10 @@ source "../../lib/mode.zsh"
 
 set -x
 
+function test::mode::toggle_dryrun() {
+}
+test::mode::toggle_dryrun
+
 function test::mode::dryrun() {
   mode::dryrun
   [[ $? -eq 1 ]]

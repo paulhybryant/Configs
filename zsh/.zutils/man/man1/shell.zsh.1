@@ -132,75 +132,21 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "UTIL.ZSH 1"
-.TH UTIL.ZSH 1 "2015-10-06" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "SHELL.ZSH 1"
+.TH SHELL.ZSH 1 "2015-10-06" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: util.zsh \- Various utility functions.
+File: shell.zsh \- Utilities for shell
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""util::geoinfo""" 4
-.el .IP "Function \f(CWutil::geoinfo\fR" 4
-.IX Item "Function util::geoinfo"
-Get the geo location information.
-.Sp
-\&\f(CW@return\fR list of values for requested fields.
-.ie n .IP "Function ""util::start_ssh_agent""" 4
-.el .IP "Function \f(CWutil::start_ssh_agent\fR" 4
-.IX Item "Function util::start_ssh_agent"
-Start ssh agent if not yet.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::installed_gnome_shell_exts""" 4
-.el .IP "Function \f(CWutil::installed_gnome_shell_exts\fR" 4
-.IX Item "Function util::installed_gnome_shell_exts"
-List installed gnome shell extensions
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::ta""" 4
-.el .IP "Function \f(CWutil::ta\fR" 4
-.IX Item "Function util::ta"
-Tmux attach wrapper, which updates tmux environment as configured.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::histgrep""" 4
-.el .IP "Function \f(CWutil::histgrep\fR" 4
-.IX Item "Function util::histgrep"
-Grep in reverse order in history.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::setup_abbrev""" 4
-.el .IP "Function \f(CWutil::setup_abbrev\fR" 4
-.IX Item "Function util::setup_abbrev"
-Setup zsh abbreviations.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::brew_upgrade""" 4
-.el .IP "Function \f(CWutil::brew_upgrade\fR" 4
-.IX Item "Function util::brew_upgrade"
-Upgrade outdated brew packages.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::vim""" 4
-.el .IP "Function \f(CWutil::vim\fR" 4
-.IX Item "Function util::vim"
-Open files with vim in a single vim instance in one tmux window.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::gvim""" 4
-.el .IP "Function \f(CWutil::gvim\fR" 4
-.IX Item "Function util::gvim"
-Open files with gvim in a single gvim instance.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::check_test_coverage""" 4
-.el .IP "Function \f(CWutil::check_test_coverage\fR" 4
-.IX Item "Function util::check_test_coverage"
-Check test coverage for zsh functions.
+.ie n .IP "Function ""shell::eval""" 4
+.el .IP "Function \f(CWshell::eval\fR" 4
+.IX Item "Function shell::eval"
+Eval the strings, and output logs based on verbose level.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
