@@ -38,7 +38,7 @@ function configs::bootstrap() {
 function configs::config() {
   configs::_config_env
   configs::_config_alias
-  util::_start_ssh_agent "ssh-agent"
+  util::start_ssh_agent "ssh-agent"
 }
 function configs::end() {
   setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
@@ -104,7 +104,7 @@ function configs::_config_env() {
   stty start undef
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
-  util::_setup_abbrev
+  util::setup_abbrev
 
   # setup pre-command {{{
   function configs::_myprecmd() {
@@ -250,12 +250,12 @@ function configs::_config_alias() {
   alias nvim="NVIM=nvim nvim"
   alias pfd="whence -f"
   alias rm=file::rm
-  alias ta="util::_ta"
+  alias ta="util::ta"
   alias tl='tmux list-sessions'
   alias tmux="TERM=screen-256color tmux -2"
-  alias ts=util::_tmux_start
-  alias vi=util::_vim
-  alias vim=util::_vim
+  alias ts=util::tmux_start
+  alias vi=util::vim
+  alias vim=util::vim
   # alias vi="vi -p"
   # alias vim="vim -p"
   # Use vimpager to replace less, which is used to view man page
