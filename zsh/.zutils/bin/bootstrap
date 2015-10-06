@@ -49,6 +49,7 @@ function bootstrap() {
     most stdman
   brew gem install tmuxinator npm automux
   brew install --HEAD vimdoc vroom
+  brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb
   npm install -g urchin
 
   os::OSX && io::msg "Installing extra stuff for OSX" && \

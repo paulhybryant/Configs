@@ -880,7 +880,7 @@ if s:vimplugin_size >= 1
           \     'p:pagerefs:1:0'
           \   ],
           \   'sort'  : 0,
-          \   'deffile' : expand('~/.ctagscnf/autohotkey.cnf'),
+          \   'deffile' : expand('~/.ctagsconf/autohotkey.conf'),
           \ }
   endfunction
   " }}}
