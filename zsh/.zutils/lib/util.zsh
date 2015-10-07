@@ -16,6 +16,9 @@ File: util.zsh - Various utility functions.
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/io.zsh"
+source "${0:h}/strings.zsh"
+
 : <<=cut
 =item Function C<util::geoinfo>
 

@@ -23,19 +23,32 @@ Examples
   base::exists "VAR"
 
 Check whether something 'exists'
-The check order is the following:
-1. Variable or Function
-2. Binary
-3. File or Directory
 
 $1 The thing to be checked whether it exists.
 
 @return 0 or 1. 0 exists, 1 not exists.
 =cut
 function base::exists() {
-  eval "[[ -n \${$1+1} ]]" && return 0
-  whence "$1" > /dev/null && return 0
-  [[ -e "$1" || -d "$1" ]] && return 0
+  setopt localoptions unset
+  local -A _fn_options
+  base::getopt v:b:s:f:d: var:,bin:,sub:,file:,dir: "$@"
+
+  if [[ ! (-z ${_fn_options[--var]} && -z ${_fn_options[-v]}) ]]; then
+    [[ ! -z ${_fn_options[--var]} ]] && eval "[[ -n \${${_fn_options[--var]}+1} ]]" && return 0
+    [[ ! -z ${_fn_options[-v]} ]] && eval "[[ -n \${${_fn_options[-v]}+1} ]]" && return 0
+  elif [[ ! (-z ${_fn_options[--bin]} && -z ${_fn_options[-b]}) ]]; then
+    [[ ! -z ${_fn_options[--bin]} ]] && whence "${_fn_options[--bin]}" > /dev/null && return 0
+    [[ ! -z ${_fn_options[-b]} ]] && whence "${_fn_options[-b]}" > /dev/null && return 0
+  elif [[ ! (-z ${_fn_options[--sub]} && -z ${_fn_options[-s]}) ]]; then
+    [[ ! -z ${_fn_options[--sub]} ]] && whence -f "${_fn_options[--sub]}" > /dev/null && return 0
+    [[ ! -z ${_fn_options[-s]} ]] && whence -f "${_fn_options[-s]}" > /dev/null && return 0
+  elif [[ ! (-z ${_fn_options[--file]} && -z ${_fn_options[-f]}) ]]; then
+    [[ ! -z ${_fn_options[--file]} && -e "${_fn_options[--file]}" ]] && return 0
+    [[ ! -z ${_fn_options[-f]} && -e "${_fn_options[-f]}" ]] && return 0
+  elif [[ ! (-z ${_fn_options[--dir]} && -z ${_fn_options[-d]}) ]]; then
+    [[ ! -z ${_fn_options[--dir]} && -d "${_fn_options[--dir]}" ]] && return 0
+    [[ ! -z ${_fn_options[-d]} && -d "${_fn_options[-d]}" ]] && return 0
+  fi
   return 1
 }
 
@@ -110,15 +123,23 @@ function base::getopt() {
   shift 2
   # _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@")
   _opts=$(${CMDPREFIX}getopt -o "${_short}" --long "${_long}" -- "$@")
-  # Note the quotes around '$_opts': they are essential!
+  # Note the quotes around '${_opts}': they are essential!
   eval set -- "${_opts}"
   local _var
   _fn_options=()
   while true; do
     case "$1" in
-      -- ) shift; break ;;
-      -* ) _var="$1"; _fn_options[${_var}]="true"; shift ;;
-      * ) [[ -z ${_var} ]] && break; _fn_options[${_var}]="$1" && _var=''; shift ;;
+      -- )
+        [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true"
+        shift
+        break ;;
+      -* )
+        _var="$1"
+        shift ;;
+      * )
+        [[ -z ${_var} ]] && break
+        _fn_options[${_var}]="$1" && _var=''
+        shift ;;
    esac
   done
 }

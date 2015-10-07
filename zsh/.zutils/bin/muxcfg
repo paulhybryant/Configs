@@ -1,14 +1,17 @@
 #!/usr/bin/env zsh
 
+source "$HOME/.zutils/lib/init.zsh"
+source "$HOME/.zutils/lib/base.zsh"
+source "$HOME/.zutils/lib/io.zsh"
+source "$HOME/.zutils/lib/mode.zsh"
+
 function muxcfg::mirror_and_start() {
   local _muxproj_="$1"
   local _muxconfig_="$2"
   local _startcwd_="$3"
   if [[ -d "$GIT_WORKING_DIR_ROOT/$_muxproj_" ]]; then
-    echo "Error: $GIT_WORKING_DIR_ROOT/$_muxproj_ exists!"
-    if [[ $DRYRUN == false ]]; then
-      return
-    fi
+    io::hl "Error: $GIT_WORKING_DIR_ROOT/$_muxproj_ exists!"
+    mode::dryrun || return 1
   fi
   if [[ $DRYRUN == true ]]; then
     echo "sed -e \"s#\${SESSION}#$_muxproj_#\" -e \"s#\${ROOT}#$_startcwd_#\" \"$MUXDIR/project.yml.template\" > \"$_muxconfig_\""
@@ -26,7 +29,8 @@ function muxcfg::start() {
   START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
   if [ -e "$_muxconfig_" ];
   then
-    if io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] "; then
+    io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] "
+    if [[ $? -eq 0 ]]; then
       echo "\n$_muxconfig_ will be overwritten."
       mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
     else
@@ -38,14 +42,13 @@ function muxcfg::start() {
 }
 function muxcfg::delete() {
   local _muxproj_="$1"
-  if [[ -e "$MUXDIR/$_muxproj_.yml" &&
-    \ io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "; then
-      run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
-      run "cd $GIT_REPO" "Chdir to $GIT_REPO"
-      run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
-      run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
-      run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
-    fi
+  io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "
+  if [[ $? -eq 0 && -e "$MUXDIR/$_muxproj_.yml" ]]; then
+    run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
+    run "cd $GIT_REPO" "Chdir to $GIT_REPO"
+    run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
+    run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
+    run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
   else
     echo "No project named $_muxproj_ exists."
   fi
@@ -59,9 +62,10 @@ Usage: muxcfg [arguments] [command] [project]
 
 Arguments:
   -h or --help          Print the usage information
-  -u or --usage         Print the usage information
-  -v or --verbose       Print additional information
   -n or --dryrun        Only print the command to be executed
+  -s or --src           Source git repo directory
+  -t or --dst           Destination git repo directory
+  -v or --verbose       Print additional information
   -y or --noconfirm     Skip confirmation
 
 Commands:
@@ -71,8 +75,15 @@ EOF
 }
 function muxcfg() {
   setopt localoptions nounset err_return
-  base::exists tmuxinator
-  base::exists "$HOME/.tmuxinator"
+  local -A _fn_options
+  base::exists -b tmuxinator
+  base::exists -d "$HOME/.tmuxinator"
+  return 0
+  local -A _fn_options
+  base::getopt hnvys:t: help,dryrun,verbose,noconfirm,src:,dst: "$@"
+  echo $1
+  echo $#
+  return 0
   case "$1" in
     start|delete )
       muxcfg::$1 "$2"
@@ -92,8 +103,8 @@ function muxcfg() {
     git_repo=$HOME/gitrepo
     git_new_workdir_cmd="git::new_workdir"
     start_cwd=$git_working_dir_root/__MUXPROJ__
-    base::exists $git_new_workdir_cmd
   fi
+  base::exists -f $git_new_workdir_cmd
 }
 muxcfg "$@"
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

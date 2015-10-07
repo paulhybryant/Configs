@@ -16,6 +16,9 @@ File: shell.zsh - Utilities for shell
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/io.zsh"
+source "${0:h}/mode.zsh"
+
 : <<=cut
 =item Function C<shell::eval>
 
@@ -26,8 +29,8 @@ Eval the strings, and output logs based on verbose level.
 function shell::eval() {
   setopt localoptions err_return nounset
   if mode::dryrun; then
-    io::msg "$*"
+    echo "[Dryrun] $*"
   else
-    eval $*
+    eval "$*"
   fi
 }

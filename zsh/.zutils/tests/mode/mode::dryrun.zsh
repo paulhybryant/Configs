@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-source "../../lib/init.zsh"
-source "../../lib/mode.zsh"
+source "${0:h}/../../lib/init.zsh"
+source "${0:h}/../../lib/base.zsh"
+source "${0:h}/../../lib/mode.zsh"
 
 set -x
 
@@ -11,12 +12,16 @@ test::mode::toggle_dryrun
 
 function test::mode::dryrun() {
   mode::dryrun
-  [[ $? -eq 1 ]]
+  [[ $? -eq 1 ]] || return 1
+
   mode::toggle_dryrun
   mode::dryrun
-  [[ $? -eq 0 ]]
+  [[ $? -eq 0 ]] || return 1
+
   mode::toggle_dryrun
   mode::dryrun
-  [[ $? -eq 1 ]]
+  [[ $? -eq 1 ]] || return 1
+
+  return 0
 }
 test::mode::dryrun

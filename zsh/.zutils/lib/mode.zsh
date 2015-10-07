@@ -16,6 +16,8 @@ File: mode.zsh - Set or get the variables modes for the shell.
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/base.zsh"
+
 : <<=cut
 =item Function C<mode::verbose>
 
@@ -26,7 +28,8 @@ $1 Verbose level
 @return 0 if satisfied, 1 otherwise
 =cut
 function mode::verbose() {
-  base::exists '__VERBOSE__' || __VERBOSE__='0'
+  local -A _fn_options
+  base::exists -v '__VERBOSE__' || __VERBOSE__='0'
   [[ "$__VERBOSE__" < "$1" ]] && return 1
   return 0
 }
@@ -55,7 +58,8 @@ Whether it is in dryrun mode.
 @return 0 if it is dryrun mode, 1 otherwise.
 =cut
 function mode::dryrun() {
-  base::exists '__DRYRUN__' && return 0
+  local -A _fn_options
+  base::exists -v '__DRYRUN__' && return 0
   return 1
 }
 
@@ -67,7 +71,8 @@ Toggle dryrun mode
 @return NULL
 =cut
 function mode::toggle_dryrun() {
-  if base::exists '__DRYRUN__'; then
+  local -A _fn_options
+  if base::exists -v '__DRYRUN__'; then
     unset __DRYRUN__
   else
     export __DRYRUN__=

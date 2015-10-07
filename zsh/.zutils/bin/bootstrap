@@ -17,7 +17,8 @@ function bootstrap() {
     libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev \
     trash-cli clipit xclip x11-xkb-utils
 
-  if ! base::exists "${BREWHOME}"; then
+  local -A _fn_options
+  if ! base::exists -d "${BREWHOME}"; then
     io::msg "Cloning ${BREWVERSION}"
     git clone "https://github.com/Homebrew/${BREWVERSION}" "${BREWHOME}"
   fi

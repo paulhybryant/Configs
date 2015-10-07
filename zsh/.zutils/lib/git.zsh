@@ -16,6 +16,9 @@ File: git.zsh - Git related utility functions.
 
 init::sourced "${0:a}" && return
 
+source "${0:h}/base.zsh"
+source "${0:h}/io.zsh"
+
 export GIT_EDITOR='vim'
 
 : <<=cut
