@@ -42,7 +42,7 @@ Set verbose level of shell.
 @return NULL
 =cut
 function mode::set_verbose() {
-  __VERBOSE__=$1
+  export __VERBOSE__=$1
   if [[ $1 -gt 0 ]]; then
     export GIT_CURL_VERBOSE=$1
   else

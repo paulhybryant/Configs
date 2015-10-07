@@ -2,8 +2,10 @@
 
 source "$HOME/.zutils/lib/init.zsh"
 source "$HOME/.zutils/lib/base.zsh"
+source "$HOME/.zutils/lib/git.zsh"
 source "$HOME/.zutils/lib/io.zsh"
 source "$HOME/.zutils/lib/mode.zsh"
+source "$HOME/.zutils/lib/shell.zsh"
 
 function muxcfg::mirror_and_start() {
   local _muxproj_="$1"
@@ -24,11 +26,13 @@ function muxcfg::mirror_and_start() {
   fi
 }
 function muxcfg::start() {
-  local _muxproj_="$1"
-  local _muxconfig_="$MUXDIR/$_muxproj_.yml"
+  return 0
+  local -A _fn_options
+  base::getopt ys:t:w:c:p: noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+
+  local _muxconfig_="$MUXDIR/${_fn_options[--proj]}.yml"
   START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
-  if [ -e "$_muxconfig_" ];
-  then
+  if [[] -e "$_muxconfig_" ]]; then
     io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] "
     if [[ $? -eq 0 ]]; then
       echo "\n$_muxconfig_ will be overwritten."
@@ -41,6 +45,8 @@ function muxcfg::start() {
   fi
 }
 function muxcfg::delete() {
+  echo "delete"
+  return 0
   local _muxproj_="$1"
   io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "
   if [[ $? -eq 0 && -e "$MUXDIR/$_muxproj_.yml" ]]; then
@@ -53,7 +59,7 @@ function muxcfg::delete() {
     echo "No project named $_muxproj_ exists."
   fi
 }
-function muxcfg::_git5wrapper() {
+function muxcfg::git5wrapper() {
   git5 mirror $1 $2 --allow_existing_branch --branch=$3
 }
 function muxcfg::usage() {
@@ -72,39 +78,45 @@ Commands:
   start                 Create project repository, branch and config, start tmux session
   delete                Delete project repository, branch and config, kill tmux session
 EOF
+  return 1
 }
-function muxcfg() {
-  setopt localoptions nounset err_return
+function muxcfg::main() {
+  setopt localoptions unset err_return
   local -A _fn_options
+  local -a _fn_args
   base::exists -b tmuxinator
   base::exists -d "$HOME/.tmuxinator"
-  return 0
-  local -A _fn_options
-  base::getopt hnvys:t: help,dryrun,verbose,noconfirm,src:,dst: "$@"
-  echo $1
-  echo $#
-  return 0
-  case "$1" in
-    start|delete )
-      muxcfg::$1 "$2"
-      ;;
-    * )
-      echo "Invalid command: $1" >&2
-      muxcfg::usage
-  esac
+  base::getopt hys:t: help,noconfirm,src:,dst: "$@"
+  io::vlog 2 "${(kv)_fn_options}"
+  io::vlog 2 "${_fn_args}"
+
+  if [[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]]; then
+    muxcfg::usage
+  fi
+
+  eval set -- "${_fn_args}"
+  local _subcmd _project _git_new_workdir_cmd _cwd
+  _subcmd="$1"
+  _project="$2"
 
   if [[ -e "$HOME/.google" ]]; then
-    git_working_dir_root=$HOME/Projects
-    git_repo=$HOME/Src
-    git_new_workdir_cmd="muxcfg::_git5wrapper"
-    start_cwd=$git_working_dir_root/__MUXPROJ__/google3
+    _git_new_workdir_cmd="muxcfg::git5wrapper"
+    _cwd=${_fn_options[--dst]}/${_project}/google3
   else
-    git_working_dir_root=$HOME/Workspace
-    git_repo=$HOME/gitrepo
-    git_new_workdir_cmd="git::new_workdir"
-    start_cwd=$git_working_dir_root/__MUXPROJ__
+    _git_new_workdir_cmd="git::new_workdir"
+    _cwd=${_fn_options[--dst]}/${_project}
   fi
-  base::exists -f $git_new_workdir_cmd
+  base::exists --sub "${_git_new_workdir_cmd}"
+
+  io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
+  case "${_subcmd}" in
+    start|delete )
+      shell::eval muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --project "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
+      ;;
+    * )
+      muxcfg::usage
+  esac
+  return 0
 }
-muxcfg "$@"
+muxcfg::main "$@"
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

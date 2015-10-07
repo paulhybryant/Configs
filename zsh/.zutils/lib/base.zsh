@@ -127,19 +127,25 @@ function base::getopt() {
   eval set -- "${_opts}"
   local _var
   _fn_options=()
-  while true; do
+  while [[ $# -gt 0 ]]; do
     case "$1" in
       -- )
         [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true"
+        _var=''
         shift
-        break ;;
+        ;;
       -* )
         _var="$1"
-        shift ;;
+        shift
+        ;;
       * )
-        [[ -z ${_var} ]] && break
-        _fn_options[${_var}]="$1" && _var=''
-        shift ;;
+        if [[ -z ${_var} ]]; then
+          _fn_args=(${_fn_args} $1)
+        else
+          _fn_options[${_var}]="$1" && _var=''
+        fi
+        shift
+        ;;
    esac
   done
 }
