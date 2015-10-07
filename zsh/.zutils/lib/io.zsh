@@ -40,8 +40,9 @@ Gets yes or no reply from user.
 @return 0 if yes, 1 otherwise.
 =cut
 function io::yes_or_no() {
-  read -q "REPLY?$1?(y/n)"
-  io::vlog 1 "[${0:t}] ${REPLY}"
+  read -q "REPLY?$1?(y/n) [n]"
+  io::vlog 2 "[${0:t}] ${REPLY}"
+  echo -n "\n"
   [[ "$REPLY" =~ y\|Y ]] && return 0
   return 1
 }

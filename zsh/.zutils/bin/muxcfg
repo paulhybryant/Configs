@@ -7,56 +7,72 @@ source "$HOME/.zutils/lib/io.zsh"
 source "$HOME/.zutils/lib/mode.zsh"
 source "$HOME/.zutils/lib/shell.zsh"
 
-function muxcfg::mirror_and_start() {
-  local _muxproj_="$1"
-  local _muxconfig_="$2"
-  local _startcwd_="$3"
-  if [[ -d "$GIT_WORKING_DIR_ROOT/$_muxproj_" ]]; then
-    io::hl "Error: $GIT_WORKING_DIR_ROOT/$_muxproj_ exists!"
-    mode::dryrun || return 1
-  fi
-  if [[ $DRYRUN == true ]]; then
-    echo "sed -e \"s#\${SESSION}#$_muxproj_#\" -e \"s#\${ROOT}#$_startcwd_#\" \"$MUXDIR/project.yml.template\" > \"$_muxconfig_\""
-    echo "$GIT_NEW_WORKDIR_CMD $GIT_REPO $GIT_WORKING_DIR_ROOT/$_muxproj_ $_muxproj_"
-    echo "mux start \"$_muxproj_\""
-  else
-    sed -e "s#\${SESSION}#$_muxproj_#" -e "s#\${ROOT}#$_startcwd_#" "$MUXDIR/project.yml.template" > "$_muxconfig_"
-    $GIT_NEW_WORKDIR_CMD "$GIT_REPO" "$GIT_WORKING_DIR_ROOT/$_muxproj_" "$_muxproj_"
-    mux start "$_muxproj_"
-  fi
-}
 function muxcfg::start() {
-  return 0
+  setopt localoptions unset err_return
   local -A _fn_options
   base::getopt ys:t:w:c:p: noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  local _proj _cwd _cmd _src _dst _muxcfg
+  [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
+  [[ -z "${_fn_options[-p]}" ]] || _proj="${_fn_options[-p]}"
+  [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
+  [[ -z "${_fn_options[-s]}" ]] || _src="${_fn_options[-s]}"
+  [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
+  [[ -z "${_fn_options[-t]}" ]] || _dst="${_fn_options[-t]}"
+  [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
+  [[ -z "${_fn_options[-w]}" ]] || _cwd="${_fn_options[-w]}"
+  [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
+  [[ -z "${_fn_options[-c]}" ]] || _cmd="${_fn_options[-c]}"
 
-  local _muxconfig_="$MUXDIR/${_fn_options[--proj]}.yml"
-  START_CWD=${START_CWD//__MUXPROJ__/$_muxproj_}
-  if [[] -e "$_muxconfig_" ]]; then
-    io::yes_or_no "$_muxconfig_ exists, overwrite (y/n)? [n] "
-    if [[ $? -eq 0 ]]; then
-      echo "\n$_muxconfig_ will be overwritten."
-      mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
+  local _muxcfg="$HOME/.tmuxinator/${_proj}.yml"
+  if [[ -e "$_muxcfg" && \
+    (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+    if io::yes_or_no "$_muxcfg exists, overwrite"; then
+      io::warn "$_muxcfg will be overwritten."
     else
-      sed -e "s#\${SESSION}#$_muxproj_#" "$MUXDIR/project.yml.template"
+      return 1
     fi
-  else
-    mirror_and_start "$_muxproj_" "$_muxconfig_" "$START_CWD"
   fi
+
+  if base::exists -d "${_dst}"; then
+    io::hl "[muxcfg]: Directory ${_dst} exists!"
+    mode::dryrun || return 1
+  fi
+  shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $HOME/.tmuxinator/project.yml.template > ${_muxcfg}"
+  shell::eval "${_cmd} ${_src} ${_dst} ${_proj}"
+  shell::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
-  echo "delete"
-  return 0
-  local _muxproj_="$1"
-  io::yes_or_no "Delete project $_muxproj_ (y/n)? [n] "
-  if [[ $? -eq 0 && -e "$MUXDIR/$_muxproj_.yml" ]]; then
-    run "mux delete $_muxproj_" "Deleting tmuxinator config $MUXDIR/$_muxproj_.yml"
-    run "cd $GIT_REPO" "Chdir to $GIT_REPO"
-    run "git branch -D $_muxproj_" "Deleting branch $_muxproj_"
-    run "rm -rf $GIT_WORKING_DIR_ROOT/$_muxproj_" "Deleting directory $GIT_WORKING_DIR_ROOT/$_muxproj_"
-    run "tmux kill-session -t $_muxproj_" "Killing tmux session $_muxproj_"
+  setopt localoptions unset err_return
+  local -A _fn_options
+  base::getopt ys:t:w:c:p: noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  local _proj _cwd _cmd _src _dst _muxcfg
+  [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
+  [[ -z "${_fn_options[-p]}" ]] || _proj="${_fn_options[-p]}"
+  [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
+  [[ -z "${_fn_options[-s]}" ]] || _src="${_fn_options[-s]}"
+  [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
+  [[ -z "${_fn_options[-t]}" ]] || _dst="${_fn_options[-t]}"
+  [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
+  [[ -z "${_fn_options[-w]}" ]] || _cwd="${_fn_options[-w]}"
+  [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
+  [[ -z "${_fn_options[-c]}" ]] || _cmd="${_fn_options[-c]}"
+
+  if [[ (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+    io::yes_or_no "Delete project ${_proj}"
+  fi
+
+  if [[ -e "$HOME/.tmuxinator/${_proj}.yml" ]]; then
+    io::vlog 1 "Deleting tmuxinator config $HOME/.tmuxinator/${_proj}.yml"
+    shell::eval "mux delete ${_proj}"
+    cd ${_src}
+    io::vlog 1 "Deleting branch ${_proj}"
+    shell::eval "git branch -D ${_proj}"
+    io::vlog 1 "Deleting directory ${_dst}"
+    shell::eval "rm -rf ${_dst}"
+    io::vlog 1 "Killing tmux session ${_proj}"
+    shell::eval "tmux kill-session -t ${_proj}"
   else
-    echo "No project named $_muxproj_ exists."
+    io::err "No project named ${_proj} exists."
   fi
 }
 function muxcfg::git5wrapper() {
@@ -68,10 +84,8 @@ Usage: muxcfg [arguments] [command] [project]
 
 Arguments:
   -h or --help          Print the usage information
-  -n or --dryrun        Only print the command to be executed
   -s or --src           Source git repo directory
   -t or --dst           Destination git repo directory
-  -v or --verbose       Print additional information
   -y or --noconfirm     Skip confirmation
 
 Commands:
@@ -111,10 +125,15 @@ function muxcfg::main() {
   io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
   case "${_subcmd}" in
     start|delete )
-      shell::eval muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --project "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
+      if [[ ! (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+        muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" -y
+      else
+        muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
+      fi
       ;;
     * )
       muxcfg::usage
+      ;;
   esac
   return 0
 }

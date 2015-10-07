@@ -80,5 +80,16 @@ function mode::toggle_dryrun() {
 }
 
 : <<=cut
+=item Function C<mode::set_dryrun>
+
+Set dryrun mode to true
+
+@return NULL
+=cut
+function mode::set_dryrun() {
+  export __DRYRUN__=
+}
+
+: <<=cut
 =back
 =cut

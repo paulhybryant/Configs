@@ -10,6 +10,10 @@ function test::mode::toggle_dryrun() {
 }
 test::mode::toggle_dryrun
 
+function test::mode::set_dryrun() {
+}
+test::mode::set_dryrun
+
 function test::mode::dryrun() {
   mode::dryrun
   [[ $? -eq 1 ]] || return 1
@@ -22,6 +26,9 @@ function test::mode::dryrun() {
   mode::dryrun
   [[ $? -eq 1 ]] || return 1
 
+  mode::set_dryrun
+  mode::dryrun
+  [[ $? -eq 0 ]] || return 1
   return 0
 }
 test::mode::dryrun
