@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-
+#
 source "$HOME/.zutils/lib/init.zsh"
 source "$HOME/.zutils/lib/base.zsh"
 source "$HOME/.zutils/lib/git.zsh"
@@ -23,7 +23,7 @@ function muxcfg::start() {
   [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
   [[ -z "${_fn_options[-c]}" ]] || _cmd="${_fn_options[-c]}"
 
-  local _muxcfg="$HOME/.tmuxinator/${_proj}.yml"
+  local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && \
     (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
     if io::yes_or_no "$_muxcfg exists, overwrite"; then
@@ -37,7 +37,7 @@ function muxcfg::start() {
     io::hl "[muxcfg]: Directory ${_dst} exists!"
     mode::dryrun || return 1
   fi
-  shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $HOME/.tmuxinator/project.yml.template > ${_muxcfg}"
+  shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $MUXCFGDIR/project.yml.template > ${_muxcfg}"
   shell::eval "${_cmd} ${_src} ${_dst} ${_proj}"
   shell::eval "mux start ${_proj}"
 }
@@ -61,10 +61,10 @@ function muxcfg::delete() {
     io::yes_or_no "Delete project ${_proj}"
   fi
 
-  if [[ -e "$HOME/.tmuxinator/${_proj}.yml" ]]; then
-    io::vlog 1 "Deleting tmuxinator config $HOME/.tmuxinator/${_proj}.yml"
+  if [[ -e "$MUXCFGDIR/${_proj}.yml" ]]; then
+    io::vlog 1 "Deleting tmuxinator config $MUXCFGDIR/${_proj}.yml"
     shell::eval "mux delete ${_proj}"
-    cd ${_src}
+    cd "${_src}" || return 1
     io::vlog 1 "Deleting branch ${_proj}"
     shell::eval "git branch -D ${_proj}"
     io::vlog 1 "Deleting directory ${_dst}"
@@ -76,7 +76,7 @@ function muxcfg::delete() {
   fi
 }
 function muxcfg::git5wrapper() {
-  git5 mirror $1 $2 --allow_existing_branch --branch=$3
+  git5 mirror "$1" "$2" --allow_existing_branch --branch="$3"
 }
 function muxcfg::usage() {
   cat <<EOF
@@ -99,7 +99,7 @@ function muxcfg::main() {
   local -A _fn_options
   local -a _fn_args
   base::exists -b tmuxinator
-  base::exists -d "$HOME/.tmuxinator"
+  base::exists -d "$MUXCFGDIR"
   base::getopt hys:t: help,noconfirm,src:,dst: "$@"
   io::vlog 2 "${(kv)_fn_options}"
   io::vlog 2 "${_fn_args}"
@@ -126,9 +126,9 @@ function muxcfg::main() {
   case "${_subcmd}" in
     start|delete )
       if [[ ! (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
-        muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" -y
+        "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" -y
       else
-        muxcfg::${_subcmd} --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
+        "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
       fi
       ;;
     * )
@@ -137,5 +137,8 @@ function muxcfg::main() {
   esac
   return 0
 }
+
+MUXCFGDIR="$HOME/.tmuxinator"
 muxcfg::main "$@"
+
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
