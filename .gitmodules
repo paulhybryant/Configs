@@ -1,5 +1,5 @@
-[submodule "zsh/.zprezto"]
-	path = zsh/.zprezto
+[submodule "prezto/.zprezto"]
+	path = prezto/.zprezto
 	url = git@github.com:paulhybryant/prezto.git
 [submodule "misc/.dircolors-solarized"]
 	path = misc/.dircolors-solarized
@@ -7,9 +7,6 @@
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "zsh/.oh-my-zsh"]
-	path = zsh/.oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "oh-my-zsh/.oh-my-zsh"]
 	path = oh-my-zsh/.oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
