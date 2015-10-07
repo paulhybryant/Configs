@@ -76,7 +76,17 @@ function muxcfg::delete() {
   fi
 }
 function muxcfg::git5wrapper() {
-  git5 mirror "$1" "$2" --allow_existing_branch --branch="$3"
+  setopt localoptions err_return
+  local -A _fn_options
+  _fn_options=(-src '' -dst '' -branch '')
+  local -a _fn_args
+  _fn_args=("${(@M)@:#-*}")
+  base::parseargs
+
+  for arg in ${(k)_fn_options}; do
+    [[ -z ${_fn_options[${arg}]} ]] && io::err "Missing required argument ${arg}"
+  done
+  shell::eval "git5 mirror ${_fn_options[-src]} ${_fn_options[-dst]} --allow_existing_branch --branch=${_fn_options[-branch]}"
 }
 function muxcfg::usage() {
   cat <<EOF
