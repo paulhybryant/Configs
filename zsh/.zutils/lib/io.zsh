@@ -22,14 +22,14 @@ function io::hl() {
   printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
 }
 function io::err() {
-  io::hl "$*"
+  printf "%-${PREFIXWIDTH}s ${COLOR_Red}$*\n${COLOR_Color_Off}" "[Error]"
   return 1
 }
 function io::warn() {
-  printf "${COLOR_Yellow}$*\n${COLOR_Color_Off}"
+  printf "%-${PREFIXWIDTH}s ${COLOR_Yellow}$*\n${COLOR_Color_Off}" "[Warning]"
 }
 function io::msg() {
-  printf "${COLOR_Green}$*\n${COLOR_Color_Off}"
+  printf "%-${PREFIXWIDTH}s ${COLOR_Green}$*\n${COLOR_Color_Off}" "[Info]"
 }
 
 : <<=cut

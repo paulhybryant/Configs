@@ -1,68 +1,84 @@
 #!/usr/bin/env zsh
 
-function bootstrap() {
-  setopt localoptions err_return
+function bootstrap::usage() {
+  cat <<EOF
+Usage: bootstrap [arguments]
 
-  [[ $# -eq 1 ]]
-  source "$1/init.zsh"
-  source "$1/base.zsh"
-  source "$1/configs.zsh"
-  source "$1/file.zsh"
-  source "$1/io.zsh"
-  source "$1/os.zsh"
-
-  configs::_bootstrap
-  io::msg "Installing ${BREWVERSION} dependencies..."
-  os::LINUX && sudo apt-get install build-essential curl git m4 ruby texinfo \
-    libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev \
-    trash-cli clipit xclip x11-xkb-utils
-
+Arguments:
+  -h or --help          Print the usage information
+  -n or --dryrun        Dryrun
+EOF
+  return 1
+}
+function bootstrap::main() {
+  setopt localoptions unset err_return
   local -A _fn_options
+  base::getopt hn help,dryrun "$@"
+
+  [[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]] && \
+    bootstrap::usage
+  [[ ! (-z "${_fn_options[--dryrun]}" && -z "${_fn_options[-n]}") ]] && \
+    mode::set_dryrun
+
+  configs::bootstrap
+  io::msg "Installing ${BREWVERSION} dependencies..."
+  os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
+    ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
+    zlib1g-dev trash-cli clipit xclip x11-xkb-utils"
+
   if ! base::exists -d "${BREWHOME}"; then
     io::msg "Cloning ${BREWVERSION}"
-    git clone "https://github.com/Homebrew/${BREWVERSION}" "${BREWHOME}"
+    shell::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
+      \"${BREWHOME}\""
   fi
 
-  brew install coreutils stow
+  shell::eval "brew install coreutils stow"
   io::msg "Creating symlinks with stow"
-  mkdir -p "$HOME/.tmux/plugins"
-  mkdir -p "$HOME/.vim/"
-  ln -s $HOME/.vim $HOME/.nvim
-  for module in misc tmux tmuxinator vim x11 zsh; do
-    stow "${module}"
+  shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
+  shell::eval "mkdir -p \"$HOME/.vim/\""
+  shell::eval "ln -s $HOME/.vim $HOME/.nvim"
+  for module in misc tmux vim zsh; do
+    shell::eval "stow \"${module}\""
   done
 
   io::msg "Tapping extra repositories"
-  brew tap paulhybryant/myformulae
-  brew tap homebrew/x11
-  brew tap homebrew/dupes
-  brew tap homebrew/completions
-  brew tap iveney/mocha
+  shell::eval "brew tap paulhybryant/myformulae"
+  shell::eval "brew tap homebrew/x11"
+  shell::eval "brew tap homebrew/dupes"
+  shell::eval "brew tap homebrew/completions"
+  shell::eval "brew tap iveney/mocha"
 
   io::msg "Installing softwares"
-  brew install --HEAD paulhybryant/myformulae/powerline-shell \
-    paulhybryant/myformulae/zsh-completions
-  brew install --with-gssapi --with-libssh2 --with-rtmpdump curl
-  brew install --disable-nls --override-system-vi --with-client-server \
-    --with-lua --with-luajit --with-gui vim
-  brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat dos2unix \
-    most stdman
-  brew gem install tmuxinator npm automux
-  brew install --HEAD vimdoc vroom
-  brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb
-  npm install -g urchin
+  shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell \
+    paulhybryant/myformulae/zsh-completions"
+  shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
+  shell::eval "brew install --disable-nls --override-system-vi \
+    --with-client-server --with-lua --with-luajit --with-gui vim"
+  shell::eval "brew install brew-gem cmake ctags git htop python python3 \
+    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman"
+  shell::eval "brew gem install tmuxinator npm automux"
+  shell::eval "brew install --HEAD vimdoc vroom"
+  shell::eval "brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb"
+  shell::eval "npm install -g urchin"
 
   os::OSX && io::msg "Installing extra stuff for OSX" && \
-    brew install brew-cask clipper macvim trash lsof \
-    reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt
+    shell::eval "brew install brew-cask clipper macvim trash lsof \
+    reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
 
-  pip install powerline-status advanced-ssh-config neovim Terminator
+  shell::eval "pip install powerline-status advanced-ssh-config neovim \
+    Terminator"
 
   io::msg "All Done!"
 }
 
 setopt local_options
-bootstrap "${0:a:h}"
+source "${0:a:h}/../lib/init.zsh"
+source "${0:a:h}/../lib/base.zsh"
+source "${0:a:h}/../lib/configs.zsh"
+source "${0:a:h}/../lib/io.zsh"
+source "${0:a:h}/../lib/os.zsh"
+source "${0:a:h}/../lib/shell.zsh"
+
+bootstrap::main "$@"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

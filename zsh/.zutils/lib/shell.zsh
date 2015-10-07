@@ -29,7 +29,7 @@ Eval the strings, and output logs based on verbose level.
 function shell::eval() {
   setopt localoptions err_return nounset
   if mode::dryrun; then
-    echo "[Dryrun] $*"
+    printf "%-${PREFIXWIDTH}s $*\n" "[Dryrun]"
   else
     eval "$*"
   fi
