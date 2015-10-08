@@ -1,4 +1,6 @@
-source "$HOME/.antigen.zsh"
+if [[ -e "$HOME/.antigen.zsh" ]]; then
+  source "$HOME/.antigen.zsh"
+fi
 
 source "$HOME/.zutils/lib/configs.zsh"
 
@@ -6,7 +8,9 @@ source "$HOME/.zutils/lib/configs.zsh"
 # One such example is tmux.
 configs::bootstrap
 
-source "$HOME/.zshrc.prezto"
+if [[ -e "$HOME/.zshrc.prezto" ]]; then
+  source "$HOME/.zshrc.prezto"
+fi
 
 configs::config
 
