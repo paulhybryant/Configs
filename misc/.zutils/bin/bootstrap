@@ -56,7 +56,7 @@ function bootstrap::main() {
     --with-client-server --with-lua --with-luajit --with-gui vim"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
     the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman"
-  shell::eval "brew gem install tmuxinator npm automux"
+  shell::eval "brew gem install tmuxinator npm automux pypy pypy3"
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb"
   shell::eval "npm install -g urchin"

@@ -98,7 +98,7 @@ function configs::_config_env() {
 
   # setup pre-command {{{
   function configs::_myprecmd() {
-    export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
+    # export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
     if [[ ! -z "$TMUX" ]]; then
       local _pat
       for var in ${__tmux_vars__};
