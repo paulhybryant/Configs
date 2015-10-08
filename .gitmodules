@@ -10,3 +10,6 @@
 [submodule "oh-my-zsh/.oh-my-zsh"]
 	path = oh-my-zsh/.oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "third_party/antigen"]
+	path = third_party/antigen
+	url = https://github.com/zsh-users/antigen.git
