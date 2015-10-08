@@ -1,5 +1,6 @@
 source "$HOME/.antigen.zsh"
 
+antigen use oh-my-zsh
 antigen bundle sorin-ionescu/prezto
 
 # Tell antigen that you're done.
