@@ -16,7 +16,7 @@ function test::shell::eval() {
   [[ "${_expected}" == "${_actual}" ]]
 
   mode::toggle_dryrun
-  _expected='[Dryrun] echo "hello world"'
+  _expected=$(printf "%-${PREFIXWIDTH}s echo \"hello world\"" '[Dryrun]')
   _actual="$(shell::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 }

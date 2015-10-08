@@ -33,7 +33,7 @@ function muxcfg::start() {
     fi
   fi
 
-  if base::exists -d "${_dst}"; then
+  if [[ -d "${_dst}" ]]; then
     io::hl "[muxcfg]: Directory ${_dst} exists!"
     mode::dryrun || return 1
   fi
@@ -108,8 +108,8 @@ function muxcfg::main() {
   setopt localoptions unset err_return
   local -A _fn_options
   local -a _fn_args
-  base::exists -b tmuxinator
-  base::exists -d "$MUXCFGDIR"
+  whence tmuxinator > /dev/null
+  shell::eval "mkdir -p \"$MUXCFGDIR\""
   base::getopt hys:t: help,noconfirm,src:,dst: "$@"
   io::vlog 2 "${(kv)_fn_options}"
   io::vlog 2 "${_fn_args}"
@@ -130,7 +130,7 @@ function muxcfg::main() {
     _git_new_workdir_cmd="git::new_workdir"
     _cwd=${_fn_options[--dst]}/${_project}
   fi
-  base::exists --sub "${_git_new_workdir_cmd}"
+  whence -f "${_git_new_workdir_cmd}" > /dev/null
 
   io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
   case "${_subcmd}" in

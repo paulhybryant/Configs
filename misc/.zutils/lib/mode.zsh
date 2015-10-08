@@ -28,8 +28,7 @@ $1 Verbose level
 @return 0 if satisfied, 1 otherwise
 =cut
 function mode::verbose() {
-  local -A _fn_options
-  base::exists -v '__VERBOSE__' || __VERBOSE__='0'
+  [[ -n ${__VERBOSE__+1} ]] || __VERBOSE__='0'
   [[ "$__VERBOSE__" < "$1" ]] && return 1
   return 0
 }
@@ -58,8 +57,7 @@ Whether it is in dryrun mode.
 @return 0 if it is dryrun mode, 1 otherwise.
 =cut
 function mode::dryrun() {
-  local -A _fn_options
-  base::exists -v '__DRYRUN__' && return 0
+  [[ -n ${__DRYRUN__+1} ]] && return 0
   return 1
 }
 
@@ -71,8 +69,7 @@ Toggle dryrun mode
 @return NULL
 =cut
 function mode::toggle_dryrun() {
-  local -A _fn_options
-  if base::exists -v '__DRYRUN__'; then
+  if [[ -n ${__DRYRUN__+1} ]]; then
     unset __DRYRUN__
   else
     export __DRYRUN__=

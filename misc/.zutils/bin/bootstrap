@@ -26,7 +26,7 @@ function bootstrap::main() {
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev trash-cli clipit xclip x11-xkb-utils"
 
-  if ! base::exists -d "${BREWHOME}"; then
+  if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}"
     shell::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
       \"${BREWHOME}\""
