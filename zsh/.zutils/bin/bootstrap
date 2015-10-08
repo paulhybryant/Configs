@@ -34,6 +34,7 @@ function bootstrap::main() {
 
   shell::eval "brew install coreutils stow"
   io::msg "Creating symlinks with stow"
+  shell::eval "mkdir -p \"$HOME/.antigen/repos/\""
   shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
   shell::eval "ln -s $HOME/.vim $HOME/.nvim"
