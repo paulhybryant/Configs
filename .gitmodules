@@ -10,6 +10,3 @@
 [submodule "third_party/antigen"]
 	path = third_party/antigen
 	url = https://github.com/zsh-users/antigen.git
-[submodule "prezto/.zprezto"]
-	path = prezto/.zprezto
-	url = https://github.com/sorin-ionescu/prezto.git
