@@ -1,18 +1,15 @@
-if [[ -e "$HOME/.antigen.zsh" ]]; then
-  source "$HOME/.antigen.zsh"
-fi
+source "$HOME/.antigen.zsh"
 
+antigen bundle sorin-ionescu/prezto
+
+# Tell antigen that you're done.
+antigen apply
+
+source "$HOME/.zutils/lib/init.zsh"
 source "$HOME/.zutils/lib/configs.zsh"
-
-# Some binary won't be available in path if only installed in brew.
-# One such example is tmux.
-configs::bootstrap
-
-if [[ -e "$HOME/.zshrc.prezto" ]]; then
-  source "$HOME/.zshrc.prezto"
-fi
-
+source "$HOME/.zutils/lib/util.zsh"
 configs::config
+util::start_ssh_agent "ssh-agent"
 
 # Local configurations
 if [[ -e "$HOME/.zshrc.local" ]]; then

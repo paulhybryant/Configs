@@ -20,18 +20,15 @@ source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"
 source "${0:h}/util.zsh"
 
-function configs::bootstrap() {
+function configs::config() {
   if os::OSX; then
     configs::_config_darwin
   elif os::LINUX; then
     configs::_config_linux
   fi
   configs::_config_brew
-}
-function configs::config() {
   configs::_config_env
   configs::_config_alias
-  util::start_ssh_agent "ssh-agent"
 }
 function configs::end() {
   setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
