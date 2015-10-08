@@ -1,0 +1,12 @@
+unsetkey "$"
+
+setkey down "j"
+setkey up "k"
+setkey page_down "^d"
+setkey page_up "^u"
+setkey search_forward "/"
+setkey search_backward "?"
+setkey bob "gg"
+setkey eob "G"
+setkey column_left "h"
+setkey column_right "l"
