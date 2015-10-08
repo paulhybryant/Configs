@@ -45,10 +45,10 @@ function configs::_config_darwin() {
   export BREWHOME="$HOME/.$BREWVERSION"
   alias updatedb="/usr/libexec/locate.updatedb"
   export CMDPREFIX="g"
-  alias ls="${CMDPREFIX}ls"
-  alias mktemp="${CMDPREFIX}mktemp"
-  alias stat="${CMDPREFIX}stat"
-  alias date="${CMDPREFIX}date"
+  alias ls='${CMDPREFIX}ls'
+  alias mktemp='${CMDPREFIX}mktemp'
+  alias stat='${CMDPREFIX}stat'
+  alias date='${CMDPREFIX}date'
 }
 function configs::_config_linux() {
   export BREWVERSION="linuxbrew"
