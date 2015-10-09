@@ -49,13 +49,14 @@ function init::sourced() {
   local _cur_signature="${(P)_var}"
 
   local _signature
-  if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
+  # if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
     # Fallback to OSX native stat
-    _signature="$1-$(stat -f '%m' $1)"
-  else
-    _signature="$1-$(${CMDPREFIX}stat -c '%Y' $1)"
+    # _signature="$1-$(stat -f '%m' $1)"
+  # else
+    # _signature="$1-$(${CMDPREFIX}stat -c '%Y' $1)"
     # $(${CMDPREFIX}date -r "$1" +%s)
-  fi
+  # fi
+  _signature="$(${aliases[stat]:-stat} -c '%Y' $1)"
 
   if [[ "${_signature}" == "$_cur_signature" ]]; then
     return 0
@@ -95,11 +96,12 @@ $1 Filename
 =cut
 function time::getmtime() {
   local _mtime
-  if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
-    _mtime="$(stat -f '%m' $1)"
-  else
-    _mtime="$(${CMDPREFIX}stat -c '%Y' $1)"
-  fi
+  # if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
+    # _mtime="$(stat -f '%m' $1)"
+  # else
+    # _mtime="$(${CMDPREFIX}stat -c '%Y' $1)"
+  # fi
+  _mtime="$(${aliases[stat]:-stat} -c '%Y' $1)"
   echo "${_mtime}"
 }
 

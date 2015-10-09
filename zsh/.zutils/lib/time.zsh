@@ -16,8 +16,6 @@ File: time.zsh - Time related utility functions
 
 init::sourced "${0:a}" && return
 
-source "${0:h}/os.zsh"
-
 : <<=cut
 =item Function C<time::human_readable_date>
 
