@@ -1,5 +1,6 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+bindkey -d                                                                      # Unbind all keys
 # antigen {{{
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
@@ -178,11 +179,11 @@ function customize() {
 
   unalias run-help 2>/dev/null
   autoload run-help
+  autoload -Uz up-line-or-beginning-search                                      # Put cursor at end of line when using Up for command history
+  autoload -Uz down-line-or-beginning-search                                    # Put cursor at end of line when using Down for command history
   autoload -Uz bashcompinit
   autoload -Uz compinit compdef
-  autoload -Uz down-line-or-beginning-search
   autoload -Uz promptinit
-  autoload -Uz up-line-or-beginning-search                                      # Put cursor at end of line when using Up/Down for command history
 
   util::install_precmd
   util::setup_abbrev
