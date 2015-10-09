@@ -93,9 +93,6 @@ function customize() {
   setopt localoptions err_return
 
   [[ -d ~/.zutils ]]
-  source ~/.zutils/lib/os.zsh
-  os::bootstrap
-
   source ~/.zutils/lib/init.zsh
   init::once
 
@@ -129,9 +126,9 @@ function customize() {
   export SAVEHIST=60000
   export HISTFILE="$HOME/.zsh_history"
   case $HIST_STAMPS in
-    "mm/dd/yyyy") alias history='fc -fl 1' ;;
-    "dd.mm.yyyy") alias history='fc -El 1' ;;
-    "yyyy-mm-dd") alias history='fc -il 1' ;;
+    'mm/dd/yyyy') alias history='fc -fl 1' ;;
+    'dd.mm.yyyy') alias history='fc -El 1' ;;
+    'yyyy-mm-dd') alias history='fc -il 1' ;;
     *) alias history='fc -l 1' ;;
   esac
 
@@ -157,17 +154,17 @@ function customize() {
   zle -N down-line-or-beginning-search
   zle -N up-line-or-beginning-search
 
-  bindkey "^[OD" beginning-of-line
-  bindkey "^[OC" end-of-line
-  bindkey -s "OM" ""
-  # bindkey "^[[3~" delete-char
+  bindkey '^[OD' beginning-of-line
+  bindkey '^[OC' end-of-line
+  bindkey -s 'OM' ''
+  # bindkey '^[[3~' delete-char
   # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-  bindkey -r "^S"
-  bindkey "^R" history-incremental-pattern-search-backward
-  bindkey "^[[A" up-line-or-beginning-search                                    # Up
-  bindkey "^[[B" down-line-or-beginning-search                                  # Down
-  bindkey "^I" expand-or-complete-with-dots
-  # bindkey "^I" expand-or-complete-prefix
+  bindkey -r '^S'
+  bindkey '^R' history-incremental-pattern-search-backward
+  bindkey '^[[A' up-line-or-beginning-search                                    # Up
+  bindkey '^[[B' down-line-or-beginning-search                                  # Down
+  bindkey '^I' expand-or-complete-with-dots
+  # bindkey '^I' expand-or-complete-prefix
 
   autoload -Uz bashcompinit
   autoload -Uz compinit compdef
@@ -179,17 +176,17 @@ function customize() {
   alias la=file::la
   alias ll=file::ll
   alias ls="${aliases[ls]:-ls} --color=tty"
-  alias nvim="NVIM=nvim nvim"
-  alias pfd="whence -f"
+  alias nvim='NVIM=nvim nvim'
+  alias pfd='whence -f'
   alias rm=file::rm
-  alias ta="util::ta"
+  alias ta='util::ta'
   alias tl='tmux list-sessions'
-  alias tmux="TERM=screen-256color tmux -2"
+  alias tmux='TERM=screen-256color tmux -2'
   alias ts=util::tmux_start
   alias vi=util::vim
   alias vim=util::vim
-  # alias vi="vi -p"
-  # alias vim="vim -p"
+  # alias vi='vi -p'
+  # alias vim='vim -p'
   # Use vimpager to replace less, which is used to view man page
   # export PAGER=vimpager
   # alias less=$PAGER
@@ -197,7 +194,7 @@ function customize() {
 
   util::install_precmd
   util::setup_abbrev
-  util::start_ssh_agent "ssh-agent"
+  util::start_ssh_agent 'ssh-agent'
 
   # Local configurations
   if [[ -f ~/.zshrc.local ]]; then

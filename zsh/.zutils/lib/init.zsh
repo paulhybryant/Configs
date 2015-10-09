@@ -24,11 +24,40 @@ Put the following boilerplate at the start of all library files.
 =over 4
 =cut
 
+function os::OSX() {
+  [[ "$OSTYPE" == "darwin"* ]] && return 0
+  return 1
+}
+function os::LINUX() {
+  [[ "$OSTYPE" == "linux-gnu"* ]] && return 0
+  return 1
+}
+function os::CYGWIN() {
+  [[ "$OSTYPE" == "cygwin32"* ]] && return 0
+  return 1
+}
+function os::WINDOWS() {
+  [[ "$OSTYPE" == "windows"* ]] && return 0
+  return 1
+}
 function init::once() {
   if [[ -n "${__ONCEINIT__+1}" ]]; then
     return 0
   else
     export __ONCEINIT__="yes"
+  fi
+  if os::OSX; then
+    export BREWVERSION="homebrew"
+    export BREWHOME="$HOME/.$BREWVERSION"
+    alias updatedb="/usr/libexec/locate.updatedb"
+    export CMDPREFIX="g"
+    alias ls='${CMDPREFIX}ls'
+    alias mktemp='${CMDPREFIX}mktemp'
+    alias stat='${CMDPREFIX}stat'
+    alias date='${CMDPREFIX}date'
+  elif os::LINUX; then
+    export BREWVERSION="linuxbrew"
+    export BREWHOME="$HOME/.$BREWVERSION"
   fi
   typeset -Ag __LIB_REGISTRY__
   export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"

@@ -20,7 +20,6 @@ function bootstrap::main() {
   [[ ! (-z "${_fn_options[--dryrun]}" && -z "${_fn_options[-n]}") ]] && \
     mode::set_dryrun
 
-  os::bootstrap
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
@@ -70,15 +69,17 @@ function bootstrap::main() {
     Terminator"
 
   io::msg "All Done!"
+
+  source ~/.zshrc
 }
 
 setopt LOCAL_OPTIONS
-source "${0:a:h}/../lib/os.zsh"
 source "${0:a:h}/../lib/init.zsh"
 source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
+init::once
 bootstrap::main "$@"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
