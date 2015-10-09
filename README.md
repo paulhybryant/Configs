@@ -3,5 +3,4 @@ My workspace configs
 
 My work environment bootstrap and configurations
 
-git clone --recursive git@github.com:paulhybryant/Configs.git $HOME/.configs
-$HOME/.configs/zsh/.zutils/bin/bootstrap
+sh -c "`curl -fsSL https://raw.githubusercontent.com/paulhybryant/Configs/master/install.sh`"

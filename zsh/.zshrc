@@ -1,14 +1,16 @@
 if [[ -d "$HOME/.antigen/repos/antigen" ]]; then
   source "$HOME/.antigen/repos/antigen/antigen.zsh"
 
+  antigen use prezto
+  for module in fasd git; do
+    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
+    antigen bundle sorin-ionescu/prezto modules/${module}
+  done
+
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib
-  antigen use prezto
-  antigen bundle sorin-ionescu/prezto --loc=modules/fasd
-
   # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
   # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
