@@ -3,10 +3,10 @@ if [[ -d "$HOME/.antigen/repos/antigen" ]]; then
 
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib
+  antigen use prezto
 
   # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
   # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-  antigen bundle sorin-ionescu/prezto
 
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy

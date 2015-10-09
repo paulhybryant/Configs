@@ -97,7 +97,7 @@ function! s:ConfigureYcm()
   let g:ycm_min_num_identifier_candidate_chars = 0
   let g:ycm_min_num_of_chars_for_completion = 2
   let g:ycm_open_loclist_on_ycm_diags = 1
-  let g:ycm_path_to_python_interpreter = ''
+  let g:ycm_path_to_python_interpreter = '/usr/bin/python'
   let g:ycm_register_as_syntastic_checker = 1
   let g:ycm_semantic_triggers =  {
     \   'c' : ['->', '.'],
@@ -113,8 +113,8 @@ function! s:ConfigureYcm()
     \   'erlang' : [':'],
     \ }
   let g:ycm_server_keep_logfiles = 10                                           " keep log files
-  let g:ycm_server_log_level = 'info'                                           " Default info
-  let g:ycm_server_use_vim_stdout = 1
+  let g:ycm_server_log_level = 'debug'                                          " Default info
+  let g:ycm_server_use_vim_stdout = 1                                           " Set to 0 if ycm server crashes to debug
   let g:ycm_show_diagnostics_ui = 1
   let g:ycm_warning_symbol = '>>'
 endfunction
@@ -189,6 +189,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
+  NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap and saved file
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
@@ -336,6 +337,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'bling/vim-airline'                                                 " Lean & mean status/tabline for vim that's light as air
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
+    let g:airline#extensions#nrrwrgn#enabled = 1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#show_tab_type = 1
     let g:airline#extensions#tabline#left_sep = ''
@@ -637,6 +639,7 @@ if s:vimplugin_size >= 0
   endfunction
   NeoBundle 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'disabled' : 1,
         \ 'lazy' : 1,
         \ }                                                                     " Make vim an IDE for writing vimscript
   let s:vimsupport = neobundle#get('Vim-Support')
@@ -694,7 +697,6 @@ if s:vimplugin_size >= 1
   NeoBundle 'kana/vim-gf-diff'                                                  " Go to changed block under cursor from diff output
   NeoBundle 'kana/vim-gf-user'                                                  " Framework for customizing gf
   NeoBundle 'kana/vim-idwintab'                                                 " Assign unique id for windows
-  NeoBundle 'kana/vim-narrow'                                                   " Emulate Emacs's narrow feature
   NeoBundle 'kana/vim-niceblock'                                                " Make visual block mode more useful
   NeoBundle 'kana/vim-operator-siege'                                           " Operator to siege (surround) texts
   NeoBundle 'kana/vim-operator-user'                                            " User defined operator
@@ -1447,9 +1449,9 @@ if s:vimplugin_size >= 99
   NeoBundle 'danro/rename.vim'                                                  " Rename the underlying filename of the buffer
   NeoBundle 'kana/vim-metarw'
   NeoBundle 'kana/vim-metarw-git'
+  NeoBundle 'kana/vim-narrow'                                                   " Emulate Emacs's narrow feature
   NeoBundle 'kana/vim-surround'
   NeoBundle 'kana/vim-repeat'
-  NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'guns/xterm-color-table.vim'                                        " Show xterm color tables in vim
   NeoBundle 'chrisbra/Colorizer'                                                " Highlight hex / color name with the actual color
   NeoBundle 'gorodinskiy/vim-coloresque'
