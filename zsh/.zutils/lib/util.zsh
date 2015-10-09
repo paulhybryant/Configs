@@ -316,8 +316,10 @@ function util::tmux_attach() {
   \tmux attach -d -t "$1"
 }
 
-function util::_myprecmd() {
+function util::powerline_shell() {
   export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
+}
+function util::copy_tmux_vars() {
   if [[ ! -z "$TMUX" ]]; then
     local _pat
     for var in ${__TMUX_VARS__};
@@ -339,11 +341,11 @@ function util::_myprecmd() {
 }
 function util::install_precmd() {
   for s in "${precmd_functions[@]}"; do
-    if [ "$s" = "util::_myprecmd" ]; then
+    if [[ "$s" == "util::powerline_shell" || "$s" == "util::copy_tmux_vars" ]]; then
       return
     fi
   done
-  precmd_functions+=(util::_myprecmd)
+  precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
 }
 
 : <<=cut

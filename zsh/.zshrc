@@ -100,14 +100,17 @@ function customize() {
   source ~/.zutils/lib/file.zsh
   source ~/.zutils/lib/util.zsh
 
-  export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
-  unalias run-help 2>/dev/null
-  autoload run-help
-  export HELPDIR="$BREWHOME/share/zsh/help"
+  # Don't enable the following line, it will screw up HOME and END key in tmux
+  # export TERM=xterm-256color
+  # If it is really need for program foo, create an alias like this
+  # alias foo='TERM=xterm-256color foo'
 
+  export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
+  export HELPDIR="$BREWHOME/share/zsh/help"
   export EDITOR='vim'
   export GREP_OPTIONS='--color=auto'
   export PAGER='most'
+  # export PAGER=vimpager
   export PREFIXWIDTH=10
   export MANPAGER="$PAGER"
   export TERM='screen-256color'
@@ -115,13 +118,6 @@ function customize() {
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
-  # Don't enable the following line, it will screw up HOME and END key in tmux
-  # export TERM=xterm-256color
-  # If it is really need for program foo, create an alias like this
-  # alias foo='TERM=xterm-256color foo'
-
-  eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
-
   export HISTSIZE=50000
   export SAVEHIST=60000
   export HISTFILE="$HOME/.zsh_history"
@@ -137,6 +133,20 @@ function customize() {
   stty ixoff -ixon
   stty stop undef
   stty start undef
+
+  alias grepc='grep -C 5 '
+  alias la=file::la
+  alias ll=file::ll
+  alias ls="${aliases[ls]:-ls} --color=tty"
+  alias nvim='NVIM=nvim nvim'
+  alias pfd='whence -f'
+  alias rm=file::rm
+  alias ta='util::ta'
+  alias tl='tmux list-sessions'
+  alias tmux='TERM=screen-256color tmux -2'
+  alias ts=util::tmux_start
+  alias vi=util::vim                                                            # alias vi='vi -p'
+  alias vim=util::vim                                                           # alias vim='vim -p'
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
 
@@ -166,31 +176,13 @@ function customize() {
   bindkey '^I' expand-or-complete-with-dots
   # bindkey '^I' expand-or-complete-prefix
 
+  unalias run-help 2>/dev/null
+  autoload run-help
   autoload -Uz bashcompinit
   autoload -Uz compinit compdef
   autoload -Uz down-line-or-beginning-search
   autoload -Uz promptinit
   autoload -Uz up-line-or-beginning-search                                      # Put cursor at end of line when using Up/Down for command history
-
-  alias grepc='grep -C 5 '
-  alias la=file::la
-  alias ll=file::ll
-  alias ls="${aliases[ls]:-ls} --color=tty"
-  alias nvim='NVIM=nvim nvim'
-  alias pfd='whence -f'
-  alias rm=file::rm
-  alias ta='util::ta'
-  alias tl='tmux list-sessions'
-  alias tmux='TERM=screen-256color tmux -2'
-  alias ts=util::tmux_start
-  alias vi=util::vim
-  alias vim=util::vim
-  # alias vi='vi -p'
-  # alias vim='vim -p'
-  # Use vimpager to replace less, which is used to view man page
-  # export PAGER=vimpager
-  # alias less=$PAGER
-  # alias zless=$PAGER
 
   util::install_precmd
   util::setup_abbrev

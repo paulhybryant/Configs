@@ -16,6 +16,9 @@ File: colors.zsh - Colorful terminal output.
 
 init::sourced "${0:a}" && return
 
+[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
+  eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
+
 : <<=cut
 =item Function C<colors::define>
 
