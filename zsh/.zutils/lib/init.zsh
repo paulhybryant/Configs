@@ -24,17 +24,17 @@ Put the following boilerplate at the start of all library files.
 =over 4
 =cut
 
-function init::runonce() {
-  if [[ -n "${__RUNONCE__+1}" ]]; then
-    return
+function init::once() {
+  if [[ -n "${__ONCEINIT__+1}" ]]; then
+    return 0
   else
-    export __RUNONCE__="yes"
+    export __ONCEINIT__="yes"
   fi
-  typeset -Ag __lib_registry__
-  typeset -ag __tmux_vars__
-  __tmux_vars__=(DISPLAY SSH_AUTH_SOCK SSH_CLIENT SSH_OS)
+  typeset -Ag __LIB_REGISTRY__
+  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
+  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
+  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
 }
-init::runonce
 
 : <<=cut
 =item Function C<init::sourced>
@@ -77,9 +77,9 @@ $1 Absolute path to the file to check.
 function init::registered() {
   local _mtime
   _mtime="$(time::getmtime $1)"
-  if [[ -z ${__lib_registry__["$1"]} || \
-      ${__lib_registry__["$1"]} != "${_mtime}" ]]; then
-    __lib_registry__["$1"]="${_mtime}"
+  if [[ -z ${__LIB_REGISTRY__["$1"]} || \
+      ${__LIB_REGISTRY__["$1"]} != "${_mtime}" ]]; then
+    __LIB_REGISTRY__["$1"]="${_mtime}"
     return 1
   else
     return 0

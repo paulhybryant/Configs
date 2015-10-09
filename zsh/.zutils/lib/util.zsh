@@ -19,6 +19,9 @@ init::sourced "${0:a}" && return
 source "${0:h}/io.zsh"
 source "${0:h}/strings.zsh"
 
+typeset -ag __TMUX_VARS__
+__TMUX_VARS__=(DISPLAY SSH_AUTH_SOCK SSH_CLIENT SSH_OS)
+
 : <<=cut
 =item Function C<util::geoinfo>
 
@@ -75,7 +78,7 @@ Tmux attach wrapper, which updates tmux environment as configured.
 @return NULL
 =cut
 function util::ta() {
-  for var in ${__tmux_vars__};
+  for var in ${__TMUX_VARS__};
   do
     local _value=
     eval _value=\$${var}
@@ -317,7 +320,7 @@ function util::_myprecmd() {
   export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
   if [[ ! -z "$TMUX" ]]; then
     local _pat
-    for var in ${__tmux_vars__};
+    for var in ${__TMUX_VARS__};
     do
       if [[ -z "${_pat}" ]]; then
         _pat="^${var}"

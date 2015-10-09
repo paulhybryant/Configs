@@ -18,22 +18,18 @@ function os::OSX() {
   [[ "$OSTYPE" == "darwin"* ]] && return 0
   return 1
 }
-
 function os::LINUX() {
   [[ "$OSTYPE" == "linux-gnu"* ]] && return 0
   return 1
 }
-
 function os::CYGWIN() {
   [[ "$OSTYPE" == "cygwin32"* ]] && return 0
   return 1
 }
-
 function os::WINDOWS() {
   [[ "$OSTYPE" == "windows"* ]] && return 0
   return 1
 }
-
 function os::bootstrap() {
   if os::OSX; then
     export BREWVERSION="homebrew"
