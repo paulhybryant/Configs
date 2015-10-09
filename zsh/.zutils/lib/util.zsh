@@ -111,7 +111,6 @@ function util::setup_abbrev() {
           'cx' 'chmod +x'
           'da' 'du -sch'
           'e'  'print -l'
-          'j' 'jobs -l'
           'lad' $'ls -d .*(/)\n# only show dot-directories'
           'lb' 'listabbrevs'
           'lsa' $'ls -a .*(.)\n# only show dot-files'

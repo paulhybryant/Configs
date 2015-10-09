@@ -96,7 +96,6 @@ function configs::_config_env() {
 
   fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
   util::setup_abbrev
-  [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && source $(brew --prefix)/etc/profile.d/autojump.sh
 
   # setup pre-command {{{
   function configs::_myprecmd() {
