@@ -79,7 +79,7 @@ source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
-init::once
+init::runonce
 bootstrap::main "$@"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

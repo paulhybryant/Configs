@@ -40,7 +40,7 @@ function os::WINDOWS() {
   [[ "$OSTYPE" == "windows"* ]] && return 0
   return 1
 }
-function init::once() {
+function init::runonce() {
   if [[ -n "${__ONCEINIT__+1}" ]]; then
     return 0
   else
@@ -63,6 +63,7 @@ function init::once() {
   export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
   export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
 }
 
 : <<=cut
