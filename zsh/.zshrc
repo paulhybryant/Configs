@@ -130,31 +130,18 @@ stty start undef
 
 (( $+aliases[run-help] )) && unalias run-help
 alias grepc='grep -C 5 '
-alias la=file::la
-alias ll=file::ll
 alias ls="${aliases[ls]:-ls} --color=tty"
 alias info='info --vi-keys'
 alias nvim='NVIM=nvim nvim'
 alias pfd='whence -f'
-alias rm='file::rm'
-alias ta='util::ta'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
-alias ts='util::tmux_start'
-alias vi='util::vim'                                                          # alias vi='vi -p'
-alias vim='util::vim'                                                         # alias vim='vim -p'
 
 # case-insensitive (uppercase from lowercase) completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # process completion
 zstyle ':completion:*:processes' command "ps -au$USER"
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
-function expand-or-complete-with-dots() {                                     # Displays red dots when autocompleting
-  printf "%s......%s" "${COLOR_Red}" "${COLOR_Color_Off}"
-  zle expand-or-complete-prefix
-  zle redisplay
-}
-zle -N expand-or-complete-with-dots
 zle -N down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
@@ -184,13 +171,20 @@ function customize() {
   source ~/.zutils/lib/init.zsh
   init::runonce
 
-  source ~/.zutils/lib/colors.zsh
   source ~/.zutils/lib/file.zsh
-  source ~/.zutils/lib/util.zsh
+  alias la=file::la
+  alias ll=file::ll
+  alias rm='file::rm'
 
+  source ~/.zutils/lib/util.zsh
+  alias ta='util::ta'
+  alias ts='util::tmux_start'
+  alias vi='util::vim'                                                          # alias vi='vi -p'
+  alias vim='util::vim'                                                         # alias vim='vim -p'
   util::install_precmd
   util::setup_abbrev
   util::start_ssh_agent 'ssh-agent'
+  zle -N util::expand-or-complete-with-dots
 }
 customize
 

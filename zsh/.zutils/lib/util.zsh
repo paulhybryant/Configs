@@ -16,6 +16,7 @@ File: util.zsh - Various utility functions.
 
 (( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
 
+source "${0:h}/colors.zsh"
 source "${0:h}/io.zsh"
 source "${0:h}/strings.zsh"
 
@@ -346,6 +347,12 @@ function util::install_precmd() {
     fi
   done
   precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
+}
+
+function util::expand-or-complete-with-dots() {                                     # Displays red dots when autocompleting
+  printf "%s......%s" "${COLOR_Red}" "${COLOR_Color_Off}"
+  zle expand-or-complete-prefix
+  zle redisplay
 }
 
 : <<=cut
