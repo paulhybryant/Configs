@@ -37,9 +37,9 @@ $1 Filename
 function time::getmtime() {
   local _mtime
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    _mtime="$(stat -f '%m' $1)"
+    _mtime="$(\stat -f '%m' $1)"
   else
-    _mtime="$(stat -c '%Y' $1)"
+    _mtime="$(\stat -c '%Y' $1)"
     # $(${CMDPREFIX}date -r "$1" +%s)
   fi
   echo "${_mtime}"
