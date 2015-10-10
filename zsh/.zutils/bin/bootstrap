@@ -70,7 +70,8 @@ function bootstrap::main() {
 
   io::msg "All Done!"
 
-  source ~/.zshrc
+  io::msg "Sourcing zsh configurations."
+  shell::eval "source ~/.zshrc"
 }
 
 setopt LOCAL_OPTIONS
