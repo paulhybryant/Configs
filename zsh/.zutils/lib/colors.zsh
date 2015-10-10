@@ -14,7 +14,7 @@ File: colors.zsh - Colorful terminal output.
 =over 4
 =cut
 
-init::sourced "${0:a}" && return
+(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
 
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
   eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"

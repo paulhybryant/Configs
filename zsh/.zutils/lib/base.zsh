@@ -14,7 +14,7 @@ File: base.zsh - Basic utiliti functions.
 =over 4
 =cut
 
-init::sourced "${0:a}" && return
+(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
 
 : <<=cut
 =item Function C<base::exists>

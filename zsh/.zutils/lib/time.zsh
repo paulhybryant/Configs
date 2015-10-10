@@ -14,7 +14,10 @@ File: time.zsh - Time related utility functions
 =over 4
 =cut
 
-init::sourced "${0:a}" && return
+(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+
+source "${0:h}/io.zsh"
+source "${0:h}/os.zsh"
 
 : <<=cut
 =item Function C<time::human_readable_date>

@@ -24,46 +24,25 @@ Put the following boilerplate at the start of all library files.
 =over 4
 =cut
 
-function os::OSX() {
-  [[ "$OSTYPE" == "darwin"* ]] && return 0
-  return 1
-}
-function os::LINUX() {
-  [[ "$OSTYPE" == "linux-gnu"* ]] && return 0
-  return 1
-}
-function os::CYGWIN() {
-  [[ "$OSTYPE" == "cygwin32"* ]] && return 0
-  return 1
-}
-function os::WINDOWS() {
-  [[ "$OSTYPE" == "windows"* ]] && return 0
-  return 1
-}
-function init::runonce() {
-  if [[ -n "${__ONCEINIT__+1}" ]]; then
-    return 0
+(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+
+: <<=cut
+=item Function C<time::getmtime>
+
+Get last modification time of a file.
+$1 Filename
+
+@return string of the last modified time of a file.
+=cut
+function time::getmtime() {
+  local _mtime
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    _mtime="$(stat -f '%m' $1)"
   else
-    export __ONCEINIT__="yes"
+    _mtime="$(stat -c '%Y' $1)"
+    # $(${CMDPREFIX}date -r "$1" +%s)
   fi
-  if os::OSX; then
-    export BREWVERSION="homebrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-    alias updatedb="/usr/libexec/locate.updatedb"
-    export CMDPREFIX="g"
-    alias ls='${CMDPREFIX}ls'
-    alias mktemp='${CMDPREFIX}mktemp'
-    alias stat='${CMDPREFIX}stat'
-    alias date='${CMDPREFIX}date'
-  elif os::LINUX; then
-    export BREWVERSION="linuxbrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-  fi
-  typeset -Ag __LIB_REGISTRY__
-  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
-  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
-  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
+  echo "${_mtime}"
 }
 
 : <<=cut
@@ -77,17 +56,9 @@ function init::sourced() {
   # strip the .zsh extension
   local _var="__SOURCED_${${1:t:u}%.ZSH}__"
   local _cur_signature="${(P)_var}"
-
   local _signature
-  # if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
-    # Fallback to OSX native stat
-    # _signature="$1-$(stat -f '%m' $1)"
-  # else
-    # _signature="$1-$(${CMDPREFIX}stat -c '%Y' $1)"
-    # $(${CMDPREFIX}date -r "$1" +%s)
-  # fi
-  _signature="$(${aliases[stat]:-stat} -c '%Y' $1)"
 
+  _signature="$1-$(time::getmtime $1)"
   if [[ "${_signature}" == "$_cur_signature" ]]; then
     return 0
   else
@@ -116,23 +87,32 @@ function init::registered() {
   fi
 }
 
-: <<=cut
-=item Function C<time::getmtime>
+source "${0:h}/os.zsh"
 
-Get last modification time of a file.
-$1 Filename
-
-@return string of the last modified time of a file.
-=cut
-function time::getmtime() {
-  local _mtime
-  # if [[ "$OSTYPE" == "darwin"* && -z "${CMDPREFIX}" ]]; then
-    # _mtime="$(stat -f '%m' $1)"
-  # else
-    # _mtime="$(${CMDPREFIX}stat -c '%Y' $1)"
-  # fi
-  _mtime="$(${aliases[stat]:-stat} -c '%Y' $1)"
-  echo "${_mtime}"
+function init::runonce() {
+  if [[ -n "${__ONCEINIT__+1}" ]]; then
+    return 0
+  else
+    export __ONCEINIT__="yes"
+  fi
+  if os::OSX; then
+    export BREWVERSION="homebrew"
+    export BREWHOME="$HOME/.$BREWVERSION"
+    alias updatedb="/usr/libexec/locate.updatedb"
+    export CMDPREFIX="g"
+    alias ls='${CMDPREFIX}ls'
+    alias mktemp='${CMDPREFIX}mktemp'
+    alias stat='${CMDPREFIX}stat'
+    alias date='${CMDPREFIX}date'
+  elif os::LINUX; then
+    export BREWVERSION="linuxbrew"
+    export BREWHOME="$HOME/.$BREWVERSION"
+  fi
+  typeset -Ag __LIB_REGISTRY__
+  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
+  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
+  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
 }
 
 : <<=cut

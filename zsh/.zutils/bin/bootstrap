@@ -78,6 +78,7 @@ setopt LOCAL_OPTIONS
 source "${0:a:h}/../lib/init.zsh"
 source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
+source "${0:a:h}/../lib/os.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
 init::runonce

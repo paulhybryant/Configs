@@ -14,7 +14,7 @@ File: strings.zsh - Utility functions for string manipulation.
 =over 4
 =cut
 
-init::sourced "${0:a}" && return
+(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
 
 source "${0:h}/base.zsh"
 
