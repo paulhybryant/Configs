@@ -58,10 +58,13 @@ function init::sourced() {
   local _cur_signature="${(P)_var}"
   local _signature
 
+  (( ${+functions[io::vlog]} )) && io::vlog 1 "Trying to source ${1:t}"
   _signature="$1-$(time::getmtime $1)"
   if [[ "${_signature}" == "$_cur_signature" ]]; then
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "${1:t} already sourced, timestamp: ${_cur_signature}"
     return 0
   else
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_signature}"
     eval "${_var}=\"${_signature}\""
     return 1
   fi
