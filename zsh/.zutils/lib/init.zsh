@@ -108,6 +108,7 @@ function init::runonce() {
     export BREWVERSION="linuxbrew"
     export BREWHOME="$HOME/.$BREWVERSION"
   fi
+  alias ls="${aliases[ls]:-ls} --color=tty"
   typeset -Ag __LIB_REGISTRY__
   export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
   export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"

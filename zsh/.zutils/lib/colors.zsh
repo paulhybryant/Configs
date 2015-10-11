@@ -100,7 +100,6 @@ function colors::define() {
   export COLOR_On_ICyan='\033[0;106m'    # Cyan
   export COLOR_On_IWhite='\033[0;107m'   # White
 }
-colors::define
 
 : <<=cut
 =item Function C<colors::manpage>
@@ -143,7 +142,6 @@ function colors::manpage() {
   # Light Gray  0;37     White         1;37
   #########################################
 }
-colors::manpage
 
 : <<=cut
 =back

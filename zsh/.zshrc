@@ -28,27 +28,27 @@ fi
 # zshoptions {{{
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
-setopt AUTOCD                                                                # Switching directories for lazy people
+setopt AUTOCD                                                                  # Switching directories for lazy people
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_MINUS
 setopt PUSHD_SILENT
 
 # Completion
-setopt ALWAYS_TO_END                                                          # When complete from middle, move cursor
+setopt ALWAYS_TO_END                                                            # When complete from middle, move cursor
 setopt AUTO_LIST
-setopt AUTO_MENU                                                              # Automatically use menu completion after the second consecutive request for completion
+setopt AUTO_MENU                                                                # Automatically use menu completion after the second consecutive request for completion
 setopt AUTO_PARAM_SLASH
-setopt COMPLETE_ALIASES                                                       # Prevent aliases from being internally substituted before completion is attempted
-setopt COMPLETE_IN_WORD                                                       # Not just at the end
+setopt COMPLETE_ALIASES                                                         # Prevent aliases from being internally substituted before completion is attempted
+setopt COMPLETE_IN_WORD                                                         # Not just at the end
 setopt GLOB_COMPLETE
 setopt LIST_AMBIGUOUS
 setopt LIST_TYPES
 
 # Expansion and Globbing
-setopt EXTENDED_GLOB                                                          # Weird &amp; wacky pattern matching - yay zsh!
-setopt NO_NOMATCH                                                             # pass through '*' if globbing fails
-setopt CASEMATCH                                                              # Whether the regex comparison (e.g. =~) will match case
+setopt EXTENDED_GLOB                                                            # Weird &amp; wacky pattern matching - yay zsh!
+setopt NO_NOMATCH                                                               # pass through '*' if globbing fails
+setopt CASEMATCH                                                                # Whether the regex comparison (e.g. =~) will match case
 
 # History
 setopt APPEND_HISTORY
@@ -56,42 +56,42 @@ setopt BANG_HIST
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS                                                   # Do not enter command lines into the history list if they are duplicates of the previous event
-setopt HIST_IGNORE_DUPS                                                       # ignore duplication command history list
-setopt HIST_IGNORE_SPACE                                                      # Remove command lines from the history list when the first character on the line is a space
+setopt HIST_IGNORE_ALL_DUPS                                                     # Do not enter command lines into the history list if they are duplicates of the previous event
+setopt HIST_IGNORE_DUPS                                                         # ignore duplication command history list
+setopt HIST_IGNORE_SPACE                                                        # Remove command lines from the history list when the first character on the line is a space
 setopt HIST_NO_STORE
-setopt HIST_REDUCE_BLANKS                                                     # Remove superfluous blanks from each command line being added to the history list
+setopt HIST_REDUCE_BLANKS                                                       # Remove superfluous blanks from each command line being added to the history list
 setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY                                                            # When using ! cmds, confirm first
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY                                                          # share command history data
+setopt HIST_VERIFY                                                              # When using ! cmds, confirm first
+setopt NO_INC_APPEND_HISTORY
+setopt SHARE_HISTORY                                                            # share command history data
 
 # Input/Output
 setopt ALIASES
 setopt CLOBBER
 setopt CORRECT
-setopt INTERACTIVE_COMMENTS                                                   # Escape commands so I can use them later
-setopt PRINT_EXIT_VALUE                                                       # Alert me if something's failed
+setopt INTERACTIVE_COMMENTS                                                     # Escape commands so I can use them later
+setopt PRINT_EXIT_VALUE                                                         # Alert me if something's failed
 setopt SHORT_LOOPS
 
 # Job Control
 setopt CHECK_JOBS
-setopt NOHUP                                                                  # Don't kill background jobs when I logout
+setopt NOHUP                                                                    # Don't kill background jobs when I logout
 
 # Prompting
 setopt PROMPT_BANG
-setopt NO_PROMPT_CR                                                           # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
+setopt NO_PROMPT_CR                                                             # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
 setopt PROMPT_PERCENT
 setopt PROMPT_SUBST
 
 # Scripts and Functions
-setopt LOCAL_OPTIONS                                                          # Allow setting function local options with 'setopt localoptions foo nobar'
+setopt LOCAL_OPTIONS                                                            # Allow setting function local options with 'setopt localoptions foo nobar'
 
 # Shell Emulation
 setopt NO_CONTINUE_ON_ERROR
 
 # Shell State
-setopt VI                                                                     # Use vi key bindings in ZSH
+setopt VI                                                                       # Use vi key bindings in ZSH
 # }}}
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
@@ -128,41 +128,35 @@ stty ixoff -ixon
 stty stop undef
 stty start undef
 
-(( $+aliases[run-help] )) && unalias run-help
 alias grepc='grep -C 5 '
-alias ls="${aliases[ls]:-ls} --color=tty"
 alias info='info --vi-keys'
 alias nvim='NVIM=nvim nvim'
 alias pfd='whence -f'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
 
-# case-insensitive (uppercase from lowercase) completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# process completion
-zstyle ':completion:*:processes' command "ps -au$USER"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                             # case-insensitive (uppercase from lowercase) completion
+zstyle ':completion:*:processes' command "ps -au$USER"                          # process completion
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
+
 zle -N down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
+bindkey -v                                                                      # Use vi key bindings
 bindkey '^[OD' beginning-of-line
 bindkey '^[OC' end-of-line
 bindkey -s 'OM' ''
-# bindkey '^[[3~' delete-char
-# By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-bindkey -r '^S'
+bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
 bindkey '^R' history-incremental-pattern-search-backward
-bindkey '^[[A' up-line-or-beginning-search                                    # Up
-bindkey '^[[B' down-line-or-beginning-search                                  # Down
-bindkey '^I' expand-or-complete-with-dots
+bindkey '^[[A' up-line-or-beginning-search                                      # Up
+bindkey '^[[B' down-line-or-beginning-search                                    # Down
 # bindkey '^I' expand-or-complete-prefix
+# bindkey '^[[3~' delete-char
 
-autoload run-help
-autoload -Uz up-line-or-beginning-search                                      # Put cursor at end of line when using Up for command history
-autoload -Uz down-line-or-beginning-search                                    # Put cursor at end of line when using Down for command history
-autoload -Uz bashcompinit
-autoload -Uz compinit compdef
-autoload -Uz promptinit
+(( $+aliases[run-help] )) && unalias run-help
+autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
+autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
+autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
 function customize() {
   setopt localoptions err_return
@@ -170,6 +164,10 @@ function customize() {
   [[ -d ~/.zutils ]]
   source ~/.zutils/lib/init.zsh
   init::runonce
+
+  source ~/.zutils/lib/colors.zsh
+  colors::define
+  colors::manpage
 
   source ~/.zutils/lib/file.zsh
   alias la=file::la
@@ -185,6 +183,7 @@ function customize() {
   util::setup_abbrev
   util::start_ssh_agent 'ssh-agent'
   zle -N util::expand-or-complete-with-dots
+  bindkey '^I' util::expand-or-complete-with-dots
 }
 customize
 
@@ -193,6 +192,9 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-bashcompinit
+autoload -Uz compinit compdef
 compinit
+autoload -Uz bashcompinit
+bashcompinit
+autoload -Uz promptinit
 promptinit
