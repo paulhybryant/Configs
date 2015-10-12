@@ -96,7 +96,7 @@ function init::runonce() {
   if [[ -n "${__ONCEINIT__+1}" ]]; then
     return 0
   else
-    export __ONCEINIT__="yes"
+    export __ONCEINIT__=
   fi
   if os::OSX; then
     export BREWVERSION="homebrew"
