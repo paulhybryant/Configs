@@ -46,6 +46,7 @@
   @ Learn zsh completions
   @ Abbreviation breaks history search, fix it.
   @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params.
+  @ Manage myconfigs with antigen
 
 * misc
 = Misc @p:2 =

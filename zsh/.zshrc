@@ -1,47 +1,6 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 bindkey -d                                                                      # Unbind all keys
-# antigen {{{
-if [[ -d ~/.antigen/repos/antigen ]]; then
-  source ~/.antigen/repos/antigen/antigen.zsh
-
-  antigen use prezto
-  local pmodules
-  # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory completion prompt \
-    command-not-found fasd git history-substring-search homebrew python ssh \
-    syntax-highlighting tmux)
-  # os::OSX && pmodules+=(osx)
-  for module in ${pmodules}; do
-    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
-    antigen bundle sorin-ionescu/prezto modules/${module}
-  done
-  unset pmodules
-
-  # Alternative (from zpreztorc), order matters!
-  # zstyle ':prezto:load' pmodule \
-    # 'environment' \
-    # 'terminal' \
-    # 'editor' \
-    # 'history' \
-    # 'directory' \
-    # 'spectrum' \
-    # 'utility' \
-    # 'completion' \
-    # 'prompt'
-  # zstyle ':prezto:module:editor' key-bindings 'vi'
-
-  # antigen use oh-my-zsh
-  # antigen bundle --loc=lib
-  # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
-  # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-  # antigen theme candy
-  # antigen theme robbyrussell/oh-my-zsh themes/candy
-
-  # Tell antigen that you're done.
-  antigen apply
-fi
-# }}}
 # zshoptions {{{
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
@@ -115,7 +74,6 @@ setopt VI                                                                       
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
-
 export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 export HELPDIR="$BREWHOME/share/zsh/help"
 export EDITOR='vim'
@@ -151,28 +109,21 @@ alias nvim='NVIM=nvim nvim'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                             # case-insensitive (uppercase from lowercase) completion
-zstyle ':completion:*:processes' command "ps -au$USER"                          # process completion
-zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
-
-zle -N down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-
-bindkey -v                                                                      # Use vi key bindings
-bindkey '^[OD' beginning-of-line
-bindkey '^[OC' end-of-line
-bindkey -s 'OM' ''
-bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-bindkey '^R' history-incremental-pattern-search-backward
-bindkey '^[[A' up-line-or-beginning-search                                      # Up
-bindkey '^[[B' down-line-or-beginning-search                                    # Down
-# bindkey '^I' expand-or-complete-prefix
-# bindkey '^[[3~' delete-char
-
 (( $+aliases[run-help] )) && unalias run-help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
+
+bindkey -v                                                                      # Use vi key bindings
+bindkey '^[OD' beginning-of-line                                                # Set left arrow as HOME
+bindkey '^[OC' end-of-line                                                      # Set right arrow as END
+bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
+bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
+bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
+bindkey '^[[A' up-line-or-beginning-search                                      # Up
+bindkey '^[[B' down-line-or-beginning-search                                    # Down
+# bindkey '^I' expand-or-complete-prefix
+# bindkey '^[[3~' delete-char
 
 function customize() {
   setopt localoptions err_return
@@ -186,8 +137,8 @@ function customize() {
   colors::manpage
 
   source ~/.zutils/lib/file.zsh
-  alias la=file::la
-  alias ll=file::ll
+  alias la='file::la'
+  alias ll='file::ll'
   alias rm='file::rm'
 
   source ~/.zutils/lib/util.zsh
@@ -198,30 +149,60 @@ function customize() {
   util::install_precmd
   util::setup_abbrev
   os::OSX && util::fix_display_osx
-  os::LINUX && util::start_ssh_agent 'ssh-agent'
-  os::OSX && util::start_ssh_agent 'gnubby-ssh-agent'
-
-  function expand-or-complete-with-dots() {                                     # Displays red dots when autocompleting
-    printf "${COLOR_Red}......${COLOR_Color_Off}"
-    zle expand-or-complete-prefix
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  bindkey '^I' expand-or-complete-with-dots
+  os::LINUX && util::start_ssh_agent 'ssh-agent' || (os::OSX && util::start_ssh_agent 'gnubby-ssh-agent')
 
   source ~/.zutils/lib/git.zsh
   source ~/.zutils/lib/net.zsh
+
+  autoload -Uz bashcompinit && bashcompinit
+  zstyle ":completion:*" show-completer true
+
 }
 customize
+
+# antigen {{{
+if [[ -d ~/.antigen/repos/antigen ]]; then
+  source ~/.antigen/repos/antigen/antigen.zsh
+
+  antigen use prezto
+  local pmodules
+  # Order matters! (per zpreztorc)
+  pmodules=(environment terminal editor history directory completion prompt \
+    command-not-found fasd git history-substring-search homebrew python ssh \
+    syntax-highlighting tmux)
+  # os::OSX && pmodules+=(osx)
+  for module in ${pmodules}; do
+    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
+    antigen bundle sorin-ionescu/prezto modules/${module}
+  done
+  unset pmodules
+
+  # Alternative (from zpreztorc), order matters!
+  # zstyle ':prezto:load' pmodule \
+    # 'environment' \
+    # 'terminal' \
+    # 'editor' \
+    # 'history' \
+    # 'directory' \
+    # 'spectrum' \
+    # 'utility' \
+    # 'completion' \
+    # 'prompt'
+  # zstyle ':prezto:module:editor' key-bindings 'vi'
+
+  # antigen use oh-my-zsh
+  # antigen bundle --loc=lib
+  # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
+  # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
+  # antigen theme candy
+  # antigen theme robbyrussell/oh-my-zsh themes/candy
+
+  # Tell antigen that you're done.
+  antigen apply
+fi
+# }}}
 
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-autoload -Uz compinit compdef
-compinit
-autoload -Uz bashcompinit
-bashcompinit
-autoload -Uz promptinit
-promptinit
