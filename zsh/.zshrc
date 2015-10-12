@@ -181,7 +181,8 @@ function customize() {
   alias vim='util::vim'                                                         # alias vim='vim -p'
   util::install_precmd
   util::setup_abbrev
-  util::start_ssh_agent 'ssh-agent'
+  os::OSX && util::fix_display_osx
+  util::start_ssh_agent 'gnubby-ssh-agent'
   zle -N util::expand-or-complete-with-dots
   bindkey '^I' util::expand-or-complete-with-dots
 }

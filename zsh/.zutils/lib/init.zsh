@@ -113,6 +113,7 @@ function init::runonce() {
   fi
   alias ls="${aliases[ls]:-ls} --color=tty"
   typeset -Ag __LIB_REGISTRY__
+  os::OSX && export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
   export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$PATH"
   export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"

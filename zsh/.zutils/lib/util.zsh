@@ -355,6 +355,17 @@ function util::expand-or-complete-with-dots() {                                 
   zle redisplay
 }
 
+function util::fix_display_osx() {
+  local _dispdir _dispfile _dispnew
+  _dispdir=$(dirname "$DISPLAY")
+  _dispfile=$(basename "$DISPLAY")
+  _dispnew="${_dispdir}/:0"
+  if [[ -e "$DISPLAY" && "${_dispfile}" = "org.macosforge.xquartz:0" ]]; then
+    mv "$DISPLAY" "${_dispnew}"
+  fi
+  export DISPLAY=${_dispnew}
+}
+
 : <<=cut
 =back
 =cut
