@@ -349,12 +349,6 @@ function util::install_precmd() {
   precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
 }
 
-function util::expand-or-complete-with-dots() {                                     # Displays red dots when autocompleting
-  printf "%s......%s" "${COLOR_Red}" "${COLOR_Color_Off}"
-  zle expand-or-complete-prefix
-  zle redisplay
-}
-
 function util::fix_display_osx() {
   local _dispdir _dispfile _dispnew
   _dispdir=$(dirname "$DISPLAY")
