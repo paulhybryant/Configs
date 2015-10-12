@@ -37,7 +37,7 @@ function bootstrap::main() {
   shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
   [[ ! -d ~/.nvim ]] && shell::eval "ln -s $HOME/.vim $HOME/.nvim"
-  for module in misc prezto tmux vim; do
+  for module in misc tmux vim; do
     shell::eval "stow \"${module}\""
   done
   os::OSX && stow osx
