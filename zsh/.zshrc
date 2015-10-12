@@ -182,7 +182,8 @@ function customize() {
   util::install_precmd
   util::setup_abbrev
   os::OSX && util::fix_display_osx
-  util::start_ssh_agent 'gnubby-ssh-agent'
+  os::LINUX && util::start_ssh_agent 'gnubbyagent'
+  os::OSX && util::start_ssh_agent 'gnubby-ssh-agent'
   zle -N util::expand-or-complete-with-dots
   bindkey '^I' util::expand-or-complete-with-dots
 }
