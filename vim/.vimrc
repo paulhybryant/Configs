@@ -383,12 +383,6 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Info help page source for vim-ref
   " }}}
   " {{{2
-  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
-        \ 'regular_namne' : 'Align',
-        \ 'type' : 'vba',
-        \ }                                                                     " Alinghing texts based on specific charater etc
-  " }}}
-  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
         \   'autoload' : {
         \     'commands' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
@@ -806,6 +800,12 @@ if s:vimplugin_size >= 1
   NeoBundle 'glts/vim-radical', {
         \ 'depends' : ['vim-magnum'],
         \ }                                                                     " Show number under cursor in hex, octal, binary
+  " }}}
+  " {{{2
+  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
+        \ 'regular_namne' : 'Align',
+        \ 'type' : 'vba',
+        \ }                                                                     " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
