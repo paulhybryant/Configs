@@ -46,8 +46,10 @@ function bootstrap::main() {
   shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell \
     paulhybryant/myformulae/zsh-completions"
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
-  shell::eval "brew install --disable-nls --override-system-vi \
-    --with-client-server --with-lua --with-luajit --with-gui vim"
+  os::LINUX && shell::eval "brew install --disable-nls --override-system-vi \
+    --with-client-server --with-lua --with-luajit --with-gtk+ vim"
+  os::OSX && shell::eval "brew install --disable-nls --override-system-vi \
+    --with-client-server --with-lua --with-luajit vim"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
     the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman"
   shell::eval "brew gem install tmuxinator npm automux pypy pypy3"
