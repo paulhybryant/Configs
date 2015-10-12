@@ -19,13 +19,14 @@ function bootstrap::main() {
     zlib1g-dev trash-cli clipit xclip x11-xkb-utils"
 
   if [[ ! -d "${BREWHOME}" ]]; then
-    io::msg "Cloning ${BREWVERSION}"
+    io::msg "Cloning ${BREWVERSION}..."
     shell::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
       \"${BREWHOME}\""
   fi
 
+  shell::eval "brew update && brew upgrade $(brew outdated)"
   shell::eval "brew install coreutils stow"
-  io::msg "Creating symlinks with stow"
+  io::msg "Creating symlinks with stow..."
   shell::eval "mkdir -p \"$HOME/.antigen/repos/\""
   shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
@@ -35,14 +36,14 @@ function bootstrap::main() {
   done
   os::OSX && shell::eval "[[ -d ${module} ]] && stow osx"
 
-  io::msg "Tapping extra repositories"
+  io::msg "Tapping extra repositories..."
   shell::eval "brew tap paulhybryant/myformulae"
   shell::eval "brew tap homebrew/x11"
   shell::eval "brew tap homebrew/dupes"
   shell::eval "brew tap homebrew/completions"
   shell::eval "brew tap iveney/mocha"
 
-  io::msg "Installing softwares"
+  io::msg "Installing softwares..."
   shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell \
     paulhybryant/myformulae/zsh-completions"
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
@@ -51,22 +52,19 @@ function bootstrap::main() {
   os::OSX && shell::eval "brew install --disable-nls --override-system-vi \
     --with-client-server --with-lua --with-luajit vim"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman"
-  shell::eval "brew gem install tmuxinator npm automux pypy pypy3"
+    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh"
+  shell::eval "pip install powerline-status advanced-ssh-config neovim \
+    terminatorcli bz2file"
+  shell::eval "brew gem install tmuxinator automux pypy pypy3"
   shell::eval "brew install --HEAD vimdoc vroom"
-  shell::eval "brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb"
+  shell::eval "brew install npm"
   shell::eval "npm install -g urchin"
 
-  os::OSX && io::msg "Installing extra stuff for OSX" && \
+  os::OSX && io::msg "Installing extra stuff for OSX..." && \
     shell::eval "brew install brew-cask clipper macvim trash lsof \
     reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
 
-  shell::eval "pip install powerline-status advanced-ssh-config neovim \
-    Terminator"
-
-  io::msg "All Done!"
-
-  io::msg "Sourcing zsh configurations."
+  io::msg "All done! Sourcing zsh configurations..."
   shell::eval "source ~/.zshrc"
 }
 
@@ -91,7 +89,8 @@ local _config_dir
 _config_dir="${0:A:h}/../../../"
 init::runonce
 shell::eval "pushd ${_config_dir:a}"
-bootstrap::main
+# bootstrap::main
+shell::eval "source ~/.zshrc"
 shell::eval "popd"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
