@@ -7,12 +7,29 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 
   antigen use prezto
   local pmodules
-  pmodules=(fasd git)
+  # Order matters! (per zpreztorc)
+  pmodules=(environment terminal editor history directory completion prompt \
+    command-not-found fasd git history-substring-search homebrew python ssh \
+    syntax-highlighting tmux)
+  # os::OSX && pmodules+=(osx)
   for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
     antigen bundle sorin-ionescu/prezto modules/${module}
   done
   unset pmodules
+
+  # Alternative (from zpreztorc), order matters!
+  # zstyle ':prezto:load' pmodule \
+    # 'environment' \
+    # 'terminal' \
+    # 'editor' \
+    # 'history' \
+    # 'directory' \
+    # 'spectrum' \
+    # 'utility' \
+    # 'completion' \
+    # 'prompt'
+  # zstyle ':prezto:module:editor' key-bindings 'vi'
 
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib
@@ -131,7 +148,6 @@ stty start undef
 alias grepc='grep -C 5 '
 alias info='info --vi-keys'
 alias nvim='NVIM=nvim nvim'
-alias pfd='whence -f'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
 
@@ -192,6 +208,9 @@ function customize() {
   }
   zle -N expand-or-complete-with-dots
   bindkey '^I' expand-or-complete-with-dots
+
+  source ~/.zutils/lib/git.zsh
+  source ~/.zutils/lib/net.zsh
 }
 customize
 
