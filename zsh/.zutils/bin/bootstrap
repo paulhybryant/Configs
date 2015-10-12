@@ -12,13 +12,6 @@ EOF
 }
 function bootstrap::main() {
   setopt localoptions unset err_return
-  local -A _fn_options
-  base::getopt hn help,dryrun "$@"
-
-  [[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]] && \
-    bootstrap::usage
-  [[ ! (-z "${_fn_options[--dryrun]}" && -z "${_fn_options[-n]}") ]] && \
-    mode::set_dryrun
 
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
@@ -36,11 +29,11 @@ function bootstrap::main() {
   shell::eval "mkdir -p \"$HOME/.antigen/repos/\""
   shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
-  [[ ! -d ~/.nvim ]] && shell::eval "ln -s $HOME/.vim $HOME/.nvim"
+  shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   for module in misc tmux vim; do
-    shell::eval "stow \"${module}\""
+    shell::eval "[[ -d ${module} ]] && stow ${module}"
   done
-  os::OSX && stow osx
+  os::OSX && shell::eval "[[ -d ${module} ]] && stow osx"
 
   io::msg "Tapping extra repositories"
   shell::eval "brew tap paulhybryant/myformulae"
@@ -82,7 +75,19 @@ source "${0:a:h}/../lib/io.zsh"
 source "${0:a:h}/../lib/os.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
+local -A _fn_options
+base::getopt hn help,dryrun "$@"
+
+[[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]] && \
+  bootstrap::usage
+[[ ! (-z "${_fn_options[--dryrun]}" && -z "${_fn_options[-n]}") ]] && \
+  mode::set_dryrun
+
+unset _fn_options
+
 init::runonce
-bootstrap::main "$@"
+shell::eval "pushd $(os::realpath ${0:a:h}/../../../)"
+bootstrap::main
+shell::eval "popd"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

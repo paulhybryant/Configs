@@ -34,3 +34,10 @@ function os::WINDOWS() {
   [[ "$OSTYPE" == "windows"* ]] && return 0
   return 1
 }
+function os::realpath() {
+  if which -s realpath > /dev/null; then
+    realpath "$@"
+  elif os::OSX; then
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+  fi
+}
