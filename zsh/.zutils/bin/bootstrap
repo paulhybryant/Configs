@@ -40,6 +40,7 @@ function bootstrap::main() {
   for module in misc prezto tmux vim; do
     shell::eval "stow \"${module}\""
   done
+  os::OSX && stow osx
 
   io::msg "Tapping extra repositories"
   shell::eval "brew tap paulhybryant/myformulae"
