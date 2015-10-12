@@ -85,8 +85,10 @@ base::getopt hn help,dryrun "$@"
 
 unset _fn_options
 
+local _config_dir
+_config_dir="${0:a:h}/../../"
 init::runonce
-shell::eval "pushd $(os::realpath ${0:a:h}/../../../)"
+shell::eval "pushd ${_config_dir:A}"
 bootstrap::main
 shell::eval "popd"
 
