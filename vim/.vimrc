@@ -11,61 +11,14 @@ let g:vimsyn_folding = 'af'                                                     
 let s:vimplugin_size = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
-" Setup NeoBundle and OS.vim {{{1
-filetype off
-if has('vim_starting')
-  " Install NeoBundle if needed {{{2
-  let s:neobundle_base_path = expand('~/.vim/bundle/')
-  let s:neobundle_install_path = s:neobundle_base_path . 'neobundle.vim/'
-  function! s:InstallNeobundleIfNotPresent(base_path, path)
-    let l:url = 'https://github.com/Shougo/neobundle.vim.git'
-    if !isdirectory(a:path)
-      echo 'Installing neobundle...'
-      silent execute '!mkdir -p' a:base_path
-      silent execute '!git clone' l:url a:path
-    endif
-  endfunction
-  call s:InstallNeobundleIfNotPresent(
-        \ s:neobundle_base_path, s:neobundle_install_path)
-  " }}}
-  execute 'set runtimepath+=' . s:neobundle_install_path
-endif
-call neobundle#begin(s:neobundle_base_path)
-NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
-NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                       " Provides consistency across OSes
-let g:OS = os#init()
-" }}}
-" Windows Compatible {{{1
-if g:OS.is_windows
-  source $VIMRUNTIME/mswin.vim
-  behave mswin
-
-  let $TERM='win32'
-  " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
-  " across (heterogeneous) systems easier.
-  set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-  " Be nice and check for multi_byte even if the config requires
-  " multi_byte support most of the time
-  if has('multi_byte')
-    " Windows cmd.exe still uses cp850. If Windows ever moved to
-    " Powershell as the primary terminal, this would be utf-8
-    set termencoding=cp850
-    setglobal fileencoding=utf-8
-    " Windows has traditionally used cp1252, so it's probably wise to
-    " fallback into cp1252 instead of eg. iso-8859-15.
-    " Newer Windows files might contain utf-8 or utf-16 LE so we might
-    " want to try them first.
-    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-  endif
-  set shellslash
-  NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
-  NeoBundle 'wincent/Command-T'
-else
-  set shell=/bin/sh
-endif
-" }}}
 " Shared plugin configurations {{{1
+function! s:InstallBundleIfNotPresent(bundle)
+  if !isdirectory(a:bundle.path)
+    echo 'Installing' a:bundle.name . '...'
+    silent execute '!git clone' a:bundle.url a:bundle.path
+  endif
+endfunction
+
 function! s:ConfigureRelatedFiles()
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <leader>g' . l:key .
@@ -118,6 +71,58 @@ function! s:ConfigureYcm()
   let g:ycm_show_diagnostics_ui = 1
   let g:ycm_warning_symbol = '>>'
 endfunction
+" }}}
+" Setup NeoBundle and OS.vim {{{1
+filetype off
+if has('vim_starting')
+  let s:bundle_base_path = expand('~/.vim/bundle/')
+  silent execute '!mkdir -p' s:bundle_base_path
+  call s:InstallBundleIfNotPresent({
+        \ 'name' : 'neobundle',
+        \ 'path' : s:bundle_base_path . 'neobundle.vim/',
+        \ 'url' : 'https://github.com/Shougo/neobundle.vim.git',
+        \ })
+  call s:InstallBundleIfNotPresent({
+        \ 'name' : 'os',
+        \ 'path' : s:bundle_base_path . 'os.vim/',
+        \ 'url' : 'https://github.com/Rykka/os.vim.git',
+        \ })
+  execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
+endif
+call neobundle#begin(s:bundle_base_path)
+NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
+NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                       " Provides consistency across OSes
+let g:OS = os#init()
+" }}}
+" Windows Compatible {{{1
+if g:OS.is_windows
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+
+  let $TERM='win32'
+  " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
+  " across (heterogeneous) systems easier.
+  set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
+  " Be nice and check for multi_byte even if the config requires
+  " multi_byte support most of the time
+  if has('multi_byte')
+    " Windows cmd.exe still uses cp850. If Windows ever moved to
+    " Powershell as the primary terminal, this would be utf-8
+    set termencoding=cp850
+    setglobal fileencoding=utf-8
+    " Windows has traditionally used cp1252, so it's probably wise to
+    " fallback into cp1252 instead of eg. iso-8859-15.
+    " Newer Windows files might contain utf-8 or utf-16 LE so we might
+    " want to try them first.
+    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+  endif
+  set shellslash
+  NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
+  NeoBundle 'wincent/Command-T'
+else
+  set shell=/bin/sh
+endif
 " }}}
 " Google specific setup {{{1
 let s:google_config = resolve(expand('~/.vimrc.google'))
@@ -630,6 +635,7 @@ if s:vimplugin_size >= 0
         \     'filetypes' : ['vim'],
         \   },
         \ 'lazy' : 1,
+        \ 'regular_namne' : 'Decho',
         \ 'type' : 'vba',
         \ }                                                                     " Debug echo for debuging vim plugins
   let s:decho = neobundle#get('Decho')
