@@ -28,17 +28,19 @@ done
 
 curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > /tmp/antigen.zsh
 source /tmp/antigen.zsh
-local url="$(-antigen-resolve-bundle-url "paulhybryant/Configs")"
+local url="$(-antigen-resolve-bundle-url "git@github.com:paulhybryant/Configs.git")"
 -antigen-ensure-repo "${url}"
-$(-antigen-get-clone-dir "${url}")/zsh/.zsh/bin/bootstrap -n
+pushd $(-antigen-get-clone-dir "${url}")
+./zsh/.zsh/bin/bootstrap -n
 echo "Continue [y/n]? "
 read -r reply
 case $reply in
   Y*|y*)
     echo "Installing..."
-    "${install_dir}/zsh/.zsh/bin/bootstrap"
+    ./zsh/.zsh/bin/bootstrap
     ;;
   *)
     exit 1
     ;;
 esac
+popd
