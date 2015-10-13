@@ -20,8 +20,8 @@ source "${0:h}/colors.zsh"
 source "${0:h}/io.zsh"
 source "${0:h}/strings.zsh"
 
-typeset -ag __TMUX_VARS__
-__TMUX_VARS__=(DISPLAY SSH_AUTH_SOCK SSH_CLIENT SSH_OS)
+typeset -a __TMUX_VARS__
+__TMUX_VARS__=(SSH_CLIENT SSH_OS)
 
 : <<=cut
 =item Function C<util::geoinfo>

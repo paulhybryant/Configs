@@ -31,18 +31,19 @@ while getopts ":hd:" opt; do
   esac
 done
 
-if [ ! -d "$HOME/${dir}" ]; then
+install_dir="$HOME/.antigen/repos/${dir}"
+if [ ! -d "${install_dir}" ]; then
   echo "Dryrun..."
-  echo "Cloning to ${dir}..."
-  git clone --recursive git@github.com:paulhybryant/Config.git "$HOME/${dir}"
-  "$HOME/${dir}/zsh/.zutils/bin/bootstrap -n"
+  echo "Cloning to ${install_dir}..."
+  git clone --recursive git@github.com:paulhybryant/Config.git "${install_dir}"
+  "${install_dir}/zsh/.zutils/bin/bootstrap -n"
 
   echo "Continue [y/n]? "
   read -r reply
   case $reply in
     Y*|y*)
       echo "Installing..."
-      "$HOME/${dir}/zsh/.zutils/bin/bootstrap"
+      "${install_dir}/zsh/.zutils/bin/bootstrap"
       ;;
     *)
       exit 1

@@ -90,34 +90,19 @@ function init::registered() {
   fi
 }
 
-source "${0:h}/os.zsh"
-
-function init::runonce() {
-  if [[ -n "${__ONCEINIT__+1}" ]]; then
+function init::loaded() {
+  (( ${+functions[io::vlog]} )) && io::vlog 1 "Trying to source ${1:t}"
+  local _ltime
+  zstyle -s ":mycfg:module:${1:t}" loaded _ltime
+  _mtime="$(time::getmtime $1)"
+  if [[ "${_ltime}" == "$_mtime" ]]; then
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "${1:t} already sourced, timestamp: ${_ltime}"
     return 0
   else
-    __ONCEINIT__=
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_mtime}"
+    zstyle ":mycfg:module:${1:t}" loaded "${_mtime}"
+    return 1
   fi
-  if os::OSX; then
-    export BREWVERSION="homebrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-    alias updatedb="/usr/libexec/locate.updatedb"
-    export CMDPREFIX="g"
-    alias ls='${CMDPREFIX}ls'
-    alias mktemp='${CMDPREFIX}mktemp'
-    alias stat='${CMDPREFIX}stat'
-    alias date='${CMDPREFIX}date'
-  elif os::LINUX; then
-    export BREWVERSION="linuxbrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-  fi
-  alias ls="${aliases[ls]:-ls} --color=tty"
-  typeset -Ag __LIB_REGISTRY__
-  os::OSX && export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
-  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
-  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
 }
 
 : <<=cut

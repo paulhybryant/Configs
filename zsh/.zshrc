@@ -1,6 +1,88 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-bindkey -d                                                                      # Unbind all keys
+source ~/.zutils/lib/init.zsh
+source ~/.zutils/lib/os.zsh
+
+if os::OSX; then
+  export BREWVERSION="homebrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
+  alias updatedb="/usr/libexec/locate.updatedb"
+  export CMDPREFIX="g"
+  alias ls='${CMDPREFIX}ls'
+  alias mktemp='${CMDPREFIX}mktemp'
+  alias stat='${CMDPREFIX}stat'
+  alias date='${CMDPREFIX}date'
+elif os::LINUX; then
+  export BREWVERSION="linuxbrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
+fi
+
+function runonce() {
+  # if [[ -n "${__ONCEINIT__+1}" ]]; then
+    # return 0
+  # else
+    # __ONCEINIT__=
+  # fi
+  alias ls="${aliases[ls]:-ls} --color=tty"
+  typeset -Ag __LIB_REGISTRY__
+  os::OSX && export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
+  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
+  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
+}
+runonce
+
+source ~/.zutils/lib/colors.zsh
+colors::define
+colors::manpage
+
+# antigen {{{
+if [[ -d ~/.antigen/repos/antigen ]]; then
+  source ~/.antigen/repos/antigen/antigen.zsh
+
+  zstyle ':prezto:module:editor' key-bindings 'vi'
+  # Alternative (from zpreztorc), order matters!
+  # This has to be put before antigen use prezto (which sources root init.zsh
+  # for prezto)
+  # zstyle ':prezto:load' pmodule \
+    # 'environment' \
+    # 'terminal' \
+    # 'editor' \
+    # 'history' \
+    # 'directory' \
+    # 'spectrum' \
+    # 'utility' \
+    # 'completion' \
+    # 'prompt'
+
+  antigen use prezto
+  local pmodules
+  # Order matters! (per zpreztorc)
+  pmodules=(environment terminal editor history directory completion prompt \
+    command-not-found fasd git history-substring-search homebrew python ssh \
+    syntax-highlighting tmux)
+  os::OSX && pmodules+=(osx)
+  for module in ${pmodules}; do
+    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
+    antigen bundle sorin-ionescu/prezto modules/${module}
+  done
+  unset pmodules
+
+  # antigen bundle paulhybryant/Configs --loc=zsh/.zutils/lib/foo.zsh
+
+  # antigen use oh-my-zsh
+  # antigen bundle --loc=lib
+  # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
+  # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
+  # antigen theme candy
+  # antigen theme robbyrussell/oh-my-zsh themes/candy
+
+  # Tell antigen that you're done.
+  antigen apply
+fi
+# }}}
+
 # zshoptions {{{
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
@@ -109,12 +191,11 @@ alias nvim='NVIM=nvim nvim'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
 
-(( $+aliases[run-help] )) && unalias run-help
+(( $+aliases[run-help] )) && unalias run-help                                   # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
-bindkey -v                                                                      # Use vi key bindings
 bindkey '^[OD' beginning-of-line                                                # Set left arrow as HOME
 bindkey '^[OC' end-of-line                                                      # Set right arrow as END
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
@@ -125,82 +206,26 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 # bindkey '^I' expand-or-complete-prefix
 # bindkey '^[[3~' delete-char
 
-function customize() {
-  setopt localoptions err_return
+source ~/.zutils/lib/file.zsh
+alias la='file::la'
+alias ll='file::ll'
+alias rm='file::rm'
 
-  [[ -d ~/.zutils ]]
-  source ~/.zutils/lib/init.zsh
-  init::runonce
+source ~/.zutils/lib/util.zsh
+alias ta='util::ta'
+alias ts='util::tmux_start'
+alias vi='util::vim'                                                          # alias vi='vi -p'
+alias vim='util::vim'                                                         # alias vim='vim -p'
+util::install_precmd
+util::setup_abbrev
+os::OSX && util::fix_display_osx
+os::LINUX && util::start_ssh_agent 'ssh-agent' || (os::OSX && util::start_ssh_agent 'gnubby-ssh-agent')
 
-  source ~/.zutils/lib/colors.zsh
-  colors::define
-  colors::manpage
+source ~/.zutils/lib/git.zsh
+source ~/.zutils/lib/net.zsh
 
-  source ~/.zutils/lib/file.zsh
-  alias la='file::la'
-  alias ll='file::ll'
-  alias rm='file::rm'
-
-  source ~/.zutils/lib/util.zsh
-  alias ta='util::ta'
-  alias ts='util::tmux_start'
-  alias vi='util::vim'                                                          # alias vi='vi -p'
-  alias vim='util::vim'                                                         # alias vim='vim -p'
-  util::install_precmd
-  util::setup_abbrev
-  os::OSX && util::fix_display_osx
-  os::LINUX && util::start_ssh_agent 'ssh-agent' || (os::OSX && util::start_ssh_agent 'gnubby-ssh-agent')
-
-  source ~/.zutils/lib/git.zsh
-  source ~/.zutils/lib/net.zsh
-
-  autoload -Uz bashcompinit && bashcompinit
-  zstyle ":completion:*" show-completer true
-
-}
-customize
-
-# antigen {{{
-if [[ -d ~/.antigen/repos/antigen ]]; then
-  source ~/.antigen/repos/antigen/antigen.zsh
-
-  antigen use prezto
-  local pmodules
-  # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory completion prompt \
-    command-not-found fasd git history-substring-search homebrew python ssh \
-    syntax-highlighting tmux)
-  # os::OSX && pmodules+=(osx)
-  for module in ${pmodules}; do
-    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
-    antigen bundle sorin-ionescu/prezto modules/${module}
-  done
-  unset pmodules
-
-  # Alternative (from zpreztorc), order matters!
-  # zstyle ':prezto:load' pmodule \
-    # 'environment' \
-    # 'terminal' \
-    # 'editor' \
-    # 'history' \
-    # 'directory' \
-    # 'spectrum' \
-    # 'utility' \
-    # 'completion' \
-    # 'prompt'
-  # zstyle ':prezto:module:editor' key-bindings 'vi'
-
-  # antigen use oh-my-zsh
-  # antigen bundle --loc=lib
-  # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
-  # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-  # antigen theme candy
-  # antigen theme robbyrussell/oh-my-zsh themes/candy
-
-  # Tell antigen that you're done.
-  antigen apply
-fi
-# }}}
+autoload -Uz bashcompinit && bashcompinit
+zstyle ":completion:*" show-completer true
 
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
