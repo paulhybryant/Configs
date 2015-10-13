@@ -6,7 +6,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   local mycfglibs
   mycfglibs=(os base env colors file git io mode net shell strings time util)
   for lib in ${mycfglibs}; do
-    antigen bundle paulhybryant/Configs --loc=zsh/.zsh/lib/${lib}.zsh
+    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/${lib}.zsh
   done
   unset mycfglibs
 
