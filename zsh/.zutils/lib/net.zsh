@@ -14,7 +14,7 @@ File: net.zsh - Utility functions related to network access.
 =over 4
 =cut
 
-(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
 : <<=cut
 =item Function C<net::external_ip>

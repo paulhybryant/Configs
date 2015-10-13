@@ -14,10 +14,11 @@ File: util.zsh - Various utility functions.
 =over 4
 =cut
 
-(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
 source "${0:h}/colors.zsh"
 source "${0:h}/io.zsh"
+source "${0:h}/os.zsh"
 source "${0:h}/strings.zsh"
 
 typeset -a __TMUX_VARS__
@@ -349,7 +350,8 @@ function util::install_precmd() {
   precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
 }
 
-function util::fix_display_osx() {
+function util::fix_display() {
+  os::OSX || return 0
   local _dispdir _dispfile _dispnew
   _dispdir=$(dirname "$DISPLAY")
   _dispfile=$(basename "$DISPLAY")
@@ -359,6 +361,16 @@ function util::fix_display_osx() {
   fi
   export DISPLAY=${_dispnew}
 }
+
+alias ta='util::ta'
+alias ts='util::tmux_start'
+alias vi='util::vim'                                                          # alias vi='vi -p'
+alias vim='util::vim'                                                         # alias vim='vim -p'
+
+util::install_precmd
+util::setup_abbrev
+util::fix_display
+util::start_ssh_agent "${SSH_AGENT_NAME}"
 
 : <<=cut
 =back

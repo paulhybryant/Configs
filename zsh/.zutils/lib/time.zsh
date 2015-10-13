@@ -14,7 +14,7 @@ File: time.zsh - Time related utility functions
 =over 4
 =cut
 
-(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
 source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"

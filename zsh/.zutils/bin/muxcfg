@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 #
-source "$HOME/.zutils/lib/init.zsh"
 source "$HOME/.zutils/lib/base.zsh"
 source "$HOME/.zutils/lib/git.zsh"
 source "$HOME/.zutils/lib/io.zsh"

@@ -69,7 +69,6 @@ function bootstrap::main() {
 }
 
 setopt LOCAL_OPTIONS
-source "${0:a:h}/../lib/init.zsh"
 source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
 source "${0:a:h}/../lib/os.zsh"
@@ -87,7 +86,7 @@ unset _fn_options
 
 local _config_dir
 _config_dir="${0:A:h}/../../../"
-init::runonce
+base::runonce
 shell::eval "pushd ${_config_dir:a}"
 # bootstrap::main
 shell::eval "source ~/.zshrc"

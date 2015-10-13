@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/init.zsh"
 source "${0:h}/../../lib/base.zsh"
 
 set -x

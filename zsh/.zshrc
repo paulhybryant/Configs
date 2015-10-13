@@ -1,44 +1,24 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-source ~/.zutils/lib/init.zsh
-source ~/.zutils/lib/os.zsh
-
-if os::OSX; then
-  export BREWVERSION="homebrew"
-  export BREWHOME="$HOME/.$BREWVERSION"
-  alias updatedb="/usr/libexec/locate.updatedb"
-  export CMDPREFIX="g"
-  alias ls='${CMDPREFIX}ls'
-  alias mktemp='${CMDPREFIX}mktemp'
-  alias stat='${CMDPREFIX}stat'
-  alias date='${CMDPREFIX}date'
-elif os::LINUX; then
-  export BREWVERSION="linuxbrew"
-  export BREWHOME="$HOME/.$BREWVERSION"
-fi
-
-function runonce() {
-  if [[ -n "${__ONCEINIT__+1}" ]]; then
-    return 0
-  else
-    __ONCEINIT__=
-  fi
-  alias ls="${aliases[ls]:-ls} --color=tty"
-  os::OSX && export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
-  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
-  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
-}
-runonce
-
-source ~/.zutils/lib/colors.zsh
-colors::define
-colors::manpage
-
 # antigen {{{
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
+
+  local mycfglibs
+  # mycfglibs=(os init base colors file git io mode net shell strings time util)
+  mycfglibs=(os)
+  for lib in ${mycfglibs}; do
+    antigen bundle paulhybryant/Configs --loc=zsh/.zutils/lib/${lib}.zsh
+  done
+  unset mycfglibs
+
+  # source ~/.zutils/lib/os.zsh
+  source ~/.zutils/lib/init.zsh
+  source ~/.zutils/lib/colors.zsh
+  source ~/.zutils/lib/file.zsh
+  source ~/.zutils/lib/util.zsh
+  source ~/.zutils/lib/git.zsh
+  source ~/.zutils/lib/net.zsh
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!
@@ -67,8 +47,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     antigen bundle sorin-ionescu/prezto modules/${module}
   done
   unset pmodules
-
-  # antigen bundle paulhybryant/Configs --loc=zsh/.zutils/lib/foo.zsh
 
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib
@@ -204,24 +182,6 @@ bindkey '^[[A' up-line-or-beginning-search                                      
 bindkey '^[[B' down-line-or-beginning-search                                    # Down
 # bindkey '^I' expand-or-complete-prefix
 # bindkey '^[[3~' delete-char
-
-source ~/.zutils/lib/file.zsh
-alias la='file::la'
-alias ll='file::ll'
-alias rm='file::rm'
-
-source ~/.zutils/lib/util.zsh
-alias ta='util::ta'
-alias ts='util::tmux_start'
-alias vi='util::vim'                                                          # alias vi='vi -p'
-alias vim='util::vim'                                                         # alias vim='vim -p'
-util::install_precmd
-util::setup_abbrev
-os::OSX && util::fix_display_osx
-os::LINUX && util::start_ssh_agent 'ssh-agent' || (os::OSX && util::start_ssh_agent 'gnubby-ssh-agent')
-
-source ~/.zutils/lib/git.zsh
-source ~/.zutils/lib/net.zsh
 
 autoload -Uz bashcompinit && bashcompinit
 zstyle ":completion:*" show-completer true

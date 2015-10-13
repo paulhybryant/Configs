@@ -151,20 +151,7 @@ Put the following boilerplate at the start of all library files.
 .PP
 .Vb 2
 \&    source init.zsh
-\&    init::sourced "${0:a}" && return
+\&    base::sourced "${0:a}" && return
 .Ve
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""time::getmtime""" 4
-.el .IP "Function \f(CWtime::getmtime\fR" 4
-.IX Item "Function time::getmtime"
-Get last modification time of a file.
-\&\f(CW$1\fR Filename
-.Sp
-\&\f(CW@return\fR string of the last modified time of a file.
-.ie n .IP "Function ""init::sourced""" 4
-.el .IP "Function \f(CWinit::sourced\fR" 4
-.IX Item "Function init::sourced"
-\&\f(CW$1\fR Absolute path to the file to be sourced.
-.Sp
-\&\f(CW@return\fR 0 or 1, indicates whether latest version of this file is sourced.

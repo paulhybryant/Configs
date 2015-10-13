@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "BASE.ZSH 1"
-.TH BASE.ZSH 1 "2015-10-12" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH BASE.ZSH 1 "2015-10-13" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -190,3 +190,16 @@ Example:
   _fn_options[\-u] == \*(R""
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""time::getmtime""" 4
+.el .IP "Function \f(CWtime::getmtime\fR" 4
+.IX Item "Function time::getmtime"
+Get last modification time of a file.
+\&\f(CW$1\fR Filename
+.Sp
+\&\f(CW@return\fR string of the last modified time of a file.
+.ie n .IP "Function ""base::sourced""" 4
+.el .IP "Function \f(CWbase::sourced\fR" 4
+.IX Item "Function base::sourced"
+\&\f(CW$1\fR Absolute path to the file to be sourced.
+.Sp
+\&\f(CW@return\fR 0 or 1, indicates whether latest version of this file is sourced.

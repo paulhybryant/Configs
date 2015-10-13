@@ -16,7 +16,7 @@ Identify the current running OS.
 =over 4
 =cut
 
-(( ${+functions[init::sourced]} )) && init::sourced "${0:a}" && return 0
+(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
 function os::OSX() {
   [[ "$OSTYPE" == "darwin"* ]] && return 0
