@@ -53,6 +53,21 @@ $1 Absolute path to the file to be sourced.
 @return 0 or 1, indicates whether latest version of this file is sourced.
 =cut
 function init::sourced() {
+  (( ${+functions[io::vlog]} )) && io::vlog 1 "Trying to source ${1:t}"
+  local _ltime
+  zstyle -s ":mycfg:module:${${1:t}%.zsh}" loaded _ltime
+  _mtime="$(time::getmtime $1)"
+  if [[ "${_ltime}" == "$_mtime" ]]; then
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "${1:t} already sourced, timestamp: ${_ltime}"
+    return 0
+  else
+    (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_mtime}"
+    zstyle ":mycfg:module:${${1:t}%.zsh}" loaded "${_mtime}"
+    return 1
+  fi
+}
+
+function init::_deprecated_sourced() {
   # strip the .zsh extension
   local _var="__SOURCED_${${1:t:u}%.ZSH}__"
   local _cur_signature="${(P)_var}"
@@ -66,41 +81,6 @@ function init::sourced() {
   else
     (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_signature}"
     eval "${_var}=\"${_signature}\""
-    return 1
-  fi
-}
-
-: <<=cut
-=item Function C<init::registered>
-
-Check if a file is registered (sourced), if not register it.
-$1 Absolute path to the file to check.
-
-@return 0 or 1, indicates whether latest version of this file is registered.
-=cut
-function init::registered() {
-  local _mtime
-  _mtime="$(time::getmtime $1)"
-  if [[ -z ${__LIB_REGISTRY__["$1"]} || \
-      ${__LIB_REGISTRY__["$1"]} != "${_mtime}" ]]; then
-    __LIB_REGISTRY__["$1"]="${_mtime}"
-    return 1
-  else
-    return 0
-  fi
-}
-
-function init::loaded() {
-  (( ${+functions[io::vlog]} )) && io::vlog 1 "Trying to source ${1:t}"
-  local _ltime
-  zstyle -s ":mycfg:module:${1:t}" loaded _ltime
-  _mtime="$(time::getmtime $1)"
-  if [[ "${_ltime}" == "$_mtime" ]]; then
-    (( ${+functions[io::vlog]} )) && io::vlog 1 "${1:t} already sourced, timestamp: ${_ltime}"
-    return 0
-  else
-    (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_mtime}"
-    zstyle ":mycfg:module:${1:t}" loaded "${_mtime}"
     return 1
   fi
 }

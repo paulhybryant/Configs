@@ -18,13 +18,12 @@ elif os::LINUX; then
 fi
 
 function runonce() {
-  # if [[ -n "${__ONCEINIT__+1}" ]]; then
-    # return 0
-  # else
-    # __ONCEINIT__=
-  # fi
+  if [[ -n "${__ONCEINIT__+1}" ]]; then
+    return 0
+  else
+    __ONCEINIT__=
+  fi
   alias ls="${aliases[ls]:-ls} --color=tty"
-  typeset -Ag __LIB_REGISTRY__
   os::OSX && export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
   export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
   export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
