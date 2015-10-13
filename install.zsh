@@ -30,7 +30,7 @@ curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh >
 source /tmp/antigen.zsh
 local url="$(-antigen-resolve-bundle-url "paulhybryant/Configs")"
 -antigen-ensure-repo "${url}"
-"$(-antigen-get-clone-dir "${url}")/zsh/.zsh/bin/bootstrap -n"
+$(-antigen-get-clone-dir "${url}")/zsh/.zsh/bin/bootstrap -n
 echo "Continue [y/n]? "
 read -r reply
 case $reply in

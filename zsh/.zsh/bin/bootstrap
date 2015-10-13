@@ -31,7 +31,7 @@ function bootstrap::main() {
   shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
   shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
-  for module in misc tmux vim; do
+  for module in misc tmux vim zsh; do
     shell::eval "[[ -d ${module} ]] && stow ${module} -t ~"
   done
   os::OSX && shell::eval "[[ -d ${module} ]] && stow osx -t ~"
@@ -63,9 +63,7 @@ function bootstrap::main() {
   os::OSX && io::msg "Installing extra stuff for OSX..." && \
     shell::eval "brew install brew-cask clipper macvim trash lsof \
     reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
-
-  io::msg "All done! Sourcing zsh configurations..."
-  shell::eval "source ~/.zshrc"
+  io::msg "Bootstrap done!"
 }
 
 setopt LOCAL_OPTIONS
