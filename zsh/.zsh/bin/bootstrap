@@ -52,7 +52,7 @@ function bootstrap::main() {
   os::OSX && shell::eval "brew install --disable-nls --override-system-vi \
     --with-client-server --with-lua --with-luajit vim"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh"
+    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh fasd"
   shell::eval "pip install powerline-status advanced-ssh-config neovim \
     terminatorcli bz2file"
   shell::eval "brew gem install tmuxinator automux pypy pypy3"
