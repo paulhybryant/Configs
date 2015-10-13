@@ -16,6 +16,8 @@ File: colors.zsh - Colorful terminal output.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
+source "${0:h}/base.zsh"
+
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
   eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
 

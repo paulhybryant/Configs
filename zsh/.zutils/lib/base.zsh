@@ -209,8 +209,6 @@ function base::_deprecated_sourced() {
   fi
 }
 
-source "${0:h}/os.zsh"
-
 function base::runonce() {
   if [[ -n "${__ONCEINIT__+1}" ]]; then
     return 0

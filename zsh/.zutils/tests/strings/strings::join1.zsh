@@ -4,7 +4,6 @@ source "${0:h}/../../lib/base.zsh"
 source "${0:h}/../../lib/mode.zsh"
 source "${0:h}/../../lib/strings.zsh"
 
-
 set -x
 
 function test::strings::join() {

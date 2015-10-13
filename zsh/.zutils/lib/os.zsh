@@ -41,3 +41,7 @@ function os::realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
   fi
 }
+
+: <<=cut
+=back
+=cut

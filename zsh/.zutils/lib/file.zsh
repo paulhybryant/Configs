@@ -16,6 +16,7 @@ File: file.zsh - File system related utility functions.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
+source "${0:h}/base.zsh"
 source "${0:h}/io.zsh"
 source "${0:h}/os.zsh"
 

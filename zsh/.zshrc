@@ -5,20 +5,20 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
   local mycfglibs
-  # mycfglibs=(os init base colors file git io mode net shell strings time util)
-  mycfglibs=(os)
+  # mycfglibs=(os base colors file git io mode net shell strings time util)
+  mycfglibs=(os base)
   for lib in ${mycfglibs}; do
     antigen bundle paulhybryant/Configs --loc=zsh/.zutils/lib/${lib}.zsh
   done
   unset mycfglibs
 
   # source ~/.zutils/lib/os.zsh
-  source ~/.zutils/lib/init.zsh
-  source ~/.zutils/lib/colors.zsh
-  source ~/.zutils/lib/file.zsh
-  source ~/.zutils/lib/util.zsh
-  source ~/.zutils/lib/git.zsh
-  source ~/.zutils/lib/net.zsh
+  # source ~/.zutils/lib/base.zsh
+  # source ~/.zutils/lib/colors.zsh
+  # source ~/.zutils/lib/file.zsh
+  # source ~/.zutils/lib/util.zsh
+  # source ~/.zutils/lib/git.zsh
+  # source ~/.zutils/lib/net.zsh
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!

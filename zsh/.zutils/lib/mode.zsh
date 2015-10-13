@@ -16,6 +16,8 @@ File: mode.zsh - Set or get the variables modes for the shell.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
+source "${0:h}/base.zsh"
+
 : <<=cut
 =item Function C<mode::verbose>
 
