@@ -32,9 +32,9 @@ function bootstrap::main() {
   shell::eval "mkdir -p \"$HOME/.vim/\""
   shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   for module in misc tmux vim; do
-    shell::eval "[[ -d ${module} ]] && stow ${module}"
+    shell::eval "[[ -d ${module} ]] && stow ${module} -t ~"
   done
-  os::OSX && shell::eval "[[ -d ${module} ]] && stow osx"
+  os::OSX && shell::eval "[[ -d ${module} ]] && stow osx -t ~"
 
   io::msg "Tapping extra repositories..."
   shell::eval "brew tap paulhybryant/myformulae"

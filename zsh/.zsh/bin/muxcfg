@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 #
-source "$HOME/.zutils/lib/base.zsh"
-source "$HOME/.zutils/lib/git.zsh"
-source "$HOME/.zutils/lib/io.zsh"
-source "$HOME/.zutils/lib/mode.zsh"
-source "$HOME/.zutils/lib/shell.zsh"
+source "$HOME/.zsh/lib/base.zsh"
+source "$HOME/.zsh/lib/git.zsh"
+source "$HOME/.zsh/lib/io.zsh"
+source "$HOME/.zsh/lib/mode.zsh"
+source "$HOME/.zsh/lib/shell.zsh"
 
 function muxcfg::start() {
   setopt localoptions unset err_return

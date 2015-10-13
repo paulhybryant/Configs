@@ -232,8 +232,8 @@ function base::runonce() {
     export SSH_AGENT_NAME='ssh-agent'
   fi
   alias ls="${aliases[ls]:-ls} --color=tty"
-  export PATH="$HOME/.zutils/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
-  export MANPATH="$BREWHOME/share/man:$HOME/.zutils/man:$MANPATH"
+  export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
+  export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
   export INFOPATH="$BREWHOME/share/info:$INFOPATH"
   fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
 }

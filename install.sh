@@ -36,14 +36,14 @@ if [ ! -d "${install_dir}" ]; then
   echo "Dryrun..."
   echo "Cloning to ${install_dir}..."
   git clone --recursive git@github.com:paulhybryant/Config.git "${install_dir}"
-  "${install_dir}/zsh/.zutils/bin/bootstrap -n"
+  "${install_dir}/zsh/.zsh/bin/bootstrap -n"
 
   echo "Continue [y/n]? "
   read -r reply
   case $reply in
     Y*|y*)
       echo "Installing..."
-      "${install_dir}/zsh/.zutils/bin/bootstrap"
+      "${install_dir}/zsh/.zsh/bin/bootstrap"
       ;;
     *)
       exit 1
