@@ -1,6 +1,6 @@
 My workspace configs
 ======
 
-My work environment bootstrap and configurations
+My work environment bootstrap and configurations for zsh
 
-sh -c "`curl -fsSL https://raw.githubusercontent.com/paulhybryant/Configs/master/install.sh`"
+zsh -c "`curl -fsSL https://raw.githubusercontent.com/paulhybryant/Configs/master/install.zsh`"

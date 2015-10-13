@@ -69,9 +69,9 @@ function bootstrap::main() {
 }
 
 setopt LOCAL_OPTIONS
+source "${0:a:h}/../lib/os.zsh"
 source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
-source "${0:a:h}/../lib/os.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
 local -A _fn_options
@@ -88,8 +88,8 @@ local _config_dir
 _config_dir="${0:A:h}/../../../"
 base::runonce
 shell::eval "pushd ${_config_dir:a}"
-# bootstrap::main
-shell::eval "source ~/.zshrc"
+bootstrap::main
+shell::eval "source ${_config_dir:a}/zsh/.zshrc"
 shell::eval "popd"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
