@@ -201,36 +201,6 @@ function base::_deprecated_sourced() {
   fi
 }
 
-function base::runonce() {
-  if [[ -n "${__ONCEINIT__+1}" ]]; then
-    return 0
-  else
-    __ONCEINIT__='y'
-  fi
-  if os::OSX; then
-    export BREWVERSION="homebrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    export CMDPREFIX="g"
-    export SSH_AGENT_NAME='gnubby-ssh-agent'
-    alias updatedb="/usr/libexec/locate.updatedb"
-    alias ls='${CMDPREFIX}ls'
-    alias mktemp='${CMDPREFIX}mktemp'
-    alias stat='${CMDPREFIX}stat'
-    alias date='${CMDPREFIX}date'
-  else
-    export BREWVERSION="linuxbrew"
-    export BREWHOME="$HOME/.$BREWVERSION"
-    export SSH_AGENT_NAME='ssh-agent'
-  fi
-  alias ls="${aliases[ls]:-ls} --color=tty"
-  export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
-  export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
-  export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-  fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
-}
-base::runonce
-
 : <<=cut
 =back
 =cut

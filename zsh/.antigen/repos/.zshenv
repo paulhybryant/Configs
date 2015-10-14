@@ -1,19 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-: <<=cut
-=pod
-
-=head1 NAME
-
-File: env.zsh - Environment setup
-
-=head1 DESCRIPTION
-
-=head2 Methods
-
-=over 4
-=cut
-
 # zshoptions {{{
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
@@ -83,6 +69,29 @@ setopt NO_CONTINUE_ON_ERROR
 setopt VI                                                                       # Use vi key bindings in ZSH
 # }}}
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export BREWVERSION="homebrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
+  export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  export CMDPREFIX="g"
+  export SSH_AGENT_NAME='gnubby-ssh-agent'
+  alias updatedb="/usr/libexec/locate.updatedb"
+else
+  export BREWVERSION="linuxbrew"
+  export BREWHOME="$HOME/.$BREWVERSION"
+  export SSH_AGENT_NAME='ssh-agent'
+fi
+
+alias date='${CMDPREFIX}date'
+alias ls='${CMDPREFIX}ls --color=tty'
+alias mktemp='${CMDPREFIX}mktemp'
+alias stat='${CMDPREFIX}stat'
+
+export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
+export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
+export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
+
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
@@ -126,7 +135,3 @@ autoload run-help                                                               
 
 autoload -Uz bashcompinit && bashcompinit
 zstyle ":completion:*" show-completer true
-
-: <<=cut
-=back
-=cut

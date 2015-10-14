@@ -90,7 +90,7 @@ base::getopt help,dryrun,unstow,stow "$@"
 
 local _config_dir
 _config_dir="${0:A:h}/../../../"
-base::runonce
+shell::eval "source ${_config_dir:a}/zsh/.zshenv"
 shell::eval "pushd ${_config_dir:a}"
 if [[ ! -z "${_fn_options[--unstow]}" ]]; then
   bootstrap::stow "-D"

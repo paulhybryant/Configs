@@ -4,7 +4,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
   local mycfglibs
-  mycfglibs=(os base env colors file git io mode net shell strings time util)
+  mycfglibs=(os base colors file git io mode net shell strings time util)
   for lib in ${mycfglibs}; do
     antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/${lib}.zsh
   done
