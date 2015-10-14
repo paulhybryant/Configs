@@ -1,3 +1,19 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=pod
+
+=head1 NAME
+
+File: env.zsh - Environment setup
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+=cut
+
 # zshoptions {{{
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
@@ -105,21 +121,12 @@ alias info='info --vi-keys'
 alias nvim='NVIM=nvim nvim'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
-
 (( $+aliases[run-help] )) && unalias run-help                                   # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
-autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
-autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
-
-bindkey '^[OD' beginning-of-line                                                # Set left arrow as HOME
-bindkey '^[OC' end-of-line                                                      # Set right arrow as END
-bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
-bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
-bindkey '^[[A' up-line-or-beginning-search                                      # Up
-bindkey '^[[B' down-line-or-beginning-search                                    # Down
-# bindkey '^I' expand-or-complete-prefix
-# bindkey '^[[3~' delete-char
 
 autoload -Uz bashcompinit && bashcompinit
 zstyle ":completion:*" show-completer true
+
+: <<=cut
+=back
+=cut

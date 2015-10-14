@@ -31,23 +31,18 @@ $1 The thing to be checked whether it exists.
 function base::exists() {
   setopt localoptions unset
   local -A _fn_options
-  base::getopt v:b:s:f:d: var:,bin:,sub:,file:,dir: "$@"
+  base::getopt var:,bin:,sub:,file:,dir: "$@"
 
-  if [[ ! (-z ${_fn_options[--var]} && -z ${_fn_options[-v]}) ]]; then
+  if [[ ! -z ${_fn_options[--var]} ]]; then
     [[ ! -z ${_fn_options[--var]} ]] && eval "[[ -n \${${_fn_options[--var]}+1} ]]" && return 0
-    [[ ! -z ${_fn_options[-v]} ]] && eval "[[ -n \${${_fn_options[-v]}+1} ]]" && return 0
-  elif [[ ! (-z ${_fn_options[--bin]} && -z ${_fn_options[-b]}) ]]; then
+  elif [[ ! -z ${_fn_options[--bin]} ]]; then
     [[ ! -z ${_fn_options[--bin]} ]] && whence "${_fn_options[--bin]}" > /dev/null && return 0
-    [[ ! -z ${_fn_options[-b]} ]] && whence "${_fn_options[-b]}" > /dev/null && return 0
-  elif [[ ! (-z ${_fn_options[--sub]} && -z ${_fn_options[-s]}) ]]; then
+  elif [[ -z ${_fn_options[--sub]} ]]; then
     [[ ! -z ${_fn_options[--sub]} ]] && whence -f "${_fn_options[--sub]}" > /dev/null && return 0
-    [[ ! -z ${_fn_options[-s]} ]] && whence -f "${_fn_options[-s]}" > /dev/null && return 0
-  elif [[ ! (-z ${_fn_options[--file]} && -z ${_fn_options[-f]}) ]]; then
+  elif [[ ! -z ${_fn_options[--file]} ]]; then
     [[ ! -z ${_fn_options[--file]} && -e "${_fn_options[--file]}" ]] && return 0
-    [[ ! -z ${_fn_options[-f]} && -e "${_fn_options[-f]}" ]] && return 0
-  elif [[ ! (-z ${_fn_options[--dir]} && -z ${_fn_options[-d]}) ]]; then
+  elif [[ ! -z ${_fn_options[--dir]} ]]; then
     [[ ! -z ${_fn_options[--dir]} && -d "${_fn_options[--dir]}" ]] && return 0
-    [[ ! -z ${_fn_options[-d]} && -d "${_fn_options[-d]}" ]] && return 0
   fi
   return 1
 }
@@ -101,28 +96,24 @@ function base::parseargs() {
 : <<=cut
 =item Function C<base::getopt>
 
-Use gnu getopt to parse function arguments.
+Use gnu getopt to parse long function arguments.
 
 Example:
   local -A _fn_options
-  base::getopt df:u: no-detached,foo:,unset: --no-detached -f yo
+  base::getopt no-detached,foo:,unset: --no-detached --foo yo
   _fn_options[--no-detached] == "true"
   _fn_options[--foo] == "yo"
   _fn_options[--unset] == ""
-  _fn_options[-d] == "true"
-  _fn_options[-f] == "yo"
-  _fn_options[-u] == ""
 
 @return NULL
 =cut
 function base::getopt() {
   setopt localoptions err_return
   local _opts _short _long
-  _short="$1"
-  _long="$2"
-  shift 2
+  _long="$1"
+  shift
   # _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@")
-  _opts=$(${CMDPREFIX}getopt -o "${_short}" --long "${_long}" -- "$@")
+  _opts=$(${CMDPREFIX}getopt -o '' --long "${_long}" -- "$@" || exit 1)
   # Note the quotes around '${_opts}': they are essential!
   eval set -- "${_opts}"
   local _var
@@ -130,17 +121,18 @@ function base::getopt() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
       -- )
-        [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true"
+        [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true" && _var=''
         _var=''
         shift
         ;;
-      -* )
+      --* )
+        [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true"
         _var="$1"
         shift
         ;;
       * )
         if [[ -z ${_var} ]]; then
-          _fn_args=(${_fn_args} $1)
+          _fn_args+=($1)
         else
           _fn_options[${_var}]="$1" && _var=''
         fi

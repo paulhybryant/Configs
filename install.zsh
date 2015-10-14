@@ -32,7 +32,7 @@ setopt verbose
 local url="$(-antigen-resolve-bundle-url "git@github.com:paulhybryant/Configs.git")"
 -antigen-ensure-repo "${url}"
 pushd $(-antigen-get-clone-dir "${url}")
-./zsh/.zsh/bin/bootstrap -n
+./zsh/.zsh/bin/bootstrap --dryrun
 echo "Continue [y/n]? "
 read -r reply
 case $reply in

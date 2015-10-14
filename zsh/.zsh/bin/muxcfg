@@ -9,18 +9,13 @@ source "$HOME/.zsh/lib/shell.zsh"
 function muxcfg::start() {
   setopt localoptions unset err_return
   local -A _fn_options
-  base::getopt ys:t:w:c:p: noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  base::getopt noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
   local _proj _cwd _cmd _src _dst _muxcfg
   [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
-  [[ -z "${_fn_options[-p]}" ]] || _proj="${_fn_options[-p]}"
   [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
-  [[ -z "${_fn_options[-s]}" ]] || _src="${_fn_options[-s]}"
   [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
-  [[ -z "${_fn_options[-t]}" ]] || _dst="${_fn_options[-t]}"
   [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
-  [[ -z "${_fn_options[-w]}" ]] || _cwd="${_fn_options[-w]}"
   [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
-  [[ -z "${_fn_options[-c]}" ]] || _cmd="${_fn_options[-c]}"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && \
@@ -43,18 +38,13 @@ function muxcfg::start() {
 function muxcfg::delete() {
   setopt localoptions unset err_return
   local -A _fn_options
-  base::getopt ys:t:w:c:p: noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  base::getopt noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
   local _proj _cwd _cmd _src _dst _muxcfg
   [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
-  [[ -z "${_fn_options[-p]}" ]] || _proj="${_fn_options[-p]}"
   [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
-  [[ -z "${_fn_options[-s]}" ]] || _src="${_fn_options[-s]}"
   [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
-  [[ -z "${_fn_options[-t]}" ]] || _dst="${_fn_options[-t]}"
   [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
-  [[ -z "${_fn_options[-w]}" ]] || _cwd="${_fn_options[-w]}"
   [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
-  [[ -z "${_fn_options[-c]}" ]] || _cmd="${_fn_options[-c]}"
 
   if [[ (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
     io::yes_or_no "Delete project ${_proj}"
@@ -92,16 +82,16 @@ function muxcfg::usage() {
 Usage: muxcfg [arguments] [command] [project]
 
 Arguments:
-  -h or --help          Print the usage information
-  -s or --src           Source git repo directory
-  -t or --dst           Destination git repo directory
-  -y or --noconfirm     Skip confirmation
+  --help          Print the usage information
+  --src           Source git repo directory
+  --dst           Destination git repo directory
+  --noconfirm     Skip confirmation
 
 Commands:
   start                 Create project repository, branch and config, start tmux session
   delete                Delete project repository, branch and config, kill tmux session
 EOF
-  return 1
+  exit 1
 }
 function muxcfg::main() {
   setopt localoptions unset err_return
@@ -109,13 +99,11 @@ function muxcfg::main() {
   local -a _fn_args
   whence tmuxinator > /dev/null
   shell::eval "mkdir -p \"$MUXCFGDIR\""
-  base::getopt hys:t: help,noconfirm,src:,dst: "$@"
+  base::getopt help,noconfirm,src:,dst: "$@"
   io::vlog 2 "${(kv)_fn_options}"
   io::vlog 2 "${_fn_args}"
 
-  if [[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]]; then
-    muxcfg::usage
-  fi
+  [[ ! -z "${_fn_options[--help]}") ]] && muxcfg::usage
 
   eval set -- "${_fn_args}"
   local _subcmd _project _git_new_workdir_cmd _cwd
@@ -134,7 +122,7 @@ function muxcfg::main() {
   io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
   case "${_subcmd}" in
     start|delete )
-      if [[ ! (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+      if [[ ! -z ${_fn_options[--noconfirm]} ]]; then
         "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" -y
       else
         "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"

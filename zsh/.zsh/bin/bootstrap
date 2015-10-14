@@ -5,10 +5,18 @@ function bootstrap::usage() {
 Usage: bootstrap [arguments]
 
 Arguments:
-  -h or --help          Print the usage information
-  -n or --dryrun        Dryrun
+  --help          Print the usage information
+  --dryrun        Dryrun, cannot come first due to ggetopt limitations (FIX ME)!
+  --unstow        Revert the stow symlinks
+  --stow          Stow only
 EOF
-  return 1
+  exit 0
+}
+function bootstrap::stow() {
+  for module in misc tmux vim zsh; do
+    shell::eval "[[ -d ${module} ]] && stow $1 ${module} -t ~"
+  done
+  os::OSX && shell::eval "[[ -d osx ]] && stow $1 osx -t ~"
 }
 function bootstrap::main() {
   setopt localoptions unset err_return
@@ -35,10 +43,7 @@ function bootstrap::main() {
   shell::eval "mkdir -p \"$HOME/.tmuxinator\""
   shell::eval "mkdir -p \"$HOME/.vim/\""
   shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
-  for module in misc tmux vim zsh; do
-    shell::eval "[[ -d ${module} ]] && stow ${module} -t ~"
-  done
-  os::OSX && shell::eval "[[ -d osx ]] && stow osx -t ~"
+  bootstrap::stow
 
   io::msg "Tapping extra repositories..."
   shell::eval "brew tap paulhybryant/myformulae"
@@ -76,22 +81,25 @@ source "${0:a:h}/../lib/base.zsh"
 source "${0:a:h}/../lib/io.zsh"
 source "${0:a:h}/../lib/shell.zsh"
 
+setopt localoptions err_return
 local -A _fn_options
-base::getopt hn help,dryrun "$@"
+base::getopt help,dryrun,unstow,stow "$@"
 
-[[ ! (-z "${_fn_options[--help]}" && -z "${_fn_options[-h]}") ]] && \
-  bootstrap::usage
-[[ ! (-z "${_fn_options[--dryrun]}" && -z "${_fn_options[-n]}") ]] && \
-  mode::set_dryrun
-
-unset _fn_options
+[[ ! -z "${_fn_options[--help]}" ]] && bootstrap::usage
+[[ ! -z "${_fn_options[--dryrun]}" ]] && mode::set_dryrun
 
 local _config_dir
 _config_dir="${0:A:h}/../../../"
 base::runonce
 shell::eval "pushd ${_config_dir:a}"
-bootstrap::main
-shell::eval "source ${_config_dir:a}/zsh/.zshrc"
+if [[ ! -z "${_fn_options[--unstow]}" ]]; then
+  bootstrap::stow "-D"
+elif [[ ! -z "${_fn_options[--stow]}" ]]; then
+  bootstrap::stow
+else
+  bootstrap::main
+  shell::eval "source ${_config_dir:a}/zsh/.zshrc"
+fi
 shell::eval "popd"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

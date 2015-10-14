@@ -132,71 +132,15 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "BASE.ZSH 1"
-.TH BASE.ZSH 1 "2015-10-14" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "KB.ZSH 1"
+.TH KB.ZSH 1 "2015-10-14" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: base.zsh \- Basic utiliti functions.
+File: kb.zsh \- Key binding
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""base::exists""" 4
-.el .IP "Function \f(CWbase::exists\fR" 4
-.IX Item "Function base::exists"
-Examples
-  base::exists \*(L"\s-1VAR\*(R"\s0
-.Sp
-Check whether something 'exists'
-.Sp
-\&\f(CW$1\fR The thing to be checked whether it exists.
-.Sp
-\&\f(CW@return\fR 0 or 1. 0 exists, 1 not exists.
-.ie n .IP "Function ""base::parseargs""" 4
-.el .IP "Function \f(CWbase::parseargs\fR" 4
-.IX Item "Function base::parseargs"
-Parse arguments passed to functions.
-Assuming the existence of two variables:
-  _fn_options \- Containing the default options and default option values for this function
-  _fn_args \- Arguments passed to this function
-.Sp
-Example:
-  local \-A _fn_options
-  _fn_options=(\-\-no\-detached 'null' \-\-foo 'null' \-\-unset 'empty')
-  local \-a _fn_args
-  _fn_args=(\-\-no\-detached \-\-foo=y)
-  base::parseargs
-  [[ ${_fn_options[\-\-no\-detached]} == \*(L"true\*(R" ]]
-  [[ ${_fn_options[\-\-foo]} == \*(L"y\*(R" ]]
-  [[ ${_fn_options[\-\-unset]} == \*(L"empty\*(R" ]]
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""base::getopt""" 4
-.el .IP "Function \f(CWbase::getopt\fR" 4
-.IX Item "Function base::getopt"
-Use gnu getopt to parse long function arguments.
-.Sp
-Example:
-  local \-A _fn_options
-  base::getopt no\-detached,foo:,unset: \-\-no\-detached \-\-foo yo
-  _fn_options[\-\-no\-detached] == \*(L"true\*(R"
-  _fn_options[\-\-foo] == \*(L"yo\*(R"
-  _fn_options[\-\-unset] == ""
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""time::getmtime""" 4
-.el .IP "Function \f(CWtime::getmtime\fR" 4
-.IX Item "Function time::getmtime"
-Get last modification time of a file.
-\&\f(CW$1\fR Filename
-.Sp
-\&\f(CW@return\fR string of the last modified time of a file.
-.ie n .IP "Function ""base::sourced""" 4
-.el .IP "Function \f(CWbase::sourced\fR" 4
-.IX Item "Function base::sourced"
-\&\f(CW$1\fR Absolute path to the file to be sourced.
-.Sp
-\&\f(CW@return\fR 0 or 1, indicates whether latest version of this file is sourced.

@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+source "${0:h}/../../lib/os.zsh"
 source "${0:h}/../../lib/base.zsh"
 
 set -x
@@ -17,7 +18,7 @@ function test::base::exists() {
   base::exists --var __TEST_FOO__
   [[ $? -eq 1 ]]
   declare __TEST_FOO__
-  base::exists -v __TEST_FOO__
+  base::exists --var __TEST_FOO__
   [[ $? -eq 0 ]]
 }
 test::base::exists
