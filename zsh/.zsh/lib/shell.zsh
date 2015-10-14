@@ -67,6 +67,14 @@ function shell::exists() {
   return 1
 }
 
+function shell::realpath() {
+  if which -s realpath > /dev/null; then
+    realpath "$@"
+  elif os::OSX; then
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+  fi
+}
+
 : <<=cut
 =back
 =cut

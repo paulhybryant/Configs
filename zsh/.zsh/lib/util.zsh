@@ -63,17 +63,6 @@ function util::start_ssh_agent() {
 }
 
 : <<=cut
-=item Function C<util::installed_gnome_shell_exts>
-
-List installed gnome shell extensions
-
-@return NULL
-=cut
-function util::installed_gnome_shell_exts() {
-  grep "name\":" ~/.local/share/gnome-shell/extensions/*/metadata.json /usr/share/gnome-shell/extensions/*/metadata.json | awk -F '"name": "|",' '{print $2}'
-}
-
-: <<=cut
 =item Function C<util::ta>
 
 Tmux attach wrapper, which updates tmux environment as configured.
@@ -157,19 +146,6 @@ function util::setup_abbrev() {
 
   bindkey "  " globalias
   bindkey " " magic-space
-}
-
-: <<=cut
-=item Function C<util::brew_upgrade>
-
-Upgrade outdated brew packages.
-
-@return NULL
-=cut
-function util::brew_upgrade() {
-  brew update
-  brew upgrade $(brew outdated)
-  # Update pip
 }
 
 : <<=cut
@@ -318,7 +294,6 @@ function util::tmux_attach() {
   done
   \tmux attach -d -t "$1"
 }
-
 function util::powerline_shell() {
   export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
 }
@@ -350,7 +325,6 @@ function util::install_precmd() {
   done
   precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
 }
-
 function util::fix_display() {
   os::OSX || return 0
   local _dispdir _dispfile _dispnew
