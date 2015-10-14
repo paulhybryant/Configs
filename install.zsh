@@ -26,8 +26,9 @@ while getopts ":h" opt; do
   esac
 done
 
-curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > /tmp/antigen.zsh
-source /tmp/antigen.zsh
+echo "Sourcing antigen..."
+source <(curl -sL https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh) || exit 1
+setopt verbose
 local url="$(-antigen-resolve-bundle-url "git@github.com:paulhybryant/Configs.git")"
 -antigen-ensure-repo "${url}"
 pushd $(-antigen-get-clone-dir "${url}")
@@ -44,3 +45,4 @@ case $reply in
     ;;
 esac
 popd
+unsetopt verbose
