@@ -45,10 +45,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  # prezto will delete all key-bindings in one module, need to put after prezto
-  # to ensure they are not deleted.
-  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/kb.zsh
-
   # Tell antigen that you're done.
   antigen apply
 fi

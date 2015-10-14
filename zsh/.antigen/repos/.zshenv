@@ -86,6 +86,7 @@ alias date='${CMDPREFIX}date'
 alias ls='${CMDPREFIX}ls --color=tty'
 alias mktemp='${CMDPREFIX}mktemp'
 alias stat='${CMDPREFIX}stat'
+alias stow-'stow -v'
 
 export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
 export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"

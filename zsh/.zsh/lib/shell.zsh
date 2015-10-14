@@ -37,5 +37,36 @@ function shell::eval() {
 }
 
 : <<=cut
+=item Function C<shell::exists>
+
+Examples
+  shell::exists --var "VAR"
+
+Check whether something 'exists'
+
+$1 The thing to be checked whether it exists.
+
+@return 0 or 1. 0 exists, 1 not exists.
+=cut
+function shell::exists() {
+  setopt localoptions unset
+  local -A _fn_options
+  base::getopt var:,bin:,sub:,file:,dir: "$@"
+
+  if [[ ! -z ${_fn_options[--var]} ]]; then
+    [[ ! -z ${_fn_options[--var]} ]] && eval "[[ -n \${${_fn_options[--var]}+1} ]]" && return 0
+  elif [[ ! -z ${_fn_options[--bin]} ]]; then
+    [[ ! -z ${_fn_options[--bin]} ]] && whence "${_fn_options[--bin]}" > /dev/null && return 0
+  elif [[ -z ${_fn_options[--sub]} ]]; then
+    [[ ! -z ${_fn_options[--sub]} ]] && whence -f "${_fn_options[--sub]}" > /dev/null && return 0
+  elif [[ ! -z ${_fn_options[--file]} ]]; then
+    [[ ! -z ${_fn_options[--file]} && -e "${_fn_options[--file]}" ]] && return 0
+  elif [[ ! -z ${_fn_options[--dir]} ]]; then
+    [[ ! -z ${_fn_options[--dir]} && -d "${_fn_options[--dir]}" ]] && return 0
+  fi
+  return 1
+}
+
+: <<=cut
 =back
 =cut

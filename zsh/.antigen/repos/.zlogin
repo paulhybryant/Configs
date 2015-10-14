@@ -1,19 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-: <<=cut
-=pod
-
-=head1 NAME
-
-File: kb.zsh - Key binding
-
-=head1 DESCRIPTION
-
-=head2 Methods
-
-=over 4
-=cut
-
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
@@ -26,7 +12,3 @@ bindkey '^[[A' up-line-or-beginning-search                                      
 bindkey '^[[B' down-line-or-beginning-search                                    # Down
 # bindkey '^I' expand-or-complete-prefix
 # bindkey '^[[3~' delete-char
-
-: <<=cut
-=back
-=cut
