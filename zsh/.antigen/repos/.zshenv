@@ -86,7 +86,7 @@ alias date='${CMDPREFIX}date'
 alias ls='${CMDPREFIX}ls --color=tty'
 alias mktemp='${CMDPREFIX}mktemp'
 alias stat='${CMDPREFIX}stat'
-alias stow-'stow -v'
+alias stow='stow -v'
 
 export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
 export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
@@ -113,6 +113,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export HISTSIZE=50000
 export SAVEHIST=60000
 export HISTFILE="$HOME/.zsh_history"
+export HIST_STAMPS='yyyy-mm-dd'
 case $HIST_STAMPS in
   'mm/dd/yyyy') alias history='fc -fl 1' ;;
   'dd.mm.yyyy') alias history='fc -El 1' ;;
