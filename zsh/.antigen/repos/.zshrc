@@ -56,6 +56,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/keys.zsh
   # Tell antigen that you're done.
   antigen apply
 fi

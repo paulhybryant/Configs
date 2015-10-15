@@ -82,12 +82,6 @@ else
   export SSH_AGENT_NAME='ssh-agent'
 fi
 
-alias date='${CMDPREFIX}date'
-alias ls='${CMDPREFIX}ls --color=tty'
-alias mktemp='${CMDPREFIX}mktemp'
-alias stat='${CMDPREFIX}stat'
-alias stow='stow -v'
-
 export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
 export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
 export INFOPATH="$BREWHOME/share/info:$INFOPATH"
@@ -121,11 +115,17 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
+alias date='${CMDPREFIX}date'
 alias grepc='grep -C 5 '
 alias info='info --vi-keys'
+alias ls='${CMDPREFIX}ls --color=tty'
+alias mktemp='${CMDPREFIX}mktemp'
 alias nvim='NVIM=nvim nvim'
+alias stat='${CMDPREFIX}stat'
+alias stow='stow -v'
 alias tl='tmux list-sessions'
 alias tmux='TERM=screen-256color tmux -2'
+alias mank='man -K'
 (( $+aliases[run-help] )) && unalias run-help                                   # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
