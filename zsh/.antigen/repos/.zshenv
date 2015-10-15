@@ -121,12 +121,6 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
-# Allow pass Ctrl + C(Q, S) for terminator
-stty ixany
-stty ixoff -ixon
-stty stop undef
-stty start undef
-
 alias grepc='grep -C 5 '
 alias info='info --vi-keys'
 alias nvim='NVIM=nvim nvim'

@@ -1,5 +1,11 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+# Allow pass Ctrl + C(Q, S) for terminator
+stty ixany
+stty ixoff -ixon
+stty stop undef
+stty start undef
+
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
