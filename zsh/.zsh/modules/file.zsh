@@ -110,8 +110,10 @@ function file::ll() {
   END {
     if (filenum > 0) {
       split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
+      y = 0
+      for(i = 5; y < 1 && i > 0; i--) {
         y = sum / (2^(10*i))
+      }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
   }' <<< $(${CMDPREFIX}ls -lh $*)
@@ -133,8 +135,10 @@ function file::la() {
   END {
     if (filenum > 0) {
       split("B KB MB GB TB PB", type)
-      for(i = 5; y < 1; i--)
+      y = 0
+      for(i = 5; y < 1 && i > 0; i--) {
         y = sum / (2^(10*i))
+      }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
   }' <<< $(${CMDPREFIX}ls -alF $*)
