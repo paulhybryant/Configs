@@ -1,6 +1,2 @@
-colors.zsh
-file.zsh
-git.zsh
 io.zsh
-net.zsh
-util.zsh
+os.zsh

@@ -3,12 +3,12 @@
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
-  local mycfglibs
-  mycfglibs=(os base colors file git io mode net shell strings time util)
-  for lib in ${mycfglibs}; do
-    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/${lib}.zsh
+  local mycfgmodules
+  mycfgmodules=(colors file git net util)
+  for module in ${mycfgmodules}; do
+    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
   done
-  unset mycfglibs
+  unset mycfgmodules
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!

@@ -16,11 +16,12 @@ File: util.zsh - Various utility functions.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/base.zsh"
+source "${0:h}/../lib/os.zsh"
+source "${0:h}/../lib/base.zsh"
+source "${0:h}/../lib/io.zsh"
+source "${0:h}/../lib/strings.zsh"
+
 source "${0:h}/colors.zsh"
-source "${0:h}/io.zsh"
-source "${0:h}/os.zsh"
-source "${0:h}/strings.zsh"
 
 typeset -a __TMUX_VARS__
 __TMUX_VARS__=(SSH_CLIENT SSH_OS)

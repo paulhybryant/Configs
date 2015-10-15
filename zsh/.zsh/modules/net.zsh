@@ -16,7 +16,7 @@ File: net.zsh - Utility functions related to network access.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/base.zsh"
+source "${0:h}/../lib/base.zsh"
 
 : <<=cut
 =item Function C<net::external_ip>
@@ -62,6 +62,8 @@ function net::port_open() {
   nc -zv "$1" "$2" 2> /dev/null && return 0
   return 1
 }
+
+alias ssh='net::ssh'
 
 : <<=cut
 =back
