@@ -3,6 +3,7 @@
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
+# TODO(me): Bind C-Left and C-Right as HOME / END
 bindkey '^[OD' beginning-of-line                                                # Set left arrow as HOME
 bindkey '^[OC' end-of-line                                                      # Set right arrow as END
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
