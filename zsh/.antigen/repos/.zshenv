@@ -130,4 +130,4 @@ alias mank='man -K'
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
 autoload -Uz bashcompinit && bashcompinit
-zstyle ":completion:*" show-completer true
+# zstyle ":completion:*" show-completer true
