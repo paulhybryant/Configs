@@ -102,7 +102,7 @@ List files in long format.
 @return NULL
 =cut
 function file::ll() {
-  eval "${aliases[ls]:-ls} -lh \"$*\""
+  eval "${aliases[ls]:-ls} -lh $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -116,7 +116,7 @@ function file::ll() {
       }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(${CMDPREFIX}ls -lh "$*")
+  }' <<< $(${CMDPREFIX}ls -lh $*)
 }
 
 : <<=cut
@@ -128,7 +128,7 @@ List all files, including hidden files.
 =cut
 function file::la() {
   setopt localoptions verbose
-  eval "${aliases[ls]:-ls} -laF \"$*\""
+  eval "${aliases[ls]:-ls} -aF $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -142,7 +142,7 @@ function file::la() {
       }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(${CMDPREFIX}ls -laF "$*")
+  }' <<< $(${CMDPREFIX}ls -aF $*)
 }
 
 alias la='file::la'
