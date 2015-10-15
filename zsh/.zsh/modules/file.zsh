@@ -127,7 +127,8 @@ List all files, including hidden files.
 @return NULL
 =cut
 function file::la() {
-  eval "${aliases[ls]:-ls} -alF $*"
+  setopt localoptions verbose
+  eval "${aliases[ls]:-ls} -aF $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -141,7 +142,7 @@ function file::la() {
       }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(${CMDPREFIX}ls -alF $*)
+  }' <<< $(${CMDPREFIX}ls -aF $*)
 }
 
 alias la='file::la'
