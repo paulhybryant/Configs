@@ -19,6 +19,7 @@ File: util.zsh - Various utility functions.
 source "${0:h}/../lib/os.zsh"
 source "${0:h}/../lib/base.zsh"
 source "${0:h}/../lib/io.zsh"
+source "${0:h}/../lib/shell.zsh"
 source "${0:h}/../lib/strings.zsh"
 
 source "${0:h}/colors.zsh"
@@ -338,10 +339,17 @@ function util::fix_display() {
   export DISPLAY=${_dispnew}
 }
 
+function util::run() {
+  mode::set_dryrun
+  shell::eval "$*"
+  io::yes_or_no 'Continue to run' && mode::toggle_dryrun && shell::eval "$*"
+}
+
 alias ta='util::ta'
 alias ts='util::tmux_start'
 alias vi='util::vim'                                                          # alias vi='vi -p'
 alias vim='util::vim'                                                         # alias vim='vim -p'
+alias run='util::run'
 
 util::install_precmd
 util::setup_abbrev
