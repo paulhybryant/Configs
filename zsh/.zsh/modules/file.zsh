@@ -95,14 +95,14 @@ function file::rm() {
 }
 
 : <<=cut
-=item Function C<file::ll>
+=item Function C<file::ls>
 
 List files in long format.
 
 @return NULL
 =cut
-function file::ll() {
-  eval "${aliases[ls]:-ls} -lh $*"
+function file::ls() {
+  eval "${aliases[ls]:-ls} -Fh $1 $*"
   awk '/^-/ {
     sum += $5
     ++filenum
@@ -116,37 +116,12 @@ function file::ll() {
       }
       printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
     }
-  }' <<< $(${CMDPREFIX}ls -lh $*)
+  }' <<< $(${CMDPREFIX}ls -lFh $1 $*)
 }
 
-: <<=cut
-=item Function C<file::la>
-
-List all files, including hidden files.
-
-@return NULL
-=cut
-function file::la() {
-  setopt localoptions verbose
-  eval "${aliases[ls]:-ls} -aF $*"
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      y = 0
-      for(i = 5; y < 1 && i > 0; i--) {
-        y = sum / (2^(10*i))
-      }
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< $(${CMDPREFIX}ls -aF $*)
-}
-
-alias la='file::la'
-alias ll='file::ll'
+alias la='file::ls -a'
+alias ll='file::ls -l'
+alias lla='file::ls -la'
 alias rm='file::rm'
 
 : <<=cut
