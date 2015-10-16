@@ -46,8 +46,8 @@
   @ Learn zsh completions
   @ Abbreviation breaks history search, fix it.
   @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params.
-  @ Manage myconfigs with antigen @p:1
-  @ Use zstyle to track loaded lib version @p:1
+  @ Manage myconfigs with antigen @p:1 (DONE 2015-10-16 14:33)
+  @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
   @ Cache geoinfo
 
 * misc
@@ -66,8 +66,8 @@
   @ Build vim on windows (DONE 2014-12-02 21:13)
   @ Gvim windows shell context extension (DONE 2014-12-06 18:10)
   @ Try out rocket dock in win (DONE 2014-12-06 18:10)
-  @ Unit test zsh library. @p:1
+  @ Unit test zsh library. @p:1 (DONE 2015-10-16 14:33)
   @ Check documentation for all my vim plugins, do not create new before updating existing doc @p:1
-  @ Document zsh library, checkout the doc gen tools @p:1
+  @ Document zsh library, checkout the doc gen tools @p:1 (DONE 2015-10-16 14:33)
   @ Learn python @p:1
   @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)
