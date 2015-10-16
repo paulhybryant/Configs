@@ -396,6 +396,7 @@ if s:vimplugin_size >= 0
   " }}}
   " {{{2
   NeoBundle 'junegunn/fzf', {
+        \ 'directory' : 'fzf-vanilla',
         \ 'rtp': maktaba#path#Dirname(
         \   maktaba#path#Dirname(resolve(exepath('fzf'))))
         \ }                                                                     " Fuzzy finder
