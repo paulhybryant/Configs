@@ -38,7 +38,7 @@
   @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching. (DONE 2014-12-06 18:09)
   @ Make tmux resurrect automatic. (DONE 2015-08-19 16:18)
   @ Fix tmux-continuum to kill default session
-  @ Migrate muxcfg
+  @ Migrate muxcfg (DONE 2015-10-16 14:35)
 
 * zsh related tasks
 = Zsh @p:2 =

@@ -684,6 +684,7 @@ endif
 " }}}
 " Priority 1 Plugins {{{1
 if s:vimplugin_size >= 1
+  NeoBundle 'vim-scripts/SyntaxRange'                                           " Tail for windows in vim
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
   NeoBundle 'aquach/vim-http-client'                                            " Make http request in vim, and show the response
