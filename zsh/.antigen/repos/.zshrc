@@ -14,12 +14,9 @@ fi
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
-  local mycfgmodules
-  mycfgmodules=(colors file git net util)
-  for module in ${mycfgmodules}; do
+  for module in colors file git net util; do
     antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
   done
-  unset mycfgmodules
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!
@@ -56,7 +53,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/keys.zsh
+  for module in options keys aliases; do
+    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
+  done
   # Tell antigen that you're done.
   antigen apply
 fi

@@ -1,74 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-# zshoptions {{{
-# Options are not ordered alphabetically, but their order in zsh man page
-# Changing Directories
-setopt AUTOCD                                                                  # Switching directories for lazy people
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt PUSHD_MINUS
-setopt PUSHD_SILENT
-
-# Completion
-setopt ALWAYS_TO_END                                                            # When complete from middle, move cursor
-setopt AUTO_LIST
-setopt AUTO_MENU                                                                # Automatically use menu completion after the second consecutive request for completion
-setopt AUTO_PARAM_SLASH
-setopt COMPLETE_ALIASES                                                         # Prevent aliases from being internally substituted before completion is attempted
-setopt COMPLETE_IN_WORD                                                         # Not just at the end
-setopt GLOB_COMPLETE
-setopt LIST_AMBIGUOUS
-setopt LIST_TYPES
-
-# Expansion and Globbing
-setopt EXTENDED_GLOB                                                            # Weird &amp; wacky pattern matching - yay zsh!
-setopt NO_NOMATCH                                                               # pass through '*' if globbing fails
-setopt CASEMATCH                                                                # Whether the regex comparison (e.g. =~) will match case
-
-# History
-setopt APPEND_HISTORY
-setopt BANG_HIST
-setopt EXTENDED_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS                                                     # Do not enter command lines into the history list if they are duplicates of the previous event
-setopt HIST_IGNORE_DUPS                                                         # ignore duplication command history list
-setopt HIST_IGNORE_SPACE                                                        # Remove command lines from the history list when the first character on the line is a space
-setopt HIST_NO_STORE
-setopt HIST_REDUCE_BLANKS                                                       # Remove superfluous blanks from each command line being added to the history list
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY                                                              # When using ! cmds, confirm first
-setopt NO_INC_APPEND_HISTORY
-setopt SHARE_HISTORY                                                            # share command history data
-
-# Input/Output
-setopt ALIASES
-setopt CLOBBER
-setopt CORRECT
-setopt INTERACTIVE_COMMENTS                                                     # Escape commands so I can use them later
-setopt PRINT_EXIT_VALUE                                                         # Alert me if something's failed
-setopt SHORT_LOOPS
-
-# Job Control
-setopt CHECK_JOBS
-setopt NOHUP                                                                    # Don't kill background jobs when I logout
-
-# Prompting
-setopt PROMPT_BANG
-setopt NO_PROMPT_CR                                                             # Default on, resulting in a carriage return ^M when enter on the numeric pad is pressed.
-setopt PROMPT_PERCENT
-setopt PROMPT_SUBST
-
-# Scripts and Functions
-setopt LOCAL_OPTIONS                                                            # Allow setting function local options with 'setopt localoptions foo nobar'
-
-# Shell Emulation
-setopt NO_CONTINUE_ON_ERROR
-
-# Shell State
-setopt VI                                                                       # Use vi key bindings in ZSH
-# }}}
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
@@ -108,35 +39,6 @@ export HISTSIZE=50000
 export SAVEHIST=60000
 export HISTFILE="$HOME/.zsh_history"
 export HIST_STAMPS='yyyy-mm-dd'
-case $HIST_STAMPS in
-  'mm/dd/yyyy') alias history='fc -fl 1' ;;
-  'dd.mm.yyyy') alias history='fc -El 1' ;;
-  'yyyy-mm-dd') alias history='fc -il 1' ;;
-  *) alias history='fc -l 1' ;;
-esac
-
-alias date='${CMDPREFIX}date'
-alias grepc='grep -C 5 '
-alias info='info --vi-keys'
-alias ls='${CMDPREFIX}ls --color=tty'
-alias mank='man -K'
-alias mktemp='${CMDPREFIX}mktemp'
-alias nvim='NVIM=nvim nvim'
-alias stat='${CMDPREFIX}stat'
-alias stow='stow -v'
-alias tl='tmux list-sessions'
-alias tmux='TERM=screen-256color tmux -2'
-alias unbindkey='bindkey -r'
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
-(( $+aliases[run-help] )) && unalias run-help                                   # Use built-in run-help to use online help
-autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true

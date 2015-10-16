@@ -21,6 +21,7 @@ source "${0:h}/../lib/base.zsh"
 source "${0:h}/../lib/io.zsh"
 source "${0:h}/../lib/shell.zsh"
 source "${0:h}/../lib/strings.zsh"
+source "${0:h}/../lib/time.zsh"
 
 source "${0:h}/colors.zsh"
 
@@ -35,10 +36,16 @@ Get the geo location information.
 @return list of values for requested fields.
 =cut
 function util::geoinfo() {
-  # ip, hostname, city, region, country, loc, org
-  local _filter
+  local _cache='/tmp/.util.geoinfo'
+  local _expire _filter
+  _expire=$(time::_seconds)
+  _expire=$((_expire - 3600))
+  if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
+    # ip, hostname, city, region, country, loc, org
+    curl -x '' ipinfo.io 1> ${_cache} 2> /dev/null
+  fi
   _filter=$(strings::join --prefix=. --delim=, "$@")
-  echo $(curl -x '' ipinfo.io 2> /dev/null | jq "${_filter}")
+  jq "${_filter}" < ${_cache}
 }
 
 : <<=cut

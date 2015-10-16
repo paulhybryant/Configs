@@ -49,6 +49,7 @@
   @ Manage myconfigs with antigen @p:1 (DONE 2015-10-16 14:33)
   @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
   @ Cache geoinfo
+  @ Add option completion for zsh in vim
 
 * misc
 = Misc @p:2 =
