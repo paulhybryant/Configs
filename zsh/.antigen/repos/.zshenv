@@ -1,9 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+declare -U path
+declare -U fpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export BREWVERSION="homebrew"
   export BREWHOME="$HOME/.$BREWVERSION"
-  export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  # export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  path=(/opt/local/bin /opt/local/sbin $path)
   export CMDPREFIX="g"
   export SSH_AGENT_NAME='gnubby-ssh-agent'
   alias updatedb="/usr/libexec/locate.updatedb"
@@ -13,10 +16,16 @@ else
   export SSH_AGENT_NAME='ssh-agent'
 fi
 
-export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
-export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
-export INFOPATH="$BREWHOME/share/info:$INFOPATH"
-fpath+=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions)
+# export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
+path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
+declare -U manpath
+# export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
+manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
+declare -U infopath
+declare -T INFOPATH infopath
+# export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+infopath=($BREWHOME/share/info $infopath)
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color

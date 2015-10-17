@@ -25,7 +25,7 @@ source "${0:h}/../lib/time.zsh"
 
 source "${0:h}/colors.zsh"
 
-typeset -a __TMUX_VARS__
+declare -a __TMUX_VARS__
 __TMUX_VARS__=(SSH_CLIENT SSH_OS)
 
 : <<=cut
