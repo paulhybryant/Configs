@@ -14,7 +14,7 @@ fi
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
-  for module in colors file git net strings time util; do
+  for module in colors file git net util; do
     antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
   done
 
