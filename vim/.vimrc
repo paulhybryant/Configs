@@ -172,6 +172,8 @@ else
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive codefmt plugin[mappings]
+    " python formatter: https://github.com/google/yapf
+    " java formatter: https://github.com/google/google-java-format
   endfunction
   " }}}
   " {{{2
@@ -190,6 +192,7 @@ call glaive#Install()
 " }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_size >= 0
+  NeoBundle 'google/vim-searchindex'
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
