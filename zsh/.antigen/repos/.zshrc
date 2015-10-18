@@ -53,10 +53,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   local pmodules
   # Order matters! (per zpreztorc)
   pmodules=(environment terminal editor history directory completion prompt \
-    command-not-found fasd git history-substring-search homebrew python ssh \
-    syntax-highlighting tmux)
+    command-not-found fasd git syntax-highlighting history-substring-search \
+    homebrew python ssh tmux)
   os::OSX && pmodules+=(osx)
-  pmodules=()
   for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
     antigen bundle sorin-ionescu/prezto modules/${module}

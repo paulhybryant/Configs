@@ -1,6 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+zle -N up-line-or-beginning-search
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history
+zle -N down-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
 # TODO(me): Bind C-Left and C-Right as HOME / END

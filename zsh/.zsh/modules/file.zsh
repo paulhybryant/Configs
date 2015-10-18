@@ -102,7 +102,7 @@ List files in long format.
 @return NULL
 =cut
 function file::ls() {
-  ${=aliases[ls]:-ls} -Fh $1 $*
+  eval "${=aliases[ls]:-ls} -Fh $1 $*"
   awk '/^-/ {
     sum += $5
     ++filenum
