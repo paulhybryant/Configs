@@ -16,10 +16,6 @@ File: shell.zsh - Utilities for shell
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/base.zsh"
-source "${0:h}/io.zsh"
-source "${0:h}/mode.zsh"
-
 : <<=cut
 =item Function C<shell::eval>
 

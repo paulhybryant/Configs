@@ -16,8 +16,6 @@ File: net.zsh - Utility functions related to network access.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/../lib/base.zsh"
-
 : <<=cut
 =item Function C<net::external_ip>
 

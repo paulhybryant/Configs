@@ -1,0 +1,7 @@
+source "${0:h}/os.zsh"
+source "${0:h}/mode.zsh"
+source "${0:h}/base.zsh"
+source "${0:h}/io.zsh"
+source "${0:h}/shell.zsh"
+source "${0:h}/strings.zsh"
+source "${0:h}/time.zsh"

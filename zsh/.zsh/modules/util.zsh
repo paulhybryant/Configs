@@ -16,15 +16,6 @@ File: util.zsh - Various utility functions.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/../lib/os.zsh"
-source "${0:h}/../lib/base.zsh"
-source "${0:h}/../lib/io.zsh"
-source "${0:h}/../lib/shell.zsh"
-source "${0:h}/../lib/strings.zsh"
-source "${0:h}/../lib/time.zsh"
-
-source "${0:h}/colors.zsh"
-
 declare -a __TMUX_VARS__
 __TMUX_VARS__=(SSH_CLIENT SSH_OS)
 
@@ -41,6 +32,7 @@ function util::geoinfo() {
   _expire=$(time::_seconds)
   _expire=$((_expire - 3600))
   if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
+    rm ${_cache} > /dev/null 2>&1
     # ip, hostname, city, region, country, loc, org
     curl -x '' ipinfo.io 1> ${_cache} 2> /dev/null
   fi
@@ -56,15 +48,15 @@ Start ssh agent if not yet.
 @return NULL
 =cut
 function util::start_ssh_agent() {
-  local _agent
+  local _agent _agent_pid
   _agent=$1
   # Start ssh agent if needed
   # Check to see if SSH Agent is already running
   # agent_pid="$(ps -ef | grep "${_agent}" | grep -v "grep" | awk '{print($2)}')"
-  agent_pid=$(pgrep "${_agent}")
+  _agent_pid=$(pgrep "${_agent}")
 
   # If the agent is not running (pid is zero length string)
-  if [[ -z "${agent_pid}" ]]; then
+  if [[ -z "${_agent_pid}" ]]; then
       # Start up SSH Agent
       # this seems to be the proper method as opposed to `exec ssh-agent bash`
       eval "$(${_agent})"
@@ -327,6 +319,7 @@ function util::copy_tmux_vars() {
   fi
 }
 function util::install_precmd() {
+  declare -ag precmd_functions
   for s in "${precmd_functions[@]}"; do
     if [[ "$s" == "util::powerline_shell" || "$s" == "util::copy_tmux_vars" ]]; then
       return
@@ -350,6 +343,51 @@ function util::run() {
   mode::set_dryrun
   shell::eval "$*"
   io::yes_or_no 'Continue to run' && mode::toggle_dryrun && shell::eval "$*"
+}
+
+function util::zsh_startup_profiling() {
+  setopt localoptions KSH_ARRAYS CLOBBER
+  PROFILING='y' zsh
+  local _log="/tmp/zsh.profile"
+  local _profile="/tmp/zsh.profile-summary"
+  echo "Profile log: ${_log}"
+  local _file _start _end _curfile _cum _startline _endline
+  local -a _parts
+
+  printf "%-8s : %-10s : %s\n" "time" "cumulative" "file" > "${_profile}"
+  _cum=0
+  # _i=0
+  while read -r _line
+  do
+    # _i=$((_i + 1))
+    # if [[ $_i -gt $2 ]]; then
+      # break;
+    # fi
+    if [[ ! ${_line} =~ '^\+' ]]; then
+      continue
+    fi
+    _parts=($=_line)
+    _end=${_parts[0]/\+/}
+    _curfile="${_parts[1]/:[0-9]*>/}"
+    if [[ ! ${_curfile} =~ '^/' ]]; then
+      continue
+    fi
+    if [[ "${_file}" != "${_curfile}" ]]; then
+      if [[ "${_end}" =~ '^[0-9][0-9.]*' && ! -z "${_file}" ]]; then
+        _cum=$((_cum + _end - _start))
+        printf "%-8f : %-10f : %s:%s-%s\n" "$((_end - _start))" "${_cum}" "${_file}" "${_startline/>/}" "${_endline/>/}" >> "${_profile}"
+      fi
+      _start="${_end}"
+      _startline="${_parts[1]/*:/}"
+      _endline="${_parts[1]/*:/}"
+      _file="${_curfile}"
+    else
+      _endline="${_parts[1]/*:/}"
+    fi
+  done < "${_log}"
+  _cum=$((_cum + _end - _start))
+  printf "%-8f : %-10f : %s:%s-%s\n" "$((_end - _start))" "${_cum}" "${_file}" "${_startline/>/}" "${_endline/>/}" >> "${_profile}"
+  echo "Profile summary: ${_profile}"
 }
 
 alias ta='util::ta'

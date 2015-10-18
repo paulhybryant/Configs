@@ -16,10 +16,6 @@ File: file.zsh - File system related utility functions.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/../lib/os.zsh"
-source "${0:h}/../lib/base.zsh"
-source "${0:h}/../lib/io.zsh"
-
 : <<=cut
 =item Function C<file::find_ignore_dir>
 

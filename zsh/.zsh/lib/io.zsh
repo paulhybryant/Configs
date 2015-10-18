@@ -16,9 +16,6 @@ File: io.zsh - IO related utility functions.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/base.zsh"
-source "${0:h}/mode.zsh"
-
 function io::hl() {
   printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
 }

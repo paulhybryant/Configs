@@ -2,7 +2,7 @@
 
 # Use PROFILING='y' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
-  echo "Profiling result in /tmp/zstartup.profile.$$"
+  local _profile_log="/tmp/zsh.profile"
   # set the trace prompt to include seconds, nanoseconds, script name and line number
   # This is GNU date syntax; by default Macs ship with the BSD date program, which isn't compatible
   # PS4='+$(date "+%s:%N") %N:%i> '
@@ -10,7 +10,7 @@ if [[ -n ${PROFILING+1} ]]; then
   PS4='+$EPOCHREALTIME %N:%i> '
   # save file stderr to file descriptor 3 and redirect stderr (including trace
   # output) to a file with the script's PID as an extension
-  exec 3>&2 2> /tmp/startlog.$$
+  exec 3>&2 2> ${_profile_log}
   # set options to turn on tracing and expansion of commands contained in the prompt
   setopt xtrace prompt_subst
 fi
@@ -21,18 +21,11 @@ stty ixoff -ixon
 stty stop undef
 stty start undef
 
-# Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
-fi
-
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
-  mymodules=(colors file git net util)
-  for module in ${mymodules}; do
-    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
-  done
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/init.zsh
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/colors.zsh
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!
@@ -52,9 +45,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen use prezto
   local pmodules
   # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory completion prompt \
-    command-not-found fasd git syntax-highlighting history-substring-search \
-    homebrew python ssh tmux)
+  pmodules=(environment terminal editor history directory completion fasd git \
+    command-not-found syntax-highlighting history-substring-search homebrew \
+    ssh tmux)
   os::OSX && pmodules+=(osx)
   for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
@@ -69,12 +62,13 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  mymodules=(options keys aliases)
-  for module in ${mymodules}; do
-    antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
-  done
-  unset modules
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/init.zsh
 
   # Tell antigen that you're done.
-  antigen apply
+  # antigen apply
 fi
+
+# Local configurations
+# if [[ -f ~/.zshrc.local ]]; then
+  # source ~/.zshrc.local
+# fi

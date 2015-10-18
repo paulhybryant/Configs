@@ -16,8 +16,6 @@ File: strings.zsh - Utility functions for string manipulation.
 
 (( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
 
-source "${0:h}/base.zsh"
-
 : <<=cut
 =item Function C<strings::strip_slash>
 
