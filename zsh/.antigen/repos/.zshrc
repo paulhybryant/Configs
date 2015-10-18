@@ -1,5 +1,20 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+# Use PROFILING='y' zsh to profile the startup time
+if [[ -n ${PROFILING+1} ]]; then
+  echo "Profiling result in /tmp/zstartup.profile.$$"
+  # set the trace prompt to include seconds, nanoseconds, script name and line number
+  # This is GNU date syntax; by default Macs ship with the BSD date program, which isn't compatible
+  # PS4='+$(date "+%s:%N") %N:%i> '
+  zmodload zsh/datetime
+  PS4='+$EPOCHREALTIME %N:%i> '
+  # save file stderr to file descriptor 3 and redirect stderr (including trace
+  # output) to a file with the script's PID as an extension
+  exec 3>&2 2> /tmp/startlog.$$
+  # set options to turn on tracing and expansion of commands contained in the prompt
+  setopt xtrace prompt_subst
+fi
+
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
 stty ixoff -ixon
@@ -14,7 +29,8 @@ fi
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
-  for module in colors file git net util; do
+  mymodules=(colors file git net util)
+  for module in ${mymodules}; do
     antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
   done
 
@@ -40,6 +56,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     command-not-found fasd git history-substring-search homebrew python ssh \
     syntax-highlighting tmux)
   os::OSX && pmodules+=(osx)
+  pmodules=()
   for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
     antigen bundle sorin-ionescu/prezto modules/${module}
@@ -53,9 +70,12 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  for module in options keys aliases; do
+  mymodules=(options keys aliases)
+  for module in ${mymodules}; do
     antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/${module}.zsh
   done
+  unset modules
+
   # Tell antigen that you're done.
   antigen apply
 fi

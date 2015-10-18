@@ -125,10 +125,8 @@ else
 endif
 " }}}
 " Google specific setup {{{1
-let s:google_config = resolve(expand('~/.vimrc.google'))
-let g:at_google = filereadable(s:google_config)
 let g:provided = {}
-if g:at_google
+if isdirectory(expand('~/.google'))
   let g:provided = {
         \ 'YouCompleteMe' : '',
         \ 'relatedfiles' : '',
@@ -137,7 +135,7 @@ if g:at_google
         \ 'vim-maktaba' : '',
         \ }
   if has('vim_starting')
-    execute 'source' s:google_config
+    execute 'source' expand('~/.vimrc.local')
   endif
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
