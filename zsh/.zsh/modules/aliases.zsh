@@ -5,18 +5,19 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
-alias date="${CMDPREFIX}date"
-alias grepc='grep -C 5 '
-alias info='info --vi-keys'
-alias ls="${CMDPREFIX}ls --color=tty"
-alias mank='man -K'
+alias date="\\${CMDPREFIX}date"
+alias grepc='\\grep -C 5 '
+alias info='\\info --vi-keys'
+alias ls="\\${CMDPREFIX}ls --color=tty"
+alias mank='\\man -K'
 alias mktemp="${CMDPREFIX}mktemp"
 alias nvim='NVIM=nvim nvim'
 alias stat="${CMDPREFIX}stat"
-alias stow='stow -v'
-alias tl='tmux list-sessions'
-alias tmux='TERM=screen-256color tmux -2'
+alias stow='\\stow -v'
+alias tl='\\tmux list-sessions'
+alias tmux='TERM=screen-256color \\tmux -2'
 alias unbindkey='bindkey -r'
+alias vartype='declare -p'
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
 alias d='fasd -d'        # directory

@@ -3,27 +3,22 @@
 declare -U path
 declare -U fpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export BREWVERSION="homebrew"
-  export BREWHOME="$HOME/.$BREWVERSION"
-  # export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  declare -x -r BREWVERSION="homebrew"
+  declare -x -r BREWHOME="$HOME/.$BREWVERSION"
   path=(/opt/local/bin /opt/local/sbin $path)
-  export CMDPREFIX="g"
-  export SSH_AGENT_NAME='gnubby-ssh-agent'
+  declare -x -r CMDPREFIX="g"
+  declare -x -r SSH_AGENT_NAME='gnubby-ssh-agent'
   alias updatedb="/usr/libexec/locate.updatedb"
 else
-  export BREWVERSION="linuxbrew"
-  export BREWHOME="$HOME/.$BREWVERSION"
-  export SSH_AGENT_NAME='ssh-agent'
+  declare -x -r BREWVERSION="linuxbrew"
+  declare -x -r BREWHOME="$HOME/.$BREWVERSION"
+  declare -x -r SSH_AGENT_NAME='ssh-agent'
 fi
 
-# export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$BREWHOME/bin:$BREWHOME/sbin:$BREWHOME/opt/go/libexec/bin:$PATH"
 path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
 declare -U manpath
-# export MANPATH="$BREWHOME/share/man:$HOME/.zsh/man:$MANPATH"
 manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
-declare -U infopath
-declare -T INFOPATH infopath
-# export INFOPATH="$BREWHOME/share/info:$INFOPATH"
+declare -U -T INFOPATH infopath
 infopath=($BREWHOME/share/info $infopath)
 fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath)
 
@@ -31,23 +26,25 @@ fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions $fpath
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
-export XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
-export HELPDIR="$BREWHOME/share/zsh/help"
-export EDITOR='vim'
-export GREP_OPTIONS='--color=auto'
-export PAGER='most'
+declare -x -r XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
+declare -x HELPDIR="$BREWHOME/share/zsh/help"
+declare -x -r EDITOR='vim'
+declare -x GREP_OPTIONS='--color=auto'
+declare -x -r PAGER='most'
 # export PAGER=vimpager
-export PREFIXWIDTH=10
-export MANPAGER="$PAGER"
-export TERM='screen-256color'
-export VISUAL='vim'
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export HISTSIZE=50000
-export SAVEHIST=60000
-export HISTFILE="$HOME/.zsh_history"
-export HIST_STAMPS='yyyy-mm-dd'
+declare -x PREFIXWIDTH=10
+declare -x MANPAGER="$PAGER"
+declare -x TERM='screen-256color'
+declare -x -r VISUAL='vim'
+declare -x -r XDG_CACHE_HOME="$HOME/.cache"
+declare -x -r XDG_CONFIG_HOME="$HOME/.config"
+declare -x -r XDG_DATA_HOME="$HOME/.local/share"
+declare -x HISTSIZE=50000
+declare -x SAVEHIST=60000
+declare -x HISTFILE="$HOME/.zhistory"
+declare -x -r HIST_STAMPS='yyyy-mm-dd'
+
+brew list go > /dev/null 2>&1 && declare -x GOPATH="$(brew --prefix go)"
 
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true

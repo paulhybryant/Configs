@@ -80,6 +80,7 @@ setopt FUNCTION_ARGZERO
 # Shell Emulation
 setopt NO_CONTINUE_ON_ERROR
 setopt KSH_ARRAYS                                                               # Make array index starts at 0
+setopt RC_EXPAND_PARAM
 
 # Zle
 setopt VI                                                                       # Use vi key bindings in ZSH (bindkey -v)
