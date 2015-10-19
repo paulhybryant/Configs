@@ -1,21 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-: <<=cut
-=pod
-
-=head1 NAME
-
-File: colors.zsh - Colorful terminal output.
-
-=head1 DESCRIPTION
-
-=head2 Methods
-
-=over 4
-=cut
-
-(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
-
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
   eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
 

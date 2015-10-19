@@ -18,9 +18,69 @@ source "${0:h}/options.zsh"
 source "${0:h}/aliases.zsh"
 source "${0:h}/keys.zsh"
 
-source "${0:h}/net.zsh"
 source "${0:h}/util.zsh"
 
+# net utils {{{
+: <<=cut
+=item Function C<net::external-ip>
+
+Get the external ip address for current host.
+
+@return string of external ip address.
+=cut
+autoload -Uz net::external-ip
+
+: <<=cut
+=item Function C<net::ssh>
+
+Utility function that set some env variables by default when connected through ssh.
+Arguments will be passed through to ssh
+
+@return NULL
+=cut
+autoload -Uz net::ssh
+
+: <<=cut
+=item Function C<net::port-open>
+
+Test whether a port / range of ports is / are open.
+
+$1 Host address
+$2 Port number
+
+Example:
+  net::port_open 127.0.0.1 80
+  net::port_open 127.0.0.1 80 90
+  net::port_open 127.0.0.1 80-90
+
+@return 0 if the port is open on specified host, 1 otherwise.
+=cut
+autoload -Uz net::port-open
+
+alias ssh='net::ssh'
+# }}}
+# colors utils {{{
+[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
+  eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
+
+: <<=cut
+=item Function C<colors::define>
+
+Define color env variables.
+
+@return NULL
+=cut
+autoload -Uz colors::define && colors::define
+
+: <<=cut
+=item Function C<colors::manpage>
+
+Make man page colorful.
+
+@return NULL
+=cut
+autolaod -Uz colors::manpage && colors::manpage
+# }}}
 # git utils {{{
 export GIT_EDITOR='vim'
 
