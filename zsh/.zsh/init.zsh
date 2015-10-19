@@ -153,6 +153,7 @@ bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 # }}}
 # colors utils {{{
+declare -x LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
   eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
 
@@ -163,7 +164,7 @@ Define color env variables.
 
 @return NULL
 =cut
-autoload -Uz colors::define && colors::define
+colors::define
 
 : <<=cut
 =item Function C<colors::manpage>
@@ -172,7 +173,7 @@ Make man page colorful.
 
 @return NULL
 =cut
-autoload -Uz colors::manpage && colors::manpage
+colors::manpage
 # }}}
 # file utils {{{
 : <<=cut
@@ -185,7 +186,6 @@ $1 The directory to ignore.
 
 @return NULL
 =cut
-autoload -Uz file::find-ignore-dir
 
 : <<=cut
 =item Function C<file::find-ignore-git>
@@ -195,7 +195,6 @@ A shortcut for file::find-ignore-dir for git.
 
 @return NULL
 =cut
-autoload -Uz file::find-ignore-git
 
 : <<=cut
 =item Function C<file::rm>
@@ -213,7 +212,6 @@ Arguments
 
 @return NULL
 =cut
-autoload -Uz file::rm
 
 : <<=cut
 =item Function C<file::ls>
@@ -222,7 +220,6 @@ List files in long format.
 
 @return NULL
 =cut
-autoload -Uz file::ls
 
 alias la='file::ls -a'
 alias ll='file::ls -l'
@@ -241,7 +238,6 @@ Number of arguments accepted: --no-detached
 
 @return NULLPTR
 =cut
-autoload -Uz git::check-dirty-repos
 
 : <<=cut
 =item Function C<git::has-branch>
@@ -250,7 +246,6 @@ Whether a branch exists in current depo.
 
 @return 0 if exists, 1 otherwise.
 =cut
-autoload -Uz git::has-branch
 
 : <<=cut
 =item Function C<git::parent-branch>
@@ -271,7 +266,6 @@ autoload -Uz git::has-branch
 
 @return NULL
 =cut
-autoload -Uz git::parent-branch
 
 : <<=cut
 =item Function C<git::new-workdir>
@@ -285,7 +279,6 @@ $3 New branch name
 
 @return NULL
 =cut
-autoload -Uz git::new-workdir
 
 : <<=cut
 =item Function C<git::submodule-url>
@@ -294,7 +287,6 @@ List of url of all submodules.
 
 @return NULL
 =cut
-autoload -Uz git::submodule-url
 
 : <<=cut
 =item Function C<git::submodule-mv>
@@ -303,7 +295,6 @@ Move submodule with a single command.
 
 @return NULL
 =cut
-autoload -Uz git::submodule-mv
 # }}}
 # misc utils {{{
 declare -a __TMUX_VARS__
@@ -316,7 +307,6 @@ Get the geo location information.
 
 @return list of values for requested fields.
 =cut
-autoload -Uz util::geoinfo
 
 : <<=cut
 =item Function C<util::start-ssh-agent>
@@ -325,7 +315,6 @@ Start ssh agent if not yet.
 
 @return NULL
 =cut
-autoload -Uz util::start-ssh-agent
 
 : <<=cut
 =item Function C<util::ta>
@@ -334,7 +323,6 @@ Tmux attach wrapper, which updates tmux environment as configured.
 
 @return NULL
 =cut
-autoload -Uz util::ta
 
 : <<=cut
 =item Function C<util::histgrep>
@@ -343,7 +331,6 @@ Grep in reverse order in history.
 
 @return NULL
 =cut
-autoload -Uz util::histgrep
 
 : <<=cut
 =item Function C<util::setup-abbrevs>
@@ -352,7 +339,6 @@ Setup zsh abbreviations.
 
 @return NULL
 =cut
-autoload -Uz util::setup-abbrevs
 
 : <<=cut
 =item Function C<util::vim>
@@ -361,7 +347,6 @@ Open files with vim in a single vim instance in one tmux window.
 
 @return NULL
 =cut
-autoload -Uz util::vim
 
 : <<=cut
 =item Function C<util::gvim>
@@ -370,7 +355,6 @@ Open files with gvim in a single gvim instance.
 
 @return NULL
 =cut
-autoload -Uz util::gvim
 
 : <<=cut
 =item Function C<util::check-test-coverage>
@@ -379,21 +363,6 @@ Check test coverage for zsh functions.
 
 @return NULL
 =cut
-autoload -Uz util::check-test-coverage
-
-autoload -Uz util::tmux-attach
-
-autoload -Uz util::powerline-shell
-
-autoload -Uz util::copy-tmux-vars
-
-autoload -Uz util::install-precmd
-
-autoload -Uz util::fix-display
-
-autoload -Uz util::run
-
-autoload -Uz zsh-startup-profiling
 
 alias ta='util::ta'
 alias ts='util::tmux_start'
@@ -414,7 +383,6 @@ Get the external ip address for current host.
 
 @return string of external ip address.
 =cut
-autoload -Uz net::external-ip
 
 : <<=cut
 =item Function C<net::ssh>
@@ -424,7 +392,6 @@ Arguments will be passed through to ssh
 
 @return NULL
 =cut
-autoload -Uz net::ssh
 
 : <<=cut
 =item Function C<net::port-open>
@@ -441,7 +408,6 @@ Example:
 
 @return 0 if the port is open on specified host, 1 otherwise.
 =cut
-autoload -Uz net::port-open
 
 alias ssh='net::ssh'
 # }}}

@@ -46,6 +46,6 @@ declare -x -r HIST_STAMPS='yyyy-mm-dd'
 
 brew list go > /dev/null 2>&1 && declare -x GOPATH="$(brew --prefix go)"
 
-# autoload -- ~/.zsh/modules/[^_]*(:t)
+autoload -Uz -- ~/.zsh/functions/[^_]*(:t)
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true

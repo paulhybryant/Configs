@@ -2,8 +2,8 @@
 
 declare -ag precmd_functions
 for s in "${precmd_functions[@]}"; do
-  if [[ "$s" == "util::powerline_shell" || "$s" == "util::copy_tmux_vars" ]]; then
+  if [[ "$s" == "util::powerline-shell" || "$s" == "util::copy-tmux-vars" ]]; then
     return
   fi
 done
-precmd_functions+=(util::powerline_shell util::copy_tmux_vars)
+precmd_functions+=(util::powerline-shell util::copy-tmux-vars)

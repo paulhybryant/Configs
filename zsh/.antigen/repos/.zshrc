@@ -31,7 +31,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle mollifier/zload
 
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/init.zsh
-  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/functions/init.zsh
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
 
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!
