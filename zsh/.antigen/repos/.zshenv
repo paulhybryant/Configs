@@ -20,7 +20,7 @@ declare -U manpath
 manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
 declare -U -T INFOPATH infopath
 infopath=($BREWHOME/share/info $infopath)
-fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh/functions $fpath)
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh/lib ~/.zsh/functions $fpath)
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
