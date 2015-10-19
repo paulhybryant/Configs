@@ -1,0 +1,9 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+local _branch
+if [[ $# -eq 0 ]]; then
+  _branch=$(git rev-parse --abbrev-ref HEAD)
+else
+  _branch=$1
+fi
+git show-branch | ack '\*' | ack -v "$_branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'

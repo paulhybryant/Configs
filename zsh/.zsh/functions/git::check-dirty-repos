@@ -1,0 +1,33 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return
+local -A _fn_options
+_fn_options=(--no-detached '')
+local -a _fn_args
+_fn_args=("${(@M)@:#-*}")
+base::parseargs
+
+setopt localoptions nounset
+[[ "${_fn_options[--no-detached]}" == "true" ]] && \
+  io::msg "Considering detached as dirty."
+local -a dirty_repos
+dirty_repos=()
+for dir in */; do
+  io::vlog 2 "[${0:t}] Checking ${dir}"
+  pushd "${dir}"
+  if [[ -d '.git' && (-n $(git status --porcelain) || \
+    ("${_fn_options[--no-detached]}" == "true" && \
+      "$(git status)" =~ '^HEAD detached.*')) ]]; then
+    dirty_repos+=${dir}
+  fi
+  popd
+done
+
+if [[ ${#dirty_repos} -gt 0 ]]; then
+  io::hl "${#dirty_repos} dirty repo(s) found!"
+  for dir in ${dirty_repos}; do
+    io::hl "Dirty repo: ${dir}"
+  done
+else
+  io::msg "All clean!"
+fi
