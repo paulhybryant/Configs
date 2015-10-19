@@ -1,5 +1,5 @@
-.DS_Store
-.git
-.svn
-.hg
-.+~
+\.DS_Store
+\.git
+\.svn
+\.hg
+\.+~
