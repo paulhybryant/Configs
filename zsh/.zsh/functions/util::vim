@@ -1,0 +1,34 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+local -a _servers_list
+local _server_name
+local _vimflags
+# if [[ ! -z "$SSH_OS" ]]; then
+  # _vimflags='-X'
+# fi
+if [[ -z "$TMUX" ]]; then
+  io::vlog 1 "Not in tmux, invoking vim without server name."
+  \vim ${_vimflags} "$@"
+else
+  _servers_list=($(\vim --serverlist))
+  io::vlog 1 "Vim servers: ${_servers_list}"
+  _server_name=$(tmux display-message -p '#S-#W')
+  # Convert to upper case
+  _server_name=${_server_name:u}
+  io::vlog 1 "Vim server name to use: ${_server_name}"
+  local _server_exists
+  for server in ${_servers_list}; do
+    io::vlog 1 "Found vim server: ${server}"
+    if [[ "${_server_name}" == "${server}" ]]; then
+      _server_exists='yes'
+      break
+    fi
+  done
+  if [[ -z "${_server_exists}" ]]; then
+    io::vlog 1 "Starting vim with server name: ${_server_name}"
+    \vim ${_vimflags} --servername "${_server_name}" "$@"
+  else
+    io::vlog 1 "Connecting to vim server: ${_server_name}"
+    \vim ${_vimflags} --servername ${_server_name} --remote "$@"
+  fi
+fi

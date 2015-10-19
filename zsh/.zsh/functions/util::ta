@@ -1,0 +1,9 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+for var in ${__TMUX_VARS__};
+do
+  local _value=
+  eval _value=\$${var}
+  \tmux set-environment ${var} "${_value}"
+done
+tmux attach -t "$1"

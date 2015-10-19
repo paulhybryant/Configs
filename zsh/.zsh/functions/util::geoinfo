@@ -1,0 +1,13 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+local _cache='/tmp/.util.geoinfo'
+local _expire _filter
+_expire=$(time::_seconds)
+_expire=$((_expire - 3600))
+if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
+  rm ${_cache} > /dev/null 2>&1
+  # ip, hostname, city, region, country, loc, org
+  curl -x '' ipinfo.io 1> ${_cache} 2> /dev/null
+fi
+_filter=$(strings::join --prefix=. --delim=, "$@")
+jq "${_filter}" < ${_cache}

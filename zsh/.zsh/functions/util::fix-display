@@ -1,0 +1,11 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+os::OSX || return 0
+local _dispdir _dispfile _dispnew
+_dispdir=$(dirname "$DISPLAY")
+_dispfile=$(basename "$DISPLAY")
+_dispnew="${_dispdir}/:0"
+if [[ -e "$DISPLAY" && "${_dispfile}" = "org.macosforge.xquartz:0" ]]; then
+  mv "$DISPLAY" "${_dispnew}"
+fi
+export DISPLAY=${_dispnew}
