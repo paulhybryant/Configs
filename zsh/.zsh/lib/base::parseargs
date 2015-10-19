@@ -1,0 +1,25 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return
+local _arg _argv _kv
+for arg in ${_fn_args}; do
+  _arg=
+  _argv=
+  if [[ "${arg}" =~ '.*=.*' ]]; then
+    _kv=("${(s/=/)arg}")
+    _arg=${_kv[1]}
+    _argv=${_kv[2]}
+  else
+    _arg=${arg}
+  fi
+  if [[ ${+_fn_options[${_arg}]} -eq 0 ]]; then
+    printf "Available options: ${(k)_fn_options}\n"
+    printf "${COLOR_Red}Invalid options: ${_arg}\n${COLOR_Color_Off}"
+    return 1
+  fi
+  if [[ -z "${_argv}" ]]; then
+    _fn_options[${_arg}]="true"
+  else
+    _fn_options[${_arg}]="${_argv}"
+  fi
+done

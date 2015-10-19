@@ -411,6 +411,178 @@ Example:
 
 alias ssh='net::ssh'
 # }}}
+# library functions {{{
+: <<=cut
+=item Function C<base::parseargs>
+
+Parse arguments passed to functions.
+Assuming the existence of two variables:
+  _fn_options - Containing the default options and default option values for this function
+  _fn_args - Arguments passed to this function
+
+Example:
+  local -A _fn_options
+  _fn_options=(--no-detached 'null' --foo 'null' --unset 'empty')
+  local -a _fn_args
+  _fn_args=(--no-detached --foo=y)
+  base::parseargs
+  [[ ${_fn_options[--no-detached]} == "true" ]]
+  [[ ${_fn_options[--foo]} == "y" ]]
+  [[ ${_fn_options[--unset]} == "empty" ]]
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<base::getopt>
+
+Use gnu getopt to parse long function arguments.
+
+Example:
+  local -A _fn_options
+  base::getopt no-detached,foo:,unset: --no-detached --foo yo
+  _fn_options[--no-detached] == "true"
+  _fn_options[--foo] == "yo"
+  _fn_options[--unset] == ""
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<time::getmtime>
+
+Get last modification time of a file.
+$1 Filename
+
+@return string of the last modified time of a file.
+=cut
+
+: <<=cut
+=item Function C<base::sourced>
+
+$1 Absolute path to the file to be sourced.
+
+@return 0 or 1, indicates whether latest version of this file is sourced.
+=cut
+
+: <<=cut
+=item Function C<strings::strip-slash>
+
+Strip trailing slash in the string.
+
+$1 The string to apply the strip operation
+
+@return the result string after stripping
+=cut
+
+: <<=cut
+=item Function C<strings::join>
+
+Join string with delimiter and prefix.
+
+@return The resulting string after joining.
+=cut
+
+: <<=cut
+=item Function C<shell::eval>
+
+Eval the strings, and output logs based on verbose level.
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<shell::exists>
+
+Examples
+  shell::exists --var "VAR"
+
+Check whether something 'exists'
+
+$1 The thing to be checked whether it exists.
+
+@return 0 or 1. 0 exists, 1 not exists.
+=cut
+
+: <<=cut
+=item Function C<io::yes_or_no>
+
+Gets yes or no reply from user.
+
+@return 0 if yes, 1 otherwise.
+=cut
+
+: <<=cut
+=item Function C<io::vlog>
+
+Print log message based on verbose level.
+
+$1 Verbose level
+$2 Message
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<mode::verbose>
+
+Whether the specified verbose level is satisfied
+
+$1 Verbose level
+
+@return 0 if satisfied, 1 otherwise
+=cut
+
+: <<=cut
+=item Function C<mode::set_verbose>
+
+Set verbose level of shell.
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<mode::dryrun>
+
+Whether it is in dryrun mode.
+
+@return 0 if it is dryrun mode, 1 otherwise.
+=cut
+
+: <<=cut
+=item Function C<mode::toggle_dryrun>
+
+Toggle dryrun mode
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<mode::set_dryrun>
+
+Set dryrun mode to true
+
+@return NULL
+=cut
+
+: <<=cut
+=item Function C<time::human-readable-date>
+
+Print time in human readable format.
+
+$1 Current time in seconds since epoch
+
+@return string in human readable format for the specified time.
+=cut
+
+: <<=cut
+=item Function C<time::_seconds>
+
+Print current time in seconds since epoch.
+
+@return string of current time in seconds since epoch
+=cut
+# }}}
 
 : <<=cut
 =back

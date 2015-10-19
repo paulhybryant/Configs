@@ -1,0 +1,7 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+read -q "REPLY?$1?(y/n) [n]"
+io::vlog 2 "[${0:t}] ${REPLY}"
+echo -n "\n"
+[[ "$REPLY" =~ y\|Y ]] && return 0
+return 1

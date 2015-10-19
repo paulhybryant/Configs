@@ -1,0 +1,34 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return
+local _opts _short _long
+_long="$1"
+shift
+# _opts=$(getopt -o vnyhu --long verbose,dryrun,noconfirm,help,usage -n 'muxcfg' -- "$@")
+_opts=$(${CMDPREFIX}getopt -o '' --long "${_long}" -- "$@" || exit 1)
+# Note the quotes around '${_opts}': they are essential!
+eval set -- "${_opts}"
+local _var
+_fn_options=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -- )
+      [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true" && _var=''
+      _var=''
+      shift
+      ;;
+    --* )
+      [[ ! -z "${_var}" ]] && _fn_options[${_var}]="true"
+      _var="$1"
+      shift
+      ;;
+    * )
+      if [[ -z ${_var} ]]; then
+        _fn_args+=($1)
+      else
+        _fn_options[${_var}]="$1" && _var=''
+      fi
+      shift
+      ;;
+  esac
+done
