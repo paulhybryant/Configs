@@ -8,7 +8,6 @@ esac
 alias date="\\${CMDPREFIX}date"
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
-alias ls="\\${CMDPREFIX}ls --color=tty"
 alias mank='\man -K'
 alias mktemp="${CMDPREFIX}mktemp"
 alias nvim='NVIM=nvim nvim'

@@ -24,6 +24,12 @@ stty start undef
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
+  # zload automatically reload a file containing functions. However, it achieves
+  # this using pre_cmd functions, which is too heavy. Ideally should only check
+  # the modification time of the file.
+  # TODO: Reuse this idea and make it lightweight.
+  # antigen bundle mollifier/zload
+
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/lib/init.zsh
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/modules/colors.zsh
 

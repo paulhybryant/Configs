@@ -14,10 +14,8 @@ File: file.zsh - File system related utility functions.
 =over 4
 =cut
 
-(( ${+functions[base::sourced]} )) && base::sourced "${0:a}" && return 0
-
 : <<=cut
-=item Function C<file::find_ignore_dir>
+=item Function C<file::find-ignore-dir>
 
 Find in current directory, with dir $1 ignored.
 TODO: Make $1 an array, and ignore a list of dirs.
@@ -26,32 +24,17 @@ $1 The directory to ignore.
 
 @return NULL
 =cut
-function file::find_ignore_dir() {
-  # Commands with the same output
-  # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
-  # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
-  # find . -type d \( -path './third_party*' -o -path './.git*' \) -prune -o -type f -print
-  # Differences betwee these commands
-  # 1. -prune stops find from descending into a directory. Just specifying
-  #    -not -path will still descend into the skipped directory, but -not -path
-  #    will be false whenever find tests each file.
-  # 2. find prints the pruned directory
-  # So performance of 1 and 3 will be better
-  # find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
-  find . -wholename "*/$1" -prune -o "$@" -print
-}
+autoload -Uz file::find-ignore-dir
 
 : <<=cut
-=item Function C<file::find_ignore_git>
+=item Function C<file::find-ignore-git>
 
 Find in current directory, with dir .git ignored.
-A shortcut for file::find_ignore_dir for git.
+A shortcut for file::find-ignore-dir for git.
 
 @return NULL
 =cut
-function file::find_ignore_git() {
-  file::find_ignore_dir ".git"
-}
+autoload -Uz file::find-ignore-git
 
 : <<=cut
 =item Function C<file::rm>
@@ -69,26 +52,7 @@ Arguments
 
 @return NULL
 =cut
-function file::rm() {
-  local _args='-'
-  while getopts fivrdh opt
-  do
-    case "${opt}" in
-      f|i|r|d|h)
-        os::LINUX && _args="${_args}${opt}"
-        ;;
-      v)
-        _args="${_args}${opt}"
-        ;;
-      *)
-        trash -h
-        ;;
-    esac
-  done
-  shift $OPTIND-1
-  [[ "${_args}" == "-" ]] && _args=''
-  trash ${_args} "$@"
-}
+autoload -Uz file::rm
 
 : <<=cut
 =item Function C<file::ls>
@@ -97,27 +61,12 @@ List files in long format.
 
 @return NULL
 =cut
-function file::ls() {
-  eval "${=aliases[ls]:-ls} -Fh $1 $*"
-  awk '/^-/ {
-    sum += $5
-    ++filenum
-  }
-  END {
-    if (filenum > 0) {
-      split("B KB MB GB TB PB", type)
-      y = 0
-      for(i = 5; y < 1 && i > 0; i--) {
-        y = sum / (2^(10*i))
-      }
-      printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
-    }
-  }' <<< $(${CMDPREFIX}ls -lFh $1 $*)
-}
+autoload -Uz file::ls
 
 alias la='file::ls -a'
 alias ll='file::ls -l'
 alias lla='file::ls -la'
+alias ls='file::ls'
 alias rm='file::rm'
 
 : <<=cut

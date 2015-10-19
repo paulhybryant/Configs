@@ -2,7 +2,7 @@
 
 # List files in long format.
 
-eval "${=aliases[ls]:-ls} -Fh $1 $*"
+eval "\\${CMDPREFIX}ls --color=tty -Fh $1 $*"
 awk '/^-/ {
   sum += $5
   ++filenum

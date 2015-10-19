@@ -1,0 +1,31 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+# Use trash to remove files so it can be recovered!
+# Accepts rm arguments to be compatible wit rm.
+# Usually we define alias for it.
+
+# Examples
+  # source file.zsh
+  # alias rm=file::rm
+
+# Arguments
+  # Same as rm
+
+local _args='-'
+while getopts fivrdh opt
+do
+  case "${opt}" in
+    f|i|r|d|h)
+      os::LINUX && _args="${_args}${opt}"
+      ;;
+    v)
+      _args="${_args}${opt}"
+      ;;
+    *)
+      \trash -h
+      ;;
+  esac
+done
+shift $OPTIND-1
+[[ "${_args}" == "-" ]] && _args=''
+\trash ${_args} "$@"
