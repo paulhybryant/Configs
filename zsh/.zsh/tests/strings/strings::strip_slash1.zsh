@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/base.zsh"
-source "${0:h}/../../lib/strings.zsh"
+fpath+=(${0:h}/../../lib/)
+autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 
-function test::strings::strip_slash() {
-  local _ret=$(strings::strip_slash '/a/b/c/')
+function test::strings::strip-slash() {
+  local _ret=$(strings::strip-slash '/a/b/c/')
   [[ "${_ret}" == '/a/b/c' ]]
 }
-test::strings::strip_slash
+test::strings::strip-slash

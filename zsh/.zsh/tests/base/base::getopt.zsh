@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/base.zsh"
+fpath+=(${0:h}/../../lib/)
+autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 

@@ -1,31 +1,31 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/base.zsh"
-source "${0:h}/../../lib/mode.zsh"
+fpath+=(${0:h}/../../lib/)
+autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 
-function test::mode::toggle_dryrun() {
+function test::mode::toggle-dryrun() {
 }
-test::mode::toggle_dryrun
+test::mode::toggle-dryrun
 
-function test::mode::set_dryrun() {
+function test::mode::set-dryrun() {
 }
-test::mode::set_dryrun
+test::mode::set-dryrun
 
 function test::mode::dryrun() {
   mode::dryrun
   [[ $? -eq 1 ]] || return 1
 
-  mode::toggle_dryrun
+  mode::toggle-dryrun
   mode::dryrun
   [[ $? -eq 0 ]] || return 1
 
-  mode::toggle_dryrun
+  mode::toggle-dryrun
   mode::dryrun
   [[ $? -eq 1 ]] || return 1
 
-  mode::set_dryrun
+  mode::set-dryrun
   mode::dryrun
   [[ $? -eq 0 ]] || return 1
   return 0

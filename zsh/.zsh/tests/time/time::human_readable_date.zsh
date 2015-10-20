@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/base.zsh"
-source "${0:h}/../../lib/time.zsh"
+fpath+=(${0:h}/../../lib/)
+autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 
-function test::time::human_readable_date() {
+function test::time::human-readable-date() {
   local _time='1442143442'
-  local _ret=$(time::human_readable_date "${_time}")
+  local _ret=$(time::human-readable-date "${_time}")
   [[ "${_ret}" == 'Sun Sep 13 19:24:02 CST 2015' ]]
 }
-test::time::human_readable_date
+test::time::human-readable-date

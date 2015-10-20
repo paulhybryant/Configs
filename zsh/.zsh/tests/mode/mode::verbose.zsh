@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
-source "${0:h}/../../lib/base.zsh"
-source "${0:h}/../../lib/mode.zsh"
+fpath+=(${0:h}/../../lib/)
+autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 
 function test::mode::verbose() {
-  mode::set_verbose 1
+  mode::set-verbose 1
   mode::verbose 0
   [[ $? -eq 0 ]]
   mode::verbose 2
