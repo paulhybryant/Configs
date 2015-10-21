@@ -1,18 +1,14 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 setopt localoptions err_return
-local -A _fn_options
-_fn_options=(-src '' -dst '' -branch '')
-local -a _fn_args
-_fn_args=("${(@M)@:#-*}")
-base::parseargs
+zparseopts -D -A opts -src: -dst: -branch:
 
 for arg in ${(k)_fn_options}; do
   [[ -z ${_fn_options[${arg}]} ]] && io::err "Missing required argument ${arg}"
 done
-local _orig_git=${_fn_options[-src]}
-local _new_workdir=${_fn_options[-dst]}
-local _branch=${_fn_options[-branch]}
+local _orig_git=${opts[--src]}
+local _new_workdir=${opts[--dst]}
+local _branch=${opts[--branch]}
 
 # want to make sure that what is pointed to has a .git directory ...
 local _git_dir

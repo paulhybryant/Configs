@@ -1,20 +1,17 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-setopt localoptions err_return
-local -A _fn_options
-_fn_options=(--delim ',' --prefix '')
-local -a _fn_args
-_fn_args=("${(@M)@:#-*}")
-base::parseargs
+setopt localoptions err_return nounset
+zparseopts -D -A opts -delim: -prefix: "$@"
 
-_args=("${(@)@:#-*}")
-setopt localoptions nounset
+[[ -n ${opts[--prefix]+1} ]] || opts[--prefix]=''
+[[ -n ${opts[--delim]+1} ]] || opts[--delim]=','
+
 local _result
-for part in ${_args}; do
+for part in "$@"; do
   if [[ -z "${_result}" ]]; then
-    _result="${_fn_options[--prefix]}${part}"
+    _result="${opts[--prefix]}${part}"
   else
-    _result="${_result}${_fn_options[--delim]}${_fn_options[--prefix]}${part}"
+    _result="${_result}${opts[--delim]}${opts[--prefix]}${part}"
   fi
 done
 echo "${_result}"

@@ -9,7 +9,7 @@ function test::strings::join() {
   local _actual _expected _ignore
   _ignore=($(cat ./testdata/ignore.lst | xargs echo))
   _expected="io.zsh\|colors.zsh"
-  _actual=$(strings::join --delim='\|' ${_ignore})
+  _actual=$(strings::join --delim '\|' ${_ignore})
   [[ "${_expected}" == "${_actual}" ]]
 }
 test::strings::join

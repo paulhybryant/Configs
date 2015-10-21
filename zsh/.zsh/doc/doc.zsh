@@ -16,42 +16,6 @@ File: functions.zsh - My autoload functions.
 
 # library functions {{{
 : <<=cut
-=item Function C<base::parseargs>
-
-Parse arguments passed to functions.
-Assuming the existence of two variables:
-  _fn_options - Containing the default options and default option values for this function
-  _fn_args - Arguments passed to this function
-
-Example:
-  local -A _fn_options
-  _fn_options=(--no-detached 'null' --foo 'null' --unset 'empty')
-  local -a _fn_args
-  _fn_args=(--no-detached --foo=y)
-  base::parseargs
-  [[ ${_fn_options[--no-detached]} == "true" ]]
-  [[ ${_fn_options[--foo]} == "y" ]]
-  [[ ${_fn_options[--unset]} == "empty" ]]
-
-@return NULL
-=cut
-
-: <<=cut
-=item Function C<base::getopt>
-
-Use gnu getopt to parse long function arguments.
-
-Example:
-  local -A _fn_options
-  base::getopt no-detached,foo:,unset: --no-detached --foo yo
-  _fn_options[--no-detached] == "true"
-  _fn_options[--foo] == "yo"
-  _fn_options[--unset] == ""
-
-@return NULL
-=cut
-
-: <<=cut
 =item Function C<time::getmtime>
 
 Get last modification time of a file.

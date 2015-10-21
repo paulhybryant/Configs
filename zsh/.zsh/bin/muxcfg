@@ -8,18 +8,16 @@ source "$HOME/.zsh/lib/shell.zsh"
 
 function muxcfg::start() {
   setopt localoptions unset err_return
-  local -A _fn_options
-  base::getopt noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  zparseopts -A opts -noconfirm -src: -dst: -cwd: -cmd: -proj: "$@"
   local _proj _cwd _cmd _src _dst _muxcfg
-  [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
-  [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
-  [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
-  [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
-  [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
+  [[ -n "${opts[--proj]+1}" ]] && _proj="${opts[--proj]}"
+  [[ -n "${opts[--src]+1}" ]] && _src="${opts[--src]}"
+  [[ -n "${opts[--dst]+1}" ]] && _dst="${opts[--dst]}"
+  [[ -n "${opts[--cwd]+1}" ]] && _cwd="${opts[--cwd]}"
+  [[ -n "${opts[--cmd]+1}" ]] && _cmd="${opts[--cmd]}"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
-  if [[ -e "$_muxcfg" && \
-    (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+  if [[ -e "$_muxcfg" && ! -n ${opts[--noconfirm]+1} ]]; then
     if io::yes_or_no "$_muxcfg exists, overwrite"; then
       io::warn "$_muxcfg will be overwritten."
     else
@@ -37,16 +35,15 @@ function muxcfg::start() {
 }
 function muxcfg::delete() {
   setopt localoptions unset err_return
-  local -A _fn_options
-  base::getopt noconfirm,src:,dst:,cwd:,cmd:,proj: "$@"
+  zparseopts -A opts -noconfirm -src: -dst: -cwd: -cmd: -proj: "$@"
   local _proj _cwd _cmd _src _dst _muxcfg
-  [[ -z "${_fn_options[--proj]}" ]] || _proj="${_fn_options[--proj]}"
-  [[ -z "${_fn_options[--src]}" ]] || _src="${_fn_options[--src]}"
-  [[ -z "${_fn_options[--dst]}" ]] || _dst="${_fn_options[--dst]}"
-  [[ -z "${_fn_options[--cwd]}" ]] || _cwd="${_fn_options[--cwd]}"
-  [[ -z "${_fn_options[--cmd]}" ]] || _cmd="${_fn_options[--cmd]}"
+  [[ -n "${opts[--proj]+1}" ]] && _proj="${opts[--proj]}"
+  [[ -n "${opts[--src]+1}" ]] && _src="${opts[--src]}"
+  [[ -n "${opts[--dst]+1}" ]] && _dst="${opts[--dst]}"
+  [[ -n "${opts[--cwd]+1}" ]] && _cwd="${opts[--cwd]}"
+  [[ -n "${opts[--cmd]+1}" ]] && _cmd="${opts[--cmd]}"
 
-  if [[ (-z ${_fn_options[--noconfirm]} && -z ${_fn_options[-y]}) ]]; then
+  if [[ ! -n ${opts[--noconfirm]+1} ]]; then
     io::yes_or_no "Delete project ${_proj}"
   fi
 
@@ -66,16 +63,8 @@ function muxcfg::delete() {
 }
 function muxcfg::git5wrapper() {
   setopt localoptions err_return
-  local -A _fn_options
-  _fn_options=(-src '' -dst '' -branch '')
-  local -a _fn_args
-  _fn_args=("${(@M)@:#-*}")
-  base::parseargs
-
-  for arg in ${(k)_fn_options}; do
-    [[ -z ${_fn_options[${arg}]} ]] && io::err "Missing required argument ${arg}"
-  done
-  shell::eval "git5 mirror ${_fn_options[-src]} ${_fn_options[-dst]} --allow_existing_branch --branch=${_fn_options[-branch]}"
+  zparseopts -D -A opts -src: -dst: -branch:
+  shell::eval "git5 mirror ${opts[--src]} ${opts[--dst]} --allow_existing_branch --branch=${opts[--branch]}"
 }
 function muxcfg::usage() {
   cat <<EOF
@@ -95,37 +84,33 @@ EOF
 }
 function muxcfg::main() {
   setopt localoptions unset err_return
-  local -A _fn_options
-  local -a _fn_args
   whence tmuxinator > /dev/null
   shell::eval "mkdir -p \"$MUXCFGDIR\""
-  base::getopt help,noconfirm,src:,dst: "$@"
-  io::vlog 2 "${(kv)_fn_options}"
-  io::vlog 2 "${_fn_args}"
+  zparseopts -D -A opts -help -noconfirm -src: -dst: "$@"
+  io::vlog 2 "${(kv)opts}"
 
-  [[ ! -z "${_fn_options[--help]}") ]] && muxcfg::usage
+  [[ -n ${opts[--help]+1} ]] && muxcfg::usage
 
-  eval set -- "${_fn_args}"
   local _subcmd _project _git_new_workdir_cmd _cwd
   _subcmd="$1"
   _project="$2"
 
   if [[ -e "$HOME/.google" ]]; then
     _git_new_workdir_cmd="muxcfg::git5wrapper"
-    _cwd=${_fn_options[--dst]}/${_project}/google3
+    _cwd=${opts[--dst]}/${_project}/google3
   else
     _git_new_workdir_cmd="git::new_workdir"
-    _cwd=${_fn_options[--dst]}/${_project}
+    _cwd=${opts[--dst]}/${_project}
   fi
   whence -f "${_git_new_workdir_cmd}" > /dev/null
 
   io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
   case "${_subcmd}" in
     start|delete )
-      if [[ ! -z ${_fn_options[--noconfirm]} ]]; then
-        "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" -y
+      if [[ -n ${opts[--noconfirm]} ]]; then
+        "muxcfg::${_subcmd}" --src "${opts[--src]}" --dst "${opts[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" --noconfirm
       else
-        "muxcfg::${_subcmd}" --src "${_fn_options[--src]}" --dst "${_fn_options[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
+        "muxcfg::${_subcmd}" --src "${opts[--src]}" --dst "${opts[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
       fi
       ;;
     * )
