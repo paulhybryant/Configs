@@ -71,8 +71,10 @@ function bootstrap::main() {
   shell::eval "npm install -g urchin"
 
   os::OSX && io::msg "Installing extra stuff for OSX..." && \
-    shell::eval "brew install brew-cask clipper macvim trash lsof \
+    shell::eval "brew install brew-cask clipper macvim osxutils lsof \
     reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
+  os::OSX && shell::eval "brew install --force trash"
+  os::OSX && shell::eval "brew link --overwrite trash"
   io::msg "Bootstrap done!"
 }
 
