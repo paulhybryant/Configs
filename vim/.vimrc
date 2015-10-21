@@ -19,7 +19,7 @@ function! s:InstallBundleIfNotPresent(bundle)
   endif
 endfunction
 
-function! s:ConfigureRelatedFiles()
+function! g:ConfigureRelatedFiles()
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <leader>g' . l:key .
           \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
@@ -27,7 +27,7 @@ function! s:ConfigureRelatedFiles()
   endfor
 endfunction
 
-function! s:ConfigureYcm()
+function! g:ConfigureYcm()
   nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
   let g:ycm_always_populate_location_list = 1                                   " Default 0
   let g:ycm_auto_trigger = 1
