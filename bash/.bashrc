@@ -63,8 +63,8 @@ complete -F _tmux_sessions -o default ta
 
 # Additional configurations to load {{{
 
-if [ -f "$HOME/.bashrc.local" ]; then
-  . ~/.bashrc.local
+if [ -f "$HOME/.bashrc.google" ]; then
+  source ~/.bashrc.google
 fi
 
 # Tmuxinator

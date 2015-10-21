@@ -77,6 +77,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 fi
 
 # Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
+if [[ -f ~/.zshrc.google ]]; then
+  source ~/.zshrc.google
 fi

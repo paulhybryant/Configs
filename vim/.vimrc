@@ -126,19 +126,12 @@ endif
 " }}}
 " Google specific setup {{{1
 let g:provided = {}
-if filereadable('/usr/share/vim/google/google.vim')
-  let g:provided = {
-        \ 'YouCompleteMe' : '',
-        \ 'relatedfiles' : '',
-        \ 'vim-codefmt' : '',
-        \ 'vim-glaive' : '',
-        \ 'vim-maktaba' : '',
-        \ }
-  source /usr/share/vim/google/google.vim
-  Glug magic
-  call s:ConfigureRelatedFiles()
-  call s:ConfigureYcm()
-else
+if filereadable(expand('~/.vimrc.google'))
+  if has('vim_starting')
+    execute 'source' expand('~/.vimrc.google')
+  endif
+endif
+if empty(g:provided)
   " {{{2
   NeoBundle 'google/vim-maktaba', {
         \ 'force' : 1,
@@ -1526,9 +1519,6 @@ call neobundle#end()
 filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
 colorscheme solarized
-if has('vim_starting')
-  execute 'source' expand('~/.vimrc.local')
-endif
 " }}}
 " Settings {{{1
 syntax on                                                                       " Syntax highlighting
