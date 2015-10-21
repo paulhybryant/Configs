@@ -1,5 +1,10 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
+autoload -Uz -- ~/.zsh/functions/[^_]*(:t)
+autoload -Uz bashcompinit && bashcompinit
+# zstyle ":completion:*" show-completer true
+
 # Use PROFILING='y' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
   local _profile_log="/tmp/zsh.profile"
@@ -30,8 +35,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # TODO: Reuse this idea and make it lightweight.
   # antigen bundle mollifier/zload
 
-  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
-
   zstyle ':prezto:module:editor' key-bindings 'vi'
   # Alternative (from zpreztorc), order matters!
   # This has to be put before antigen use prezto (which sources root init.zsh
@@ -59,6 +62,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     antigen bundle sorin-ionescu/prezto modules/${module}
   done
   unset pmodules
+
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
 
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib

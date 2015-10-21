@@ -138,6 +138,7 @@ bindkey '\C-p' reverse-menu-complete
 declare -x LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
   eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
 
