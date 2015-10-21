@@ -6,7 +6,6 @@ autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 set -x
 
 function test::shell::exists() {
-  local -A _fn_options
   shell::exists --sub test::_foo_
   [[ $? -eq 1 ]]
   function test::_foo_() {

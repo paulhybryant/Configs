@@ -126,7 +126,7 @@ endif
 " }}}
 " Google specific setup {{{1
 let g:provided = {}
-if isdirectory(expand('~/.google'))
+if filereadable('/usr/share/vim/google/google.vim')
   let g:provided = {
         \ 'YouCompleteMe' : '',
         \ 'relatedfiles' : '',
@@ -134,9 +134,8 @@ if isdirectory(expand('~/.google'))
         \ 'vim-glaive' : '',
         \ 'vim-maktaba' : '',
         \ }
-  if has('vim_starting')
-    execute 'source' expand('~/.vimrc.local')
-  endif
+  source /usr/share/vim/google/google.vim
+  Glug magic
   call s:ConfigureRelatedFiles()
   call s:ConfigureYcm()
 else
@@ -1527,6 +1526,9 @@ call neobundle#end()
 filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
 colorscheme solarized
+if has('vim_starting')
+  execute 'source' expand('~/.vimrc.local')
+endif
 " }}}
 " Settings {{{1
 syntax on                                                                       " Syntax highlighting

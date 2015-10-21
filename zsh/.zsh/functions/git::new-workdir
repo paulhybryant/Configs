@@ -3,9 +3,6 @@
 setopt localoptions err_return
 zparseopts -D -A opts -src: -dst: -branch:
 
-for arg in ${(k)_fn_options}; do
-  [[ -z ${_fn_options[${arg}]} ]] && io::err "Missing required argument ${arg}"
-done
 local _orig_git=${opts[--src]}
 local _new_workdir=${opts[--dst]}
 local _branch=${opts[--branch]}

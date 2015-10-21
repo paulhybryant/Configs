@@ -2,7 +2,7 @@
 
 # List files in long format.
 
-eval "\\${CMDPREFIX}ls --color=tty -Fh $1 $*"
+eval "\\${CMDPREFIX}ls --color=tty -Fh $*"
 awk '/^-/ {
   sum += $5
   ++filenum
@@ -16,4 +16,4 @@ END {
     }
     printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
   }
-}' <<< $(${CMDPREFIX}ls -lFh $1 $*)
+}' <<< $(${CMDPREFIX}ls -lFh $*)
