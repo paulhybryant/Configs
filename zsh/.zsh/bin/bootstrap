@@ -75,12 +75,13 @@ function bootstrap::main() {
   io::msg "Bootstrap done!"
 }
 
-setopt LOCAL_OPTIONS
-source "${0:a:h}/../lib/os.zsh"
-source "${0:a:h}/../lib/base.zsh"
-source "${0:a:h}/../lib/io.zsh"
-source "${0:a:h}/../lib/shell.zsh"
+local _config_dir
+_config_dir="${0:A:h}/../../"
+source ${_config_dir:a}/.zshenv
+autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
+autoload -Uz -- ${_config_dir:a}/.zsh/functions/[^_]*(:t)
 
+setopt LOCAL_OPTIONS
 setopt localoptions err_return
 local -A _fn_options
 base::getopt help,dryrun,unstow,stow "$@"
@@ -88,9 +89,6 @@ base::getopt help,dryrun,unstow,stow "$@"
 [[ ! -z "${_fn_options[--help]}" ]] && bootstrap::usage
 [[ ! -z "${_fn_options[--dryrun]}" ]] && mode::set_dryrun
 
-local _config_dir
-_config_dir="${0:A:h}/../../../"
-shell::eval "source ${_config_dir:a}/zsh/.zshenv"
 shell::eval "pushd ${_config_dir:a}"
 if [[ ! -z "${_fn_options[--unstow]}" ]]; then
   bootstrap::stow "-D"
@@ -98,7 +96,7 @@ elif [[ ! -z "${_fn_options[--stow]}" ]]; then
   bootstrap::stow
 else
   bootstrap::main
-  shell::eval "source ${_config_dir:a}/zsh/.zshrc"
+  shell::eval "source ${_config_dir:a}/.zshrc"
 fi
 shell::eval "popd"
 
