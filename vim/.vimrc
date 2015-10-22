@@ -182,13 +182,13 @@ call glaive#Install()
 " }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_size >= 0
-  NeoBundle 'google/vim-searchindex'
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap and saved file
+  NeoBundle 'google/vim-searchindex'
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
@@ -197,6 +197,17 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Useful mappings for surrounding text objects with a pair of chars
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
+  " {{{2
+  NeoBundle 'DeaR/vim-scratch', {
+        \ 'autoload' : { 'commands' : ['ScratchOpen'] },
+        \ 'lazy' : 1,
+        \ 'type__protocol' : 'ssh',
+        \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
+  let s:vimscratch = neobundle#get('vim-scratch')
+  function! s:vimscratch.hooks.on_source(bundle)
+    vmap <CR> <Plug>(scrath-evaluate)
+  endfunction
+  " }}}
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
         \ 'depends' : 'Shougo/context_filetype.vim',
@@ -976,13 +987,6 @@ if s:vimplugin_size >= 1
   function! s:indicator.hooks.on_source(bundle)
     Glaive vim-diff-indicator plugin[mappings]
   endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'paulhybryant/vim-scratch', {
-        \ 'autoload' : { 'commands' : ['ScratchOpen'] },
-        \ 'lazy' : 1,
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/vim-textobj-path', {
