@@ -68,7 +68,7 @@ function bootstrap::main() {
   shell::eval "brew gem install tmuxinator automux pypy pypy3"
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "brew install npm"
-  shell::eval "npm install -g urchin"
+  shell::eval "npm install -g urchin npm-update-outdated"
 
   os::OSX && io::msg "Installing extra stuff for OSX..." && \
     shell::eval "brew install brew-cask clipper macvim osxutils lsof \

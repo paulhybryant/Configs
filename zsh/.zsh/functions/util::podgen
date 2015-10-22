@@ -1,3 +1,37 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-awk '/^: <<=cut/ { inrange = 1 } /^=cut/ { print $0; inrange = 0 } /.*/ { if (inrange > 0) print $0 }'
+setopt localoptions clobber
+
+local -a _files
+local _tempfile
+_tempfile=$(mktemp)
+
+while [[ $# -gt 1 ]];
+do
+  _files+=($1)
+  shift
+done
+
+cat << =cut > "${_tempfile}"
+=pod
+
+=head1 NAME
+
+File: My function documentations
+
+=head1 DESCRIPTION
+
+=head2 Methods
+
+=over 4
+
+=cut
+
+awk '/^: <<=cut/ { inrange = 1 } /^=cut/ { print ""; inrange = 0 } /.*/ { if (inrange == 2) print $0; if (inrange == 1) inrange = 2 }' ${_files[@]} >> "${_tempfile}"
+
+cat << =cut >> "${_tempfile}"
+
+=back
+=cut
+
+pod2man "${_tempfile}" > "$1"

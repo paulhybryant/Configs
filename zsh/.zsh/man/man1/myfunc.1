@@ -132,123 +132,18 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "DOC.ZSH 1"
-.TH DOC.ZSH 1 "2015-10-21" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "TMP.XEPGDIILTJ 1"
+.TH TMP.XEPGDIILTJ 1 "2015-10-22" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: functions.zsh \- My autoload functions.
+File: Documentations
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
-.ie n .IP "Function ""time::getmtime""" 4
-.el .IP "Function \f(CWtime::getmtime\fR" 4
-.IX Item "Function time::getmtime"
-Get last modification time of a file.
-\&\f(CW$1\fR Filename
-.Sp
-\&\f(CW@return\fR string of the last modified time of a file.
-.ie n .IP "Function ""base::sourced""" 4
-.el .IP "Function \f(CWbase::sourced\fR" 4
-.IX Item "Function base::sourced"
-\&\f(CW$1\fR Absolute path to the file to be sourced.
-.Sp
-\&\f(CW@return\fR 0 or 1, indicates whether latest version of this file is sourced.
-.ie n .IP "Function ""strings::strip\-slash""" 4
-.el .IP "Function \f(CWstrings::strip\-slash\fR" 4
-.IX Item "Function strings::strip-slash"
-Strip trailing slash in the string.
-.Sp
-\&\f(CW$1\fR The string to apply the strip operation
-.Sp
-\&\f(CW@return\fR the result string after stripping
-.ie n .IP "Function ""strings::join""" 4
-.el .IP "Function \f(CWstrings::join\fR" 4
-.IX Item "Function strings::join"
-Join string with delimiter and prefix.
-.Sp
-\&\f(CW@return\fR The resulting string after joining.
-.ie n .IP "Function ""shell::eval""" 4
-.el .IP "Function \f(CWshell::eval\fR" 4
-.IX Item "Function shell::eval"
-Eval the strings, and output logs based on verbose level.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""shell::exists""" 4
-.el .IP "Function \f(CWshell::exists\fR" 4
-.IX Item "Function shell::exists"
-Examples
-  shell::exists \-\-var \*(L"\s-1VAR\*(R"\s0
-.Sp
-Check whether something 'exists'
-.Sp
-\&\f(CW$1\fR The thing to be checked whether it exists.
-.Sp
-\&\f(CW@return\fR 0 or 1. 0 exists, 1 not exists.
-.ie n .IP "Function ""io::yes_or_no""" 4
-.el .IP "Function \f(CWio::yes_or_no\fR" 4
-.IX Item "Function io::yes_or_no"
-Gets yes or no reply from user.
-.Sp
-\&\f(CW@return\fR 0 if yes, 1 otherwise.
-.ie n .IP "Function ""io::vlog""" 4
-.el .IP "Function \f(CWio::vlog\fR" 4
-.IX Item "Function io::vlog"
-Print log message based on verbose level.
-.Sp
-\&\f(CW$1\fR Verbose level
-\&\f(CW$2\fR Message
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""mode::verbose""" 4
-.el .IP "Function \f(CWmode::verbose\fR" 4
-.IX Item "Function mode::verbose"
-Whether the specified verbose level is satisfied
-.Sp
-\&\f(CW$1\fR Verbose level
-.Sp
-\&\f(CW@return\fR 0 if satisfied, 1 otherwise
-.ie n .IP "Function ""mode::set_verbose""" 4
-.el .IP "Function \f(CWmode::set_verbose\fR" 4
-.IX Item "Function mode::set_verbose"
-Set verbose level of shell.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""mode::dryrun""" 4
-.el .IP "Function \f(CWmode::dryrun\fR" 4
-.IX Item "Function mode::dryrun"
-Whether it is in dryrun mode.
-.Sp
-\&\f(CW@return\fR 0 if it is dryrun mode, 1 otherwise.
-.ie n .IP "Function ""mode::toggle_dryrun""" 4
-.el .IP "Function \f(CWmode::toggle_dryrun\fR" 4
-.IX Item "Function mode::toggle_dryrun"
-Toggle dryrun mode
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""mode::set_dryrun""" 4
-.el .IP "Function \f(CWmode::set_dryrun\fR" 4
-.IX Item "Function mode::set_dryrun"
-Set dryrun mode to true
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""time::human\-readable\-date""" 4
-.el .IP "Function \f(CWtime::human\-readable\-date\fR" 4
-.IX Item "Function time::human-readable-date"
-Print time in human readable format.
-.Sp
-\&\f(CW$1\fR Current time in seconds since epoch
-.Sp
-\&\f(CW@return\fR string in human readable format for the specified time.
-.ie n .IP "Function ""time::_seconds""" 4
-.el .IP "Function \f(CWtime::_seconds\fR" 4
-.IX Item "Function time::_seconds"
-Print current time in seconds since epoch.
-.Sp
-\&\f(CW@return\fR string of current time in seconds since epoch
 .ie n .IP "Function ""colors::define""" 4
 .el .IP "Function \f(CWcolors::define\fR" 4
 .IX Item "Function colors::define"
@@ -277,6 +172,12 @@ Find in current directory, with dir .git ignored.
 A shortcut for file::find\-ignore\-dir for git.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""file::ls""" 4
+.el .IP "Function \f(CWfile::ls\fR" 4
+.IX Item "Function file::ls"
+List files.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""file::rm""" 4
 .el .IP "Function \f(CWfile::rm\fR" 4
 .IX Item "Function file::rm"
@@ -292,12 +193,6 @@ Arguments
   Same as rm
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""file::ls""" 4
-.el .IP "Function \f(CWfile::ls\fR" 4
-.IX Item "Function file::ls"
-List files in long format.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""git::check\-dirty\-repos""" 4
 .el .IP "Function \f(CWgit::check\-dirty\-repos\fR" 4
 .IX Item "Function git::check-dirty-repos"
@@ -311,6 +206,17 @@ Number of arguments accepted: \-\-no\-detached
 Whether a branch exists in current depo.
 .Sp
 \&\f(CW@return\fR 0 if exists, 1 otherwise.
+.ie n .IP "Function ""git::new\-workdir""" 4
+.el .IP "Function \f(CWgit::new\-workdir\fR" 4
+.IX Item "Function git::new-workdir"
+Create a new git working dir based on existing repo, and create a new branch in
+the new workign dir.
+.Sp
+\&\f(CW$1\fR Source git working directory
+\&\f(CW$2\fR New git working directory
+\&\f(CW$3\fR New branch name
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""git::parent\-branch""" 4
 .el .IP "Function \f(CWgit::parent\-branch\fR" 4
 .IX Item "Function git::parent-branch"
@@ -329,15 +235,10 @@ Whether a branch exists in current depo.
 #    commit and the branch tip. We don't care. Ignore them.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""git::new\-workdir""" 4
-.el .IP "Function \f(CWgit::new\-workdir\fR" 4
-.IX Item "Function git::new-workdir"
-Create a new git working dir based on existing repo, and create a new branch in
-the new workign dir.
-.Sp
-\&\f(CW$1\fR Source git working directory
-\&\f(CW$2\fR New git working directory
-\&\f(CW$3\fR New branch name
+.ie n .IP "Function ""git::submodule\-mv""" 4
+.el .IP "Function \f(CWgit::submodule\-mv\fR" 4
+.IX Item "Function git::submodule-mv"
+Move submodule with a single command.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""git::submodule\-url""" 4
@@ -346,73 +247,12 @@ the new workign dir.
 List of url of all submodules.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""git::submodule\-mv""" 4
-.el .IP "Function \f(CWgit::submodule\-mv\fR" 4
-.IX Item "Function git::submodule-mv"
-Move submodule with a single command.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::geoinfo""" 4
-.el .IP "Function \f(CWutil::geoinfo\fR" 4
-.IX Item "Function util::geoinfo"
-Get the geo location information.
-.Sp
-\&\f(CW@return\fR list of values for requested fields.
-.ie n .IP "Function ""util::start\-ssh\-agent""" 4
-.el .IP "Function \f(CWutil::start\-ssh\-agent\fR" 4
-.IX Item "Function util::start-ssh-agent"
-Start ssh agent if not yet.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::ta""" 4
-.el .IP "Function \f(CWutil::ta\fR" 4
-.IX Item "Function util::ta"
-Tmux attach wrapper, which updates tmux environment as configured.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::histgrep""" 4
-.el .IP "Function \f(CWutil::histgrep\fR" 4
-.IX Item "Function util::histgrep"
-Grep in reverse order in history.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::setup\-abbrevs""" 4
-.el .IP "Function \f(CWutil::setup\-abbrevs\fR" 4
-.IX Item "Function util::setup-abbrevs"
-Setup zsh abbreviations.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::vim""" 4
-.el .IP "Function \f(CWutil::vim\fR" 4
-.IX Item "Function util::vim"
-Open files with vim in a single vim instance in one tmux window.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::gvim""" 4
-.el .IP "Function \f(CWutil::gvim\fR" 4
-.IX Item "Function util::gvim"
-Open files with gvim in a single gvim instance.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""util::check\-test\-coverage""" 4
-.el .IP "Function \f(CWutil::check\-test\-coverage\fR" 4
-.IX Item "Function util::check-test-coverage"
-Check test coverage for zsh functions.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""net::external\-ip""" 4
 .el .IP "Function \f(CWnet::external\-ip\fR" 4
 .IX Item "Function net::external-ip"
 Get the external ip address for current host.
 .Sp
 \&\f(CW@return\fR string of external ip address.
-.ie n .IP "Function ""net::ssh""" 4
-.el .IP "Function \f(CWnet::ssh\fR" 4
-.IX Item "Function net::ssh"
-Utility function that set some env variables by default when connected through ssh.
-Arguments will be passed through to ssh
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""net::port\-open""" 4
 .el .IP "Function \f(CWnet::port\-open\fR" 4
 .IX Item "Function net::port-open"
@@ -427,3 +267,58 @@ Example:
   net::port_open 127.0.0.1 80\-90
 .Sp
 \&\f(CW@return\fR 0 if the port is open on specified host, 1 otherwise.
+.ie n .IP "Function ""net::ssh""" 4
+.el .IP "Function \f(CWnet::ssh\fR" 4
+.IX Item "Function net::ssh"
+Utility function that set some env variables by default when connected through ssh.
+Arguments will be passed through to ssh
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::check\-test\-coverage""" 4
+.el .IP "Function \f(CWutil::check\-test\-coverage\fR" 4
+.IX Item "Function util::check-test-coverage"
+Check test coverage for zsh functions.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::geoinfo""" 4
+.el .IP "Function \f(CWutil::geoinfo\fR" 4
+.IX Item "Function util::geoinfo"
+Get the geo location information.
+.Sp
+\&\f(CW@return\fR list of values for requested fields.
+.ie n .IP "Function ""util::gvim""" 4
+.el .IP "Function \f(CWutil::gvim\fR" 4
+.IX Item "Function util::gvim"
+Open files with gvim in a single gvim instance.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::histgrep""" 4
+.el .IP "Function \f(CWutil::histgrep\fR" 4
+.IX Item "Function util::histgrep"
+Grep in reverse order in history.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::setup\-abbrevs""" 4
+.el .IP "Function \f(CWutil::setup\-abbrevs\fR" 4
+.IX Item "Function util::setup-abbrevs"
+Setup zsh abbreviations.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::start\-ssh\-agent""" 4
+.el .IP "Function \f(CWutil::start\-ssh\-agent\fR" 4
+.IX Item "Function util::start-ssh-agent"
+Start ssh agent if not yet.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::ta""" 4
+.el .IP "Function \f(CWutil::ta\fR" 4
+.IX Item "Function util::ta"
+Tmux attach wrapper, which updates tmux environment as configured.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""util::vim""" 4
+.el .IP "Function \f(CWutil::vim\fR" 4
+.IX Item "Function util::vim"
+Open files with vim in a single vim instance in one tmux window.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0

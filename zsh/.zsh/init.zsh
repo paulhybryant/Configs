@@ -151,8 +151,7 @@ alias rm='file::rm'
 
 export GIT_EDITOR='vim'
 
-declare -a __TMUX_VARS__
-__TMUX_VARS__=(SSH_CLIENT SSH_OS)
+declare -agxr __TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY)
 
 alias ta='util::ta'
 alias ts='util::tmux_start'
