@@ -11,7 +11,7 @@ if [[ ! -z "$TMUX" ]]; then
     fi
   done
   local _vars
-  _vars="$(tmux show-environment | grep \"${_pat}\")"
+  _vars="$(tmux show-environment | grep "${_pat}")"
   for var in ${_vars};
   do
     io::vlog 1 "export $var"

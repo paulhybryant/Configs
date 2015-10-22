@@ -29,20 +29,20 @@ function bootstrap::main() {
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
-    shell::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
-      \"${BREWHOME}\""
+    shell::eval "git clone "https://github.com/Homebrew/${BREWVERSION}" \
+      "${BREWHOME}""
   fi
 
   # shell::eval "brew update && brew upgrade $(brew outdated)"
   shell::eval "brew install coreutils stow"
   io::msg "Creating symlinks with stow..."
-  shell::eval "mkdir -p \"$HOME/.antigen/repos/\""
-  shell::eval "mkdir -p \"$HOME/.configs/pip/\""
-  shell::eval "mkdir -p \"$HOME/.configs/terminator/\""
-  shell::eval "mkdir -p \"$HOME/.ssh/\""
-  shell::eval "mkdir -p \"$HOME/.tmux/plugins\""
-  shell::eval "mkdir -p \"$HOME/.tmuxinator\""
-  shell::eval "mkdir -p \"$HOME/.vim/\""
+  shell::eval "mkdir -p "$HOME/.antigen/repos/""
+  shell::eval "mkdir -p "$HOME/.configs/pip/""
+  shell::eval "mkdir -p "$HOME/.configs/terminator/""
+  shell::eval "mkdir -p "$HOME/.ssh/""
+  shell::eval "mkdir -p "$HOME/.tmux/plugins""
+  shell::eval "mkdir -p "$HOME/.tmuxinator""
+  shell::eval "mkdir -p "$HOME/.vim/""
   shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   bootstrap::stow
 

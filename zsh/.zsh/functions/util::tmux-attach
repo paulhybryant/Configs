@@ -7,10 +7,10 @@ do
   local value=
   eval value=\$$var
   # local _var_
-  # eval "_val_=\"\${$var}\""
+  # eval "_val_="\${$var}""
   # echo $_val_
   \tmux set-environment $var "$value"
-  echo "export $var=\"$value\"" >> "$setenv"
+  echo "export $var="$value"" >> "$setenv"
 done
 for window in $(\tmux list-windows -t "$1" -F "#W");
 do
@@ -23,15 +23,15 @@ do
     \tmux send-keys -t "$1:$window.$id" ENTER
     sleep 0.1
     if [[ $cmd != "bash" && $cmd != "zsh" && $cmd != "blaze64" ]]; then
-      # run "\\tmux send-keys -t \"$1:$window\" C-z"
-      # run "\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
+      # run "\\tmux send-keys -t "$1:$window" C-z"
+      # run "\tmux send-keys -t "$1:$window.$id" source \\ $setenv ENTER"
       \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
       sleep 0.1
-      # run "\\tmux send-keys -t \"$1:$window.$id\" fg ENTER"
+      # run "\\tmux send-keys -t "$1:$window.$id" fg ENTER"
       \tmux send-keys -t "$1:$window.$id" fg ENTER
     else
       \tmux send-keys -t "$1:$window.$id" source \ $setenv ENTER
-      # run "\\tmux send-keys -t \"$1:$window.$id\" source \\ $setenv ENTER"
+      # run "\\tmux send-keys -t "$1:$window.$id" source \\ $setenv ENTER"
     fi
   done
 done

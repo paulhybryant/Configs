@@ -46,12 +46,12 @@ function muxcfg::start() {
 
   shell::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
 
-  if [[ -d "${_dst}" ]]; then
-    io::hl "[muxcfg]: Directory ${_dst} exists!"
+  if [[ -d "${_dst}/${_proj}" ]]; then
+    io::hl "[muxcfg] Directory ${_dst} exists!"
     mode::dryrun || return 1
   fi
   shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $MUXCFGDIR/project.yml.template > ${_muxcfg}"
-  shell::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
+  $(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}
   shell::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
@@ -83,14 +83,13 @@ function muxcfg::delete() {
 }
 function muxcfg::git5wrapper() {
   setopt localoptions err_return
-  zparseopts -D -A opts -src: -dst: -branch:
-  shell::eval "git5 mirror ${opts[--src]} ${opts[--dst]} --allow_existing_branch --branch=${opts[--branch]}"
+  shell::eval "git5 mirror $1 $2 --allow_existing_branch --branch=$3"
 }
 function muxcfg::main() {
   setopt localoptions unset err_return
 
   shell::eval "whence tmuxinator > /dev/null"
-  shell::eval "mkdir -p \"$MUXCFGDIR\""
+  shell::eval "mkdir -p "$MUXCFGDIR""
   io::vlog 2 "${(kv)opts}"
 
   local _subcmd _project _git_new_workdir_cmd _cwd
