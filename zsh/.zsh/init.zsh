@@ -60,7 +60,7 @@ alias la='file::ls -a'
 alias ll='file::ls -l'
 alias lla='file::ls -la'
 alias ls='file::ls'
-alias rm='file::rm'
+alias rm='\trash'
 
 export GIT_EDITOR='vim'
 
