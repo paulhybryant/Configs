@@ -18,6 +18,6 @@ _agent_pid=$(pgrep "${_agent}")
 # If the agent is not running (pid is zero length string)
 if [[ -z "${_agent_pid}" ]]; then
     # Start up SSH Agent
-    # this seems to be the proper method as opposed to `exec ssh-agent bash`
+    # this seems to be the proper method as opposed to $(exec ssh-agent bash)
     eval "$(${_agent})"
 fi

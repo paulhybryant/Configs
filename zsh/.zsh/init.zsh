@@ -102,7 +102,7 @@ setopt COMPLETE_IN_WORD                                                         
 setopt GLOB_COMPLETE
 setopt LIST_AMBIGUOUS
 setopt LIST_TYPES
-setopt MENU_COMPLETE
+# setopt MENU_COMPLETE
 
 # Expansion and Globbing
 setopt BAD_PATTERN

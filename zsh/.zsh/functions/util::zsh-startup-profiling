@@ -41,4 +41,5 @@ do
 done < "${_log}"
 _cum=$((_cum + _end - _start))
 printf "%-8f : %-10f : %s:%s-%s\n" "$((_end - _start))" "${_cum}" "${_file}" "${_startline/>/}" "${_endline/>/}" >> "${_profile}"
+cat ${_profile}
 echo "Profile summary: ${_profile}"
