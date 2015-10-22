@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<util::vim>
+
+Open files with vim in a single vim instance in one tmux window.
+
+@return NULL
+=cut
+
 local -a _servers_list
 local _server_name
 local _vimflags

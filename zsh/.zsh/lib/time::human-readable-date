@@ -1,5 +1,15 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<time::human-readable-date>
+
+Print time in human readable format.
+
+$1 Current time in seconds since epoch
+
+@return string in human readable format for the specified time.
+=cut
+
 local _time_str
 if os::OSX && [[ -z ${CMDPREFIX} ]]; then
   _time_str=$(date -r "$1")

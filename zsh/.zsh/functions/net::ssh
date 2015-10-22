@@ -1,3 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<net::ssh>
+
+Utility function that set some env variables by default when connected through ssh.
+Arguments will be passed through to ssh
+
+@return NULL
+=cut
+
 ssh -Y "$@" -t "export SSH_OS=\"`uname`\"; zsh"

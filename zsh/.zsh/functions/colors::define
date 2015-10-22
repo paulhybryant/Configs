@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<colors::define>
+
+Define color env variables.
+
+@return NULL
+=cut
+
 # Reset
 export COLOR_Color_Off='\033[0m'       # Text Reset
 

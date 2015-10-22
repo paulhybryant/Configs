@@ -1,4 +1,20 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<net::port-open>
+
+Test whether a port / range of ports is / are open.
+
+$1 Host address
+$2 Port number
+
+Example:
+  net::port_open 127.0.0.1 80
+  net::port_open 127.0.0.1 80 90
+  net::port_open 127.0.0.1 80-90
+
+@return 0 if the port is open on specified host, 1 otherwise.
+=cut
+
 nc -zv "$1" "$2" 2> /dev/null && return 0
 return 1

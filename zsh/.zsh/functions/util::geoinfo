@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<util::geoinfo>
+
+Get the geo location information.
+
+@return list of values for requested fields.
+=cut
+
 local _cache='/tmp/.util.geoinfo'
 local _expire _filter
 _expire=$(time::_seconds)

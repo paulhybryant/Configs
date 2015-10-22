@@ -1,5 +1,25 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<git::parent-branch>
+
+# Get parent branch of a branch, defaults to current branch.
+# How it works:
+# 1| Display a textual history of all commits.
+# 2| Ancestors of the current commit are indicated
+#    by a star. Filter out everything else.
+# 3| Ignore all the commits in the current branch.
+# 4| The first result will be the nearest ancestor branch.
+#    Ignore the other results.
+# 5| Branch names are displayed [in brackets]. Ignore
+#    everything outside the brackets, and the brackets.
+# 6| Sometimes the branch name will include a ~2 or ^1 to
+#    indicate how many commits are between the referenced
+#    commit and the branch tip. We don't care. Ignore them.
+
+@return NULL
+=cut
+
 local _branch
 if [[ $# -eq 0 ]]; then
   _branch=$(git rev-parse --abbrev-ref HEAD)

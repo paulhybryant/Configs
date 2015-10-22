@@ -1,5 +1,14 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<time::getmtime>
+
+Get last modification time of a file.
+$1 Filename
+
+@return string of the last modified time of a file.
+=cut
+
 local _mtime
 if [[ "$OSTYPE" == "darwin"* ]]; then
   _mtime="$(\stat -f '%m' $1)"

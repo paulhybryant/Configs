@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<mode::toggle-dryrun>
+
+Toggle dryrun mode
+
+@return NULL
+=cut
+
 if [[ -n ${__DRYRUN__+1} ]]; then
   unset __DRYRUN__
 else

@@ -1,4 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<git::has-branch>
+
+Whether a branch exists in current depo.
+
+@return 0 if exists, 1 otherwise.
+=cut
+
 setopt localoptions err_return
 [[ -n $(git branch --list "$1") ]]

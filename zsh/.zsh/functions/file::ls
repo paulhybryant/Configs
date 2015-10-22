@@ -1,6 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-# List files in long format.
+: <<=cut
+=item Function C<file::ls>
+
+List files.
+
+@return NULL
+=cut
 
 eval "\\${CMDPREFIX}ls --color=tty -Fh $*"
 awk '/^-/ {

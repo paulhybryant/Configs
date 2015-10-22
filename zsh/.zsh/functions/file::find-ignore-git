@@ -1,3 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<file::find-ignore-git>
+
+Find in current directory, with dir .git ignored.
+A shortcut for file::find-ignore-dir for git.
+
+@return NULL
+=cut
+
 file::find_ignore_dir ".git"

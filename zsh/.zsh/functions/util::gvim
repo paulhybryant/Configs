@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<util::gvim>
+
+Open files with gvim in a single gvim instance.
+
+@return NULL
+=cut
+
 local -a _servers_list
 _servers_list=($(\vim --serverlist))
 io::vlog 1 "Vim servers: ${_servers_list}"

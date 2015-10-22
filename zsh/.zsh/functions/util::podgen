@@ -1,0 +1,3 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+awk '/^: <<=cut/ { inrange = 1 } /^=cut/ { print $0; inrange = 0 } /.*/ { if (inrange > 0) print $0 }'

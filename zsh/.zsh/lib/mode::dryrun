@@ -1,4 +1,12 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<mode::dryrun>
+
+Whether it is in dryrun mode.
+
+@return 0 if it is dryrun mode, 1 otherwise.
+=cut
+
 [[ -n ${__DRYRUN__+1} ]] && return 0
 return 1

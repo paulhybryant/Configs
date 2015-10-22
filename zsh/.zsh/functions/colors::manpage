@@ -1,5 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<colors::manpage>
+
+Make man page colorful.
+
+@return NULL
+=cut
+
 # The following won't have effect unless less is used (instead of vimpager)
 # http://superuser.com/questions/452034/bash-colorized-man-page
 #

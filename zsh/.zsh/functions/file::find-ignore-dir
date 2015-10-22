@@ -1,5 +1,16 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<file::find-ignore-dir>
+
+Find in current directory, with dir $1 ignored.
+TODO: Make $1 an array, and ignore a list of dirs.
+
+$1 The directory to ignore.
+
+@return NULL
+=cut
+
 # Commands with the same output
 # find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
 # find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print

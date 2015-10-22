@@ -1,5 +1,18 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+: <<=cut
+=item Function C<git::new-workdir>
+
+Create a new git working dir based on existing repo, and create a new branch in
+the new workign dir.
+
+$1 Source git working directory
+$2 New git working directory
+$3 New branch name
+
+@return NULL
+=cut
+
 setopt localoptions err_return
 zparseopts -D -A opts -src: -dst: -branch:
 
