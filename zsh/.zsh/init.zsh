@@ -74,14 +74,13 @@ setopt PROMPT_SUBST
 # Scripts and Functions
 setopt C_BASES
 setopt ERR_RETURN
-setopt LOCAL_OPTIONS                                                            # Allow setting function local options with 'setopt localoptions foo nobar'
 setopt FUNCTION_ARGZERO
 # setopt SOURCE_TRACE
 # setopt XTRACE
 
 # Shell Emulation
 setopt NO_CONTINUE_ON_ERROR
-setopt KSH_ARRAYS                                                               # Make array index starts at 0
+# setopt KSH_ARRAYS                                                               # Make array index starts at 0
 setopt RC_EXPAND_PARAM
 
 # Zle
