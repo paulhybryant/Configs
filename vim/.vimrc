@@ -150,7 +150,7 @@ if empty(g:provided)
         \ }                                                                     " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
-    call s:ConfigureYcm()
+    call g:ConfigureYcm()
   endfunction
   " }}}
   " {{{2
