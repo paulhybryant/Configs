@@ -1,20 +1,39 @@
 #!/usr/bin/env zsh
-#
-source "$HOME/.zsh/lib/base.zsh"
-source "$HOME/.zsh/lib/git.zsh"
-source "$HOME/.zsh/lib/io.zsh"
-source "$HOME/.zsh/lib/mode.zsh"
-source "$HOME/.zsh/lib/shell.zsh"
 
+function muxcfg::new-workdir-cmd() {
+  if [[ -n ${__GOOGLE__+1} ]]; then
+    echo "muxcfg::git5wrapper"
+  else
+    echo "git::new-workdir"
+  fi
+}
+function muxcfg::usage() {
+  cat <<EOF
+Usage: muxcfg [arguments] [command] [project]
+
+Arguments:
+  -h or --help          Print the usage information
+  -s or --src           Source git repo directory
+  -t or --dst           Destination git repo directory
+  -y or --noconfirm     Skip confirmation
+  -v or --verbose       Verbose
+  -n or --dryrun        Dryrun
+
+Commands:
+  start                 Create project repository, branch and config, start tmux session
+  delete                Delete project repository, branch and config, kill tmux session
+EOF
+  exit 1
+}
 function muxcfg::start() {
-  setopt localoptions unset err_return
-  zparseopts -A opts -noconfirm -src: -dst: -cwd: -cmd: -proj: "$@"
-  local _proj _cwd _cmd _src _dst _muxcfg
-  [[ -n "${opts[--proj]+1}" ]] && _proj="${opts[--proj]}"
-  [[ -n "${opts[--src]+1}" ]] && _src="${opts[--src]}"
-  [[ -n "${opts[--dst]+1}" ]] && _dst="${opts[--dst]}"
-  [[ -n "${opts[--cwd]+1}" ]] && _cwd="${opts[--cwd]}"
-  [[ -n "${opts[--cmd]+1}" ]] && _cmd="${opts[--cmd]}"
+  setopt localoptions nounset err_return
+
+  zparseopts -A localopts -cwd: -proj: "$@"
+  local _proj _cwd _src _dst _muxcfg
+  [[ -n "${localopts[--proj]+1}" ]] && _proj="${localopts[--proj]}"
+  [[ -n ${opts[--src]+1} ]] && _src="${opts[--src]}"
+  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}"
+  [[ -n "${localopts[--cwd]+1}" ]] && _cwd="${localopts[--cwd]}"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && ! -n ${opts[--noconfirm]+1} ]]; then
@@ -25,23 +44,24 @@ function muxcfg::start() {
     fi
   fi
 
+  shell::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
+
   if [[ -d "${_dst}" ]]; then
     io::hl "[muxcfg]: Directory ${_dst} exists!"
     mode::dryrun || return 1
   fi
   shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $MUXCFGDIR/project.yml.template > ${_muxcfg}"
-  shell::eval "${_cmd} ${_src} ${_dst} ${_proj}"
+  shell::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
   shell::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
-  setopt localoptions unset err_return
-  zparseopts -A opts -noconfirm -src: -dst: -cwd: -cmd: -proj: "$@"
-  local _proj _cwd _cmd _src _dst _muxcfg
-  [[ -n "${opts[--proj]+1}" ]] && _proj="${opts[--proj]}"
-  [[ -n "${opts[--src]+1}" ]] && _src="${opts[--src]}"
-  [[ -n "${opts[--dst]+1}" ]] && _dst="${opts[--dst]}"
-  [[ -n "${opts[--cwd]+1}" ]] && _cwd="${opts[--cwd]}"
-  [[ -n "${opts[--cmd]+1}" ]] && _cmd="${opts[--cmd]}"
+  setopt localoptions nounset err_return
+  zparseopts -A localopts -cwd: -proj: "$@"
+  local _proj _cwd _src _dst _muxcfg
+  [[ -n "${localopts[--proj]+1}" ]] && _proj="${localopts[--proj]}"
+  [[ -n ${opts[--src]+1} ]] && _src="${opts[--src]}"
+  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}"
+  [[ -n "${localopts[--cwd]+1}" ]] && _cwd="${localopts[--cwd]}"
 
   if [[ ! -n ${opts[--noconfirm]+1} ]]; then
     io::yes_or_no "Delete project ${_proj}"
@@ -66,52 +86,27 @@ function muxcfg::git5wrapper() {
   zparseopts -D -A opts -src: -dst: -branch:
   shell::eval "git5 mirror ${opts[--src]} ${opts[--dst]} --allow_existing_branch --branch=${opts[--branch]}"
 }
-function muxcfg::usage() {
-  cat <<EOF
-Usage: muxcfg [arguments] [command] [project]
-
-Arguments:
-  --help          Print the usage information
-  --src           Source git repo directory
-  --dst           Destination git repo directory
-  --noconfirm     Skip confirmation
-
-Commands:
-  start                 Create project repository, branch and config, start tmux session
-  delete                Delete project repository, branch and config, kill tmux session
-EOF
-  exit 1
-}
 function muxcfg::main() {
   setopt localoptions unset err_return
-  whence tmuxinator > /dev/null
-  shell::eval "mkdir -p \"$MUXCFGDIR\""
-  zparseopts -D -A opts -help -noconfirm -src: -dst: "$@"
-  io::vlog 2 "${(kv)opts}"
 
-  [[ -n ${opts[--help]+1} ]] && muxcfg::usage
+  shell::eval "whence tmuxinator > /dev/null"
+  shell::eval "mkdir -p \"$MUXCFGDIR\""
+  io::vlog 2 "${(kv)opts}"
 
   local _subcmd _project _git_new_workdir_cmd _cwd
   _subcmd="$1"
   _project="$2"
 
-  if [[ -e "$HOME/.google" ]]; then
-    _git_new_workdir_cmd="muxcfg::git5wrapper"
+  if [[ -n ${__GOOGLE__+1} ]]; then
     _cwd=${opts[--dst]}/${_project}/google3
   else
-    _git_new_workdir_cmd="git::new_workdir"
     _cwd=${opts[--dst]}/${_project}
   fi
-  whence -f "${_git_new_workdir_cmd}" > /dev/null
 
   io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
   case "${_subcmd}" in
     start|delete )
-      if [[ -n ${opts[--noconfirm]} ]]; then
-        "muxcfg::${_subcmd}" --src "${opts[--src]}" --dst "${opts[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}" --noconfirm
-      else
-        "muxcfg::${_subcmd}" --src "${opts[--src]}" --dst "${opts[--dst]}" --proj "${_project}" --cmd "${_git_new_workdir_cmd}" --cwd "${_cwd}"
-      fi
+      "muxcfg::${_subcmd}" --proj "${_project}" --cwd "${_cwd}"
       ;;
     * )
       muxcfg::usage
@@ -119,6 +114,22 @@ function muxcfg::main() {
   esac
   return 0
 }
+
+local _config_dir
+_config_dir="${0:A:h}/../../"
+fpath=(${_config_dir:a}/.zsh/lib ${_config_dir:a}/.zsh/functions $fpath)
+autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
+autoload -Uz -- ${_config_dir:a}/.zsh/functions/[^_]*(:t)
+
+setopt LOCAL_OPTIONS
+setopt localoptions err_return
+
+declare -Ag opts
+zparseopts -D -A opts h n v y -help -dryrun -verbose -src: -dst: -noconfirm "$@"
+
+[[ -n ${opts[--help]+1} || -n ${opts[-h]+1} ]] && muxcfg::usage
+[[ -n ${opts[--dryrun]+1} || -n ${opts[-n]+1} ]] && mode::set-dryrun
+[[ -n ${opts[--verbose]+1} || -n ${opts[-v]+1} ]] && setopt localoptions verbose
 
 MUXCFGDIR="$HOME/.tmuxinator"
 muxcfg::main "$@"
