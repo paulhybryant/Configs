@@ -17,6 +17,8 @@ Arguments
 @return NULL
 =cut
 
+# The trash utility installed by brew install trash in OSX supports all options
+# acceptted by rm, the one included in oxsutils does not.
 local _args='-'
 while getopts fivrdh opt
 do
