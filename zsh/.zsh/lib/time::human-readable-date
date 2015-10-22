@@ -10,10 +10,8 @@ $1 Current time in seconds since epoch
 @return string in human readable format for the specified time.
 =cut
 
+(( ${+commands[${CMDPREFIX}date]} )) || return 1
+
 local _time_str
-if os::OSX && [[ -z ${CMDPREFIX} ]]; then
-  _time_str=$(date -r "$1")
-else
-  _time_str=$("${CMDPREFIX}date" --date=@"$1")
-fi
+_time_str=$("${CMDPREFIX}date" --date=@"$1")
 echo "${_time_str}"
