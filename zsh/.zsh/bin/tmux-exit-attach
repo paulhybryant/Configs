@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+[[ -z "$TMUX" ]] && return 0
+
+local _status
+_status="$(tmux list-sessions | wc -l)$(tmux display-message -p '#{session_windows}:#{window_panes}')"
+[[ "${_status}" == "1:1:1" ]] || \tmux send-keys C-d
+
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
