@@ -52,12 +52,17 @@ bindkey '\C-p' reverse-menu-complete
 
 declare -x LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}dircolors $HOME/.dircolors-solarized/dircolors.256dark)"
+  eval "$(${CMDPREFIX}dircolors ~/.dircolors-solarized/dircolors.256dark)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
 
 alias la='file::ls -a'
+alias lal='file::ls .*(@) *(@)'
+alias lll='file::ls -l .*(@) *(@)'
+alias laf='file::ls .*(/,.) *(/,.)'
+alias ld='file::ls -d .*(/) *(/)'
+alias lld='file::ls -ld .*(/) *(/)'
 alias ll='file::ls -l'
 alias lla='file::ls -la'
 alias ls='file::ls'
