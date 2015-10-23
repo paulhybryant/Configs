@@ -10,7 +10,7 @@ List files.
 
 setopt localoptions err_return
 
-eval '${CMDPREFIX}\ls --color=tty -Fh "$@" 2>/dev/null'
+eval '${CMDPREFIX}\ls --color=yes -Fh "$@" 2>/dev/null'
 awk '/^-/ {
   sum += $5
   ++filenum

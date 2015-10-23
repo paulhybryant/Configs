@@ -29,29 +29,35 @@ function muxcfg::start() {
   setopt localoptions nounset err_return
 
   zparseopts -A localopts -cwd: -proj: "$@"
-  local _proj _cwd _src _dst _muxcfg
+  local _proj _cwd _src _dst _muxcfg _tmpcfg
   [[ -n "${localopts[--proj]+1}" ]] && _proj="${localopts[--proj]}"
   [[ -n ${opts[--src]+1} ]] && _src="${opts[--src]}"
-  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}"
+  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}/${_proj}"
   [[ -n "${localopts[--cwd]+1}" ]] && _cwd="${localopts[--cwd]}"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && ! -n ${opts[--noconfirm]+1} ]]; then
     if io::yes_or_no "$_muxcfg exists, overwrite"; then
       io::warn "$_muxcfg will be overwritten."
+      _tmpcfg=$(mktemp)
+      shell::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_tmpcfg}"
+      shell::eval "vimdiff $MUXCFGDIR/${_proj}.yml ${_tmpcfg}"
+      io::yes_or_no "Continue"
+      shell::eval "mv ${_tmpcfg} $MUXCFGDIR/${_proj}.yml"
     else
       return 1
     fi
+  else
+    shell::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_muxcfg}"
   fi
 
-  shell::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
-
-  if [[ -d "${_dst}/${_proj}" ]]; then
-    io::hl "[muxcfg] Directory ${_dst} exists!"
-    mode::dryrun || return 1
+  if [[ -d "${_dst}" ]]; then
+    io::hl "[muxcfg] Directory ${_dst} exists."
+    io::yes_or_no "Skip branching and start with existing copy"
+  else
+    shell::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
+    shell::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
   fi
-  shell::eval "sed -e s#\${SESSION}#${_proj}# -e s#\${ROOT}#${_cwd}# $MUXCFGDIR/project.yml.template > ${_muxcfg}"
-  $(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}
   shell::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
@@ -86,7 +92,7 @@ function muxcfg::git5wrapper() {
   shell::eval "git5 mirror $1 $2 --allow_existing_branch --branch=$3"
 }
 function muxcfg::main() {
-  setopt localoptions unset err_return
+  setopt localoptions nounset err_return
 
   shell::eval "whence tmuxinator > /dev/null"
   shell::eval "mkdir -p "$MUXCFGDIR""

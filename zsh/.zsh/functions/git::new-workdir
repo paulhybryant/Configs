@@ -13,6 +13,9 @@ $3 New branch name
 @return NULL
 =cut
 
+echo 'y'
+return 0
+
 setopt localoptions nounset err_return
 
 local _orig_git=$1
