@@ -63,9 +63,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   done
   unset pmodules
 
-  # setopt NO_LOCAL_OPTIONS
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
-  # setopt LOCAL_OPTIONS
 
   # antigen use oh-my-zsh
   # antigen bundle --loc=lib

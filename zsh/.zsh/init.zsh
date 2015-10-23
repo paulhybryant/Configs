@@ -29,7 +29,7 @@ alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
-[[ "$+aliases[run-help]" == "1" ]] && unalias run-help                                   # Use built-in run-help to use online help
+[[ -n ${aliases[run-help]+1} ]] && unalias run-help                                   # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
 zle -N up-line-or-beginning-search
@@ -52,7 +52,7 @@ bindkey '\C-p' reverse-menu-complete
 
 declare -x LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)"
+  eval '${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark' > /dev/null 2>&1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
