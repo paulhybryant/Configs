@@ -82,3 +82,7 @@ if [[ -f ~/.zshrc.google ]]; then
 fi
 
 autoload -Uz compinit && compinit
+
+if [[ -n ${PROFILING+1} ]]; then
+  exit 0
+fi
