@@ -1,7 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-if [[ ! -z "$TMUX" ]]; then
+if [[ ! -z "${TMUX}" ]]; then
   local _pat
+  local -A _varsmap
   for var in ${__TMUX_VARS__};
   do
     if [[ -z "${_pat}" ]]; then
@@ -10,11 +11,20 @@ if [[ ! -z "$TMUX" ]]; then
       _pat="${_pat}\|^${var}"
     fi
   done
-  local _vars
-  _vars="$(tmux show-environment | grep "${_pat}")"
-  for var in ${_vars};
+
+  while read var
   do
-    io::vlog 1 "export $var"
-    export $var
+    io::vlog 1 "export ${var}"
+    export ${var}
+    io::vlog 1 "_varsmap[${var/=*/}]=1"
+    _varsmap[${var/=*/}]=1
+  done< <(\tmux show-environment | grep "${_pat}")
+
+  for var in ${__TMUX_VARS__};
+  do
+    if [[ ! -n ${_varsmap[${var}]+1} ]]; then
+      io::vlog 1 "export ${var}="
+      export ${var}=
+    fi
   done
 fi

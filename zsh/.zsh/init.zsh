@@ -7,13 +7,13 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
-alias date="\\${CMDPREFIX}date"
+alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
 alias mank='\man -K'
-alias mktemp="${CMDPREFIX}mktemp"
+alias mktemp='${CMDPREFIX}\mktemp'
 alias nvim='NVIM=nvim nvim'
-alias stat="${CMDPREFIX}stat"
+alias stat='${CMDPREFIX}\stat'
 alias stow='\stow -v'
 alias tl='\tmux list-sessions'
 alias tmux='TERM=screen-256color \tmux -2'
@@ -29,7 +29,7 @@ alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
-[[ "$+aliases[run-help]" == "1" ]] && unalias run-help                                   # Use built-in run-help to use online help
+[[ -n ${aliases[run-help]+1} ]] && unalias run-help                                   # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
 zle -N up-line-or-beginning-search
@@ -52,20 +52,27 @@ bindkey '\C-p' reverse-menu-complete
 
 declare -x LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}dircolors ~/.dircolors-solarized/dircolors.256dark)"
+  eval '${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark' > /dev/null 2>&1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
 
-alias la='file::ls -a'
 alias lal='file::ls .*(@) *(@)'
 alias lll='file::ls -l .*(@) *(@)'
-alias laf='file::ls .*(/,.) *(/,.)'
-alias ld='file::ls -d .*(/) *(/)'
-alias lld='file::ls -ld .*(/) *(/)'
+alias lf='file::ls *(.)'
+alias laf='file::ls .*(.) *(.)'
+alias lfd='file::ls *(/,.)'
+alias lafd='file::ls .*(/,.) *(/,.)'
+alias ld='file::ls -d *(/)'
+alias lad='file::ls -d .*(/) *(/)'
+alias lld='file::ls -ld *(/)'
+alias llad='file::ls -ld .*(/) *(/)'
+
+alias la='file::ls -a'
 alias ll='file::ls -l'
 alias lla='file::ls -la'
-alias ls='file::ls'
+alias ls='file::ls .'
+
 alias rm='\trash'
 
 export GIT_EDITOR='vim'

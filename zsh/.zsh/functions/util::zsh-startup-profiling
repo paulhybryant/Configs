@@ -1,9 +1,10 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 setopt localoptions KSH_ARRAYS CLOBBER
-PROFILING='y' zsh
 local _log="/tmp/zsh.profile"
 local _profile="/tmp/zsh.profile-summary"
+rm "${_log}" "${_profile}" > /dev/null 2>&1
+PROFILING='y' zsh
 echo "Profile log: ${_log}"
 local _file _start _end _curfile _cum _startline _endline
 local -a _parts

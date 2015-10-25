@@ -30,7 +30,8 @@ declare -x -r XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -x HELPDIR="$BREWHOME/share/zsh/help"
 declare -x -r EDITOR='vim'
 declare -x GREP_OPTIONS='--color=auto'
-declare -x -r PAGER='most'
+declare -x LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen --no-init --raw-control-chars'
+declare -x PAGER='most'
 # export PAGER=vimpager
 declare -x PREFIXWIDTH=10
 declare -x MANPAGER="$PAGER"

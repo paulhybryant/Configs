@@ -8,7 +8,9 @@ List files.
 @return NULL
 =cut
 
-eval "\\${CMDPREFIX}ls --color=tty -Fh $*"
+setopt localoptions err_return
+
+eval '${CMDPREFIX}\ls --color=yes -Fh "$@" 2>/dev/null'
 awk '/^-/ {
   sum += $5
   ++filenum
@@ -22,4 +24,4 @@ END {
     }
     printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
   }
-}' <<< $(${CMDPREFIX}ls -lFh $*)
+}' <<< $(${CMDPREFIX}\ls -lFh "$@" 2>/dev/null)
