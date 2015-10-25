@@ -1,0 +1,14 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+[[ -z "$TMUX" ]] && return 0
+io::vlog 1 "Trying to switch tmux client if possible"
+
+local _num_sessions _session_state
+_num_sessions=$(\tmux list-sessions 2> /dev/null | wc -l)
+_session_state="$(tmux display-message -p '#{session_windows}:#{window_panes}')"
+io::vlog 1 "Number of sessions: ${_num_sessions}, Session state: ${_session_state}"
+
+if [[ ${_num_sessions} -gt 1 && "${_session_state}" == "1:1" ]]; then
+  io::vlog 1 "Swithc tmux client"
+  \tmux switch-client -n
+fi

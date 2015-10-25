@@ -84,3 +84,4 @@ if [[ -f ~/.zshrc.google ]]; then
 fi
 
 autoload -Uz compinit && compinit
+trap 'util::tmux-try-switch' EXIT
