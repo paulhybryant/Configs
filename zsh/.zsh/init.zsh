@@ -50,9 +50,9 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-declare -x LS_COLORS
+declare -xg LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval '${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark' > /dev/null 2>&1
+  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
