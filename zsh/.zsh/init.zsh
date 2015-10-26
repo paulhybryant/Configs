@@ -90,7 +90,6 @@ alias run='util::run'
 util::install-precmd
 util::setup-abbrevs
 util::fix-display
-util::start-ssh-agent "${SSH_AGENT_NAME}"
 
 alias ssh='net::ssh'
 

@@ -7,12 +7,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   declare -x -r BREWHOME="$HOME/.$BREWVERSION"
   path=(/opt/local/bin /opt/local/sbin $path)
   declare -x -r CMDPREFIX="g"
-  declare -x -r SSH_AGENT_NAME='gnubby-ssh-agent'
   alias updatedb="/usr/libexec/locate.updatedb"
 else
   declare -x -r BREWVERSION="linuxbrew"
   declare -x -r BREWHOME="$HOME/.$BREWVERSION"
-  declare -x -r SSH_AGENT_NAME='ssh-agent'
 fi
 
 path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
