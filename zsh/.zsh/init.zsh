@@ -7,6 +7,7 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
+alias xrebindkeys='killall -HUP xbindkeys 2>&1 > /dev/null; xbindkeys'
 alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
