@@ -44,6 +44,11 @@ bindkey '^[OC' end-of-line                                                      
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
 bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
 bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
+# bindkey '\C-R' history-incremental-pattern-search-backward                        # Search history backward incrementally
+# bindkey 'r' history-incremental-pattern-search-backward                        # Search history backward incrementally
+# bindkey -s 'd' ''
+# bindkey -s 'z' ''
+# bindkey -s 'c' ''
 bindkey '^[[A' up-line-or-beginning-search                                      # Up
 bindkey '^[[B' down-line-or-beginning-search                                    # Down
 # bindkey '^I' expand-or-complete-prefix
