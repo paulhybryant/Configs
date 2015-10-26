@@ -78,8 +78,7 @@ alias rm='\trash'
 export GIT_EDITOR='vim'
 
 declare -agx __TMUX_VARS__
-__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY)
-declare -agxr __TMUX_VARS__
+__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID)
 
 alias ta='util::ta'
 alias ts='util::tmux_start'

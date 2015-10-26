@@ -689,6 +689,7 @@ endif
 " Priority 1 Plugins {{{1
 if s:vimplugin_size >= 1
   NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer
+  NeoBundle 'tmux-plugins/vim-tmux-focus-events'                                " Make terminal vim and tmux work better together
   NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global script options
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to

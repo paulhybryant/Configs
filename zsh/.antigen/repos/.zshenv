@@ -26,7 +26,7 @@ fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh
 # alias foo='TERM=xterm-256color foo'
 declare -x -r XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -x HELPDIR="$BREWHOME/share/zsh/help"
-declare -x -r EDITOR='vim'
+declare -x EDITOR='vim'
 declare -x GREP_OPTIONS='--color=auto'
 declare -x LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen --no-init --raw-control-chars'
 declare -x PAGER='most'
@@ -34,7 +34,7 @@ declare -x PAGER='most'
 declare -x PREFIXWIDTH=10
 declare -x MANPAGER="$PAGER"
 declare -x TERM='screen-256color'
-declare -x -r VISUAL='vim'
+declare -x VISUAL='vim'
 declare -x -r XDG_CACHE_HOME="$HOME/.cache"
 declare -x -r XDG_CONFIG_HOME="$HOME/.config"
 declare -x -r XDG_DATA_HOME="$HOME/.local/share"
