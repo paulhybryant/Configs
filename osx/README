@@ -1,0 +1,3 @@
+/Applications/Karabiner.app/Contents/Library/bin/karabiner export > ./karabiner-import.sh
+/Applications/Seil.app/Contents/Library/bin/seil export > ./seil-import.sh
+cp ~/Library/Preferences/org.pqrs.Seil.plist ~/Library/Preferences/org.pqrs.Karabiner.plist .
