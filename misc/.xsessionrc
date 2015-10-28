@@ -14,8 +14,9 @@ setxkbmap -option ''
 setxkbmap -option caps:escape
 
 setxkbmap -option altwin:ctrl_alt_win
-# setxkbmap -option ctrl:lctrl_meta
+setxkbmap -option altwin:swap_alt_win
 
+# setxkbmap -option ctrl:lctrl_meta
 # setxkbmap -option altwin:meta_win
 # setxkbmap -option altwin:swap_alt_win
 # setxkbmap -option altwin:ctrl_win
