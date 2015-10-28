@@ -75,3 +75,4 @@
   @ Add brew formula for trash-cli
   @ Add completion for functions like cg
   @ Make keyboardlayouteditor work
+  @ Compile xvkbd in OSX (with macports if needed)

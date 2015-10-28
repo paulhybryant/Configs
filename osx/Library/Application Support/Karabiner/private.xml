@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<root>
+ <item>
+    <name>Use Contrl+Command+L to lock screen</name>
+    <identifier>private.control_command_l_lock_screen</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::CONTROL_L, ModifierFlag::COMMAND_L,
+      KeyCode::VK_IOHIDPOSTEVENT_NX_POWER_KEY, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L
+    </autogen>
+  </item>
+</root>
