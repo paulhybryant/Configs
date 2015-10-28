@@ -8,7 +8,7 @@
   next_tab = None
   go_up = None
   group_tab = None
-  paste = <Ctrl>v
+  paste = <Alt>v
   close_window = None
   go_prev = None
   prev_tab = None
@@ -19,7 +19,7 @@
   rotate_cw = None
   go_left = None
   go_next = None
-  copy = <Ctrl>c
+  copy = <Alt>c
   group_all = None
 [profiles]
   [[default]]

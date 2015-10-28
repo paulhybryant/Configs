@@ -32,7 +32,7 @@ alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
-[[ -n ${aliases[run-help]+1} ]] && unalias run-help                                   # Use built-in run-help to use online help
+[[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
 zle -N up-line-or-beginning-search
@@ -41,13 +41,15 @@ zle -N down-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
 # TODO(me): Bind C-Left and C-Right as HOME / END
-bindkey '^[OD' beginning-of-line                                                # Set left arrow as HOME
-bindkey '^[OC' end-of-line                                                      # Set right arrow as END
+# bindkey '^[OD' beginning-of-line                                              # Set left arrow as HOME
+# bindkey '^[OC' end-of-line                                                    # Set right arrow as END
+bindkey "[1;5D" beginning-of-line                                             # Set ctrl + left arrow as HOME
+bindkey "[1;5C" end-of-line                                                   # Set ctrl + right arrow as END
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
 bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-# bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
-bindkey '\C-R' history-incremental-pattern-search-backward                        # Search history backward incrementally
-# bindkey 'r' history-incremental-pattern-search-backward                        # Search history backward incrementally
+# bindkey '^R' history-incremental-pattern-search-backward                      # Search history backward incrementally
+bindkey '\C-R' history-incremental-pattern-search-backward                      # Search history backward incrementally
+# bindkey 'r' history-incremental-pattern-search-backward                     # Search history backward incrementally
 # bindkey -s 'd' ''
 # bindkey -s 'z' ''
 # bindkey -s 'c' ''
