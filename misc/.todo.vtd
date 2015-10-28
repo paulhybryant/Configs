@@ -72,3 +72,6 @@
   @ Document zsh library, checkout the doc gen tools @p:1 (DONE 2015-10-16 14:33)
   @ Learn python @p:1
   @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)
+  @ Add brew formula for trash-cli
+  @ Add completion for functions like cg
+  @ Make keyboardlayouteditor work

@@ -25,7 +25,8 @@ function bootstrap::main() {
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
-    zlib1g-dev trash-cli clipit xclip x11-xkb-utils"
+    zlib1g-dev trash-cli clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
+    xvkbd"
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -39,6 +40,7 @@ function bootstrap::main() {
   shell::eval "mkdir -p "$HOME/.antigen/repos/""
   shell::eval "mkdir -p "$HOME/.configs/pip/""
   shell::eval "mkdir -p "$HOME/.configs/terminator/""
+  shell::eval "mkdir -p "$HOME/.local/bin/""
   shell::eval "mkdir -p "$HOME/.ssh/""
   shell::eval "mkdir -p "$HOME/.tmux/plugins""
   shell::eval "mkdir -p "$HOME/.tmuxinator""

@@ -1,8 +1,22 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 # if [ -s ~/.Xmodmap ]; then
   # xmodmap ~/.Xmodmap
   # zenity --info --text=".Xmodmap loaded"
 # fi
 
+# Available options are in /usr/share/X11/xkb/rules
+# Check out base.lst to get started.
+# Clear all options first
+setxkbmap -option ''
+
+# Map caps to ctrl
 setxkbmap -option caps:escape
+
+setxkbmap -option altwin:ctrl_alt_win
+setxkbmap -option altwin:swap_alt_win
+
+# setxkbmap -option ctrl:lctrl_meta
+# setxkbmap -option altwin:meta_win
+# setxkbmap -option altwin:swap_alt_win
+# setxkbmap -option altwin:ctrl_win

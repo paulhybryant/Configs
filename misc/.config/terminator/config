@@ -1,15 +1,26 @@
 [global_config]
-  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = CustomCommandsMenu, InactivityWatch, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, Logger, MavenPluginURLHandler, LaunchpadBugURLHandler
   title_transmit_bg_color = "#d30102"
   focus = system
   inactive_color_offset = 1.0
 [keybindings]
   cycle_prev = None
   next_tab = None
-  prev_tab = None
-  cycle_next = None
-  copy = <Ctrl>c
+  go_up = None
+  group_tab = None
   paste = <Ctrl>v
+  close_window = None
+  go_prev = None
+  prev_tab = None
+  go_down = None
+  close_term = None
+  cycle_next = None
+  go_right = None
+  rotate_cw = None
+  go_left = None
+  go_next = None
+  copy = <Ctrl>c
+  group_all = None
 [profiles]
   [[default]]
     copy_on_selection = True
@@ -17,30 +28,26 @@
     font = Courier New Bold 11
     background_image = None
     scrollback_infinite = True
-
-  # Copied from terminator-solarized: https://github.com/ghuntley/terminator-solarized.git
   [[solarized-dark]]
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    foreground_color = "#eee8d5"
-    background_color = "#002b36"
-    cursor_color = "#eee8d5"
-    copy_on_selection = True
-    use_system_font = False
     font = Courier New Bold 11
     background_image = None
+    use_system_font = False
+    cursor_color = "#eee8d5"
+    foreground_color = "#eee8d5"
+    copy_on_selection = True
+    background_color = "#002b36"
     scrollback_infinite = True
-
   [[solarized-light]]
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    background_color = "#eee8d5"
-    foreground_color = "#002b36"
-    cursor_color = "#002b36"
-    copy_on_selection = True
-    use_system_font = False
     font = Courier New Bold 11
     background_image = None
+    use_system_font = False
+    cursor_color = "#002b36"
+    foreground_color = "#002b36"
+    copy_on_selection = True
+    background_color = "#eee8d5"
     scrollback_infinite = True
-
 [layouts]
   [[default]]
     [[[child1]]]
