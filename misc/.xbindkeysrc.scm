@@ -64,11 +64,13 @@
 
 ;; Examples of commands:
 
-(xbindkey '(control shift q) "xbindkeys_show")
-(xbindkey '(alt t) "$HOME/.local/bin/xvkbd::ctrl-t")
-(xbindkey '(alt f) "$HOME/.local/bin/xvkbd::ctrl-f")
+; (xbindkey '(control shift q) "xbindkeys_show")
+; (xbindkey '(alt t) "$HOME/.local/bin/xvkbd::ctrl-t")
+; (xbindkey '(alt f) "$HOME/.local/bin/xvkbd::ctrl-f")
+
 ; (xbindkey '(alt d) "$HOME/.local/bin/xvkbd::ctrl-d")
 ; (xbindkey '(alt u) "$HOME/.local/bin/xvkbd::ctrl-u")
+; (xbindkey '(alt r) "$HOME/.local/bin/xvkbd::ctrl-r")
 ; (xbindkey '(alt t) "zenity --info --text=\"$(xdotool getactivewindow)\"")
 
 ;; set directly keycode (here control + f with my keyboard)

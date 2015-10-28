@@ -7,7 +7,9 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
+alias cdtrash='pushd ~/.local/share/Trash/files'
 alias xrebindkeys='killall -HUP xbindkeys 2>&1 > /dev/null; xbindkeys'
+alias xkbreset="setxkbmap -option ''"
 alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
@@ -43,8 +45,8 @@ bindkey '^[OD' beginning-of-line                                                
 bindkey '^[OC' end-of-line                                                      # Set right arrow as END
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
 bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
-bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
-# bindkey '\C-R' history-incremental-pattern-search-backward                        # Search history backward incrementally
+# bindkey '^R' history-incremental-pattern-search-backward                        # Search history backward incrementally
+bindkey '\C-R' history-incremental-pattern-search-backward                        # Search history backward incrementally
 # bindkey 'r' history-incremental-pattern-search-backward                        # Search history backward incrementally
 # bindkey -s 'd' ''
 # bindkey -s 'z' ''
