@@ -57,21 +57,26 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
 
-alias lal='file::ls .*(@) *(@)'
-alias lll='file::ls -l .*(@) *(@)'
-alias lf='file::ls *(.)'
-alias laf='file::ls .*(.) *(.)'
-alias lfd='file::ls *(/,.)'
-alias lafd='file::ls .*(/,.) *(/,.)'
-alias ld='file::ls -d *(/)'
-alias lad='file::ls -d .*(/) *(/)'
-alias lld='file::ls -ld *(/)'
-alias llad='file::ls -ld .*(/) *(/)'
-
-alias la='file::ls -a'
+alias ls='file::ls'
+alias l='file::ls'
 alias ll='file::ls -l'
+alias la='file::ls -a'
 alias lla='file::ls -la'
-alias ls='file::ls .'
+
+alias llink='file::ll'
+alias lll='file::ll -l'
+alias lal='file::ll -a'
+alias llal='file::ll -la'
+
+alias lf='file::lf'
+alias llf='file::lf -l'
+alias laf='file::lf -a'
+alias llaf='file::lf -la'
+
+alias ldir='file::ld'
+alias lld='file::ld -l'
+alias lad='file::ld -a'
+alias llad='file::ld -la'
 
 alias rm='\trash'
 

@@ -8,9 +8,14 @@ List files.
 @return NULL
 =cut
 
+zparseopts -D l=l a=a
+
+[[ $# -eq 0 ]] && set -- .
 setopt localoptions err_return
 
-eval '${CMDPREFIX}\ls --color=yes -Fh "$@" 2>/dev/null'
+target=("$@")
+
+eval '${CMDPREFIX}\ls --color=yes -Fh $l $a ${target} 2>/dev/null'
 awk '/^-/ {
   sum += $5
   ++filenum
@@ -24,4 +29,4 @@ END {
     }
     printf("Total size (files only): %.1f %s, %d files.\n", y, type[i+2], filenum)
   }
-}' <<< $(${CMDPREFIX}\ls -lFh "$@" 2>/dev/null)
+}' <<< $(${CMDPREFIX}\ls -lFh $l $a ${target} 2>/dev/null)
