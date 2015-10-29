@@ -72,8 +72,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  # Tell antigen that you're done.
-  # antigen apply
+  # Tell antigen that you're done. It will call compinit again, need to evaluate
+  # whether it slows startup down.
+  antigen apply
 fi
 
 # Local configurations

@@ -22,6 +22,7 @@ function bootstrap::stow() {
 function bootstrap::main() {
   setopt localoptions unset err_return
 
+  shell::eval "sudo -v"
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
@@ -77,33 +78,41 @@ function bootstrap::main() {
     reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
   os::OSX && shell::eval "brew install --force trash"
   os::OSX && shell::eval "brew link --overwrite trash"
+  os::OSX && shell::eval "./osx/.osx"
   io::msg "Bootstrap done!"
 }
 
 setopt LOCAL_OPTIONS
 setopt localoptions err_return
 
-zparseopts -A opts h n u s v -help -dryrun -unstow -stow -verbose "$@"
+# local -a help dryrun unstow stow verbose
+zparseopts -D -a opts h=help n=dryrun u=unstow s=stow v=verbose \
+  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose "$@"
 
 local _config_dir _stow_opts
-_config_dir="${0:A:h}/../../"
-# source ${_config_dir:a}/.zshenv
-fpath=(${_config_dir:a}/.zsh/lib ${_config_dir:a}/.zsh/functions $fpath)
-autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
-autoload -Uz -- ${_config_dir:a}/.zsh/functions/[^_]*(:t)
+_config_dir="${0:A:h}/../../../"
+if [[ -n ${dryrun} ]]; then
+  printf "[Dryrun]   source ${_config_dir:a}/zsh/.zshenv\n"
+elif [[ ! -f ~/.zshenv ]] || \
+  ! diff ~/.zshenv ${_config_dir:a}/zsh/.zshenv 2>&1 > /dev/null; then
+  source ${_config_dir:a}/zsh/.zshenv
+fi
+fpath=(${_config_dir:a}/zsh/.zsh/lib ${_config_dir:a}/zsh/.zsh/functions $fpath)
+autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
+autoload -Uz -- ${_config_dir:a}/zsh/.zsh/functions/[^_]*(:t)
 
-[[ -n ${opts[--help]+1} || -n ${opts[-h]+1} ]] && bootstrap::usage
-[[ -n ${opts[--dryrun]+1} || -n ${opts[-n]+1} ]] && mode::set-dryrun && _stow_opts="-n"
-[[ -n ${opts[--verbose]+1} || -n ${opts[-v]+1} ]] && setopt localoptions verbose
+[[ -n ${help} ]] && bootstrap::usage
+[[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts="-n"
+[[ -n ${verbose} ]] && setopt localoptions verbose
 
 shell::eval "pushd ${_config_dir:a}"
-if [[ -n ${opts[--unstow]+1} || -n ${opts[-u]+1} ]]; then
+if [[ -n ${unstow} ]]; then
   bootstrap::stow ${_stow_opts} -D
-elif [[ -n ${opts[--stow]+1} || -n ${opts[-s]+1} ]]; then
+elif [[ -n ${stow} ]]; then
   bootstrap::stow ${_stow_opts}
 else
   bootstrap::main
-  shell::eval "source ${_config_dir:a}/.zshrc"
+  shell::eval "source ${_config_dir:a}/zsh/.zshrc"
 fi
 shell::eval "popd"
 
