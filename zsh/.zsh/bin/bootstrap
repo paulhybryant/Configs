@@ -26,7 +26,7 @@ function bootstrap::main() {
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
-    zlib1g-dev trash-cli clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
+    zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd"
 
   if [[ ! -d "${BREWHOME}" ]]; then
@@ -70,6 +70,7 @@ function bootstrap::main() {
     terminatorcli bz2file"
   shell::eval "brew gem install tmuxinator automux pypy pypy3"
   shell::eval "brew install --HEAD vimdoc vroom"
+  os::LINUX && shell::eval "brew install --HEAD trash-cli"
   shell::eval "brew install npm"
   shell::eval "npm install -g urchin npm-update-outdated"
 

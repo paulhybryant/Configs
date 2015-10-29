@@ -22,7 +22,6 @@ alias tl='\tmux list-sessions'
 alias tmux='TERM=screen-256color \tmux -2'
 alias unbindkey='bindkey -r'
 alias vartype='declare -p'
-alias trash-restore='restore-trash'
 alias aga='ag --hidden'
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
