@@ -77,3 +77,4 @@
   @ Make keyboardlayouteditor work
   @ Compile xvkbd in OSX (with macports if needed)
   @ Make command-1 work in OSX (it is mapped to ctrl-1 now)
+  @ Map win+h,i,j,k to arrow keys (DONE 2015-10-29 17:30)

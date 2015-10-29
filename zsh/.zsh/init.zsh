@@ -8,7 +8,8 @@ case $HIST_STAMPS in
 esac
 
 alias cdtrash='pushd ~/.local/share/Trash/files'
-alias xrebindkeys='killall -HUP xbindkeys 2>&1 > /dev/null; xbindkeys'
+alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
+alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
 alias xkbreset="setxkbmap -option ''"
 alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '

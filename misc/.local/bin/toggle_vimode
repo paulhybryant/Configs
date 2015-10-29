@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+LOCK=/tmp/vimode.lock
+if [[ -f $LOCK ]]; then
+  rm $LOCK
+  killall xbindkeys 2>&1 > /dev/null
+  ln -sf ~/.xbindkeysrc.normal ~/.xbindkeysrc.scm
+  notify-send 'vimmode' 'off'
+else
+  touch $LOCK
+  notify-send 'vimmode' 'on'
+  ln -sf ~/.xbindkeysrc.vim ~/.xbindkeysrc.scm
+fi
+xbindkeys

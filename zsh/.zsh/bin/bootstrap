@@ -48,6 +48,7 @@ function bootstrap::main() {
   shell::eval "mkdir -p "$HOME/.vim/""
   shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   bootstrap::stow
+  shell::eval "ln -sf $HOME/.xbindkeysrc.normal $HOME/.xbindkeysrc.scm"
 
   io::msg "Tapping extra repositories..."
   shell::eval "brew tap paulhybryant/myformulae"
