@@ -8,6 +8,7 @@ case $HIST_STAMPS in
 esac
 
 alias cdtrash='pushd ~/.local/share/Trash/files'
+alias cdlink='file::cdlink'
 alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
 alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
 alias xkbclear="setxkbmap -option ''"

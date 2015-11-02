@@ -1,0 +1,8 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return nounset
+
+[[ -h "$1" ]] || io::err "$1 is not a symbolic link."
+[[ -n ${commands[realpath]+1} ]] || io::err "realpath not found."
+
+pushd "$(dirname "$(realpath "$1")")"

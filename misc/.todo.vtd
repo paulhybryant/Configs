@@ -45,7 +45,7 @@
   @ Redirect completion of bb to blaze subcommand, when complete_aliases is set (DONE 2015-10-16 22:30)
   @ Learn zsh completions
   @ Abbreviation breaks history search, fix it. (DONE 2015-10-16 22:30)
-  @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params.
+  @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params. (DONE 2015-11-02 17:18)
   @ Manage myconfigs with antigen @p:1 (DONE 2015-10-16 14:33)
   @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
   @ Cache geoinfo (DONE 2015-10-16 22:30)
@@ -72,9 +72,9 @@
   @ Document zsh library, checkout the doc gen tools @p:1 (DONE 2015-10-16 14:33)
   @ Learn python @p:1
   @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)
-  @ Add brew formula for trash-cli
-  @ Add completion for functions like cg
+  @ Add brew formula for trash-cli (DONE 2015-11-02 17:17)
+  @ Add completion for functions like cg (DONE 2015-11-02 17:17)
   @ Make keyboardlayouteditor work
   @ Compile xvkbd in OSX (with macports if needed)
-  @ Make command-1 work in OSX (it is mapped to ctrl-1 now)
+  @ Make command-1 work in OSX (it is mapped to ctrl-1 now) (DONE 2015-11-02 17:18)
   @ Map win+h,i,j,k to arrow keys (DONE 2015-10-29 17:30)
