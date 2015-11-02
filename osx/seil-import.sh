@@ -62,7 +62,7 @@ $cli set keycode_lang4 76
 /bin/echo -n .
 $cli set enable_cut 0
 /bin/echo -n .
-$cli set keycode_command_r 54
+$cli set keycode_command_r 60
 /bin/echo -n .
 $cli set keycode_ssapex_l1 111
 /bin/echo -n .
@@ -204,7 +204,7 @@ $cli set keycode_return 36
 /bin/echo -n .
 $cli set enable_int3 0
 /bin/echo -n .
-$cli set keycode_shift_r 60
+$cli set keycode_shift_r 54
 /bin/echo -n .
 $cli set keycode_menu 111
 /bin/echo -n .
