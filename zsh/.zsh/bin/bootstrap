@@ -63,6 +63,8 @@ function bootstrap::main() {
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   os::LINUX && shell::eval "brew install --disable-nls --override-system-vi \
     --with-client-server --with-lua --with-luajit --with-gtk+ vim"
+  os::LINUX && shell::eval "brew install --HEAD trash-cli"
+  os::LINUX && shell::eval "brew install terminator"
   os::OSX && shell::eval "brew install --disable-nls --override-system-vi \
     --with-client-server --with-lua --with-luajit vim"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
@@ -71,9 +73,8 @@ function bootstrap::main() {
     terminatorcli bz2file"
   shell::eval "brew gem install tmuxinator automux pypy pypy3"
   shell::eval "brew install --HEAD vimdoc vroom"
-  os::LINUX && shell::eval "brew install --HEAD trash-cli"
   shell::eval "brew install npm"
-  shell::eval "npm install -g urchin npm-update-outdated"
+  # shell::eval "https_proxy='' npm install -g urchin npm-update-outdated"
 
   os::OSX && io::msg "Installing extra stuff for OSX..." && \
     shell::eval "brew install brew-cask clipper macvim osxutils lsof \
