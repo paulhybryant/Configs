@@ -25,6 +25,10 @@ stty ixany
 stty ixoff -ixon
 stty stop undef
 stty start undef
+# Prevent Ctrl + D to send eof so that it can be rebind
+# stty eof ''
+# stty eof undef
+# bindkey -s '^D' 'exit^M'
 
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh

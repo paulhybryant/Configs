@@ -10,7 +10,8 @@ esac
 alias cdtrash='pushd ~/.local/share/Trash/files'
 alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
 alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
-alias xkbreset="setxkbmap -option ''"
+alias xkbclear="setxkbmap -option ''"
+alias xkbreload="~/.xsessionrc"
 alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
