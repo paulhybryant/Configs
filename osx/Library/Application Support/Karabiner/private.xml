@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <root>
- <item>
+  <item>
     <name>Use Contrl+Command+L to lock screen</name>
     <identifier>private.control_command_l_lock_screen</identifier>
     <autogen>
@@ -57,6 +57,21 @@
       __KeyToKey__
       KeyCode::KEY_9, ModifierFlag::CONTROL_L,
       KeyCode::KEY_9, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+  <item>
+    <name>Use Command_L + Arrow (left or right) to switch tmux window</name>
+    <identifier>private.command_l_arrow_l_r_to_alt_arrow_l_r</identifier>
+    <only>TERMINAL</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L,
+      KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L,
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L,
+      KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L,
     </autogen>
   </item>
 </root>
