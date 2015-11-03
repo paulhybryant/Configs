@@ -1,0 +1,41 @@
+section: screens
+	PC2:
+		alt = meta
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		switchCorners = none 
+		switchCornerSize = 0
+	yuhuang:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		switchCorners = none 
+		switchCornerSize = 0
+end
+
+section: aliases
+end
+
+section: links
+	PC2:
+		right = yuhuang
+	yuhuang:
+		left = PC2
+end
+
+section: options
+	relativeMouseMoves = false
+	screenSaverSync = true
+	win32KeepForeground = false
+	switchCorners = none 
+	switchCornerSize = 0
+	keystroke(Control+t) = keystroke(Meta+t,PC2)
+	keystroke(Control+w) = keystroke(Meta+w,PC2)
+	keystroke(Control+l) = keystroke(Meta+l,PC2)
+	keystroke(Control+f) = keystroke(Meta+f,PC2)
+	keystroke(Control+Alt+l) = keystroke(Control+Meta+l,PC2)
+end
+

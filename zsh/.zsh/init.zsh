@@ -102,6 +102,7 @@ alias ts='util::tmux_start'
 alias vi='util::vim'                                                          # alias vi='vi -p'
 alias vim='util::vim'                                                         # alias vim='vim -p'
 alias run='util::run'
+alias gvim='util::gvim'
 
 util::install-precmd
 util::setup-abbrevs
