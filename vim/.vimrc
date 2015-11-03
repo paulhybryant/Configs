@@ -548,15 +548,6 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Capture Ex command output to buffer
   " }}}
   " {{{2
-  NeoBundle 'wincent/vim-clipper', {
-        \ 'disabled' : !g:OS.is_mac,
-        \ }                                                                     " Clipper integratino for Vim
-  let s:vimclipper = neobundle#get('vim-clipper')
-  function s:vimclipper.hooks.on_source(bundle)
-    vmap y y<Plug>(ClipperClip)
-  endfunction
-  " }}}
-  " {{{2
   NeoBundle 'xolox/vim-notes', {
         \ 'autoload' : {
         \     'commands' : [
@@ -688,6 +679,15 @@ endif
 " }}}
 " Priority 1 Plugins {{{1
 if s:vimplugin_size >= 1
+  " {{{2
+  NeoBundle 'wincent/vim-clipper', {
+        \ 'disabled' : !g:OS.is_mac,
+        \ }                                                                     " Clipper integratino for Vim
+  let s:vimclipper = neobundle#get('vim-clipper')
+  function s:vimclipper.hooks.on_source(bundle)
+    vmap y y<Plug>(ClipperClip)
+  endfunction
+  " }}}
   NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'                                " Make terminal vim and tmux work better together
   NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global script options
