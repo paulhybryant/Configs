@@ -40,6 +40,7 @@ function bootstrap::main() {
   io::msg "Creating symlinks with stow..."
   shell::eval "mkdir -p "$HOME/.antigen/repos/""
   shell::eval "mkdir -p "$HOME/.configs/pip/""
+  shell::eval "mkdir -p "$HOME/.configs/ranger/""
   shell::eval "mkdir -p "$HOME/.configs/terminator/""
   shell::eval "mkdir -p "$HOME/.local/bin/""
   shell::eval "mkdir -p "$HOME/.ssh/""
