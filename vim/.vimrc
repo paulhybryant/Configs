@@ -1261,7 +1261,6 @@ endif
 " }}}
 " Priority 99 Plugins {{{1
 if s:vimplugin_size >= 99
-  NeoBundle 'paulhybryant/neobundle.vim'                                        " Plugin manager
   NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
   NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
