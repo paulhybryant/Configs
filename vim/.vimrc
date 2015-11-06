@@ -336,6 +336,13 @@ if s:vimplugin_size >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'airblade/vim-gitgutter'                                            " Show the sign at changes from last git commit
+  let s:gitgutter = neobundle#get('vim-gitgutter')
+  function! s:gitgutter.hooks.on_source(bundle)
+    let g:gitgutter_highlight_lines = 1
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
@@ -448,19 +455,6 @@ if s:vimplugin_size >= 0
       vmap Y y:call myutils#YankToRemoteClipboard()<CR>
     endif
     call myutils#SetupTablineMappings(g:OS)
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'paulhybryant/vim-signify', {
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Show the sign at changes from last git commit
-  let s:signify = neobundle#get('vim-signify')
-  function! s:signify.hooks.on_source(bundle)
-    let g:signify_vcs_list=['git']
-    " let g:signify_line_highlight=1
-    let g:signify_sign_show_count=1
-    nmap <leader>gj <plug>(signify-next-hunk)
-    nmap <leader>gk <plug>(signify-prev-hunk)
   endfunction
   " }}}
   " {{{2
@@ -978,18 +972,6 @@ if s:vimplugin_size >= 1
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/vim-diff-indicator', {
-        \ 'depends' : filter(
-        \   ['paulhybryant/vim-signify', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:provided, v:val)'),
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Diff indicator based on vim-signify
-  let s:indicator = neobundle#get('vim-diff-indicator')
-  function! s:indicator.hooks.on_source(bundle)
-    Glaive vim-diff-indicator plugin[mappings]
-  endfunction
-  " }}}
-  " {{{2
   NeoBundle 'paulhybryant/vim-textobj-path', {
         \ 'depends' : ['kana/vim-textobj-user'],
         \ 'type__protocol' : 'ssh',
@@ -1261,6 +1243,31 @@ endif
 " }}}
 " Priority 99 Plugins {{{1
 if s:vimplugin_size >= 99
+  " {{{2
+  NeoBundle 'paulhybryant/vim-diff-indicator', {
+        \ 'depends' : filter(
+        \   ['paulhybryant/vim-signify', 'vim-glaive', 'vim-maktaba'],
+        \   '!has_key(g:provided, v:val)'),
+        \ 'type__protocol' : 'ssh',
+        \ }                                                                     " Diff indicator based on vim-signify
+  let s:indicator = neobundle#get('vim-diff-indicator')
+  function! s:indicator.hooks.on_source(bundle)
+    Glaive vim-diff-indicator plugin[mappings]
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'paulhybryant/vim-signify', {
+        \ 'type__protocol' : 'ssh',
+        \ }                                                                     " Show the sign at changes from last git commit
+  let s:signify = neobundle#get('vim-signify')
+  function! s:signify.hooks.on_source(bundle)
+    let g:signify_vcs_list=['git']
+    " let g:signify_line_highlight=1
+    let g:signify_sign_show_count=1
+    nmap <leader>gj <plug>(signify-next-hunk)
+    nmap <leader>gk <plug>(signify-prev-hunk)
+  endfunction
+  " }}}
   NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
   NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager
@@ -1509,7 +1516,6 @@ if s:vimplugin_size >= 99
         \ }                                                                   " Completion for c-family language
   NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   NeoBundle 'edkolev/promptline.vim'
-  NeoBundle 'airblade/vim-gitgutter'}                                         " Prefer vim-signify
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }               " Better integration between vim and shell
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                " Post, view and edit gist in vim
   NeoBundle 'Keithbsmiley/gist.vim'                                           " Use gist from vim
