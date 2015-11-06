@@ -12,11 +12,6 @@ local -a _servers_list
 _servers_list=($(\vim --serverlist))
 io::vlog 1 "Vim servers: ${_servers_list}"
 
-function os::gvim() {
-  os::OSX && \mvim "$@"
-  os::LINUX && \vim -g "$@"
-}
-
 local _server_name
 for server in ${_servers_list}; do
   io::vlog 1 "Found vim server: ${server}"
@@ -28,8 +23,8 @@ done
 if [[ -z "${_server_name}" ]]; then
   _server_name='GVIM-SINGLETON'
   io::vlog 1 "Starting gVim with server name: ${_server_name}"
-  os::gvim --servername "${_server_name}" "$@"
+  \gvim --servername "${_server_name}" "$@"
 else
   io::vlog 1 "Connecting to gVim server: ${_server_name}"
-  os::gvim --servername ${_server_name} --remote "$@"
+  \gvim --servername ${_server_name} --remote "$@"
 fi

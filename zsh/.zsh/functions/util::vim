@@ -13,14 +13,9 @@ local _server_name _vimflags
 # if [[ ! -z "$SSH_OS" ]]; then
   # _vimflags='-X'
 # fi
-function os::vim() {
-  os::OSX && \mvim -v "$@"
-  os::LINUX && \vim "$@"
-}
-
 if [[ -z "$TMUX" ]]; then
   io::vlog 1 "Not in tmux, invoking vim without server name."
-  os::vim ${_vimflags} "$@"
+  \vim ${_vimflags} "$@"
 else
   _servers_list=($(\vim --serverlist))
   io::vlog 1 "Vim servers: ${_servers_list}"
@@ -38,9 +33,9 @@ else
   done
   if [[ -z "${_server_exists}" ]]; then
     io::vlog 1 "Starting vim with server name: ${_server_name}"
-    os::vim ${_vimflags} --servername "${_server_name}" "$@"
+    \vim ${_vimflags} --servername "${_server_name}" "$@"
   else
     io::vlog 1 "Connecting to vim server: ${_server_name}"
-    os::vim ${_vimflags} --servername ${_server_name} --remote "$@"
+    \vim ${_vimflags} --servername ${_server_name} --remote "$@"
   fi
 fi
