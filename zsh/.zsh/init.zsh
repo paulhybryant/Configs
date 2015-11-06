@@ -1,5 +1,16 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+declare -xg GIT_EDITOR='vim'
+declare -agx __TMUX_VARS__
+__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID)
+declare -xg LS_COLORS
+
+[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
+  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+colors::define
+colors::manpage
+
 case $HIST_STAMPS in
   'mm/dd/yyyy') alias history='fc -fl 1' ;;
   'dd.mm.yyyy') alias history='fc -El 1' ;;
@@ -34,6 +45,31 @@ alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
+alias ls='file::ls'
+alias l='file::ls'
+alias ll='file::ls -l'
+alias la='file::ls -a'
+alias lla='file::ls -la'
+alias llink='file::ll'
+alias lll='file::ll -l'
+alias lal='file::ll -a'
+alias llal='file::ll -la'
+alias lf='file::lf'
+alias llf='file::lf -l'
+alias laf='file::lf -a'
+alias llaf='file::lf -la'
+alias ldir='file::ld'
+alias lld='file::ld -l'
+alias lad='file::ld -a'
+alias llad='file::ld -la'
+alias rm='\trash -v'
+alias ta='util::ta'
+alias ts='tmux start-server; tmux attach'
+alias vi='util::vim'                                                          # alias vi='vi -p'
+alias vim='util::vim'                                                         # alias vim='vim -p'
+alias run='util::run'
+alias gvim='util::gvim'
+alias ssh='net::ssh'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
@@ -62,53 +98,9 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-declare -xg LS_COLORS
-[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-colors::define
-colors::manpage
-
-alias ls='file::ls'
-alias l='file::ls'
-alias ll='file::ls -l'
-alias la='file::ls -a'
-alias lla='file::ls -la'
-
-alias llink='file::ll'
-alias lll='file::ll -l'
-alias lal='file::ll -a'
-alias llal='file::ll -la'
-
-alias lf='file::lf'
-alias llf='file::lf -l'
-alias laf='file::lf -a'
-alias llaf='file::lf -la'
-
-alias ldir='file::ld'
-alias lld='file::ld -l'
-alias lad='file::ld -a'
-alias llad='file::ld -la'
-
-alias rm='\trash'
-
-export GIT_EDITOR='vim'
-
-declare -agx __TMUX_VARS__
-__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID)
-
-alias ta='util::ta'
-alias ts='util::tmux_start'
-alias vi='util::vim'                                                          # alias vi='vi -p'
-alias vim='util::vim'                                                         # alias vim='vim -p'
-alias run='util::run'
-alias gvim='util::gvim'
-
 util::install-precmd
 util::setup-abbrevs
 util::fix-display
-
-alias ssh='net::ssh'
 
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
