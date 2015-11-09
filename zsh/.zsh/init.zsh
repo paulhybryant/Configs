@@ -20,6 +20,7 @@ esac
 
 alias cdtrash='pushd ~/.local/share/Trash/files'
 alias cdlink='file::cdlink'
+alias clogout='cinnamon-session-quit --logout'
 alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
 alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
 alias xkbclear="setxkbmap -option ''"
