@@ -27,7 +27,7 @@ function bootstrap::main() {
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd"
+    xvkbd git-annex"
   # TODO: Install OSX prerequisites.
 
   if [[ ! -d "${BREWHOME}" ]]; then
@@ -96,8 +96,7 @@ function bootstrap::main() {
 setopt LOCAL_OPTIONS
 setopt localoptions err_return
 
-# local -a help dryrun unstow stow verbose
-zparseopts -D -a opts h=help n=dryrun u=unstow s=stow v=verbose \
+zparseopts -D -K -M -E h=help n=dryrun u=unstow s=stow v=verbose \
   -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose "$@"
 
 local _config_dir _stow_opts

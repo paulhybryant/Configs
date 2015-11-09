@@ -26,14 +26,14 @@ EOF
   exit 1
 }
 function muxcfg::start() {
-  setopt localoptions nounset err_return
+  setopt localoptions err_return
 
-  zparseopts -A localopts -cwd: -proj: "$@"
+  zparseopts -D -K -M -E -- s:=src t:=dst -src:=src -dst:=dst
   local _proj _cwd _src _dst _muxcfg _tmpcfg
-  [[ -n "${localopts[--proj]+1}" ]] && _proj="${localopts[--proj]}"
-  [[ -n ${opts[--src]+1} ]] && _src="${opts[--src]}"
-  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}/${_proj}"
-  [[ -n "${localopts[--cwd]+1}" ]] && _cwd="${localopts[--cwd]}"
+  _proj="$1"
+  [[ ${#src} -ge 2 ]] && _src="${src[2]}" || io::err "Missing required option -s or --src"
+  [[ ${#dst} -ge 2 ]] && _dst="${dst[2]}/${_proj}" || io::err "Missing required option -t or --dst"
+  _cwd="$(muxcfg::getcwd ${_dst} ${_proj})"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && ! -n ${opts[--noconfirm]+1} ]]; then
@@ -61,13 +61,14 @@ function muxcfg::start() {
   shell::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
-  setopt localoptions nounset err_return
-  zparseopts -A localopts -cwd: -proj: "$@"
+  setopt localoptions err_return
+
+  zparseopts -D -K -M -E -- s:=src t:=dst -src:=src -dst:=dst
   local _proj _cwd _src _dst _muxcfg
-  [[ -n "${localopts[--proj]+1}" ]] && _proj="${localopts[--proj]}"
-  [[ -n ${opts[--src]+1} ]] && _src="${opts[--src]}"
-  [[ -n ${opts[--dst]+1} ]] && _dst="${opts[--dst]}"
-  [[ -n "${localopts[--cwd]+1}" ]] && _cwd="${localopts[--cwd]}"
+  _proj="$1"
+  [[ ${#src} -ge 2 ]] && _src="${src[2]}" || io::err "Missing required option -s or --src"
+  [[ ${#dst} -ge 2 ]] && _dst="${dst[2]}/${_proj}" || io::err "Missing required option -t or --dst"
+  _cwd="$(muxcfg::getcwd ${_dst} ${_proj})"
 
   if [[ ! -n ${opts[--noconfirm]+1} ]]; then
     io::yes_or_no "Delete project ${_proj}"
@@ -92,32 +93,41 @@ function muxcfg::git5wrapper() {
   shell::eval "git5 mirror $1 $2 --allow_existing_branch --branch=$3"
 }
 function muxcfg::main() {
-  setopt localoptions nounset err_return
+  setopt localoptions err_return
+  zparseopts -D -K -M -E -- h=help n=dryrun v=verbose s:=src t:=dst \
+    -help=help -dryrun=dryrun -verbose=verbose -src:=src -dst:=dst
+
+  [[ -n ${help} ]] && muxcfg::usage
+  [[ -n ${dryrun} ]] && mode::set-dryrun
+  [[ -n ${verbose} ]] && setopt localoptions verbose
+  [[ ${#src} -lt 2 ]] && io::err "Missing required option -s or --src"
+  [[ ${#dst} -lt 2 ]] && io::err "Missing required option -t or --dst"
 
   shell::eval "whence tmuxinator > /dev/null"
   shell::eval "mkdir -p "$MUXCFGDIR""
-  io::vlog 2 "${(kv)opts}"
 
-  local _subcmd _project _git_new_workdir_cmd _cwd
+  local _subcmd _git_new_workdir_cmd
   _subcmd="$1"
-  _project="$2"
+  shift
 
-  if [[ -n ${__GOOGLE__+1} ]]; then
-    _cwd=${opts[--dst]}/${_project}/google3
-  else
-    _cwd=${opts[--dst]}/${_project}
-  fi
-
-  io::vlog 1 "[muxcfg] Subcommand: ${_subcmd}"
+  io::vlog 1 "[muxcfg] Subcommand: ${src[2]}"
   case "${_subcmd}" in
     start|delete )
-      "muxcfg::${_subcmd}" --proj "${_project}" --cwd "${_cwd}"
+      "muxcfg::${_subcmd}" -s "${src[2]}" -t "${dst[2]}" "$@"
       ;;
     * )
+      io::hl "Unknown subcommand ${_subcmd}."
       muxcfg::usage
       ;;
   esac
   return 0
+}
+function muxcfg::getcwd() {
+  if [[ -n ${__GOOGLE__+1} ]]; then
+    echo "${1}/${2}/google3"
+  else
+    echo "${1}/${2}"
+  fi
 }
 
 local _config_dir
@@ -127,15 +137,6 @@ autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
 autoload -Uz -- ${_config_dir:a}/.zsh/functions/[^_]*(:t)
 
 setopt LOCAL_OPTIONS
-setopt localoptions err_return
-
-declare -Ag opts
-zparseopts -D -A opts h n v y -help -dryrun -verbose -src: -dst: -noconfirm "$@"
-
-[[ -n ${opts[--help]+1} || -n ${opts[-h]+1} ]] && muxcfg::usage
-[[ -n ${opts[--dryrun]+1} || -n ${opts[-n]+1} ]] && mode::set-dryrun
-[[ -n ${opts[--verbose]+1} || -n ${opts[-v]+1} ]] && setopt localoptions verbose
-
 MUXCFGDIR="$HOME/.tmuxinator"
 muxcfg::main "$@"
 
