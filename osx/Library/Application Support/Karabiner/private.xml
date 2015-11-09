@@ -74,4 +74,19 @@
       KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L,
     </autogen>
   </item>
+  <item>
+    <name>Use Command_L + (h or l) to switch tmux window</name>
+    <identifier>private.command_l_hl_to_alt_l_hl</identifier>
+    <only>TERMINAL</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::H, ModifierFlag::COMMAND_L,
+      KeyCode::H, ModifierFlag::OPTION_L,
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::COMMAND_L,
+      KeyCode::L, ModifierFlag::OPTION_L,
+    </autogen>
+  </item>
 </root>
