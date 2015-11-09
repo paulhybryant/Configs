@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+# fpath+=($HOME/.zsh/functions)
+# autoload -Uz x::get-active-window-process-name
+
+# local _process
+# _process="$(x::get-active-window-process-name)"
+# [[ "${_process}" == "/usr/bin/termin" ]] && return 1
+
 LOCK=/tmp/vimode.lock
 if [[ -f $LOCK ]]; then
   rm $LOCK
@@ -12,3 +19,4 @@ else
   ln -sf ~/.xbindkeysrc.vim ~/.xbindkeysrc.scm
 fi
 xbindkeys
+return 0

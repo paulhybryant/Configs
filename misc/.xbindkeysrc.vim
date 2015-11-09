@@ -1,7 +1,9 @@
 ; vim: filetype=scheme sw=2 ts=2 sts=2 et tw=80 nospell
 
 ; Use name directly (control, alt, letter etc)
-(xbindkey '(control alt v) "$HOME/.local/bin/toggle_vimode")
+; (xbindkey '(control alt v) "$HOME/.local/bin/toggle_vimode")
+; (xbindkey '("m:0x10" "c:66") "$HOME/.local/bin/toggle_vimode || xvkbd -xsendevent -text '\\[Escape]'")
+(xbindkey '("m:0x14" "c:66") "$HOME/.local/bin/toggle_vimode")
 ; (xbindkey '(h) "[[ -f /tmp/vimode.lock ]] && xvkbd -xsendevent -text '\\[Left]' || xvkbd -xsendevent -text 'h'")
 ; (xbindkey '(j) "[[ -f /tmp/vimode.lock ]] && xvkbd -xsendevent -text '\\[Down]' || xvkbd -xsendevent -text 'j'")
 ; (xbindkey '(k) "[[ -f /tmp/vimode.lock ]] && xvkbd -xsendevent -text '\\[Up]' || xvkbd -xsendevent -text 'k'")
@@ -11,6 +13,8 @@
 (xbindkey '(j) "xvkbd -xsendevent -text '\\[Down]'")
 (xbindkey '(k) "xvkbd -xsendevent -text '\\[Up]'")
 (xbindkey '(l) "xvkbd -xsendevent -text '\\[Right]'")
+(xbindkey '(x) "xvkbd -xsendevent -text '\\[Delete]'")
+; (xbindkey '(x) "xvkbd -xsendevent -text '\\b'")
 ; Use keycode directly (can be found by xbindkeys -k, or -mk for multiple keys)
 (xbindkey '("m:0x10" "c:61") "xvkbd -xsendevent -text '\\Cf'")
 ; TODO: Check why the follow doesn't work

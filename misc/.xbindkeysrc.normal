@@ -65,7 +65,9 @@
 ;; Examples of commands:
 
 ; (xbindkey '(control shift q) "xbindkeys_show")
-(xbindkey '(control alt v) "$HOME/.local/bin/toggle_vimode")
+; (xbindkey '(control alt v) "$HOME/.local/bin/toggle_vimode")
+; (xbindkey '("m:0x10" "c:66") "$HOME/.local/bin/toggle_vimode || xvkbd -xsendevent -text '\\[Escape]'")
+(xbindkey '("m:0x14" "c:66") "$HOME/.local/bin/toggle_vimode")
 ; (xbindkey '(Shift Return) "$HOME/.local/bin/toggle_vimode")
 ; (xbindkey '(alt t) "$HOME/.local/bin/xvkbd::ctrl-t")
 ; (xbindkey '(alt f) "$HOME/.local/bin/xvkbd::ctrl-f")
