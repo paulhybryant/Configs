@@ -401,7 +401,10 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
-    let g:buffergator_suppress_keymaps=1
+    let g:buffergator_viewport_split_policy = 'L'
+    let g:buffergator_autodismiss_on_select = 0
+    let g:buffergator_autoupdate = 1
+    let g:buffergator_suppress_keymaps = 1
     noremap <leader>bf :BuffergatorOpen<CR>
   endfunction
   " }}}
