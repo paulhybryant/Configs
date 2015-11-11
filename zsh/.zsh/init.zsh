@@ -102,7 +102,14 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-util::install-precmd
+case $(tty) in
+  /dev/tty/[0-9]*)
+    prompt bart
+    ;;
+  /dev/pts/[0-9]*)
+    util::install-precmd
+    ;;
+esac
 util::setup-abbrevs
 util::fix-display
 

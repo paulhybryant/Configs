@@ -87,6 +87,7 @@ if [[ -f ~/.zshrc.google ]]; then
 fi
 
 autoload -Uz compinit && compinit
+autoload -Uz promptinit && promptinit
 trap 'util::tmux-try-switch' EXIT
 
 if [[ -n ${PROFILING+1} ]]; then
