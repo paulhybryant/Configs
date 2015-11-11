@@ -20,6 +20,8 @@ esac
 
 alias cdtrash='pushd ~/.local/share/Trash/files'
 alias cdlink='file::cdlink'
+alias dpkg-cleanup-config='dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
+alias sourcepkg='dpkg -S'
 alias clogout='cinnamon-session-quit --logout'
 alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
 alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'

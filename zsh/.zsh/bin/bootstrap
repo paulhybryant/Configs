@@ -27,7 +27,7 @@ function bootstrap::main() {
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd git-annex"
+    xvkbd git-annex xautomation"
   # TODO: Install OSX prerequisites.
 
   if [[ ! -d "${BREWHOME}" ]]; then
