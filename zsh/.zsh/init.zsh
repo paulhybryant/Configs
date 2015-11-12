@@ -41,7 +41,14 @@ elif os::OSX; then
   alias cdtrash='pushd ~/.local/share/Trash/files'
   alias trash-empty='trash -s'
   alias trash-list='trash -l'
-  util::install-precmd
+  case $(tty) in
+    /dev/console)
+      prompt bart
+      ;;
+    /dev/ttys[0-9]*)
+      util::install-precmd
+      ;;
+  esac
 fi
 
 alias cdlink='file::cdlink'
