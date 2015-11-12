@@ -18,16 +18,33 @@ case $HIST_STAMPS in
   *) alias history='fc -l 1' ;;
 esac
 
-alias cdtrash='pushd ~/.local/share/Trash/files'
+if os::LINUX; then
+  alias cdtrash='pushd ~/.local/share/Trash/files'
+  alias dpkg-cleanup-config='dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
+  alias sysprefs='unity-control-center'
+  alias sourcepkg='dpkg -S'
+  alias clogout='cinnamon-session-quit --logout'
+  alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
+  alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
+  alias xkbclear="setxkbmap -option ''"
+  alias xkbreload="~/.xsessionrc"
+
+  case $(tty) in
+    /dev/tty/[0-9]*)
+      prompt bart
+      ;;
+    /dev/pts/[0-9]*)
+      util::install-precmd
+      ;;
+  esac
+elif os::OSX; then
+  alias cdtrash='pushd ~/.local/share/Trash/files'
+  alias trash-empty='trash -s'
+  alias trash-list='trash -l'
+  util::install-precmd
+fi
+
 alias cdlink='file::cdlink'
-alias dpkg-cleanup-config='dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
-alias sysprefs='unity-control-center'
-alias sourcepkg='dpkg -S'
-alias clogout='cinnamon-session-quit --logout'
-alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
-alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
-alias xkbclear="setxkbmap -option ''"
-alias xkbreload="~/.xsessionrc"
 alias date='${CMDPREFIX}\date'
 alias grepc='\grep -C 5 '
 alias info='\info --vi-keys'
@@ -38,7 +55,7 @@ alias stat='${CMDPREFIX}\stat'
 alias stow='\stow -v'
 alias tl='\tmux list-sessions'
 alias tmux='TERM=screen-256color \tmux -2'
-alias unbindkey='bindkey -r'
+alias zunbindkey='bindkey -r'
 alias vartype='declare -p'
 alias aga='ag --hidden'
 alias a='fasd -a'        # any
@@ -102,14 +119,6 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-case $(tty) in
-  /dev/tty/[0-9]*)
-    prompt bart
-    ;;
-  /dev/pts/[0-9]*)
-    util::install-precmd
-    ;;
-esac
 util::setup-abbrevs
 util::fix-display
 
