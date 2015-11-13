@@ -5,30 +5,36 @@ usage() {
 Usage: install.sh [arguments]
 
 Arguments:
-  -h          Print the usage information
+  -h or --help    Print the usage information
 EOF
 }
 
-while getopts ":h" opt; do
-  case $opt in
-    h)
-      usage
-      exit 0
-      ;;
-    :)
-      echo "Option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
-    \?)
-      echo "Invalid option: -$OPTARG" >&2
-      exit 1
-      ;;
-  esac
-done
+# while getopts ":h" opt; do
+  # case $opt in
+    # h)
+      # usage
+      # exit 0
+      # ;;
+    # :)
+      # echo "Option -$OPTARG requires an argument." >&2
+      # exit 1
+      # ;;
+    # \?)
+      # echo "Invalid option: -$OPTARG" >&2
+      # exit 1
+      # ;;
+  # esac
+# done
+
+zparseopts -D -K -M -E -- h=help v=verbose \
+  -help=help -verbose=verbose
+
+[[ -n ${help} ]] && usage && return 0
 
 echo "Sourcing antigen..."
-source <(curl -sL https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh) || exit 1
-setopt verbose
+source <(curl -sL https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh) || return 1
+
+[[ -n ${verbose} ]] && setopt verbose
 local url="$(-antigen-resolve-bundle-url "git@github.com:paulhybryant/Configs.git")"
 -antigen-ensure-repo "${url}"
 pushd $(-antigen-get-clone-dir "${url}")
@@ -45,4 +51,3 @@ case $reply in
     ;;
 esac
 popd
-unsetopt verbose

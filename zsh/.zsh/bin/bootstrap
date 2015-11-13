@@ -96,8 +96,8 @@ function bootstrap::main() {
 setopt LOCAL_OPTIONS
 setopt localoptions err_return
 
-zparseopts -D -K -M -E h=help n=dryrun u=unstow s=stow v=verbose \
-  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose "$@"
+zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
+  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose
 
 local _config_dir _stow_opts
 _config_dir="${0:A:h}/../../../"
