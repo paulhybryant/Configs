@@ -7,34 +7,54 @@
 # _process="$(x::get-active-window-process-name)"
 # [[ "${_process}" == "/usr/bin/termin" ]] && return 1
 
+setopt localoptions err_return
+
+function send-notification() {
+  notify-send 'vimmode' "$1"
+}
+
 function on() {
-  touch $LOCK
-  notify-send 'vimmode' 'on'
+  if is_on "$1"; then
+    echo 'already on'
+    return 0
+  fi
+  touch "$1"
   ln -sf ~/.xbindkeysrc.vim ~/.xbindkeysrc.scm
+  echo 'on'
 }
 
 function off() {
-  rm $LOCK
+  if ! is_on "$1"; then
+    echo 'already off'
+    return 0
+  fi
+  rm "$1"
   killall xbindkeys 2>&1 > /dev/null
   ln -sf ~/.xbindkeysrc.normal ~/.xbindkeysrc.scm
-  notify-send 'vimmode' 'off'
+  echo 'off'
 }
 
 function toggle() {
-  if is_on; then
-    off
+  if is_on "$1"; then
+    echo $(off)
   else
-    on
+    echo $(on)
   fi
 }
 
 function is_on() {
-  [[ -f $LOCK ]] && return 0
+  [[ -f "$1" ]] && return 0
   return 1
 }
 
-local _subcmd="$1"
-LOCK=/tmp/vimode.lock
-$1
+local _subcmd _lock _message
+_subcmd="$1"
+_lock=/tmp/vimode.lock
+_message=$($1 ${_lock})
 xbindkeys
+if ! xbindkeys -s; then
+  _message='error'
+  off
+fi
+send-notification "${_message}"
 return 0
