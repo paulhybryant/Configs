@@ -28,7 +28,6 @@ function bootstrap::main() {
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd git-annex xautomation"
-  # TODO: Install OSX prerequisites.
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -81,13 +80,15 @@ function bootstrap::main() {
 
   if os::OSX; then
     io::msg "Installing extra stuff for OSX..."
+    shell::eval "brew tap caskroom/versions"
     shell::eval "brew install --with-custom-icons --with-lua --with-luajit \
       --with-override-system-vim macvim"
     shell::eval "brew install brew-cask clipper osxutils lsof \
       reattach-to-user-namespace paulhybryant/myformulae/gnu-getopt"
     shell::eval "brew install --force trash"
     shell::eval "brew link --overwrite trash"
-    shell::eval "./osx/.osx"
+    shell::eval "./osx/.osx/init.zsh"
+    shell::eval "brew cask install karabiner seil spectacle xquartz git-annex"
     # TODO: import the saved preferences for karabiner etc.
   fi
   io::msg "Bootstrap done!"

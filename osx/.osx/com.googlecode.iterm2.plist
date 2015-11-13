@@ -259,6 +259,20 @@
 	<real>1.0900000333786011</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x68-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>h</string>
+		</dict>
+		<key>0x6c-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>l</string>
+		</dict>
 		<key>0x74-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -419,7 +433,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>375 284 924 485 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>720 80 720 797 0 0 1440 877 </string>
+	<string>0 403 570 473 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>457 348 570 451 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1157,7 +1171,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453869181.428069</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>468485884.47432601</real>
+	<real>468986715.978019</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1222,7 +1236,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-07T03:21:19Z</date>
+	<date>2015-11-12T02:05:13Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
