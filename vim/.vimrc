@@ -411,13 +411,17 @@ if s:vimplugin_size >= 0
   " {{{2
   NeoBundle 'junegunn/fzf', {
         \ 'directory' : 'fzf-vanilla',
+        \ 'name' : 'fzf-vanilla',
+        \ 'regular_name' : 'fzf-vanilla',
         \ 'rtp': maktaba#path#Dirname(
         \   maktaba#path#Dirname(resolve(exepath('fzf'))))
         \ }                                                                     " Fuzzy finder
   " }}}
   " {{{2
   NeoBundle 'junegunn/fzf.vim', {
-        \ 'depends' : ['gunegunn/fzf'],
+        \ 'name' : 'fzf.vim',
+        \ 'regular_name' : 'fzf.vim',
+        \ 'depends' : ['fzf-vanilla'],
         \ }                                                                     " Enhanced vim plugin for fzf fuzzy finder
   " }}}
   " {{{2
@@ -622,6 +626,7 @@ if s:vimplugin_size >= 0
         \     'filetypes' : ['vim'],
         \   },
         \ 'lazy' : 1,
+        \ 'name' : 'Decho',
         \ 'regular_namne' : 'Decho',
         \ 'type' : 'vba',
         \ }                                                                     " Debug echo for debuging vim plugins
@@ -845,6 +850,7 @@ if s:vimplugin_size >= 1
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vis.vba.gz', {
+        \ 'name' : 'VisualBlockCommand'
         \ 'regular_name' : 'VisualBlockCommand',
         \ 'type' : 'vba',
         \ }                                                                     " Performs an Ex command on a visual block (e.g. search pattern in visual block)
