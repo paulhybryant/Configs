@@ -12,8 +12,8 @@ setopt localoptions err_return nounset
 local -a _functions _tests
 local -A _test_cases
 local _ignore
-_ignore=($(cat lib/.ignore | xargs echo))
-_ignore=$(strings::join --delim='\|' ${_ignore})
+_ignore='os::LINUX'
+# _ignore=$(strings::join --delim='\|' ${_ignore})
 io::vlog 1 "Ignored files: ${_ignore}"
 _tests=($(find tests/ -name "*.zsh" | grep -v ${_ignore} | xargs grep -h -o "^function test::.*()" | sed -e 's/^function \(.*\)()/\1/'))
 io::vlog 1 "Tests:\n${_tests}"
