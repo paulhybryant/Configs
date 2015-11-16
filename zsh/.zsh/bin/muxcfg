@@ -132,9 +132,8 @@ function muxcfg::getcwd() {
 
 local _config_dir
 _config_dir="${0:A:h}/../../"
-fpath=(${_config_dir:a}/.zsh/lib ${_config_dir:a}/.zsh/functions $fpath)
+fpath=(${_config_dir:a}/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
-autoload -Uz -- ${_config_dir:a}/.zsh/functions/[^_]*(:t)
 
 setopt LOCAL_OPTIONS
 MUXCFGDIR="$HOME/.tmuxinator"

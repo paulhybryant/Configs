@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-fpath+=($HOME/.zsh/functions/)
+fpath+=($HOME/.zsh/lib/)
 autoload -Uz osx::export-spectacle-config
 
 local _dir=${0:a:h}

@@ -110,9 +110,8 @@ elif [[ ! -f ~/.zshenv ]] || \
   ! diff ~/.zshenv ${_config_dir:a}/zsh/.zshenv 2>&1 > /dev/null; then
   source ${_config_dir:a}/zsh/.zshenv
 fi
-fpath=(${_config_dir:a}/zsh/.zsh/lib ${_config_dir:a}/zsh/.zsh/functions $fpath)
+fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
-autoload -Uz -- ${_config_dir:a}/zsh/.zsh/functions/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts="-n"
