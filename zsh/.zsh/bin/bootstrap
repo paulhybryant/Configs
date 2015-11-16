@@ -57,6 +57,7 @@ function bootstrap::main() {
   shell::eval "brew tap homebrew/dupes"
   shell::eval "brew tap homebrew/completions"
   shell::eval "brew tap iveney/mocha"
+  shell::eval "brew tap beeftornado/rmtree"
 
   io::msg "Installing softwares..."
   shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell \
@@ -70,7 +71,7 @@ function bootstrap::main() {
   fi
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
     the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh \
-    ranger fasd makeself upx"
+    ranger fasd makeself upx brew-rmtree"
   shell::eval "pip install powerline-status advanced-ssh-config neovim \
     terminatorcli bz2file"
   shell::eval "brew gem install tmuxinator automux pypy pypy3"
