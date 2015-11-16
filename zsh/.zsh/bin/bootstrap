@@ -89,7 +89,8 @@ function bootstrap::main() {
     shell::eval "brew link --overwrite trash"
     shell::eval "./osx/.osx/init.zsh"
     shell::eval "brew cask install karabiner seil spectacle xquartz git-annex"
-    # TODO: import the saved preferences for karabiner etc.
+    shell::eval "./osx/.osx/init.zsh"
+    # TODO: import the saved preferences for karabiner etc, in init.zsh.
   fi
   io::msg "Bootstrap done!"
 }
