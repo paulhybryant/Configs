@@ -1,6 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-[[ -d ~/.zsh/lib ]] && autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
+declare -Axg FN_REGISTRY
+autoload -Uz zsh::autoload time::getmtime
+[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true
 
