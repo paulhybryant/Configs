@@ -10,9 +10,7 @@ Open files with vim in a single vim instance in one tmux window.
 
 local -a _servers_list
 local _server_name
-if [[ ! -z "$SSH_OS" && "$SSH_FROM" != "Beijing" ]]; then
-  \vim -X "$@"
-elif [[ -z "$TMUX" ]]; then
+if [[ -z "$TMUX" ]]; then
     io::vlog 1 "Not in tmux, invoking vim without server name."
     \vim "$@"
 else

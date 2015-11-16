@@ -9,4 +9,8 @@ Arguments will be passed through to ssh
 @return NULL
 =cut
 
-ssh -Y "$@" -t "export SSH_OS="$(uname)" SSH_FROM="$(util::geoinfo city)"; zsh"
+mode::verbose 1 && SSH_OPTIONS=('-v' $SSH_OPTIONS)
+
+local _ssh_os="$(uname)"
+local _ssh_from="$(util::geoinfo city | sed 's/\"//g')"
+shell::eval "\ssh ${SSH_OPTIONS} "$@" -t "SSH_OS=${_ssh_os} SSH_FROM=${_ssh_from} zsh""
