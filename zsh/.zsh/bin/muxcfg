@@ -28,6 +28,7 @@ EOF
 function muxcfg::start() {
   setopt localoptions err_return
 
+  local -a src dst
   zparseopts -D -K -M -E -- s:=src t:=dst -src:=src -dst:=dst
   local _proj _cwd _src _dst _muxcfg _tmpcfg
   _proj="$1"
@@ -63,6 +64,7 @@ function muxcfg::start() {
 function muxcfg::delete() {
   setopt localoptions err_return
 
+  local -a src dst
   zparseopts -D -K -M -E -- s:=src t:=dst -src:=src -dst:=dst
   local _proj _cwd _src _dst _muxcfg
   _proj="$1"
@@ -94,6 +96,8 @@ function muxcfg::git5wrapper() {
 }
 function muxcfg::main() {
   setopt localoptions err_return
+
+  local -a help dryrun verbose src dst
   zparseopts -D -K -M -E -- h=help n=dryrun v=verbose s:=src t:=dst \
     -help=help -dryrun=dryrun -verbose=verbose -src:=src -dst:=dst
 

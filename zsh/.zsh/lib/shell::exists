@@ -14,6 +14,7 @@ $1 The thing to be checked whether it exists.
 =cut
 
 setopt localoptions unset
+
 zparseopts -A opts -var: -bin: -sub: -file: -dir: "$@"
 
 if [[ -n ${opts[--var]+1} ]]; then

@@ -98,6 +98,7 @@ function bootstrap::main() {
 setopt LOCAL_OPTIONS
 setopt localoptions err_return
 
+local -a help dryrun unstow stow verbose
 zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
   -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose
 

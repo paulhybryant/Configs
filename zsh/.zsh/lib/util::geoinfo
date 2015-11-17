@@ -8,18 +8,24 @@ Get the geo location information.
 @return list of values for requested fields.
 =cut
 
-zparseopts -D -K -M -E -- -no-cache=o_cache
+local -a opt_cache opt_cn
+zparseopts -D -K -M -E -- -no-cache=opt_cache -no-cn=opt_cn
 
-local _cache='/tmp/.util.geoinfo'
-[[ -n ${o_cache} ]] && \rm -v "${_cache}"
-local _expire _filter
+  echo ${opt_cachelocal _cache='/tmp/.util.geoinfo'
+[[ -n ${opt_cache} ]] && \rm -v "${_cache}"
+local _expire _filter _url
 _expire=$(time::_seconds)
 _expire=$((_expire - 3600))
 if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
   rm ${_cache} > /dev/null 2>&1
   # ip, hostname, city, region, country, loc, org
-  curl -x '' ipinfo.io 1> ${_cache} 2> /dev/null
-  # curl -x '' int.dpool.sina.com.cn/iplookup/iplookup.php?format=json 1> ${_cache} 2> /dev/null
+  if [[ -n ${opt_cn} ]]; then
+    _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
+  else
+    _url='ipinfo.io'
+  fi
+  io::vlog 1 "Using url: ${_url}"
+  curl -x '' "${_url}" 1> ${_cache} 2> /dev/null
 fi
 _filter=$(strings::join --prefix . --delim , "$@")
 jq "${_filter}" < ${_cache}

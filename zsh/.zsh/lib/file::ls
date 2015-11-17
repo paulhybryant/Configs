@@ -8,6 +8,7 @@ List files.
 @return NULL
 =cut
 
+local -a l a
 zparseopts -D l=l a=a
 
 [[ $# -eq 0 ]] && set -- .

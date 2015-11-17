@@ -9,6 +9,7 @@ Join string with delimiter and prefix.
 =cut
 
 setopt localoptions err_return nounset
+
 zparseopts -D -A opts -delim: -prefix: "$@"
 
 [[ -n ${opts[--prefix]+1} ]] || opts[--prefix]=''

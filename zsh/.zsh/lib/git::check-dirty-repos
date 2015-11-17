@@ -10,6 +10,7 @@ Number of arguments accepted: --no-detached
 =cut
 
 setopt localoptions err_return
+
 zparseopts -D -A opts -no-detached "$@"
 
 setopt localoptions nounset

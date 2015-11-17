@@ -26,6 +26,7 @@ EOF
   # esac
 # done
 
+local -a verbose help
 zparseopts -D -K -M -E -- h=help v=verbose \
   -help=help -verbose=verbose
 
