@@ -8,7 +8,10 @@ Get the geo location information.
 @return list of values for requested fields.
 =cut
 
+zparseopts -D -K -M -E -- -no-cache=o_cache
+
 local _cache='/tmp/.util.geoinfo'
+[[ -n ${o_cache} ]] && \rm -v "${_cache}"
 local _expire _filter
 _expire=$(time::_seconds)
 _expire=$((_expire - 3600))

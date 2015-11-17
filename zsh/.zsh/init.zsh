@@ -99,6 +99,7 @@ alias vim='util::vim'                                                         # 
 alias run='util::run'
 alias gvim='util::gvim'
 alias ssh='net::ssh'
+alias npm='http_proxy="" https_proxy="" \npm'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help to use online help
 autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
 
