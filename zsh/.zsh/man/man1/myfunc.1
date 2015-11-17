@@ -132,18 +132,24 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "TMP.XEPGDIILTJ 1"
-.TH TMP.XEPGDIILTJ 1 "2015-10-22" "perl v5.18.2" "User Contributed Perl Documentation"
+.IX Title "TMP.Q6YGWLPNNI 1"
+.TH TMP.Q6YGWLPNNI 1 "2015-11-17" "perl v5.18.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-File: Documentations
+File: My function documentations
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 .SS "Methods"
 .IX Subsection "Methods"
+.ie n .IP "Function ""base::sourced""" 4
+.el .IP "Function \f(CWbase::sourced\fR" 4
+.IX Item "Function base::sourced"
+\&\f(CW$1\fR Absolute path to the file to be sourced.
+.Sp
+\&\f(CW@return\fR 0 or 1, indicates whether latest version of this file is sourced.
 .ie n .IP "Function ""colors::define""" 4
 .el .IP "Function \f(CWcolors::define\fR" 4
 .IX Item "Function colors::define"
@@ -176,21 +182,6 @@ A shortcut for file::find\-ignore\-dir for git.
 .el .IP "Function \f(CWfile::ls\fR" 4
 .IX Item "Function file::ls"
 List files.
-.Sp
-\&\f(CW@return\fR \s-1NULL\s0
-.ie n .IP "Function ""file::rm""" 4
-.el .IP "Function \f(CWfile::rm\fR" 4
-.IX Item "Function file::rm"
-Use trash to remove files so it can be recovered!
-Accepts rm arguments to be compatible wit rm.
-Usually we define alias for it.
-.Sp
-Examples
-  source file.zsh
-  alias rm=file::rm
-.Sp
-Arguments
-  Same as rm
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
 .ie n .IP "Function ""git::check\-dirty\-repos""" 4
@@ -247,6 +238,53 @@ Move submodule with a single command.
 List of url of all submodules.
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""io::vlog""" 4
+.el .IP "Function \f(CWio::vlog\fR" 4
+.IX Item "Function io::vlog"
+Print log message based on verbose level.
+.Sp
+\&\f(CW$1\fR Verbose level
+\&\f(CW$2\fR Message
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""io::yes_or_no""" 4
+.el .IP "Function \f(CWio::yes_or_no\fR" 4
+.IX Item "Function io::yes_or_no"
+Gets yes or no reply from user.
+.Sp
+\&\f(CW@return\fR 0 if yes, 1 otherwise.
+.ie n .IP "Function ""mode::dryrun""" 4
+.el .IP "Function \f(CWmode::dryrun\fR" 4
+.IX Item "Function mode::dryrun"
+Whether it is in dryrun mode.
+.Sp
+\&\f(CW@return\fR 0 if it is dryrun mode, 1 otherwise.
+.ie n .IP "Function ""mode::set\-dryrun""" 4
+.el .IP "Function \f(CWmode::set\-dryrun\fR" 4
+.IX Item "Function mode::set-dryrun"
+Set dryrun mode to true
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""mode::set\-verbose""" 4
+.el .IP "Function \f(CWmode::set\-verbose\fR" 4
+.IX Item "Function mode::set-verbose"
+Set verbose level of shell.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""mode::toggle\-dryrun""" 4
+.el .IP "Function \f(CWmode::toggle\-dryrun\fR" 4
+.IX Item "Function mode::toggle-dryrun"
+Toggle dryrun mode
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""mode::verbose""" 4
+.el .IP "Function \f(CWmode::verbose\fR" 4
+.IX Item "Function mode::verbose"
+Whether the specified verbose level is satisfied
+.Sp
+\&\f(CW$1\fR Verbose level
+.Sp
+\&\f(CW@return\fR 0 if satisfied, 1 otherwise
 .ie n .IP "Function ""net::external\-ip""" 4
 .el .IP "Function \f(CWnet::external\-ip\fR" 4
 .IX Item "Function net::external-ip"
@@ -274,6 +312,66 @@ Utility function that set some env variables by default when connected through s
 Arguments will be passed through to ssh
 .Sp
 \&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""shell::eval""" 4
+.el .IP "Function \f(CWshell::eval\fR" 4
+.IX Item "Function shell::eval"
+Eval the strings, and output logs based on verbose level.
+.Sp
+\&\f(CW@return\fR \s-1NULL\s0
+.ie n .IP "Function ""shell::exists""" 4
+.el .IP "Function \f(CWshell::exists\fR" 4
+.IX Item "Function shell::exists"
+Examples
+  shell::exists \-\-var \*(L"\s-1VAR\*(R"\s0
+.Sp
+Check whether something 'exists'
+.Sp
+\&\f(CW$1\fR The thing to be checked whether it exists.
+.Sp
+\&\f(CW@return\fR 0 or 1. 0 exists, 1 not exists.
+.ie n .IP "Function ""strings::join""" 4
+.el .IP "Function \f(CWstrings::join\fR" 4
+.IX Item "Function strings::join"
+Join string with delimiter and prefix.
+.Sp
+\&\f(CW@return\fR The resulting string after joining.
+.ie n .IP "Function ""strings::strip\-slash""" 4
+.el .IP "Function \f(CWstrings::strip\-slash\fR" 4
+.IX Item "Function strings::strip-slash"
+Strip trailing slash in the string.
+.Sp
+\&\f(CW$1\fR The string to apply the strip operation
+.Sp
+\&\f(CW@return\fR the result string after stripping
+.ie n .IP "Function ""time::date\-to\-seconds""" 4
+.el .IP "Function \f(CWtime::date\-to\-seconds\fR" 4
+.IX Item "Function time::date-to-seconds"
+Convert date string to seconds since epoch
+.Sp
+\&\f(CW$1\fR Date string
+.Sp
+\&\f(CW@return\fR string in seconds since epoch.
+.ie n .IP "Function ""time::getmtime""" 4
+.el .IP "Function \f(CWtime::getmtime\fR" 4
+.IX Item "Function time::getmtime"
+Get last modification time of a file.
+\&\f(CW$1\fR Filename
+.Sp
+\&\f(CW@return\fR string of the last modified time of a file.
+.ie n .IP "Function ""time::human\-readable\-date""" 4
+.el .IP "Function \f(CWtime::human\-readable\-date\fR" 4
+.IX Item "Function time::human-readable-date"
+Print time in human readable format.
+.Sp
+\&\f(CW$1\fR Current time in seconds since epoch
+.Sp
+\&\f(CW@return\fR string in human readable format for the specified time.
+.ie n .IP "Function ""time::_seconds""" 4
+.el .IP "Function \f(CWtime::_seconds\fR" 4
+.IX Item "Function time::_seconds"
+Print current time in seconds since epoch.
+.Sp
+\&\f(CW@return\fR string of current time in seconds since epoch
 .ie n .IP "Function ""util::check\-test\-coverage""" 4
 .el .IP "Function \f(CWutil::check\-test\-coverage\fR" 4
 .IX Item "Function util::check-test-coverage"
