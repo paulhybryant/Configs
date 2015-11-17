@@ -73,9 +73,7 @@
 ; (xbindkey '(alt t) "$HOME/.local/bin/xvkbd::ctrl-t")
 ; (xbindkey '(alt f) "$HOME/.local/bin/xvkbd::ctrl-f")
 
-; (xbindkey '(alt d) "$HOME/.local/bin/xvkbd::ctrl-d")
-; (xbindkey '(alt u) "$HOME/.local/bin/xvkbd::ctrl-u")
-; (xbindkey '(alt r) "$HOME/.local/bin/xvkbd::ctrl-r")
+; (xbindkey '(alt d) "xvkbd::send-to-active-window '\Cd'")
 ; (xbindkey '(alt t) "zenity --info --text=\"$(xdotool getactivewindow)\"")
 
 ;; set directly keycode (here control + f with my keyboard)
