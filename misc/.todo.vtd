@@ -75,6 +75,6 @@
   @ Add brew formula for trash-cli (DONE 2015-11-02 17:17)
   @ Add completion for functions like cg (DONE 2015-11-02 17:17)
   @ Make keyboardlayouteditor work
-  @ Compile xvkbd in OSX (with macports if needed)
+  @ Compile xvkbd in OSX (with macports if needed) (DONE 2015-11-17 17:19)
   @ Make command-1 work in OSX (it is mapped to ctrl-1 now) (DONE 2015-11-02 17:18)
   @ Map win+h,i,j,k to arrow keys (DONE 2015-10-29 17:30)
