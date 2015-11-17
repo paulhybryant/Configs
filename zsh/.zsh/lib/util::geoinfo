@@ -19,6 +19,7 @@ if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
   rm ${_cache} > /dev/null 2>&1
   # ip, hostname, city, region, country, loc, org
   curl -x '' ipinfo.io 1> ${_cache} 2> /dev/null
+  # curl -x '' int.dpool.sina.com.cn/iplookup/iplookup.php?format=json 1> ${_cache} 2> /dev/null
 fi
 _filter=$(strings::join --prefix . --delim , "$@")
 jq "${_filter}" < ${_cache}

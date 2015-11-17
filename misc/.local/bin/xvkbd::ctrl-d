@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-xvkbd -window $(xdotool getactivewindow) -xsendevent -text '\Cd'
-# xvkbd -window $(xdotool getactivewindow) -xsendevent -text "Cd"

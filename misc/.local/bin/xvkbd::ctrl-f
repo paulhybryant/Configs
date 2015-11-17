@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-xvkbd -window $(xdotool getactivewindow) -xsendevent -text '\Cf'
