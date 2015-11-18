@@ -3,33 +3,35 @@
 setopt localoptions err_return
 
 if [[ $# -eq 0 ]]; then
-  io::err "Requires at least the directory to scan."
+  io::err "$0: Requires at least the directory to scan."
 fi
 
 local _dir
 _dir="$1"
 shift
 
-[[ -d "${_dir}" ]] || io::err "First argument must be a directory"
+[[ -d ${_dir} ]] || io::err "$0: First argument must be a directory"
+
 
 if [[ $# -eq 0 ]]; then
-  local _mtime
-  for func in ${_dir}/[^_]*(:t); do
-    _mtime=$(time::getmtime ${_dir}/${func})
+  set -- ${_dir}/[^_]*(:t)
+fi
+
+local _mtime
+for func in "$@"; do
+  io::vlog 1 "Reloading function ${func}."
+  _mtime=$(time::getmtime ${_dir}/${func})
+  if (( ${+FN_REGISTRY[${func}]} )); then
     if [[ "$FN_REGISTRY[${func}]" != "${_mtime}" ]]; then
       io::vlog 1 "Function ${func} reloaded."
       unfunction -- "${func}"
-      zsh::autoload "${func}"
+      if [[ "${func}" == "zsh::autoload" ]]; then
+        autoload -Uz "${func}"
+      else
+        zsh::autoload ${_dir} "${func}"
+      fi
     fi
-  done
-else
-  for func in "$@"; do
-    io::vlog 1 "Function ${func} reloaded."
-    unfunction -- "${func}"
-    if [[ "${func}" == "zsh::autoload" ]]; then
-      autoload -Uz "${func}"
-    else
-      zsh::autoload ${_dir} "${func}"
-    fi
-  done
-fi
+  else
+    zsh::autoload "${_dir}" "${func}"
+  fi
+done

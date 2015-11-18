@@ -2,11 +2,15 @@
 
 setopt localoptions err_return
 
+if [[ $# -eq 0 ]]; then
+  io::err "$0: Requires at least the directory to scan."
+fi
+
 local _dir
 _dir="$1"
 shift
 
-[[ -d "${_dir}" ]] || io::err "First argument must be a directory"
+[[ -d ${_dir} ]] || io::err "$0: First argument must be a directory"
 
 local _mtime
 for func in "$@"; do
