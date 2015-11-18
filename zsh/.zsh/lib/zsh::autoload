@@ -1,8 +1,16 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+setopt localoptions err_return
+
+local _dir
+_dir="$1"
+shift
+
+[[ -d "${_dir}" ]] || io::err "First argument must be a directory"
+
 local _mtime
 for func in "$@"; do
-  _mtime=$(time::getmtime ~/.zsh/lib/${func})
+  _mtime=$(time::getmtime ${_dir}/${func})
   autoload -Uz ${func}
   FN_REGISTRY[${func}]="${_mtime}"
 done

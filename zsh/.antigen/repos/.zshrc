@@ -2,7 +2,7 @@
 
 declare -Axg FN_REGISTRY
 autoload -Uz zsh::autoload time::getmtime
-[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
+[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib ~/.zsh/lib/[^_]*(:t)
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true
 

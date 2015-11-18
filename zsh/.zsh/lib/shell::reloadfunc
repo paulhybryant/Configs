@@ -1,9 +1,21 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+setopt localoptions err_return
+
+if [[ $# -eq 0 ]]; then
+  io::err "Requires at least the directory to scan."
+fi
+
+local _dir
+_dir="$1"
+shift
+
+[[ -d "${_dir}" ]] || io::err "First argument must be a directory"
+
 if [[ $# -eq 0 ]]; then
   local _mtime
-  for func in ~/.zsh/lib/[^_]*(:t); do
-    _mtime=$(time::getmtime ~/.zsh/lib/${func})
+  for func in ${_dir}/[^_]*(:t); do
+    _mtime=$(time::getmtime ${_dir}/${func})
     if [[ "$FN_REGISTRY[${func}]" != "${_mtime}" ]]; then
       io::vlog 1 "Function ${func} reloaded."
       unfunction -- "${func}"
@@ -14,6 +26,10 @@ else
   for func in "$@"; do
     io::vlog 1 "Function ${func} reloaded."
     unfunction -- "${func}"
-    zsh::autoload "${func}"
+    if [[ "${func}" == "zsh::autoload" ]]; then
+      autoload -Uz "${func}"
+    else
+      zsh::autoload ${_dir} "${func}"
+    fi
   done
 fi
