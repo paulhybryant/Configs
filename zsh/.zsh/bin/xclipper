@@ -6,9 +6,11 @@ autoload -Uz os::LINUX os::OSX osx::xclip ssh::xclip
 setopt localoptions err_return
 
 if os::LINUX; then
-  xclip "$@"
+  if [[ "${SSH_OS}" == "Darwin" ]]; then
+    ssh::xclip "$@"
+  else
+    xclip "$@"
+  fi
 elif os::OSX; then
   osx::xclip "$@"
-elif [[ "${SSH_OS}" == "Darwin" ]]; then
-  ssh::xclip "$@"
 fi
