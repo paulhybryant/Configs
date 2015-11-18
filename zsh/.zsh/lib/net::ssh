@@ -9,6 +9,8 @@ Arguments will be passed through to ssh
 @return NULL
 =cut
 
+setopt localoptions nounset err_return
+
 mode::verbose 1 && SSH_OPTIONS=('-v' $SSH_OPTIONS)
 
 local _ssh_os="$(uname)"
