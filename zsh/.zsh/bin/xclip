@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+#
+fpath+=($HOME/.zsh/lib)
+autoload -Uz os::LINUX os::OSX osx::xclip ssh::xclip
+
+setopt localoptions err_return
+
+if os::LINUX; then
+  xclip "$@"
+elif os::OSX; then
+  osx::xclip "$@"
+elif [[ "${SSH_OS}" == "Darwin" ]]; then
+  ssh::xclip "$@"
+fi

@@ -4,14 +4,14 @@
 (xbindkey '("m:0x10" "c:76") "notify-send 'info' 'killing xbindkeys'; killall xbindkeys 2>&1 > /dev/null")
 
 ; Use name directly (control, alt, letter etc)
-; (xbindkey '(control alt v) "$HOME/.local/bin/vimode toggle")
+; (xbindkey '(control alt v) "vimode toggle")
 ; Use escape to swith to vim mode, but only do this when the active window is
 ; not a terminal (handled in vimode toggle)
-; (xbindkey '("m:0x10" "c:66") "$HOME/.local/bin/vimode toggle || xvkbd -xsendevent -text '\\[Escape]'")
+; (xbindkey '("m:0x10" "c:66") "vimode toggle || xvkbd -xsendevent -text '\\[Escape]'")
 
 ; Use ctrl + escape to switch to vim mode
 ; Use keycode directly (can be found by xbindkeys -k)
-(xbindkey '("m:0x14" "c:66") "$HOME/.local/bin/vimode on")
+(xbindkey '("m:0x14" "c:66") "vimode on")
 
 (define (bind-dw)
   "DW commands"
@@ -27,7 +27,7 @@
 
 ; Use letter
 ; see man xbindkey / man xvkbd to see what text (keysyms) are available.
-(xbindkey '(a) "$HOME/.local/bin/vimode off")
+(xbindkey '(a) "vimode off")
 (xbindkey '(b) "xvkbd -xsendevent -text '\\C\\[Left]'")
 (xbindkey '(c) "")
 (define (bind-d)
@@ -44,7 +44,7 @@
 (xbindkey '(f) "")
 (xbindkey '(g) "")
 (xbindkey '(h) "xvkbd -xsendevent -text '\\[Left]'")
-(xbindkey '(i) "$HOME/.local/bin/vimode off")
+(xbindkey '(i) "vimode off")
 (xbindkey '(j) "xvkbd -xsendevent -text '\\[Down]'")
 (xbindkey '(k) "xvkbd -xsendevent -text '\\[Up]'")
 (xbindkey '(l) "xvkbd -xsendevent -text '\\[Right]'")

@@ -65,13 +65,13 @@
 ;; Examples of commands:
 
 ; (xbindkey '(control shift q) "xbindkeys_show")
-; (xbindkey '(control alt v) "$HOME/.local/bin/vimode toggle")
-; (xbindkey '("m:0x10" "c:66") "$HOME/.local/bin/vimode toggle_|| xvkbd -xsendevent -text '\\[Escape]'")
+; (xbindkey '(control alt v) "vimode toggle")
+; (xbindkey '("m:0x10" "c:66") "vimode toggle_|| xvkbd -xsendevent -text '\\[Escape]'")
 (xbindkey '("m:0x10" "c:76") "notify-send 'info' 'killing xbindkeys'; killall xbindkeys 2>&1 > /dev/null")
-(xbindkey '("m:0x14" "c:66") "$HOME/.local/bin/vimode on")
-; (xbindkey '(Shift Return) "$HOME/.local/bin/vimode toggle_")
-; (xbindkey '(alt t) "$HOME/.local/bin/xvkbd::ctrl-t")
-; (xbindkey '(alt f) "$HOME/.local/bin/xvkbd::ctrl-f")
+(xbindkey '("m:0x14" "c:66") "vimode on")
+; (xbindkey '(Shift Return) "vimode toggle_")
+; (xbindkey '(alt t) "xvkbd::send-to-active-window '\Ct'")
+; (xbindkey '(alt f) "xvkbd::send-to-active-window '\Cf'")
 
 ; (xbindkey '(alt d) "xvkbd::send-to-active-window '\Cd'")
 ; (xbindkey '(alt t) "zenity --info --text=\"$(xdotool getactivewindow)\"")
