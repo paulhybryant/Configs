@@ -603,10 +603,10 @@ if s:vimplugin_size >= 0
         \ 'autoload' : { 'filetypes' : ['tmux'] },
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing .tmux.conf
-  NeoBundle 'wellle/tmux-complete.vim', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Insert mode completion of words in adjacent panes
+  " NeoBundle 'wellle/tmux-complete.vim', {
+        " \ 'autoload' : { 'filetypes' : ['tmux'] },
+        " \ 'lazy' : 1,
+        " \ }                                                                     " Insert mode completion of words in adjacent panes
   " }}}
   " ft-vim {{{2
   NeoBundle 'vim-scripts/ReloadScript', {

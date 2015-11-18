@@ -42,6 +42,8 @@ elif os::OSX; then
   alias cdtrash='pushd ~/.local/share/Trash/files'
   alias trash-empty='trash -s'
   alias trash-list='trash -l'
+  alias xclip='osx::xclip'
+  alias notify-send='osx::notify-send'
   case $(tty) in
     /dev/console)
       prompt bart
