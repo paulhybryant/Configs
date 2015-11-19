@@ -126,7 +126,7 @@ endif
 " }}}
 " Google specific setup {{{1
 let g:provided = {}
-if filereadable(expand('~/.vimrc.google'))
+if filereadable('/usr/share/vim/google/google.vim')
   if has('vim_starting')
     execute 'source' expand('~/.vimrc.google')
   endif
@@ -157,11 +157,10 @@ if empty(g:provided)
   NeoBundle 'google/vim-codefmt', {
         \ 'autoload' : { 'filetypes' : ['cpp', 'javascript', 'sql'] },
         \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
-        \ 'lazy' : 1,
         \ }                                                                     " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
-    Glaive codefmt plugin[mappings]
+    Glaive vim-codefmt plugin[mappings]
     " python formatter: https://github.com/google/yapf
     " java formatter: https://github.com/google/google-java-format
   endfunction
@@ -413,7 +412,7 @@ if s:vimplugin_size >= 0
         \ 'directory' : 'fzf-vanilla',
         \ 'name' : 'fzf-vanilla',
         \ 'regular_name' : 'fzf-vanilla',
-        \ 'rtp': maktaba#path#Dirname(
+        \ 'rtp' : maktaba#path#Dirname(
         \   maktaba#path#Dirname(resolve(exepath('fzf'))))
         \ }                                                                     " Fuzzy finder
   " }}}
@@ -453,8 +452,10 @@ if s:vimplugin_size >= 0
           \  'folddigest', 'capture' ]`
     execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
     call myutils#InitUndoSwapViews()
-    let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
-    call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
+    if neobundle#is_sourced('vim-codefmt')
+      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
+      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
+    endif
   endfunction
   function! s:myutils.hooks.on_post_source(bundle)
     " Only use this when running in OSX or ssh from OSX
@@ -1100,7 +1101,7 @@ if s:vimplugin_size >= 1
   NeoBundle 'rstacruz/sparkup', {
         \ 'autoload' : { 'filetypes' : ['html'] },
         \ 'lazy' : 1,
-        \ 'rtp': 'vim',
+        \ 'rtp' : 'vim',
         \ }                                                                     " Write HTML code faster
   NeoBundle 'Valloric/MatchTagAlways', {
         \ 'autoload' : { 'filetypes' : ['html', 'xml'] },
@@ -1524,7 +1525,7 @@ if s:vimplugin_size >= 99
         \ 'autoload' : { 'filetypes' : ['cpp', 'c'] },
         \ 'lazy' : 1,
         \ }                                                                   " Completion for c-family language
-  NeoBundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  NeoBundle 'Lokaltog/powerline', {'rtp' : '/powerline/bindings/vim'}
   NeoBundle 'edkolev/promptline.vim'
   NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }               " Better integration between vim and shell
   NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                " Post, view and edit gist in vim
@@ -1532,7 +1533,7 @@ if s:vimplugin_size >= 99
   NeoBundle 'Raimondi/VimRegEx.vim'                                           " Regex dev and test env in vim
   NeoBundle 'tyru/winmove.vim'
   NeoBundle 'tyru/wim'
-  NeoBundle 'vimwiki/vimwiki', { 'rtp': '~/.vim/bundle/vimwiki/src' }
+  NeoBundle 'vimwiki/vimwiki', { 'rtp' : '~/.vim/bundle/vimwiki/src' }
 endif
 " }}}
 " Wrap up bundle setup {{{1
