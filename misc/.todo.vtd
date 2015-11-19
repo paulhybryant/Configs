@@ -16,7 +16,7 @@
   @ Use verbose to find out what cause the autofold when terminus is enabled @p:0 (DONE 2015-09-09 22:00)
   @ Snippets for adding POD documentations in vim. (DONE 2015-09-09 14:47)
   @ Sort block by foldtext @p:1 (DONE 2015-09-10 15:25)
-  @ Fix yanking multiline stuff in OSX. @p:2
+  @ Fix yanking multiline stuff in OSX. @p:2 (DONE 2015-11-19 11:21)
   @ Finish all of learn vimscript the hard way @p:1
   @ Learn vim syntax fold, convert zsh fold to syntax fold if possible @p:2
   @ Make .vimrc resourceable @p:1 (DONE 2015-09-13 11:07)
@@ -29,6 +29,7 @@
   @ Add vroom tests for all my plugins @p:2
   @ Make vim-argwrap handle vimscript better
   @ Try to write a vim plugin with python @p:2
+  @ Fix tmux-complete.vim hang in OSX
 
 * tmux related tasks
 = Tmux @p:2 =

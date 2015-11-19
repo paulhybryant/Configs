@@ -603,10 +603,11 @@ if s:vimplugin_size >= 0
         \ 'autoload' : { 'filetypes' : ['tmux'] },
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing .tmux.conf
-  " NeoBundle 'wellle/tmux-complete.vim', {
-        " \ 'autoload' : { 'filetypes' : ['tmux'] },
-        " \ 'lazy' : 1,
-        " \ }                                                                     " Insert mode completion of words in adjacent panes
+  NeoBundle 'wellle/tmux-complete.vim', {
+        \ 'autoload' : { 'filetypes' : ['tmux'] },
+        \ 'disabled' : g:OS.is_mac,
+        \ 'lazy' : 1,
+        \ }                                                                     " Insert mode completion of words in adjacent panes
   " }}}
   " ft-vim {{{2
   NeoBundle 'vim-scripts/ReloadScript', {
@@ -620,21 +621,21 @@ if s:vimplugin_size >= 0
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
-  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
-        \ 'autoload' : {
-        \     'commands' : ['Decho'],
-        \     'filetypes' : ['vim'],
-        \   },
-        \ 'lazy' : 1,
-        \ 'name' : 'Decho',
-        \ 'regular_namne' : 'Decho',
-        \ 'type' : 'vba',
-        \ }                                                                     " Debug echo for debuging vim plugins
-  let s:decho = neobundle#get('Decho')
-  function! s:decho.hooks.on_source(bundle)
-    let g:dechofuncname = 1
-    let g:decho_winheight = 10
-  endfunction
+  " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
+        " \ 'autoload' : {
+        " \     'commands' : ['Decho'],
+        " \     'filetypes' : ['vim'],
+        " \   },
+        " \ 'lazy' : 1,
+        " \ 'name' : 'Decho',
+        " \ 'regular_namne' : 'Decho',
+        " \ 'script_type' : 'vba',
+        " \ }                                                                     " Debug echo for debuging vim plugins
+  " let s:decho = neobundle#get('Decho')
+  " function! s:decho.hooks.on_source(bundle)
+    " let g:dechofuncname = 1
+    " let g:decho_winheight = 10
+  " endfunction
   NeoBundle 'vim-scripts/Vim-Support', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'disabled' : 1,
@@ -814,57 +815,57 @@ if s:vimplugin_size >= 1
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
         \ 'regular_namne' : 'Align',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
         \ 'depends' : ['Align'],
         \ 'regular_namne' : 'DotFill',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Align the texts by repeatedly filling blanks with specified charater.
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz', {
         \ 'regular_namne' : 'LargeFile',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Quicker editing of large files, turning off events, undo, highlight etc.
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/help.vba.gz', {
         \ 'regular_namne' : 'syntax-help',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Syntax highlight for help file
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hicolors.vba.gz', {
         \ 'regular_namne' : 'hicolors',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Shows highlighting colors in their own colors, plus a colorscheme editor
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz', {
         \ 'regular_namne' : 'hilinks',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Highlight group of item under corsor is linked to
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vis.vba.gz', {
         \ 'name' : 'VisualBlockCommand'
         \ 'regular_name' : 'VisualBlockCommand',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Performs an Ex command on a visual block (e.g. search pattern in visual block)
   " }}}2
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/visincr.vba.gz', {
         \ 'regular_namne' : 'visincr',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Increase integer values in visual block
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/vissort.vba.gz', {
         \ 'regular_namne' : 'vissort',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Allow sorting lines by using a visual block (column)
   " }}}
   " {{{2
@@ -1067,7 +1068,7 @@ if s:vimplugin_size >= 1
         \ 'autoload' : { 'filetypes' : ['cpp'] },
         \ 'lazy' : 1,
         \ 'regular_name' : 'blockhl',
-        \ 'type' : 'vba',
+        \ 'script_type' : 'vba',
         \ }                                                                     " Highlights in block level
   NeoBundle 'jaxbot/semantic-highlight.vim', {
         \ 'autoload' : { 'filetypes' : ['cpp'] },
