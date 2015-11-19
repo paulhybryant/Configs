@@ -32,8 +32,6 @@ $cli set remap.pc_application_h2left_arrow 1
 /bin/echo -n .
 $cli set private.control_command_l_lock_screen 1
 /bin/echo -n .
-$cli set private.command_l_arrow_l_r_to_alt_arrow_l_r 1
-/bin/echo -n .
 $cli set remap.save_winstyle_no_term 1
 /bin/echo -n .
 /bin/echo
