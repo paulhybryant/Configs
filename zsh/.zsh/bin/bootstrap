@@ -64,20 +64,21 @@ function bootstrap::main() {
   shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell \
     paulhybryant/myformulae/zsh-completions"
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
+  shell::eval "brew install brew-gem cmake ctags git htop python python3 \
+    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh \
+    ranger fasd makeself upx brew-rmtree ruby npm git-extras"
+  # pypy pypy3
+  shell::eval "brew install --HEAD vimdoc vroom"
+  shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
+    neovim terminatorcli bz2file"
   if os::LINUX; then
     shell::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
     shell::eval "brew install --HEAD trash-cli"
     shell::eval "brew install terminator"
   fi
-  shell::eval "brew install brew-gem cmake ctags git htop python python3 \
-    the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh \
-    ranger fasd makeself upx brew-rmtree ruby npm spidermonkey"
-  shell::eval "pip install powerline-status advanced-ssh-config neovim \
-    terminatorcli bz2file"
-  shell::eval "brew gem install tmuxinator automux pypy pypy3"
-  shell::eval "brew install --HEAD vimdoc vroom"
-  # shell::eval "https_proxy='' npm install -g urchin npm-update-outdated shelljs"
+  shell::eval "brew gem install tmuxinator automux"
+  shell::eval "http_proxy='' https_proxy='' npm install -g urchin npm-update-outdated shelljs"
 
   if os::OSX; then
     io::msg "Installing extra stuff for OSX..."
@@ -126,6 +127,7 @@ elif [[ -n ${stow} ]]; then
   bootstrap::stow ${_stow_opts}
 else
   bootstrap::main
+  shell::eval "source ${_config_dir:a}/zsh/.zshenv"
   shell::eval "source ${_config_dir:a}/zsh/.zshrc"
 fi
 shell::eval "popd"

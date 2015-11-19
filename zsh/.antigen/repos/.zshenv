@@ -3,14 +3,14 @@
 declare -U path
 declare -U fpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  declare -x -r BREWVERSION="homebrew"
-  declare -x -r BREWHOME="$HOME/.$BREWVERSION"
+  declare -x BREWVERSION="homebrew"
+  declare -x BREWHOME="$HOME/.$BREWVERSION"
+  declare -x CMDPREFIX="g"
   path=(/opt/local/bin /opt/local/sbin $path)
-  declare -x -r CMDPREFIX="g"
-  alias updatedb="/usr/libexec/locate.updatedb"
 else
-  declare -x -r BREWVERSION="linuxbrew"
-  declare -x -r BREWHOME="$HOME/.$BREWVERSION"
+  declare -x BREWVERSION="linuxbrew"
+  declare -x BREWHOME="$HOME/.$BREWVERSION"
+  declare -x CMDPREFIX=""
 fi
 
 path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
@@ -24,7 +24,7 @@ fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
 # alias foo='TERM=xterm-256color foo'
-declare -x -r XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
+declare -x XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -x HELPDIR="$BREWHOME/share/zsh/help"
 declare -x EDITOR='vim'
 declare -x GREP_OPTIONS='--color=auto'
@@ -35,12 +35,12 @@ declare -x PREFIXWIDTH=10
 declare -x MANPAGER="$PAGER"
 declare -x TERM='screen-256color'
 declare -x VISUAL='vim'
-declare -x -r XDG_CACHE_HOME="$HOME/.cache"
-declare -x -r XDG_CONFIG_HOME="$HOME/.config"
-declare -x -r XDG_DATA_HOME="$HOME/.local/share"
+declare -x XDG_CACHE_HOME="$HOME/.cache"
+declare -x XDG_CONFIG_HOME="$HOME/.config"
+declare -x XDG_DATA_HOME="$HOME/.local/share"
 declare -x HISTSIZE=50000
 declare -x SAVEHIST=60000
 declare -x HISTFILE="$HOME/.zhistory"
-declare -x -r HIST_STAMPS='yyyy-mm-dd'
+declare -x HIST_STAMPS='yyyy-mm-dd'
 
 brew list go > /dev/null 2>&1 && declare -x GOPATH="$(brew --prefix go)"

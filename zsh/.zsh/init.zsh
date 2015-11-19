@@ -43,6 +43,7 @@ elif os::OSX; then
   alias trash-empty='trash -s'
   alias trash-list='trash -l'
   alias notify-send='osx::notify-send'
+  alias updatedb="/usr/libexec/locate.updatedb"
   case $(tty) in
     /dev/console)
       prompt bart
