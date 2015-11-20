@@ -65,7 +65,7 @@ function bootstrap::main() {
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
     the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh \
-    ranger fasd makeself upx brew-rmtree ruby npm git-extras"
+    ranger fasd makeself upx brew-rmtree ruby npm git-extras nmap"
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
