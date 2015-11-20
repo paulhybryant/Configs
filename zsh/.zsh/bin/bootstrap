@@ -42,7 +42,6 @@ function bootstrap::main() {
   shell::eval "mkdir -p "$HOME/.configs/pip/""
   shell::eval "mkdir -p "$HOME/.configs/ranger/""
   shell::eval "mkdir -p "$HOME/.configs/terminator/""
-  shell::eval "mkdir -p "$HOME/.local/bin/""
   shell::eval "mkdir -p "$HOME/.ssh/""
   shell::eval "mkdir -p "$HOME/.tmux/plugins""
   shell::eval "mkdir -p "$HOME/.tmuxinator""
