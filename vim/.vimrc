@@ -195,7 +195,6 @@ call glaive#Install()
 if s:vimplugin_size >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
-  NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap and saved file
@@ -358,6 +357,13 @@ if s:vimplugin_size >= 0
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
     let g:solarized_diffmode="high"
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
+  let s:camelcasemotion = neobundle#get('CamelCaseMotion')
+  function s:camelcasemotion.hooks.on_source(bundle)
+    call camelcasemotion#CreateMotionMappings('<leader>')
   endfunction
   " }}}
   " {{{2

@@ -65,7 +65,7 @@ function bootstrap::main() {
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 \
     the_silver_searcher tmux vimpager zsh netcat dos2unix most stdman assh \
-    ranger fasd makeself upx brew-rmtree ruby npm git-extras nmap"
+    ranger fasd makeself upx brew-rmtree ruby npm git-extras nmap urlview"
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
@@ -77,7 +77,8 @@ function bootstrap::main() {
     shell::eval "brew install terminator"
   fi
   shell::eval "brew gem install tmuxinator automux"
-  shell::eval "http_proxy='' https_proxy='' npm install -g urchin npm-update-outdated shelljs"
+  shell::eval "http_proxy='' https_proxy='' \
+    npm install -g urchin npm-update-outdated shelljs"
 
   if os::OSX; then
     io::msg "Installing extra stuff for OSX..."
@@ -86,11 +87,13 @@ function bootstrap::main() {
       --with-override-system-vim macvim"
     shell::eval "brew install brew-cask clipper osxutils lsof \
       paulhybryant/myformulae/gnu-getopt"
-    shell::eval "brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
+    shell::eval "brew install reattach-to-user-namespace \
+      --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
     shell::eval "brew install --force trash"
     shell::eval "brew link --overwrite trash"
     shell::eval "./osx/.osx/init.zsh"
-    shell::eval "brew cask install karabiner seil spectacle xquartz git-annex"
+    shell::eval "brew cask install karabiner seil spectacle \
+      xquartz git-annex urlview"
     shell::eval "./osx/.osx/init.zsh"
     # TODO: import the saved preferences for karabiner etc, in init.zsh.
   fi
