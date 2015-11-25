@@ -11,10 +11,12 @@
 setxkbmap -option ''
 
 # Map caps to ctrl
-setxkbmap -option caps:escape
+# setxkbmap -option caps:escape
 
-setxkbmap -option altwin:ctrl_alt_win
-# setxkbmap -option altwin:swap_alt_win
+# Swap caps to ctrl
+setxkbmap -option caps:swapescape -option altwin:ctrl_alt_win
+
+# setxkbmap -option caps:swapescape -option altwin:swap_alt_win
 
 # setxkbmap -option ctrl:lctrl_meta
 # setxkbmap -option altwin:meta_win

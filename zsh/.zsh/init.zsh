@@ -3,7 +3,7 @@
 declare -xg GIT_EDITOR
 GIT_EDITOR='vim'
 declare -agx __TMUX_VARS__
-__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID)
+__TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID P4DIFF)
 declare -xg LS_COLORS
 
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
@@ -94,7 +94,7 @@ alias lld='file::ld -l'
 alias lad='file::ld -a'
 alias llad='file::ld -la'
 alias rm='\trash -v'
-alias ta='util::ta'
+alias ta='tmux::attach'
 alias ts='tmux start-server; tmux attach'
 alias vi='util::vim'                                                          # alias vi='vi -p'
 alias vim='util::vim'                                                         # alias vim='vim -p'

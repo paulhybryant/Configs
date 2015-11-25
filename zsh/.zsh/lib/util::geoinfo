@@ -14,7 +14,7 @@ zparseopts -D -K -M -E -- -no-cache=opt_cache -no-cn=opt_cn
 local _cache='/tmp/.util.geoinfo'
 [[ -n ${opt_cache} ]] && \rm -v "${_cache}"
 local _expire _filter _url
-_expire=$(time::_seconds)
+_expire=$(time::seconds)
 _expire=$((_expire - 3600))
 if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
   rm ${_cache} > /dev/null 2>&1
