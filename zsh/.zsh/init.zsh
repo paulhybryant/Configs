@@ -55,56 +55,57 @@ elif os::OSX; then
   osx::fix-display
 fi
 
-alias cdlink='file::cdlink'
-alias date='${CMDPREFIX}\date'
-alias grepc='\grep -C 5 '
-alias info='\info --vi-keys'
-alias mank='\man -K'
-alias mktemp='${CMDPREFIX}\mktemp'
-alias nvim='NVIM=nvim nvim'
-alias stat='${CMDPREFIX}\stat'
-alias stow='\stow -v'
-alias tl='\tmux list-sessions'
-alias tmux='TERM=screen-256color \tmux -2'
-alias zunbindkey='bindkey -r'
-alias vartype='declare -p'
+alias a='fasd -a'                                                               # any
 alias aga='ag --hidden'
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
-alias ls='file::ls'
+alias cdlink='file::cdlink'
+alias d='fasd -d'                                                               # directory
+alias date='${CMDPREFIX}\date'
+alias f='fasd -f'                                                               # file
+alias find='file::find-ignore-dir ".git"'
+alias grepc='\grep -C 5 '
+alias gvim='util::gvim'
+alias info='\info --vi-keys'
 alias l='file::ls'
-alias ll='file::ls -l'
 alias la='file::ls -a'
+alias lad='file::ld -a'
+alias laf='file::lf -a'
+alias lal='file::ll -a'
+alias ldir='file::ld'
+alias lf='file::lf'
+alias ll='file::ls -l'
 alias lla='file::ls -la'
+alias llad='file::ld -la'
+alias llaf='file::lf -la'
+alias llal='file::ll -la'
+alias lld='file::ld -l'
+alias llf='file::lf -l'
 alias llink='file::ll'
 alias lll='file::ll -l'
-alias lal='file::ll -a'
-alias llal='file::ll -la'
-alias lf='file::lf'
-alias llf='file::lf -l'
-alias laf='file::lf -a'
-alias llaf='file::lf -la'
-alias ldir='file::ld'
-alias lld='file::ld -l'
-alias lad='file::ld -a'
-alias llad='file::ld -la'
-alias rm='\trash -v'
-alias ta='tmux::attach'
-alias ts='tmux start-server; tmux attach'
-alias vi='util::vim'                                                          # alias vi='vi -p'
-alias vim='util::vim'                                                         # alias vim='vim -p'
-alias run='shell::run'
-alias gvim='util::gvim'
-alias ssh='net::ssh'
+alias ls='file::ls'
+alias mank='\man -K'
+alias mktemp='${CMDPREFIX}\mktemp'
 alias npm='http_proxy="" https_proxy="" \npm'
-[[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help to use online help
-autoload run-help                                                               # Use the zsh built-in run-help function, run-help is aliased to man by default
+alias nvim='NVIM=nvim nvim'
+alias rm='\trash -v'
+alias run='shell::run'
+alias s='fasd -si'                                                              # show / search / select
+alias sd='fasd -sid'                                                            # interactive directory selection
+alias sf='fasd -sif'                                                            # interactive file selection
+alias ssh='net::ssh'
+alias stat='${CMDPREFIX}\stat'
+alias stow='\stow -v'
+alias ta='tmux::attach'
+alias tl='\tmux list-sessions'
+alias tmux='TERM=screen-256color \tmux -2'
+alias ts='tmux start-server; tmux attach'
+alias vartype='declare -p'
+alias vi='util::vim'                                                            # alias vi='vi -p'
+alias vim='util::vim'                                                           # alias vim='vim -p'
+alias z='fasd_cd -d'                                                            # cd, same as j in autojump
+alias zunbindkey='bindkey -r'
+alias zz='fasd_cd -d -i'                                                        # cd with interactive selection
+[[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
+autoload run-help                                                               # Unset previous run-help alias
 
 zle -N up-line-or-beginning-search
 autoload -Uz up-line-or-beginning-search                                        # Put cursor at end of line when using Up for command history

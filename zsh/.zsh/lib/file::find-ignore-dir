@@ -23,4 +23,8 @@ $1 The directory to ignore.
 # So performance of 1 and 3 will be better
 # find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
 
-find . -wholename "*/$1" -prune -o "$@" -print
+local _dir _ignore_dir
+_ignore_dir="$1"
+_dir="$2"
+shift 2
+find "${_dir}" -wholename "*/${_ignore_dir}" -prune -o "$@" -print
