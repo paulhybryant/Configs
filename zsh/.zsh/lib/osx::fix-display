@@ -8,4 +8,4 @@ _dispnew="${_dispdir}/:0"
 if [[ -e "$DISPLAY" && "${_dispfile}" = "org.macosforge.xquartz:0" ]]; then
   mv "$DISPLAY" "${_dispnew}"
 fi
-export DISPLAY=${_dispnew}
+declare -xg DISPLAY=${_dispnew}

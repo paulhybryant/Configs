@@ -35,7 +35,7 @@ if os::LINUX; then
       prompt bart
       ;;
     /dev/pts/[0-9]*)
-      util::install-precmd
+      shell::install-precmd
       ;;
   esac
 elif os::OSX; then
@@ -49,9 +49,10 @@ elif os::OSX; then
       prompt bart
       ;;
     /dev/ttys[0-9]*)
-      util::install-precmd
+      shell::install-precmd
       ;;
   esac
+  osx::fix-display
 fi
 
 alias cdlink='file::cdlink'
@@ -98,7 +99,7 @@ alias ta='tmux::attach'
 alias ts='tmux start-server; tmux attach'
 alias vi='util::vim'                                                          # alias vi='vi -p'
 alias vim='util::vim'                                                         # alias vim='vim -p'
-alias run='util::run'
+alias run='shell::run'
 alias gvim='util::gvim'
 alias ssh='net::ssh'
 alias npm='http_proxy="" https_proxy="" \npm'
@@ -130,8 +131,7 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-util::setup-abbrevs
-util::fix-display
+shell::setup-abbrevs
 
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories

@@ -2,6 +2,7 @@
 
 declare -U path
 declare -U fpath
+declare -U precmd_functions
 if [[ "$OSTYPE" == "darwin"* ]]; then
   declare -x BREWVERSION="homebrew"
   declare -x BREWHOME="$HOME/.$BREWVERSION"
