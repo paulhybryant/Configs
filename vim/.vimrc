@@ -12,6 +12,24 @@ let s:vimplugin_size = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
 " Shared plugin configurations {{{1
+function! s:OSDetect()
+  let l:is_unix = has('unix')
+  let l:is_windows = has('win16') || has('win32') || has('win64') || has('win95')
+  let l:is_cygwin = has('win32unix')
+  let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
+        \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+        \   (!isdirectory('/proc') && executable('sw_vers')))
+  let l:is_linux = l:is_unix && !l:is_mac && !l:is_cygwin
+
+  let g:OS = {
+        \ 'is_unix'     :  l:is_unix,
+        \ 'is_windows'  :  l:is_windows,
+        \ 'is_cygwin'   :  l:is_cygwin,
+        \ 'is_mac'      :  l:is_mac,
+        \ 'is_linux'    :  l:is_linux,
+        \}
+endfun
+
 function! s:InstallBundleIfNotPresent(bundle)
   if !isdirectory(a:bundle.path)
     echo 'Installing' a:bundle.name . '...'
@@ -72,7 +90,7 @@ function! g:ConfigureYcm()
   let g:ycm_warning_symbol = '>>'
 endfunction
 " }}}
-" Setup NeoBundle and OS.vim {{{1
+" Setup NeoBundle {{{1
 filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
@@ -82,18 +100,12 @@ if has('vim_starting')
         \ 'path' : s:bundle_base_path . 'neobundle.vim/',
         \ 'url' : 'https://github.com/Shougo/neobundle.vim.git',
         \ })
-  call s:InstallBundleIfNotPresent({
-        \ 'name' : 'os',
-        \ 'path' : s:bundle_base_path . 'os.vim/',
-        \ 'url' : 'https://github.com/Rykka/os.vim.git',
-        \ })
+  call s:OSDetect()
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
 endif
 call neobundle#begin(s:bundle_base_path)
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-NeoBundle 'Rykka/os.vim', { 'force' : 1 }                                       " Provides consistency across OSes
-let g:OS = os#init()
 " }}}
 " Windows Compatible {{{1
 if g:OS.is_windows
@@ -439,7 +451,7 @@ if s:vimplugin_size >= 0
   " {{{2
   NeoBundle 'paulhybryant/myutils', {
         \ 'depends' : filter(
-        \   ['os.vim', 'vim-codefmt', 'vim-glaive', 'vim-maktaba'],
+        \   ['vim-codefmt', 'vim-glaive', 'vim-maktaba'],
         \   '!has_key(g:provided, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " My vim customization (utility functions, syntax etc)
@@ -459,8 +471,9 @@ if s:vimplugin_size >= 0
   endfunction
   function! s:myutils.hooks.on_post_source(bundle)
     " Only use this when running in OSX or ssh from OSX
-    if g:OS.is_mac || $SSH_OS == 'Darwin'
-      vmap Y y:call myutils#YankToRemoteClipboard()<CR>
+    if g:OS.is_mac && $SSH_OS == 'Darwin'
+      " vmap Y y:call myutils#YankToRemoteClipboard()<CR>
+      vnoremap y y:call system('nc -c localhost 8377', @0)<CR>
     endif
     call myutils#SetupTablineMappings(g:OS)
   endfunction
@@ -1494,7 +1507,7 @@ if s:vimplugin_size >= 99
   NeoBundle 'Rykka/clickable-things'
   " {{{2
   NeoBundle 'Rykka/clickable.vim', {
-        \ 'depends' : ['Rykka/os.vim','Rykka/clickable-things']
+        \ 'depends' : ['Rykka/clickable-things']
         \ }                                                                     " Make things clickable in texts
   let s:clickable = neobundle#get('clickable.vim')
   function! s:clickable.hooks.on_source(bundle)
@@ -1609,14 +1622,9 @@ else
   set spell                                                                     " Spellcheck
 endif
 
-if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                " On Linux and mac use + register for copy-paste
-  " Remember to install clipit in ubuntu
-  if g:OS.is_linux && empty($SSH_OS)
-    set clipboard=unnamedplus
-  else
-    set clipboard=unnamed                                                       " use * register to pass the content back to ssh client
-  endif
-else                                                                            " On Windows, use * register for copy-paste
+if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                " On Linux and Mac use + register
+  set clipboard=unnamedplus
+else                                                                            " On Windows use * register
   set clipboard=unnamed
 endif
 " }}}
