@@ -194,18 +194,20 @@ call glaive#Install()
 " Priority 0 Plugins {{{1
 if s:vimplugin_size >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
+  NeoBundle 'Rykka/riv.vim'
+  NeoBundle 'Rykka/InstantRst'
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
-  NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between existing swap and saved file
-  NeoBundle 'google/vim-searchindex'
+  NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
+  NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
-  NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end construct (e.g. endfunction)
+  NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
-  NeoBundle 'tpope/vim-surround'                                                " Useful mappings for surrounding text objects with a pair of chars
+  NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
@@ -216,6 +218,15 @@ if s:vimplugin_size >= 0
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
     vmap <CR> <Plug>(scrath-evaluate)
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'Rykka/lastbuf.vim'                                                 " Open last closed buffer
+  let s:lastbuf = neobundle#get('lastbuf.vim')
+  function s:lastbuf.hooks.on_source(bundle)
+    map <c-s-t> :LastBuf<CR>
+    let g:lastbuf_num = 10
+    let g:lastbuf_level = 2
   endfunction
   " }}}
   " {{{2
