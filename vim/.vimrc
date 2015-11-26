@@ -17,8 +17,7 @@ function! s:OSDetect()
   let l:is_windows = has('win16') || has('win32') || has('win64') || has('win95')
   let l:is_cygwin = has('win32unix')
   let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
-        \ && (has('mac') || has('macunix') || has('gui_macvim') ||
-        \   (!isdirectory('/proc') && executable('sw_vers')))
+        \ && (has('mac') || has('macunix') || has('gui_macvim'))
   let l:is_linux = l:is_unix && !l:is_mac && !l:is_cygwin
 
   let g:OS = {
@@ -29,13 +28,6 @@ function! s:OSDetect()
         \ 'is_linux'    :  l:is_linux,
         \}
 endfun
-
-function! s:InstallBundleIfNotPresent(bundle)
-  if !isdirectory(a:bundle.path)
-    echo 'Installing' a:bundle.name . '...'
-    silent execute '!git clone' a:bundle.url a:bundle.path
-  endif
-endfunction
 
 function! g:ConfigureRelatedFiles()
   for l:key in ['c', 'h', 't', 'b']
@@ -94,12 +86,6 @@ endfunction
 filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
-  silent execute '!mkdir -p' s:bundle_base_path
-  call s:InstallBundleIfNotPresent({
-        \ 'name' : 'neobundle',
-        \ 'path' : s:bundle_base_path . 'neobundle.vim/',
-        \ 'url' : 'https://github.com/Shougo/neobundle.vim.git',
-        \ })
   call s:OSDetect()
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
 endif
@@ -311,8 +297,7 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   let s:unite = neobundle#get('unite.vim')
   function! s:unite.hooks.on_source(bundle)
-    let l:cache_dir = expand('~/.cache/unite')
-    let g:unite_data_directory = l:cache_dir
+    let g:unite_data_directory = expand('~/.cache/unite')
     let g:unite_abbr_highlight = 'Keyword'
     if (!isdirectory(g:unite_data_directory))
       call mkdir(g:unite_data_directory, 'p')

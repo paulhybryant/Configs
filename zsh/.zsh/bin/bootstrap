@@ -97,6 +97,8 @@ function bootstrap::main() {
     shell::eval "./osx/.osx/init.zsh"
     # TODO: import the saved preferences for karabiner etc, in init.zsh.
   fi
+
+  shell::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
   io::msg "Bootstrap done!"
 }
 
