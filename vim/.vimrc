@@ -171,7 +171,7 @@ if empty(g:provided)
         \ }                                                                     " Open related files in C++
   let s:relatedfiles = neobundle#get('relatedfiles')
   function s:relatedfiles.hooks.on_source(bundle)
-    call s:ConfigureRelatedFiles()
+    call g:ConfigureRelatedFiles()
   endfunction
   " }}}
 endif
