@@ -221,15 +221,6 @@ if s:vimplugin_size >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'Rykka/lastbuf.vim'                                                 " Open last closed buffer
-  let s:lastbuf = neobundle#get('lastbuf.vim')
-  function s:lastbuf.hooks.on_source(bundle)
-    map <c-s-t> :LastBuf<CR>
-    let g:lastbuf_num = 10
-    let g:lastbuf_level = 2
-  endfunction
-  " }}}
-  " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
         \ 'depends' : 'Shougo/context_filetype.vim',
         \ 'disabled' : !has('lua'),
