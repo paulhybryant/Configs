@@ -14,7 +14,7 @@ setxkbmap -option ''
 # setxkbmap -option caps:escape
 
 # Swap caps to ctrl
-setxkbmap -option caps:swapescape -option altwin:ctrl_alt_win
+setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 
 # setxkbmap -option caps:swapescape -option altwin:swap_alt_win
 

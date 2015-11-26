@@ -569,6 +569,11 @@ if s:vimplugin_size >= 0
         \ }                                                                     " Capture Ex command output to buffer
   " }}}
   " {{{2
+  NeoBundle 'wellle/tmux-complete.vim', {
+        \ 'disabled' : g:OS.is_mac,
+        \ }                                                                     " Insert mode completion of words in adjacent panes
+  " }}}
+  " {{{2
   NeoBundle 'xolox/vim-notes', {
         \ 'autoload' : {
         \     'commands' : [
@@ -623,11 +628,6 @@ if s:vimplugin_size >= 0
         \ 'autoload' : { 'filetypes' : ['tmux'] },
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing .tmux.conf
-  NeoBundle 'wellle/tmux-complete.vim', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] },
-        \ 'disabled' : g:OS.is_mac,
-        \ 'lazy' : 1,
-        \ }                                                                     " Insert mode completion of words in adjacent panes
   " }}}
   " ft-vim {{{2
   NeoBundle 'vim-scripts/ReloadScript', {
