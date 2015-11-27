@@ -1,11 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-declare -Axg FN_REGISTRY
-autoload -Uz zsh::autoload time::getmtime
-[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib ~/.zsh/lib/[^_]*(:t)
-autoload -Uz bashcompinit && bashcompinit
-# zstyle ":completion:*" show-completer true
-
 # Use PROFILING='y' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
   local _profile_log="/tmp/zsh.profile"
@@ -20,6 +14,12 @@ if [[ -n ${PROFILING+1} ]]; then
   # set options to turn on tracing and expansion of commands contained in the prompt
   setopt xtrace prompt_subst
 fi
+
+declare -Axg FN_REGISTRY
+autoload -Uz zsh::autoload time::getmtime
+[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib ~/.zsh/lib/[^_]*(:t)
+autoload -Uz bashcompinit && bashcompinit
+# zstyle ":completion:*" show-completer true
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
