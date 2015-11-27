@@ -33,6 +33,7 @@ xkb_symbols "ctrl_alt_win" {
     key <LWIN> { [ Alt_L, Meta_L ] };
     key <RWIN> { [ Alt_R, Meta_R ] };
     key <LCTL> { [ Super_L, Super_L ] };
+    key <RCTL> { [ Super_R, Super_R ] };
     modifier_map Control { <RALT>, <LALT> };
     modifier_map Mod1 { <LWIN>, <RWIN> };
     modifier_map Mod4 { <LCTL>, <RCTL> };

@@ -68,8 +68,9 @@
 ; (xbindkey '(control alt v) "vimode toggle")
 ; (xbindkey '("m:0x10" "c:66") "vimode toggle_|| xvkbd -xsendevent -text '\\[Escape]'")
 (xbindkey '("m:0x10" "c:76") "notify-send 'info' 'killing xbindkeys'; killall xbindkeys 2>&1 > /dev/null")
+; control + escape to toggle vimode
 (xbindkey '("m:0x14" "c:66") "vimode on")
-; (xbindkey '(Shift Return) "vimode toggle_")
+; (xbindkey '(Shift Return) "vimode toggle")
 ; (xbindkey '(alt t) "xvkbd::send-to-active-window '\Ct'")
 ; (xbindkey '(alt f) "xvkbd::send-to-active-window '\Cf'")
 
