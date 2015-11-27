@@ -118,6 +118,7 @@ if g:OS.is_windows
   set shellslash
   NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   NeoBundle 'wincent/Command-T'
+  NeoBundle 'sgur/unite-everything'
 else
   set shell=/bin/sh
 endif
@@ -195,6 +196,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
+  NeoBundle 'tsukkee/unite-help'                                                " Help source for unite.vim
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
         \ 'autoload' : { 'commands' : ['ScratchOpen'] },
@@ -700,7 +702,11 @@ if s:vimplugin_size >= 1
   " }}}
   NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'                                " Make terminal vim and tmux work better together
-  NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global script options
+  NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global vars
+  NeoBundle 'Shougo/neomru.vim'                                                 " Context filetype
+  NeoBundle 'tsukkee/unite-tag'                                                 " Unite source for tag file
+  NeoBundle 'tacroe/unite-mark'                                                 " Unite source for marks
+  NeoBundle 'tacroe/unite-alias'                                                " Unite source for aliases
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
   NeoBundle 'aquach/vim-http-client'                                            " Make http request in vim, and show the response
@@ -737,7 +743,6 @@ if s:vimplugin_size >= 1
   NeoBundle 'tpope/vim-scriptease'                                              " Plugin for developing vim plugins
   NeoBundle 'tpope/vim-speeddating'                                             " Quickly input dates
   NeoBundle 'tpope/vim-unimpaired'                                              " Complementary pairs of mappings
-  NeoBundle 'tsukkee/unite-help'                                                " Help source for unite.vim
   NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
   NeoBundle 'ujihisa/unite-colorscheme'                                         " Browser colorscheme with unite
   NeoBundle 'ujihisa/unite-locate'                                              " Use locate to find files with unite
