@@ -27,8 +27,9 @@ if os::LINUX; then
   alias clogout='cinnamon-session-quit --logout'
   alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
   alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
-  alias xkbclear="setxkbmap -option ''"
-  alias xkbreload="~/.xsessionrc"
+  alias xkbmapclear="setxkbmap -option ''"
+  alias xkbmapreload="~/.xsessionrc"
+  alias resetxkbmap='sudo dpkg-reconfigure xkb-data'
 
   case $(tty) in
     /dev/tty/[0-9]*)
