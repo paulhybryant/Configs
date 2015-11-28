@@ -52,13 +52,12 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     # 'directory' \
     # 'spectrum' \
     # 'utility' \
-    # 'completion' \
     # 'prompt'
 
   antigen use prezto
   local pmodules
   # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory completion fasd git \
+  pmodules=(environment terminal editor history directory fasd git \
     command-not-found syntax-highlighting history-substring-search homebrew \
     ssh tmux)
   os::OSX && pmodules+=(osx)
