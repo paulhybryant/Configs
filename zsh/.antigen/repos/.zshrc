@@ -76,8 +76,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  # Tell antigen that you're done. It will call compinit again, need to evaluate
-  # whether it slows startup down.
   antigen apply
 fi
 
@@ -88,6 +86,11 @@ fi
 
 autoload -Uz compinit && compinit
 autoload -Uz promptinit && promptinit
+
+# This has to be set after compinit (why?)
+compdef _ta tmux::attach ta
+autoload -Uz _ta _ta-sessions
+
 trap 'tmux::try-switch' EXIT
 
 if [[ -n ${PROFILING+1} ]]; then

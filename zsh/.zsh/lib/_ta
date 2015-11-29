@@ -1,0 +1,12 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+[[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
+local -a args
+
+args=(
+    '-c[specify working directory for the session]:directory:_path_files -g "*(-/)"'
+    '-d[detach other clients attached to target session]'
+    '-r[put the client into read-only mode]'
+    '-t[choose a target session]:target session:_ta-sessions'
+)
+_arguments ${args}
