@@ -1,27 +1,28 @@
 #!/usr/bin/env zsh
 
-fpath+=(${0:h}/../../lib/)
-autoload -Uz zsh::autoload time::getmtime
+local _dir=${0:h}/../../lib/
+fpath+=(${_dir})
+autoload -Uz zsh::autoload time::getmtime io::err
 declare -Axg FN_REGISTRY
-zsh::autoload ${0:h}/../../lib/[^_]*(:t)
+zsh::autoload ${_dir} ${_dir}/[^_]*(:t)
 
 set -x
 
 function test::shell::reloadfunc() {
   local _expected
-  _expected=$(time::getmtime ${0:h}/../../lib/shell::reloadfunc)
+  _expected=$(time::getmtime ${_dir}/shell::reloadfunc)
   _actual="$FN_REGISTRY[shell::reloadfunc]"
   [[ "${_expected}" == "${_actual}" ]]
 
-  touch ${0:h}/../../lib/shell::reloadfunc
-  shell::reloadfunc shell::reloadfunc
-  _expected=$(time::getmtime ${0:h}/../../lib/shell::reloadfunc)
+  touch ${_dir}/shell::reloadfunc
+  shell::reloadfunc ${_dir} shell::reloadfunc
+  _expected=$(time::getmtime ${_dir}/shell::reloadfunc)
   _actual="$FN_REGISTRY[shell::reloadfunc]"
   [[ "${_expected}" == "${_actual}" ]]
 
-  touch ${0:h}/../../lib/shell::reloadfunc
-  shell::reloadfunc
-  _expected=$(time::getmtime ${0:h}/../../lib/shell::reloadfunc)
+  touch ${_dir}/shell::reloadfunc
+  shell::reloadfunc ${_dir}
+  _expected=$(time::getmtime ${_dir}/shell::reloadfunc)
   [[ "${_expected}" == "$FN_REGISTRY[shell::reloadfunc]" ]]
 }
 test::shell::reloadfunc

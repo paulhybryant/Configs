@@ -95,7 +95,6 @@ function bootstrap::main() {
     shell::eval "brew cask install karabiner seil spectacle \
       xquartz git-annex urlview"
     shell::eval "./osx/.osx/init.zsh"
-    # TODO: import the saved preferences for karabiner etc, in init.zsh.
   fi
 
   shell::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
