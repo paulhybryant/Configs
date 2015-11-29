@@ -1,8 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-declare -xg GIT_EDITOR
-GIT_EDITOR='vim'
-declare -agx __TMUX_VARS__
+declare -xg GIT_EDITOR='vim'
+declare -axg __TMUX_VARS__
 __TMUX_VARS__=(SSH_CLIENT SSH_OS SSH_AUTH_SOCK DISPLAY SSH_AGENT_PID P4DIFF)
 declare -xg LS_COLORS
 

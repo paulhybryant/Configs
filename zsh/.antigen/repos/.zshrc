@@ -57,9 +57,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen use prezto
   local pmodules
   # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory fasd git \
-    command-not-found syntax-highlighting history-substring-search homebrew \
-    ssh tmux)
+  pmodules=(environment terminal editor history directory fasd git ssh tmux \
+    command-not-found syntax-highlighting history-substring-search homebrew)
   os::OSX && pmodules+=(osx)
   for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
@@ -89,7 +88,7 @@ autoload -Uz promptinit && promptinit
 
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach ta
-autoload -Uz _ta _ta-sessions
+zsh::autoload ~/.zsh/lib _ta _ta-sessions
 
 trap 'tmux::try-switch' EXIT
 
