@@ -120,7 +120,7 @@ bindkey "[1;5C" end-of-line                                                   #
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
 bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
 # bindkey '^R' history-incremental-pattern-search-backward                      # Search history backward incrementally
-bindkey '\C-R' history-incremental-pattern-search-backward                      # Search history backward incrementally
+# bindkey '\C-R' history-incremental-pattern-search-backward                      # Search history backward incrementally
 # bindkey 'r' history-incremental-pattern-search-backward                     # Search history backward incrementally
 # bindkey -s 'd' ''
 # bindkey -s 'z' ''
@@ -133,6 +133,8 @@ bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
 shell::setup-abbrevs
+
+[[ -e ~/.fzf/shell/key-bindings.zsh ]] && source ~/.fzf/shell/key-bindings.zsh
 
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories

@@ -66,6 +66,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   done
   unset pmodules
 
+  antigen bundle mollifier/anyframe
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
 
   # antigen use oh-my-zsh

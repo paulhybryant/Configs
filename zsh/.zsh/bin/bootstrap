@@ -58,18 +58,19 @@ function bootstrap::main() {
   shell::eval "brew tap homebrew/completions"
   shell::eval "brew tap iveney/mocha"
   shell::eval "brew tap beeftornado/rmtree"
+  # shell::eval "brew tap peco/peco"
 
   io::msg "Installing softwares..."
   shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
-    fasd makeself upx brew-rmtree ruby npm git-extras nmap urlview \
+    fasd makeself upx brew-rmtree ruby npm git-extras nmap urlview fzf peco \
     zsh-completions"
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
-    neovim terminatorcli bz2file"
+    neovim terminatorcli bz2file, percol"
   if os::LINUX; then
     shell::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
