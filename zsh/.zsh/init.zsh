@@ -94,7 +94,7 @@ alias sf='fasd -sif'                                                            
 alias ssh='net::ssh'
 alias stat='${CMDPREFIX}\stat'
 alias stow='\stow -v'
-alias ta='tmux::attach'
+alias ta='tmux::attach -d -t'
 alias tl='\tmux list-sessions'
 alias tmux='TERM=screen-256color \tmux -2'
 alias ts='tmux start-server; tmux attach'
@@ -132,7 +132,7 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-shell::setup-abbrevs
+# shell::setup-abbrevs
 
 [[ -e ~/.fzf/shell/key-bindings.zsh ]] && source ~/.fzf/shell/key-bindings.zsh
 
@@ -151,7 +151,7 @@ setopt AUTO_MENU                                                                
 setopt AUTO_PARAM_KEYS
 setopt AUTO_PARAM_SLASH
 setopt AUTO_REMOVE_SLASH
-setopt COMPLETE_ALIASES                                                         # Prevent aliases from being internally substituted before completion is attempted
+setopt NO_COMPLETE_ALIASES                                                         # Prevent aliases from being internally substituted before completion is attempted
 setopt COMPLETE_IN_WORD                                                         # Not just at the end
 setopt GLOB_COMPLETE
 setopt LIST_AMBIGUOUS

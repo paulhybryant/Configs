@@ -88,7 +88,7 @@ autoload -Uz compinit && compinit
 autoload -Uz promptinit && promptinit
 
 # This has to be set after compinit (why?)
-compdef _ta tmux::attach ta
+compdef _ta tmux::attach
 zsh::autoload ~/.zsh/lib _ta _ta-sessions
 
 trap 'tmux::try-switch' EXIT

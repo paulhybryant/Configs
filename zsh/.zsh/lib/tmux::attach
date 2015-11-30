@@ -10,9 +10,8 @@ Tmux attach wrapper, which updates tmux environment as configured.
 
 setopt localoptions err_return
 
-if [[ ! ($# -eq 2 && "$1" == "-t") ]]; then
-  io::err "tmux::attach -t [session]"
-fi
+echo "$@"
+return 0
 
 for var in ${__TMUX_VARS__};
 do
@@ -20,4 +19,4 @@ do
   eval _value=\$${var}
   \tmux set-environment ${var} "${_value}"
 done
-tmux attach -dt "$2"
+tmux attach "$@"
