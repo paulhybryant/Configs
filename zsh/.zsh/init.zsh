@@ -134,7 +134,9 @@ bindkey '\C-p' reverse-menu-complete
 
 # shell::setup-abbrevs
 
-[[ -e ~/.fzf/shell/key-bindings.zsh ]] && source ~/.fzf/shell/key-bindings.zsh
+declare -xg FZF_DEFAULT_OPTS='-e'
+local _fzf_dir=$(brew --prefix fzf)
+[[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories

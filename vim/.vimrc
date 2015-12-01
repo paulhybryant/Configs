@@ -118,7 +118,11 @@ if g:OS.is_windows
   set shellslash
   NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
   NeoBundle 'wincent/Command-T'
-  NeoBundle 'sgur/unite-everything'
+  " {{{2
+  NeoBundle 'sgur/unite-everything', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for everything
+  " }}}
 else
   set shell=/bin/sh
 endif
@@ -180,6 +184,7 @@ call glaive#Install()
 " }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_size >= 0
+  let g:fzf_brew_prefix = system('brew --prefix fzf')
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Rykka/riv.vim'
   NeoBundle 'Rykka/InstantRst'
@@ -196,7 +201,6 @@ if s:vimplugin_size >= 0
   NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
-  NeoBundle 'tsukkee/unite-help'                                                " Help source for unite.vim
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
         \ 'autoload' : { 'commands' : ['ScratchOpen'] },
@@ -416,18 +420,17 @@ if s:vimplugin_size >= 0
   " }}}
   " {{{2
   NeoBundle 'junegunn/fzf', {
-        \ 'directory' : 'fzf-vanilla',
-        \ 'name' : 'fzf-vanilla',
-        \ 'regular_name' : 'fzf-vanilla',
-        \ 'rtp' : maktaba#path#Dirname(
-        \   maktaba#path#Dirname(resolve(exepath('fzf'))))
+        \ 'base_path' : maktaba#path#Dirname(g:fzf_brew_prefix),
+        \ 'directory' : 'fzf',
+        \ 'name' : 'fzf',
+        \ 'regular_name' : 'fzf',
         \ }                                                                     " Fuzzy finder
   " }}}
   " {{{2
   NeoBundle 'junegunn/fzf.vim', {
+        \ 'depends' : ['fzf'],
         \ 'name' : 'fzf.vim',
         \ 'regular_name' : 'fzf.vim',
-        \ 'depends' : ['fzf-vanilla'],
         \ }                                                                     " Enhanced vim plugin for fzf fuzzy finder
   " }}}
   " {{{2
@@ -553,6 +556,11 @@ if s:vimplugin_size >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'tsukkee/unite-help', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Help source for unite.vim
+  " }}}
+  " {{{2
   NeoBundle 'tyru/capture.vim', {
         \ 'autoload' : { 'commands' : ['Capture'] },
         \ }                                                                     " Capture Ex command output to buffer
@@ -572,8 +580,8 @@ if s:vimplugin_size >= 0
         \       },
         \     ]
         \   },
-        \ 'lazy' : 1,
         \ 'depends' : ['xolox/vim-misc'],
+        \ 'lazy' : 1,
         \ }                                                                     " Note taking with vim
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
@@ -704,9 +712,26 @@ if s:vimplugin_size >= 1
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'                                " Make terminal vim and tmux work better together
   NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global vars
   NeoBundle 'Shougo/neomru.vim'                                                 " Context filetype
-  NeoBundle 'tsukkee/unite-tag'                                                 " Unite source for tag file
-  NeoBundle 'tacroe/unite-mark'                                                 " Unite source for marks
-  NeoBundle 'tacroe/unite-alias'                                                " Unite source for aliases
+  " {{{2
+  NeoBundle 'tsukkee/unite-tag', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for tag files
+  " }}}
+  " {{{2
+  NeoBundle 'tacroe/unite-mark', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for marks
+  " }}}
+  " {{{2
+  NeoBundle 'majkinetor/unite-cmdmatch', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for command line completion
+  " }}}
+  " {{{2
+  NeoBundle 'tacroe/unite-alias', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for aliases
+  " }}}
   NeoBundle 'Chiel92/vim-autoformat'                                            " Easy code formatting with external formatter
   NeoBundle 'Lokaltog/vim-easymotion'                                           " Display hint for jumping to
   NeoBundle 'aquach/vim-http-client'                                            " Make http request in vim, and show the response
@@ -730,11 +755,19 @@ if s:vimplugin_size >= 1
   NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
   NeoBundle 'powerman/vim-plugin-AnsiEsc'                                       " Improved version of AnsiEsc
   NeoBundle 'sjl/splice.vim'                                                    " Vim three way merge tool
-  NeoBundle 'skeept/Ultisnips-neocomplete-unite'                                " Ultisnips source for unite
+  " {{{2
+  NeoBundle 'skeept/Ultisnips-neocomplete-unite', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for Ultisnips
+  " }}}
   NeoBundle 'thinca/vim-editvar'                                                " Open a buffer to edit a variable and set its value
   NeoBundle 'thinca/vim-prettyprint'                                            " Pretty print vim variable for debugging
   NeoBundle 'thinca/vim-quickrun'                                               " Execute whole/part of currently edited file
-  NeoBundle 'thinca/vim-unite-history'                                          " History source for unite
+  " {{{2
+  NeoBundle 'thinca/vim-unite-history', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for history
+  " }}}
   NeoBundle 'thinca/vim-visualstar'                                             " Allow searching using '*' with visually selected text
   NeoBundle 'tpope/vim-abolish.git'                                             " Creates set of abbreviations for spell correction easily
   NeoBundle 'tpope/vim-commentary'                                              " Plugin for adding comments
@@ -744,8 +777,16 @@ if s:vimplugin_size >= 1
   NeoBundle 'tpope/vim-speeddating'                                             " Quickly input dates
   NeoBundle 'tpope/vim-unimpaired'                                              " Complementary pairs of mappings
   NeoBundle 'tyru/emap.vim'                                                     " Extensible mappings
-  NeoBundle 'ujihisa/unite-colorscheme'                                         " Browser colorscheme with unite
-  NeoBundle 'ujihisa/unite-locate'                                              " Use locate to find files with unite
+  " {{{2
+  NeoBundle 'ujihisa/unite-colorscheme', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for colorschemes
+  " }}}
+  " {{{2
+  NeoBundle 'ujihisa/unite-locate', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for locate
+  " }}}
   NeoBundle 'vasconcelloslf/vim-foldfocus'                                      " Edit and read fold in a separate buffer
   NeoBundle 'vim-scripts/ExtractMatches'                                        " Yank matches from range into a register
   NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
@@ -1416,15 +1457,43 @@ if s:vimplugin_size >= 99
         \ }                                                                     " Text object for a hunk of diffs
   NeoBundle 'bronson/vim-visual-star-search'                                    " Use * to search for selected text from visual mode
   NeoBundle 'wincent/ferret'                                                    " Enhanced multi-file search for Vim
-  NeoBundle 'h1mesuke/unite-outline'
+  " {{{2
+  NeoBundle 'h1mesuke/unite-outline', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for outline
+  " }}}
   NeoBundle 'Xuyuanp/nerdtree-git-plugin'
   NeoBundle 'mbbill/undotree'
-  NeoBundle 'mattn/unite-gist'
-  NeoBundle 'Shougo/unite-build'
-  NeoBundle 'Shougo/unite-sudo'
-  NeoBundle 'Shougo/unite-ssh'
-  NeoBundle 'kopischke/unite-spell-suggest'
-  NeoBundle 'tyru/unite-screen.sh'
+  " {{{2
+  NeoBundle 'mattn/unite-gist', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for gist
+  " }}}
+  " {{{2
+  NeoBundle 'Shougo/unite-build', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for build
+  " }}}
+  " {{{2
+  NeoBundle 'Shougo/unite-sudo', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for sudo
+  " }}}
+  " {{{2
+  NeoBundle 'Shougo/unite-ssh', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for ssh
+  " }}}
+  " {{{2
+  NeoBundle 'kopischke/unite-spell-suggest', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for spellcheck
+  " }}}
+  " {{{2
+  NeoBundle 'tyru/unite-screen.sh', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Unite source for screen
+  " }}}
   NeoBundle 'tpope/vim-vinegar'                                                 " NERDTree enhancement
   " {{{2
   NeoBundle 'osyo-manga/vim-over'                                               " Preview changes to be made

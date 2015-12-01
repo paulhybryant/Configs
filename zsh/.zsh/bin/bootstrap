@@ -66,7 +66,7 @@ function bootstrap::main() {
   shell::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap urlview fzf peco \
-    zsh-completions"
+    zsh-completions pt"
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
@@ -79,7 +79,7 @@ function bootstrap::main() {
   fi
   shell::eval "brew gem install tmuxinator automux"
   shell::eval "http_proxy='' https_proxy='' \
-    npm install -g urchin npm-update-outdated shelljs"
+    npm install -g urchin npm-update-outdated shelljs js-beautify"
 
   if os::OSX; then
     io::msg "Installing extra stuff for OSX..."
