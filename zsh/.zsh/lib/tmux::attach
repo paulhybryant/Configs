@@ -10,9 +10,6 @@ Tmux attach wrapper, which updates tmux environment as configured.
 
 setopt localoptions err_return
 
-echo "$@"
-return 0
-
 for var in ${__TMUX_VARS__};
 do
   local _value=
