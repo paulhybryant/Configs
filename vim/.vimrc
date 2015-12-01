@@ -420,7 +420,7 @@ if s:vimplugin_size >= 0
   " }}}
   " {{{2
   NeoBundle 'junegunn/fzf', {
-        \ 'base_path' : maktaba#path#Dirname(g:fzf_brew_prefix),
+        \ 'base' : maktaba#path#Dirname(g:fzf_brew_prefix),
         \ 'directory' : 'fzf',
         \ 'name' : 'fzf',
         \ 'regular_name' : 'fzf',

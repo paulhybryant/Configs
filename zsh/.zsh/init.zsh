@@ -136,6 +136,11 @@ bindkey '\C-p' reverse-menu-complete
 
 declare -xg FZF_DEFAULT_OPTS='-e'
 local _fzf_dir=$(brew --prefix fzf)
+declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
+    -o -type f -print \
+    -o -type d -print \
+    -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
+
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
 # Options are not ordered alphabetically, but their order in zsh man page
