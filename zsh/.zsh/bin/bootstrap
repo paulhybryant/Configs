@@ -70,7 +70,7 @@ function bootstrap::main() {
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
-    neovim terminatorcli bz2file, percol"
+    neovim terminatorcli bz2file percol"
   if os::LINUX; then
     shell::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
@@ -92,10 +92,9 @@ function bootstrap::main() {
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
     shell::eval "brew install --force trash"
     shell::eval "brew link --overwrite trash"
-    shell::eval "./osx/.osx/init.zsh"
     shell::eval "brew cask install karabiner seil spectacle \
       xquartz git-annex urlview"
-    shell::eval "./osx/.osx/init.zsh"
+    # shell::eval "./osx/.osx/init.zsh"
   fi
 
   shell::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
