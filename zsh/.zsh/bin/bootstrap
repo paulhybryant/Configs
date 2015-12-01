@@ -27,7 +27,7 @@ function bootstrap::main() {
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd git-annex xautomation"
+    xvkbd git-annex xautomation urlview"
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -65,8 +65,9 @@ function bootstrap::main() {
   shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   shell::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
-    fasd makeself upx brew-rmtree ruby npm git-extras nmap urlview fzf peco \
-    zsh-completions pt"
+    fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
+    zsh-completions"
+  shell::eval "brew install --force pt"
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
