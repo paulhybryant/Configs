@@ -1,60 +1,21 @@
 #!/usr/bin/env zsh
 
-# fpath+=($HOME/.zsh/lib)
-# autoload -Uz x::get-active-window-process-name
-
-# local _process
-# _process="$(x::get-active-window-process-name)"
-# [[ "${_process}" == "/usr/bin/termin" ]] && return 1
-
 setopt localoptions err_return
 
+[[ $# -eq 1 ]] || echo 'Usage: vimode [mode]'
+
 function send-notification() {
-  notify-send 'vimmode' "$1"
+  notify-send 'vimode' "$1"
 }
 
-function on() {
-  if is_on "$1"; then
-    echo 'already on'
-    return 0
-  fi
-  touch "$1"
-  ln -sf ~/.xbindkeysrc.vim ~/.xbindkeysrc.scm
-  echo 'on'
+function normal() {
+  xkb-switch -s 'us(vimnormal)'
+  send-notification 'normal'
 }
 
-function off() {
-  if ! is_on "$1"; then
-    echo 'already off'
-    return 0
-  fi
-  rm "$1"
-  killall xbindkeys 2>&1 > /dev/null
-  ln -sf ~/.xbindkeysrc.normal ~/.xbindkeysrc.scm
-  echo 'off'
+function insert() {
+  xkb-switch -s 'us(viminsert)'
+  send-notification 'insert'
 }
 
-function toggle() {
-  if is_on "$1"; then
-    echo $(off)
-  else
-    echo $(on)
-  fi
-}
-
-function is_on() {
-  [[ -f "$1" ]] && return 0
-  return 1
-}
-
-local _subcmd _lock _message
-_subcmd="$1"
-_lock=/tmp/vimode.lock
-_message=$($1 ${_lock})
-xbindkeys
-if ! xbindkeys -s; then
-  _message='error'
-  off
-fi
-send-notification "${_message}"
-return 0
+$1
