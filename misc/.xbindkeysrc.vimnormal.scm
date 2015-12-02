@@ -11,7 +11,7 @@
 
 ; Use ctrl + escape to switch to vim mode
 ; Use keycode directly (can be found by xbindkeys -k)
-(xbindkey '("m:0x14" "c:66") "vimode normal")
+; (xbindkey '("m:0x14" "c:66") "vimode insert")
 
 (define (bind-dw)
   "DW commands"

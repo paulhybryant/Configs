@@ -2,23 +2,29 @@
 
 setopt localoptions err_return
 
-[[ $# -eq 1 ]] || echo 'Usage: vimode [mode]'
-
 function send-notification() {
   notify-send 'vimode' "$1"
 }
 
 function normal() {
-  xkb-switch -s 'us(vimnormal)'
+  # xkb-switch -s 'us(vimnormal)'
+  setxkbmap -layout 'us(vimnormal)'
   xbindkeys -fg ~/.xbindkeysrc.vimnormal.scm
   send-notification 'normal'
 }
 
 function insert() {
-  xkb-switch -s 'us(viminsert)'
+  setxkbmap -layout 'us(viminsert)'
   xbindkeys
   send-notification 'insert'
 }
 
-killall xbindkeys 2>&1 > /dev/null
-$1
+if [[ $# -gt 1 ]]; then
+  echo 'Usage: vimode [mode]'
+  return 1
+elif [[ $# -eq 0 ]]; then
+  xkb-switch -p
+else
+  killall xbindkeys 2>&1 > /dev/null
+  $1
+fi
