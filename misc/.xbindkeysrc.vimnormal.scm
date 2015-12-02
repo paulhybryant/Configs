@@ -27,7 +27,7 @@
 
 ; Use letter
 ; see man xbindkey / man xvkbd to see what text (keysyms) are available.
-(xbindkey '(a) "vimode insert")
+(xbindkey '(a) "~/.zsh/bin/vimode insert")
 (xbindkey '(b) "xvkbd -xsendevent -text '\\C\\[Left]'")
 (xbindkey '(c) "")
 (define (bind-d)
@@ -43,7 +43,7 @@
 (xbindkey '(e) "xvkbd -xsendevent -text '\\C\\[Right]'")
 (xbindkey '(f) "")
 (xbindkey '(g) "")
-(xbindkey '(i) "vimode insert")
+(xbindkey '(i) "~/.zsh/bin/vimode insert")
 (xbindkey '(m) "")
 (xbindkey '(n) "")
 (xbindkey '(o) "")
@@ -67,10 +67,34 @@
 (xbindkey '(z) "")
 
 (xbindkey '(slash) "xvkbd -xsendevent -text '\\Cf'")
-; D
+
+(xbindkey '(Shift a) "xvkbd -xsendevent -text '\\S\\[End]a'")
+(xbindkey '(Shift b) "")
+(xbindkey '(Shift c) "")
 (xbindkey '(Shift d) "xvkbd -xsendevent -text '\\S\\[End]\\[Delete]'")
-; V
+(xbindkey '(Shift e) "")
+(xbindkey '(Shift f) "")
+(xbindkey '(Shift g) "")
+(xbindkey '(Shift h) "")
+(xbindkey '(Shift i) "")
+(xbindkey '(Shift j) "")
+(xbindkey '(Shift k) "")
+(xbindkey '(Shift l) "")
+(xbindkey '(Shift m) "")
+(xbindkey '(Shift n) "")
+(xbindkey '(Shift o) "")
+(xbindkey '(Shift p) "")
+(xbindkey '(Shift q) "")
+(xbindkey '(Shift r) "")
+(xbindkey '(Shift s) "")
+(xbindkey '(Shift t) "")
+(xbindkey '(Shift u) "")
 (xbindkey '(Shift v) "xvkbd -xsendevent -text '\\[Home]\\S\\[End]'")
+(xbindkey '(Shift w) "")
+(xbindkey '(Shift x) "")
+(xbindkey '(Shift y) "")
+(xbindkey '(Shift z) "")
+
 ; 0
 (xbindkey '("0") "xvkbd -xsendevent -text '\\[Home]'")
 ; $
