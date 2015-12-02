@@ -8,13 +8,13 @@
 # Available options are in /usr/share/X11/xkb/rules
 # Check out base.lst to get started.
 # Clear all options first
-setxkbmap -option ''
+# setxkbmap -option ''
 
 # Map caps to ctrl
 # setxkbmap -option caps:escape
 
 # Swap caps to ctrl
-setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
+# setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 
 # setxkbmap -option caps:swapescape -option altwin:swap_alt_win
 
