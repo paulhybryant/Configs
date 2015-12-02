@@ -36,8 +36,8 @@
 
 
 
-# Switch layout with Ctrl + Escape
-"setxkbmap -layout us -variant viminsert"
+# Switch to vimnormal layout with Ctrl + Escape
+"vimode normal"
     m:0x14 + c:66
     Control+Mod2 + Escape
 

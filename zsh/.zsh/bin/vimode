@@ -10,12 +10,15 @@ function send-notification() {
 
 function normal() {
   xkb-switch -s 'us(vimnormal)'
+  xbindkeys -fg ~/.xbindkeysrc.vimnormal.scm
   send-notification 'normal'
 }
 
 function insert() {
   xkb-switch -s 'us(viminsert)'
+  xbindkeys
   send-notification 'insert'
 }
 
+killall xbindkeys 2>&1 > /dev/null
 $1
