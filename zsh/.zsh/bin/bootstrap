@@ -71,7 +71,7 @@ function bootstrap::main() {
   # pypy pypy3
   shell::eval "brew install --HEAD vimdoc vroom"
   shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
-    neovim terminatorcli bz2file percol"
+    neovim terminatorcli bz2file percol butterfly libsass"
   if os::LINUX; then
     shell::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
