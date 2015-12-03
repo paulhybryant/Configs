@@ -89,4 +89,16 @@
       KeyCode::L, ModifierFlag::OPTION_L,
     </autogen>
   </item>
+  <item>
+    <name>Ctrl-Escape toggles Normal Mode</name>
+    <identifier>remap.vimnormal_ctrlbracketleft_toggle2</identifier>
+    <not>{{UBIQUITOUS_VIM_BINDINGS_IGNORE_APPS}}</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::ESCAPE, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL,
+      KeyCode::VK_LOCK_ALL_FORCE_OFF,
+      KeyCode::VK_CONFIG_TOGGLE_notsave_ubiq_vimnormal,
+      {{ UBIQUITOUS_VIM_BINDINGS_CANCEL_OPERATOR_PENDING }}
+    </autogen>
+  </item>
 </root>
