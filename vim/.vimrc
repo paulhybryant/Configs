@@ -462,10 +462,6 @@ if s:vimplugin_size >= 0
           \  'folddigest', 'capture' ]`
     execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
     call myutils#InitUndoSwapViews()
-    if neobundle#is_sourced('vim-codefmt')
-      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
-      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
-    endif
   endfunction
   function! s:myutils.hooks.on_post_source(bundle)
     " Only use this when running in OSX or ssh from OSX
@@ -1272,6 +1268,10 @@ if s:vimplugin_size >= 1
       " execute ':SQLUFormatter'
       " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
     " endfunction
+    if neobundle#is_sourced('vim-codefmt') && neobundle#is_installed('myutils')
+      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
+      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
+    endif
   endfunction
   NeoBundle 'vim-scripts/SQLComplete.vim', {
         \ 'autoload' : { 'filetypes' : ['sql'] },
