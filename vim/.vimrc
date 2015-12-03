@@ -1331,6 +1331,7 @@ if s:vimplugin_size >= 99
     nmap <leader>gk <plug>(signify-prev-hunk)
   endfunction
   " }}}
+  NeoBundle 'oplatek/Conque-Shell'
   NeoBundle 'MarcWeber/vim-addon-manager'                                       " Yet another vim plugin manager
   NeoBundle 'gmarik/Vundle.vim'                                                 " Yet another vim plugin manager
   NeoBundle 'junegunn/vim-plug'                                                 " Yet another vim plugin manager

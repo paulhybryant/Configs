@@ -21,9 +21,10 @@ dirty_repos=()
 for dir in */; do
   io::vlog 2 "[${0:t}] Checking ${dir}"
   pushd "${dir}"
-  if [[ -d '.git' && (-n $(git status --porcelain) || \
+  if [[ -d '.git' && (($(git diff origin/master | wc -l) -ne 0) || \
+    (-n $(git status --porcelain) || \
     (-n ${opts[--no-detached]+1} && \
-      "$(git status)" =~ '^HEAD detached.*')) ]]; then
+    "$(git status)" =~ '^HEAD detached.*'))) ]]; then
     dirty_repos+=${dir}
   fi
   popd
