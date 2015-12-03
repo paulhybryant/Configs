@@ -125,8 +125,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 fi
 
 # Local configurations
-if [[ -f ~/.zshrc.google ]]; then
-  source ~/.zshrc.google
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
 fi
 
 autoload -Uz compinit && compinit
