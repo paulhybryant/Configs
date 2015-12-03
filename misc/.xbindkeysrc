@@ -30,6 +30,8 @@
 # Shift+...
 
 
+
+
 #keystate_numlock = enable
 #keystate_scrolllock = enable
 #keystate_capslock = enable
@@ -40,6 +42,51 @@
 "~/.zsh/bin/vimode normal"
     m:0x14 + c:66
     Control+Mod2 + Escape
+
+#Chrome1
+# "xvkbd -xsendevent -text '\A1'"
+    # m:0x40 + c:10
+    # Mod4 + 1
+
+#Chrome2
+# "xvkbd -xsendevent -text '\A2'"
+    # m:0x40 + c:11
+    # Mod4 + 2
+
+#Chrome3
+# "xvkbd -xsendevent -text '\A3'"
+    # m:0x40 + c:12
+    # Mod4 + 3
+
+#Chrome4
+# "xvkbd -xsendevent -text '\A4'"
+    # m:0x40 + c:13
+    # Mod4 + 4
+
+#Chrome5
+# "xvkbd -xsendevent -text '\A5'"
+    # m:0x40 + c:14
+    # Mod4 + 5
+
+#Chrome6
+# "xvkbd -xsendevent -text '\A6'"
+    # m:0x40 + c:15
+    # Mod4 + 6
+
+#Chrome7
+# "xvkbd -xsendevent -text '\A7'"
+    # m:0x40 + c:16
+    # Mod4 + 7
+
+#Chrome8
+# "xvkbd -xsendevent -text '\A8'"
+    # m:0x40 + c:17
+    # Mod4 + 8
+
+#Chrome9
+# "xvkbd -xsendevent -text '\A9'"
+    # m:0x40 + c:18
+    # Mod4 + 9
 
 #
 # End of xbindkeys configuration

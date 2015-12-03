@@ -38,6 +38,11 @@
 
 
 
+# Switch to vimnormal layout with Ctrl + Escape
+"~/.zsh/bin/vimode normal"
+    m:0x14 + c:66
+    Control+Mod2 + Escape
+
 #Chrome1
 # "xvkbd -xsendevent -text '\A1'"
     # m:0x40 + c:10
