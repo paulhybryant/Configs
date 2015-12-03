@@ -7,6 +7,7 @@ scriptencoding utf-8                                                            
 let g:mapleader = ','
 let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
+let g:blacklisted_bundles = {}
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 let s:vimplugin_size = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
@@ -135,21 +136,21 @@ endif
 " Special bundles that might be blacklisted {{{1
   " {{{2
   NeoBundle 'google/vim-maktaba', {
-        \ 'disabled' : has_key(g:blacklisted, 'vim-maktaba'),
+        \ 'disabled' : has_key(g:blacklisted_bundles, 'vim-maktaba'),
         \ 'force' : 1,
         \ }                                                                     " Vimscript plugin library from google
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive', {
         \ 'depends' : ['google/vim-maktaba'],
-        \ 'disabled' : has_key(g:blacklisted, 'vim-glaive'),
+        \ 'disabled' : has_key(g:blacklisted_bundles, 'vim-glaive'),
         \ 'force' : 1,
         \ }                                                                     " Plugin for better vim plugin configuration
   " }}}
   " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
         \ 'autoload' : { 'filetypes' : ['c', 'cpp', 'go', 'python'] },
-        \ 'disabled' : has_key(g:blacklisted, 'YouCompleteMe'),
+        \ 'disabled' : has_key(g:blacklisted_bundles, 'YouCompleteMe'),
         \ 'lazy' : 1,
         \ }                                                                     " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
@@ -161,7 +162,7 @@ endif
   NeoBundle 'google/vim-codefmt', {
         \ 'autoload' : { 'filetypes' : ['cpp', 'javascript', 'sql'] },
         \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
-        \ 'disabled' : has_key(g:blacklisted, 'vim-codefmt'),
+        \ 'disabled' : has_key(g:blacklisted_bundles, 'vim-codefmt'),
         \ }                                                                     " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
@@ -173,7 +174,7 @@ endif
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
         \ 'autoload' : { 'filetypes' : ['cpp'] },
-        \ 'disabled' : has_key(g:blacklisted, 'relatedfiles'),
+        \ 'disabled' : has_key(g:blacklisted_bundles, 'relatedfiles'),
         \ 'lazy' : 1,
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " Open related files in C++
@@ -452,7 +453,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'paulhybryant/myutils', {
         \ 'depends' : filter(
         \   ['vim-codefmt', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:blacklisted, v:val)'),
+        \   '!has_key(g:blacklisted_bundles, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " My vim customization (utility functions, syntax etc)
   let s:myutils = neobundle#get('myutils')
@@ -1014,7 +1015,7 @@ if s:vimplugin_size >= 1
   NeoBundle 'paulhybryant/foldcol', {
         \ 'depends' : filter(
         \   ['Align', 'vim-codefmt', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:blacklisted, v:val)'),
+        \   '!has_key(g:blacklisted_bundles, v:val)'),
         \ 'type__protocol' : 'ssh'
         \ }                                                                     " Fold columns selected in visual block mode
   let s:foldcol = neobundle#get('foldcol')
@@ -1312,7 +1313,7 @@ if s:vimplugin_size >= 99
   NeoBundle 'paulhybryant/vim-diff-indicator', {
         \ 'depends' : filter(
         \   ['paulhybryant/vim-signify', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:blacklisted, v:val)'),
+        \   '!has_key(g:blacklisted_bundles, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " Diff indicator based on vim-signify
   let s:indicator = neobundle#get('vim-diff-indicator')
