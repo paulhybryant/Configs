@@ -71,6 +71,8 @@
   )
 (bind-w)
 (xbindkey '(x) "xvkbd -xsendevent -text '\\[Delete]'")
+; Backspace
+; (xbindkey '(x) "xvkbd -xsendevent -text '\\b'")
 (xbindkey '(y) "xvkbd -xsendevent -text '\\Cc'")
 (xbindkey '(z) "")
 
@@ -107,6 +109,3 @@
 (xbindkey '("0") "xvkbd -xsendevent -text '\\[Home]'")
 ; $
 (xbindkey '("m:0x11" "c:13") "xvkbd -xsendevent -text '\\[End]'")
-
-; Backspace
-; (xbindkey '(x) "xvkbd -xsendevent -text '\\b'")
