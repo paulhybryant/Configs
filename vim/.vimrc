@@ -127,28 +127,29 @@ else
   set shell=/bin/sh
 endif
 " }}}
-" Google specific setup {{{1
-let g:provided = {}
-if filereadable('/usr/share/vim/google/google.vim')
-  if has('vim_starting')
-    execute 'source' expand('~/.vimrc.google')
-  endif
+" Local setup (before) {{{1
+if filereadable(expand('~/.vimrc.local.before'))
+  execute 'source' expand('~/.vimrc.local.before')
 endif
-if empty(g:provided)
+" }}}
+" Special bundles that might be blacklisted {{{1
   " {{{2
   NeoBundle 'google/vim-maktaba', {
+        \ 'disabled' : has_key(g:blacklisted, 'vim-maktaba'),
         \ 'force' : 1,
         \ }                                                                     " Vimscript plugin library from google
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive', {
         \ 'depends' : ['google/vim-maktaba'],
+        \ 'disabled' : has_key(g:blacklisted, 'vim-glaive'),
         \ 'force' : 1,
         \ }                                                                     " Plugin for better vim plugin configuration
   " }}}
   " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
         \ 'autoload' : { 'filetypes' : ['c', 'cpp', 'go', 'python'] },
+        \ 'disabled' : has_key(g:blacklisted, 'YouCompleteMe'),
         \ 'lazy' : 1,
         \ }                                                                     " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
@@ -160,6 +161,7 @@ if empty(g:provided)
   NeoBundle 'google/vim-codefmt', {
         \ 'autoload' : { 'filetypes' : ['cpp', 'javascript', 'sql'] },
         \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
+        \ 'disabled' : has_key(g:blacklisted, 'vim-codefmt'),
         \ }                                                                     " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
@@ -171,6 +173,7 @@ if empty(g:provided)
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
         \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'disabled' : has_key(g:blacklisted, 'relatedfiles'),
         \ 'lazy' : 1,
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " Open related files in C++
@@ -179,7 +182,6 @@ if empty(g:provided)
     call g:ConfigureRelatedFiles()
   endfunction
   " }}}
-endif
 call glaive#Install()
 " }}}
 " Priority 0 Plugins {{{1
@@ -450,7 +452,7 @@ if s:vimplugin_size >= 0
   NeoBundle 'paulhybryant/myutils', {
         \ 'depends' : filter(
         \   ['vim-codefmt', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:provided, v:val)'),
+        \   '!has_key(g:blacklisted, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " My vim customization (utility functions, syntax etc)
   let s:myutils = neobundle#get('myutils')
@@ -1012,7 +1014,7 @@ if s:vimplugin_size >= 1
   NeoBundle 'paulhybryant/foldcol', {
         \ 'depends' : filter(
         \   ['Align', 'vim-codefmt', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:provided, v:val)'),
+        \   '!has_key(g:blacklisted, v:val)'),
         \ 'type__protocol' : 'ssh'
         \ }                                                                     " Fold columns selected in visual block mode
   let s:foldcol = neobundle#get('foldcol')
@@ -1310,7 +1312,7 @@ if s:vimplugin_size >= 99
   NeoBundle 'paulhybryant/vim-diff-indicator', {
         \ 'depends' : filter(
         \   ['paulhybryant/vim-signify', 'vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:provided, v:val)'),
+        \   '!has_key(g:blacklisted, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " Diff indicator based on vim-signify
   let s:indicator = neobundle#get('vim-diff-indicator')
@@ -1694,5 +1696,10 @@ if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                
   set clipboard=unnamedplus
 else                                                                            " On Windows use * register
   set clipboard=unnamed
+endif
+" }}}
+" Local setup (after) {{{1
+if filereadable(expand('~/.vimrc.local.after'))
+  execute 'source' expand('~/.vimrc.local.after')
 endif
 " }}}
