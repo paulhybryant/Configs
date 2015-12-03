@@ -27,7 +27,7 @@ function bootstrap::main() {
   os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd git-annex xautomation urlview"
+    xvkbd git-annex xautomation urlview xdotool x11-apps"
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -87,6 +87,7 @@ function bootstrap::main() {
     shell::eval "brew tap caskroom/versions"
     shell::eval "brew install --with-custom-icons --with-lua --with-luajit \
       --with-override-system-vim macvim"
+    shell::eval "brew linkapps macvim"
     shell::eval "brew install brew-cask clipper osxutils lsof \
       paulhybryant/myformulae/gnu-getopt"
     shell::eval "brew install reattach-to-user-namespace \
