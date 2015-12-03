@@ -4,18 +4,18 @@ setopt localoptions err_return
 
 function send-notification() {
   notify-send 'vimode' "$1"
-  zenity --info --text="$1"
+  # zenity --info --text="$1"
 }
 
 function normal() {
-  xkb-switch -s 'us(vimnormal)'
+  # xkb-switch -s 'us(vimnormal)'
   # setxkbmap -layout 'us' -variant 'vimnormal'
   xbindkeys -fg ~/.xbindkeysrc.vimnormal.scm
   send-notification 'normal'
 }
 
 function insert() {
-  xkb-switch -s 'us(viminsert)'
+  # xkb-switch -s 'us(viminsert)'
   # setxkbmap -layout 'us' -variant 'viminsert'
   xbindkeys
   send-notification 'insert'
@@ -25,7 +25,8 @@ if [[ $# -gt 1 ]]; then
   echo 'Usage: vimode [mode]'
   return 1
 elif [[ $# -eq 0 ]]; then
-  xkb-switch -p
+  # xkb-switch -p
+  xbindkeys -s
 else
   killall xbindkeys 2>&1 > /dev/null || true
   $1
