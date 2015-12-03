@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function muxcfg::new-workdir-cmd() {
-  if [[ -n ${__GOOGLE__+1} ]]; then
+  if [[ -d ~/.google ]]; then
     echo "muxcfg::git5wrapper"
   else
     echo "git::new-workdir"
@@ -127,7 +127,7 @@ function muxcfg::main() {
   return 0
 }
 function muxcfg::getcwd() {
-  if [[ -n ${__GOOGLE__+1} ]]; then
+  if [[ -d ~/.google ]]; then
     echo "${1}/${2}/google3"
   else
     echo "${1}/${2}"
