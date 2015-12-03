@@ -1,21 +1,22 @@
-" vim: set sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=cvim nospell:
+" vim sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=cvim
+" vim nospell
 
-" Settings {{{
+" Options {{{
 
-" set noinsertmappings
-set cncpcompletion
+set noinsertmappings
+set nocncpcompletion
+set regexp
 set ignorecase
 set incsearch
-set noautofocus                         " Stops sites from focusing on input box when loaded.
+set noautofocus                                                                 " Stops focusing on input box when page loaded.
 set noautoupdategist
 set nolinkaimations
 set nonumerichints
-set regexp
 set typelinkhints
-
-" }}}
-
-" Variables {{{
+set hud                                                                         " Show the heads-up-display
+set smartcase
+set autohidecursor
+set showtabindices
 
 let barposition = "bottom"
 let completionengines = ["google", "amazon", "imdb", "dogpile"]
