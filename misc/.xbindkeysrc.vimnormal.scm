@@ -43,7 +43,7 @@
 (xbindkey '(e) "xvkbd -xsendevent -text '\\C\\[Right]'")
 (xbindkey '(f) "")
 ; (xbindkey '(g) "")
-; (xbindkey '(h) "xvkbd -xsendevent -text '\\[Left]'")
+(xbindkey '(h) "xvkbd -xsendevent -text '\\[Left]'")
 ; (xbindkey '(h) "xte 'key Left'")
 (xbindkey '(i) "~/.zsh/bin/vimode insert")
 (xbindkey '(j) "xvkbd -xsendevent -text '\\[Down]'")

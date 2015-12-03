@@ -1,12 +1,5 @@
 #!/usr/bin/env zsh
 
-# fpath+=($HOME/.zsh/lib)
-# autoload -Uz x::get-active-window-process-name
-
-# local _process
-# _process="$(x::get-active-window-process-name)"
-# [[ "${_process}" == "/usr/bin/termin" ]] && return 1
-
 setopt localoptions err_return
 
 function send-notification() {
