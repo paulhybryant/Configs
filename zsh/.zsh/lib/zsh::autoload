@@ -2,8 +2,9 @@
 
 setopt localoptions err_return
 
-local -a directory
-zparseopts -D -K -M -E -- d:=directory -dir:=directory
+local -a directory reload
+zparseopts -D -K -M -E -- d:=directory -dir:=directory \
+  r=reload -reload=reload
 
 if [[ -z ${directory+1} ]]; then
   io::err "Missing required option -d / --dir"
@@ -13,6 +14,12 @@ fi
 
 local _mtime
 for func in "$@"; do
+  if [[ -n ${reload+1} ]]; then
+    if (( ${+FN_REGISTRY[${func}]} )); then
+      io::vlog 1 "Reload function ${func}."
+      unfunction -- "${func}"
+    fi
+  fi
   _mtime=$(time::getmtime ${directory[2]}/${func})
   autoload -Uz ${func}
   FN_REGISTRY[${func}]="${_mtime}"
