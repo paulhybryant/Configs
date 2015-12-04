@@ -9,7 +9,7 @@ let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:blacklisted_bundles = {}
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
-let s:vimplugin_size = str2nr($VIMPLUGINS)
+let s:vimplugin_priority = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
 " Shared plugin configurations {{{1
@@ -186,7 +186,7 @@ endif
 call glaive#Install()
 " }}}
 " Priority 0 Plugins {{{1
-if s:vimplugin_size >= 0
+if s:vimplugin_priority >= 0
   let g:fzf_brew_prefix = system('brew --prefix fzf')
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Rykka/riv.vim'
@@ -607,18 +607,6 @@ if s:vimplugin_size >= 0
         \ }                                                                     " View call stacks in vim
   NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
   " }}}
-  " ft-shell {{{2
-  NeoBundle 'vim-scripts/bash-support.vim', {
-        \ 'autoload' : { 'filetypes' : ['sh'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Make vim an IDE for writing bash
-  let s:bash_support = neobundle#get('bash-support.vim')
-  function! s:bash_support.hooks.on_source(bundle)
-    let g:BASH_MapLeader  = g:maplocalleader
-    let g:BASH_GlobalTemplateFile = expand(
-          \ a:bundle.path . '/bash-support/templates/Templates')
-  endfunction
-  " }}}
   " ft-tmux {{{2
   NeoBundle 'tmux-plugins/vim-tmux', {
         \ 'autoload' : { 'filetypes' : ['tmux'] },
@@ -697,7 +685,7 @@ if s:vimplugin_size >= 0
 endif
 " }}}
 " Priority 1 Plugins {{{1
-if s:vimplugin_size >= 1
+if s:vimplugin_priority >= 1
   " {{{2
   NeoBundle 'wincent/vim-clipper', {
         \ 'disabled' : !g:OS.is_mac,
@@ -1305,10 +1293,22 @@ if s:vimplugin_size >= 1
         \ 'lazy' : 1,
         \ }                                                                     " Syntax, formatting for ansible's YAML dialect
   " }}}
+  " ft-bash {{{2
+  NeoBundle 'vim-scripts/bash-support.vim', {
+        \ 'autoload' : { 'filetypes' : ['sh'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Make vim an IDE for writing bash
+  let s:bash_support = neobundle#get('bash-support.vim')
+  function! s:bash_support.hooks.on_source(bundle)
+    let g:BASH_MapLeader  = g:maplocalleader
+    let g:BASH_GlobalTemplateFile = expand(
+          \ a:bundle.path . '/bash-support/templates/Templates')
+  endfunction
+  " }}}
 endif
 " }}}
 " Priority 99 Plugins {{{1
-if s:vimplugin_size >= 99
+if s:vimplugin_priority >= 99
   " {{{2
   NeoBundle 'paulhybryant/vim-diff-indicator', {
         \ 'depends' : filter(
