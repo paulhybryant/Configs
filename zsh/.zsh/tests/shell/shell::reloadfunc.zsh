@@ -4,7 +4,7 @@ local _dir=${0:h}/../../lib/
 fpath+=(${_dir})
 autoload -Uz zsh::autoload time::getmtime io::err
 declare -Axg FN_REGISTRY
-zsh::autoload ${_dir} ${_dir}/[^_]*(:t)
+zsh::autoload -d ${_dir} ${_dir}/[^_]*(:t)
 
 set -x
 

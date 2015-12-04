@@ -22,7 +22,7 @@ if [[ ! -z "${TMUX}" ]]; then
 
   for var in ${__TMUX_VARS__};
   do
-    if [[ ! -n ${_varsmap[${var}]+1} ]]; then
+    if [[ -z ${_varsmap[${var}]+1} ]]; then
       io::vlog 1 "export ${var}="
       export ${var}=
     fi

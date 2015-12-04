@@ -10,7 +10,7 @@ $1 Verbose level
 @return 0 if satisfied, 1 otherwise
 =cut
 
-if [[ ! -n ${__VERBOSE__+1} ]]; then
+if [[ -z ${__VERBOSE__+1} ]]; then
   declare -xg __VERBOSE__
   __VERBOSE__=0
 fi

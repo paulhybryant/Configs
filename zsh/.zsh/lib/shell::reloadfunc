@@ -28,10 +28,10 @@ for func in "$@"; do
       if [[ "${func}" == "zsh::autoload" ]]; then
         autoload -Uz "${func}"
       else
-        zsh::autoload ${_dir} "${func}"
+        zsh::autoload -d ${_dir} "${func}"
       fi
     fi
   else
-    zsh::autoload "${_dir}" "${func}"
+    zsh::autoload -d "${_dir}" "${func}"
   fi
 done

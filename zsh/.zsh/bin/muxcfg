@@ -37,7 +37,7 @@ function muxcfg::start() {
   _cwd="$(muxcfg::getcwd ${_dst} ${_proj})"
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
-  if [[ -e "$_muxcfg" && ! -n ${opts[--noconfirm]+1} ]]; then
+  if [[ -e "$_muxcfg" && -z ${opts[--noconfirm]+1} ]]; then
     if io::yes_or_no "$_muxcfg exists, overwrite"; then
       io::warn "$_muxcfg will be overwritten."
       _tmpcfg=$(mktemp)
@@ -72,7 +72,7 @@ function muxcfg::delete() {
   [[ ${#dst} -ge 2 ]] && _dst="${dst[2]}/${_proj}" || io::err "Missing required option -t or --dst"
   _cwd="$(muxcfg::getcwd ${_dst} ${_proj})"
 
-  if [[ ! -n ${opts[--noconfirm]+1} ]]; then
+  if [[ -z ${opts[--noconfirm]+1} ]]; then
     io::yes_or_no "Delete project ${_proj}"
   fi
 
