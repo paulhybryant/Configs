@@ -2,16 +2,17 @@
 
 setopt localoptions err_return
 
-if [[ $# -eq 0 ]]; then
-  io::err "$0: Requires at least the directory to scan."
+local -a directory
+zparseopts -D -K -M -E -- d:=directory -dir:=directory
+
+if [[ -z ${directory+1} ]]; then
+  io::err "Missing required option -d / --dir"
 fi
 
+[[ ${#directory} -ge 2 && -d ${directory[2]} ]] || io::err "$0: ${directory[2]} is not a directory"
+
 local _dir
-_dir="$1"
-shift
-
-[[ -d ${_dir} ]] || io::err "$0: First argument must be a directory"
-
+_dir=${directory[2]}
 
 if [[ $# -eq 0 ]]; then
   set -- ${_dir}/[^_]*(:t)
