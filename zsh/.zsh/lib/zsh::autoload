@@ -2,9 +2,9 @@
 
 setopt localoptions err_return
 
-local -a directory reload
+local -a directory reloadall
 zparseopts -D -K -M -E -- d:=directory -dir:=directory \
-  r=reload -reload=reload
+  a=reloadall -reloadall=reloadall
 
 local -a _dir
 if [[ ${#directory} -gt 0 ]]; then
@@ -17,12 +17,22 @@ else
   _dir=(${ZSH_LIB_DIR})
 fi
 
+if [[ ${#reloadall} -gt 0 ]]; then
+  local -a _funcs
+  _funcs=()
+  for dir in ${_dir}; do
+    _funcs+=(${dir}/[^_]*(:t))
+  done
+  set -- ${_funcs}
+fi
+
 local _mtime
 for func in "$@"; do
-  if [[ -n ${reload+1} ]]; then
-    if (( ${+FN_REGISTRY[${func}]} )); then
-      io::vlog 1 "Reload function ${func}."
-      unfunction -- "${func}"
+  if (( ${+FN_REGISTRY[${func}]} )); then
+    io::vlog 1 "Reload function ${func}."
+    unfunction -- "${func}"
+    if [[ "${func}" == "time::getmtime" ]]; then
+      autoload -Uz time::getmtime
     fi
   fi
   for dir in ${_dir}; do
