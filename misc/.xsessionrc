@@ -16,6 +16,9 @@ setxkbmap -option ''
 # Swap caps to ctrl
 setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 
+killall xbindkeys > /dev/null 2>&1
+xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
+
 # setxkbmap -option caps:swapescape -option altwin:swap_alt_win
 
 # setxkbmap -option ctrl:lctrl_meta
