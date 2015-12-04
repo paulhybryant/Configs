@@ -6,11 +6,16 @@ local -a directory reload
 zparseopts -D -K -M -E -- d:=directory -dir:=directory \
   r=reload -reload=reload
 
-if [[ -z ${directory+1} ]]; then
-  io::err "Missing required option -d / --dir"
+local -a _dir
+if [[ ${#directory} -gt 0 ]]; then
+  [[ -d ${directory[2]} ]] || \
+    echo "$0: ${directory[2]} is not a directory"
+  _dir=("${directory[2]}")
+else
+  [[ ${#ZSH_LIB_DIR} -eq 0 ]] && \
+    io::err "$0: ZSH_LIB_DIR not set and -d not specified."
+  _dir=(${ZSH_LIB_DIR})
 fi
-
-[[ ${#directory} -ge 2 && -d ${directory[2]} ]] || io::err "$0: ${directory[2]} is not a directory"
 
 local _mtime
 for func in "$@"; do
@@ -20,7 +25,11 @@ for func in "$@"; do
       unfunction -- "${func}"
     fi
   fi
-  _mtime=$(time::getmtime ${directory[2]}/${func})
-  autoload -Uz ${func}
-  FN_REGISTRY[${func}]="${_mtime}"
+  for dir in ${_dir}; do
+    if [[ -e ${dir}/${func} ]]; then
+      _mtime=$(time::getmtime ${dir}/${func})
+      autoload -Uz ${func}
+      FN_REGISTRY[${func}]="${_mtime}"
+    fi
+  done
 done

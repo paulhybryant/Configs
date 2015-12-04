@@ -61,8 +61,10 @@ declare -xg HISTFILE="$HOME/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
 
 declare -Axg FN_REGISTRY
+declare -axg -U ZSH_LIB_DIR
+ZSH_LIB_DIR=(~/.zsh/lib $ZSH_LIB_DIR)
 autoload -Uz zsh::autoload time::getmtime
-[[ -d ~/.zsh/lib ]] && zsh::autoload -d ~/.zsh/lib ~/.zsh/lib/[^_]*(:t)
+[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
 autoload -Uz bashcompinit && bashcompinit
 # zstyle ":completion:*" show-completer true
 
@@ -134,7 +136,7 @@ autoload -Uz promptinit && promptinit
 
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach
-zsh::autoload -d ~/.zsh/lib _ta _ta-sessions
+zsh::autoload _ta _ta-sessions
 
 trap 'tmux::try-switch' EXIT
 
