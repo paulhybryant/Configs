@@ -12,9 +12,9 @@ if [[ ${#directory} -gt 0 ]]; then
     echo "$0: ${directory[2]} is not a directory"
   _dir=("${directory[2]}")
 else
-  [[ ${#ZSH_LIB_DIR} -eq 0 ]] && \
-    io::err "$0: ZSH_LIB_DIR not set and -d not specified."
-  _dir=(${ZSH_LIB_DIR})
+  [[ ${#zsh_autoload_dir} -eq 0 ]] && \
+    io::err "$0: zsh_autoload_dir not set and -d not specified."
+  _dir=(${zsh_autoload_dir})
 fi
 
 if [[ ${#reloadall} -gt 0 ]]; then

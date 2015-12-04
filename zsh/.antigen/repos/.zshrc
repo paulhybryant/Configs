@@ -61,8 +61,8 @@ declare -xg HISTFILE="$HOME/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
 
 declare -Axg FN_REGISTRY
-declare -axg -U ZSH_LIB_DIR
-ZSH_LIB_DIR=(~/.zsh/lib $ZSH_LIB_DIR)
+declare -axg -U zsh_autoload_dir
+zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
 autoload -Uz zsh::autoload time::getmtime
 [[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
 autoload -Uz bashcompinit && bashcompinit
