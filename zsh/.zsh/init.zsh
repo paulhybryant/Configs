@@ -87,7 +87,7 @@ alias mktemp='${CMDPREFIX}\mktemp'
 alias npm='http_proxy="" https_proxy="" \npm'
 alias nvim='NVIM=nvim nvim'
 alias rm='\trash -v'
-alias run='shell::run'
+alias run='zsh::run'
 alias s='fasd -si'                                                              # show / search / select
 alias sd='fasd -sid'                                                            # interactive directory selection
 alias sf='fasd -sif'                                                            # interactive file selection
