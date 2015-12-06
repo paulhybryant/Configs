@@ -29,13 +29,12 @@ if os::LINUX; then
   alias xkbmapclear="setxkbmap -option ''"
   alias xkbmapreload="~/.xsessionrc"
   alias resetxkbmap='sudo dpkg-reconfigure xkb-data'
-
   case $(tty) in
     /dev/tty/[0-9]*)
       prompt bart
       ;;
     /dev/pts/[0-9]*)
-      shell::install-precmd
+      zsh::install-precmd
       ;;
   esac
 elif os::OSX; then
@@ -49,7 +48,7 @@ elif os::OSX; then
       prompt bart
       ;;
     /dev/ttys[0-9]*)
-      shell::install-precmd
+      zsh::install-precmd
       ;;
   esac
   osx::fix-display
