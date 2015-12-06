@@ -397,6 +397,14 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Info help page source for vim-ref
   " }}}
   " {{{2
+  NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
+  let s:vimsyncopate = neobundle#get('vim-syncopate')
+  function! s:vimsyncopate.hooks.on_source(bundle)
+    Glaive syncopate plugin[mappings] colorscheme=putty
+    let g:html_number_lines = 0
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
         \   'autoload' : {
         \     'commands' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
@@ -569,6 +577,17 @@ if s:vimplugin_priority >= 0
         \ 'autoload' : { 'filetypes' : ['cpp'] },
         \ 'lazy' : 1,
         \ }                                                                     " Enhanced vim cpp highlight
+  " }}}
+  " ft-markdown {{{2
+  NeoBundle 'plasticboy/vim-markdown', {
+        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Yet another markdown syntax highlighting
+  NeoBundle 'thinca/vim-ft-markdown_fold', {
+        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Fold markdown
+  NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
   " }}}
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
@@ -809,14 +828,6 @@ if s:vimplugin_priority >= 1
   let s:netrw = neobundle#get('netrw')
   function! s:netrw.hooks.on_source(bundle)
     let g:netrw_altfile = 1
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
-  let s:vimsyncopate = neobundle#get('vim-syncopate')
-  function! s:vimsyncopate.hooks.on_source(bundle)
-    Glaive syncopate plugin[mappings] colorscheme=putty
-    let g:html_number_lines = 0
   endfunction
   " }}}
   " {{{2
@@ -1217,18 +1228,10 @@ if s:vimplugin_priority >= 1
   NeoBundle 'Quramy/vison'                                                      " For writting JSON with JSON Schema
   " }}}
   " ft-markdown {{{2
-  NeoBundle 'plasticboy/vim-markdown', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundle 'isnowfy/python-vim-instant-markdown', {
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
         \ }                                                                     " Start a http server and preview markdown instantly
-  NeoBundle 'thinca/vim-ft-markdown_fold', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Fold markdown
   " NeoBundle 'tpope/vim-markdown', {
         " \ 'autoload' : { 'filetypes' : ['markdown'] },
         " \ 'lazy' : 1,
