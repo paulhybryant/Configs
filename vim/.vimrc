@@ -191,7 +191,6 @@ endif
 " }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_priority >= 0
-  let g:fzf_brew_prefix = system('brew --prefix fzf')
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
@@ -395,16 +394,6 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'edkolev/tmuxline.vim', {
-        \ 'gui' : 0,
-        \ 'lazy' : 1,
-        \ }                                                                     " Change tmux theme to be consistent with vim statusline
-  " let s:tmuxline = neobundle#get('tmuxline.vim')
-  " function s:tmuxline.hooks.on_post_source(bundle)
-    " Tmuxline airline_tabline
-  " endfunction
-  " }}}
-  " {{{2
   NeoBundle 'eiiches/vim-ref-info', {
         \ 'depends' : 'thinca/vim-ref',
         \ }                                                                     " Info help page source for vim-ref
@@ -423,21 +412,6 @@ if s:vimplugin_priority >= 0
     let g:buffergator_suppress_keymaps = 1
     noremap <leader>bf :BuffergatorOpen<CR>
   endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'junegunn/fzf', {
-        \ 'base' : maktaba#path#Dirname(g:fzf_brew_prefix),
-        \ 'directory' : 'fzf',
-        \ 'name' : 'fzf',
-        \ 'regular_name' : 'fzf',
-        \ }                                                                     " Fuzzy finder
-  " }}}
-  " {{{2
-  NeoBundle 'junegunn/fzf.vim', {
-        \ 'depends' : ['fzf'],
-        \ 'name' : 'fzf.vim',
-        \ 'regular_name' : 'fzf.vim',
-        \ }                                                                     " Enhanced vim plugin for fzf fuzzy finder
   " }}}
   " {{{2
   NeoBundle 'ntpeters/vim-better-whitespace'                                    " Highlight all types of whitespaces
@@ -603,11 +577,6 @@ if s:vimplugin_priority >= 0
         \ 'filetypes' : ['python'],
         \ 'lazy' : 1,
         \ }                                                                     " Python dev env
-  NeoBundle 'mattboehm/vim-unstack', {
-        \ 'filetypes' : ['python'],
-        \ 'lazy' : 1,
-        \ }                                                                     " View call stacks in vim
-  NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
   " }}}
   " ft-ruby {{{2
   NeoBundle 'vim-ruby/vim-ruby', {
@@ -648,19 +617,6 @@ if s:vimplugin_priority >= 0
     " let g:dechofuncname = 1
     " let g:decho_winheight = 10
   " endfunction
-  NeoBundle 'dbakker/vim-lint', {
-        \ 'depends' : 'syngan/vim-vimlint',
-        \ 'filetypes' : ['vim'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Syntax checker for vimscript
-  NeoBundle 'syngan/vim-vimlint', {
-        \ 'autoload' : {
-        \    'commands' : ['VimLint'],
-        \    'filetypes' : ['vim'],
-        \  },
-        \ 'depends' : 'ynkdir/vim-vimlparser',
-        \ 'lazy' : 1,
-        \ }                                                                     " Syntax checker for vimscript
   NeoBundle 'google/vim-ft-vroom', {
         \ 'autoload' : { 'filetypes' : ['vroom'] },
         \ 'lazy' : 1,
@@ -685,6 +641,32 @@ endif
 " }}}
 " Priority 1 Plugins {{{1
 if s:vimplugin_priority >= 1
+  let g:fzf_brew_prefix = system('brew --prefix fzf')
+  " {{{2
+  NeoBundle 'junegunn/fzf', {
+        \ 'base' : maktaba#path#Dirname(g:fzf_brew_prefix),
+        \ 'directory' : 'fzf',
+        \ 'name' : 'fzf',
+        \ 'regular_name' : 'fzf',
+        \ }                                                                     " Fuzzy finder
+  " }}}
+  " {{{2
+  NeoBundle 'junegunn/fzf.vim', {
+        \ 'depends' : ['fzf'],
+        \ 'name' : 'fzf.vim',
+        \ 'regular_name' : 'fzf.vim',
+        \ }                                                                     " Enhanced vim plugin for fzf fuzzy finder
+  " }}}
+  " {{{2
+  NeoBundle 'edkolev/tmuxline.vim', {
+        \ 'gui' : 0,
+        \ 'lazy' : 1,
+        \ }                                                                     " Consistent tmux theme with statusline
+  " let s:tmuxline = neobundle#get('tmuxline.vim')
+  " function s:tmuxline.hooks.on_post_source(bundle)
+    " Tmuxline airline_tabline
+  " endfunction
+  " }}}
   " {{{2
   NeoBundle 'tsukkee/unite-help', {
         \ 'depends' : [ 'Shougo/unite.vim' ],
@@ -1263,6 +1245,13 @@ if s:vimplugin_priority >= 1
         \ 'lazy' : 1,
         \ }                                                                     " Text object for perl function
   " }}}
+  " ft-python {{{2
+  NeoBundle 'mattboehm/vim-unstack', {
+        \ 'filetypes' : ['python'],
+        \ 'lazy' : 1,
+        \ }                                                                     " View call stacks in vim
+  NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
+  " }}}
   " ft-sql {{{2
   NeoBundle 'jphustman/SQLUtilities', {
         \ 'autoload' : { 'filetypes' : ['sql'] },
@@ -1291,6 +1280,19 @@ if s:vimplugin_priority >= 1
         \ }                                                                     " Better SQL syntax highlighting
   " }}}
   " ft-vim {{{2
+  NeoBundle 'dbakker/vim-lint', {
+        \ 'depends' : 'syngan/vim-vimlint',
+        \ 'filetypes' : ['vim'],
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax checker for vimscript
+  NeoBundle 'syngan/vim-vimlint', {
+        \ 'autoload' : {
+        \    'commands' : ['VimLint'],
+        \    'filetypes' : ['vim'],
+        \  },
+        \ 'depends' : 'ynkdir/vim-vimlparser',
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax checker for vimscript
   NeoBundle 'kana/vim-vspec', {
         \ 'autoload' : { 'filetypes' : ['vim'] },
         \ 'lazy' : 1,
