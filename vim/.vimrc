@@ -194,11 +194,9 @@ if s:vimplugin_priority >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
-  NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
-  NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
@@ -692,6 +690,8 @@ if s:vimplugin_priority >= 1
     let g:Vim_MapLeader  = g:mapleader
   endfunction
   " }}}
+  NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
+  NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
   NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'                                " Make terminal vim and tmux work better together
   NeoBundle 'vim-scripts/getVar.vim'                                            " Convenient retrieval of buffer or global vars
