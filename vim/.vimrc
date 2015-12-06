@@ -545,8 +545,12 @@ if s:vimplugin_priority >= 0
           \ 'ip'  :0,
           \ 'ie'  :0,
           \ }
-    nnoremap <leader>ll <Plug>(expand_region_expand)
-    nnoremap <leader>hh <Plug>(expand_region_shrink)
+  endfunction
+  function! s:expand_region.hooks.on_post_source(bundle)
+    call expand_region#custom_text_objects('ruby', {
+          \ 'im' :0,
+          \ 'am' :0,
+          \ })
   endfunction
   " }}}
   " {{{2
@@ -604,6 +608,12 @@ if s:vimplugin_priority >= 0
         \ 'lazy' : 1,
         \ }                                                                     " View call stacks in vim
   NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
+  " }}}
+  " ft-ruby {{{2
+  NeoBundle 'vim-ruby/vim-ruby', {
+        \ 'autoload' : { 'filetypes' : ['ruby'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Vim plugin for editing ruby files.
   " }}}
   " ft-tmux {{{2
   NeoBundle 'tmux-plugins/vim-tmux', {
