@@ -132,7 +132,7 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 
-# shell::setup-abbrevs
+# zsh::setup-abbrevs
 
 declare -xg FZF_DEFAULT_OPTS='-e'
 local _fzf_dir=$(brew --prefix fzf)
