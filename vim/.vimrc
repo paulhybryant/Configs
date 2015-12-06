@@ -185,12 +185,14 @@ endif
   " }}}
 call glaive#Install()
 " }}}
+" Debuging Plugins {{{1
+if s:vimplugin_priority < 0
+endif
+" }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_priority >= 0
   let g:fzf_brew_prefix = system('brew --prefix fzf')
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'Rykka/riv.vim'
-  NeoBundle 'Rykka/InstantRst'
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
@@ -353,6 +355,7 @@ if s:vimplugin_priority >= 0
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
     let g:solarized_diffmode="high"
+    colorscheme solarized
   endfunction
   " }}}
   " {{{2
@@ -555,11 +558,6 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'tsukkee/unite-help', {
-        \ 'depends' : [ 'Shougo/unite.vim' ],
-        \ }                                                                     " Help source for unite.vim
-  " }}}
-  " {{{2
   NeoBundle 'tyru/capture.vim', {
         \ 'autoload' : { 'commands' : ['Capture'] },
         \ }                                                                     " Capture Ex command output to buffer
@@ -640,15 +638,6 @@ if s:vimplugin_priority >= 0
     " let g:dechofuncname = 1
     " let g:decho_winheight = 10
   " endfunction
-  NeoBundle 'vim-scripts/Vim-Support', {
-        \ 'autoload' : { 'filetypes' : ['vim'] },
-        \ 'disabled' : 1,
-        \ 'lazy' : 1,
-        \ }                                                                     " Make vim an IDE for writing vimscript
-  let s:vimsupport = neobundle#get('Vim-Support')
-  function! s:vimsupport.hooks.on_source(bundle)
-    let g:Vim_MapLeader  = g:mapleader
-  endfunction
   NeoBundle 'dbakker/vim-lint', {
         \ 'depends' : 'syngan/vim-vimlint',
         \ 'filetypes' : ['vim'],
@@ -687,12 +676,28 @@ endif
 " Priority 1 Plugins {{{1
 if s:vimplugin_priority >= 1
   " {{{2
+  NeoBundle 'tsukkee/unite-help', {
+        \ 'depends' : [ 'Shougo/unite.vim' ],
+        \ }                                                                     " Help source for unite.vim
+  " }}}
+  " {{{2
   NeoBundle 'wincent/vim-clipper', {
         \ 'disabled' : !g:OS.is_mac,
         \ }                                                                     " Clipper integratino for Vim
   let s:vimclipper = neobundle#get('vim-clipper')
   function s:vimclipper.hooks.on_source(bundle)
     vmap y y<Plug>(ClipperClip)
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'vim-scripts/Vim-Support', {
+        \ 'autoload' : { 'filetypes' : ['vim'] },
+        \ 'disabled' : 1,
+        \ 'lazy' : 1,
+        \ }                                                                     " Make vim an IDE for writing vimscript
+  let s:vimsupport = neobundle#get('Vim-Support')
+  function! s:vimsupport.hooks.on_source(bundle)
+    let g:Vim_MapLeader  = g:mapleader
   endfunction
   " }}}
   NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer
@@ -779,6 +784,8 @@ if s:vimplugin_priority >= 1
   NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
   NeoBundle 'wincent/terminus'                                                  " Enhanced terminal integration (e.g bracketed-paste)
   NeoBundle 'xolox/vim-misc'                                                    " Dependency for vim-notes
+  NeoBundle 'Rykka/riv.vim'
+  NeoBundle 'Rykka/InstantRst'
   " {{{2
   NeoBundle 'Bozar/foldMarker', {
         \ 'autoload' : { 'commands' : ['FoldMarker'] },
@@ -1622,9 +1629,8 @@ endif
 " }}}
 " Wrap up bundle setup {{{1
 call neobundle#end()
-filetype plugin indent on                                                       " Automatically detect file types.
 NeoBundleCheck
-colorscheme solarized
+filetype plugin indent on                                                       " Automatically detect file types.
 " }}}
 " Settings {{{1
 syntax on                                                                       " Syntax highlighting
