@@ -41,25 +41,25 @@ function muxcfg::start() {
     if io::yes_or_no "$_muxcfg exists, overwrite"; then
       io::warn "$_muxcfg will be overwritten."
       _tmpcfg=$(mktemp)
-      shell::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_tmpcfg}"
-      shell::eval "vimdiff $MUXCFGDIR/${_proj}.yml ${_tmpcfg}"
+      zsh::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_tmpcfg}"
+      zsh::eval "vimdiff $MUXCFGDIR/${_proj}.yml ${_tmpcfg}"
       io::yes_or_no "Continue"
-      shell::eval "mv ${_tmpcfg} $MUXCFGDIR/${_proj}.yml"
+      zsh::eval "mv ${_tmpcfg} $MUXCFGDIR/${_proj}.yml"
     else
       return 1
     fi
   else
-    shell::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_muxcfg}"
+    zsh::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_muxcfg}"
   fi
 
   if [[ -d "${_dst}" ]]; then
     io::hl "[muxcfg] Directory ${_dst} exists."
     io::yes_or_no "Skip branching and start with existing copy"
   else
-    shell::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
-    shell::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
+    zsh::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
+    zsh::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
   fi
-  shell::eval "mux start ${_proj}"
+  zsh::eval "mux start ${_proj}"
 }
 function muxcfg::delete() {
   setopt localoptions err_return
@@ -78,21 +78,21 @@ function muxcfg::delete() {
 
   if [[ -e "$MUXCFGDIR/${_proj}.yml" ]]; then
     io::vlog 1 "Deleting tmuxinator config $MUXCFGDIR/${_proj}.yml"
-    shell::eval "mux delete ${_proj}"
+    zsh::eval "mux delete ${_proj}"
     cd "${_src}" || return 1
     io::vlog 1 "Deleting branch ${_proj}"
-    shell::eval "git branch -D ${_proj}"
+    zsh::eval "git branch -D ${_proj}"
     io::vlog 1 "Deleting directory ${_dst}"
-    shell::eval "rm -rf ${_dst}"
+    zsh::eval "rm -rf ${_dst}"
     io::vlog 1 "Killing tmux session ${_proj}"
-    shell::eval "tmux kill-session -t ${_proj}"
+    zsh::eval "tmux kill-session -t ${_proj}"
   else
     io::err "No project named ${_proj} exists."
   fi
 }
 function muxcfg::git5wrapper() {
   setopt localoptions err_return
-  shell::eval "git5 mirror $1 $2 --allow_existing_branch --branch=$3"
+  zsh::eval "git5 mirror $1 $2 --allow_existing_branch --branch=$3"
 }
 function muxcfg::main() {
   setopt localoptions err_return
@@ -107,8 +107,8 @@ function muxcfg::main() {
   [[ ${#src} -lt 2 ]] && io::err "Missing required option -s or --src"
   [[ ${#dst} -lt 2 ]] && io::err "Missing required option -t or --dst"
 
-  shell::eval "whence tmuxinator > /dev/null"
-  shell::eval "mkdir -p "$MUXCFGDIR""
+  zsh::eval "whence tmuxinator > /dev/null"
+  zsh::eval "mkdir -p "$MUXCFGDIR""
 
   local _subcmd _git_new_workdir_cmd
   _subcmd="$1"

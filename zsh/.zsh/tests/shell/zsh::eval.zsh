@@ -5,17 +5,17 @@ autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 
 set -x
 
-function test::shell::eval() {
+function test::zsh::eval() {
   local _cmd _expected _actual
   _cmd='echo "hello world"'
 
   _expected='hello world'
-  _actual="$(shell::eval ${_cmd})"
+  _actual="$(zsh::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 
   mode::toggle-dryrun
   _expected=$(printf "%-${PREFIXWIDTH}s echo \"hello world\"" '[Dryrun]')
-  _actual="$(shell::eval ${_cmd})"
+  _actual="$(zsh::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 }
-test::shell::eval
+test::zsh::eval

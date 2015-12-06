@@ -22,83 +22,83 @@ function bootstrap::stow() {
 function bootstrap::main() {
   setopt localoptions unset err_return
 
-  shell::eval "sudo -v"
+  zsh::eval "sudo -v"
   io::msg "Installing ${BREWVERSION} dependencies..."
-  os::LINUX && shell::eval "sudo apt-get install build-essential curl git m4 \
+  os::LINUX && zsh::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd git-annex xautomation urlview xdotool x11-apps"
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
-    shell::eval "git clone "https://github.com/Homebrew/${BREWVERSION}" \
+    zsh::eval "git clone "https://github.com/Homebrew/${BREWVERSION}" \
       "${BREWHOME}""
   fi
 
-  # shell::eval "brew update && brew upgrade $(brew outdated)"
-  shell::eval "brew install coreutils stow"
+  # zsh::eval "brew update && brew upgrade $(brew outdated)"
+  zsh::eval "brew install coreutils stow"
   io::msg "Creating symlinks with stow..."
-  shell::eval "mkdir -p "$HOME/.antigen/repos/""
-  shell::eval "mkdir -p "$HOME/.config/pip/""
-  shell::eval "mkdir -p "$HOME/.config/ranger/""
-  shell::eval "mkdir -p "$HOME/.config/terminator/""
-  shell::eval "mkdir -p "$HOME/.ssh/""
-  shell::eval "mkdir -p "$HOME/.tmux/plugins""
-  shell::eval "mkdir -p "$HOME/.tmuxinator""
-  shell::eval "mkdir -p "$HOME/.vim/""
-  shell::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
+  zsh::eval "mkdir -p "$HOME/.antigen/repos/""
+  zsh::eval "mkdir -p "$HOME/.config/pip/""
+  zsh::eval "mkdir -p "$HOME/.config/ranger/""
+  zsh::eval "mkdir -p "$HOME/.config/terminator/""
+  zsh::eval "mkdir -p "$HOME/.ssh/""
+  zsh::eval "mkdir -p "$HOME/.tmux/plugins""
+  zsh::eval "mkdir -p "$HOME/.tmuxinator""
+  zsh::eval "mkdir -p "$HOME/.vim/""
+  zsh::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   bootstrap::stow
-  shell::eval "ln -sf $HOME/.xbindkeysrc.normal $HOME/.xbindkeysrc.scm"
+  zsh::eval "ln -sf $HOME/.xbindkeysrc.normal $HOME/.xbindkeysrc.scm"
 
   io::msg "Tapping extra repositories..."
-  shell::eval "brew tap paulhybryant/myformulae"
-  shell::eval "brew tap homebrew/x11"
-  shell::eval "brew tap homebrew/dupes"
-  shell::eval "brew tap homebrew/completions"
-  shell::eval "brew tap iveney/mocha"
-  shell::eval "brew tap beeftornado/rmtree"
-  # shell::eval "brew tap peco/peco"
+  zsh::eval "brew tap paulhybryant/myformulae"
+  zsh::eval "brew tap homebrew/x11"
+  zsh::eval "brew tap homebrew/dupes"
+  zsh::eval "brew tap homebrew/completions"
+  zsh::eval "brew tap iveney/mocha"
+  zsh::eval "brew tap beeftornado/rmtree"
+  # zsh::eval "brew tap peco/peco"
 
   io::msg "Installing softwares..."
-  shell::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
-  shell::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
-  shell::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
+  zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
+  zsh::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
+  zsh::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
     zsh-completions xbindkeys"
-  shell::eval "brew install --force pt"
+  zsh::eval "brew install --force pt"
   # pypy pypy3
-  shell::eval "brew install --HEAD vimdoc vroom"
-  shell::eval "pip install --upgrade powerline-status advanced-ssh-config \
+  zsh::eval "brew install --HEAD vimdoc vroom"
+  zsh::eval "pip install --upgrade powerline-status advanced-ssh-config \
     neovim terminatorcli bz2file percol butterfly libsass"
   if os::LINUX; then
-    shell::eval "brew install --disable-nls --override-system-vi \
+    zsh::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
-    shell::eval "brew install --HEAD trash-cli"
-    shell::eval "brew install terminator"
+    zsh::eval "brew install --HEAD trash-cli"
+    zsh::eval "brew install terminator"
   fi
-  shell::eval "brew gem install tmuxinator automux"
-  shell::eval "http_proxy='' https_proxy='' \
+  zsh::eval "brew gem install tmuxinator automux"
+  zsh::eval "http_proxy='' https_proxy='' \
     npm install -g urchin npm-update-outdated shelljs js-beautify"
 
   if os::OSX; then
     io::msg "Installing extra stuff for OSX..."
-    shell::eval "brew tap caskroom/versions"
-    shell::eval "brew install --with-custom-icons --with-lua --with-luajit \
+    zsh::eval "brew tap caskroom/versions"
+    zsh::eval "brew install --with-custom-icons --with-lua --with-luajit \
       --with-override-system-vim macvim"
-    shell::eval "brew linkapps macvim"
-    shell::eval "brew install brew-cask clipper osxutils lsof \
+    zsh::eval "brew linkapps macvim"
+    zsh::eval "brew install brew-cask clipper osxutils lsof \
       paulhybryant/myformulae/gnu-getopt"
-    shell::eval "brew install reattach-to-user-namespace \
+    zsh::eval "brew install reattach-to-user-namespace \
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
-    shell::eval "brew install --force trash"
-    shell::eval "brew link --overwrite trash"
-    shell::eval "brew cask install karabiner seil spectacle \
+    zsh::eval "brew install --force trash"
+    zsh::eval "brew link --overwrite trash"
+    zsh::eval "brew cask install karabiner seil spectacle \
       xquartz git-annex urlview"
-    # shell::eval "./osx/.osx/init.zsh"
+    # zsh::eval "./osx/.osx/init.zsh"
   fi
 
-  shell::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
+  zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
   io::msg "Bootstrap done!"
 }
 
@@ -124,16 +124,16 @@ autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 [[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts="-n"
 [[ -n ${verbose} ]] && setopt localoptions verbose
 
-shell::eval "pushd ${_config_dir:a}"
+zsh::eval "pushd ${_config_dir:a}"
 if [[ -n ${unstow} ]]; then
   bootstrap::stow ${_stow_opts} -D
 elif [[ -n ${stow} ]]; then
   bootstrap::stow ${_stow_opts}
 else
   bootstrap::main
-  shell::eval "source ${_config_dir:a}/zsh/.zshenv"
-  shell::eval "source ${_config_dir:a}/zsh/.zshrc"
+  zsh::eval "source ${_config_dir:a}/zsh/.zshenv"
+  zsh::eval "source ${_config_dir:a}/zsh/.zshrc"
 fi
-shell::eval "popd"
+zsh::eval "popd"
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

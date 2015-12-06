@@ -2,6 +2,6 @@
 
 setopt localoptions err_return nounset
 
-shell::eval "antigen update"
-shell::eval "brew update && brew upgrade \\$(brew outdated)"
-shell::eval "pip list --outdated | awk '{print \\$1}' | xargs -n 1 pip install -Up"
+zsh::eval "antigen update"
+zsh::eval "brew update && brew upgrade \$(brew outdated)"
+zsh::eval "pip list --outdated 2> /dev/null | awk '{print \$1}' | xargs -n 1 pip install -U"

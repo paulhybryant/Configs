@@ -59,7 +59,7 @@ fi
 _git_dir=$(cd "${_git_dir}"; pwd)
 
 # create the workdir
-shell::eval "mkdir -p "${_new_workdir}/.git" || return 1"
+zsh::eval "mkdir -p "${_new_workdir}/.git" || return 1"
 
 # create the links to the original repo.  explicitly exclude index, HEAD and
 # logs/HEAD from the list since they are purely related to the current working
@@ -68,23 +68,23 @@ for x in config refs logs/refs objects info hooks packed-refs remotes rr-cache s
 do
   case $x in
   */*)
-    shell::eval "mkdir -p "$(dirname "${_new_workdir}/.git/$x")""
+    zsh::eval "mkdir -p "$(dirname "${_new_workdir}/.git/$x")""
     ;;
   esac
-  shell::eval "ln -s "${_git_dir}/$x" "${_new_workdir}/.git/$x""
+  zsh::eval "ln -s "${_git_dir}/$x" "${_new_workdir}/.git/$x""
 done
 
 # now setup the workdir
 cd "${_new_workdir}"
 # copy the HEAD from the original repository as a default branch
-shell::eval "cp "${_git_dir}/HEAD" .git/HEAD"
+zsh::eval "cp "${_git_dir}/HEAD" .git/HEAD"
 # checkout the branch (either the same as HEAD from the original repository, or
 # the one that was asked for)
 if [[ -z "${_branch}" ]]; then
   _branch=$(basename "${_new_workdir}")
 fi
 if git::has-branch "${_branch}"; then
-  shell::eval "git checkout -f "${_branch}""
+  zsh::eval "git checkout -f "${_branch}""
 else
-  shell::eval "git checkout -f -b "${_branch}""
+  zsh::eval "git checkout -f -b "${_branch}""
 fi
