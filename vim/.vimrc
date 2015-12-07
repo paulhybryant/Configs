@@ -378,6 +378,8 @@ if s:vimplugin_priority >= 0
     let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
     let g:airline#extensions#tmuxline#color_template = 'normal'
     let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
+    let g:airline#extensions#hunks#enabled = 1
+    let g:airline#extensions#whitespace#enabled = 1
   endfunction
   " }}}
   " {{{2
@@ -579,10 +581,14 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Enhanced vim cpp highlight
   " }}}
   " ft-markdown {{{2
-  NeoBundle 'plasticboy/vim-markdown', {
+  " NeoBundle 'plasticboy/vim-markdown', {
+        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'lazy' : 1,
+        " \ }                                                                     " Yet another markdown syntax highlighting
+  NeoBundle 'tpope/vim-markdown', {
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
-        \ }                                                                     " Yet another markdown syntax highlighting
+        \ }                                                                   " Syntax highlighting for markdown
   NeoBundle 'thinca/vim-ft-markdown_fold', {
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
@@ -1232,10 +1238,6 @@ if s:vimplugin_priority >= 1
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
         \ }                                                                     " Start a http server and preview markdown instantly
-  " NeoBundle 'tpope/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : ['markdown'] },
-        " \ 'lazy' : 1,
-        " \ }                                                                   " Syntax highlighting for markdown
   " NeoBundle 'suan/vim-instant-markdown'
         " \ 'autoload' : { 'filetypes' : ['markdown'] },
         " \ 'lazy' : 1,
