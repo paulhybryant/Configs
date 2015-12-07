@@ -581,14 +581,27 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Enhanced vim cpp highlight
   " }}}
   " ft-markdown {{{2
-  " NeoBundle 'plasticboy/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : ['markdown'] },
-        " \ 'lazy' : 1,
-        " \ }                                                                     " Yet another markdown syntax highlighting
-  NeoBundle 'tpope/vim-markdown', {
+  NeoBundle 'plasticboy/vim-markdown', {
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
-        \ }                                                                   " Syntax highlighting for markdown
+        \ 'directory' : 'plasticboy-markdown',
+        \ 'name' : 'plasticboy-markdown',
+        \ 'regular_name' : 'plasticboy-markdown',
+        \ }                                                                     " Yet another markdown syntax highlighting
+  " NeoBundle 'tpope/vim-markdown', {
+        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'lazy' : 1,
+        " \ 'directory' : 'tpope-markdown',
+        " \ 'name' : 'tpope-markdown',
+        " \ 'regular_name' : 'tpope-markdown',
+        " \ }                                                                     " Yet another markdown syntax highlighting
+  " NeoBundle 'hallison/vim-markdown', {
+        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'lazy' : 1,
+        " \ 'directory' : 'hallison-markdown',
+        " \ 'name' : 'hallison-markdown',
+        " \ 'regular_name' : 'hallison-markdown',
+        " \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundle 'thinca/vim-ft-markdown_fold', {
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
@@ -1238,10 +1251,10 @@ if s:vimplugin_priority >= 1
         \ 'autoload' : { 'filetypes' : ['markdown'] },
         \ 'lazy' : 1,
         \ }                                                                     " Start a http server and preview markdown instantly
-  " NeoBundle 'suan/vim-instant-markdown'
-        " \ 'autoload' : { 'filetypes' : ['markdown'] },
-        " \ 'lazy' : 1,
-        " \ }
+  NeoBundle 'suan/vim-instant-markdown'
+        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'lazy' : 1,
+        \ }
   " }}}
   " ft-perl {{{2
   NeoBundle 'thinca/vim-textobj-function-perl', {
