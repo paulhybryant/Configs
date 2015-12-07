@@ -163,6 +163,7 @@ endif
         \ 'autoload' : { 'filetypes' : ['cpp', 'javascript', 'sql'] },
         \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
         \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
+        \ 'lazy' : 1,
         \ }                                                                     " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)

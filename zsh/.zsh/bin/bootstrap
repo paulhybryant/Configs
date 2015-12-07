@@ -46,7 +46,6 @@ function bootstrap::main() {
   zsh::eval "mkdir -p "$HOME/.tmux/plugins""
   zsh::eval "mkdir -p "$HOME/.tmuxinator""
   zsh::eval "mkdir -p "$HOME/.vim/""
-  zsh::eval "[[ ! -d ~/.nvim ]] && ln -s $HOME/.vim $HOME/.nvim"
   bootstrap::stow
   zsh::eval "ln -sf $HOME/.xbindkeysrc.normal $HOME/.xbindkeysrc.scm"
 
