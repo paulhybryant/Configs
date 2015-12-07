@@ -208,7 +208,6 @@ if s:vimplugin_priority >= 0
   NeoBundle 'DeaR/vim-scratch', {
         \ 'autoload' : { 'commands' : ['ScratchOpen'] },
         \ 'lazy' : 1,
-        \ 'type__protocol' : 'ssh',
         \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
@@ -438,7 +437,7 @@ if s:vimplugin_priority >= 0
   " {{{2
   NeoBundle 'paulhybryant/myutils', {
         \ 'depends' : filter(
-        \   ['vim-codefmt', 'vim-glaive', 'vim-maktaba'],
+        \   ['vim-glaive', 'vim-maktaba'],
         \   '!has_key(g:disabled_bundles, v:val)'),
         \ 'type__protocol' : 'ssh',
         \ }                                                                     " My vim customization (utility functions, syntax etc)
