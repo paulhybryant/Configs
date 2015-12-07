@@ -1,0 +1,29 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return nounset
+
+local -a name
+zparseopts -D -K -M -E -- n:=name -name:=name
+
+local _tmpfile
+_tmpfile=$(mktemp)
+
+local _new_profile
+if [[ ${#name} -gt 0 ]]; then
+  _new_profile="${name[2]}"
+else
+  _new_profile=$(/Applications/Karabiner.app/Contents/Library/bin/karabiner list | grep "$(/Applications/Karabiner.app/Contents/Library/bin/karabiner selected):" | awk '{print $2}')
+  _new_profile="${_new_profile}_copy"
+fi
+
+# 1. Export settings.
+/Applications/Karabiner.app/Contents/Library/bin/karabiner export > ${_tmpfile}
+
+# 2. Make new setting.
+/Applications/Karabiner.app/Contents/Library/bin/karabiner append "${_new_profile}"
+
+# 3. Switch profile.
+/Applications/Karabiner.app/Contents/Library/bin/karabiner select_by_name "${_new_profile}"
+
+# 4. Import settings.
+sh ${_tmpfile}
