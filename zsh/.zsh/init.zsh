@@ -57,6 +57,7 @@ fi
 alias a='fasd -a'                                                               # any
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
+alias cdr='cd-gitroot'
 alias d='fasd -d'                                                               # directory
 alias date='${CMDPREFIX}\date'
 alias f='fasd -f'                                                               # file

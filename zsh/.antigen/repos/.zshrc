@@ -87,6 +87,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # Wrapper for peco/percol/fzf
   # antigen bundle mollifier/anyframe
 
+  # antigen bundle mollifier/cd-bookmark
+  antigen bundle mollifier/cd-gitroot
+
   local pmodules
   # Order matters! (per zpreztorc)
   pmodules=(environment terminal editor history directory fasd git ssh tmux \
