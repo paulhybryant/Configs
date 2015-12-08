@@ -28,9 +28,11 @@ fi
 
 local _mtime
 for func in "$@"; do
-  if (( ${+FN_REGISTRY[${func}]} )); then
+  zstyle -s ":fnregistry:${func}" fnregistry "_mtime" || true
+  if [[ ! -z "${_mtime}" ]]; then
     io::vlog 1 "Reload function ${func}."
     unfunction -- "${func}"
+    _mtime=''
     if [[ "${func}" == "time::getmtime" ]]; then
       autoload -Uz time::getmtime
     fi
@@ -39,7 +41,7 @@ for func in "$@"; do
     if [[ -e ${dir}/${func} ]]; then
       _mtime=$(time::getmtime ${dir}/${func})
       autoload -Uz ${func}
-      FN_REGISTRY[${func}]="${_mtime}"
+      zstyle ":fnregistry:${func}" fnregistry "${_mtime}"
     fi
   done
 done

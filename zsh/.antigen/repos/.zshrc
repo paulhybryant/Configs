@@ -60,7 +60,6 @@ declare -xg SAVEHIST=60000
 declare -xg HISTFILE="$HOME/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
 
-declare -Axg FN_REGISTRY
 declare -axg -U zsh_autoload_dir
 zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
 autoload -Uz zsh::autoload time::getmtime
