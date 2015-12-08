@@ -51,6 +51,7 @@
   @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
   @ Cache geoinfo (DONE 2015-10-16 22:30)
   @ Add option completion for zsh in vim
+  @ Make powerline-shell one prompt plugin for zsh
 
 * misc
 = Misc @p:2 =

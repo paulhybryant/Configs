@@ -64,8 +64,6 @@ declare -axg -U zsh_autoload_dir
 zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
 autoload -Uz zsh::autoload time::getmtime
 [[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
-autoload -Uz bashcompinit && bashcompinit
-# zstyle ":completion:*" show-completer true
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
@@ -86,33 +84,28 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # TODO: Reuse this idea and make it lightweight.
   # antigen bundle mollifier/zload
 
-  zstyle ':prezto:module:editor' key-bindings 'vi'
-  # Alternative (from zpreztorc), order matters!
-  # This has to be put before antigen use prezto (which sources root init.zsh
-  # for prezto)
-  # zstyle ':prezto:load' pmodule \
-    # 'environment' \
-    # 'terminal' \
-    # 'editor' \
-    # 'history' \
-    # 'directory' \
-    # 'spectrum' \
-    # 'utility' \
-    # 'prompt'
+  # Wrapper for peco/percol/fzf
+  # antigen bundle mollifier/anyframe
 
-  antigen use prezto
   local pmodules
   # Order matters! (per zpreztorc)
   pmodules=(environment terminal editor history directory fasd git ssh tmux \
-    command-not-found syntax-highlighting history-substring-search homebrew)
+    command-not-found syntax-highlighting history-substring-search homebrew \
+    prompt)
   os::OSX && pmodules+=(osx)
-  for module in ${pmodules}; do
+
+  zstyle ':prezto:load' pmodule ${pmodules}
+  zstyle ':prezto:module:editor' key-bindings 'vi'
+  antigen use prezto
+
+  # Alternative with antigen
+  # for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
-    antigen bundle sorin-ionescu/prezto modules/${module}
-  done
+    # antigen bundle sorin-ionescu/prezto modules/${module}
+  # done
+
   unset pmodules
 
-  antigen bundle mollifier/anyframe
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
 
   # antigen use oh-my-zsh
@@ -130,8 +123,7 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-autoload -Uz compinit && compinit
-autoload -Uz promptinit && promptinit
+zstyle ":completion:*" show-completer true
 
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach
