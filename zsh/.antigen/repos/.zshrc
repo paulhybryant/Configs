@@ -15,28 +15,6 @@ if [[ -n ${PROFILING+1} ]]; then
   setopt xtrace prompt_subst
 fi
 
-declare -U path
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  declare -xg BREWVERSION="homebrew"
-  declare -xg BREWHOME="$HOME/.$BREWVERSION"
-  declare -xg CMDPREFIX="g"
-  path=(/opt/local/bin /opt/local/sbin $path)
-else
-  declare -xg BREWVERSION="linuxbrew"
-  declare -xg BREWHOME="$HOME/.$BREWVERSION"
-  declare -xg CMDPREFIX=""
-fi
-path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
-
-declare -U fpath
-fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh/lib $fpath)
-declare -U manpath
-manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
-declare -U -T INFOPATH infopath
-infopath=($BREWHOME/share/info $infopath)
-brew list go > /dev/null 2>&1 && declare -xg GOPATH="$(brew --prefix go)"
-declare -U precmd_functions
-
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
@@ -59,11 +37,6 @@ declare -xg HISTSIZE=50000
 declare -xg SAVEHIST=60000
 declare -xg HISTFILE="$HOME/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
-
-declare -axg -U zsh_autoload_dir
-zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
-autoload -Uz zsh::autoload time::getmtime
-[[ -d ~/.zsh/lib ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
@@ -88,16 +61,25 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle mollifier/anyframe
 
   # antigen bundle mollifier/cd-bookmark
-  # antigen bundle mollifier/cd-gitroot
+  antigen bundle mollifier/cd-gitroot
 
   antigen use prezto
   local pmodules
   # Order matters! (per zpreztorc)
-  pmodules=(environment terminal directory history git ssh tmux prompt homebrew)
-  # pmodules=(environment terminal editor history directory fasd git ssh tmux \
-    # command-not-found syntax-highlighting history-substring-search homebrew \
-    # prompt)
+  pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
+    homebrew prompt completion)
   os::OSX && pmodules+=(osx)
+  zstyle ":completion:*" show-completer true
+  # zstyle ':prezto:module:syntax-highlighting' highlighters \
+    # 'main' \
+    # 'brackets' \
+    # 'pattern' \
+    # 'cursor' \
+    # 'root'
+  # zstyle ':prezto:module:syntax-highlighting' styles \
+    # 'builtin' 'bg=blue' \
+    # 'command' 'bg=blue' \
+    # 'function' 'bg=blue'
   pmodload "${pmodules[@]}"
   unset pmodules
   prompt bart
@@ -129,8 +111,6 @@ fi
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-zstyle ":completion:*" show-completer true
 
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach
