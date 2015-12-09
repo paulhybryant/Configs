@@ -88,36 +88,39 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle mollifier/anyframe
 
   # antigen bundle mollifier/cd-bookmark
-  antigen bundle mollifier/cd-gitroot
+  # antigen bundle mollifier/cd-gitroot
 
-  local pmodules
+  # antigen use prezto
+  # local pmodules
   # Order matters! (per zpreztorc)
-  pmodules=(environment terminal editor history directory fasd git ssh tmux \
-    command-not-found syntax-highlighting history-substring-search homebrew \
-    prompt)
-  os::OSX && pmodules+=(osx)
+  # pmodules=(git ssh tmux prompt homebrew)
+  # pmodules=(environment terminal editor history directory fasd git ssh tmux \
+    # command-not-found syntax-highlighting history-substring-search homebrew \
+    # prompt)
+  # os::OSX && pmodules+=(osx)
+  # pmodload "${pmodules[@]}"
+  # unset pmodules
+  # prompt powerline
 
-  zstyle ':prezto:load' pmodule ${pmodules}
-  zstyle ':prezto:module:editor' key-bindings 'vi'
-  antigen use prezto
+  # Alternative 1
+  # zstyle ':prezto:load' pmodule ${pmodules}
+  # zstyle ':prezto:module:editor' key-bindings 'vi'
 
-  # Alternative with antigen
+  # Alternative 2
   # for module in ${pmodules}; do
     # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
     # antigen bundle sorin-ionescu/prezto modules/${module}
   # done
 
-  unset pmodules
-
-  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
-
-  # antigen use oh-my-zsh
   # antigen bundle --loc=lib
   # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
   # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-  # antigen theme candy
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
+  antigen use oh-my-zsh
+  antigen bundle git directories
+  antigen theme sorin
+  antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
 

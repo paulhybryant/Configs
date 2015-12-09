@@ -4,11 +4,11 @@ declare -xg GIT_EDITOR='vim'
 zstyle ":registry:var:tmux-vars" registry \
   "SSH_CLIENT" "SSH_OS" "SSH_AUTH_SOCK" \
   "DISPLAY" "SSH_AGENT_PID" "P4DIFF"
-declare -xg LS_COLORS
 
-[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# declare -xg LS_COLORS
+# [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
+  # eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
 
