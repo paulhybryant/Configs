@@ -3,7 +3,9 @@
 if [[ ! -z "${TMUX}" ]]; then
   local _pat
   local -A _varsmap
-  for var in ${__TMUX_VARS__};
+  local -a _tmux_vars
+  zstyle -a ":registry:var:tmux-vars" registry "_tmux_vars"
+  for var in ${_tmux_vars};
   do
     if [[ -z "${_pat}" ]]; then
       _pat="^${var}"
@@ -20,7 +22,7 @@ if [[ ! -z "${TMUX}" ]]; then
     _varsmap[${var/=*/}]=1
   done< <(\tmux show-environment | grep "${_pat}")
 
-  for var in ${__TMUX_VARS__};
+  for var in ${_tmux_vars};
   do
     if [[ -z ${_varsmap[${var}]+1} ]]; then
       io::vlog 1 "export ${var}="

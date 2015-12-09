@@ -10,7 +10,9 @@ Tmux attach wrapper, which updates tmux environment as configured.
 
 setopt localoptions err_return
 
-for var in ${__TMUX_VARS__};
+local -a _tmux_vars
+zstyle -a ":registry:var:tmux-vars" registry "_tmux_vars"
+for var in ${_tmux_vars};
 do
   local _value=
   eval _value=\$${var}

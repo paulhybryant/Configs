@@ -8,8 +8,7 @@ Set verbose level of shell.
 @return NULL
 =cut
 
-declare -xg __VERBOSE__
-__VERBOSE__=$1
+zstyle ":registry:var:verbose" registry "$1"
 if [[ $1 -gt 0 ]]; then
   declare -x GIT_CURL_VERBOSE
   GIT_CURL_VERBOSE=$1
