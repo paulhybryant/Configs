@@ -90,17 +90,17 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle mollifier/cd-bookmark
   # antigen bundle mollifier/cd-gitroot
 
-  # antigen use prezto
-  # local pmodules
+  antigen use prezto
+  local pmodules
   # Order matters! (per zpreztorc)
-  # pmodules=(git ssh tmux prompt homebrew)
+  pmodules=(environment terminal directory history git ssh tmux prompt homebrew)
   # pmodules=(environment terminal editor history directory fasd git ssh tmux \
     # command-not-found syntax-highlighting history-substring-search homebrew \
     # prompt)
-  # os::OSX && pmodules+=(osx)
-  # pmodload "${pmodules[@]}"
-  # unset pmodules
-  # prompt powerline
+  os::OSX && pmodules+=(osx)
+  pmodload "${pmodules[@]}"
+  unset pmodules
+  prompt bart
 
   # Alternative 1
   # zstyle ':prezto:load' pmodule ${pmodules}
@@ -117,9 +117,10 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
   # antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  antigen use oh-my-zsh
-  antigen bundle git directories
-  antigen theme sorin
+  # antigen use oh-my-zsh
+  # antigen bundle git directories
+  # antigen theme robbyrussell
+
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
