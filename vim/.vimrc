@@ -544,6 +544,11 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'thinca/vim-textobj-between', {
+        \ 'depends' : 'kana/vim-textobj-user',
+        \ }                                                                     " Text object between a char
+  " }}}
+  " {{{2
   NeoBundle 'tyru/capture.vim', {
         \ 'autoload' : { 'commands' : ['Capture'] },
         \ }                                                                     " Capture Ex command output to buffer
@@ -1457,9 +1462,6 @@ if s:vimplugin_priority >= 99
   NeoBundle 'sgur/vim-textobj-parameter', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ }
-  NeoBundle 'thinca/vim-textobj-between', {
-        \ 'depends' : 'kana/vim-textobj-user',
-        \ }                                                                     " Text object between a char
   NeoBundle 'thinca/vim-textobj-comment', {
         \ 'depends' : 'kana/vim-textobj-user',
         \ }                                                                     " Text object  for comments
