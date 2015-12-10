@@ -55,13 +55,10 @@ elif os::OSX; then
   osx::fix-display
 fi
 
-alias a='fasd -a'                                                               # any
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
-alias d='fasd -d'                                                               # directory
 alias date='${CMDPREFIX}\date'
-alias f='fasd -f'                                                               # file
 alias find='file::find-ignore-dir ".git"'
 alias grepc='\grep -C 5 '
 alias gvim='util::gvim'
@@ -89,9 +86,6 @@ alias npm='http_proxy="" https_proxy="" \npm'
 alias nvim='NVIM=nvim nvim'
 alias rm='\trash -v'
 alias run='zsh::run'
-alias s='fasd -si'                                                              # show / search / select
-alias sd='fasd -sid'                                                            # interactive directory selection
-alias sf='fasd -sif'                                                            # interactive file selection
 alias ssh='net::ssh'
 alias stat='${CMDPREFIX}\stat'
 alias stow='\stow -v'
@@ -102,9 +96,7 @@ alias ts='tmux start-server; tmux attach'
 alias vartype='declare -p'
 alias vi='util::vim'                                                            # alias vi='vi -p'
 alias vim='util::vim'                                                           # alias vim='vim -p'
-alias z='fasd_cd -d'                                                            # cd, same as j in autojump
 alias zunbindkey='bindkey -r'
-alias zz='fasd_cd -d -i'                                                        # cd with interactive selection
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
 autoload run-help                                                               # Unset previous run-help alias
 
