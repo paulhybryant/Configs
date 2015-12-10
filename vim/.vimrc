@@ -184,6 +184,13 @@ endif
     call g:ConfigureRelatedFiles()
   endfunction
   " }}}
+  " ft-python {{{2
+  NeoBundle 'klen/python-mode', {
+        \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
+        \ 'filetypes' : ['python'],
+        \ 'lazy' : 1,
+        \ }                                                                     " Python dev env
+  " }}}
 call glaive#Install()
 " }}}
 " Debuging Plugins {{{1
@@ -612,12 +619,6 @@ if s:vimplugin_priority >= 0
         \ 'lazy' : 1,
         \ }                                                                     " Fold markdown
   NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
-  " }}}
-  " ft-python {{{2
-  NeoBundle 'klen/python-mode', {
-        \ 'filetypes' : ['python'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Python dev env
   " }}}
   " ft-ruby {{{2
   NeoBundle 'vim-ruby/vim-ruby', {

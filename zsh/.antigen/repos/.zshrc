@@ -65,12 +65,12 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 
   antigen use prezto
   local pmodules
-  # Order matters! (per zpreztorc)
+  # Order matters!
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
-  pmodules=(environment git homebrew prompt helper)
+  # TODO: Make syntax-highlighting work
+  pmodules=(environment git homebrew prompt helper completion)
   os::OSX && pmodules+=(osx)
-  zstyle ":completion:*" show-completer true
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
     # 'main' \
     # 'brackets' \
@@ -83,6 +83,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     # 'function' 'bg=blue'
   pmodload "${pmodules[@]}"
   unset pmodules
+  zstyle ":completion:*" show-completer true
   prompt clint
 
   # Alternative 1
