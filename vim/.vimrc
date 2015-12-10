@@ -1664,6 +1664,11 @@ call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on                                                       " Automatically detect file types.
 " }}}
+" Local setup (after) {{{1
+if filereadable(expand('~/.vimrc.local.after'))
+  execute 'source' expand('~/.vimrc.local.after')
+endif
+" }}}
 " Settings {{{1
 syntax on                                                                       " Syntax highlighting
 set autoindent                                                                  " Indent at the same level of the previous line
@@ -1735,10 +1740,5 @@ if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                
   set clipboard=unnamedplus
 else                                                                            " On Windows use * register
   set clipboard=unnamed
-endif
-" }}}
-" Local setup (after) {{{1
-if filereadable(expand('~/.vimrc.local.after'))
-  execute 'source' expand('~/.vimrc.local.after')
 endif
 " }}}

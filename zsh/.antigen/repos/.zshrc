@@ -117,7 +117,9 @@ fi
 compdef _ta tmux::attach
 zsh::autoload _ta _ta-sessions
 
-trap 'tmux::try-switch' EXIT
+autoload -Uz add-zsh-hook
+add-zsh-hook zshexit tmux::try-switch
+# trap 'tmux::try-switch' EXIT
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
