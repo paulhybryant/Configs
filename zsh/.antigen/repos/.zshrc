@@ -67,11 +67,12 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 
   antigen use prezto
   local pmodules
-  # Order matters! (per zpreztorc)
-  pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
-    homebrew prompt completion helper)
+  # Order matters!
+  # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
+    # homebrew prompt completion helper)
+  # TODO: Make syntax-highlighting work
+  pmodules=(environment git homebrew prompt helper)
   os::OSX && pmodules+=(osx)
-  zstyle ":completion:*" show-completer true
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
     # 'main' \
     # 'brackets' \
@@ -84,6 +85,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     # 'function' 'bg=blue'
   pmodload "${pmodules[@]}"
   unset pmodules
+  zstyle ":completion:*" show-completer true
   prompt clint
 
   # Alternative 1
@@ -114,6 +116,7 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
+autoload -Uz compinit && compinit
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach
 zsh::autoload _ta _ta-sessions
