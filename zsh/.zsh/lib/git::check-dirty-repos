@@ -35,6 +35,8 @@ if [[ ${#dirty_repos} -gt 0 ]]; then
   for dir in ${dirty_repos}; do
     io::hl "Dirty repo: ${dir}"
   done
+  return 1
 else
   io::msg "All clean!"
+  return 0
 fi
