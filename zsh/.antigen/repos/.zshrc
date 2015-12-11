@@ -71,7 +71,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
   # TODO: Make syntax-highlighting work
-  pmodules=(environment git homebrew prompt helper)
+  pmodules=(environment git homebrew prompt helper fasd)
   os::OSX && pmodules+=(osx)
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
     # 'main' \
@@ -86,7 +86,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   pmodload "${pmodules[@]}"
   unset pmodules
   zstyle ":completion:*" show-completer true
-  prompt clint
+  prompt agnoster
 
   # Alternative 1
   # zstyle ':prezto:load' pmodule ${pmodules}
