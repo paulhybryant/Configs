@@ -36,7 +36,7 @@ function bootstrap::main() {
   fi
 
   # zsh::eval "brew update && brew upgrade $(brew outdated)"
-  zsh::eval "brew install coreutils stow"
+  zsh::eval "brew install coreutils stow findutils"
   io::msg "Creating symlinks with stow..."
   zsh::eval "mkdir -p "$HOME/.antigen/repos/""
   zsh::eval "mkdir -p "$HOME/.config/pip/""
