@@ -700,16 +700,6 @@ if s:vimplugin_priority >= 1
         \ }                                                                     " Enhanced vim plugin for fzf fuzzy finder
   " }}}
   " {{{2
-  NeoBundle 'edkolev/tmuxline.vim', {
-        \ 'gui' : 0,
-        \ 'lazy' : 1,
-        \ }                                                                     " Consistent tmux theme with statusline
-  " let s:tmuxline = neobundle#get('tmuxline.vim')
-  " function s:tmuxline.hooks.on_post_source(bundle)
-    " Tmuxline airline_tabline
-  " endfunction
-  " }}}
-  " {{{2
   NeoBundle 'tsukkee/unite-help', {
         \ 'depends' : [ 'Shougo/unite.vim' ],
         \ }                                                                     " Help source for unite.vim
@@ -732,6 +722,15 @@ if s:vimplugin_priority >= 1
   let s:vimsupport = neobundle#get('Vim-Support')
   function! s:vimsupport.hooks.on_source(bundle)
     let g:Vim_MapLeader  = g:mapleader
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'edkolev/tmuxline.vim', {
+        \ 'gui' : 0,
+        \ }                                                                     " Consistent tmux theme with statusline
+  let s:tmuxline = neobundle#get('tmuxline.vim')
+  function s:tmuxline.hooks.on_post_source(bundle)
+    Tmuxline airline_tabline
   endfunction
   " }}}
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
