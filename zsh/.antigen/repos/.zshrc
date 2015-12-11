@@ -69,7 +69,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
   # TODO: Make syntax-highlighting work
-  pmodules=(environment git homebrew prompt helper completion)
+  pmodules=(environment git homebrew prompt helper)
   os::OSX && pmodules+=(osx)
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
     # 'main' \
@@ -114,6 +114,7 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
+autoload -Uz compinit && compinit
 # This has to be set after compinit (why?)
 compdef _ta tmux::attach
 zsh::autoload _ta _ta-sessions
