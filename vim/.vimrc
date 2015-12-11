@@ -728,10 +728,7 @@ if s:vimplugin_priority >= 1
   NeoBundle 'edkolev/tmuxline.vim', {
         \ 'gui' : 0,
         \ }                                                                     " Consistent tmux theme with statusline
-  let s:tmuxline = neobundle#get('tmuxline.vim')
-  function s:tmuxline.hooks.on_post_source(bundle)
-    Tmuxline airline_tabline
-  endfunction
+  " Tmuxline airline_tabline
   " }}}
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
   NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
