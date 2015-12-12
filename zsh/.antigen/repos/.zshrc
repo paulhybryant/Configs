@@ -66,7 +66,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle mollifier/cd-gitroot
 
   antigen use prezto
-  zstyle ':prezto:module:git:info:ahead' format '%A'
   local pmodules
   # Order matters!
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
@@ -110,7 +109,14 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
-prompt paradox
+
+# prompt paradox
+# zstyle ':prezto:module:git:info:branch' format ' %b'
+# zstyle ':prezto:module:git:info:action' format ''
+# zstyle ':prezto:module:git:info:ahead' format ' ⬆ %A'
+# zstyle ':prezto:module:git:info:stashed' format ''
+# zstyle ':prezto:module:git:info:modified' format ''
+# zstyle ':prezto:module:git:info:dirty' format ''
 
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
