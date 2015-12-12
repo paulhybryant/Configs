@@ -66,6 +66,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle mollifier/cd-gitroot
 
   antigen use prezto
+  zstyle ':prezto:module:git:info:ahead' format '%A'
   local pmodules
   # Order matters!
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
