@@ -36,7 +36,7 @@ function bootstrap::main() {
   fi
 
   # zsh::eval "brew update && brew upgrade $(brew outdated)"
-  zsh::eval "brew install coreutils stow"
+  zsh::eval "brew install coreutils stow findutils"
   io::msg "Creating symlinks with stow..."
   zsh::eval "mkdir -p "$HOME/.antigen/repos/""
   zsh::eval "mkdir -p "$HOME/.config/pip/""
@@ -59,7 +59,7 @@ function bootstrap::main() {
   # zsh::eval "brew tap peco/peco"
 
   io::msg "Installing softwares..."
-  zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
+  # zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
   zsh::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
   zsh::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \

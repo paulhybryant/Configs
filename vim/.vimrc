@@ -406,6 +406,12 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Info help page source for vim-ref
   " }}}
   " {{{2
+  NeoBundle 'edkolev/tmuxline.vim', {
+        \ 'gui' : 0,
+        \ 'lazy' : 1,
+        \ }                                                                     " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
+  " }}}
+  " {{{2
   NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
   let s:vimsyncopate = neobundle#get('vim-syncopate')
   function! s:vimsyncopate.hooks.on_source(bundle)
@@ -722,15 +728,6 @@ if s:vimplugin_priority >= 1
   let s:vimsupport = neobundle#get('Vim-Support')
   function! s:vimsupport.hooks.on_source(bundle)
     let g:Vim_MapLeader  = g:mapleader
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'edkolev/tmuxline.vim', {
-        \ 'gui' : 0,
-        \ }                                                                     " Consistent tmux theme with statusline
-  let s:tmuxline = neobundle#get('tmuxline.vim')
-  function s:tmuxline.hooks.on_post_source(bundle)
-    Tmuxline airline_tabline
   endfunction
   " }}}
   NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
