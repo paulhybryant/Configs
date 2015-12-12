@@ -86,8 +86,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   pmodload "${pmodules[@]}"
   unset pmodules
   zstyle ":completion:*" show-completer true
-  # prompt agnoster
-  prompt paradox
+  prompt agnoster
 
   # Alternative 1
   # zstyle ':prezto:load' pmodule ${pmodules}
