@@ -8,4 +8,4 @@ Set dryrun mode to true
 @return NULL
 =cut
 
-export __DRYRUN__=
+zstyle ":registry:var:verbose" dryrun "yes"

@@ -8,8 +8,8 @@ Toggle dryrun mode
 @return NULL
 =cut
 
-if [[ -n ${__DRYRUN__+1} ]]; then
-  unset __DRYRUN__
+if mode::dryrun; then
+  zstyle ":registry:var:verbose" dryrun "no"
 else
-  export __DRYRUN__=
+  mode::set-dryrun
 fi

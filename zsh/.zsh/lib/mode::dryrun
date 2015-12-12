@@ -8,5 +8,11 @@ Whether it is in dryrun mode.
 @return 0 if it is dryrun mode, 1 otherwise.
 =cut
 
-[[ -n ${__DRYRUN__+1} ]] && return 0
+zstyle -s ":registry:var:dryrun" registry "_dryrun"
+if [[ -z ${_dryrun} ]]; then
+  zstyle ":registry:var:verbose" dryrun "no"
+  _dryrun="no"
+fi
+
+[[ "yes" == "${_dryrun}" ]] && return 0
 return 1
