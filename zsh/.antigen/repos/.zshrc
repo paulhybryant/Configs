@@ -110,6 +110,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
+prompt paradox
 
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
