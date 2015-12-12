@@ -403,6 +403,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 1</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-Configs.git/osx</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -430,12 +432,14 @@
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>1260 1440 630 435 -591 900 2560 1577 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>375 284 924 485 0 0 1440 877 </string>
+	<string>598 1691 924 485 -591 900 2560 1577 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 403 570 473 0 0 1440 877 </string>
+	<string>0 84 1440 793 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>457 348 570 451 0 0 1440 877 </string>
+	<string>208 1789 585 473 -591 900 2560 1577 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>744 286 570 451 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_183A6FE4-07B4-42E0-8890-C7C35ADE86ED</key>
@@ -613,9 +617,9 @@
 			<key>Blend</key>
 			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
-			<false/>
+			<true/>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
@@ -989,7 +993,7 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>SauceCodePowerline-Regular 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -1171,7 +1175,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453869181.428069</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>468986715.978019</real>
+	<real>471497757.81798899</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1220,7 +1224,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/yuhuang/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-Configs.git/osx</string>
+	<string>/Users/yuhuang/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-Configs.git/osx/.osx</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1236,7 +1240,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-12T02:05:13Z</date>
+	<date>2015-12-11T01:46:50Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
