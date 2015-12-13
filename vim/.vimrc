@@ -650,21 +650,21 @@ if s:vimplugin_priority >= 0
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
-  " NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Decho.vba.gz', {
-        " \ 'autoload' : {
-        " \     'commands' : ['Decho'],
-        " \     'filetypes' : ['vim'],
-        " \   },
-        " \ 'lazy' : 1,
-        " \ 'name' : 'Decho',
-        " \ 'regular_namne' : 'Decho',
-        " \ 'script_type' : 'vba',
-        " \ }                                                                     " Debug echo for debuging vim plugins
-  " let s:decho = neobundle#get('Decho')
-  " function! s:decho.hooks.on_source(bundle)
-    " let g:dechofuncname = 1
-    " let g:decho_winheight = 10
-  " endfunction
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/Configs/master/blob/vba/Decho.vba.gz', {
+        \ 'autoload' : {
+        \     'commands' : ['Decho'],
+        \     'filetypes' : ['vim'],
+        \   },
+        \ 'lazy' : 1,
+        \ 'name' : 'Decho',
+        \ 'regular_namne' : 'Decho',
+        \ 'type' : 'vba',
+        \ }                                                                     " Debug echo for debuging vim plugins
+  let s:decho = neobundle#get('Decho')
+  function! s:decho.hooks.on_source(bundle)
+    let g:dechofuncname = 1
+    let g:decho_winheight = 10
+  endfunction
   NeoBundle 'google/vim-ft-vroom', {
         \ 'autoload' : { 'filetypes' : ['vroom'] },
         \ 'lazy' : 1,
@@ -1280,7 +1280,8 @@ if s:vimplugin_priority >= 1
         \ }                                                                     " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
-    let g:sqlutil_align_comma=0
+    let g:sqlutil_align_comma = 0
+    let g:decho_enable = 0
     " function! s:FormatSql()
       " execute ':SQLUFormatter'
       " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
