@@ -4,28 +4,34 @@
 =item Function C<git::check-dirty-repos>
 
 Check subdirs of current directory, and report repos that are dirty
-Number of arguments accepted: --no-detached
+Number of arguments accepted: --exclude-detached
 
 @return NULLPTR
 =cut
 
 setopt localoptions err_return
 
-zparseopts -D -A opts -no-detached "$@"
+zparseopts -D -A opts -exclude-detached -exclude-ahead
 
 setopt localoptions nounset
-[[ -n ${opts[--no-detached]+1} ]] && \
+[[ -n ${opts[--exclude-detached]+1} ]] && \
   io::msg "Considering detached as dirty."
 local -a dirty_repos
 dirty_repos=()
 for dir in */; do
   io::vlog 2 "[${0:t}] Checking ${dir}"
   pushd "${dir}"
-  if [[ -d '.git' && (($(git diff origin/master | wc -l) -ne 0) || \
-    (-n $(git status --porcelain) || \
-    (-n ${opts[--no-detached]+1} && \
-    "$(git status)" =~ '^HEAD detached.*'))) ]]; then
-    dirty_repos+=${dir}
+  if [[ -d '.git' ]]; then
+    if [[ -n $(git status --porcelain) ]]; then
+      # Dirty
+      dirty_repos+=${dir}
+    elif [[ -z ${opts[--exclude-ahead]+1} && ($(git diff origin/master | wc -l) -ne 0) ]]; then
+      # Check ahead
+      dirty_repos+=${dir}
+    elif [[ -z ${opts[--exclude-detached]+1} && ("$(git status)" =~ '^HEAD detached.*') ]]; then
+      # Check detached
+      dirty_repos+=${dir}
+    fi
   fi
   popd
 done
