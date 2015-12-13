@@ -37,8 +37,6 @@ declare -xg XDG_CONFIG_HOME="$HOME/.config"
 declare -xg XDG_DATA_HOME="$HOME/.local/share"
 declare -xg HISTSIZE=50000
 declare -xg SAVEHIST=60000
-declare -xg HISTFILE="$HOME/.zhistory"
-declare -xg HIST_STAMPS='yyyy-mm-dd'
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
@@ -109,6 +107,9 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle git@github.com:paulhybryant/Configs.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
+
+declare -xg HISTFILE="$ZDOTDIR/.zhistory"
+declare -xg HIST_STAMPS='yyyy-mm-dd'
 
 # prompt paradox
 # zstyle ':prezto:module:git:info:branch' format ' %b'

@@ -8,4 +8,4 @@ Set dryrun mode to true
 @return NULL
 =cut
 
-zstyle ":registry:var:verbose" dryrun "yes"
+zstyle ":registry:var:dryrun" registry "yes"

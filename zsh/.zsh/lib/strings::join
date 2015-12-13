@@ -10,7 +10,7 @@ Join string with delimiter and prefix.
 
 setopt localoptions err_return nounset
 
-zparseopts -D -A opts -delim: -prefix: "$@"
+zparseopts -D -A opts -delim: -prefix:
 
 [[ -n ${opts[--prefix]+1} ]] || opts[--prefix]=''
 [[ -n ${opts[--delim]+1} ]] || opts[--delim]=','

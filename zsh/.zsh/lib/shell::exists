@@ -15,7 +15,7 @@ $1 The thing to be checked whether it exists.
 
 setopt localoptions unset
 
-zparseopts -A opts -var: -bin: -sub: -file: -dir: "$@"
+zparseopts -A opts -var: -bin: -sub: -file: -dir:
 
 if [[ -n ${opts[--var]+1} ]]; then
   [[ -n ${opts[--var]+1} ]] && eval "[[ -n \${${opts[--var]}+1} ]]" && return 0

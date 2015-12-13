@@ -7,6 +7,11 @@ set -x
 
 function test::mode::set-verbose() {
   mode::set-verbose 10
-  [[ "${__VERBOSE__}" -eq 10 ]]
+  mode::verbose 10
+  [[ $? -eq 0 ]]
+  mode::verbose 9
+  [[ $? -eq 0 ]]
+  mode::verbose 11
+  [[ $? -eq 1 ]]
 }
 test::mode::set-verbose

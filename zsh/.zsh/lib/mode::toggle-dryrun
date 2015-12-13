@@ -9,7 +9,7 @@ Toggle dryrun mode
 =cut
 
 if mode::dryrun; then
-  zstyle ":registry:var:verbose" dryrun "no"
+  zstyle ":registry:var:dryrun" registry "no"
 else
   mode::set-dryrun
 fi
