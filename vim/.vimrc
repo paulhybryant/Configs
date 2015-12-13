@@ -662,6 +662,7 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Debug echo for debuging vim plugins
   let s:decho = neobundle#get('Decho')
   function! s:decho.hooks.on_source(bundle)
+    let g:decho_enable = 0
     let g:dechofuncname = 1
     let g:decho_winheight = 10
   endfunction
@@ -1281,7 +1282,6 @@ if s:vimplugin_priority >= 1
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
     let g:sqlutil_align_comma = 0
-    let g:decho_enable = 0
     " function! s:FormatSql()
       " execute ':SQLUFormatter'
       " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
