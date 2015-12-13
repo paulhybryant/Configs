@@ -7,14 +7,14 @@ set -x
 
 function test::zsh::eval() {
   local _cmd _expected _actual
-  _cmd='echo "hello world"'
+  _cmd='printf "hello world\n"'
 
   _expected='hello world'
   _actual="$(zsh::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 
   mode::toggle-dryrun
-  _expected=$(printf "%-${PREFIXWIDTH}s echo \"hello world\"" '[Dryrun]')
+  _expected=$(printf "%-${PREFIXWIDTH}s printf \"hello world\\n\"" '[Dryrun]')
   _actual="$(zsh::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 }

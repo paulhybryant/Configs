@@ -5,7 +5,7 @@ setopt localoptions err_return
 function send-notification() {
   notify-send 'vimode' "$1"
   # zenity --info --text="$1"
-  # echo "$1" > /dev/pts/30
+  # printf "$1\n" > /dev/pts/30
 }
 
 function normal() {
@@ -34,7 +34,7 @@ fpath+=(~/.zsh/lib)
 autoload -Uz x::get-active-window-process-name
 
 if [[ $# -gt 1 ]]; then
-  echo 'Usage: vimode [mode]'
+  printf 'Usage: vimode [mode]\n'
   return 1
 elif [[ $# -eq 0 ]]; then
   # xkb-switch -p

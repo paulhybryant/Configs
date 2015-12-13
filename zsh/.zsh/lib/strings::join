@@ -23,4 +23,4 @@ for part in "$@"; do
     _result="${_result}${opts[--delim]}${opts[--prefix]}${part}"
   fi
 done
-echo "${_result}"
+printf "${_result}\n"

@@ -5,7 +5,7 @@ local _log="/tmp/zsh.profile"
 local _profile="/tmp/zsh.profile-summary"
 rm "${_log}" "${_profile}" > /dev/null 2>&1
 PROFILING='y' zsh
-echo "Profile log: ${_log}"
+printf "Profile log: ${_log}\n"
 local _file _start _end _curfile _cum _startline _endline
 local -a _parts
 
@@ -43,4 +43,4 @@ done < "${_log}"
 _cum=$((_cum + _end - _start))
 printf "%-8f : %-10f : %s:%s-%s\n" "$((_end - _start))" "${_cum}" "${_file}" "${_startline/>/}" "${_endline/>/}" >> "${_profile}"
 cat ${_profile}
-echo "Profile summary: ${_profile}"
+printf "Profile summary: ${_profile}\n"

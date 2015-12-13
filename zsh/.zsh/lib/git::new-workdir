@@ -13,7 +13,7 @@ $3 New branch name
 @return NULL
 =cut
 
-echo 'y'
+printf 'y\n'
 return 0
 
 setopt localoptions nounset err_return

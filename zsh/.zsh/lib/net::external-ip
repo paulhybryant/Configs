@@ -10,4 +10,4 @@ Get the external ip address for current host.
 
 local _ip
 _ip="$(curl -x '' ipecho.net/plain 2> /dev/null)"
-echo "${_ip}"
+printf "${_ip}\n"

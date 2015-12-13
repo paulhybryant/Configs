@@ -10,4 +10,4 @@ Print current time in seconds since epoch.
 
 local _time_str
 _time_str="$(${CMDPREFIX}\date +%s)"
-echo "${_time_str}"
+printf "${_time_str}\n"

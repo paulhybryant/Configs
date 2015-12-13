@@ -10,6 +10,6 @@ Gets yes or no reply from user.
 
 read -q "REPLY?$1?(y/n) [n]"
 io::vlog 2 "[${0:t}] ${REPLY}"
-echo -n "\n"
+printf "\n"
 [[ "$REPLY" =~ y\|Y ]] && return 0
 return 1

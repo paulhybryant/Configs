@@ -12,4 +12,4 @@ $1 Filename
 local _mtime
 _mtime="$(${CMDPREFIX}\stat -c '%Y' $1)"
 # $(${CMDPREFIX}date -r "$1" +%s)
-echo "${_mtime}"
+printf "${_mtime}\n"

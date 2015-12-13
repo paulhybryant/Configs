@@ -11,9 +11,9 @@ Eval the strings, and output logs based on verbose level.
 setopt localoptions err_return nounset
 if mode::dryrun; then
   local _cmd
-  _cmd=$(echo "$*" | sed 's/  */ /g')
+  _cmd=$(printf "$*\n" | sed 's/  */ /g')
   printf "%-${PREFIXWIDTH}s ${_cmd}\n" "[Dryrun]"
 else
-  mode::verbose 1 && echo "$*"
+  mode::verbose 1 && printf "$*\n"
   eval "$*"
 fi

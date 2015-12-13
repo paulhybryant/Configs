@@ -89,7 +89,7 @@ prompt_git() {
     test -n "$(git status --porcelain --ignore-submodules)"
   }
   is_ahead() {
-    echo "$(git status --porcelain --ignore-submodules -b | head -n 1 | grep "\[ahead" | sed -e 's/.*\[ahead \([0-9]*\)\]/\1/')"
+    printf "$(git status --porcelain --ignore-submodules -b | head -n 1 | grep "\[ahead" | sed -e 's/.*\[ahead \([0-9]*\)\]/\1/')\n"
   }
   ref="$vcs_info_msg_0_"
   if [[ -n "$ref" ]]; then

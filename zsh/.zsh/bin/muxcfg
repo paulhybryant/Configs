@@ -2,9 +2,9 @@
 
 function muxcfg::new-workdir-cmd() {
   if [[ -d ~/.google ]]; then
-    echo "muxcfg::git5wrapper"
+    printf "muxcfg::git5wrapper\n"
   else
-    echo "git::new-workdir"
+    printf "git::new-workdir\n"
   fi
 }
 function muxcfg::usage() {
@@ -128,9 +128,9 @@ function muxcfg::main() {
 }
 function muxcfg::getcwd() {
   if [[ -d ~/.google ]]; then
-    echo "${1}/${2}/google3"
+    printf "${1}/${2}/google3\n"
   else
-    echo "${1}/${2}"
+    printf "${1}/${2}\n"
   fi
 }
 

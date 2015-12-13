@@ -3,5 +3,5 @@
 if which -s realpath > /dev/null; then
   realpath "$@"
 elif os::OSX; then
-  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+  [[ $1 = /* ]] && printf "$1\n" || printf "$PWD/${1#./}\n"
 fi

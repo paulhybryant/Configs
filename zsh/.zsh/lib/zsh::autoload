@@ -9,7 +9,7 @@ zparseopts -D -K -M -E -- d:=directory -dir:=directory \
 local -a _dir
 if [[ ${#directory} -gt 0 ]]; then
   [[ -d ${directory[2]} ]] || \
-    echo "$0: ${directory[2]} is not a directory"
+    printf "$0: ${directory[2]} is not a directory\n"
   _dir=("${directory[2]}")
 else
   [[ ${#zsh_autoload_dir} -eq 0 ]] && \
