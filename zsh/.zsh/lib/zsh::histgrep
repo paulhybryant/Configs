@@ -8,4 +8,4 @@ Grep in reverse order in zsh history.
 @return NULL
 =cut
 
-${CMDPREFIX}tac ${HISTFILE:-~/.zsh_history} | grep -m 1 "$@"
+tac ${HISTFILE:-~/.zsh_history} | grep -m 1 "$@"

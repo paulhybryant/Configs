@@ -10,8 +10,8 @@ $1 Current time in seconds since epoch
 @return string in human readable format for the specified time.
 =cut
 
-(( ${+commands[${CMDPREFIX}date]} )) || return 1
+(( ${+commands[date]} )) || return 1
 
 local _time_str
-_time_str=$("${CMDPREFIX}date" --date=@"$1")
+_time_str=$(date --date=@"$1")
 printf "${_time_str}\n"

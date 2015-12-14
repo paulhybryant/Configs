@@ -11,5 +11,5 @@ $1 Date string
 =cut
 
 local _seconds_str
-_seconds_str=$("${CMDPREFIX}date" -d "$1" +%s)
+_seconds_str=$(date -d "$1" +%s)
 printf "${_seconds_str}\n"

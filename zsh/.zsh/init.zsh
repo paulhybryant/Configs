@@ -93,7 +93,7 @@ zstyle ":registry:var:tmux-vars" registry \
 
 declare -xg LS_COLORS
 [[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(${CMDPREFIX}\dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
+  eval "$(dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
@@ -144,7 +144,6 @@ fi
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
-alias date='${CMDPREFIX}\date'
 alias find='file::find-ignore-dir ".git"'
 alias grepc='\grep -C 5 '
 alias gvim='util::gvim'
@@ -165,20 +164,16 @@ alias lld='file::ld -l'
 alias llf='file::lf -l'
 alias llink='file::ll'
 alias lll='file::ll -l'
-alias ls='file::ls'
 alias mank='\man -K'
-alias mktemp='${CMDPREFIX}\mktemp'
 alias npm='http_proxy="" https_proxy="" \npm'
 alias nvim='NVIM=nvim nvim'
-alias rm='\trash -v'
 alias run='zsh::run'
 alias ssh='net::ssh'
-alias stat='${CMDPREFIX}\stat'
 alias stow='\stow -v'
 alias ta='tmux::attach -d -t'
 alias tl='\tmux list-sessions'
 alias tmux='TERM=screen-256color \tmux -2'
-alias ts='tmux start-server; tmux attach'
+alias ts='\tmux start-server; \tmux attach'
 alias vartype='declare -p'
 alias vi='util::vim'                                                            # alias vi='vi -p'
 alias vim='util::vim'                                                           # alias vim='vim -p'

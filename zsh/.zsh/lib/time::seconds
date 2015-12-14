@@ -9,5 +9,5 @@ Print current time in seconds since epoch.
 =cut
 
 local _time_str
-_time_str="$(${CMDPREFIX}\date +%s)"
+_time_str="$(date +%s)"
 printf "${_time_str}\n"

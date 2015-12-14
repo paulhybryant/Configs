@@ -64,7 +64,7 @@ function bootstrap::main() {
   zsh::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
-    zsh-completions xbindkeys markdown"
+    zsh-completions xbindkeys markdown gnu-sed"
   zsh::eval "brew install --force pt"
   # pypy pypy3
   zsh::eval "brew install --HEAD vimdoc vroom"
