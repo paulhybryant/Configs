@@ -47,10 +47,6 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
-if [[ -f ~/.zshrc.local.before ]]; then
-  source ~/.zshrc.local.before
-fi
-
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
@@ -126,8 +122,8 @@ declare -xg HIST_STAMPS='yyyy-mm-dd'
 # zstyle ':prezto:module:git:info:dirty' format ''
 
 # Local configurations
-if [[ -f ~/.zshrc.local.after ]]; then
-  source ~/.zshrc.local.after
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
 fi
 
 autoload -Uz compinit && compinit
