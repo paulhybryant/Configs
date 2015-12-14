@@ -29,7 +29,7 @@ alias mktemp='${CMDPREFIX}\mktemp'
 alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
-/usr/bin/which -s trash && alias rm='\trash -v'
+which trash > /dev/null 2>&1 && alias rm='\trash -v'
 
 declare -axg -U zsh_autoload_dir
 zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
