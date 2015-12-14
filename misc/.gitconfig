@@ -141,7 +141,7 @@
   path = ~/.gitconfig.local
 
 [url "git@github.com:paulhybryant/"]
-  insteadof = mygithub:
+  insteadof = me:
 
 [url "https://github.com/"]
   insteadof = github:
