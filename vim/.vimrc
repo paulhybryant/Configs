@@ -650,7 +650,7 @@ if s:vimplugin_priority >= 0
   function! s:reload_script.hooks.on_source(bundle)
     map <leader>rl :ReloadScript %:p<CR>
   endfunction
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/Configs/master/blob/vba/Decho.vba.gz', {
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Decho.vba.gz', {
         \ 'autoload' : {
         \     'commands' : ['Decho'],
         \     'filetypes' : ['vim'],

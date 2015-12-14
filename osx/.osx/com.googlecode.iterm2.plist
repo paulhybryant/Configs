@@ -406,7 +406,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 1</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-Configs.git/osx</string>
+	<string>~/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-dotfiles.git/osx</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 481}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1224,7 +1224,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/yuhuang/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-Configs.git/osx/.osx</string>
+	<string>/Users/yuhuang/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-dotfiles.git/osx/.osx</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>

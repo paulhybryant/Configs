@@ -19,10 +19,10 @@ echo "Sourcing antigen..."
 source <(curl -sL https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh) || return 1
 
 [[ -n ${verbose} ]] && setopt verbose
-local url="$(-antigen-resolve-bundle-url "https://github.com/paulhybryant/Configs.git")"
+local url="$(-antigen-resolve-bundle-url "https://github.com/paulhybryant/dotfiles.git")"
 -antigen-ensure-repo "${url}"
 pushd $(-antigen-get-clone-dir "${url}")
-git remote set-url origin "git@github.com:paulhybryant/Configs.git"
+git remote set-url origin "git@github.com:paulhybryant/dotfiles.git"
 ./zsh/.zsh/bin/bootstrap --dryrun
 echo "Continue [y/n]? "
 read -r reply
