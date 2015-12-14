@@ -16,7 +16,7 @@ setopt localoptions err_return
 
 target=("$@")
 
-eval 'ls --color=yes -Fh $l $a ${target} 2>/dev/null'
+eval 'ls --color=auto -Fh $l $a ${target} 2>/dev/null'
 awk '/^-/ {
   sum += $5
   ++filenum

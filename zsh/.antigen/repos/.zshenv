@@ -24,7 +24,7 @@ brew list gnu-sed > /dev/null 2>&1 && manpath=($(brew --prefix gnu-sed)/libexec/
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'
-alias ls='${CMDPREFIX}\ls'
+alias ls='${CMDPREFIX}\ls --color=auto'
 alias mktemp='${CMDPREFIX}\mktemp'
 alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
