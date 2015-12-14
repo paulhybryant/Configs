@@ -20,7 +20,7 @@ setopt COMPLETE_IN_WORD                                                         
 setopt GLOB_COMPLETE
 setopt LIST_AMBIGUOUS
 setopt LIST_TYPES
-# setopt MENU_COMPLETE
+setopt NO_MENU_COMPLETE
 
 # Expansion and Globbing
 setopt BAD_PATTERN
@@ -29,7 +29,7 @@ setopt EXTENDED_GLOB                                                            
 setopt GLOB
 setopt MARK_DIRS
 setopt NO_NOMATCH                                                               # pass through '*' if globbing fails
-# setopt WARN_CREATE_GLOBAL
+setopt NO_WARN_CREATE_GLOBAL
 
 # History
 setopt APPEND_HISTORY
@@ -73,10 +73,10 @@ setopt PROMPT_SUBST
 
 # Scripts and Functions
 setopt C_BASES
-# setopt ERR_RETURN                                                             # Enable this would break completion!
+setopt NO_ERR_RETURN                                                             # Enable this would break completion!
 setopt FUNCTION_ARGZERO
-# setopt SOURCE_TRACE
-# setopt XTRACE
+setopt NO_SOURCE_TRACE
+setopt NO_XTRACE
 
 # Shell Emulation
 setopt NO_CONTINUE_ON_ERROR
