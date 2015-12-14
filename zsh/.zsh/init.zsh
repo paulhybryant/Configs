@@ -216,4 +216,7 @@ declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype
     -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
 
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
-zsh::prompt
+
+if [[ -z ${PROFILING+1} ]]; then
+  zsh::prompt
+fi

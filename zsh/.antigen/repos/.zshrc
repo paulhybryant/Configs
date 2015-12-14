@@ -48,6 +48,10 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
+if [[ -f ~/.zshrc.local.before ]]; then
+  source ~/.zshrc.local.before
+fi
+
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
@@ -69,7 +73,10 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
   # TODO: Make syntax-highlighting work
-  pmodules=(environment git homebrew prompt helper fasd)
+  pmodules=(environment git homebrew helper fasd)
+  if [[ -z ${PROFILING+1} ]]; then
+    pmodules+=(prompt)
+  fi
   os::OSX && pmodules+=(osx)
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
     # 'main' \
@@ -120,8 +127,8 @@ declare -xg HIST_STAMPS='yyyy-mm-dd'
 # zstyle ':prezto:module:git:info:dirty' format ''
 
 # Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
+if [[ -f ~/.zshrc.local.after ]]; then
+  source ~/.zshrc.local.after
 fi
 
 autoload -Uz compinit && compinit
@@ -129,10 +136,10 @@ autoload -Uz compinit && compinit
 compdef _ta tmux::attach
 zsh::autoload _ta _ta-sessions
 
-autoload -Uz add-zsh-hook
-add-zsh-hook zshexit tmux::try-switch
-# trap 'tmux::try-switch' EXIT
-
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
+else
+  autoload -Uz add-zsh-hook
+  add-zsh-hook zshexit tmux::try-switch
+  # trap 'tmux::try-switch' EXIT
 fi
