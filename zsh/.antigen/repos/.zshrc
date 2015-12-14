@@ -2,7 +2,6 @@
 
 # Use PROFILING='y' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
-  local _profile_log="/tmp/zsh.profile"
   # set the trace prompt to include seconds, nanoseconds, script name and line number
   # This is GNU date syntax; by default Macs ship with the BSD date program, which isn't compatible
   # PS4='+$(date "+%s:%N") %N:%i> '
@@ -10,7 +9,7 @@ if [[ -n ${PROFILING+1} ]]; then
   PS4='+$EPOCHREALTIME %N:%i> '
   # save file stderr to file descriptor 3 and redirect stderr (including trace
   # output) to a file with the script's PID as an extension
-  exec 3>&2 2> ${_profile_log}
+  exec 3>&2 2> ${PROFILING}
   # set options to turn on tracing and expansion of commands contained in the prompt
   setopt xtrace prompt_subst
 fi
