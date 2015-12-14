@@ -15,9 +15,9 @@ EOF
 }
 function bootstrap::stow() {
   for module in misc tmux vim zsh; do
-    [[ -d ${module} ]] && stow -v "$@" ${module} -t ~
+    [[ -d ${module} ]] && stow -v ${_stow_opts} ${module} -t ~
   done
-  os::OSX && [[ -d osx ]] && stow -v "$@" osx -t ~
+  os::OSX && [[ -d osx ]] && stow -v ${_stow_opts} osx -t ~
 }
 function bootstrap::main() {
   setopt localoptions unset err_return
@@ -108,26 +108,27 @@ local -a help dryrun unstow stow verbose
 zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
   -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose
 
-local _config_dir _stow_opts
+local _config_dir
+local -a _stow_opts
 _config_dir="${0:A:h}/../../../"
 if [[ -n ${dryrun} ]]; then
   printf "[Dryrun]   source ${_config_dir:a}/zsh/.zshenv\n"
-elif [[ ! -f ~/.zshenv ]] || \
-  ! diff ~/.zshenv ${_config_dir:a}/zsh/.zshenv 2>&1 > /dev/null; then
+else
   source ${_config_dir:a}/zsh/.zshenv
 fi
 fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
-[[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts="-n"
+[[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts=("-n")
 [[ -n ${verbose} ]] && setopt localoptions verbose
 
 zsh::eval "pushd ${_config_dir:a}"
 if [[ -n ${unstow} ]]; then
-  bootstrap::stow ${_stow_opts} -D
+  _stow_opts+=(-D)
+  bootstrap::stow
 elif [[ -n ${stow} ]]; then
-  bootstrap::stow ${_stow_opts}
+  bootstrap::stow
 else
   bootstrap::main
   zsh::eval "source ${_config_dir:a}/zsh/.zshenv"
