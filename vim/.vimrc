@@ -495,6 +495,9 @@ if s:vimplugin_priority >= 0
       vnoremap y y:call system('nc -c localhost 8377', @0)<CR>
     endif
     call myutils#SetupTablineMappings(g:OS)
+    let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+    call l:codefmt_registry.AddExtension(
+          \ myutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
   " {{{2
