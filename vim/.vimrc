@@ -656,9 +656,9 @@ if s:vimplugin_priority >= 0
       " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
     " endfunction
     if (neobundle#is_sourced('vim-codefmt') ||
-          \ maktaba#plugin#IsRegistered('vim-codefmt'))
+          \ maktaba#plugin#IsRegistered('codefmt'))
           \ && neobundle#is_installed('myutils')
-      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
+      let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
       call l:codefmt_registry.AddExtension(
             \ myutils#sqlformatter#GetSQLFormatter())
     endif
