@@ -32,11 +32,13 @@ function! s:OSDetect()
 endfun
 
 function! g:ConfigureRelatedFiles()
+  Glaive relatedfiles plugin[mappings]=0
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <leader>g' . l:key .
           \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
           \ l:key . '")<CR>'
   endfor
+  nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
 endfunction
 
 function! g:ConfigureYcm()
