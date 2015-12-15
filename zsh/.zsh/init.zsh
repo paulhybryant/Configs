@@ -177,6 +177,7 @@ alias ts='\tmux start-server; \tmux attach'
 alias vartype='declare -p'
 alias vi='util::vim'                                                            # alias vi='vi -p'
 alias vim='util::vim'                                                           # alias vim='vim -p'
+alias yank='util::yank'
 alias zunbindkey='bindkey -r'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
 autoload run-help                                                               # Unset previous run-help alias
