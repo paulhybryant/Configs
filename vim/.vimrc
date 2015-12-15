@@ -435,6 +435,11 @@ if s:vimplugin_priority >= 0
         \ 'regular_namne' : 'Mark',
         \ 'type' : 'vba',
         \ }                                                                     " Highlight multiple workds
+  let s:mark = neobundle#get('Mark')
+  function! s:mark.hooks.on_source(bundle)
+    nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+    nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+  endfunction
   " }}}
   " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
