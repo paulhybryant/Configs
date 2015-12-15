@@ -1637,14 +1637,6 @@ if s:vimplugin_priority >= 99
   NeoBundle 'neitanod/vim-ondemandhighlight'
   NeoBundle 'embear/vim-localvimrc'                                             " Load local vimrc in parent dirs of currently opened file
   NeoBundle 'thinca/vim-localrc', { 'type' : 'svn' }                            " Enable vim configuration file for each directory
-  " {{{2
-  NeoBundle 'vim-scripts/mark'                                                  " Highlight multiple patterns with different color
-  let s:mark = neobundle#get('mark')
-  function! s:mark.hooks.on_source(bundle)
-    nnoremap <leader>mc :MarkClear<CR>
-    nnoremap <leader>m/ :Mark <C-R>/<CR>
-  endfunction
-  " }}}
   NeoBundle 'vim-scripts/TagHighlight'
   NeoBundle 'vim-scripts/utl.vim'
   NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
