@@ -430,6 +430,13 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
+        \ 'name' : 'Mark',
+        \ 'regular_namne' : 'Mark',
+        \ 'type' : 'vba',
+        \ }                                                                     " Highlight multiple workds
+  " }}}
+  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
         \   'autoload' : {
         \     'commands' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
