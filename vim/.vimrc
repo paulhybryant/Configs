@@ -34,7 +34,7 @@ endfun
 function! g:ConfigureRelatedFiles()
   Glaive relatedfiles plugin[mappings]=0
   for l:key in ['c', 'h', 't', 'b']
-    execute 'nnoremap <leader>g' . l:key .
+    execute 'nnoremap <unique> <silent> <leader>g' . l:key .
           \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
           \ l:key . '")<CR>'
   endfor
@@ -42,7 +42,7 @@ function! g:ConfigureRelatedFiles()
 endfunction
 
 function! g:ConfigureYcm()
-  nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+  nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
   let g:ycm_always_populate_location_list = 1                                   " Default 0
   let g:ycm_auto_trigger = 1
   let g:ycm_autoclose_preview_window_after_completion = 1                       " Automatically close the preview window for completion
@@ -212,7 +212,8 @@ if s:vimplugin_priority >= 0
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
-  NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  NeoBundle 'Townk/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   " {{{2
@@ -222,7 +223,7 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
-    vmap <CR> <Plug>(scrath-evaluate)
+    vnoremap <unique> <CR> <Plug>(scrath-evaluate)
   endfunction
   " }}}
   " {{{2
@@ -263,7 +264,7 @@ if s:vimplugin_priority >= 0
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
@@ -321,7 +322,7 @@ if s:vimplugin_priority >= 0
     if (!isdirectory(g:unite_data_directory))
       call mkdir(g:unite_data_directory, 'p')
     endif
-    nnoremap <C-p> :Unite file_rec/async<CR>
+    nnoremap <unique> <C-p> :Unite file_rec/async<CR>
     let g:unite_enable_start_insert = 1
     let g:unite_prompt = '» '
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -399,10 +400,10 @@ if s:vimplugin_priority >= 0
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
   function! s:tmux_navigator.hooks.on_source(bundle)
     " Allow jumping to other tmux pane in insert mode
-    imap <C-j> <ESC><C-j>
-    imap <C-h> <ESC><C-h>
-    imap <C-l> <ESC><C-l>
-    imap <C-k> <ESC><C-k>
+    inoremap <unique> <C-j> <ESC><C-j>
+    inoremap <unique> <C-h> <ESC><C-h>
+    inoremap <unique> <C-l> <ESC><C-l>
+    inoremap <unique> <C-k> <ESC><C-k>
   endfunction
   " }}}
   " {{{2
@@ -455,7 +456,7 @@ if s:vimplugin_priority >= 0
     let g:buffergator_autodismiss_on_select = 0
     let g:buffergator_autoupdate = 1
     let g:buffergator_suppress_keymaps = 1
-    noremap <leader>bf :BuffergatorOpen<CR>
+    noremap <unique> <leader>bf :BuffergatorOpen<CR>
   endfunction
   " }}}
   " {{{2
@@ -463,7 +464,7 @@ if s:vimplugin_priority >= 0
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
     let g:strip_whitespace_on_save = 1
-    nnoremap <leader>sw :ToggleStripWhitespaceOnSave<CR>
+    nnoremap <unique> <leader>sw :ToggleStripWhitespaceOnSave<CR>
   endfunction
   " }}}
   " {{{2
@@ -489,11 +490,6 @@ if s:vimplugin_priority >= 0
     call myutils#InitUndoSwapViews()
   endfunction
   function! s:myutils.hooks.on_post_source(bundle)
-    " Only use this when running in OSX or ssh from OSX
-    if g:OS.is_mac && $SSH_OS == 'Darwin'
-      " vmap Y y:call myutils#YankToRemoteClipboard()<CR>
-      vnoremap y y:call system('nc -c localhost 8377', @0)<CR>
-    endif
     call myutils#SetupTablineMappings(g:OS)
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(
@@ -515,10 +511,6 @@ if s:vimplugin_priority >= 0
           \ }
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
-    " nmap <leader>ci <Plug>NERDCommenterInvert
-    " xmap <leader>ci <Plug>NERDCommenterInvert
-    " nmap <leader>cc <Plug>NERDCommenterComment
-    " xmap <leader>cc <Plug>NERDCommenterComment
   endfunction
   " }}}
   " {{{2
@@ -535,7 +527,7 @@ if s:vimplugin_priority >= 0
     let g:NERDTreeShowBookmarks = 1
     let g:NERDTreeShowHidden = 1
     let g:nerdtree_tabs_open_on_gui_startup = 0
-    nnoremap <C-e> :NERDTreeToggle %<CR>
+    nnoremap <unique> <C-e> :NERDTreeToggle %<CR>
   endfunction
   " }}}
   " {{{2
@@ -579,7 +571,7 @@ if s:vimplugin_priority >= 0
   NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simultaneously
   let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
   function! s:vimmulticursors.hooks.on_source(bundle)
-    nnoremap <leader>mcf
+    nnoremap <unique> <leader>mcf
           \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
   endfunction
   " }}}
@@ -705,7 +697,7 @@ if s:vimplugin_priority >= 0
         \ }                                                                     " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
-    map <leader>rl :ReloadScript %:p<CR>
+    nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
   endfunction
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Decho.vba.gz', {
         \ 'autoload' : {
@@ -1575,16 +1567,16 @@ if s:vimplugin_priority >= 99
         \ }                                                                     " Commands for working with git
   let s:fugitive = neobundle#get('vim-fugitive')
   function! s:fugitive.hooks.on_source(bundle)
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gm :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gr :Gread<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>
-    nnoremap <silent> <leader>ge :Gedit<CR>
-    nnoremap <silent> <leader>gi :Git add -p %<CR>
+    nnoremap <unique> <silent> <leader>gs :Gstatus<CR>
+    nnoremap <unique> <silent> <leader>gd :Gdiff<CR>
+    nnoremap <unique> <silent> <leader>gm :Gcommit<CR>
+    nnoremap <unique> <silent> <leader>gb :Gblame<CR>
+    nnoremap <unique> <silent> <leader>gl :Glog<CR>
+    nnoremap <unique> <silent> <leader>gp :Git push<CR>
+    nnoremap <unique> <silent> <leader>gr :Gread<CR>
+    nnoremap <unique> <silent> <leader>gw :Gwrite<CR>
+    nnoremap <unique> <silent> <leader>ge :Gedit<CR>
+    nnoremap <unique> <silent> <leader>gi :Git add -p %<CR>
   endfunction
   " }}}
   NeoBundle 'justinmk/vim-sneak'                                                " Easy motion within one line
