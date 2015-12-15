@@ -420,6 +420,13 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Align.vba.gz', {
+        \ 'name' : 'Align',
+        \ 'regular_namne' : 'Align',
+        \ 'type' : 'vba',
+        \ }                                                                     " Alinghing texts based on specific charater etc
+  " }}}
+  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
         \   'autoload' : {
         \     'commands' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
@@ -631,6 +638,33 @@ if s:vimplugin_priority >= 0
         \ 'autoload' : { 'filetypes' : ['ruby'] },
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing ruby files.
+  " }}}
+  " ft-sql {{{2
+  NeoBundle 'jphustman/SQLUtilities', {
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'depends' : ['Align'],
+        \ 'lazy' : 1,
+        \ }                                                                     " Utilities for editing SQL scripts (v7.0)
+  let s:sqlutilities = neobundle#get('SQLUtilities')
+  function! s:sqlutilities.hooks.on_source(bundle)
+    let g:sqlutil_align_comma = 0
+    " function! s:FormatSql()
+      " execute ':SQLUFormatter'
+      " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
+    " endfunction
+    if neobundle#is_sourced('vim-codefmt') && neobundle#is_installed('myutils')
+      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
+      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
+    endif
+  endfunction
+  NeoBundle 'vim-scripts/SQLComplete.vim', {
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " SQL script completion
+  NeoBundle 'vim-scripts/sql.vim--Stinson', {
+        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'lazy' : 1,
+        \ }                                                                     " Better SQL syntax highlighting
   " }}}
   " ft-tmux {{{2
   NeoBundle 'tmux-plugins/vim-tmux', {
@@ -883,12 +917,6 @@ if s:vimplugin_priority >= 1
   NeoBundle 'glts/vim-radical', {
         \ 'depends' : ['vim-magnum'],
         \ }                                                                     " Show number under cursor in hex, octal, binary
-  " }}}
-  " {{{2
-  NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/Align.vba.gz', {
-        \ 'regular_namne' : 'Align',
-        \ 'script_type' : 'vba',
-        \ }                                                                     " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
   NeoBundle 'http://www.drchip.org/astronaut/vim/vbafiles/DotFill.vba.gz', {
@@ -1272,33 +1300,6 @@ if s:vimplugin_priority >= 1
         \ 'lazy' : 1,
         \ }                                                                     " View call stacks in vim
   NeoBundle 'jmcantrell/vim-virtualenv'                                         " Make python installed in virutal env available to vim
-  " }}}
-  " ft-sql {{{2
-  NeoBundle 'jphustman/SQLUtilities', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
-        \ 'depends' : ['Align'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Utilities for editing SQL scripts (v7.0)
-  let s:sqlutilities = neobundle#get('SQLUtilities')
-  function! s:sqlutilities.hooks.on_source(bundle)
-    let g:sqlutil_align_comma = 0
-    " function! s:FormatSql()
-      " execute ':SQLUFormatter'
-      " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
-    " endfunction
-    if neobundle#is_sourced('vim-codefmt') && neobundle#is_installed('myutils')
-      let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
-      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
-    endif
-  endfunction
-  NeoBundle 'vim-scripts/SQLComplete.vim', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " SQL script completion
-  NeoBundle 'vim-scripts/sql.vim--Stinson', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
-        \ 'lazy' : 1,
-        \ }                                                                     " Better SQL syntax highlighting
   " }}}
   " ft-vim {{{2
   NeoBundle 'dbakker/vim-lint', {
