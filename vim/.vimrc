@@ -15,7 +15,8 @@ let s:vimplugin_priority = str2nr($VIMPLUGINS)
 " Shared plugin configurations {{{1
 function! s:OSDetect()
   let l:is_unix = has('unix')
-  let l:is_windows = has('win16') || has('win32') || has('win64') || has('win95')
+  let l:is_windows =
+        \ has('win16') || has('win32') || has('win64') || has('win95')
   let l:is_cygwin = has('win32unix')
   let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
         \ && (has('mac') || has('macunix') || has('gui_macvim'))
@@ -71,7 +72,8 @@ function! g:ConfigureYcm()
     \   'cpp,objcpp' : ['->', '.', '::'],
     \   'perl' : ['->'],
     \   'php' : ['->', '::'],
-    \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+    \   'cs,java,javascript,typescript' : ['.'],
+    \   'd,python,perl6,scala,vb,elixir,go' : ['.'],
     \   'ruby' : ['.', '::'],
     \   'lua' : ['.', ':'],
     \   'erlang' : [':'],
@@ -99,7 +101,7 @@ if g:OS.is_windows
   source $VIMRUNTIME/mswin.vim
   behave mswin
 
-  let $TERM='win32'
+  let $TERM = 'win32'
   " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
   " across (heterogeneous) systems easier.
   set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
@@ -318,8 +320,8 @@ if s:vimplugin_priority >= 0
       call mkdir(g:unite_data_directory, 'p')
     endif
     nnoremap <C-p> :Unite file_rec/async<CR>
-    let g:unite_enable_start_insert=1
-    let g:unite_prompt='» '
+    let g:unite_enable_start_insert = 1
+    let g:unite_prompt = '» '
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
   endfunction
   " }}}
@@ -358,7 +360,7 @@ if s:vimplugin_priority >= 0
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
-    let g:solarized_diffmode="high"
+    let g:solarized_diffmode = "high"
     colorscheme solarized
   endfunction
   " }}}
@@ -384,7 +386,8 @@ if s:vimplugin_priority >= 0
     " let g:airline#extensions#taboo#enabled = 1
     let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
     let g:airline#extensions#tmuxline#color_template = 'normal'
-    let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
+    let g:airline#extensions#tmuxline#snapshot_file =
+          \ '~/.tmux-statusline-colors.conf'
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#whitespace#enabled = 1
   endfunction
@@ -505,16 +508,16 @@ if s:vimplugin_priority >= 0
   NeoBundle 'scrooloose/nerdtree'                                               " File explorer inside vim
   let s:nerdtree = neobundle#get('nerdtree')
   function! s:nerdtree.hooks.on_source(bundle)
-    let g:NERDShutUp=1
-    let g:NERDTreeChDirMode=1
-    let g:NERDTreeIgnore=[
+    let g:NERDShutUp = 1
+    let g:NERDTreeChDirMode = 1
+    let g:NERDTreeIgnore = [
           \ '\.pyc', '\~$', '\.swo$', '\.swp$',
           \ '\.git', '\.hg', '\.svn', '\.bzr']
-    let g:NERDTreeMouseMode=2
+    let g:NERDTreeMouseMode = 2
     let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
-    let g:NERDTreeShowBookmarks=1
-    let g:NERDTreeShowHidden=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
+    let g:NERDTreeShowBookmarks = 1
+    let g:NERDTreeShowHidden = 1
+    let g:nerdtree_tabs_open_on_gui_startup = 0
     nnoremap <C-e> :NERDTreeToggle %<CR>
   endfunction
   " }}}
@@ -652,9 +655,12 @@ if s:vimplugin_priority >= 0
       " execute ':SQLUFormatter'
       " execute ':%s/$\n\\(\\s*\\), /,\\r\\1'
     " endfunction
-    if neobundle#is_sourced('vim-codefmt') && neobundle#is_installed('myutils')
+    if (neobundle#is_sourced('vim-codefmt') ||
+          \ maktaba#plugin#IsRegistered('vim-codefmt'))
+          \ && neobundle#is_installed('myutils')
       let l:codefmt_registry = maktaba#extension#GetRegistry('vim-codefmt')
-      call l:codefmt_registry.AddExtension(myutils#sqlformatter#GetSQLFormatter())
+      call l:codefmt_registry.AddExtension(
+            \ myutils#sqlformatter#GetSQLFormatter())
     endif
   endfunction
   NeoBundle 'vim-scripts/SQLComplete.vim', {
@@ -1026,15 +1032,15 @@ if s:vimplugin_priority >= 1
       let g:unite_source_grep_recursive_opt = ''
     elseif executable('ack-grep')
       NeoBundle 'mileszs/ack.vim'
-      let g:ackprg='ack-grep -H --nocolor --nogroup --column'
-      let g:unite_source_grep_command='ack'
-      let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-      let g:unite_source_grep_recursive_opt=''
+      let g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
+      let g:unite_source_grep_command = 'ack'
+      let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
+      let g:unite_source_grep_recursive_opt = ''
     elseif executable('ack')
       NeoBundle 'mileszs/ack.vim'
-      let g:unite_source_grep_command='ack'
-      let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-      let g:unite_source_grep_recursive_opt=''
+      let g:unite_source_grep_command = 'ack'
+      let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
+      let g:unite_source_grep_recursive_opt = ''
     endif
   endfunction
   " }}}
@@ -1239,7 +1245,7 @@ if s:vimplugin_priority >= 1
     setlocal regexpengine=1
     setlocal foldmethod=syntax
     setlocal conceallevel=1
-    let g:javascript_enable_domhtmlcss=1
+    let g:javascript_enable_domhtmlcss  = 1
     let g:javascript_conceal_function   = 'ƒ'
     let g:javascript_conceal_null       = 'ø'
     let g:javascript_conceal_NaN        = 'ℕ'
@@ -1368,9 +1374,9 @@ if s:vimplugin_priority >= 99
         \ }                                                                     " Show the sign at changes from last git commit
   let s:signify = neobundle#get('vim-signify')
   function! s:signify.hooks.on_source(bundle)
-    let g:signify_vcs_list=['git']
-    " let g:signify_line_highlight=1
-    let g:signify_sign_show_count=1
+    let g:signify_vcs_list = ['git']
+    " let g:signify_line_highlight = 1
+    let g:signify_sign_show_count = 1
     nmap <leader>gj <plug>(signify-next-hunk)
     nmap <leader>gk <plug>(signify-prev-hunk)
   endfunction
@@ -1632,7 +1638,7 @@ if s:vimplugin_priority >= 99
   NeoBundle 'embear/vim-localvimrc'                                             " Load local vimrc in parent dirs of currently opened file
   NeoBundle 'thinca/vim-localrc', { 'type' : 'svn' }                            " Enable vim configuration file for each directory
   " {{{2
-  NeoBundle 'vim-scripts/mark'                                                " Highlight multiple patterns with different color
+  NeoBundle 'vim-scripts/mark'                                                  " Highlight multiple patterns with different color
   let s:mark = neobundle#get('mark')
   function! s:mark.hooks.on_source(bundle)
     nnoremap <leader>mc :MarkClear<CR>
@@ -1641,18 +1647,18 @@ if s:vimplugin_priority >= 99
   " }}}
   NeoBundle 'vim-scripts/TagHighlight'
   NeoBundle 'vim-scripts/utl.vim'
-  NeoBundle 'bronson/vim-trailing-whitespace'                                 " Highlight trailing whitespaces
-  NeoBundle 'gregsexton/gitv', { 'depends' : 'tpope/vim-fugitive' }           " Git log viewer (Yet another gitk clone for Vim)
+  NeoBundle 'bronson/vim-trailing-whitespace'                                   " Highlight trailing whitespaces
+  NeoBundle 'gregsexton/gitv', { 'depends' : 'tpope/vim-fugitive' }             " Git log viewer (Yet another gitk clone for Vim)
   NeoBundle 'Rip-Rip/clang_complete', {
         \ 'autoload' : { 'filetypes' : ['cpp', 'c'] },
         \ 'lazy' : 1,
-        \ }                                                                   " Completion for c-family language
+        \ }                                                                     " Completion for c-family language
   NeoBundle 'Lokaltog/powerline', {'rtp' : '/powerline/bindings/vim'}
   NeoBundle 'edkolev/promptline.vim'
-  NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }               " Better integration between vim and shell
-  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                " Post, view and edit gist in vim
-  NeoBundle 'Keithbsmiley/gist.vim'                                           " Use gist from vim
-  NeoBundle 'Raimondi/VimRegEx.vim'                                           " Regex dev and test env in vim
+  NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
+  NeoBundle 'mattn/gist-vim', {'depends' : 'mattn/webapi-vim'}                  " Post, view and edit gist in vim
+  NeoBundle 'Keithbsmiley/gist.vim'                                             " Use gist from vim
+  NeoBundle 'Raimondi/VimRegEx.vim'                                             " Regex dev and test env in vim
   NeoBundle 'tyru/winmove.vim'
   NeoBundle 'tyru/wim'
   NeoBundle 'vimwiki/vimwiki', { 'rtp' : '~/.vim/bundle/vimwiki/src' }
