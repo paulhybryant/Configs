@@ -203,8 +203,7 @@ endif
 " }}}
 " Priority 0 Plugins {{{1
 if s:vimplugin_priority >= 0
-  " NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'wincent/terminus'                                                  " Enhanced terminal integration (e.g bracketed-paste)
+  NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
