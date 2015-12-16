@@ -16,8 +16,4 @@ setopt localoptions err_return
 
 target=("$@")
 
-# ls --color=always -Fh $l $a ${target} 2>/dev/null | tee >(awk::ls) /tmp/ls.log
-ls --color=auto -Fh $l $a ${target} 2>/dev/null
-if [[ -n $l ]]; then
-  ls -Fh $l $a ${target} 2>/dev/null | awk::ls
-fi
+eval "${aliases[ls]:-ls} --color=always -Fh $l $a ${target} | tee >(sed -r \"s/\x1B\[([0-9]{1,3}((;[0-9]{1,3})*)?)?[m|K]//g\" | awk::ls) 2>&1"
