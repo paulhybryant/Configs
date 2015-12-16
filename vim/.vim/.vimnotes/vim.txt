@@ -33,3 +33,6 @@ vim
 • Convert number in scientific representation to non-scientific one
   For example, convert 1.234123823487E9 to 1234123823
   %s/\.\([0-9]\{9\}\)[0-9]*E9/\1/
+• Match the nth column
+  e.g. match the word foo started at column 5
+  /\%5cfoo
