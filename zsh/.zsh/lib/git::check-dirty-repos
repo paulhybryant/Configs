@@ -9,11 +9,10 @@ Number of arguments accepted: --exclude-detached
 @return NULLPTR
 =cut
 
-setopt localoptions err_return
+setopt localoptions err_return nounset
 
 zparseopts -D -A opts -exclude-detached -exclude-ahead
 
-setopt localoptions nounset
 [[ -n ${opts[--exclude-detached]+1} ]] && \
   io::msg "Considering detached as dirty."
 local -a dirty_repos

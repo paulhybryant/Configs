@@ -1,0 +1,32 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+setopt localoptions err_return nounset
+
+local -a dirty_repos
+dirty_repos=()
+for dir in */; do
+  io::vlog 2 "[${0:t}] Updating ${dir}"
+  pushd "${dir}"
+  if [[ -d '.git' ]]; then
+    if [[ -n $(git status --porcelain) ]]; then
+      # Dirty
+      dirty_repos+=${dir}
+    else
+      # git submodule update --init --recursive
+      io::msg "Pulling ${dir}"
+      git pull --recurse-submodules
+    fi
+  fi
+  popd
+done
+
+if [[ ${#dirty_repos} -gt 0 ]]; then
+  io::hl "${#dirty_repos} dirty repo(s) found!"
+  for dir in ${dirty_repos}; do
+    io::hl "Not updated repo: ${dir}"
+  done
+  return 1
+else
+  io::msg "Done!"
+  return 0
+fi
