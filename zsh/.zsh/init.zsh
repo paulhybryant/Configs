@@ -117,11 +117,11 @@ if os::LINUX; then
   alias xkbmapreload="~/.xsessionrc"
   alias resetxkbmap='sudo dpkg-reconfigure xkb-data'
   case $(tty) in
-    /dev/tty/[0-9]*)
-      prompt bart
+    /dev/tty[0-9]*)
+      zstyle ":registry:var:tty" registry 'console'
       ;;
     /dev/pts/[0-9]*)
-      add-zsh-hook precmd tmux::copy-vars
+      zstyle ":registry:var:tty" registry 'virtual'
       ;;
   esac
 elif os::OSX; then
@@ -132,10 +132,10 @@ elif os::OSX; then
   alias updatedb="/usr/libexec/locate.updatedb"
   case $(tty) in
     /dev/console)
-      prompt bart
+      zstyle ":registry:var:tty" registry 'console'
       ;;
     /dev/ttys[0-9]*)
-      add-zsh-hook precmd tmux::copy-vars
+      zstyle ":registry:var:tty" registry 'virtual'
       ;;
   esac
   osx::fix-display
@@ -219,6 +219,11 @@ declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
 if [[ -z ${PROFILING+1} ]]; then
-  # prompt::agnoster
-  prompt::powerline-shell
+  if zstyle -t ":registry:var:tty" registry 'virtual'; then
+    add-zsh-hook precmd tmux::copy-vars
+    # prompt::agnoster
+    prompt::powerline-shell
+  else
+    prompt clint
+  fi
 fi
