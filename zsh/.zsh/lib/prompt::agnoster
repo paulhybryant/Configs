@@ -1,7 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-# export PS1="$(powerline-shell.py --colorize-hostname $? --shell zsh 2> /dev/null)"
-
 # My customized agnoster's theme
 # agnoster's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH

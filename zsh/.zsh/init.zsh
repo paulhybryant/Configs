@@ -121,7 +121,7 @@ if os::LINUX; then
       prompt bart
       ;;
     /dev/pts/[0-9]*)
-      zsh::install-precmd
+      add-zsh-hook precmd tmux::copy-vars
       ;;
   esac
 elif os::OSX; then
@@ -135,7 +135,7 @@ elif os::OSX; then
       prompt bart
       ;;
     /dev/ttys[0-9]*)
-      zsh::install-precmd
+      add-zsh-hook precmd tmux::copy-vars
       ;;
   esac
   osx::fix-display
@@ -219,5 +219,6 @@ declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
 if [[ -z ${PROFILING+1} ]]; then
-  zsh::prompt
+  # prompt::agnoster
+  prompt::powerline-shell
 fi

@@ -71,6 +71,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   pmodules=(environment git homebrew helper fasd)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
+    add-zsh-hook zshexit tmux::try-switch
+    # trap 'tmux::try-switch' EXIT
   fi
   os::OSX && pmodules+=(osx)
   # zstyle ':prezto:module:syntax-highlighting' highlighters \
@@ -133,8 +135,4 @@ zsh::autoload _ta _ta-sessions
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
-else
-  autoload -Uz add-zsh-hook
-  add-zsh-hook zshexit tmux::try-switch
-  # trap 'tmux::try-switch' EXIT
 fi

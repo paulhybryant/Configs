@@ -33,7 +33,7 @@ which ${CMDPREFIX}trash > /dev/null 2>&1 && alias rm='${CMDPREFIX}\trash -v'
 
 declare -axg -U zsh_autoload_dir
 zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
-autoload -Uz zsh::autoload time::getmtime
+autoload -Uz add-zsh-hook zsh::autoload time::getmtime
 [[ -f ~/.zsh/lib/zsh::autoload ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
 
 # Local configurations

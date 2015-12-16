@@ -15,6 +15,10 @@ for dir in */; do
       # git submodule update --init --recursive
       io::msg "Pulling ${dir}"
       git pull --recurse-submodules
+      if [[ $(git remote | wc -l) -gt 1 ]]; then
+        git fetch upstream
+        git merge upstream/master
+      fi
     fi
   fi
   popd
