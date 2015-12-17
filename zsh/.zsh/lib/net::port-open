@@ -9,9 +9,9 @@ $1 Host address
 $2 Port number
 
 Example:
-  net::port_open 127.0.0.1 80
-  net::port_open 127.0.0.1 80 90
-  net::port_open 127.0.0.1 80-90
+  net::port-open 127.0.0.1 80
+  net::port-open 127.0.0.1 80 90
+  net::port-open 127.0.0.1 80-90
 
 @return 0 if the port is open on specified host, 1 otherwise.
 =cut

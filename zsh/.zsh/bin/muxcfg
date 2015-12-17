@@ -38,12 +38,12 @@ function muxcfg::start() {
 
   local _muxcfg="$MUXCFGDIR/${_proj}.yml"
   if [[ -e "$_muxcfg" && -z ${opts[--noconfirm]+1} ]]; then
-    if io::yes_or_no "$_muxcfg exists, overwrite"; then
+    if io::yes-or-no "$_muxcfg exists, overwrite"; then
       io::warn "$_muxcfg will be overwritten."
       _tmpcfg=$(mktemp)
       zsh::eval "sed -e \"s#\\\${SESSION}#${_proj}#\" -e \"s#\\\${ROOT}#${_cwd}#\" $MUXCFGDIR/project.yml.template > ${_tmpcfg}"
       zsh::eval "vimdiff $MUXCFGDIR/${_proj}.yml ${_tmpcfg}"
-      io::yes_or_no "Continue"
+      io::yes-or-no "Continue"
       zsh::eval "mv ${_tmpcfg} $MUXCFGDIR/${_proj}.yml"
     else
       return 1
@@ -54,7 +54,7 @@ function muxcfg::start() {
 
   if [[ -d "${_dst}" ]]; then
     io::hl "[muxcfg] Directory ${_dst} exists."
-    io::yes_or_no "Skip branching and start with existing copy"
+    io::yes-or-no "Skip branching and start with existing copy"
   else
     zsh::eval "whence -f $(muxcfg::new-workdir-cmd) > /dev/null"
     zsh::eval "$(muxcfg::new-workdir-cmd) ${_src} ${_dst} ${_proj}"
@@ -73,7 +73,7 @@ function muxcfg::delete() {
   _cwd="$(muxcfg::getcwd ${_dst} ${_proj})"
 
   if [[ -z ${opts[--noconfirm]+1} ]]; then
-    io::yes_or_no "Delete project ${_proj}"
+    io::yes-or-no "Delete project ${_proj}"
   fi
 
   if [[ -e "$MUXCFGDIR/${_proj}.yml" ]]; then

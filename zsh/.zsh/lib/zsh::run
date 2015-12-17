@@ -2,4 +2,4 @@
 
 mode::set-dryrun
 zsh::eval "$*"
-io::yes_or_no 'Continue to run' && mode::toggle-dryrun && zsh::eval "$*"
+io::yes-or-no 'Continue to run' && mode::toggle-dryrun && zsh::eval "$*"

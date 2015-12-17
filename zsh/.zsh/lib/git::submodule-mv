@@ -11,5 +11,5 @@ Move submodule with a single command.
 git submodule deinit "$1"
 git rm "$1"
 local _url
-_url=$(git::submodule_url "$1")
+_url=$(git::submodule-url "$1")
 git submodule add "${_url}" "$2"
