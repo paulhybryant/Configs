@@ -2,12 +2,16 @@
 
 setopt localoptions err_return nounset
 
+local callback
 zparseopts -D -cb:=callback
 local _tmp
 _tmp=$(mktemp)
 
-tee ${_tmp}
+1> "${_tmp}"
+# tee "${_tmp}"
 
 if [[ ${#callback} -ge 2 ]]; then
   zsh::eval "${callback[2]} ${_tmp}"
+else
+  printf "%s\n" "${_tmp}" | xclipper -selection clipboard -i
 fi

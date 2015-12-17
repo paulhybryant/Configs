@@ -212,6 +212,7 @@ if s:vimplugin_priority >= 0
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
+  NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'Townk/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
