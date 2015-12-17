@@ -27,7 +27,7 @@ declare -xg GREP_OPTIONS='--color=auto'
 declare -xg LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen --no-init --raw-control-chars'
 declare -xg PAGER='most'
 # export PAGER=vimpager
-declare -xg PREFIXWIDTH=10
+zstyle ":registry:var:prefix-width" registry 10
 declare -xg MANPAGER="$PAGER"
 declare -xg TERM='screen-256color'
 declare -xg VISUAL='vim'

@@ -6,7 +6,8 @@ autoload -Uz -- ${0:h}/../../lib/[^_]*(:t)
 set -x
 
 function test::zsh::eval() {
-  local _cmd _expected _actual
+  local _cmd _expected _actual _width
+  zstyle -s ":registry:var:prefix-width" registry _width
   _cmd='printf "hello world\n"'
 
   _expected='hello world'
@@ -14,7 +15,7 @@ function test::zsh::eval() {
   [[ "${_expected}" == "${_actual}" ]]
 
   mode::toggle-dryrun
-  _expected=$(printf "%-${PREFIXWIDTH}s printf \"hello world\\n\"" '[Dryrun]')
+  _expected=$(printf "%-${_width}s printf \"hello world\\n\"" '[Dryrun]')
   _actual="$(zsh::eval ${_cmd})"
   [[ "${_expected}" == "${_actual}" ]]
 }
