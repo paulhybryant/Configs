@@ -10,8 +10,15 @@ $1 Current time in seconds since epoch
 @return string in human readable format for the specified time.
 =cut
 
-(( ${+commands[date]} )) || return 1
+# (( ${+commands[date]} )) || return 1
 
-local _time_str
-_time_str=$(date --date=@"$1")
-printf "${_time_str}\n"
+zparseopts -D -micro=micro -milli=milli
+
+local _time_str _ts
+_ts="$1"
+if [[ -n ${micro} ]]; then
+  ((_ts = _ts / 1000000))
+elif [[ -n ${milli} ]]; then
+  ((_ts = _ts / 1000))
+fi
+printf "$(date --date=@"${_ts}")\n"
