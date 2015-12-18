@@ -111,6 +111,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle git@github.com:paulhybryant/dotfiles.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
+autoload -Uz bashcompinit && bashcompinit
 
 declare -xg HISTFILE="$ZDOTDIR/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
@@ -128,8 +129,6 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-autoload -Uz compinit && compinit
-# This has to be set after compinit (why?)
 compdef _ta tmux::attach
 zsh::autoload _ta _ta-sessions
 
