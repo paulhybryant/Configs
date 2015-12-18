@@ -14,6 +14,10 @@ if [[ -n ${PROFILING+1} ]]; then
   setopt xtrace prompt_subst
 fi
 
+# This seems to be duplicate with the one in .zshenv but it is not! It ensures
+# the homebrew bin directory are in front of the system's bin directory.
+path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
+
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
