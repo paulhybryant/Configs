@@ -15,6 +15,7 @@ local _ssh_os="$(uname)"
 local _ssh_from="$(util::geoinfo city | sed 's/\"//g')"
 
 if [[ ${_ssh_os} == "Darwin" ]]; then
-  certstatus || (printf "Certificate expiried, gettign a new one...\n" && zsh::eval 'gcert')
+  certstatus -ssh_cert_comment 'corp/normal' || \
+    (printf "Certificate expiried, gettign a new one...\n" && zsh::eval 'gcert')
 fi
 zsh::eval "\ssh "$@" -t "SSH_OS=${_ssh_os} SSH_FROM=${_ssh_from} zsh -l""

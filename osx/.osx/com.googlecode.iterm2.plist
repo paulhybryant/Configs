@@ -294,20 +294,6 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0xf700-0x300000</key>
-		<dict>
-			<key>Action</key>
-			<integer>7</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0xf701-0x300000</key>
-		<dict>
-			<key>Action</key>
-			<integer>6</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
 		<key>0xf702-0x320000</key>
 		<dict>
 			<key>Action</key>
@@ -406,9 +392,11 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 1</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.antigen/repos/git@github.com-COLON-paulhybryant-SLASH-dotfiles.git/osx</string>
+	<string>~/Documents</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 481}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 521}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -435,11 +423,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1260 1440 630 435 -591 900 2560 1577 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>598 1691 924 485 -591 900 2560 1577 </string>
+	<string>375 284 924 485 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 84 1440 793 0 0 1440 877 </string>
+	<string>-1120 2022 585 473 -1120 900 2560 1600 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>208 1789 585 473 -591 900 2560 1577 </string>
+	<string>286 134 585 473 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>744 286 570 451 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_183A6FE4-07B4-42E0-8890-C7C35ADE86ED</key>
@@ -1172,10 +1160,12 @@
 			<string>/Users/yuhuang</string>
 		</dict>
 	</array>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453869181.428069</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>471497757.81798899</real>
+	<real>472122519.35276198</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1240,7 +1230,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-12-11T01:46:50Z</date>
+	<date>2015-12-18T09:08:04Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
