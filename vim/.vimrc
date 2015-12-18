@@ -164,7 +164,7 @@ endif
   " }}}
   " {{{2
   NeoBundle 'google/vim-codefmt', {
-        \ 'autoload' : { 'filetypes' : ['cpp', 'javascript', 'sql'] },
+        \ 'on_ft' : ['cpp', 'javascript', 'sql'],
         \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
         \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
         \ 'lazy' : 1,
@@ -178,7 +178,7 @@ endif
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'on_ft' : ['cpp'],
         \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
         \ 'lazy' : 1,
         \ 'type__protocol' : 'ssh',
@@ -191,9 +191,14 @@ endif
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
         \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
-        \ 'filetypes' : ['python'],
+        \ 'on_ft' : ['python'],
         \ 'lazy' : 1,
         \ }                                                                     " Python dev env
+  NeoBundle 'xolox/vim-pyref', {
+        \ 'depends' : ['xolox/vim-misc'],
+        \ 'on_ft' : ['python'],
+        \ 'lazy' : 1,
+        \ }
   " }}}
   call glaive#Install()
 " }}}
@@ -214,6 +219,8 @@ if s:vimplugin_priority >= 0
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  NeoBundle 'xolox/vim-misc'
+  NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }
   NeoBundle 'Townk/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
@@ -608,47 +615,47 @@ if s:vimplugin_priority >= 0
   " }}}
   " ft-cpp {{{2
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {
-        \ 'autoload' : { 'filetypes' : ['cpp'] },
+        \ 'on_ft' : ['cpp'],
         \ 'lazy' : 1,
         \ }                                                                     " Enhanced vim cpp highlight
   " }}}
   " ft-markdown {{{2
   NeoBundle 'plasticboy/vim-markdown', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'on_ft' : ['markdown'],
         \ 'lazy' : 1,
         \ 'directory' : 'plasticboy-markdown',
         \ 'name' : 'plasticboy-markdown',
         \ 'regular_name' : 'plasticboy-markdown',
         \ }                                                                     " Yet another markdown syntax highlighting
   " NeoBundle 'tpope/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'on_ft' : ['markdown'],
         " \ 'lazy' : 1,
         " \ 'directory' : 'tpope-markdown',
         " \ 'name' : 'tpope-markdown',
         " \ 'regular_name' : 'tpope-markdown',
         " \ }                                                                     " Yet another markdown syntax highlighting
   " NeoBundle 'hallison/vim-markdown', {
-        " \ 'autoload' : { 'filetypes' : ['markdown'] },
+        " \ 'on_ft' : ['markdown'],
         " \ 'lazy' : 1,
         " \ 'directory' : 'hallison-markdown',
         " \ 'name' : 'hallison-markdown',
         " \ 'regular_name' : 'hallison-markdown',
         " \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundle 'thinca/vim-ft-markdown_fold', {
-        \ 'autoload' : { 'filetypes' : ['markdown'] },
+        \ 'on_ft' : ['markdown'],
         \ 'lazy' : 1,
         \ }                                                                     " Fold markdown
   NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
   " }}}
   " ft-ruby {{{2
   NeoBundle 'vim-ruby/vim-ruby', {
-        \ 'autoload' : { 'filetypes' : ['ruby'] },
+        \ 'on_ft' : ['ruby'],
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing ruby files.
   " }}}
   " ft-sql {{{2
   NeoBundle 'jphustman/SQLUtilities', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'on_ft' : ['sql'],
         \ 'depends' : ['Align'],
         \ 'lazy' : 1,
         \ }                                                                     " Utilities for editing SQL scripts (v7.0)
@@ -664,17 +671,17 @@ if s:vimplugin_priority >= 0
     endif
   endfunction
   NeoBundle 'vim-scripts/SQLComplete.vim', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'on_ft' : ['sql'],
         \ 'lazy' : 1,
         \ }                                                                     " SQL script completion
   NeoBundle 'vim-scripts/sql.vim--Stinson', {
-        \ 'autoload' : { 'filetypes' : ['sql'] },
+        \ 'on_ft' : ['sql'],
         \ 'lazy' : 1,
         \ }                                                                     " Better SQL syntax highlighting
   " }}}
   " ft-tmux {{{2
   NeoBundle 'tmux-plugins/vim-tmux', {
-        \ 'autoload' : { 'filetypes' : ['tmux'] },
+        \ 'on_ft' : ['tmux'],
         \ 'lazy' : 1,
         \ }                                                                     " Vim plugin for editing .tmux.conf
   " }}}
@@ -704,13 +711,13 @@ if s:vimplugin_priority >= 0
     let g:decho_winheight = 10
   endfunction
   NeoBundle 'google/vim-ft-vroom', {
-        \ 'autoload' : { 'filetypes' : ['vroom'] },
+        \ 'on_ft' : ['vroom'],
         \ 'lazy' : 1,
         \ }                                                                     " Filetype plugin for vroom
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
-        \ 'autoload' : { 'filetypes' : ['vtd'] },
+        \ 'on_ft' : ['vtd'],
         \ 'lazy' : 1,
         \ }
   let s:vimvtd = neobundle#get('vim-vtd')

@@ -144,7 +144,7 @@ fi
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
-alias find='file::find-ignore-dir ".git"'
+alias gfind='file::find-ignore-dir ".git"'
 alias grepc='\grep -C 5 '
 alias gyank='util::yank'
 alias gvim='util::gvim'
