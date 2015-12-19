@@ -89,7 +89,6 @@ NeoBundle 'kana/vim-operator-user'                                            " 
 NeoBundle 'kana/vim-smartinput'                                               " Provide smart input assistance
 NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
 NeoBundle 'kshenoy/vim-signature'                                             " Place, toggle and display marks
-NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
 NeoBundle 'powerman/vim-plugin-AnsiEsc'                                       " Improved version of AnsiEsc
 NeoBundle 'sjl/splice.vim'                                                    " Vim three way merge tool
 " {{{1
