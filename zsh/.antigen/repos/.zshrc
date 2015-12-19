@@ -132,7 +132,7 @@ if [[ -f ~/.zshrc.local ]]; then
 fi
 
 compdef _ta tmux::attach
-zsh::autoload _ta _ta-sessions
+autoload -Uz _ta _ta-sessions
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
