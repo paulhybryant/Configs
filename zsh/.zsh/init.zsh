@@ -217,11 +217,10 @@ declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype
 
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
+add-zsh-hook precmd tmux::copy-vars
 if [[ -z ${PROFILING+1} ]]; then
   if zstyle -t ":registry:var:tty" registry 'virtual'; then
-    add-zsh-hook precmd tmux::copy-vars
-    # prompt::agnoster
-    prompt::powerline-shell
+    prompt powerline-shell
   else
     prompt clint
   fi
