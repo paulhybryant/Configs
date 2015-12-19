@@ -17,3 +17,5 @@ setopt localoptions err_return
 target=("$@")
 
 eval "${aliases[ls]:-ls} --color=always -Fh $l $a ${target} | tee >(sed -r \"s/\x1B\[([0-9]{1,3}((;[0-9]{1,3})*)?)?[m|K]//g\" | awk::ls) 2>&1"
+# eval "${aliases[ls]:-ls} --color=always -Fh $l $a ${target} | tr '\\n' ' ' | tee >(sed -r \"s/\x1B\[([0-9]{1,3}((;[0-9]{1,3})*)?)?[m|K]//g\" | awk::ls) 2>&1"
+# printf '\n'
