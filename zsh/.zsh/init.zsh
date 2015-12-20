@@ -221,6 +221,7 @@ add-zsh-hook precmd tmux::copy-vars
 if [[ -z ${PROFILING+1} ]]; then
   if zstyle -t ":registry:var:tty" registry 'virtual'; then
     prompt powerline-shell
+    # prompt powerline-plus
   else
     prompt clint
   fi
