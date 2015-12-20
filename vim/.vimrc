@@ -16,27 +16,27 @@ let s:vimplugin_priority = str2nr($VIMPLUGINS)
 function! s:OSDetect()
   let l:is_unix = has('unix')
   let l:is_windows =
-        \ has('win16') || has('win32') || has('win64') || has('win95')
+    \ has('win16') || has('win32') || has('win64') || has('win95')
   let l:is_cygwin = has('win32unix')
   let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
-        \ && (has('mac') || has('macunix') || has('gui_macvim'))
+    \ && (has('mac') || has('macunix') || has('gui_macvim'))
   let l:is_linux = l:is_unix && !l:is_mac && !l:is_cygwin
 
   let g:OS = {
-        \ 'is_unix'     :  l:is_unix,
-        \ 'is_windows'  :  l:is_windows,
-        \ 'is_cygwin'   :  l:is_cygwin,
-        \ 'is_mac'      :  l:is_mac,
-        \ 'is_linux'    :  l:is_linux,
-        \ }
+    \ 'is_unix'     :  l:is_unix,
+    \ 'is_windows'  :  l:is_windows,
+    \ 'is_cygwin'   :  l:is_cygwin,
+    \ 'is_mac'      :  l:is_mac,
+    \ 'is_linux'    :  l:is_linux,
+    \ }
 endfunction
 
 function! g:ConfigureRelatedFiles()
   Glaive relatedfiles plugin[mappings]=0
   for l:key in ['c', 'h', 't', 'b']
     execute 'nnoremap <unique> <silent> <leader>g' . l:key .
-          \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
-          \ l:key . '")<CR>'
+      \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
+      \ l:key . '")<CR>'
   endfor
   nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
 endfunction
@@ -125,8 +125,8 @@ if g:OS.is_windows
   NeoBundle 'wincent/Command-T'
   " {{{2
   NeoBundle 'sgur/unite-everything', {
-        \ 'depends' : [ 'Shougo/unite.vim' ],
-        \ }                                                                     " Unite source for everything
+    \ 'depends' : [ 'Shougo/unite.vim' ],
+    \ }                                                                         " Unite source for everything
   " }}}
 else
   set shell=/bin/sh
@@ -140,23 +140,23 @@ endif
 " Bundles that might be disabled by local configurations {{{1
   " {{{2
   NeoBundle 'google/vim-maktaba', {
-        \ 'disabled' : has_key(g:disabled_bundles, 'vim-maktaba'),
-        \ 'force' : 1,
-        \ }                                                                     " Vimscript plugin library from google
+    \ 'disabled' : has_key(g:disabled_bundles, 'vim-maktaba'),
+    \ 'force' : 1,
+    \ }                                                                         " Vimscript plugin library from google
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive', {
-        \ 'depends' : ['google/vim-maktaba'],
-        \ 'disabled' : has_key(g:disabled_bundles, 'vim-glaive'),
-        \ 'force' : 1,
-        \ }                                                                     " Plugin for better vim plugin configuration
+    \ 'depends' : ['google/vim-maktaba'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'vim-glaive'),
+    \ 'force' : 1,
+    \ }                                                                         " Plugin for better vim plugin configuration
   " }}}
   " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
-        \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
-        \ 'disabled' : has_key(g:disabled_bundles, 'YouCompleteMe'),
-        \ 'lazy' : 1,
-        \ }                                                                     " Python based multi-language completion engine
+    \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'YouCompleteMe'),
+    \ 'lazy' : 1,
+    \ }                                                                         " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
     call g:ConfigureYcm()
@@ -164,11 +164,11 @@ endif
   " }}}
   " {{{2
   NeoBundle 'google/vim-codefmt', {
-        \ 'on_ft' : ['cpp', 'javascript', 'sql'],
-        \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
-        \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
-        \ 'lazy' : 1,
-        \ }                                                                     " Code formating plugin from google
+    \ 'on_ft' : ['cpp', 'javascript', 'sql'],
+    \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
+    \ 'lazy' : 1,
+    \ }                                                                         " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive vim-codefmt plugin[mappings]
@@ -178,11 +178,11 @@ endif
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
-        \ 'on_ft' : ['cpp'],
-        \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
-        \ 'lazy' : 1,
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Open related files in C++
+    \ 'on_ft' : ['cpp'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
+    \ 'lazy' : 1,
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Open related files in C++
   let s:relatedfiles = neobundle#get('relatedfiles')
   function s:relatedfiles.hooks.on_source(bundle)
     call g:ConfigureRelatedFiles()
@@ -190,15 +190,15 @@ endif
   " }}}
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
-        \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
-        \ 'on_ft' : ['python'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Python dev env
+    \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Python dev env
   NeoBundle 'xolox/vim-pyref', {
-        \ 'depends' : ['xolox/vim-misc'],
-        \ 'on_ft' : ['python'],
-        \ 'lazy' : 1,
-        \ }
+    \ 'depends' : ['xolox/vim-misc'],
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }
   " }}}
   call glaive#Install()
 " }}}
@@ -232,9 +232,9 @@ if s:vimplugin_priority >= 0
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
-        \ 'on_cmd' : ['ScratchOpen'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Creates a scratch buffer, can evaluate the expression there
+    \ 'on_cmd' : ['ScratchOpen'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
     vnoremap <unique> <CR> <Plug>(scrath-evaluate)
@@ -242,10 +242,10 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
-        \ 'depends' : 'Shougo/context_filetype.vim',
-        \ 'disabled' : !has('lua'),
-        \ 'vim_version' : '7.3.885',
-        \ }                                                                     " Code completion engine
+    \ 'depends' : 'Shougo/context_filetype.vim',
+    \ 'disabled' : !has('lua'),
+    \ 'vim_version' : '7.3.885',
+    \ }                                                                         " Code completion engine
   let s:neocomplete = neobundle#get('neocomplete.vim')
   function! s:neocomplete.hooks.on_source(bundle)
     let g:acp_enableAtStartup = 0                                               " Disable AutoComplPop.
@@ -327,8 +327,8 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'Shougo/unite.vim', {
-        \ 'recipe' : 'unite',
-        \ }                                                                     " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+    \ 'recipe' : 'unite',
+    \ }                                                                         " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   let s:unite = neobundle#get('unite.vim')
   function! s:unite.hooks.on_source(bundle)
     let g:unite_data_directory = expand('~/.cache/unite')
@@ -344,19 +344,19 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'Shougo/vimproc.vim', {
-        \   'build' : {
-        \     'windows' : 'tools\\update-dll-mingw',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'linux' : 'make',
-        \     'unix' : 'gmake',
-        \   }
-        \ }                                                                     " Enable background process and multi-threading
+    \   'build' : {
+    \     'windows' : 'tools\\update-dll-mingw',
+    \     'cygwin' : 'make -f make_cygwin.mak',
+    \     'mac' : 'make -f make_mac.mak',
+    \     'linux' : 'make',
+    \     'unix' : 'gmake',
+    \   }
+    \ }                                                                         " Enable background process and multi-threading
   " }}}
   " {{{2
   NeoBundle 'SirVer/ultisnips', {
-        \ 'disabled' : !has('python'),
-        \ }                                                                     " Define and insert snippets
+    \ 'disabled' : !has('python'),
+    \ }                                                                         " Define and insert snippets
   let s:ultisnips = neobundle#get('ultisnips')
   function! s:ultisnips.hooks.on_source(bundle)
     " Remap Ultisnips for compatibility for YCM
@@ -404,7 +404,7 @@ if s:vimplugin_priority >= 0
     let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
     let g:airline#extensions#tmuxline#color_template = 'normal'
     let g:airline#extensions#tmuxline#snapshot_file =
-          \ '~/.tmux-statusline-colors.conf'
+      \ '~/.tmux-statusline-colors.conf'
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#whitespace#enabled = 1
   endfunction
@@ -422,14 +422,14 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'eiiches/vim-ref-info', {
-        \ 'depends' : 'thinca/vim-ref',
-        \ }                                                                     " Info help page source for vim-ref
+    \ 'depends' : 'thinca/vim-ref',
+    \ }                                                                         " Info help page source for vim-ref
   " }}}
   " {{{2
   NeoBundle 'edkolev/tmuxline.vim', {
-        \ 'gui' : 0,
-        \ 'lazy' : 1,
-        \ }                                                                     " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
+    \ 'gui' : 0,
+    \ 'lazy' : 1,
+    \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
   " }}}
   " {{{2
   NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
@@ -441,19 +441,19 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Align.vba.gz', {
-        \ 'name' : 'Align',
-        \ 'frozen' : 1,
-        \ 'regular_namne' : 'Align',
-        \ 'type' : 'vba',
-        \ }                                                                     " Alinghing texts based on specific charater etc
+    \ 'name' : 'Align',
+    \ 'frozen' : 1,
+    \ 'regular_namne' : 'Align',
+    \ 'type' : 'vba',
+    \ }                                                                         " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
-        \ 'name' : 'Mark',
-        \ 'regular_namne' : 'Mark',
-        \ 'frozen' : 1,
-        \ 'type' : 'vba',
-        \ }                                                                     " Highlight multiple workds
+    \ 'name' : 'Mark',
+    \ 'regular_namne' : 'Mark',
+    \ 'frozen' : 1,
+    \ 'type' : 'vba',
+    \ }                                                                         " Highlight multiple workds
   let s:mark = neobundle#get('Mark')
   function! s:mark.hooks.on_source(bundle)
     nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
@@ -462,8 +462,8 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator', {
-        \   'on_cmd' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
-        \ }                                                                     " Buffer selector in vim
+    \   'on_cmd' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
+    \ }                                                                         " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
     let g:buffergator_viewport_split_policy = 'L'
@@ -483,23 +483,23 @@ if s:vimplugin_priority >= 0
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/file-line', {
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " Open files and go to specific line and column (original user not active)
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Open files and go to specific line and column (original user not active)
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/myutils', {
-        \ 'depends' : filter(
-        \   ['vim-glaive', 'vim-maktaba'],
-        \   '!has_key(g:disabled_bundles, v:val)'),
-        \ 'type__protocol' : 'ssh',
-        \ }                                                                     " My vim customization (utility functions, syntax etc)
+    \ 'depends' : filter(
+    \   ['vim-glaive', 'vim-maktaba'],
+    \   '!has_key(g:disabled_bundles, v:val)'),
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " My vim customization (utility functions, syntax etc)
   let s:myutils = neobundle#get('myutils')
   function! s:myutils.hooks.on_source(bundle)
     " Close vim when the only buffer left is a special type of buffer
     Glaive myutils plugin[mappings]
-          \ bufclose_skip_types=`[
-          \  'gistls', 'nerdtree', 'indicator',
-          \  'folddigest', 'capture' ]`
+      \ bufclose_skip_types=`[
+      \  'gistls', 'nerdtree', 'indicator',
+      \  'folddigest', 'capture' ]`
     execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
     call myutils#InitUndoSwapViews()
   endfunction
@@ -507,13 +507,13 @@ if s:vimplugin_priority >= 0
     call myutils#SetupTablineMappings(g:OS)
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(
-          \ myutils#fsqlf#GetSQLFormatter())
+      \ myutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
   " {{{2
   NeoBundle 'rking/ag.vim', {
-        \ 'disabled' : !executable('ag'),
-        \ }                                                                     " Text based search tool using the silver searcher
+    \ 'disabled' : !executable('ag'),
+    \ }                                                                         " Text based search tool using the silver searcher
   " }}}
   " {{{2
   NeoBundle 'scrooloose/nerdcommenter'                                          " Plugin for adding comments
@@ -521,8 +521,8 @@ if s:vimplugin_priority >= 0
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDCreateDefaultMappings = 1
     let g:NERDCustomDelimiters = {
-          \ 'cvim' : { 'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' ' }
-          \ }
+      \ 'cvim' : { 'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' ' }
+      \ }
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
   endfunction
@@ -534,8 +534,8 @@ if s:vimplugin_priority >= 0
     let g:NERDShutUp = 1
     let g:NERDTreeChDirMode = 1
     let g:NERDTreeIgnore = [
-          \ '\.pyc', '\~$', '\.swo$', '\.swp$',
-          \ '\.git', '\.hg', '\.svn', '\.bzr']
+      \ '\.pyc', '\~$', '\.swo$', '\.swp$',
+      \ '\.git', '\.hg', '\.svn', '\.bzr']
     let g:NERDTreeMouseMode = 2
     let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
     let g:NERDTreeShowBookmarks = 1
@@ -550,10 +550,10 @@ if s:vimplugin_priority >= 0
   function! s:syntastic.hooks.on_source(bundle)
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_mode_map = {
-          \ 'mode': 'passive',
-          \ 'active_filetypes': [ 'zsh', 'sh' ],
-          \ 'passive_filetypes': [ 'vim' ]
-          \ }
+      \ 'mode': 'passive',
+      \ 'active_filetypes': [ 'zsh', 'sh' ],
+      \ 'passive_filetypes': [ 'vim' ]
+      \ }
     nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
   " }}}
@@ -562,23 +562,23 @@ if s:vimplugin_priority >= 0
   let s:expand_region = neobundle#get('vim-expand-region')
   function! s:expand_region.hooks.on_source(bundle)
     let g:expand_region_text_objects = {
-          \ 'iw'  :0,
-          \ 'iW'  :0,
-          \ 'i"'  :0,
-          \ 'i''' :0,
-          \ 'i]'  :1,
-          \ 'ib'  :1,
-          \ 'iB'  :1,
-          \ 'il'  :0,
-          \ 'ip'  :0,
-          \ 'ie'  :0,
-          \ }
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :0,
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
   endfunction
   function! s:expand_region.hooks.on_post_source(bundle)
     call expand_region#custom_text_objects('ruby', {
-          \ 'im' :0,
-          \ 'am' :0,
-          \ })
+      \ 'im' :0,
+      \ 'am' :0,
+      \ })
   endfunction
   " }}}
   " {{{2
@@ -586,31 +586,31 @@ if s:vimplugin_priority >= 0
   let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
   function! s:vimmulticursors.hooks.on_source(bundle)
     nnoremap <unique> <leader>mcf
-          \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
+      \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
   endfunction
   " }}}
   " {{{2
   NeoBundle 'thinca/vim-textobj-between', {
-        \ 'depends' : 'kana/vim-textobj-user',
-        \ }                                                                     " Text object between a char
+    \ 'depends' : 'kana/vim-textobj-user',
+    \ }                                                                         " Text object between a char
   " }}}
   " {{{2
   NeoBundle 'tyru/capture.vim', {
-        \   'on_cmd' : ['Capture'],
-        \ }                                                                     " Capture Ex command output to buffer
+    \   'on_cmd' : ['Capture'],
+    \ }                                                                         " Capture Ex command output to buffer
   " }}}
   " {{{2
   NeoBundle 'wellle/tmux-complete.vim', {
-        \ 'disabled' : g:OS.is_mac,
-        \ }                                                                     " Insert mode completion of words in adjacent panes
+    \ 'disabled' : g:OS.is_mac,
+    \ }                                                                         " Insert mode completion of words in adjacent panes
   " }}}
   " {{{2
   NeoBundle 'xolox/vim-notes', {
-        \   'on_cmd' : [{'name' : [ 'Note' ],
-        \                'complete' : 'customlist,xolox#notes#cmd_complete'}],
-        \ 'depends' : ['xolox/vim-misc'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Note taking with vim
+    \   'on_cmd' : [{'name' : [ 'Note' ],
+    \                'complete' : 'customlist,xolox#notes#cmd_complete'}],
+    \ 'depends' : ['xolox/vim-misc'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Note taking with vim
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
     let g:notes_directories = ['~/.vim/.vimnotes']
@@ -621,18 +621,18 @@ if s:vimplugin_priority >= 0
   " }}}
   " ft-cpp {{{2
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {
-        \ 'on_ft' : ['cpp'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Enhanced vim cpp highlight
+    \ 'on_ft' : ['cpp'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Enhanced vim cpp highlight
   " }}}
   " ft-markdown {{{2
   NeoBundle 'plasticboy/vim-markdown', {
-        \ 'on_ft' : ['markdown'],
-        \ 'lazy' : 1,
-        \ 'directory' : 'plasticboy-markdown',
-        \ 'name' : 'plasticboy-markdown',
-        \ 'regular_name' : 'plasticboy-markdown',
-        \ }                                                                     " Yet another markdown syntax highlighting
+    \ 'on_ft' : ['markdown'],
+    \ 'lazy' : 1,
+    \ 'directory' : 'plasticboy-markdown',
+    \ 'name' : 'plasticboy-markdown',
+    \ 'regular_name' : 'plasticboy-markdown',
+    \ }                                                                         " Yet another markdown syntax highlighting
   " NeoBundle 'tpope/vim-markdown', {
         " \ 'on_ft' : ['markdown'],
         " \ 'lazy' : 1,
@@ -648,68 +648,68 @@ if s:vimplugin_priority >= 0
         " \ 'regular_name' : 'hallison-markdown',
         " \ }                                                                     " Yet another markdown syntax highlighting
   NeoBundle 'thinca/vim-ft-markdown_fold', {
-        \ 'on_ft' : ['markdown'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Fold markdown
+    \ 'on_ft' : ['markdown'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Fold markdown
   NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
   " }}}
   " ft-ruby {{{2
   NeoBundle 'vim-ruby/vim-ruby', {
-        \ 'on_ft' : ['ruby'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Vim plugin for editing ruby files.
+    \ 'on_ft' : ['ruby'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Vim plugin for editing ruby files.
   " }}}
   " ft-sql {{{2
   NeoBundle 'jphustman/SQLUtilities', {
-        \ 'on_ft' : ['sql'],
-        \ 'depends' : ['Align'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Utilities for editing SQL scripts (v7.0)
+    \ 'on_ft' : ['sql'],
+    \ 'depends' : ['Align'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
     let g:sqlutil_align_comma = 0
     if (neobundle#is_sourced('vim-codefmt') ||
-          \ maktaba#plugin#IsRegistered('codefmt'))
-          \ && neobundle#is_installed('myutils')
+      \ maktaba#plugin#IsRegistered('codefmt'))
+      \ && neobundle#is_installed('myutils')
       let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
       call l:codefmt_registry.AddExtension(
-            \ myutils#sqlformatter#GetSQLFormatter())
+        \ myutils#sqlformatter#GetSQLFormatter())
     endif
   endfunction
   NeoBundle 'vim-scripts/SQLComplete.vim', {
-        \ 'on_ft' : ['sql'],
-        \ 'lazy' : 1,
-        \ }                                                                     " SQL script completion
+    \ 'on_ft' : ['sql'],
+    \ 'lazy' : 1,
+    \ }                                                                         " SQL script completion
   NeoBundle 'vim-scripts/sql.vim--Stinson', {
-        \ 'on_ft' : ['sql'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Better SQL syntax highlighting
+    \ 'on_ft' : ['sql'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Better SQL syntax highlighting
   " }}}
   " ft-tmux {{{2
   NeoBundle 'tmux-plugins/vim-tmux', {
-        \ 'on_ft' : ['tmux'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Vim plugin for editing .tmux.conf
+    \ 'on_ft' : ['tmux'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Vim plugin for editing .tmux.conf
   " }}}
   " ft-vim {{{2
   NeoBundle 'vim-scripts/ReloadScript', {
-        \ 'on_cmd' : ['ReloadScript'],
-        \ 'on_ft' : ['vim'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Reload vim script without having to restart vim
+    \ 'on_cmd' : ['ReloadScript'],
+    \ 'on_ft' : ['vim'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Reload vim script without having to restart vim
   let s:reload_script = neobundle#get('ReloadScript')
   function! s:reload_script.hooks.on_source(bundle)
     nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
   endfunction
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Decho.vba.gz', {
-        \ 'on_cmd' : ['Decho'],
-        \ 'on_ft' : ['vim'],
-        \ 'lazy' : 1,
-        \ 'name' : 'Decho',
-        \ 'regular_namne' : 'Decho',
-        \ 'frozen' : 1,
-        \ 'type' : 'vba',
-        \ }                                                                     " Debug echo for debuging vim plugins
+    \ 'on_cmd' : ['Decho'],
+    \ 'on_ft' : ['vim'],
+    \ 'lazy' : 1,
+    \ 'name' : 'Decho',
+    \ 'regular_namne' : 'Decho',
+    \ 'frozen' : 1,
+    \ 'type' : 'vba',
+    \ }                                                                         " Debug echo for debuging vim plugins
   let s:decho = neobundle#get('Decho')
   function! s:decho.hooks.on_source(bundle)
     let g:decho_enable = 0
@@ -717,15 +717,15 @@ if s:vimplugin_priority >= 0
     let g:decho_winheight = 10
   endfunction
   NeoBundle 'google/vim-ft-vroom', {
-        \ 'on_ft' : ['vroom'],
-        \ 'lazy' : 1,
-        \ }                                                                     " Filetype plugin for vroom
+    \ 'on_ft' : ['vroom'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Filetype plugin for vroom
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
-        \ 'on_ft' : ['vtd'],
-        \ 'lazy' : 1,
-        \ }
+    \ 'on_ft' : ['vtd'],
+    \ 'lazy' : 1,
+    \ }
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
     Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
