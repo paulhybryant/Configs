@@ -27,7 +27,7 @@
   @ Integrate SQLUtilities with codefmt @p:2 (DONE 2015-09-13 19:10)
   @ Configure delimitMate to add newline after {}, and only close <> in html / XML
   @ Add vroom tests for all my plugins @p:2
-  @ Make vim-argwrap handle vimscript better
+  @ Make vim-argwrap handle vimscript better (DONE 2015-12-19 17:05)
   @ Try to write a vim plugin with python @p:2
   @ Fix tmux-complete.vim hang in OSX
 
@@ -51,7 +51,7 @@
   @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
   @ Cache geoinfo (DONE 2015-10-16 22:30)
   @ Add option completion for zsh in vim
-  @ Make powerline-shell one prompt plugin for zsh
+  @ Make powerline-shell one prompt plugin for zsh (DONE 2015-12-19 16:59)
 
 * misc
 = Misc @p:2 =

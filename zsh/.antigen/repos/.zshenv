@@ -30,11 +30,9 @@ alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
 which ${CMDPREFIX}trash > /dev/null 2>&1 && alias rm='${CMDPREFIX}\trash -v'
+zstyle ":registry:var:prefix-width" registry 10
 
-declare -axg -U zsh_autoload_dir
-zsh_autoload_dir=(~/.zsh/lib ${zsh_autoload_dir})
-autoload -Uz add-zsh-hook zsh::autoload time::getmtime
-[[ -f ~/.zsh/lib/zsh::autoload ]] && zsh::autoload ~/.zsh/lib/[^_]*(:t)
+autoload -Uz -- add-zsh-hook ~/.zsh/lib/[^_]*(:t)
 
 # Local configurations
 if [[ -f ~/.zshenv.local ]]; then

@@ -144,7 +144,7 @@ fi
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
-alias find='file::find-ignore-dir ".git"'
+alias gfind='file::find-ignore-dir ".git"'
 alias grepc='\grep -C 5 '
 alias gyank='util::yank'
 alias gvim='util::gvim'
@@ -166,7 +166,6 @@ alias llf='file::lf -l'
 alias llink='file::ll'
 alias lll='file::ll -l'
 alias mank='\man -K'
-alias npm='http_proxy="" https_proxy="" \npm'
 alias nvim='NVIM=nvim nvim'
 alias run='zsh::run'
 alias ssh='net::ssh'
@@ -218,11 +217,10 @@ declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype
 
 [[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
 
+add-zsh-hook precmd tmux::copy-vars
 if [[ -z ${PROFILING+1} ]]; then
   if zstyle -t ":registry:var:tty" registry 'virtual'; then
-    add-zsh-hook precmd tmux::copy-vars
-    # prompt::agnoster
-    prompt::powerline-shell
+    prompt powerline-shell
   else
     prompt clint
   fi

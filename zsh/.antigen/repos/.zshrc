@@ -29,7 +29,6 @@ declare -xg GREP_OPTIONS='--color=auto'
 declare -xg LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen --no-init --raw-control-chars'
 declare -xg PAGER='most'
 # export PAGER=vimpager
-zstyle ":registry:var:prefix-width" registry 10
 declare -xg MANPAGER="$PAGER"
 declare -xg TERM='screen-256color'
 declare -xg VISUAL='vim'
@@ -113,6 +112,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   antigen bundle git@github.com:paulhybryant/dotfiles.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
+autoload -Uz bashcompinit && bashcompinit
 
 declare -xg HISTFILE="$ZDOTDIR/.zhistory"
 declare -xg HIST_STAMPS='yyyy-mm-dd'
@@ -130,10 +130,8 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-autoload -Uz compinit && compinit
-# This has to be set after compinit (why?)
 compdef _ta tmux::attach
-zsh::autoload _ta _ta-sessions
+autoload -Uz _ta _ta-sessions
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
