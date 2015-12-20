@@ -389,7 +389,9 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'bling/vim-airline'                                                 " Lean & mean status/tabline for vim that's light as air
+  NeoBundle 'bling/vim-airline', {
+    \ 'disabled' : 0,
+    \ }                                                                         " Lean & mean status/tabline for vim that's light as air
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
     let g:airline#extensions#nrrwrgn#enabled = 1
@@ -409,6 +411,10 @@ if s:vimplugin_priority >= 0
     let g:airline#extensions#whitespace#enabled = 1
   endfunction
   " }}}
+  NeoBundle 'powerline/powerline', {
+    \ 'disabled' : 1,
+    \ 'rtp': 'powerline/bindings/vim/'
+    \ }
   " {{{2
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
