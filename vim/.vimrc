@@ -426,7 +426,7 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Info help page source for vim-ref
   " }}}
   " {{{2
-  NeoBundle 'edkolev/tmuxline.vim', {
+  NeoBundle 'paulhybryant/tmuxline.vim', {
     \ 'gui' : 0,
     \ 'lazy' : 1,
     \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
