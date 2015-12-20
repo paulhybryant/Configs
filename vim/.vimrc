@@ -80,7 +80,7 @@ function! g:ConfigureYcm()
     \   'lua' : ['.', ':'],
     \   'erlang' : [':'],
     \ }
-  let g:ycm_server_keep_logfiles = 10                                           " keep log files
+  let g:ycm_server_keep_logfiles = 10                                           " Keep log files
   let g:ycm_server_log_level = 'debug'                                          " Default info
   let g:ycm_server_use_vim_stdout = 1                                           " Set to 0 if ycm server crashes to debug
   let g:ycm_show_diagnostics_ui = 1
