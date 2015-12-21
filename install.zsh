@@ -24,7 +24,7 @@ local url="$(-antigen-resolve-bundle-url "https://github.com/paulhybryant/dotfil
 pushd $(-antigen-get-clone-dir "${url}")
 git remote set-url origin "git@github.com:paulhybryant/dotfiles.git"
 ./zsh/.zsh/bin/bootstrap --dryrun
-echo "Continue [y/n]? "
+printf "Continue [y/n]? "
 read -r reply
 case $reply in
   Y*|y*)
