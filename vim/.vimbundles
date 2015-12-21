@@ -919,7 +919,6 @@ NeoBundle 'Rip-Rip/clang_complete', {
       \ 'lazy' : 1,
       \ }                                                                     " Completion for c-family language
 " }}}
-NeoBundle 'Lokaltog/powerline', {'rtp' : '/powerline/bindings/vim'}
 NeoBundle 'edkolev/promptline.vim'
 NeoBundle 'xolox/vim-shell', { 'depends' : 'xolox/vim-misc' }                 " Better integration between vim and shell
 NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }

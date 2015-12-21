@@ -13,6 +13,7 @@ let s:vimplugin_priority = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
 " Shared plugin configurations {{{1
+" OS Detection {{{2
 function! s:OSDetect()
   let l:is_unix = has('unix')
   let l:is_windows =
@@ -30,7 +31,8 @@ function! s:OSDetect()
     \ 'is_linux'    :  l:is_linux,
     \ }
 endfunction
-
+" }}}
+" Configure RelatedFiles {{{2
 function! g:ConfigureRelatedFiles()
   Glaive relatedfiles plugin[mappings]=0
   for l:key in ['c', 'h', 't', 'b']
@@ -40,7 +42,8 @@ function! g:ConfigureRelatedFiles()
   endfor
   nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
 endfunction
-
+" }}}
+" Configure YCM {{{2
 function! g:ConfigureYcm()
   nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
   let g:ycm_always_populate_location_list = 1                                   " Default 0
@@ -87,6 +90,7 @@ function! g:ConfigureYcm()
   let g:ycm_warning_symbol = '>>'
 endfunction
 " }}}
+" }}}
 " Setup NeoBundle {{{1
 filetype off
 if has('vim_starting')
@@ -128,8 +132,6 @@ if g:OS.is_windows
     \ 'depends' : [ 'Shougo/unite.vim' ],
     \ }                                                                         " Unite source for everything
   " }}}
-else
-  set shell=/bin/sh
 endif
 " }}}
 " Local setup (before) {{{1
@@ -389,7 +391,9 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'bling/vim-airline'                                                 " Lean & mean status/tabline for vim that's light as air
+  NeoBundle 'bling/vim-airline', {
+    \ 'disabled' : 0,
+    \ }                                                                         " Lean & mean status/tabline for vim that's light as air
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
     let g:airline#extensions#nrrwrgn#enabled = 1
@@ -409,6 +413,10 @@ if s:vimplugin_priority >= 0
     let g:airline#extensions#whitespace#enabled = 1
   endfunction
   " }}}
+  NeoBundle 'powerline/powerline', {
+    \ 'disabled' : 1,
+    \ 'rtp': 'powerline/bindings/vim/'
+    \ }
   " {{{2
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
