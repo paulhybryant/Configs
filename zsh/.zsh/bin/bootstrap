@@ -121,7 +121,7 @@ function bootstrap::main() {
     # zsh::eval "./osx/.osx/init.zsh"
   fi
 
-  io::msg "Bootstrap done!"
+  io::msg "Bootstrap done! Logs in ${log}. Reinitialize zsh..."
   zsh::eval "exec zsh"
 }
 
@@ -130,7 +130,7 @@ setopt localoptions err_return
 
 local -a help dryrun unstow stow verbose
 zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
-  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose
+  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose -log=log
 
 local _config_dir
 local -a _stow_opts
