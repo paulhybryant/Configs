@@ -15,9 +15,9 @@ EOF
 }
 function bootstrap::stow() {
   for module in misc tmux vim zsh; do
-    [[ -d ${module} ]] && stow -v ${_stow_opts} ${module} -t ~
+    [[ -d ${module} ]] && zsh::eval "stow -v ${_stow_opts} ${module} -t ~"
   done
-  os::OSX && [[ -d osx ]] && stow -v ${_stow_opts} osx -t ~
+  os::OSX && [[ -d osx ]] && zsh::eval "stow -v ${_stow_opts} osx -t ~"
 }
 function bootstrap::main() {
   setopt localoptions unset err_return
@@ -29,13 +29,14 @@ function bootstrap::main() {
     declare -xg BREWVERSION="linuxbrew"
     declare -xg BREWHOME="$HOME/.$BREWVERSION"
   fi
+  path=($BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
 
   zsh::eval "sudo -v"
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd git-annex xautomation urlview xdotool x11-apps"
+    xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev"
 
   if [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -43,20 +44,9 @@ function bootstrap::main() {
       "${BREWHOME}""
   fi
 
-  # zsh::eval "brew update && brew upgrade $(brew outdated)"
-  zsh::eval "brew install coreutils stow findutils"
-  io::msg "Creating symlinks with stow..."
-  zsh::eval "mkdir -p "$HOME/.antigen/repos/""
-  zsh::eval "mkdir -p "$HOME/.config/pip/""
-  zsh::eval "mkdir -p "$HOME/.config/ranger/""
-  zsh::eval "mkdir -p "$HOME/.config/terminator/""
-  zsh::eval "mkdir -p "$HOME/.ssh/""
-  zsh::eval "mkdir -p "$HOME/.tmux/plugins""
-  zsh::eval "mkdir -p "$HOME/.tmuxinator""
-  zsh::eval "mkdir -p "$HOME/.vim/""
-  bootstrap::stow
-  zsh::eval "ln -sf $HOME/.xbindkeysrc.normal $HOME/.xbindkeysrc.scm"
-
+  # brew tap / search etc sometimes complains about Non-HTTP proxy URI.
+  # This is because of an issue with the ruby open-uri library. The workaround
+  # is to set https_proxy to http_proxy (`export https_proxy=$http_proxy`).
   io::msg "Tapping extra repositories..."
   zsh::eval "brew tap paulhybryant/myformulae"
   zsh::eval "brew tap homebrew/x11"
@@ -64,27 +54,47 @@ function bootstrap::main() {
   zsh::eval "brew tap homebrew/completions"
   zsh::eval "brew tap iveney/mocha"
   zsh::eval "brew tap beeftornado/rmtree"
-  # zsh::eval "brew tap peco/peco"
+  zsh::eval "brew tap peco/peco"
+
+  zsh::eval "brew install coreutils stow findutils"
+  io::msg "Creating symlinks with stow..."
+  zsh::eval "mkdir -p "$HOME/.antigen/repos/""
+  zsh::eval "mkdir -p "$HOME/.config/pip/""
+  zsh::eval "mkdir -p "$HOME/.config/ranger/""
+  zsh::eval "mkdir -p "$HOME/.config/terminator/""
+  zsh::eval "mkdir -p "$HOME/.ssh/assh.d""
+  zsh::eval "mkdir -p "$HOME/.tmux/plugins""
+  zsh::eval "mkdir -p "$HOME/.tmuxinator""
+  zsh::eval "mkdir -p "$HOME/.vim/bundle""
+  bootstrap::stow
+  zsh::eval "ln -sf $HOME/.xbindkeysrc.viminsert.scm $HOME/.xbindkeysrc.scm"
+
+  io::msg "Installing NeoBundle..."
+  [[ ! -d ~/.vim/bundle/neobundle.vim ]] && zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
 
   io::msg "Installing softwares..."
-  # zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
+  if os::LINUX; then
+    zsh::eval "brew install python --with-unicode-ucs4"
+  fi
+  zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
   zsh::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
-  zsh::eval "brew install brew-gem cmake ctags git htop python python3 tmux \
-    the_silver_searcher vimpager zsh netcat dos2unix most stdman assh ranger \
+  zsh::eval "brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb"
+  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux \
+    the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
     zsh-completions xbindkeys markdown gnu-sed enscript"
-  zsh::eval "brew install --force pt"
-  # pypy pypy3
+  # zsh::eval "brew install --force pt"
   zsh::eval "brew install --HEAD vimdoc vroom"
-  zsh::eval "pip install --upgrade powerline-status advanced-ssh-config \
-    neovim terminatorcli bz2file percol butterfly libsass"
+  zsh::eval "pip install --upgrade powerline-status neovim terminatorcli \
+    bz2file percol butterfly libsass"
   if os::LINUX; then
     zsh::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
     zsh::eval "brew install --HEAD trash-cli"
-    zsh::eval "brew install terminator"
+    # zsh::eval "brew install terminator"
   fi
-  zsh::eval "brew gem install tmuxinator automux"
+  zsh::eval "brew gem install tmuxinator"
+  zsh::eval "brew gem install automux"
   zsh::eval "http_proxy='' https_proxy='' \
     npm install -g urchin npm-update-outdated shelljs js-beautify"
 
@@ -104,7 +114,6 @@ function bootstrap::main() {
     # zsh::eval "./osx/.osx/init.zsh"
   fi
 
-  zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
   io::msg "Bootstrap done!"
   zsh::eval "exec zsh"
 }
@@ -124,7 +133,7 @@ fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
-[[ -n ${dryrun} ]] && mode::set-dryrun && _stow_opts=("-n")
+[[ -n ${dryrun} ]] && mode::set-dryrun
 [[ -n ${verbose} ]] && setopt localoptions verbose
 
 zsh::eval "pushd ${_config_dir:a}"
