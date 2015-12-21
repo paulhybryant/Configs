@@ -22,23 +22,23 @@ function bootstrap::stow() {
 function bootstrap::main() {
   setopt localoptions unset err_return
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    declare -xg BREWVERSION="homebrew"
+  if [[ "$OSTYPE" == 'darwin'* ]]; then
+    declare -xg BREWVERSION='homebrew'
     declare -xg BREWHOME="$HOME/.$BREWVERSION"
   else
-    declare -xg BREWVERSION="linuxbrew"
+    declare -xg BREWVERSION='linuxbrew'
     declare -xg BREWHOME="$HOME/.$BREWVERSION"
   fi
   path=($BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
 
-  zsh::eval "sudo -v"
+  zsh::eval 'sudo -v'
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev"
 
-  if [[ ! -d "${BREWHOME}" ]]; then
+  if [[ mode::dryrun || ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
     zsh::eval "git clone "https://github.com/Homebrew/${BREWVERSION}" \
       "${BREWHOME}""
@@ -47,82 +47,84 @@ function bootstrap::main() {
   # brew tap / search etc sometimes complains about Non-HTTP proxy URI.
   # This is because of an issue with the ruby open-uri library. The workaround
   # is to set https_proxy to http_proxy (`export https_proxy=$http_proxy`).
-  io::msg "Tapping extra repositories..."
-  zsh::eval "brew tap paulhybryant/myformulae"
-  zsh::eval "brew tap homebrew/x11"
-  zsh::eval "brew tap homebrew/dupes"
-  zsh::eval "brew tap homebrew/completions"
-  zsh::eval "brew tap iveney/mocha"
-  zsh::eval "brew tap beeftornado/rmtree"
-  zsh::eval "brew tap peco/peco"
+  io::msg 'Tapping extra repositories...'
+  zsh::eval 'brew tap paulhybryant/myformulae'
+  zsh::eval 'brew tap homebrew/x11'
+  zsh::eval 'brew tap homebrew/dupes'
+  zsh::eval 'brew tap homebrew/completions'
+  zsh::eval 'brew tap iveney/mocha'
+  zsh::eval 'brew tap beeftornado/rmtree'
+  zsh::eval 'brew tap peco/peco'
 
-  zsh::eval "brew install coreutils stow findutils"
-  io::msg "Creating symlinks with stow..."
-  zsh::eval "mkdir -p "$HOME/.antigen/repos/""
-  zsh::eval "mkdir -p "$HOME/.config/pip/""
-  zsh::eval "mkdir -p "$HOME/.config/ranger/""
-  zsh::eval "mkdir -p "$HOME/.config/terminator/""
-  zsh::eval "mkdir -p "$HOME/.ssh/assh.d""
-  zsh::eval "mkdir -p "$HOME/.tmux/plugins""
-  zsh::eval "mkdir -p "$HOME/.tmuxinator""
-  zsh::eval "mkdir -p "$HOME/.vim/bundle""
+  zsh::eval 'brew install coreutils stow findutils'
+  io::msg 'Creating symlinks with stow...'
+  zsh::eval 'mkdir -p ~/.antigen/repos/'
+  zsh::eval 'mkdir -p ~/.config/pip/'
+  zsh::eval 'mkdir -p ~/.config/ranger/'
+  zsh::eval 'mkdir -p ~/.config/terminator/'
+  zsh::eval 'mkdir -p ~/.ssh/assh.d'
+  zsh::eval 'mkdir -p ~/.tmux/plugins'
+  zsh::eval 'mkdir -p ~/.tmuxinator'
+  zsh::eval 'mkdir -p ~/.vim/bundle'
   bootstrap::stow
-  zsh::eval "ln -sf $HOME/.xbindkeysrc.viminsert.scm $HOME/.xbindkeysrc.scm"
+  zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
 
-  io::msg "Installing NeoBundle..."
-  if [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
+  io::msg 'Installing NeoBundle...'
+  if [[ mode::dryrun || ! -d ~/.vim/bundle/neobundle.vim ]]; then
     # Another way to wrap long string is to use variable v, e.g.
-    # v="str1"; v+="str2"; cmd $v
+    # v='str1'; v+='str2'; cmd $v
     zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/`
       `neobundle.vim/master/bin/install.sh)"
-    ~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes
+    zsh::eval '~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes'
   fi
 
-  io::msg "Installing softwares..."
+  io::msg 'Installing softwares...'
   if os::LINUX; then
-    zsh::eval "brew install python --with-unicode-ucs4"
+    zsh::eval 'brew install python --with-unicode-ucs4'
   fi
-  zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
-  zsh::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
+  zsh::eval 'brew install --HEAD paulhybryant/myformulae/powerline-shell'
+  zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
   zsh::eval "brew install https://raw.githubusercontent.com/moul/`
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
     zsh-completions xbindkeys markdown gnu-sed enscript"
-  # zsh::eval "brew install --force pt"
-  zsh::eval "brew install --HEAD vimdoc vroom"
+  # zsh::eval 'brew install --force pt'
+  zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim terminatorcli \
     bz2file percol butterfly libsass"
   if os::LINUX; then
     zsh::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
-    zsh::eval "brew install --HEAD trash-cli"
-    # zsh::eval "brew install terminator"
+    zsh::eval 'brew install --HEAD trash-cli'
+    # zsh::eval 'brew install terminator'
   fi
-  zsh::eval "brew gem install tmuxinator"
-  zsh::eval "brew gem install automux"
+  zsh::eval 'brew gem install tmuxinator'
+  zsh::eval 'brew gem install automux'
   zsh::eval "http_proxy='' https_proxy='' \
     npm install -g urchin npm-update-outdated shelljs js-beautify"
 
   if os::OSX; then
-    io::msg "Installing extra stuff for OSX..."
-    zsh::eval "brew tap caskroom/versions"
+    io::msg 'Installing extra stuff for OSX...'
+    zsh::eval 'brew tap caskroom/versions'
     zsh::eval "brew install --with-custom-icons --with-lua --with-luajit \
       --with-override-system-vim macvim"
-    zsh::eval "brew linkapps macvim"
+    zsh::eval 'brew linkapps macvim'
     zsh::eval "brew install brew-cask clipper osxutils lsof \
       paulhybryant/myformulae/gnu-getopt yank textql"
     zsh::eval "brew install reattach-to-user-namespace \
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
-    zsh::eval "brew install gnu-trash"
+    zsh::eval 'brew install gnu-trash'
     zsh::eval "brew cask install karabiner seil spectacle \
       xquartz git-annex urlview"
-    # zsh::eval "./osx/.osx/init.zsh"
+    # zsh::eval './osx/.osx/init.zsh'
   fi
 
-  io::msg "Bootstrap done! Logs in ${log}. Reinitialize zsh..."
-  zsh::eval "exec zsh"
+  io::msg 'Bootstrap done!'
+  [[ ${#log} -ge 2 ]] && io::msg "Logs in ${log[2]}"
+  io::msg 'Reinitialize zsh...'
+  zsh::eval 'exec zsh'
 }
 
 setopt LOCAL_OPTIONS
@@ -130,7 +132,7 @@ setopt localoptions err_return
 
 local -a help dryrun unstow stow verbose
 zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
-  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose -log=log
+  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose -log:=log
 
 local _config_dir
 local -a _stow_opts
@@ -152,6 +154,6 @@ elif [[ -n ${stow} ]]; then
 else
   bootstrap::main
 fi
-zsh::eval "popd"
+zsh::eval 'popd'
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
