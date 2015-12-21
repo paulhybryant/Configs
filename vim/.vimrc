@@ -98,7 +98,14 @@ if has('vim_starting')
   call s:OSDetect()
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
 endif
-call neobundle#begin(s:bundle_base_path)
+try
+  call neobundle#begin(s:bundle_base_path)
+catch /E117:/
+  echoerr "Error setting up neobundle"
+  echoerr "Make sure neobundle is installed and" s:bundle_base_path
+    \ "is the correct bundle base directory."
+  finish
+endtry
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " }}}
@@ -478,7 +485,7 @@ if s:vimplugin_priority >= 0
     let g:buffergator_autodismiss_on_select = 0
     let g:buffergator_autoupdate = 1
     let g:buffergator_suppress_keymaps = 1
-    noremap <unique> <leader>bf :BuffergatorOpen<CR>
+    noremap <unique> <leader>bg :BuffergatorOpen<CR>
   endfunction
   " }}}
   " {{{2
