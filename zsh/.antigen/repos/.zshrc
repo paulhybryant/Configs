@@ -109,7 +109,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle git directories
   # antigen theme robbyrussell
 
-  antigen bundle git@github.com:paulhybryant/dotfiles.git --loc=zsh/.zsh/init.zsh
+  antigen bundle https://github.com/paulhybryant/dotfiles.git --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
 autoload -Uz bashcompinit && bashcompinit
