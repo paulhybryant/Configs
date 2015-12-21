@@ -6,12 +6,12 @@
 
 setopt localoptions err_return
 
-if os::LINUX; then
-  if [[ "${SSH_OS}" == "Darwin" ]]; then
-    ssh::xclip "$@"
-  else
+if [[ -z "$SSH_CLIENT" ]]; then
+  if os::LINUX; then
     xclip "$@"
+  elif os::OSX; then
+    osx::xclip "$@"
   fi
-elif os::OSX; then
-  osx::xclip "$@"
+else
+  ssh::xclip --os "${SSH_OS}"  "$@"
 fi

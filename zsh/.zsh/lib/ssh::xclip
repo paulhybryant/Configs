@@ -5,8 +5,14 @@ setopt localoptions err_return
 local opts direction
 
 # Consume and ignore the selection flags but save -i and -o.
-zparseopts -E -D -a opts -- -select: -selection: i=direction o=direction
+zparseopts -E -D -a opts -- -selection:=selection i=i o=o -os:=os
 
-if [[ "${direction[1]}" == "-i" ]]; then
-    nc -c localhost 8377
+if [[ ${#os} -lt 2 ]]; then
+  io::err "SSH OS not specified."
+fi
+
+if [[ "${os[2]}" == "Darwin" ]]; then
+  nc -c localhost 8377
+else
+  xclip -selection ${selection} -i ${i}
 fi
