@@ -22,6 +22,14 @@ function bootstrap::stow() {
 function bootstrap::main() {
   setopt localoptions unset err_return
 
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    declare -xg BREWVERSION="homebrew"
+    declare -xg BREWHOME="$HOME/.$BREWVERSION"
+  else
+    declare -xg BREWVERSION="linuxbrew"
+    declare -xg BREWHOME="$HOME/.$BREWVERSION"
+  fi
+
   zsh::eval "sudo -v"
   io::msg "Installing ${BREWVERSION} dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install build-essential curl git m4 \
@@ -98,6 +106,7 @@ function bootstrap::main() {
 
   zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
   io::msg "Bootstrap done!"
+  zsh::eval "exec zsh"
 }
 
 setopt LOCAL_OPTIONS
@@ -110,11 +119,7 @@ zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
 local _config_dir
 local -a _stow_opts
 _config_dir="${0:A:h}/../../../"
-if [[ -n ${dryrun} ]]; then
-  printf "[Dryrun]   source ${_config_dir:a}/zsh/.zshenv\n"
-else
-  source ${_config_dir:a}/zsh/.zshenv
-fi
+
 fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 
@@ -130,8 +135,6 @@ elif [[ -n ${stow} ]]; then
   bootstrap::stow
 else
   bootstrap::main
-  zsh::eval "source ${_config_dir:a}/zsh/.zshenv"
-  zsh::eval "source ${_config_dir:a}/zsh/.zshrc"
 fi
 zsh::eval "popd"
 

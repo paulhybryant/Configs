@@ -28,7 +28,7 @@ echo "Continue [y/n]? "
 read -r reply
 case $reply in
   Y*|y*)
-    echo "Installing..."
+    printf "Bootstraping...\n"
     ./zsh/.zsh/bin/bootstrap
     ;;
   *)
