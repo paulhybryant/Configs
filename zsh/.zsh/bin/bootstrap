@@ -70,7 +70,13 @@ function bootstrap::main() {
   zsh::eval "ln -sf $HOME/.xbindkeysrc.viminsert.scm $HOME/.xbindkeysrc.scm"
 
   io::msg "Installing NeoBundle..."
-  [[ ! -d ~/.vim/bundle/neobundle.vim ]] && zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
+  if [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
+    # Another way to wrap long string is to use variable v, e.g.
+    # v="str1"; v+="str2"; cmd $v
+    zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/`
+      `neobundle.vim/master/bin/install.sh)"
+    ~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes
+  fi
 
   io::msg "Installing softwares..."
   if os::LINUX; then
@@ -78,7 +84,8 @@ function bootstrap::main() {
   fi
   zsh::eval "brew install --HEAD paulhybryant/myformulae/powerline-shell"
   zsh::eval "brew install --with-gssapi --with-libssh2 --with-rtmpdump curl"
-  zsh::eval "brew install https://raw.githubusercontent.com/moul/advanced-ssh-config/master/contrib/homebrew/assh.rb"
+  zsh::eval "brew install https://raw.githubusercontent.com/moul/`
+    `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger \
     fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \

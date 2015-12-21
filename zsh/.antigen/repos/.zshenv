@@ -13,14 +13,17 @@ else
   declare -xg CMDPREFIX=""
 fi
 
-path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
-fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions ~/.zsh/lib $fpath)
+path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+  $BREWHOME/opt/go/libexec/bin $path)
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions \
+  ~/.zsh/lib $fpath)
 manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
 
 declare -U -T INFOPATH infopath
 infopath=($BREWHOME/share/info $infopath)
 brew list go > /dev/null 2>&1 && declare -xg GOPATH="$(brew --prefix go)"
-brew list gnu-sed > /dev/null 2>&1 && manpath=($(brew --prefix gnu-sed)/libexec/gnuman $manpath)
+brew list gnu-sed > /dev/null 2>&1 && \
+  manpath=($(brew --prefix gnu-sed)/libexec/gnuman $manpath)
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'

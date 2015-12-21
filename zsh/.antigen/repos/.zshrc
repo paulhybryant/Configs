@@ -2,21 +2,24 @@
 
 # Use PROFILING='y' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
-  # set the trace prompt to include seconds, nanoseconds, script name and line number
-  # This is GNU date syntax; by default Macs ship with the BSD date program, which isn't compatible
+  # set the trace prompt to include seconds, nanoseconds, script name and line
+  # number This is GNU date syntax; by default Macs ship with the BSD date
+  # program, which isn't compatible
   # PS4='+$(date "+%s:%N") %N:%i> '
   zmodload zsh/datetime
   PS4='+$EPOCHREALTIME %N:%i> '
   # save file stderr to file descriptor 3 and redirect stderr (including trace
   # output) to a file with the script's PID as an extension
   exec 3>&2 2> ${PROFILING}
-  # set options to turn on tracing and expansion of commands contained in the prompt
+  # set options to turn on tracing and expansion of commands contained in the
+  # prompt
   setopt xtrace prompt_subst
 fi
 
 # This seems to be duplicate with the one in .zshenv but it is not! It ensures
 # the homebrew bin directory are in front of the system's bin directory.
-path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
+path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+  $BREWHOME/opt/go/libexec/bin $path)
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
@@ -26,7 +29,8 @@ declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -xg HELPDIR="$BREWHOME/share/zsh/help"
 declare -xg EDITOR='vim'
 declare -xg GREP_OPTIONS='--color=auto'
-declare -xg LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen --no-init --raw-control-chars'
+declare -xg LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
+  `--no-init --raw-control-chars'
 declare -xg PAGER='most'
 # export PAGER=vimpager
 declare -xg MANPAGER="$PAGER"
@@ -109,7 +113,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle git directories
   # antigen theme robbyrussell
 
-  antigen bundle https://github.com/paulhybryant/dotfiles.git --loc=zsh/.zsh/init.zsh
+  antigen bundle https://github.com/paulhybryant/dotfiles.git \
+    --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
 autoload -Uz bashcompinit && bashcompinit
