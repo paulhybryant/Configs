@@ -101,4 +101,54 @@
       {{ UBIQUITOUS_VIM_BINDINGS_CANCEL_OPERATOR_PENDING }}
     </autogen>
   </item>
+  <item>
+    <name>Use Contrl+number to switch iterm2 tab</name>
+    <identifier>private.control_1_switch_to_iterm2_tab1</identifier>
+    <only>TERMINAL</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_1, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_1, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_2, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_3, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_4, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_5, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_5, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_6, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_6, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_7, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_7, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_8, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_8, ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_9, ModifierFlag::CONTROL_L,
+      KeyCode::KEY_9, ModifierFlag::OPTION_L
+    </autogen>
+  </item>
 </root>
