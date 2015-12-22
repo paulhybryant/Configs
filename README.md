@@ -15,3 +15,5 @@ My work environment bootstrap and configurations for zsh
 - spectable - https://www.spectacleapp.com/
 
 - synergy - http://synergy-project.org/
+
+- keycodes - https://manytricks.com/download/_do_not_hotlink_/keycodes202.dmg

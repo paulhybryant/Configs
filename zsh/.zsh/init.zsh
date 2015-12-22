@@ -197,6 +197,7 @@ zle -N down-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search                                      # Put cursor at end of line when using Down for command history
 
 # TODO(me): Bind C-Left and C-Right as HOME / END
+# '^L' is captured by tmux for navigating between tmux panes
 # bindkey '^[OD' beginning-of-line                                              # Set left arrow as HOME
 # bindkey '^[OC' end-of-line                                                    # Set right arrow as END
 bindkey "[1;5D" beginning-of-line                                             # Set ctrl + left arrow as HOME
