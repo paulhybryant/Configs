@@ -29,8 +29,8 @@ declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -xg HELPDIR="$BREWHOME/share/zsh/help"
 declare -xg EDITOR='vim'
 declare -xg GREP_OPTIONS='--color=auto'
-declare -xg LESS='--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
-  `--no-init --raw-control-chars'
+declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
+  `--no-init --raw-control-chars"
 declare -xg PAGER='most'
 # export PAGER=vimpager
 declare -xg MANPAGER="$PAGER"
@@ -92,7 +92,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
     # 'function' 'bg=blue'
   pmodload "${pmodules[@]}"
   unset pmodules
-  zstyle ":completion:*" show-completer true
+  zstyle ':completion:*' show-completer true
 
   # Alternative 1
   # zstyle ':prezto:load' pmodule ${pmodules}
