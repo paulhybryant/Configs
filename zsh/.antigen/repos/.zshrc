@@ -76,7 +76,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   pmodules=(environment git homebrew helper fasd ssh)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
-    add-zsh-hook zshexit tmux::try-switch
+    add-zsh-hook -Uz zshexit tmux::try-switch
     # trap 'tmux::try-switch' EXIT
   fi
   os::OSX && pmodules+=(osx)
