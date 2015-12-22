@@ -18,5 +18,5 @@ if [[ ${_ssh_os} == "Darwin" ]]; then
   certstatus -ssh_cert_comment 'corp/normal' || \
     (printf "Certificate expired, getting a new one...\n" && zsh::eval 'gcert')
 fi
-printf "SSHing to remote host $@\n"
-zsh::eval "\ssh "$@" -t "SSH_OS=${_ssh_os} SSH_FROM=${_ssh_from} zsh -l""
+printf "SSHing to remote host %s\n" "$*"
+zsh::eval "\ssh $* -t "SSH_OS=${_ssh_os} SSH_FROM=${_ssh_from} zsh -l""
