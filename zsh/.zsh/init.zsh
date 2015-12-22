@@ -142,7 +142,7 @@ elif os::OSX; then
 fi
 
 if (( ${+commands[grc]} )); then
-  alias colorify='command grc -es --colourify=auto'
+  alias colorify='command grc -es --colour=auto'
   alias ps='colorify ps'
   alias netstat='colorify netstat'
   alias ping='colorify ping'

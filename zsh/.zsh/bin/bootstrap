@@ -86,10 +86,10 @@ function bootstrap::main() {
   zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
   zsh::eval "brew install https://raw.githubusercontent.com/moul/`
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
-  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux \
-    the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger \
-    fasd makeself upx brew-rmtree ruby npm git-extras nmap fzf peco \
-    zsh-completions xbindkeys markdown gnu-sed enscript"
+  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux ruby npm \
+    the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger fasd \
+    makeself brew-rmtree git-extras nmap fzf peco grc markdown xbindkeys \
+    zsh-completions gnu-sed enscript"
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim terminatorcli \
