@@ -4,4 +4,11 @@ function prompt_powerline_shell_precmd() {
   export PS1="$(powerline-shell.py --cwd-mode fancy --colorize-hostname --shell zsh --mode patched $? 2> /dev/null)"
 }
 
-add-zsh-hook precmd prompt_powerline_shell_precmd
+declare -xg VIMODE
+function vimode::mode() {
+  VIMODE=${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}
+  zle reset-prompt
+}
+zle -N zle-keymap-select vimode::mode
+zle -N zle-line-init vimode::mode
+add-zsh-hook -Uz precmd prompt_powerline_shell_precmd

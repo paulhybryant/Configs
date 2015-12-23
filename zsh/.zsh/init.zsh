@@ -2,7 +2,7 @@
 
 # Options are not ordered alphabetically, but their order in zsh man page
 # Changing Directories
-setopt AUTOCD                                                                  # Switching directories for lazy people
+setopt AUTOCD                                                                   # Switching directories for lazy people
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_MINUS
@@ -15,7 +15,7 @@ setopt AUTO_MENU                                                                
 setopt AUTO_PARAM_KEYS
 setopt AUTO_PARAM_SLASH
 setopt AUTO_REMOVE_SLASH
-setopt NO_COMPLETE_ALIASES                                                         # Prevent aliases from being internally substituted before completion is attempted
+setopt NO_COMPLETE_ALIASES                                                      # Prevent aliases from being internally substituted before completion is attempted
 setopt COMPLETE_IN_WORD                                                         # Not just at the end
 setopt GLOB_COMPLETE
 setopt LIST_AMBIGUOUS
@@ -73,7 +73,7 @@ setopt PROMPT_SUBST
 
 # Scripts and Functions
 setopt C_BASES
-setopt NO_ERR_RETURN                                                             # Enable this would break completion!
+setopt NO_ERR_RETURN                                                            # Enable this would break completion!
 setopt FUNCTION_ARGZERO
 setopt NO_SOURCE_TRACE
 setopt NO_XTRACE
@@ -107,7 +107,8 @@ esac
 
 if os::LINUX; then
   alias cdtrash='pushd ~/.local/share/Trash/files'
-  alias dpkg-cleanup-config='dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
+  alias dpkg-cleanup-config=\
+    'dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
   alias sysprefs='unity-control-center'
   alias sourcepkg='dpkg -S'
   alias clogout='cinnamon-session-quit --logout'
@@ -205,7 +206,7 @@ bindkey "[1;5C" end-of-line                                                   #
 bindkey -s 'OM' ''                                                          # Let enter in numeric keypad work as newline (return)
 bindkey -r '^S'                                                                 # By default <C-S> is bind to self-insert, which presents vim from getting the combination.
 # bindkey '^R' history-incremental-pattern-search-backward                      # Search history backward incrementally
-# bindkey '\C-R' history-incremental-pattern-search-backward                      # Search history backward incrementally
+# bindkey '\C-R' history-incremental-pattern-search-backward                    # Search history backward incrementally
 # bindkey 'r' history-incremental-pattern-search-backward                     # Search history backward incrementally
 # bindkey -s 'd' ''
 # bindkey -s 'z' ''
@@ -221,17 +222,21 @@ bindkey '\C-p' reverse-menu-complete
 
 declare -xg FZF_DEFAULT_OPTS='-e'
 local _fzf_dir=$(brew --prefix fzf)
-declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
+declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' \
+  -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
+  -o -type f -print \
+  -o -type d -print \
+  -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
 
-[[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && source ${_fzf_dir}/shell/key-bindings.zsh
+[[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && \
+  source ${_fzf_dir}/shell/key-bindings.zsh
 
 add-zsh-hook -Uz precmd tmux::copy-vars
 if [[ -z ${PROFILING+1} ]]; then
   if zstyle -t ":registry:var:tty" registry 'virtual'; then
     prompt powerline-shell
+    # powerline-plus is the native powerline bindings from powerline
+    # powerline is the built-in powerline theme from prezto
     # prompt powerline-plus
   else
     prompt clint
