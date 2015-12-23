@@ -93,7 +93,7 @@ function bootstrap::main() {
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim terminatorcli \
-    bz2file percol butterfly libsass"
+    bz2file percol butterfly libsass neovim"
   if os::LINUX; then
     zsh::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit --with-gtk+ vim"
