@@ -403,10 +403,15 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Lean & mean status/tabline for vim that's light as air
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
+    let g:airline_detect_paste = 1
+    let g:airline_detect_modified = 1
     let g:airline#extensions#nrrwrgn#enabled = 1
-    let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#branch#use_vcscommand = 0
+    let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#show_tab_type = 1
+    let g:airline#extensions#tabline#show_buffers = 1
+    let g:airline#extensions#tabline#show_tabs = 1
+    let g:airline#extensions#tabline#show_tabs_nr = 1
     let g:airline#extensions#tabline#left_sep = ''
     let g:airline#extensions#tabline#left_alt_sep = ''
     let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -419,6 +424,7 @@ if s:vimplugin_priority >= 0
       \ '~/.tmux-statusline-colors.conf'
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#whitespace#enabled = 1
+    let g:airline_powerline_fonts = 1
   endfunction
   " }}}
   NeoBundle 'powerline/powerline', {
