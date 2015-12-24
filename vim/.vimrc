@@ -528,7 +528,28 @@ if s:vimplugin_priority >= 0
     call myutils#InitUndoSwapViews()
   endfunction
   function! s:myutils.hooks.on_post_source(bundle)
-    call myutils#SetupTablineMappings(g:OS)
+    " call myutils#SetupTablineMappings(g:OS)
+    if has('gui_running')
+      silent! nmap <silent> <unique> <M-1> <Plug>AirlineSelectTab1
+      silent! nmap <silent> <unique> <M-2> <Plug>AirlineSelectTab2
+      silent! nmap <silent> <unique> <M-3> <Plug>AirlineSelectTab3
+      silent! nmap <silent> <unique> <M-4> <Plug>AirlineSelectTab4
+      silent! nmap <silent> <unique> <M-5> <Plug>AirlineSelectTab5
+      silent! nmap <silent> <unique> <M-6> <Plug>AirlineSelectTab6
+      silent! nmap <silent> <unique> <M-7> <Plug>AirlineSelectTab7
+      silent! nmap <silent> <unique> <M-8> <Plug>AirlineSelectTab8
+      silent! nmap <silent> <unique> <M-9> <Plug>AirlineSelectTab9
+    else
+      silent! nmap <silent> <unique> 1 <Plug>AirlineSelectTab1
+      silent! nmap <silent> <unique> 2 <Plug>AirlineSelectTab2
+      silent! nmap <silent> <unique> 3 <Plug>AirlineSelectTab3
+      silent! nmap <silent> <unique> 4 <Plug>AirlineSelectTab4
+      silent! nmap <silent> <unique> 5 <Plug>AirlineSelectTab5
+      silent! nmap <silent> <unique> 6 <Plug>AirlineSelectTab6
+      silent! nmap <silent> <unique> 7 <Plug>AirlineSelectTab7
+      silent! nmap <silent> <unique> 8 <Plug>AirlineSelectTab8
+      silent! nmap <silent> <unique> 9 <Plug>AirlineSelectTab9
+    endif
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(
       \ myutils#fsqlf#GetSQLFormatter())
