@@ -220,12 +220,6 @@ endif
 " Priority 0 Plugins {{{1
 if s:vimplugin_priority >= 0
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
-  let s:argwrap = neobundle#get('vim-argwrap')
-  function! s:argwrap.hooks.on_source(bundle)
-    autocmd FileType vim let g:argwrap_tail_comma = 1
-    let g:argwrap_line_prefix = '\ '
-  endfunction
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
@@ -249,6 +243,14 @@ if s:vimplugin_priority >= 0
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
     vnoremap <unique> <CR> <Plug>(scrath-evaluate)
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
+  let s:argwrap = neobundle#get('vim-argwrap')
+  function! s:argwrap.hooks.on_source(bundle)
+    autocmd FileType vim let g:argwrap_tail_comma = 1
+    let g:argwrap_line_prefix = '\ '
   endfunction
   " }}}
   " {{{2
