@@ -43,6 +43,7 @@ function! s:vimsupport.hooks.on_source(bundle)
 endfunction
 " }}}
 NeoBundle 'chrisbra/NrrwRgn'                                                  " Emulate Emacs's narrow feature
+NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'wincent/terminus'                                                  " Enhanced terminal integration (e.g bracketed-paste)
 NeoBundle 'kana/vim-fakeclip'                                                 " Provide pseudo clipboard registers
 NeoBundle 'vim-scripts/SyntaxRange'                                           " Apply syntax to a range in buffer

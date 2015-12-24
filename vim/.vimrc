@@ -405,6 +405,7 @@ if s:vimplugin_priority >= 0
   function! s:airline.hooks.on_source(bundle)
     let g:airline#extensions#nrrwrgn#enabled = 1
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#branch#use_vcscommand = 0
     let g:airline#extensions#tabline#show_tab_type = 1
     let g:airline#extensions#tabline#left_sep = ''
     let g:airline#extensions#tabline#left_alt_sep = ''
