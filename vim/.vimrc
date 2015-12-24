@@ -19,7 +19,9 @@ function! s:OSDetect()
   let l:is_windows =
     \ has('win16') || has('win32') || has('win64') || has('win95')
   let l:is_cygwin = has('win32unix')
-  let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
+  " let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
+    " \ && (has('mac') || has('macunix') || has('gui_macvim'))
+  let l:is_mac = !l:is_windows && !l:is_cygwin
     \ && (has('mac') || has('macunix') || has('gui_macvim'))
   let l:is_linux = l:is_unix && !l:is_mac && !l:is_cygwin
 
