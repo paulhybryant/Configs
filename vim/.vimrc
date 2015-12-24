@@ -429,10 +429,12 @@ if s:vimplugin_priority >= 0
     let g:airline_powerline_fonts = 1
   endfunction
   " }}}
+  " {{{2
   NeoBundle 'powerline/powerline', {
     \ 'disabled' : 1,
     \ 'rtp': 'powerline/bindings/vim/'
-    \ }
+    \ } " Powerline for vim statusline
+  " }}}
   " {{{2
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
