@@ -122,9 +122,7 @@ function bootstrap::main() {
   fi
 
   io::msg 'Bootstrap done!'
-  [[ ${#log} -ge 2 ]] && io::msg "Logs in ${log[2]}"
   io::msg 'Reinitialize zsh...'
-  zsh::eval 'exec zsh'
 }
 
 setopt LOCAL_OPTIONS
@@ -134,7 +132,7 @@ local -a help dryrun unstow stow verbose
 zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
   -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose -log:=log
 
-local _config_dir
+local _config_dir _logfile
 local -a _stow_opts
 _config_dir="${0:A:h}/../../../"
 
@@ -144,15 +142,24 @@ autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${dryrun} ]] && mode::set-dryrun
 [[ -n ${verbose} ]] && setopt localoptions verbose
+if [[ ${#log} -ge 2 ]]; then
+  _logfile=${log[2]}
+else
+  _logfile=$(mktemp)
+fi
 
 zsh::eval "pushd ${_config_dir:a}"
 if [[ -n ${unstow} ]]; then
   _stow_opts+=(-D)
-  bootstrap::stow
+  bootstrap::stow | tee ${_logfile}
+  io::msg "Install log: ${_logfile}"
 elif [[ -n ${stow} ]]; then
-  bootstrap::stow
+  bootstrap::stow | tee ${_logfile}
+  io::msg "Install log: ${_logfile}"
 else
-  bootstrap::main
+  bootstrap::main | tee ${_logfile}
+  io::msg "Install log: ${_logfile}"
+  zsh::eval 'exec zsh'
 fi
 zsh::eval 'popd'
 

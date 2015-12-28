@@ -35,6 +35,8 @@ alias tac='${CMDPREFIX}\tac'
 which ${CMDPREFIX}trash > /dev/null 2>&1 && alias rm='${CMDPREFIX}\trash -v'
 zstyle ":registry:var:prefix-width" registry 10
 
+# Otherwise causes errors in shell started in brew --debug mode
+[[ -d ~/.zsh/lib ]] || return
 autoload -Uz -- add-zsh-hook ~/.zsh/lib/[^_]*(:t)
 
 # Local configurations
