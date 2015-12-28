@@ -791,6 +791,7 @@ endif
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on                                                       " Automatically detect file types.
+syntax on                                                                       " Syntax highlighting
 " }}}
 " Local setup (after) {{{1
 if filereadable(expand('~/.vimrc.local.after'))
@@ -798,7 +799,10 @@ if filereadable(expand('~/.vimrc.local.after'))
 endif
 " }}}
 " Settings {{{1
-syntax on                                                                       " Syntax highlighting
+" Can also use the let syntax to set these options. e.g. let &autoindent = 1
+" let &wrapscan = 0 is the same as set nowrapscan
+" let &l:wrapscan = 0 is the same as setlocal nowrapscan
+" The let syntax is useful for setting option with another option's value.
 set autoindent                                                                  " Indent at the same level of the previous line
 set autoread                                                                    " Automatically load changed files
 set autowrite                                                                   " Automatically write a file when leaving a modified buffer
