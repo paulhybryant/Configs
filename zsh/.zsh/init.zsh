@@ -32,7 +32,7 @@ setopt NO_NOMATCH                                                               
 setopt NO_WARN_CREATE_GLOBAL
 
 # History
-setopt APPEND_HISTORY
+setopt NO_APPEND_HISTORY
 setopt BANG_HIST
 setopt EXTENDED_HISTORY
 setopt HIST_ALLOW_CLOBBER
@@ -46,7 +46,7 @@ setopt HIST_NO_STORE
 setopt HIST_REDUCE_BLANKS                                                       # Remove superfluous blanks from each command line being added to the history list
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY                                                              # When using ! cmds, confirm first
-setopt INC_APPEND_HISTORY
+setopt NO_INC_APPEND_HISTORY
 setopt SHARE_HISTORY                                                            # share command history data
 
 # Input/Output

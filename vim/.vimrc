@@ -229,12 +229,13 @@ if s:vimplugin_priority >= 0
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  " NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
+  " NeoBundle 'Townk/vim-autoclose'                                             " Automatically close brackets, this conflicts with neobundle and messed up the filetypes somehow, investigate why.
   NeoBundle 'xolox/vim-misc'
   NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }
-  NeoBundle 'Townk/vim-autoclose'                                               " Automatically close brackets
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
+  NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion of words in adjacent panes
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
     \ 'on_cmd' : ['ScratchOpen'],
@@ -649,11 +650,6 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Capture Ex command output to buffer
   " }}}
   " {{{2
-  NeoBundle 'wellle/tmux-complete.vim', {
-    \ 'disabled' : g:OS.is_mac,
-    \ }                                                                         " Insert mode completion of words in adjacent panes
-  " }}}
-  " {{{2
   NeoBundle 'xolox/vim-notes', {
     \   'on_cmd' : [{'name' : [ 'Note' ],
     \                'complete' : 'customlist,xolox#notes#cmd_complete'}],
@@ -861,6 +857,7 @@ set winminheight=0                                                              
 set wrap                                                                        " Wrap long lines
 set nowrapscan                                                                  " Make regex search wrap to the start of the file
 set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
+set shell=/bin/sh
 
 if &diff
   set nospell                                                                   " No spellcheck
