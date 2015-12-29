@@ -857,7 +857,8 @@ set winminheight=0                                                              
 set wrap                                                                        " Wrap long lines
 set nowrapscan                                                                  " Make regex search wrap to the start of the file
 set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
-set shell=/bin/sh
+" let &shellcmdflag = '-f ' . &shellcmdflag                                     " For zsh to not load any RC file
+" set shell=/bin/sh                                                             " Sometimes shell can cause vim system command to be slow
 
 if &diff
   set nospell                                                                   " No spellcheck
