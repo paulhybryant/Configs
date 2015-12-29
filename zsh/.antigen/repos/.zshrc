@@ -21,6 +21,18 @@ fi
 path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   $BREWHOME/opt/go/libexec/bin $path)
 
+declare -U fpath manpath
+manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
+declare -U -T INFOPATH infopath
+infopath=($BREWHOME/share/info $infopath)
+brew list go > /dev/null 2>&1 && declare -xg GOPATH="$(brew --prefix go)"
+brew list gnu-sed > /dev/null 2>&1 && \
+  manpath=($(brew --prefix gnu-sed)/libexec/gnuman $manpath)
+
+fpath=($BREWHOME/share/zsh-completions $BREWHOME/share/zsh/site-functions \
+  ~/.zsh/lib $fpath)
+autoload -Uz -- add-zsh-hook ~/.zsh/lib/[^_]*(:t)
+
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
