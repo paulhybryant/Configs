@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 # The following is not need as it is already setup by .zshenv
-# fpath+=($HOME/.zsh/lib)
-# autoload -Uz os::LINUX os::OSX osx::xclip ssh::xclip
+fpath+=(~/.zsh/lib)
+autoload -Uz os::LINUX os::OSX osx::xclip ssh::xclip
 
 setopt localoptions err_return
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+fpath+=(~/.zsh/lib)
+autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
+
 function muxcfg::new-workdir-cmd() {
   if [[ -d ~/.google ]]; then
     printf "muxcfg::git5wrapper\n"

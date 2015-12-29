@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+fpath+=(~/.zsh/lib)
+autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
+
 function bootstrap::usage() {
   cat <<EOF
 Usage: bootstrap [arguments]

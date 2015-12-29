@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+fpath+=(~/.zsh/lib)
+autoload -Uz x::get-active-window-process-name
+
 setopt localoptions err_return
 
 function send-notification() {
