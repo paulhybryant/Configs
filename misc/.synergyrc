@@ -1,5 +1,6 @@
 section: screens
 	GMAC:
+		ctrl = meta
 		alt = meta
 		halfDuplexCapsLock = false
 		halfDuplexNumLock = false

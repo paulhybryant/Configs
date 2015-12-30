@@ -229,8 +229,6 @@ if s:vimplugin_priority >= 0
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundle 'spf13/vim-autoclose'                                               " Automatically close brackets
-  " NeoBundle 'Townk/vim-autoclose'                                             " Automatically close brackets, this conflicts with neobundle and messed up the filetypes somehow, investigate why.
   NeoBundle 'xolox/vim-misc'
   NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
@@ -509,6 +507,11 @@ if s:vimplugin_priority >= 0
     let g:strip_whitespace_on_save = 1
     nnoremap <unique> <leader>sw :ToggleStripWhitespaceOnSave<CR>
   endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'paulhybryant/vim-autoclose', {
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Automatically close brackets
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/file-line', {

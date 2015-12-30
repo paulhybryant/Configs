@@ -8,10 +8,11 @@ Open files with vim in a single vim instance in one tmux window.
 @return NULL
 =cut
 
+zparseopts -D -K -M -E -- s=singleton -singleton=singleton
+
 local -a _servers_list
 local _server_name
-if [[ -z "$TMUX" ]]; then
-    io::vlog 1 "Not in tmux, invoking vim without server name."
+if [[ (-z "$TMUX") || -z "${singleton}" ]]; then
     \vim "$@"
 else
   _servers_list=($(\vim --serverlist))
