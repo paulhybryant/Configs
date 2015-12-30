@@ -16,6 +16,7 @@ for dir in */; do
       io::msg "Pulling ${dir}"
       git pull --recurse-submodules
       if [[ $(git remote | wc -l) -gt 1 ]]; then
+        io::msg "Checkinging upstream"
         git fetch upstream
         git merge upstream/master
       fi

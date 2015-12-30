@@ -2,5 +2,6 @@
 
 setopt localoptions err_return
 
-: > dconf.conf
-dconf dump /org/cinnamon/desktop/keybindings/wm/ >> dconf.conf
+local _pwd="${0:A:h}"
+
+dconf dump /org/cinnamon/desktop/keybindings/wm/ > "${_pwd}/dconf.conf"

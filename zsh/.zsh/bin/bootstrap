@@ -17,6 +17,7 @@ function bootstrap::stow() {
   for module in misc tmux vim zsh; do
     [[ -d ${module} ]] && zsh::eval "stow -v ${_stow_opts} ${module} -t ~"
   done
+  os::LINUX && [[ -d linux ]] && zsh::eval "stow -v ${_stow_opts} linux -t ~"
   os::OSX && [[ -d osx ]] && zsh::eval "stow -v ${_stow_opts} osx -t ~"
 }
 function bootstrap::main() {
@@ -40,6 +41,9 @@ function bootstrap::main() {
     terminator kupfer"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
+  # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
+  # Update altwin of the system if needed, and then reload the xkb cache with
+  # `sudo dpkg-reconfigure xkb-data`
 
   if mode::dryrun || [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
