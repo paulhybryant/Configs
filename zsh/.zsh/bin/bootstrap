@@ -82,9 +82,9 @@ function bootstrap::main() {
   bootstrap::stow
   zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
   if os::LINUX; then
-    zsh::eval 'rm ~/.ssh/assh.d/gmac.yml'
+    zsh::eval 'command rm ~/.ssh/assh.d/gmac.yml'
   else
-    zsh::eval 'rm ~/.ssh/assh.d/yuhuang.bej.yml'
+    zsh::eval 'command rm ~/.ssh/assh.d/yuhuang.bej.yml'
   fi
   pushd ~/.ssh/
   zsh::eval "assh build > config"
