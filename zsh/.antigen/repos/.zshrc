@@ -64,6 +64,10 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
+if [[ -f ~/.zshrc.local.before ]]; then
+  source ~/.zshrc.local.before
+fi
+
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
@@ -85,7 +89,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
   # TODO: Make syntax-highlighting work
-  pmodules=(environment completion git homebrew helper fasd ssh)
+  pmodules=(environment git homebrew helper fasd ssh)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
     add-zsh-hook -Uz zshexit tmux::try-switch
@@ -143,8 +147,8 @@ declare -xg HIST_STAMPS='yyyy-mm-dd'
 # zstyle ':prezto:module:git:info:dirty' format ''
 
 # Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
+if [[ -f ~/.zshrc.local.after ]]; then
+  source ~/.zshrc.local.after
 fi
 
 compdef _ta tmux::attach
