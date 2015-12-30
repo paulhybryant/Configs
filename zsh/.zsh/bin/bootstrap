@@ -37,7 +37,9 @@ function bootstrap::main() {
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev \
-    terminator"
+    terminator kupfer"
+  # For xkb-data, symbol altwin need to be patched to fix the error where win
+  # key is not correctly mapped, if the xkb-data version is too old.
 
   if mode::dryrun || [[ ! -d "${BREWHOME}" ]]; then
     io::msg "Cloning ${BREWVERSION}..."
@@ -57,6 +59,16 @@ function bootstrap::main() {
   zsh::eval 'brew tap beeftornado/rmtree'
   zsh::eval 'brew tap peco/peco'
 
+  # Install neobundle before stow so it won
+  io::msg 'Installing NeoBundle...'
+  if mode::dryrun || [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
+    # Another way to wrap long string is to use variable v, e.g.
+    # v='str1'; v+='str2'; cmd $v
+    zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/`
+      `neobundle.vim/master/bin/install.sh)"
+    zsh::eval '~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes'
+  fi
+
   zsh::eval 'brew install coreutils stow findutils'
   io::msg 'Creating symlinks with stow...'
   zsh::eval 'mkdir -p ~/.antigen/repos/'
@@ -69,15 +81,14 @@ function bootstrap::main() {
   zsh::eval 'mkdir -p ~/.vim/bundle'
   bootstrap::stow
   zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
-
-  io::msg 'Installing NeoBundle...'
-  if mode::dryrun || [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
-    # Another way to wrap long string is to use variable v, e.g.
-    # v='str1'; v+='str2'; cmd $v
-    zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/`
-      `neobundle.vim/master/bin/install.sh)"
-    zsh::eval '~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes'
+  if os::LINUX; then
+    zsh::eval 'rm ~/.ssh/assh.d/gmac.yml'
+  else
+    zsh::eval 'rm ~/.ssh/assh.d/yuhuang.bej.yml'
   fi
+  pushd ~/.ssh/
+  zsh::eval "assh build > config"
+  popd
 
   io::msg 'Installing softwares...'
   if os::LINUX; then
@@ -87,21 +98,21 @@ function bootstrap::main() {
   zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
   zsh::eval "brew install https://raw.githubusercontent.com/moul/`
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
-  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux ruby npm \
+  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger fasd \
-    makeself brew-rmtree git-extras nmap fzf peco grc markdown xbindkeys \
-    zsh-completions gnu-sed enscript"
+    makeself brew-rmtree git-extras fzf peco grc markdown xbindkeys \
+    zsh-completions gnu-sed "
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew install --HEAD vimdoc vroom'
-  zsh::eval "pip install --upgrade powerline-status neovim terminatorcli \
-    bz2file percol butterfly libsass neovim"
+  zsh::eval "pip install --upgrade powerline-status neovim \
+    bz2file percol butterfly"
   if os::LINUX; then
-    zsh::eval "brew install --disable-nls --override-system-vi \
-      --with-client-server --with-lua --with-luajit --with-gtk+ vim"
+    # zsh::eval "brew install --disable-nls --override-system-vi \
+      # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
     zsh::eval 'brew install --HEAD trash-cli'
   fi
   zsh::eval 'brew gem install tmuxinator'
-  zsh::eval 'brew gem install automux'
+  # zsh::eval 'brew gem install automux'
   zsh::eval "http_proxy='' https_proxy='' \
     npm install -g urchin npm-update-outdated shelljs js-beautify"
 
