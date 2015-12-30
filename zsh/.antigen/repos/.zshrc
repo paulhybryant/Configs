@@ -85,7 +85,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
     # homebrew prompt completion helper)
   # TODO: Make syntax-highlighting work
-  pmodules=(environment git homebrew helper fasd ssh)
+  pmodules=(environment completion git homebrew helper fasd ssh)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
     add-zsh-hook -Uz zshexit tmux::try-switch
