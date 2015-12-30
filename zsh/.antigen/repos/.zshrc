@@ -68,6 +68,12 @@ if [[ -f ~/.zshrc.local.before ]]; then
   source ~/.zshrc.local.before
 fi
 
+# Defaults to file completion
+# Adding _files after fasd completer doesn't work, so this has to be put before
+# loading prezto
+zstyle -a ':completion:*' completer _cur_completers
+zstyle ':completion:*' completer $_cur_completers _complete _files
+
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
 
