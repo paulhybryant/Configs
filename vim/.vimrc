@@ -379,7 +379,9 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'airblade/vim-gitgutter'                                            " Show the sign at changes from last git commit
+  NeoBundle 'airblade/vim-gitgutter', {
+    \ 'disabled' : &diff,
+    \ }                                                                         " Show sign at changes from last commit
   let s:gitgutter = neobundle#get('vim-gitgutter')
   function! s:gitgutter.hooks.on_source(bundle)
     let g:gitgutter_highlight_lines = 1
