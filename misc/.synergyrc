@@ -5,14 +5,14 @@ section: screens
 		halfDuplexNumLock = false
 		halfDuplexScrollLock = false
 		xtestIsXineramaUnaware = false
-		switchCorners = none 
+		switchCorners = none
 		switchCornerSize = 0
-	yuhuang:
+	yuhuang.bej.corp.google.com:
 		halfDuplexCapsLock = false
 		halfDuplexNumLock = false
 		halfDuplexScrollLock = false
 		xtestIsXineramaUnaware = false
-		switchCorners = none 
+		switchCorners = none
 		switchCornerSize = 0
 end
 
@@ -21,8 +21,8 @@ end
 
 section: links
 	GMAC:
-		right = yuhuang
-	yuhuang:
+		right = yuhuang.bej.corp.google.com
+	yuhuang.bej.corp.google.com:
 		left = GMAC
 end
 
@@ -30,7 +30,7 @@ section: options
 	relativeMouseMoves = false
 	screenSaverSync = true
 	win32KeepForeground = false
-	switchCorners = none 
+	switchCorners = none
 	switchCornerSize = 0
 end
 
