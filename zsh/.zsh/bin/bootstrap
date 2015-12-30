@@ -90,6 +90,14 @@ function bootstrap::main() {
   zsh::eval "assh build > config"
   popd
 
+  io::msg 'Installing powerline patched fonts'
+  local _pfdir
+  _pfdir="$(mktemp -d)"
+  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir})\""
+  pushd ${_pfdir}
+  zsh::eval "./install.sh"
+  popd
+
   io::msg 'Installing softwares...'
   if os::LINUX; then
     zsh::eval 'brew install python --with-unicode-ucs4'
