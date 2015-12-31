@@ -86,7 +86,6 @@ setopt RC_EXPAND_PARAM
 # Zle
 setopt VI                                                                       # Use vi key bindings in ZSH (bindkey -v)
 
-declare -xg GIT_EDITOR='vim'
 zstyle ":registry:var:tmux-vars" registry \
   "SSH_CLIENT" "SSH_OS" "SSH_AUTH_SOCK" \
   "DISPLAY" "SSH_AGENT_PID" "P4DIFF"

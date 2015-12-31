@@ -8,7 +8,11 @@ setopt localoptions err_return
 
 if [[ -z "$SSH_CLIENT" ]]; then
   if os::LINUX; then
-    xclip "$@"
+    if (( $+commands[xclip] )); then
+      xclip "$@"
+    elif (( $+commands[xsel] )); then
+      xsel --clipboard --input
+    fi
   elif os::OSX; then
     osx::xclip "$@"
   fi

@@ -47,12 +47,13 @@ declare -xg PAGER='most'
 # export PAGER=vimpager
 declare -xg MANPAGER="$PAGER"
 declare -xg TERM='screen-256color'
-declare -xg VISUAL='vim'
+declare -xg VISUAL="$EDITOR"
 declare -xg XDG_CACHE_HOME="$HOME/.cache"
 declare -xg XDG_CONFIG_HOME="$HOME/.config"
 declare -xg XDG_DATA_HOME="$HOME/.local/share"
 declare -xg HISTSIZE=50000
 declare -xg SAVEHIST=60000
+declare -xg GIT_EDITOR="$EDITOR"
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
@@ -91,11 +92,10 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 
   antigen use prezto
   local pmodules
+  # pmodules=(tmux command-not-found completion )
   # Order matters!
-  # pmodules=(environment git ssh tmux command-not-found syntax-highlighting \
-    # homebrew prompt completion helper)
-  # TODO: Make syntax-highlighting work
-  pmodules=(environment git homebrew helper fasd ssh)
+  zstyle ':prezto:module:syntax-highlighting' color yes
+  pmodules=(environment git homebrew helper fasd ssh syntax-highlighting)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
     add-zsh-hook -Uz zshexit tmux::try-switch
