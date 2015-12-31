@@ -111,7 +111,7 @@ function bootstrap::brewinstall() {
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger fasd \
     makeself brew-rmtree git-extras fzf peco grc markdown xbindkeys \
-    zsh-completions gnu-sed "
+    zsh-completions gnu-sed jq"
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew gem install tmuxinator'
   # zsh::eval 'brew gem install automux'

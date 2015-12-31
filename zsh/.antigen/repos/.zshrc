@@ -95,7 +95,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # pmodules=(tmux command-not-found completion )
   # Order matters!
   zstyle ':prezto:module:syntax-highlighting' color yes
-  pmodules=(environment git homebrew helper fasd ssh syntax-highlighting)
+  pmodules=(environment completion git homebrew helper fasd ssh \
+    syntax-highlighting clipboard)
   if [[ -z ${PROFILING+1} ]]; then
     pmodules+=(prompt)
     add-zsh-hook -Uz zshexit tmux::try-switch
