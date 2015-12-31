@@ -16,3 +16,6 @@
 [submodule "misc/.fzf"]
 	path = misc/.fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "zsh/.antigen/repos/.zprezto"]
+	path = zsh/.antigen/repos/.zprezto
+	url = git@github.com:paulhybryant/prezto.git
