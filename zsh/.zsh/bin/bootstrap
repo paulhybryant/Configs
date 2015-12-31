@@ -8,33 +8,30 @@ Arguments:
   -h or --help          Print the usage information
   -n or --dryrun        Dryrun
   -u or --unstow        Revert the stow symlinks
-  -s or --stow          Stow only
+  -s or --stage         Start from this bootstrap stage
   -v or --verbose       Verbose
+  --log                 Write log to this file
+  -y or --yes           Skip confirmation
+  -l or --list          List stages
 EOF
   exit 0
 }
-function bootstrap::stow() {
-  for module in misc tmux vim zsh; do
-    [[ -d ${module} ]] && zsh::eval "stow -v ${_stow_opts} ${module} -t ~"
-  done
-  os::LINUX && [[ -d linux ]] && zsh::eval "stow -v ${_stow_opts} linux -t ~"
-  os::OSX && [[ -d osx ]] && zsh::eval "stow -v ${_stow_opts} osx -t ~"
+function bootstrap::list() {
+  cat <<EOF
+Stages:
+  init          Install OS prerequisites
+  brew          Install brew
+  neobundle     Install neobundle
+  stow          Install / Uninstall symlinks with stow
+  brewinstall   Install softwares with brew
+  misc          Wrap up bootstrap
+EOF
+  exit 0
 }
-function bootstrap::main() {
-  setopt localoptions unset err_return
-
-  if [[ "$OSTYPE" == 'darwin'* ]]; then
-    declare -xg BREWVERSION='homebrew'
-    declare -xg BREWHOME="$HOME/.$BREWVERSION"
-  else
-    declare -xg BREWVERSION='linuxbrew'
-    declare -xg BREWHOME="$HOME/.$BREWVERSION"
-  fi
-  path=($BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
-
-  zsh::eval 'sudo -v'
+function bootstrap::init() {
+  # zsh::eval 'sudo -v'
   io::msg "Installing ${BREWVERSION} dependencies..."
-  os::LINUX && zsh::eval "sudo apt-get install build-essential curl git m4 \
+  os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl git m4 \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
     xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev \
@@ -45,10 +42,21 @@ function bootstrap::main() {
   # Update altwin of the system if needed, and then reload the xkb cache with
   # `sudo dpkg-reconfigure xkb-data`
 
+}
+function bootstrap::brew() {
+  if [[ "$OSTYPE" == 'darwin'* ]]; then
+    declare -xg BREWVERSION='homebrew'
+    declare -xg BREWHOME="$HOME/.$BREWVERSION"
+  else
+    declare -xg BREWVERSION='linuxbrew'
+    declare -xg BREWHOME="$HOME/.$BREWVERSION"
+  fi
+  path=($BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
+
   if mode::dryrun || [[ ! -d "${BREWHOME}" ]]; then
-    io::msg "Cloning ${BREWVERSION}..."
-    zsh::eval "git clone "https://github.com/Homebrew/${BREWVERSION}" \
-      "${BREWHOME}""
+    io::msg "Cloning ${2}..."
+    zsh::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
+      \"${BREWHOME}\""
   fi
 
   # brew tap / search etc sometimes complains about Non-HTTP proxy URI.
@@ -63,48 +71,38 @@ function bootstrap::main() {
   zsh::eval 'brew tap beeftornado/rmtree'
   zsh::eval 'brew tap peco/peco'
 
-  # Install neobundle before stow so it won
+  zsh::eval 'brew install coreutils stow findutils'
+}
+function bootstrap::neobundle() {
+  # Install neobundle before stow so it won't uses the stowed vimrc
   io::msg 'Installing NeoBundle...'
   if mode::dryrun || [[ ! -d ~/.vim/bundle/neobundle.vim ]]; then
     # Another way to wrap long string is to use variable v, e.g.
     # v='str1'; v+='str2'; cmd $v
     zsh::eval "source <(curl -sL https://raw.githubusercontent.com/Shougo/`
       `neobundle.vim/master/bin/install.sh)"
-    zsh::eval '~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim neobundle-vim-recipes'
+    zsh::eval "~/.vim/bundle/neobundle.vim/bin/neoinstall vimproc.vim \
+      neobundle-vim-recipes"
   fi
-
-  zsh::eval 'brew install coreutils stow findutils'
+}
+function bootstrap::stow() {
   io::msg 'Creating symlinks with stow...'
-  zsh::eval 'mkdir -p ~/.antigen/repos/'
-  zsh::eval 'mkdir -p ~/.config/pip/'
-  zsh::eval 'mkdir -p ~/.config/ranger/'
-  zsh::eval 'mkdir -p ~/.config/terminator/'
-  zsh::eval 'mkdir -p ~/.ssh/assh.d'
-  zsh::eval 'mkdir -p ~/.tmux/plugins'
-  zsh::eval 'mkdir -p ~/.tmuxinator'
-  zsh::eval 'mkdir -p ~/.vim/bundle'
-  bootstrap::stow
-  zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
-  if os::LINUX; then
-    zsh::eval 'command rm ~/.ssh/assh.d/gmac.yml'
-  else
-    zsh::eval 'command rm ~/.ssh/assh.d/yuhuang.bej.yml'
-  fi
-  pushd ~/.ssh/
-  zsh::eval "assh build > config"
-  popd
+  zsh::eval "mkdir -p ~/.antigen/repos/ ~/.config/pip/ ~/.config/ranger/ \
+    ~/.config/terminator/ ~/.ssh/assh.d ~/.tmux/plugins ~/.tmuxinator \
+    ~/.vim/bundle"
 
-  io::msg 'Installing powerline patched fonts'
-  local _pfdir
-  _pfdir="$(mktemp -d)"
-  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir})\""
-  pushd ${_pfdir}
-  zsh::eval "./install.sh"
-  popd
-
+  for module in misc tmux vim zsh; do
+    [[ -d ${module} ]] && zsh::eval "stow -v ${_stow_opts} ${module} -t ~"
+  done
+  os::LINUX && [[ -d linux ]] && zsh::eval "stow -v ${_stow_opts} linux -t ~"
+  os::OSX && [[ -d osx ]] && zsh::eval "stow -v ${_stow_opts} osx -t ~"
+}
+function bootstrap::brewinstall() {
   io::msg 'Installing softwares...'
   if os::LINUX; then
     zsh::eval 'brew install python --with-unicode-ucs4'
+  elif os::OSX; then
+    zsh::eval 'brew install python'
   fi
   zsh::eval 'brew install --HEAD paulhybryant/myformulae/powerline-shell'
   zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
@@ -115,6 +113,8 @@ function bootstrap::main() {
     makeself brew-rmtree git-extras fzf peco grc markdown xbindkeys \
     zsh-completions gnu-sed "
   # zsh::eval 'brew install --force pt'
+  zsh::eval 'brew gem install tmuxinator'
+  # zsh::eval 'brew gem install automux'
   zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim \
     bz2file percol butterfly"
@@ -122,14 +122,8 @@ function bootstrap::main() {
     # zsh::eval "brew install --disable-nls --override-system-vi \
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
     # zsh::eval 'brew install --HEAD trash-cli'
-    pip install --upgrade trash-cli
-  fi
-  zsh::eval 'brew gem install tmuxinator'
-  # zsh::eval 'brew gem install automux'
-  zsh::eval "http_proxy='' https_proxy='' \
-    npm install -g urchin npm-update-outdated shelljs js-beautify"
-
-  if os::OSX; then
+    zsh::eval 'pip install --upgrade trash-cli'
+  elif os::OSX; then
     io::msg 'Installing extra stuff for OSX...'
     zsh::eval 'brew tap caskroom/versions'
     zsh::eval "brew install --with-custom-icons --with-lua --with-luajit \
@@ -144,19 +138,84 @@ function bootstrap::main() {
       xquartz git-annex urlview"
     # zsh::eval './osx/.osx/init.zsh'
   fi
+}
+function bootstrap::misc() {
+  zsh::eval "http_proxy='' https_proxy='' \
+    npm install -g urchin npm-update-outdated shelljs js-beautify"
+  zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
+  if os::LINUX; then
+    zsh::eval 'command rm ~/.ssh/assh.d/gmac.yml'
+  else
+    zsh::eval 'command rm ~/.ssh/assh.d/yuhuang.bej.yml'
+  fi
+  pushd ~/.ssh/
+  zsh::eval "assh build > config"
+  popd
 
-  io::msg 'Bootstrap done!'
-  io::msg 'Reinitialize zsh...'
+  io::msg 'Installing powerline patched fonts'
+  local _pfdir
+  _pfdir="$(mktemp -d)"
+  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir})\""
+  zsh::eval "pushd ${_pfdir}"
+  zsh::eval "./install.sh"
+  zsh::eval "popd"
+}
+function bootstrap::main() {
+  setopt localoptions nounset err_return
+
+  local y
+  zparseopts -D -K -M -E -- y=y -log:=log -stage:=stage
+
+  if [[ "${stage[2]}" =~ "[0-9]" ]]; then
+    case "${stage[2]}" in
+      0)
+        io::msg "=== Stage init... ==="
+        bootstrap::init $y
+        ;&
+      1)
+        io::msg "=== Stage brew... ==="
+        bootstrap::brew
+        ;&
+      2)
+        io::msg "=== Stage neobundle... ==="
+        bootstrap::neobundle
+        ;&
+      3)
+        io::msg "=== Stage stow... ==="
+        bootstrap::stow
+        ;&
+      4)
+        io::msg "=== Stage brewinstall... ==="
+        bootstrap::brewinstall
+        ;&
+      5)
+        io::msg "=== Stage misc... ==="
+        bootstrap::misc
+        ;&
+    esac
+
+    io::msg 'Bootstrap done!'
+    io::msg "Install log: ${log[2]}"
+    io::msg 'Reinitialize zsh...'
+    zsh::eval 'exec zsh'
+  else
+    io::msg "=== Stage ${stage[2]}... ==="
+    bootstrap::${stage[2]}
+
+    io::msg "${stage[2]} done!"
+    io::msg "Install log: ${log[2]}"
+  fi
 }
 
 setopt LOCAL_OPTIONS
 setopt localoptions err_return
 
-local -a help dryrun unstow stow verbose
-zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s=stow v=verbose \
-  -help=help -dryrun=dryrun -unstow=unstow -stow=stow -verbose=verbose -log:=log
+local -a help dryrun unstow stow verbose list
+zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s:=stage v=verbose l=list\
+  -help=help -dryrun=dryrun -unstow=unstow -stage:=stage -verbose=verbose \
+  -log:=log -list=list y=yes -yes=yes
 
-local _config_dir _logfile
+local _config_dir _logfile _y
 local -a _stow_opts
 _config_dir="${0:A:h}/../../../"
 
@@ -164,8 +223,10 @@ fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
 autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
+[[ -n ${list} ]] && bootstrap::list
+[[ -n ${yes} ]] && _y='-y'
 [[ -n ${dryrun} ]] && mode::set-dryrun
-[[ -n ${verbose} ]] && setopt localoptions verbose
+[[ -n ${verbose} ]] && mode::set-verbose 1
 if [[ ${#log} -ge 2 ]]; then
   _logfile=${log[2]}
 else
@@ -175,16 +236,13 @@ fi
 zsh::eval "pushd ${_config_dir:a}"
 if [[ -n ${unstow} ]]; then
   _stow_opts+=(-D)
-  bootstrap::stow | tee ${_logfile}
-  io::msg "Install log: ${_logfile}"
-elif [[ -n ${stow} ]]; then
-  bootstrap::stow | tee ${_logfile}
-  io::msg "Install log: ${_logfile}"
-else
-  bootstrap::main | tee ${_logfile}
-  io::msg "Install log: ${_logfile}"
-  zsh::eval 'exec zsh'
 fi
+if [[ -n "${stage}" ]]; then
+  _stage=${stage[2]}
+else
+  _stage=0
+fi
+bootstrap::main "$@" --stage ${_stage} --log ${_logfile} 2>&1 | tee ${_logfile}
 zsh::eval 'popd'
 
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell

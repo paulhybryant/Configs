@@ -9,12 +9,12 @@ Eval the strings, and output logs based on verbose level.
 =cut
 
 setopt localoptions err_return nounset
+local _cmd
+_cmd=$(printf "$*\n" | sed 's/  */ /g')
 if mode::dryrun; then
-  local _cmd
-  _cmd=$(printf "$*\n" | sed 's/  */ /g')
   zstyle -s ":registry:var:prefix-width" registry _width || _width=10
   printf "%-${_width}s ${_cmd}\n" "[Dryrun]"
 else
-  mode::verbose 1 && printf "$*\n"
+  mode::verbose 1 && printf "${_cmd}\n"
   eval "$*"
 fi
