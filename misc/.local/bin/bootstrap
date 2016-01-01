@@ -54,7 +54,7 @@ function bootstrap::brew() {
   path=($BREWHOME/bin $BREWHOME/sbin $BREWHOME/opt/go/libexec/bin $path)
 
   if mode::dryrun || [[ ! -d "${BREWHOME}" ]]; then
-    io::msg "Cloning ${2}..."
+    io::msg "Cloning ${BREWVERSION}..."
     zsh::eval "git clone \"https://github.com/Homebrew/${BREWVERSION}\" \
       \"${BREWHOME}\""
   fi

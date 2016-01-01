@@ -21,15 +21,6 @@ fi
 # path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   # $BREWHOME/opt/go/libexec/bin $path)
 
-declare -U fpath manpath
-manpath=($BREWHOME/share/man $manpath)
-declare -U -T INFOPATH infopath
-infopath=($BREWHOME/share/info $infopath)
-brew list go > /dev/null 2>&1 && declare -xg GOPATH="$(brew --prefix go)"
-brew list gnu-sed > /dev/null 2>&1 && \
-  manpath=($(brew --prefix gnu-sed)/libexec/gnuman $manpath)
-fpath=($BREWHOME/share/zsh-completions $fpath)
-
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
 # If it is really need for program foo, create an alias like this
@@ -59,10 +50,6 @@ stty start undef
 # stty eof ''
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
-
-if [[ -f ~/.zshrc.local.before ]]; then
-  source ~/.zshrc.local.before
-fi
 
 if [[ -d ~/.antigen/repos/antigen ]]; then
   source ~/.antigen/repos/antigen/antigen.zsh
@@ -114,8 +101,8 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
 fi
 
 # Local configurations
-if [[ -f ~/.zshrc.local.after ]]; then
-  source ~/.zshrc.local.after
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
 fi
 
 if [[ -n ${PROFILING+1} ]]; then

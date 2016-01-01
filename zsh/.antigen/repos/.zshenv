@@ -29,6 +29,7 @@ else
   alias rm='command rm -v'
 fi
 zstyle ":registry:var:prefix-width" registry 10
+declare -U fpath manpath
 
 # Local configurations
 if [[ -f ~/.zshenv.local ]]; then
