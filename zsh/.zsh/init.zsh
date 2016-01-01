@@ -31,24 +31,6 @@ setopt MARK_DIRS
 setopt NO_NOMATCH                                                               # pass through '*' if globbing fails
 setopt NO_WARN_CREATE_GLOBAL
 
-# History
-setopt NO_APPEND_HISTORY
-setopt BANG_HIST
-setopt EXTENDED_HISTORY
-setopt HIST_ALLOW_CLOBBER
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FCNTL_LOCK
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS                                                     # Do not enter command lines into the history list if they are duplicates of the previous event
-setopt HIST_IGNORE_DUPS                                                         # ignore duplication command history list
-setopt HIST_IGNORE_SPACE                                                        # Remove command lines from the history list when the first character on the line is a space
-setopt HIST_NO_STORE
-setopt HIST_REDUCE_BLANKS                                                       # Remove superfluous blanks from each command line being added to the history list
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY                                                              # When using ! cmds, confirm first
-setopt NO_INC_APPEND_HISTORY
-setopt SHARE_HISTORY                                                            # share command history data
-
 # Input/Output
 setopt ALIASES
 setopt CLOBBER
@@ -86,60 +68,13 @@ setopt RC_EXPAND_PARAM
 # Zle
 setopt VI                                                                       # Use vi key bindings in ZSH (bindkey -v)
 
+autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
 zstyle ":registry:var:tmux-vars" registry \
   "SSH_CLIENT" "SSH_OS" "SSH_AUTH_SOCK" \
   "DISPLAY" "SSH_AGENT_PID" "P4DIFF"
 
-declare -xg LS_COLORS
-[[ -f ~/.dircolors-solarized/dircolors.256dark ]] && \
-  eval "$(dircolors ~/.dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 colors::define
 colors::manpage
-
-case $HIST_STAMPS in
-  'mm/dd/yyyy') alias history='fc -fl 1' ;;
-  'dd.mm.yyyy') alias history='fc -El 1' ;;
-  'yyyy-mm-dd') alias history='fc -il 1' ;;
-  *) alias history='fc -l 1' ;;
-esac
-
-if os::LINUX; then
-  alias cdtrash='pushd ~/.local/share/Trash/files'
-  alias dpkg-cleanup-config=\
-    'dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
-  alias sysprefs='unity-control-center'
-  alias sourcepkg='dpkg -S'
-  alias clogout='cinnamon-session-quit --logout'
-  alias xrebindkeys='killall xbindkeys 2>&1 > /dev/null; xbindkeys'
-  alias xunbindkeys='killall xbindkeys 2>&1 > /dev/null'
-  alias xkbmapclear="setxkbmap -option ''"
-  alias xkbmapreload="~/.xsessionrc"
-  alias resetxkbmap='sudo dpkg-reconfigure xkb-data'
-  case $(tty) in
-    /dev/tty[0-9]*)
-      zstyle ":registry:var:tty" registry 'console'
-      ;;
-    /dev/pts/[0-9]*)
-      zstyle ":registry:var:tty" registry 'virtual'
-      ;;
-  esac
-elif os::OSX; then
-  alias cdtrash='pushd ~/.local/share/Trash/files'
-  alias trash-empty='trash -s'
-  alias trash-list='trash -l'
-  alias notify-send='osx::notify-send'
-  alias updatedb="/usr/libexec/locate.updatedb"
-  case $(tty) in
-    /dev/console)
-      zstyle ":registry:var:tty" registry 'console'
-      ;;
-    /dev/ttys[0-9]*)
-      zstyle ":registry:var:tty" registry 'virtual'
-      ;;
-  esac
-  osx::fix-display
-fi
 
 if (( ${+commands[grc]} )); then
   alias colorify='command grc -es --colour=auto'
@@ -219,19 +154,11 @@ bindkey '\C-p' reverse-menu-complete
 
 # zsh::setup-abbrevs
 
-declare -xg FZF_DEFAULT_OPTS='-e'
-local _fzf_dir=$(brew --prefix fzf)
-declare -xg FZF_CTRL_T_COMMAND="command find -L . \\( -path '*/.git*' \
-  -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
-  -o -type f -print \
-  -o -type d -print \
-  -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
-
-[[ -e ${_fzf_dir}/shell/key-bindings.zsh ]] && \
-  source ${_fzf_dir}/shell/key-bindings.zsh
-
+autoload -Uz add-zsh-hook
 add-zsh-hook -Uz precmd tmux::copy-vars
 if [[ -z ${PROFILING+1} ]]; then
+  add-zsh-hook -Uz zshexit tmux::try-switch
+  # trap 'tmux::try-switch' EXIT
   if zstyle -t ":registry:var:tty" registry 'virtual'; then
     prompt powerline-shell
     # powerline-plus is the native powerline bindings from powerline

@@ -1,4 +1,4 @@
-# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+#compdef tmux::attach
 
 [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
 local -a args
@@ -10,3 +10,5 @@ args=(
     '-t[choose a target session]:target session:_ta-sessions'
 )
 _arguments ${args}
+
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
