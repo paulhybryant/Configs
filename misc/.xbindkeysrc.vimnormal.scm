@@ -27,7 +27,7 @@
 
 ; Use letter
 ; see man xbindkey / man xvkbd to see what text (keysyms) are available.
-(xbindkey '(a) "~/.zsh/bin/vimode insert")
+(xbindkey '(a) "~/.local/bin/vimode insert")
 (xbindkey '(b) "xvkbd -xsendevent -text '\\C\\[Left]'")
 (xbindkey '(c) "")
 (define (bind-d)
@@ -43,7 +43,7 @@
 (xbindkey '(f) "")
 (xbindkey '(g) "")
 (xbindkey '(h) "xvkbd -xsendevent -text '\\[Left]'")
-(xbindkey '(i) "~/.zsh/bin/vimode insert")
+(xbindkey '(i) "~/.local/bin/vimode insert")
 (xbindkey '(j) "xvkbd -xsendevent -text '\\[Down]'")
 (xbindkey '(k) "xvkbd -xsendevent -text '\\[Up]'")
 (xbindkey '(l) "xvkbd -xsendevent -text '\\[Right]'")

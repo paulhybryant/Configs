@@ -13,7 +13,7 @@ else
   declare -xg CMDPREFIX=""
 fi
 
-path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   $BREWHOME/opt/go/libexec/bin $path)
 
 alias date='${CMDPREFIX}\date'

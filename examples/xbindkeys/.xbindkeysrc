@@ -39,7 +39,7 @@
 
 
 # Switch to vimnormal layout with Ctrl + Escape
-"~/.zsh/bin/vimode normal"
+"~/.local/bin/vimode normal"
     m:0x14 + c:66
     Control+Mod2 + Escape
 

@@ -89,7 +89,7 @@ function bootstrap::stow() {
   io::msg 'Creating symlinks with stow...'
   zsh::eval "mkdir -p ~/.antigen/repos/ ~/.config/pip/ ~/.config/ranger/ \
     ~/.config/terminator/ ~/.ssh/assh.d ~/.tmux/plugins ~/.tmuxinator \
-    ~/.vim/bundle"
+    ~/.vim/bundle ~/.local/bin"
 
   for module in misc tmux vim zsh; do
     [[ -d ${module} ]] && zsh::eval "stow -v ${_stow_opts} ${module} -t ~"
@@ -219,8 +219,10 @@ local _config_dir _logfile _y
 local -a _stow_opts
 _config_dir="${0:A:h}/../../../"
 
-fpath=(${_config_dir:a}/zsh/.zsh/lib $fpath)
-autoload -Uz -- ${_config_dir:a}/zsh/.zsh/lib/[^_]*(:t)
+fpath=(\
+  ${_config_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions $fpath)
+autoload -Uz -- \
+  ${_config_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${list} ]] && bootstrap::list

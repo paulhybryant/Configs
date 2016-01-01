@@ -18,17 +18,17 @@ fi
 
 # This seems to be duplicate with the one in .zshenv but it is not! It ensures
 # the homebrew bin directory are in front of the system's bin directory.
-# path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+# path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   # $BREWHOME/opt/go/libexec/bin $path)
 
 declare -U fpath manpath
-manpath=($BREWHOME/share/man ~/.zsh/man $manpath)
+manpath=($BREWHOME/share/man $manpath)
 declare -U -T INFOPATH infopath
 infopath=($BREWHOME/share/info $infopath)
 brew list go > /dev/null 2>&1 && declare -xg GOPATH="$(brew --prefix go)"
 brew list gnu-sed > /dev/null 2>&1 && \
   manpath=($(brew --prefix gnu-sed)/libexec/gnuman $manpath)
-fpath=($BREWHOME/share/zsh-completions ~/.zsh/lib $fpath)
+fpath=($BREWHOME/share/zsh-completions $fpath)
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
