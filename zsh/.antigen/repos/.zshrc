@@ -87,7 +87,7 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   zstyle ':prezto:module:syntax-highlighting' color yes
   zstyle ':completion:*' show-completer true
   pmodules=(environment directory completion git homebrew helper fasd ssh \
-    history syntax-highlighting clipboard linux osx fzf tmux dpkg prompt custom)
+    history syntax-highlighting clipboard linux osx tmux dpkg prompt custom fzf)
   pmodload "${pmodules[@]}"
   unset pmodules
 
