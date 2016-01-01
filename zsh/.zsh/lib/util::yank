@@ -1,9 +1,0 @@
-# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
-
-setopt localoptions err_return
-
-if [[ $# -eq 0 ]]; then
-  xclipper -selection clipboard -i "$@"
-elif [[ $# -eq 1 && -f "$1" ]]; then
-  cat "$1" | xclipper -selection clipboard -i
-fi

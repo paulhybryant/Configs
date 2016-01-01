@@ -85,14 +85,11 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # Order matters!
   zstyle ':prezto:environment:termcap' color yes
   zstyle ':prezto:module:syntax-highlighting' color yes
-  pmodules=(environment completion git homebrew helper fasd ssh \
-    history syntax-highlighting clipboard linux osx fzf)
-  if [[ -z ${PROFILING+1} ]]; then
-    pmodules+=(prompt)
-  fi
+  zstyle ':completion:*' show-completer true
+  pmodules=(environment directory completion git homebrew helper fasd ssh \
+    history syntax-highlighting clipboard linux osx fzf tmux dpkg prompt custom)
   pmodload "${pmodules[@]}"
   unset pmodules
-  zstyle ':completion:*' show-completer true
 
   # Alternative 1
   # zstyle ':prezto:load' pmodule ${pmodules}
@@ -113,8 +110,6 @@ if [[ -d ~/.antigen/repos/antigen ]]; then
   # antigen bundle git directories
   # antigen theme robbyrussell
 
-  antigen bundle https://github.com/paulhybryant/dotfiles.git \
-    --loc=zsh/.zsh/init.zsh
   antigen apply
 fi
 
@@ -125,4 +120,13 @@ fi
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
+else
+  if zstyle -t ":registry:var:tty" registry 'virtual'; then
+    prompt powerline-shell
+    # powerline-plus is the native powerline bindings from powerline
+    # powerline is the built-in powerline theme from prezto
+    # prompt powerline-plus
+  else
+    prompt clint
+  fi
 fi
