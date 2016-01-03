@@ -9,7 +9,6 @@ let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:disabled_bundles = {}
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
-let s:vimplugin_priority = str2nr($VIMPLUGINS)
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
 " Shared plugin configurations {{{1
@@ -148,7 +147,7 @@ if filereadable(expand('~/.vimrc.local.before'))
   execute 'source' expand('~/.vimrc.local.before')
 endif
 " }}}
-" Bundles that might be disabled by local configurations {{{1
+" Essential Plugins {{{1
   " {{{2
   NeoBundle 'google/vim-maktaba', {
     \ 'disabled' : has_key(g:disabled_bundles, 'vim-maktaba'),
@@ -162,63 +161,9 @@ endif
     \ 'force' : 1,
     \ }                                                                         " Plugin for better vim plugin configuration
   " }}}
-  " {{{2
-  NeoBundle 'Valloric/YouCompleteMe', {
-    \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'YouCompleteMe'),
-    \ 'lazy' : 1,
-    \ }                                                                         " Python based multi-language completion engine
-  let s:ycm = neobundle#get('YouCompleteMe')
-  function s:ycm.hooks.on_source(bundle)
-    call g:ConfigureYcm()
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'google/vim-codefmt', {
-    \ 'on_ft' : ['cpp', 'javascript', 'sql'],
-    \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
-    \ 'lazy' : 1,
-    \ }                                                                         " Code formating plugin from google
-  let s:vimcodefmt = neobundle#get('vim-codefmt')
-  function! s:vimcodefmt.hooks.on_source(bundle)
-    Glaive vim-codefmt plugin[mappings]
-    " python formatter: https://github.com/google/yapf
-    " java formatter: https://github.com/google/google-java-format
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'paulhybryant/relatedfiles', {
-    \ 'on_ft' : ['cpp'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
-    \ 'lazy' : 1,
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " Open related files in C++
-  let s:relatedfiles = neobundle#get('relatedfiles')
-  function s:relatedfiles.hooks.on_source(bundle)
-    call g:ConfigureRelatedFiles()
-  endfunction
-  " }}}
-  " ft-python {{{2
-  NeoBundle 'klen/python-mode', {
-    \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
-    \ 'on_ft' : ['python'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Python dev env
-  NeoBundle 'xolox/vim-pyref', {
-    \ 'depends' : ['xolox/vim-misc'],
-    \ 'on_ft' : ['python'],
-    \ 'lazy' : 1,
-    \ }
-  " }}}
   call glaive#Install()
 " }}}
-" Debuging Plugins {{{1
-if s:vimplugin_priority < 0
-endif
-" }}}
-" Priority 0 Plugins {{{1
-if s:vimplugin_priority >= 0
+" Plugins {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
@@ -229,8 +174,8 @@ if s:vimplugin_priority >= 0
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundle 'xolox/vim-misc'
-  NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }
+  NeoBundle 'xolox/vim-misc'                                                    " Utility functions for plugins from xolox
+  NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }                " Reload vim plugin scripts automatically on change
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion of words in adjacent panes
@@ -379,6 +324,17 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'Valloric/YouCompleteMe', {
+    \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'YouCompleteMe'),
+    \ 'lazy' : 1,
+    \ }                                                                         " Python based multi-language completion engine
+  let s:ycm = neobundle#get('YouCompleteMe')
+  function s:ycm.hooks.on_source(bundle)
+    call g:ConfigureYcm()
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'airblade/vim-gitgutter', {
     \ 'disabled' : &diff,
     \ }                                                                         " Show sign at changes from last commit
@@ -455,10 +411,36 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Info help page source for vim-ref
   " }}}
   " {{{2
+  NeoBundle 'paulhybryant/relatedfiles', {
+    \ 'on_ft' : ['cpp'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
+    \ 'lazy' : 1,
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Open related files in C++
+  let s:relatedfiles = neobundle#get('relatedfiles')
+  function s:relatedfiles.hooks.on_source(bundle)
+    call g:ConfigureRelatedFiles()
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'paulhybryant/tmuxline.vim', {
     \ 'gui' : 0,
     \ 'lazy' : 1,
     \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
+  " }}}
+  " {{{2
+  NeoBundle 'google/vim-codefmt', {
+    \ 'on_ft' : ['cpp', 'javascript', 'sql'],
+    \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
+    \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
+    \ 'lazy' : 1,
+    \ }                                                                         " Code formating plugin from google
+  let s:vimcodefmt = neobundle#get('vim-codefmt')
+  function! s:vimcodefmt.hooks.on_source(bundle)
+    Glaive vim-codefmt plugin[mappings]
+    " python formatter: https://github.com/google/yapf
+    " java formatter: https://github.com/google/google-java-format
+  endfunction
   " }}}
   " {{{2
   NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
@@ -469,7 +451,8 @@ if s:vimplugin_priority >= 0
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Align.vba.gz', {
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    \ 'dotfiles/master/blob/vba/Align.vba.gz', {
     \ 'name' : 'Align',
     \ 'frozen' : 1,
     \ 'regular_namne' : 'Align',
@@ -477,7 +460,8 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Alinghing texts based on specific charater etc
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
     \ 'name' : 'Mark',
     \ 'regular_namne' : 'Mark',
     \ 'frozen' : 1,
@@ -703,6 +687,18 @@ if s:vimplugin_priority >= 0
     \ }                                                                         " Fold markdown
   NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
   " }}}
+  " ft-python {{{2
+  NeoBundle 'klen/python-mode', {
+    \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Python dev env
+  NeoBundle 'xolox/vim-pyref', {
+    \ 'depends' : ['xolox/vim-misc'],
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }
+  " }}}
   " ft-ruby {{{2
   NeoBundle 'vim-ruby/vim-ruby', {
     \ 'on_ft' : ['ruby'],
@@ -751,7 +747,8 @@ if s:vimplugin_priority >= 0
   function! s:reload_script.hooks.on_source(bundle)
     nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
   endfunction
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/vba/Decho.vba.gz', {
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/'.
+    \ 'dotfiles/master/blob/vba/Decho.vba.gz', {
     \ 'on_cmd' : ['Decho'],
     \ 'on_ft' : ['vim'],
     \ 'lazy' : 1,
@@ -770,6 +767,12 @@ if s:vimplugin_priority >= 0
     \ 'on_ft' : ['vroom'],
     \ 'lazy' : 1,
     \ }                                                                         " Filetype plugin for vroom
+  NeoBundle 'syngan/vim-vimlint', {
+        \ 'on_cmd' : ['VimLint'],
+        \ 'on_ft' : ['vim'],
+        \ 'depends' : 'ynkdir/vim-vimlparser',
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax checker for vimscript
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
@@ -786,7 +789,6 @@ if s:vimplugin_priority >= 0
     endif
   endfunction
   " }}}
-endif
 " }}}
 " Wrap up bundle setup {{{1
 call neobundle#end()
