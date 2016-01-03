@@ -505,24 +505,24 @@ endif
     \ }                                                                         " Open files and go to specific line and column (original user not active)
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/myutils', {
+  NeoBundle 'paulhybryant/vimutils', {
     \ 'depends' : filter(
     \   ['vim-glaive', 'vim-maktaba'],
     \   '!has_key(g:disabled_bundles, v:val)'),
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " My vim customization (utility functions, syntax etc)
-  let s:myutils = neobundle#get('myutils')
-  function! s:myutils.hooks.on_source(bundle)
+  let s:vimutils = neobundle#get('vimutils')
+  function! s:vimutils.hooks.on_source(bundle)
     " Close vim when the only buffer left is a special type of buffer
-    Glaive myutils plugin[mappings]
+    Glaive vimutils plugin[mappings]
       \ bufclose_skip_types=`[
       \  'gistls', 'nerdtree', 'indicator',
       \  'folddigest', 'capture' ]`
     execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
-    call myutils#InitUndoSwapViews()
+    call vimutils#InitUndoSwapViews()
   endfunction
-  function! s:myutils.hooks.on_post_source(bundle)
-    " call myutils#SetupTablineMappings(g:OS)
+  function! s:vimutils.hooks.on_post_source(bundle)
+    " call vimutils#SetupTablineMappings(g:OS)
     if has('gui_running')
       silent! nmap <silent> <unique> <M-1> <Plug>AirlineSelectTab1
       silent! nmap <silent> <unique> <M-2> <Plug>AirlineSelectTab2
@@ -546,7 +546,7 @@ endif
     endif
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(
-      \ myutils#fsqlf#GetSQLFormatter())
+      \ vimutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
   " {{{2
@@ -716,10 +716,10 @@ endif
     let g:sqlutil_align_comma = 0
     if (neobundle#is_sourced('vim-codefmt') ||
       \ maktaba#plugin#IsRegistered('codefmt'))
-      \ && neobundle#is_installed('myutils')
+      \ && neobundle#is_installed('vimutils')
       let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
       call l:codefmt_registry.AddExtension(
-        \ myutils#sqlformatter#GetSQLFormatter())
+        \ vimutils#sqlformatter#GetSQLFormatter())
     endif
   endfunction
   NeoBundle 'vim-scripts/SQLComplete.vim', {

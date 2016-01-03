@@ -31,11 +31,11 @@ EOF
 function bootstrap::init() {
   # zsh::eval 'sudo -v'
   io::msg "Installing ${BREWVERSION} dependencies..."
-  os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl git m4 \
+  os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl git \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
-    zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev \
-    terminator kupfer"
+    zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config kupfer \
+    xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev m4 \
+    terminator"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
@@ -111,7 +111,7 @@ function bootstrap::brewinstall() {
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
     the_silver_searcher vimpager zsh netcat dos2unix most stdman ranger fasd \
     makeself brew-rmtree git-extras fzf peco grc markdown xbindkeys \
-    zsh-completions gnu-sed jq"
+    zsh-completions gnu-sed jq shellcheck"
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew gem install tmuxinator'
   # zsh::eval 'brew gem install automux'
@@ -215,14 +215,14 @@ zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s:=stage v=verbose l=list\
   -help=help -dryrun=dryrun -unstow=unstow -stage:=stage -verbose=verbose \
   -log:=log -list=list y=yes -yes=yes
 
-local _config_dir _logfile _y
+local _cfg_dir _logfile _y
 local -a _stow_opts
-_config_dir="${0:A:h}/../../../"
+_cfg_dir="${0:A:h}/../../../"
 
 fpath=(\
-  ${_config_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions $fpath)
+  ${_cfg_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions $fpath)
 autoload -Uz -- \
-  ${_config_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions/[^_]*(:t)
+  ${_cfg_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${list} ]] && bootstrap::list
@@ -235,7 +235,7 @@ else
   _logfile=$(mktemp)
 fi
 
-zsh::eval "pushd ${_config_dir:a}"
+zsh::eval "pushd ${_cfg_dir:a}"
 if [[ -n ${unstow} ]]; then
   _stow_opts+=(-D)
 fi
