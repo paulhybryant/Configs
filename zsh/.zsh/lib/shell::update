@@ -1,7 +1,0 @@
-# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
-
-setopt localoptions err_return nounset
-
-zsh::eval "antigen update"
-zsh::eval "brew update && brew upgrade \$(brew outdated)"
-zsh::eval "pip list --outdated 2> /dev/null | awk '{print \$1}' | xargs -n 1 pip install -U"

@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-fpath+=(~/.zsh/lib)
-autoload -Uz -- ~/.zsh/lib/[^_]*(:t)
-
 function muxcfg::new-workdir-cmd() {
   if [[ -d ~/.google ]]; then
     printf "muxcfg::git5wrapper\n"
@@ -138,9 +135,9 @@ function muxcfg::getcwd() {
 }
 
 local _config_dir
-_config_dir="${0:A:h}/../../"
-fpath=(${_config_dir:a}/.zsh/lib $fpath)
-autoload -Uz -- ${_config_dir:a}/.zsh/lib/[^_]*(:t)
+_config_dir="${0:A:h}/../../../zsh/.antigen/repos/.zprezto/modules/custom/functions"
+fpath=(${_config_dir:a} $fpath)
+autoload -Uz -- ${_config_dir:a}/[^_]*(:t)
 
 setopt LOCAL_OPTIONS
 MUXCFGDIR="$HOME/.tmuxinator"

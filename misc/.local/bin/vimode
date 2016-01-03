@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-fpath+=(~/.zsh/lib)
-autoload -Uz x::get-active-window-process-name
-
 setopt localoptions err_return
 
 function send-notification() {
@@ -33,8 +30,10 @@ function insert() {
   send-notification 'insert'
 }
 
-fpath+=(~/.zsh/lib)
-autoload -Uz x::get-active-window-process-name
+local _config_dir
+_config_dir="${0:A:h}/../../../zsh/.antigen/repos/.zprezto/modules/custom/functions"
+fpath=(${_config_dir:a} $fpath)
+autoload -Uz -- ${_config_dir:a}/[^_]*(:t)
 
 if [[ $# -gt 1 ]]; then
   printf 'Usage: vimode [mode]\n'

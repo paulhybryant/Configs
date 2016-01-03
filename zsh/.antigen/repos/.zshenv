@@ -13,7 +13,7 @@ else
   declare -xg CMDPREFIX=""
 fi
 
-path=(~/.zsh/bin ~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   $BREWHOME/opt/go/libexec/bin $path)
 
 alias date='${CMDPREFIX}\date'
@@ -23,8 +23,13 @@ alias mktemp='${CMDPREFIX}\mktemp'
 alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
-which ${CMDPREFIX}trash > /dev/null 2>&1 && alias rm='${CMDPREFIX}\trash -v'
+if which ${CMDPREFIX}trash > /dev/null 2>&1; then
+  alias rm='${CMDPREFIX}\trash -v'
+else
+  alias rm='command rm -v'
+fi
 zstyle ":registry:var:prefix-width" registry 10
+declare -U fpath manpath
 
 # Local configurations
 if [[ -f ~/.zshenv.local ]]; then

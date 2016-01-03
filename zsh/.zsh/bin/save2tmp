@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-
-fpath+=(~/.zsh/lib)
-autoload -Uz file::save2tmp
-
-file::save2tmp "$@"

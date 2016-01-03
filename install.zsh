@@ -26,13 +26,13 @@ local url="$(-antigen-resolve-bundle-url 'https://github.com/paulhybryant/dotfil
 -antigen-ensure-repo "${url}"
 pushd $(-antigen-get-clone-dir "${url}")
 git remote set-url origin 'git@github.com:paulhybryant/dotfiles.git'
-./zsh/.zsh/bin/bootstrap --dryrun | tee -a "${log}"
+./misc/.local/bin/bootstrap --dryrun | tee -a "${log}"
 printf 'Continue [y/n]? '
 read -r reply
 case $reply in
   Y*|y*)
     printf 'Bootstraping...\n' | tee -a "${log}"
-    ./zsh/.zsh/bin/bootstrap --log "${log}" | tee -a "${log}"
+    ./misc/.local/bin/bootstrap --log "${log}" | tee -a "${log}"
     ;;
   *)
     exit 1

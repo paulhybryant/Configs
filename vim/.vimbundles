@@ -127,6 +127,7 @@ NeoBundle 'ujihisa/unite-locate', {
 NeoBundle 'vasconcelloslf/vim-foldfocus'                                      " Edit and read fold in a separate buffer
 NeoBundle 'vim-scripts/ExtractMatches'                                        " Yank matches from range into a register
 NeoBundle 'vitalk/vim-onoff'                                                  " Mapping for toggle vim option on and off
+NeoBundle 'sjl/vitality.vim'
 NeoBundle 'Rykka/riv.vim'
 NeoBundle 'Rykka/InstantRst'
 " {{{1

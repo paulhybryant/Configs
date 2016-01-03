@@ -1,6 +1,3 @@
-[submodule "misc/.dircolors-solarized"]
-	path = misc/.dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
@@ -16,3 +13,6 @@
 [submodule "misc/.fzf"]
 	path = misc/.fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "zsh/.antigen/repos/.zprezto"]
+	path = zsh/.antigen/repos/.zprezto
+	url = git@github.com:paulhybryant/prezto.git
