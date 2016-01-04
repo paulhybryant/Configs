@@ -71,10 +71,20 @@ local pmodules
 zstyle ':prezto:environment:termcap' color yes
 zstyle ':prezto:module:syntax-highlighting' color yes
 zstyle ':completion:*' show-completer true
+zstyle ':prezto:module:prompt' theme 'powerline-shell'
 pmodules=(environment directory completion git homebrew helper fasd ssh \
-  history syntax-highlighting clipboard linux osx tmux dpkg prompt custom fzf)
+  history syntax-highlighting clipboard linux osx tmux dpkg fzf prompt custom)
 pmodload "${pmodules[@]}"
 unset pmodules
+
+if zstyle -t ":registry:var:tty" registry 'virtual'; then
+  prompt powerline-shell
+  # powerline-plus is the native powerline bindings from powerline
+  # powerline is the built-in powerline theme from prezto
+  # prompt powerline-plus
+else
+  prompt clint
+fi
 
 # Alternative 1
 # zstyle ':prezto:load' pmodule ${pmodules}
@@ -104,13 +114,4 @@ antigen apply
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
-else
-  if zstyle -t ":registry:var:tty" registry 'virtual'; then
-    prompt powerline-shell
-    # powerline-plus is the native powerline bindings from powerline
-    # powerline is the built-in powerline theme from prezto
-    # prompt powerline-plus
-  else
-    prompt clint
-  fi
 fi
