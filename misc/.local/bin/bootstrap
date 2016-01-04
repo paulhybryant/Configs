@@ -35,7 +35,7 @@ function bootstrap::init() {
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config kupfer \
     xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev m4 \
-    terminator"
+    terminator haskell-platform"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
@@ -111,7 +111,7 @@ function bootstrap::brewinstall() {
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
     the_silver_searcher zsh netcat dos2unix most stdman ranger fasd \
     brew-rmtree git-extras fzf peco grc markdown \
-    zsh-completions gnu-sed jq shellcheck"
+    zsh-completions gnu-sed jq"
   # xbindkeys makeself vimpager
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew gem install tmuxinator'
@@ -124,19 +124,18 @@ function bootstrap::brewinstall() {
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
     # zsh::eval 'brew install --HEAD trash-cli'
     zsh::eval 'pip install --upgrade trash-cli'
+    zsh::eval 'cabal update && cabal install shellcheck --force-reinstalls'
   elif os::OSX; then
     io::msg 'Installing extra stuff for OSX...'
     zsh::eval 'brew tap caskroom/versions'
     zsh::eval "brew install --with-custom-icons --with-lua --with-luajit \
       --with-override-system-vim macvim"
     zsh::eval 'brew linkapps macvim'
-    zsh::eval "brew install brew-cask clipper osxutils lsof \
-      paulhybryant/myformulae/gnu-getopt yank textql"
     zsh::eval "brew install reattach-to-user-namespace \
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
-    zsh::eval 'brew install gnu-trash'
-    zsh::eval "brew cask install karabiner seil spectacle \
-      xquartz git-annex urlview"
+    zsh::eval "brew install brew-cask clipper osxutils lsof gnu-trash \
+      paulhybryant/myformulae/gnu-getopt yank textql shellcheck"
+    zsh::eval "brew cask install karabiner seil spectacle xquartz urlview"
     # zsh::eval './osx/.osx/init.zsh'
   fi
 }
