@@ -31,7 +31,7 @@ EOF
 function bootstrap::init() {
   # zsh::eval 'sudo -v'
   io::msg "Installing ${BREWVERSION} dependencies..."
-  os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl git \
+  os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config kupfer \
     xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev m4 \

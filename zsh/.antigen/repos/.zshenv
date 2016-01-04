@@ -14,7 +14,7 @@ else
 fi
 
 path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
-  $BREWHOME/opt/go/libexec/bin $path)
+  $BREWHOME/opt/go/libexec/bin ~/.cabal/bin $path)
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'
