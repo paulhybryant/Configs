@@ -8,7 +8,7 @@
 [diff]
   tool = vimdiff
 
-  # Detect copies as well as renames
+  ; Detect copies as well as renames
   renames = copies
 
 [difftool]
@@ -23,56 +23,57 @@
 
   ignored = ls-files --others -i --exclude-standard
 
-  # Pull in remote changes for the current repository and all its submodules
+  ; Pull in remote changes for the current repository and all its submodules
   ; p = !"git pull --recurse-submodules; git submodule update --remote --merge"
-  p = !"git submodule update --init --recursive; git pull --recurse-submodules"
+  p = !"git submodule update --init --recursive; git pull --recurse-submodules --remote"
 
   pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach git pull"
 
-  # Push changes for submodules also
-  pu = push --recurse-submodules=on-demand
+  ; Push changes for submodules also
+  ; pu = push --recurse-submodules=on-demand
 
-  # Pull from upstream and merge
+  ; Pull from upstream and merge
   mu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
 
-  # View abbreviated SHA, description, and history graph of the latest 20 commits
+  ; View abbreviated SHA, description, and history graph of the latest 20 commits
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-  # View the current working tree status using the short format
+  ; View the current working tree status using the short format
   s = status -s
 
-  # Show the diff between the latest commit and the current state
+  ; Show the diff between the latest commit and the current state
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
-  # Clone a repository including all submodules
+  ; Clone a repository including all submodules
   cr = clone --recursive
 
-  # Checkout
+  ; Checkout
   co = checkout
 
-  # Commit all changes
+  ; Commit all changes
   ca = !"git add -A && git commit -av"
 
-  # Show verbose output about tags, branches or remotes
+  ; Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
   remotes = remote -v
 
-  # Interactive rebase with the given number of latest commits
+  ; Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
-  # Find commits by commit message
+  ; Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-  # diff --name-only
+  ; diff --name-only
   list = ! git diff --name-only | sed -e 's@^google3/@@'
 
-  # dirty
+  ; dirty
   dirty = "!gitdirty() { if [[ -d '.git' && -n $(git status --porcelain) ]]; then exit 1; fi }; gitdirty"
 
-  # Creates branch and checkout
-  b = checkout -b
+  ; Creates branch and checkout
+  cb = checkout -b
 
+  ; add a remote named 'upstream'
   rau = remote add upstream
 
 [core]

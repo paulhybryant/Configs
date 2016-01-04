@@ -81,3 +81,5 @@
   @ Make command-1 work in OSX (it is mapped to ctrl-1 now) (DONE 2015-11-02 17:18)
   @ Map win+h,i,j,k to arrow keys (DONE 2015-10-29 17:30)
   @ Fix urlview build in linuxbrew
+  @ Ranger configuration
+  @ man terminfo
