@@ -1,5 +1,10 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
+# In OSX, /etc/zprofile will be loaded before this zshrc. The path_helper binary
+# in OSX will reorder the entries in $PATH, causing problems.
+path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+  $BREWHOME/opt/go/libexec/bin $path)
+
 # Use PROFILING='logfile' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
   # set the trace prompt to include seconds, nanoseconds, script name and line
@@ -15,11 +20,6 @@ if [[ -n ${PROFILING+1} ]]; then
   # prompt
   setopt xtrace prompt_subst
 fi
-
-# This seems to be duplicate with the one in .zshenv but it is not! It ensures
-# the homebrew bin directory are in front of the system's bin directory.
-# path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
-  # $BREWHOME/opt/go/libexec/bin $path)
 
 # Don't enable the following line, it will screw up HOME and END key in tmux
 # export TERM=xterm-256color
