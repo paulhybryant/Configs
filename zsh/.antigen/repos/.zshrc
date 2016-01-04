@@ -51,59 +51,56 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
-if [[ -d ~/.antigen/repos/antigen ]]; then
-  source ~/.antigen/repos/antigen/antigen.zsh
+source ~/.antigen/repos/antigen/antigen.zsh
+# zload automatically reload a file containing functions. However, it achieves
+# this using pre_cmd functions, which is too heavy. Ideally should only check
+# the modification time of the file.
+# TODO: Reuse this idea and make it lightweight.
+# antigen bundle mollifier/zload
 
-  # zload automatically reload a file containing functions. However, it achieves
-  # this using pre_cmd functions, which is too heavy. Ideally should only check
-  # the modification time of the file.
-  # TODO: Reuse this idea and make it lightweight.
-  # antigen bundle mollifier/zload
+# Wrapper for peco/percol/fzf
+# antigen bundle mollifier/anyframe
 
-  # Wrapper for peco/percol/fzf
-  # antigen bundle mollifier/anyframe
+# antigen bundle mollifier/cd-bookmark
+antigen bundle mollifier/cd-gitroot
 
-  # antigen bundle mollifier/cd-bookmark
-  antigen bundle mollifier/cd-gitroot
+# ZDOTDIR is set here
+antigen use prezto
+local pmodules
+# Order matters!
+zstyle ':prezto:environment:termcap' color yes
+zstyle ':prezto:module:syntax-highlighting' color yes
+zstyle ':completion:*' show-completer true
+pmodules=(environment directory completion git homebrew helper fasd ssh \
+  history syntax-highlighting clipboard linux osx tmux dpkg prompt custom fzf)
+pmodload "${pmodules[@]}"
+unset pmodules
 
-  # ZDOTDIR is set here
-  antigen use prezto
-  local pmodules
-  # Order matters!
-  zstyle ':prezto:environment:termcap' color yes
-  zstyle ':prezto:module:syntax-highlighting' color yes
-  zstyle ':completion:*' show-completer true
-  pmodules=(environment directory completion git homebrew helper fasd ssh \
-    history syntax-highlighting clipboard linux osx tmux dpkg prompt custom fzf)
-  pmodload "${pmodules[@]}"
-  unset pmodules
+# Alternative 1
+# zstyle ':prezto:load' pmodule ${pmodules}
+# zstyle ':prezto:module:editor' key-bindings 'vi'
 
-  # Alternative 1
-  # zstyle ':prezto:load' pmodule ${pmodules}
-  # zstyle ':prezto:module:editor' key-bindings 'vi'
+# Alternative 2
+# for module in ${pmodules}; do
+  # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
+  # antigen bundle sorin-ionescu/prezto modules/${module}
+# done
 
-  # Alternative 2
-  # for module in ${pmodules}; do
-    # antigen bundle sorin-ionescu/prezto --loc=modules/${module}
-    # antigen bundle sorin-ionescu/prezto modules/${module}
-  # done
+# antigen bundle --loc=lib
+# antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
+# antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
+# antigen theme robbyrussell/oh-my-zsh themes/candy
 
-  # antigen bundle --loc=lib
-  # antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
-  # antigen bundle robbyrussell/oh-my-zsh --loc=lib/git.zsh
-  # antigen theme robbyrussell/oh-my-zsh themes/candy
-
-  # antigen use oh-my-zsh
-  # antigen bundle git directories
-  # antigen theme robbyrussell
-
-  antigen apply
-fi
+# antigen use oh-my-zsh
+# antigen bundle git directories
+# antigen theme robbyrussell
 
 # Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
+if [[ -f "$ZDOTDIR/.zshrc.local" ]]; then
+  source "$ZDOTDIR/.zshrc.local"
 fi
+
+antigen apply
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
