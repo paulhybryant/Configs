@@ -425,7 +425,6 @@ endif
   " {{{2
   NeoBundle 'paulhybryant/tmuxline.vim', {
     \ 'gui' : 0,
-    \ 'lazy' : 1,
     \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
   " }}}
   " {{{2
