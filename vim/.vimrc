@@ -381,8 +381,8 @@ endif
     " let g:airline#extensions#taboo#enabled = 1
     let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
     let g:airline#extensions#tmuxline#color_template = 'normal'
-    let g:airline#extensions#tmuxline#snapshot_file =
-      \ '~/.tmux-statusline-colors.conf'
+    " let g:airline#extensions#tmuxline#snapshot_file =
+      " \ '~/.tmux-statusline-colors.conf'
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#whitespace#enabled = 1
     let g:airline_powerline_fonts = 1
@@ -425,7 +425,12 @@ endif
   " {{{2
   NeoBundle 'paulhybryant/tmuxline.vim', {
     \ 'gui' : 0,
+    \ 'lazy' : 1,
     \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
+  " let s:tmuxline = neobundle#get('tmuxline.vim')
+  " function s:tmuxline.hooks.on_post_source(bundle)
+    " Tmuxline airline_tabline
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'google/vim-codefmt', {
