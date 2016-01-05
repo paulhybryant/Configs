@@ -421,7 +421,11 @@ endif
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'google/vim-syncopate'                                              " Makes it easy to copy syntax highlighted code and paste in emails
+  NeoBundle 'google/vim-syncopate', {
+    \ 'depends' : filter(
+    \   ['vim-glaive', 'vim-maktaba'],
+    \   '!has_key(g:disabled_bundles, v:val)'),
+    \ }                                                                         " Makes it easy to copy syntax highlighted code and paste in emails
   let s:vimsyncopate = neobundle#get('vim-syncopate')
   function! s:vimsyncopate.hooks.on_source(bundle)
     Glaive syncopate plugin[mappings] colorscheme=putty
@@ -754,6 +758,9 @@ endif
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
+    \ 'depends' : filter(
+    \   ['vim-glaive', 'vim-maktaba'],
+    \   '!has_key(g:disabled_bundles, v:val)'),
     \ 'on_ft' : ['vtd'],
     \ 'lazy' : 1,
     \ }
