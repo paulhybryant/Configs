@@ -29,7 +29,7 @@
   @ Add vroom tests for all my plugins @p:2
   @ Make vim-argwrap handle vimscript better (DONE 2015-12-19 17:05)
   @ Try to write a vim plugin with python @p:2
-  @ Fix tmux-complete.vim hang in OSX
+  @ Fix tmux-complete.vim hang in OSX (DONE 2016-01-05 12:51)
 
 * tmux related tasks
 = Tmux @p:2 =

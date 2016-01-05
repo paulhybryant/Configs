@@ -62,18 +62,21 @@ source ~/.antigen/repos/antigen/antigen.zsh
 # antigen bundle mollifier/anyframe
 
 # antigen bundle mollifier/cd-bookmark
-antigen bundle mollifier/cd-gitroot
+# antigen bundle mollifier/cd-gitroot
 
 # ZDOTDIR is set here
 antigen use prezto
 local pmodules
-# Order matters!
 zstyle ':prezto:environment:termcap' color yes
 zstyle ':prezto:module:syntax-highlighting' color yes
 zstyle ':completion:*' show-completer true
 zstyle ':prezto:module:prompt' theme 'powerline-shell'
-pmodules=(environment directory completion git homebrew helper fasd ssh \
-  history syntax-highlighting clipboard linux osx tmux dpkg fzf prompt custom)
+zstyle ':prezto:module:editor' key-bindings 'vi'
+# pmodules=(environment directory completion git homebrew helper fasd ssh \
+  # history syntax-highlighting clipboard linux osx tmux dpkg fzf prompt custom)
+# Order matters!
+pmodules=(environment directory editor completion git homebrew helper fasd \
+  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
 pmodload "${pmodules[@]}"
 unset pmodules
 
