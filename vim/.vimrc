@@ -671,10 +671,20 @@ endif
   " }}}
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
-    \ 'disabled' : has_key(g:disabled_bundles, 'python-mode'),
+    \ 'disabled' : 1,
     \ 'on_ft' : ['python'],
     \ 'lazy' : 1,
     \ }                                                                         " Python dev env
+  let s:pythonmode = neobundle#get('python-mode')
+  function! s:pythonmode.hooks.on_source(bundle)
+    let g:pymode_rope = 0                                                       " To be used with jedi
+  endfunction
+  " NeoBundle 'davidhalter/jedi-vim', {
+    " \ 'depends' : ['davidhalter/jedi'],
+    " \ 'disabled' : 1,
+    " \ 'on_ft' : ['python'],
+    " \ 'lazy' : 1,
+    " \ }                                                                         " Can be used with both YCM and NeoComplete
   NeoBundle 'xolox/vim-pyref', {
     \ 'depends' : ['xolox/vim-misc'],
     \ 'on_ft' : ['python'],
