@@ -11,92 +11,18 @@ let g:disabled_bundles = {}
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
-" Shared plugin configurations {{{1
-" OS Detection {{{2
-function! s:OSDetect()
-  let l:is_unix = has('unix')
-  let l:is_windows =
-    \ has('win16') || has('win32') || has('win64') || has('win95')
-  let l:is_cygwin = has('win32unix')
-  " let l:is_mac = $SSH_OS == 'Darwin' || !l:is_windows && !l:is_cygwin
-    " \ && (has('mac') || has('macunix') || has('gui_macvim'))
-  let l:is_mac = !l:is_windows && !l:is_cygwin
-    \ && (has('mac') || has('macunix') || has('gui_macvim'))
-  let l:is_linux = l:is_unix && !l:is_mac && !l:is_cygwin
-
-  let g:OS = {
-    \ 'is_unix'     :  l:is_unix,
-    \ 'is_windows'  :  l:is_windows,
-    \ 'is_cygwin'   :  l:is_cygwin,
-    \ 'is_mac'      :  l:is_mac,
-    \ 'is_linux'    :  l:is_linux,
-    \ }
-endfunction
-" }}}
-" Configure RelatedFiles {{{2
-function! g:ConfigureRelatedFiles()
-  Glaive relatedfiles plugin[mappings]=0
-  for l:key in ['c', 'h', 't', 'b']
-    execute 'nnoremap <unique> <silent> <leader>g' . l:key .
-      \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
-      \ l:key . '")<CR>'
-  endfor
-  nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
-endfunction
-" }}}
-" Configure YCM {{{2
-function! g:ConfigureYcm()
-  nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-  let g:ycm_always_populate_location_list = 1                                   " Default 0
-  let g:ycm_auto_trigger = 1
-  let g:ycm_autoclose_preview_window_after_completion = 1                       " Automatically close the preview window for completion
-  let g:ycm_autoclose_preview_window_after_insertion = 1                        " Automatically close the preview window for completion
-  let g:ycm_collect_identifiers_from_tags_files = 1                             " Enable completion from tags
-  let g:ycm_complete_in_comments = 1
-  let g:ycm_complete_in_strings = 1
-  let g:ycm_confirm_extra_conf = 1
-  let g:ycm_enable_diagnostic_highlighting = 1
-  let g:ycm_enable_diagnostic_signs = 1
-  let g:ycm_error_symbol = '>>'
-  let g:ycm_filetype_blacklist = {}
-  let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
-  let g:ycm_filetype_whitelist = { 'c' : 1, 'cpp' : 1, 'python' : 1, 'go' : 1 }
-  let g:ycm_goto_buffer_command = 'same-buffer'                                 " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-  let g:ycm_key_invoke_completion = '<C-Space>'
-  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-  let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-  let g:ycm_min_num_identifier_candidate_chars = 0
-  let g:ycm_min_num_of_chars_for_completion = 2
-  let g:ycm_open_loclist_on_ycm_diags = 1
-  let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-  let g:ycm_register_as_syntastic_checker = 1
-  let g:ycm_semantic_triggers =  {
-    \   'c' : ['->', '.'],
-    \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-    \             're!\[.*\]\s'],
-    \   'ocaml' : ['.', '#'],
-    \   'cpp,objcpp' : ['->', '.', '::'],
-    \   'perl' : ['->'],
-    \   'php' : ['->', '::'],
-    \   'cs,java,javascript,typescript' : ['.'],
-    \   'd,python,perl6,scala,vb,elixir,go' : ['.'],
-    \   'ruby' : ['.', '::'],
-    \   'lua' : ['.', ':'],
-    \   'erlang' : [':'],
-    \ }
-  let g:ycm_server_keep_logfiles = 10                                           " Keep log files
-  let g:ycm_server_log_level = 'debug'                                          " Default info
-  let g:ycm_server_use_vim_stdout = 1                                           " Set to 0 if ycm server crashes to debug
-  let g:ycm_show_diagnostics_ui = 1
-  let g:ycm_warning_symbol = '>>'
-endfunction
-" }}}
-" }}}
 " Setup NeoBundle {{{1
 filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
-  call s:OSDetect()
+  " OS Detection {{{2
+  let s:is_windows =
+    \ has('win16') || has('win32') || has('win64') || has('win95')
+  let s:is_cygwin = has('win32unix')
+  let s:is_mac = !s:is_windows && !s:is_cygwin
+    \ && (has('mac') || has('macunix') || has('gui_macvim'))
+  let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
+  " }}}
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
 endif
 try
@@ -111,7 +37,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'                                           
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " }}}
 " Windows Compatible {{{1
-if g:OS.is_windows
+if s:is_windows
   source $VIMRUNTIME/mswin.vim
   behave mswin
 
@@ -279,7 +205,7 @@ endif
     " let g:neocomplete#sources#omni#input_patterns.perl =
           " \ '\h\w*->\h\w*\|\h\w*::'
     " Do not use NeoComplete for these file types
-    autocmd FileType c,cpp,python NeoCompleteLock
+    autocmd FileType c,cpp,go,python NeoCompleteLock
   endfunction
   " }}}
   " {{{2
@@ -331,7 +257,49 @@ endif
     \ }                                                                         " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
-    call g:ConfigureYcm()
+    nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    let g:ycm_always_populate_location_list = 1                                   " Default 0
+    let g:ycm_auto_trigger = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1                       " Automatically close the preview window for completion
+    let g:ycm_autoclose_preview_window_after_insertion = 1                        " Automatically close the preview window for completion
+    let g:ycm_collect_identifiers_from_tags_files = 1                             " Enable completion from tags
+    let g:ycm_complete_in_comments = 1
+    let g:ycm_complete_in_strings = 1
+    let g:ycm_confirm_extra_conf = 1
+    let g:ycm_enable_diagnostic_highlighting = 1
+    let g:ycm_enable_diagnostic_signs = 1
+    let g:ycm_error_symbol = '>>'
+    let g:ycm_filetype_blacklist = {}
+    let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
+    let g:ycm_filetype_whitelist = { 'c' : 1, 'cpp' : 1, 'python' : 1, 'go' : 1 }
+    let g:ycm_goto_buffer_command = 'same-buffer'                                 " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+    let g:ycm_key_invoke_completion = '<C-Space>'
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_min_num_identifier_candidate_chars = 0
+    let g:ycm_min_num_of_chars_for_completion = 2
+    let g:ycm_open_loclist_on_ycm_diags = 1
+    let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+    let g:ycm_register_as_syntastic_checker = 1
+    let g:ycm_semantic_triggers =  {
+      \   'c' : ['->', '.'],
+      \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+      \             're!\[.*\]\s'],
+      \   'ocaml' : ['.', '#'],
+      \   'cpp,objcpp' : ['->', '.', '::'],
+      \   'perl' : ['->'],
+      \   'php' : ['->', '::'],
+      \   'cs,java,javascript,typescript' : ['.'],
+      \   'd,python,perl6,scala,vb,elixir,go' : ['.'],
+      \   'ruby' : ['.', '::'],
+      \   'lua' : ['.', ':'],
+      \   'erlang' : [':'],
+      \ }
+    let g:ycm_server_keep_logfiles = 10                                           " Keep log files
+    let g:ycm_server_log_level = 'debug'                                          " Default info
+    let g:ycm_server_use_vim_stdout = 1                                           " Set to 0 if ycm server crashes to debug
+    let g:ycm_show_diagnostics_ui = 1
+    let g:ycm_warning_symbol = '>>'
   endfunction
   " }}}
   " {{{2
@@ -419,7 +387,13 @@ endif
     \ }                                                                         " Open related files in C++
   let s:relatedfiles = neobundle#get('relatedfiles')
   function s:relatedfiles.hooks.on_source(bundle)
-    call g:ConfigureRelatedFiles()
+    Glaive relatedfiles plugin[mappings]=0
+    for l:key in ['c', 'h', 't', 'b']
+      execute 'nnoremap <unique> <silent> <leader>g' . l:key .
+        \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
+        \ l:key . '")<CR>'
+    endfor
+    nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
   endfunction
   " }}}
   " {{{2
@@ -526,7 +500,7 @@ endif
     call vimutils#InitUndoSwapViews()
   endfunction
   function! s:vimutils.hooks.on_post_source(bundle)
-    " call vimutils#SetupTablineMappings(g:OS)
+    " call vimutils#SetupTablineMappings(s:OS)
     if has('gui_running')
       silent! nmap <silent> <unique> <M-1> <Plug>AirlineSelectTab1
       silent! nmap <silent> <unique> <M-2> <Plug>AirlineSelectTab2
@@ -802,6 +776,12 @@ syntax on                                                                       
 " }}}
 " Local setup (after) {{{1
 if filereadable(expand('~/.vimrc.local.after'))
+  function! g:ConfigureYcm()
+    call s:ycm.hooks.on_source({})
+  endfunction
+  function! g:ConfigureRelatedFiles()
+    call s:relatedfiles.hooks.on_source({})
+  endfunction
   execute 'source' expand('~/.vimrc.local.after')
 endif
 " }}}
@@ -877,7 +857,7 @@ else
   set spell                                                                     " Spellcheck
 endif
 
-if has ('x11') && (g:OS.is_linux || g:OS.is_mac)                                " On Linux and Mac use + register
+if has ('x11') && (s:is_linux || s:is_mac)                                      " On Linux and Mac use + register
   set clipboard=unnamedplus
 else                                                                            " On Windows use * register
   set clipboard=unnamed
