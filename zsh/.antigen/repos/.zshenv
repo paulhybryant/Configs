@@ -1,7 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
 # Non-interactive environment variabbles should be defined in zshenv
 
-declare -U path
+declare -U path fpath manpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
   declare -xg BREWVERSION="homebrew"
   declare -xg BREWHOME="$HOME/.$BREWVERSION"
@@ -29,7 +30,6 @@ else
   alias rm='command rm -v'
 fi
 zstyle ":registry:var:prefix-width" registry 10
-declare -U fpath manpath
 
 # Local configurations
 if [[ -f ~/.zshenv.local ]]; then

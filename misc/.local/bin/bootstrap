@@ -71,7 +71,7 @@ function bootstrap::brew() {
   zsh::eval 'brew tap beeftornado/rmtree'
   zsh::eval 'brew tap peco/peco'
 
-  zsh::eval 'brew install coreutils stow findutils'
+  zsh::eval 'brew install coreutils stow'
 }
 function bootstrap::neobundle() {
   # Install neobundle before stow so it won't uses the stowed vimrc
@@ -109,10 +109,10 @@ function bootstrap::brewinstall() {
   zsh::eval "brew install https://raw.githubusercontent.com/moul/`
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
-    the_silver_searcher zsh netcat dos2unix most stdman ranger fasd \
+    the_silver_searcher zsh netcat most stdman ranger fasd \
     brew-rmtree git-extras fzf peco grc markdown \
     zsh-completions gnu-sed jq"
-  # xbindkeys makeself vimpager
+  # xbindkeys makeself vimpager dos2unix findutils
   # zsh::eval 'brew install --force pt'
   zsh::eval 'brew gem install tmuxinator'
   # zsh::eval 'brew gem install automux'
