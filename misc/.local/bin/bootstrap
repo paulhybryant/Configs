@@ -155,7 +155,7 @@ function bootstrap::misc() {
   io::msg 'Installing powerline patched fonts'
   local _pfdir
   _pfdir="$(mktemp -d)"
-  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir})\""
+  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir}\""
   zsh::eval "pushd ${_pfdir}"
   zsh::eval "./install.sh"
   zsh::eval "popd"
