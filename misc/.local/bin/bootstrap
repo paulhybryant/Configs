@@ -30,7 +30,7 @@ EOF
 }
 function bootstrap::init() {
   # zsh::eval 'sudo -v'
-  io::msg "Installing ${BREWVERSION} dependencies..."
+  io::msg "Installing dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl \
     ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
     zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config kupfer \
@@ -118,7 +118,7 @@ function bootstrap::brewinstall() {
   # zsh::eval 'brew gem install automux'
   zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim \
-    bz2file percol butterfly"
+    bz2file percol butterfly jedi"
   if os::LINUX; then
     # zsh::eval "brew install --disable-nls --override-system-vi \
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
