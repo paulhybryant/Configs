@@ -91,7 +91,6 @@ fi
 
 # Alternative 1
 # zstyle ':prezto:load' pmodule ${pmodules}
-# zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Alternative 2
 # for module in ${pmodules}; do
@@ -109,8 +108,8 @@ fi
 # antigen theme robbyrussell
 
 # Local configurations
-if [[ -f "$ZDOTDIR/.zshrc.local" ]]; then
-  source "$ZDOTDIR/.zshrc.local"
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
 fi
 
 antigen apply
