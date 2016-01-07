@@ -30,12 +30,12 @@ EOF
 }
 function bootstrap::init() {
   # zsh::eval 'sudo -v'
-  io::msg "Installing ${BREWVERSION} dependencies..."
+  io::msg "Installing dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl \
-    ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev \
-    zlib1g-dev clipit xclip x11-xkb-utils xbindkeys xbindkeys-config kupfer \
-    xvkbd git-annex xautomation urlview xdotool x11-apps libcairo2-dev m4 \
-    terminator haskell-platform"
+    git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev \
+    libncurses-dev zlib1g-dev xclip x11-xkb-utils xbindkeys xbindkeys-config \
+    kupfer xvkbd xautomation urlview xdotool x11-apps terminator \
+    haskell-platform"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
