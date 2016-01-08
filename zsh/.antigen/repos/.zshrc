@@ -51,6 +51,8 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
+autoload -Uz bashcompinit && bashcompinit
+
 source ~/.antigen/repos/antigen/antigen.zsh
 # zload automatically reload a file containing functions. However, it achieves
 # this using pre_cmd functions, which is too heavy. Ideally should only check
