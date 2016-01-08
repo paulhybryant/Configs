@@ -135,7 +135,8 @@ function bootstrap::brewinstall() {
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
     zsh::eval "brew install brew-cask clipper osxutils lsof gnu-trash \
       paulhybryant/myformulae/gnu-getopt yank textql shellcheck"
-    zsh::eval "brew cask install karabiner seil spectacle xquartz urlview"
+    zsh::eval "brew cask install karabiner seil spectacle xquartz urlview \
+      key-codes google-drive google-chrome git-annex haskell-platform"
     # zsh::eval './osx/.osx/init.zsh'
   fi
 }
@@ -155,7 +156,7 @@ function bootstrap::misc() {
   io::msg 'Installing powerline patched fonts'
   local _pfdir
   _pfdir="$(mktemp -d)"
-  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir})\""
+  zsh::eval "git clone 'https://github.com/powerline/fonts.git' \"${_pfdir}\""
   zsh::eval "pushd ${_pfdir}"
   zsh::eval "./install.sh"
   zsh::eval "popd"

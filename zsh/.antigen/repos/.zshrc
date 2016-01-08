@@ -27,7 +27,6 @@ fi
 # alias foo='TERM=xterm-256color foo'
 declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -xg HELPDIR="$BREWHOME/share/zsh/help"
-declare -xg EDITOR='vim'
 declare -xg VISUAL="$EDITOR"
 declare -xg GIT_EDITOR="$EDITOR"
 declare -xg GREP_OPTIONS='--color=auto'
