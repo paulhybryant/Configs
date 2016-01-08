@@ -122,8 +122,8 @@ function bootstrap::brewinstall() {
   if os::LINUX; then
     # zsh::eval "brew install --disable-nls --override-system-vi \
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
-    # zsh::eval 'brew install --HEAD trash-cli'
-    zsh::eval 'pip install --upgrade trash-cli'
+    zsh::eval 'brew install --HEAD trash-cli'
+    # zsh::eval 'pip install --upgrade trash-cli'
     zsh::eval 'cabal update && cabal install shellcheck --force-reinstalls'
   elif os::OSX; then
     io::msg 'Installing extra stuff for OSX...'
@@ -135,7 +135,8 @@ function bootstrap::brewinstall() {
       --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste"
     zsh::eval "brew install brew-cask clipper osxutils lsof gnu-trash \
       paulhybryant/myformulae/gnu-getopt yank textql shellcheck"
-    zsh::eval "brew cask install karabiner seil spectacle xquartz urlview"
+    zsh::eval "brew cask install karabiner seil spectacle xquartz urlview \
+      key-codes google-drive google-chrome git-annex haskell-platform"
     # zsh::eval './osx/.osx/init.zsh'
   fi
 }

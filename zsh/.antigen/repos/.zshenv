@@ -8,6 +8,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   declare -xg BREWHOME="$HOME/.$BREWVERSION"
   declare -xg CMDPREFIX="g"
   path=(/opt/local/bin /opt/local/sbin $path)
+  # Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
+  export GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
+  if [ -d "$GHC_DOT_APP" ]; then
+    path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin)
+  fi
 else
   declare -xg BREWVERSION="linuxbrew"
   declare -xg BREWHOME="$HOME/.$BREWVERSION"

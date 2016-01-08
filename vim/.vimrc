@@ -793,12 +793,6 @@ syntax on                                                                       
 " }}}
 " Local setup (after) {{{1
 if filereadable(expand('~/.vimrc.local.after'))
-  function! g:ConfigureYcm()
-    call s:ycm.hooks.on_source({})
-  endfunction
-  function! g:ConfigureRelatedFiles()
-    call s:relatedfiles.hooks.on_source({})
-  endfunction
   execute 'source' expand('~/.vimrc.local.after')
 endif
 " }}}
