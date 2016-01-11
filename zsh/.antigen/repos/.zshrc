@@ -76,7 +76,7 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # pmodules=(environment directory completion git homebrew helper fasd ssh \
   # history syntax-highlighting clipboard linux osx tmux dpkg fzf prompt custom)
 # Order matters!
-pmodules=(environment directory editor completion git homebrew helper fasd \
+pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
 pmodload "${pmodules[@]}"
 unset pmodules
@@ -108,12 +108,12 @@ fi
 # antigen bundle git directories
 # antigen theme robbyrussell
 
+antigen apply
+
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-antigen apply
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
