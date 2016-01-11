@@ -84,10 +84,13 @@ endif
   NeoBundle 'google/vim-glaive', {
     \ 'depends' : ['google/vim-maktaba'],
     \ 'disabled' : has_key(g:disabled_bundles, 'vim-glaive'),
-    \ 'force' : 1,
+    \ 'force' : 0,
     \ }                                                                         " Plugin for better vim plugin configuration
+  let s:glaive = neobundle#get('vim-glaive')
+  function s:glaive.hooks.on_source(bundle)
+    call glaive#Install()
+  endfunction
   " }}}
-  call glaive#Install()
 " }}}
 " Plugins {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
@@ -425,6 +428,7 @@ endif
     \ 'depends' : filter(
     \   ['vim-glaive', 'vim-maktaba'],
     \   '!has_key(g:disabled_bundles, v:val)'),
+    \ 'on_cmd' : [ 'SyncopateExportToBrowser', 'SyncopateExportToClipboard' ],
     \ }                                                                         " Makes it easy to copy syntax highlighted code and paste in emails
   let s:vimsyncopate = neobundle#get('vim-syncopate')
   function! s:vimsyncopate.hooks.on_source(bundle)
@@ -435,6 +439,7 @@ endif
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/Align.vba.gz', {
+    \ 'lazy' : 1,
     \ 'name' : 'Align',
     \ 'frozen' : 1,
     \ 'regular_namne' : 'Align',
@@ -549,7 +554,9 @@ endif
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'scrooloose/nerdtree'                                               " File explorer inside vim
+  NeoBundle 'scrooloose/nerdtree', {
+    \ 'lazy' : 1,
+    \ }                                                                         " File explorer inside vim
   let s:nerdtree = neobundle#get('nerdtree')
   function! s:nerdtree.hooks.on_source(bundle)
     let g:NERDShutUp = 1
