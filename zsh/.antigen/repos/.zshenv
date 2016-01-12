@@ -23,6 +23,8 @@ fi
 
 path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   $BREWHOME/opt/go/libexec/bin ~/.cabal/bin $path)
+fpath=(~/.zlib ${fpath[@]})
+autoload -Uz -- ~/.zlib/[^_]*(:t)
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'

@@ -1,11 +1,5 @@
 #!/usr/bin/env zsh
 
-# The following is not need as it is already setup by .zshenv
-local _config_dir
-_config_dir="${0:A:h}/../../../zsh/.antigen/repos/.zprezto/modules/custom/functions"
-fpath=(${_config_dir:a} $fpath)
-autoload -Uz os::LINUX os::OSX osx::xclip ssh::xclip
-
 setopt localoptions err_return
 
 if [[ -z "$SSH_CLIENT" ]]; then
