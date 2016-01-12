@@ -1,0 +1,15 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<time::date-to-seconds>
+
+Convert date string to seconds since epoch
+
+$1 Date string
+
+@return string in seconds since epoch.
+=cut
+
+local _seconds_str
+_seconds_str=$(date -d "$1" +%s)
+printf "${_seconds_str}\n"

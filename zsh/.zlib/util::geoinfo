@@ -1,0 +1,31 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<util::geoinfo>
+
+Get the geo location information.
+
+@return list of values for requested fields.
+=cut
+
+local -a opt_cache opt_cn
+zparseopts -D -K -M -E -- -no-cache=opt_cache -no-cn=opt_cn
+
+local _cache='/tmp/.util.geoinfo'
+[[ -n ${opt_cache} ]] && \rm -v "${_cache}"
+local _expire _filter _url
+_expire=$(time::now)
+_expire=$((_expire - 3600))
+if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
+  rm ${_cache} > /dev/null 2>&1
+  # ip, hostname, city, region, country, loc, org
+  if [[ -n ${opt_cn} ]]; then
+    _url='ipinfo.io'
+  else
+    _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
+  fi
+  io::vlog 1 "Using url: ${_url}"
+  curl -x '' "${_url}" 1> ${_cache} 2> /dev/null
+fi
+_filter=$(strings::join --prefix . --delim , "$@")
+jq "${_filter}" < ${_cache}

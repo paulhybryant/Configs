@@ -1,0 +1,17 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<mode::set-verbose>
+
+Set verbose level of shell.
+
+@return NULL
+=cut
+
+zstyle ":registry:var:verbose" registry "$1"
+if [[ $1 -gt 0 ]]; then
+  declare -x GIT_CURL_VERBOSE
+  GIT_CURL_VERBOSE=$1
+else
+  unset GIT_CURL_VERBOSE
+fi

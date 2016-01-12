@@ -220,11 +220,6 @@ local _cfg_dir _logfile _y
 local -a _stow_opts
 _cfg_dir="${0:A:h}/../../../"
 
-fpath=(\
-  ${_cfg_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions $fpath)
-autoload -Uz -- \
-  ${_cfg_dir:a}/zsh/.antigen/repos/.zprezto/modules/custom/functions/[^_]*(:t)
-
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${list} ]] && bootstrap::list
 [[ -n ${yes} ]] && _y='-y'

@@ -1,8 +1,3 @@
 #!/usr/bin/env zsh
 
-local _config_dir
-_config_dir="${0:A:h}/../../../zsh/.antigen/repos/.zprezto/modules/custom/functions"
-fpath=(${_config_dir:a} $fpath)
-autoload -Uz -- ${_config_dir:a}/[^_]*(:t)
-
 file::save2tmp "$@"

@@ -134,11 +134,6 @@ function muxcfg::getcwd() {
   fi
 }
 
-local _config_dir
-_config_dir="${0:A:h}/../../../zsh/.antigen/repos/.zprezto/modules/custom/functions"
-fpath=(${_config_dir:a} $fpath)
-autoload -Uz -- ${_config_dir:a}/[^_]*(:t)
-
 setopt LOCAL_OPTIONS
 MUXCFGDIR="$HOME/.tmuxinator"
 muxcfg::main "$@"
