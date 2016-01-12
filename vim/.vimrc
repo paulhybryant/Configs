@@ -7,7 +7,6 @@ scriptencoding utf-8                                                            
 let g:mapleader = ','
 let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
-let g:disabled_bundles = {}
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " }}}
@@ -68,35 +67,12 @@ if s:is_windows
   " }}}
 endif
 " }}}
-" Local setup (before) {{{1
-if filereadable(expand('~/.vimrc.local.before'))
-  execute 'source' expand('~/.vimrc.local.before')
-endif
-" }}}
-" Essential Plugins {{{1
-  " {{{2
-  NeoBundle 'google/vim-maktaba', {
-    \ 'disabled' : has_key(g:disabled_bundles, 'vim-maktaba'),
-    \ 'force' : 1,
-    \ }                                                                         " Vimscript plugin library from google
-  " }}}
-  " {{{2
-  NeoBundle 'google/vim-glaive', {
-    \ 'depends' : ['google/vim-maktaba'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'vim-glaive'),
-    \ 'force' : 0,
-    \ }                                                                         " Plugin for better vim plugin configuration
-  let s:glaive = neobundle#get('vim-glaive')
-  function s:glaive.hooks.on_source(bundle)
-    call glaive#Install()
-  endfunction
-  " }}}
-" }}}
 " Plugins {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
+  NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
@@ -255,7 +231,6 @@ endif
   " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
     \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'YouCompleteMe'),
     \ 'lazy' : 1,
     \ }                                                                         " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
@@ -384,7 +359,6 @@ endif
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
     \ 'on_ft' : ['cpp'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'relatedfiles'),
     \ 'lazy' : 1,
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " Open related files in C++
@@ -412,8 +386,6 @@ endif
   " {{{2
   NeoBundle 'google/vim-codefmt', {
     \ 'on_ft' : ['cpp', 'javascript', 'sql'],
-    \ 'depends' : ['google/vim-maktaba', 'google/vim-glaive'],
-    \ 'disabled' : has_key(g:disabled_bundles, 'vim-codefmt'),
     \ 'lazy' : 1,
     \ }                                                                         " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
@@ -424,10 +396,16 @@ endif
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'google/vim-glaive', {
+    \ 'depends' : ['google/vim-maktaba'],
+    \ }                                                                         " Plugin for better vim plugin configuration
+  let s:glaive = neobundle#get('vim-glaive')
+  function s:glaive.hooks.on_source(bundle)
+    call glaive#Install()
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'google/vim-syncopate', {
-    \ 'depends' : filter(
-    \   ['vim-glaive', 'vim-maktaba'],
-    \   '!has_key(g:disabled_bundles, v:val)'),
     \ 'on_cmd' : [ 'SyncopateExportToBrowser', 'SyncopateExportToClipboard' ],
     \ }                                                                         " Makes it easy to copy syntax highlighted code and paste in emails
   let s:vimsyncopate = neobundle#get('vim-syncopate')
@@ -493,9 +471,6 @@ endif
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/vimutils', {
-    \ 'depends' : filter(
-    \   ['vim-glaive', 'vim-maktaba'],
-    \   '!has_key(g:disabled_bundles, v:val)'),
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " My vim customization (utility functions, syntax etc)
   let s:vimutils = neobundle#get('vimutils')
@@ -775,9 +750,6 @@ endif
   " }}}
   " ft-vtd {{{2
   NeoBundle 'chiphogg/vim-vtd', {
-    \ 'depends' : filter(
-    \   ['vim-glaive', 'vim-maktaba'],
-    \   '!has_key(g:disabled_bundles, v:val)'),
     \ 'on_ft' : ['vtd'],
     \ 'lazy' : 1,
     \ }
@@ -792,16 +764,16 @@ endif
   endfunction
   " }}}
 " }}}
+" Local config {{{1
+if filereadable(expand('~/.vimrc.local'))
+  execute 'source' expand('~/.vimrc.local')
+endif
+" }}}
 " Wrap up bundle setup {{{1
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on                                                       " Automatically detect file types.
 syntax on                                                                       " Syntax highlighting
-" }}}
-" Local setup (after) {{{1
-if filereadable(expand('~/.vimrc.local.after'))
-  execute 'source' expand('~/.vimrc.local.after')
-endif
 " }}}
 " Settings {{{1
 " Can also use the let syntax to set these options. e.g. let &autoindent = 1
