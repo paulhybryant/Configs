@@ -41,7 +41,7 @@ function bootstrap::init() {
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
   # Update altwin of the system if needed, and then reload the xkb cache with
   # `sudo dpkg-reconfigure xkb-data`
-
+  [[ -f ~/.vimrc ]] && zsh::eval 'mv ~/.vimrc ~/.vimrc.bak'
 }
 function bootstrap::brew() {
   if [[ "$OSTYPE" == 'darwin'* ]]; then
@@ -178,12 +178,12 @@ function bootstrap::main() {
         bootstrap::brew
         ;&
       2)
-        io::msg "=== Stage neobundle... ==="
-        bootstrap::neobundle
-        ;&
-      3)
         io::msg "=== Stage stow... ==="
         bootstrap::stow
+        ;&
+      3)
+        io::msg "=== Stage neobundle... ==="
+        bootstrap::neobundle
         ;&
       4)
         io::msg "=== Stage brewinstall... ==="

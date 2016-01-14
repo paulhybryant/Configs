@@ -155,6 +155,14 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
+  NeoBundle 'vim-utils/vim-line'                                                " Vim inner line text object
+  let s:vimline = neobundle#get('vim-line')
+  function s:vimline.hooks.on_source(bundle)
+    omap <unique> <silent> i_  <Plug>(inner_line)
+    xmap <unique> <silent> i_  <Plug>(inner_line)
+    omap <unique> <silent> a_  $
+    xmap <unique> <silent> a_  $
+  endfunction
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'xolox/vim-misc'                                                    " Utility functions for plugins from xolox
   NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }                " Reload vim plugin scripts automatically on change
