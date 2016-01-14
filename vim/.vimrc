@@ -9,63 +9,140 @@ let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
+let s:is_windows =
+  \ has('win16') || has('win32') || has('win64') || has('win95')
+let s:is_cygwin = has('win32unix')
+let s:is_mac = !s:is_windows && !s:is_cygwin
+  \ && (has('mac') || has('macunix') || has('gui_macvim'))
+let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
+" }}}
+" Vim options {{{1
+function s:SetVimOptions()
+  " Windows Compatible {{{2
+  if s:is_windows
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+
+    let $TERM = 'win32'
+    " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
+    " across (heterogeneous) systems easier.
+    set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
+    " Be nice and check for multi_byte even if the config requires
+    " multi_byte support most of the time
+    if has('multi_byte')
+      " Windows cmd.exe still uses cp850. If Windows ever moved to
+      " Powershell as the primary terminal, this would be utf-8
+      set termencoding=cp850
+      setglobal fileencoding=utf-8
+      " Windows has traditionally used cp1252, so it's probably wise to
+      " fallback into cp1252 instead of eg. iso-8859-15.
+      " Newer Windows files might contain utf-8 or utf-16 LE so we might
+      " want to try them first.
+      set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+    endif
+    set shellslash
+  endif
+  " }}}
+  filetype plugin indent on                                                     " Automatically detect file types.
+  syntax on                                                                     " Syntax highlighting
+  " Can also use the let syntax to set these options. e.g. let &autoindent = 1
+  " let &wrapscan = 0 is the same as set nowrapscan
+  " let &l:wrapscan = 0 is the same as setlocal nowrapscan
+  " The let syntax is useful for setting option with another option's value.
+  set autoindent                                                              " Indent at the same level of the previous line
+  set autoread                                                                " Automatically load changed files
+  set autowrite                                                               " Automatically write a file when leaving a modified buffer
+  set background=dark                                                         " Assume a dark background
+  set backspace=indent,eol,start                                              " Backspace for dummies
+  set backup                                                                  " Whether saves a backup before editing
+  set cmdheight=2                                                             " Height of the cmd line
+  set cursorline                                                              " Highlight current line
+  set cursorcolumn                                                            " Highlight current line
+  set expandtab                                                               " Tabs are spaces, not tabs
+  set foldcolumn=5                                                            " Fold indicators on the left
+  set foldenable                                                              " Auto fold code
+  set hidden                                                                  " Allow buffer switching without saving
+  set history=1000                                                            " Store a ton of history (default is 20)
+  set hlsearch                                                                " Highlight search terms
+  set ignorecase                                                              " Case insensitive search
+  set imdisable                                                               " Disable IME in vim
+  set incsearch                                                               " Find as you type search
+  set laststatus=2                                                            " Always show statusline
+  set linespace=0                                                             " No extra spaces between rows
+  set list                                                                    " Display unprintable characters
+  set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                              " Highlight problematic whitespace
+  set matchpairs+=<:>                                                         " Match, to be used with %
+  set modeline                                                                " Mac disables modeline by default
+  set modelines=5                                                             " Mac sets it to 0 by default
+  set mouse=a                                                                 " Automatically enable mouse usage
+  set mousehide                                                               " Hide the mouse cursor while typing
+  set number                                                                  " Line numbers on
+  set pastetoggle=<F12>                                                       " pastetoggle (sane indentation on paste)
+  set ruler                                                                   " Show the ruler
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                          " A ruler on steroids
+  set scrolljump=5                                                            " Lines to scroll when cursor leaves screen
+  set scrolloff=0                                                             " Minimum lines to keep above and below cursor
+  set shiftround                                                              " Round indent to multiple of shiftwidth
+  set shiftwidth=2                                                            " Use indents of 2 spaces
+  set shortmess+=filmnrxoOtT                                                  " Abbrev. of messages (avoids 'hit enter')
+  set showcmd                                                                 " Show partial commands in status line and selected text in visual mode
+  set showmatch                                                               " Show matching brackets/parenthesis
+  set showmode                                                                " Display the current mode
+  set showtabline=2                                                           " Always show the tabline
+  set smartcase                                                               " Case sensitive when uppercase present
+  set softtabstop=2                                                           " Let backspace delete indent
+  " set splitbelow                                                            " Create the split at the bottom when split horizontally
+  set splitright                                                              " Create the split on the right when split vertically
+  set t_Co=256                                                                " Set number of colors supported by term
+  set tabstop=2                                                               " An indentation every two columns
+  " set term=$TERM                                                            " Make arrow and other keys work
+  set undofile                                                                " Persists undo
+  set undolevels=1000                                                         " Maximum number of changes that can be undone
+  set undoreload=10000                                                        " Save the whole buffer for undo when reloading it
+  set viewoptions=folds,options,cursor,unix,slash                             " Better Unix / Windows compatibility
+  set whichwrap=b,s,h,l,<,>,[,]                                               " Backspace and cursor keys wrap too
+  set wildmenu                                                                " Show list instead of just completing
+  set wildmode=list:longest,full                                              " Command <Tab> completion, list matches, then longest common part, then all
+  set winminheight=0                                                          " Windows can be 0 line high
+  set wrap                                                                    " Wrap long lines
+  set nowrapscan                                                              " Make regex search wrap to the start of the file
+  set comments=sl:/*,mb:*,elx:*/                                              " auto format comment blocks
+  " let &shellcmdflag = '-f ' . &shellcmdflag                                 " For zsh to not load any RC file
+  " set shell=/bin/sh                                                         " Sometimes shell can cause vim system command to be slow
+
+  if &diff
+    set nospell                                                               " No spellcheck
+  else
+    set spell                                                                 " Spellcheck
+  endif
+
+  if has ('x11') && (s:is_linux || s:is_mac)                                  " On Linux and Mac use + register
+    set clipboard=unnamedplus
+  else                                                                        " On Windows use * register
+    set clipboard=unnamed
+  endif
+endfunction
 " }}}
 " Setup NeoBundle {{{1
 filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
-  " OS Detection {{{2
-  let s:is_windows =
-    \ has('win16') || has('win32') || has('win64') || has('win95')
-  let s:is_cygwin = has('win32unix')
-  let s:is_mac = !s:is_windows && !s:is_cygwin
-    \ && (has('mac') || has('macunix') || has('gui_macvim'))
-  let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
-  " }}}
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
 endif
 try
   call neobundle#begin(s:bundle_base_path)
 catch /E117:/
-  echoerr "Error setting up neobundle"
-  echoerr "Make sure neobundle is installed and" s:bundle_base_path
-    \ "is the correct bundle base directory."
+  echohl ErrorMsg
+  echom "Error setting up neobundle. Make sure neobundle is installed and"
+    \ s:bundle_base_path "is the correct bundle base directory."
+  echohl Nonek
+  filetype plugin indent on                                                     " Automatically detect file types.
+  syntax on                                                                     " Syntax highlighting
+  call s:SetVimOptions()
   finish
 endtry
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-" }}}
-" Windows Compatible {{{1
-if s:is_windows
-  source $VIMRUNTIME/mswin.vim
-  behave mswin
-
-  let $TERM = 'win32'
-  " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
-  " across (heterogeneous) systems easier.
-  set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-  " Be nice and check for multi_byte even if the config requires
-  " multi_byte support most of the time
-  if has('multi_byte')
-    " Windows cmd.exe still uses cp850. If Windows ever moved to
-    " Powershell as the primary terminal, this would be utf-8
-    set termencoding=cp850
-    setglobal fileencoding=utf-8
-    " Windows has traditionally used cp1252, so it's probably wise to
-    " fallback into cp1252 instead of eg. iso-8859-15.
-    " Newer Windows files might contain utf-8 or utf-16 LE so we might
-    " want to try them first.
-    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-  endif
-  set shellslash
-  NeoBundle 'vim-scripts/Tail-Bundle'                                           " Tail for windows in vim
-  NeoBundle 'wincent/Command-T'
-  " {{{2
-  NeoBundle 'sgur/unite-everything', {
-    \ 'depends' : [ 'Shougo/unite.vim' ],
-    \ }                                                                         " Unite source for everything
-  " }}}
-endif
 " }}}
 " Plugins {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
@@ -653,7 +730,6 @@ endif
   " }}}
   " ft-python {{{2
   NeoBundle 'klen/python-mode', {
-    \ 'disabled' : 1,
     \ 'on_ft' : ['python'],
     \ 'lazy' : 1,
     \ }                                                                         " Python dev env
@@ -661,12 +737,11 @@ endif
   function! s:pythonmode.hooks.on_source(bundle)
     let g:pymode_rope = 0                                                       " To be used with jedi
   endfunction
-  " NeoBundle 'davidhalter/jedi-vim', {
-    " \ 'depends' : ['davidhalter/jedi'],
-    " \ 'disabled' : 1,
-    " \ 'on_ft' : ['python'],
-    " \ 'lazy' : 1,
-    " \ }                                                                         " Can be used with both YCM and NeoComplete
+  NeoBundle 'davidhalter/jedi-vim', {
+    \ 'depends' : ['davidhalter/jedi'],
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Can be used with both YCM and NeoComplete
   NeoBundle 'xolox/vim-pyref', {
     \ 'depends' : ['xolox/vim-misc'],
     \ 'on_ft' : ['python'],
@@ -763,6 +838,17 @@ endif
     endif
   endfunction
   " }}}
+  " Windows Plugins {{{2
+  if s:is_windows
+    NeoBundle 'vim-scripts/Tail-Bundle'                                         " Tail for windows in vim
+    NeoBundle 'wincent/Command-T'
+    " {{{3
+    NeoBundle 'sgur/unite-everything', {
+      \ 'depends' : [ 'Shougo/unite.vim' ],
+      \ }                                                                       " Unite source for everything
+    " }}}
+  endif
+  " }}}
 " }}}
 " Local config {{{1
 if filereadable(expand('~/.vimrc.local'))
@@ -772,84 +858,5 @@ endif
 " Wrap up bundle setup {{{1
 call neobundle#end()
 NeoBundleCheck
-filetype plugin indent on                                                       " Automatically detect file types.
-syntax on                                                                       " Syntax highlighting
-" }}}
-" Settings {{{1
-" Can also use the let syntax to set these options. e.g. let &autoindent = 1
-" let &wrapscan = 0 is the same as set nowrapscan
-" let &l:wrapscan = 0 is the same as setlocal nowrapscan
-" The let syntax is useful for setting option with another option's value.
-set autoindent                                                                  " Indent at the same level of the previous line
-set autoread                                                                    " Automatically load changed files
-set autowrite                                                                   " Automatically write a file when leaving a modified buffer
-set background=dark                                                             " Assume a dark background
-set backspace=indent,eol,start                                                  " Backspace for dummies
-set backup                                                                      " Whether saves a backup before editing
-set cmdheight=2                                                                 " Height of the cmd line
-set cursorline                                                                  " Highlight current line
-set cursorcolumn                                                                " Highlight current line
-set expandtab                                                                   " Tabs are spaces, not tabs
-set foldcolumn=5                                                                " Fold indicators on the left
-set foldenable                                                                  " Auto fold code
-set hidden                                                                      " Allow buffer switching without saving
-set history=1000                                                                " Store a ton of history (default is 20)
-set hlsearch                                                                    " Highlight search terms
-set ignorecase                                                                  " Case insensitive search
-set imdisable                                                                   " Disable IME in vim
-set incsearch                                                                   " Find as you type search
-set laststatus=2                                                                " Always show statusline
-set linespace=0                                                                 " No extra spaces between rows
-set list                                                                        " Display unprintable characters
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                                  " Highlight problematic whitespace
-set matchpairs+=<:>                                                             " Match, to be used with %
-set modeline                                                                    " Mac disables modeline by default
-set modelines=5                                                                 " Mac sets it to 0 by default
-set mouse=a                                                                     " Automatically enable mouse usage
-set mousehide                                                                   " Hide the mouse cursor while typing
-set number                                                                      " Line numbers on
-set pastetoggle=<F12>                                                           " pastetoggle (sane indentation on paste)
-set ruler                                                                       " Show the ruler
-set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                              " A ruler on steroids
-set scrolljump=5                                                                " Lines to scroll when cursor leaves screen
-set scrolloff=0                                                                 " Minimum lines to keep above and below cursor
-set shiftround                                                                  " Round indent to multiple of shiftwidth
-set shiftwidth=2                                                                " Use indents of 2 spaces
-set shortmess+=filmnrxoOtT                                                      " Abbrev. of messages (avoids 'hit enter')
-set showcmd                                                                     " Show partial commands in status line and selected text in visual mode
-set showmatch                                                                   " Show matching brackets/parenthesis
-set showmode                                                                    " Display the current mode
-set showtabline=2                                                               " Always show the tabline
-set smartcase                                                                   " Case sensitive when uppercase present
-set softtabstop=2                                                               " Let backspace delete indent
-" set splitbelow                                                                " Create the split at the bottom when split horizontally
-set splitright                                                                  " Create the split on the right when split vertically
-set t_Co=256                                                                    " Set number of colors supported by term
-set tabstop=2                                                                   " An indentation every two columns
-" set term=$TERM                                                                " Make arrow and other keys work
-set undofile                                                                    " Persists undo
-set undolevels=1000                                                             " Maximum number of changes that can be undone
-set undoreload=10000                                                            " Save the whole buffer for undo when reloading it
-set viewoptions=folds,options,cursor,unix,slash                                 " Better Unix / Windows compatibility
-set whichwrap=b,s,h,l,<,>,[,]                                                   " Backspace and cursor keys wrap too
-set wildmenu                                                                    " Show list instead of just completing
-set wildmode=list:longest,full                                                  " Command <Tab> completion, list matches, then longest common part, then all
-set winminheight=0                                                              " Windows can be 0 line high
-set wrap                                                                        " Wrap long lines
-set nowrapscan                                                                  " Make regex search wrap to the start of the file
-set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
-" let &shellcmdflag = '-f ' . &shellcmdflag                                     " For zsh to not load any RC file
-" set shell=/bin/sh                                                             " Sometimes shell can cause vim system command to be slow
-
-if &diff
-  set nospell                                                                   " No spellcheck
-else
-  set spell                                                                     " Spellcheck
-endif
-
-if has ('x11') && (s:is_linux || s:is_mac)                                      " On Linux and Mac use + register
-  set clipboard=unnamedplus
-else                                                                            " On Windows use * register
-  set clipboard=unnamed
-endif
+call s:SetVimOptions()
 " }}}

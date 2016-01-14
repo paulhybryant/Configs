@@ -23,8 +23,10 @@
 
   ignored = ls-files --others -i --exclude-standard
 
+  pr = pull --recurse-submodules
+
   ; Pull in remote changes for the current repository and all its submodules
-  ; p = !"git pull --recurse-submodules; git submodule update --remote --merge"
+  ; pa = !"git pull --recurse-submodules; git submodule update --remote --merge"
   p = !"git submodule update --init --recursive; git pull --recurse-submodules --remote"
 
   pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach git pull"

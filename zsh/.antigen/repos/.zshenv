@@ -33,11 +33,8 @@ alias mktemp='${CMDPREFIX}\mktemp'
 alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
-if which ${CMDPREFIX}trash > /dev/null 2>&1; then
-  alias rm='${CMDPREFIX}\trash -v'
-else
-  alias rm='command rm -v'
-fi
+alias rm='${CMDPREFIX}\trash -v'
+alias xargs='${CMDPREFIX}\xargs'
 zstyle ":registry:var:prefix-width" registry 10
 
 # Local configurations
