@@ -1,6 +1,59 @@
 " vim: filetype=vim shiftwidth=2 tabstop=2 softtabstop=2 expandtab textwidth=80
 " vim: foldlevel=0 foldmethod=marker nospell
 
+  " NeoBundle 'tpope/vim-markdown', {
+        " \ 'on_ft' : ['markdown'],
+        " \ 'lazy' : 1,
+        " \ 'directory' : 'tpope-markdown',
+        " \ 'name' : 'tpope-markdown',
+        " \ 'regular_name' : 'tpope-markdown',
+        " \ }                                                                     " Yet another markdown syntax highlighting
+  " NeoBundle 'hallison/vim-markdown', {
+        " \ 'on_ft' : ['markdown'],
+        " \ 'lazy' : 1,
+        " \ 'directory' : 'hallison-markdown',
+        " \ 'name' : 'hallison-markdown',
+        " \ 'regular_name' : 'hallison-markdown',
+        " \ }                                                                     " Yet another markdown syntax highlighting
+NeoBundle 'thinca/vim-ref'                                                    " Ref sources: https://github.com/thinca/vim-ref/wiki/sources
+NeoBundle 'xolox/vim-reload', { 'depends' : 'xolox/vim-misc' }                " Reload vim plugin scripts automatically on change
+  " {{{2
+  NeoBundle 'thinca/vim-textobj-between', {
+    \ 'depends' : 'kana/vim-textobj-user',
+    \ }                                                                         " Text object between a char
+  " }}}
+  " {{{2
+  NeoBundle 'google/vim-syncopate', {
+    \ 'on_cmd' : [ 'SyncopateExportToBrowser', 'SyncopateExportToClipboard' ],
+    \ }                                                                         " Makes it easy to copy syntax highlighted code and paste in emails
+  let s:vimsyncopate = neobundle#get('vim-syncopate')
+  function! s:vimsyncopate.hooks.on_source(bundle)
+    Glaive syncopate plugin[mappings] colorscheme=putty
+    let g:html_number_lines = 0
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'paulhybryant/tmuxline.vim', {
+    \ 'gui' : 0,
+    \ 'lazy' : 1,
+    \ }                                                                         " Consistent tmux theme with vim statusline. e.g. :Tmuxline airline_tabline
+  " let s:tmuxline = neobundle#get('tmuxline.vim')
+  " function s:tmuxline.hooks.on_post_source(bundle)
+    " Tmuxline airline_tabline
+  " endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'eiiches/vim-ref-info', {
+    \ 'depends' : 'thinca/vim-ref',
+    \ }                                                                         " Info help page source for vim-ref
+  " }}}
+  " {{{2
+  NeoBundle 'powerline/powerline', {
+    \ 'disabled' : 1,
+    \ 'rtp': 'powerline/bindings/vim/'
+    \ } " Powerline for vim statusline
+  " }}}
+
 let g:fzf_brew_prefix = system('brew --prefix fzf')
 " {{{1
 NeoBundle 'junegunn/fzf', {
