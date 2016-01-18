@@ -746,7 +746,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:pymode_rope = 0                                                       " To be used with jedi
   endfunction
   NeoBundle 'davidhalter/jedi-vim', {
-    \ 'depends' : ['davidhalter/jedi'],
     \ 'on_ft' : ['python'],
     \ 'lazy' : 1,
     \ }                                                                         " Can be used with both YCM and NeoComplete

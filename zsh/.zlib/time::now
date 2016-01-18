@@ -11,14 +11,16 @@ Print current time since epoch.
 local -a nano milli micro
 zparseopts -D -nano=nano -milli=milli -micro=micro
 
-local _time_str
+local _fmt _str
 if [[ -n "${nano}" ]]; then
-  _time_str="$(date +%s%N)"
+  _fmt="+%s%N"
 elif [[ -n "${micro}" ]]; then
-  _time_str="$(date +%s%6N)"
+  _fmt="+%s%6N"
 elif [[ -n "${milli}" ]]; then
-  _time_str="$(date +%s%3N)"
+  _fmt="+%s%3N"
 else
-  _time_str="$(date +%s)"
+  _fmt="+%s"
 fi
-printf "${_time_str}\n"
+
+_str="$(date ${_fmt})"
+printf "${_str}\n"
