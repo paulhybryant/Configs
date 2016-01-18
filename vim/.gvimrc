@@ -21,3 +21,23 @@ elseif has('gui_macvim')
 elseif has('gui_win32')
   set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
 endif
+
+if neobundle#is_installed('vim-vtd')
+  if &background == 'light'
+    hi! Ignore guifg=#FDF6E3
+  else
+    hi! Ignore guifg=#002B36
+  endif
+endif
+
+if neobundle#is_sourced('vimutils')
+  silent! nmap <silent> <unique> <M-1> <Plug>AirlineSelectTab1
+  silent! nmap <silent> <unique> <M-2> <Plug>AirlineSelectTab2
+  silent! nmap <silent> <unique> <M-3> <Plug>AirlineSelectTab3
+  silent! nmap <silent> <unique> <M-4> <Plug>AirlineSelectTab4
+  silent! nmap <silent> <unique> <M-5> <Plug>AirlineSelectTab5
+  silent! nmap <silent> <unique> <M-6> <Plug>AirlineSelectTab6
+  silent! nmap <silent> <unique> <M-7> <Plug>AirlineSelectTab7
+  silent! nmap <silent> <unique> <M-8> <Plug>AirlineSelectTab8
+  silent! nmap <silent> <unique> <M-9> <Plug>AirlineSelectTab9
+endif

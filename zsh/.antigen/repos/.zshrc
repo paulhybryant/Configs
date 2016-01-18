@@ -56,14 +56,10 @@ source ~/.antigen/repos/antigen/antigen.zsh
 # zload automatically reload a file containing functions. However, it achieves
 # this using pre_cmd functions, which is too heavy. Ideally should only check
 # the modification time of the file.
-# TODO: Reuse this idea and make it lightweight.
 # antigen bundle mollifier/zload
 
 # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/anyframe
-
-# antigen bundle mollifier/cd-bookmark
-# antigen bundle mollifier/cd-gitroot
 
 # ZDOTDIR is set here
 antigen use prezto
@@ -73,25 +69,18 @@ zstyle ':prezto:module:syntax-highlighting' color yes
 zstyle ':completion:*' show-completer true
 zstyle ':prezto:module:prompt' theme 'powerline-shell'
 zstyle ':prezto:module:editor' key-bindings 'vi'
-# pmodules=(environment directory completion git homebrew helper fasd ssh \
-  # history syntax-highlighting clipboard linux osx tmux dpkg fzf prompt custom)
 # Order matters!
 pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
+# zstyle ':prezto:load' pmodule ${pmodules}
 pmodload "${pmodules[@]}"
 unset pmodules
 
-if zstyle -t ":registry:var:tty" registry 'virtual'; then
-  prompt powerline-shell
-  # powerline-plus is the native powerline bindings from powerline
-  # powerline is the built-in powerline theme from prezto
-  # prompt powerline-plus
-else
-  prompt clint
-fi
-
 # Alternative 1
 # zstyle ':prezto:load' pmodule ${pmodules}
+# Does not work with antigen as the root init.zsh of prezto will only be called
+# by antigen apply and 'prompt' is used before that.
+# Should work if the usage of prompt is moved after antigen apply
 
 # Alternative 2
 # for module in ${pmodules}; do
@@ -109,6 +98,15 @@ fi
 # antigen theme robbyrussell
 
 antigen apply
+
+if zstyle -t ":registry:var:tty" registry 'virtual'; then
+  prompt powerline-shell
+  # powerline-plus is the native powerline bindings from powerline
+  # powerline is the built-in powerline theme from prezto
+  # prompt powerline-plus
+else
+  prompt clint
+fi
 
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then

@@ -1,6 +1,53 @@
 " vim: filetype=vim shiftwidth=2 tabstop=2 softtabstop=2 expandtab textwidth=80
 " vim: foldlevel=0 foldmethod=marker nospell
 
+  " {{{2
+  NeoBundle 'klen/python-mode', {
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Python dev environment
+  let s:pythonmode = neobundle#get('python-mode')
+  function! s:pythonmode.hooks.on_source(bundle)
+    let g:pymode_rope = 0                                                       " To be used with jedi
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'xolox/vim-pyref', {
+    \ 'depends' : ['xolox/vim-misc'],
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }
+  " }}}
+  " {{{2
+  NeoBundle 'vim-scripts/SQLComplete.vim', {
+    \ 'on_ft' : ['sql'],
+    \ 'lazy' : 1,
+    \ }                                                                         " SQL script completion
+  " }}}
+  " {{{2
+  NeoBundle 'syngan/vim-vimlint', {
+        \ 'on_cmd' : ['VimLint'],
+        \ 'on_ft' : ['vim'],
+        \ 'depends' : 'ynkdir/vim-vimlparser',
+        \ 'lazy' : 1,
+        \ }                                                                     " Syntax checker for vimscript
+  " }}}
+  " {{{2
+  NeoBundle 'davidhalter/jedi-vim', {
+    \ 'depends' : ['davidhalter/jedi'],
+    \ 'on_ft' : ['python'],
+    \ 'lazy' : 1,
+    \ }                                                                         " Can be used with both YCM and NeoComplete
+  " }}}
+  NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
+  " {{{2
+  NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
+  let s:argwrap = neobundle#get('vim-argwrap')
+  function! s:argwrap.hooks.on_source(bundle)
+    autocmd FileType vim let g:argwrap_tail_comma = 1
+    let g:argwrap_line_prefix = '\ '
+  endfunction
+  " }}}
   " NeoBundle 'tpope/vim-markdown', {
         " \ 'on_ft' : ['markdown'],
         " \ 'lazy' : 1,

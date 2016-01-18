@@ -123,7 +123,7 @@ function s:SetVimOptions()
   endif
 endfunction
 " }}}
-" Setup NeoBundle {{{1
+" NeoBundle Begin {{{1
 filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
@@ -144,7 +144,7 @@ endtry
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
 NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " }}}
-" Plugins {{{1
+" Bundles {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
@@ -154,28 +154,18 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
-  NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundle 'xolox/vim-misc'                                                    " Utility functions for plugins from xolox
-  NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
+  NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
+  NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
+  NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion of words in adjacent panes
-  NeoBundle 'JamshedVesuna/vim-markdown-preview'                                " Makrdown preview with minimum dependencies
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
     \ 'on_cmd' : ['ScratchOpen'],
-    \ 'lazy' : 1,
     \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
   let s:vimscratch = neobundle#get('vim-scratch')
   function! s:vimscratch.hooks.on_source(bundle)
     vnoremap <unique> <CR> <Plug>(scrath-evaluate)
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'FooSoft/vim-argwrap'                                               " Automatically wrap arguments between brackets
-  let s:argwrap = neobundle#get('vim-argwrap')
-  function! s:argwrap.hooks.on_source(bundle)
-    autocmd FileType vim let g:argwrap_tail_comma = 1
-    let g:argwrap_line_prefix = '\ '
   endfunction
   " }}}
   " {{{2
@@ -296,18 +286,15 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \ 'disabled' : !has('python'),
     \ }                                                                         " Define and insert snippets
   let s:ultisnips = neobundle#get('ultisnips')
+  " If there are multiple ft.snippet files, UltiSnips will only load the first.
   function! s:ultisnips.hooks.on_source(bundle)
     " Remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger = "<tab>"
-    " If there are multiple ft.snippet files, UltiSnips will only load the first
-    " one found.
-    " let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnippets"]
   endfunction
   " }}}
   " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
     \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
-    \ 'lazy' : 1,
     \ }                                                                         " Python based multi-language completion engine
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
@@ -411,6 +398,15 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'chiphogg/vim-vtd', {
+    \ 'on_ft' : ['vtd'],
+    \ } " Manage TODO in vim
+  let s:vimvtd = neobundle#get('vim-vtd')
+  function! s:vimvtd.hooks.on_source(bundle)
+    Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
   function! s:tmux_navigator.hooks.on_source(bundle)
@@ -422,26 +418,8 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/relatedfiles', {
-    \ 'on_ft' : ['cpp'],
-    \ 'lazy' : 1,
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " Open related files in C++
-  let s:relatedfiles = neobundle#get('relatedfiles')
-  function s:relatedfiles.hooks.on_source(bundle)
-    Glaive relatedfiles plugin[mappings]=0
-    for l:key in ['c', 'h', 't', 'b']
-      execute 'nnoremap <unique> <silent> <leader>g' . l:key .
-        \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
-        \ l:key . '")<CR>'
-    endfor
-    nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
-  endfunction
-  " }}}
-  " {{{2
   NeoBundle 'google/vim-codefmt', {
     \ 'on_ft' : ['cpp', 'javascript', 'sql'],
-    \ 'lazy' : 1,
     \ }                                                                         " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
@@ -449,6 +427,11 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     " python formatter: https://github.com/google/yapf
     " java formatter: https://github.com/google/google-java-format
   endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'google/vim-ft-vroom', {
+    \ 'on_ft' : ['vroom'],
+    \ }                                                                         " Filetype plugin for vroom
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive', {
@@ -468,6 +451,23 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \ 'regular_namne' : 'Align',
     \ 'type' : 'vba',
     \ }                                                                         " Alinghing texts based on specific charater etc
+  " }}}
+  " {{{2
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/'.
+    \ 'dotfiles/master/blob/vba/Decho.vba.gz', {
+    \ 'on_cmd' : ['Decho'],
+    \ 'on_ft' : ['vim'],
+    \ 'name' : 'Decho',
+    \ 'regular_namne' : 'Decho',
+    \ 'frozen' : 1,
+    \ 'type' : 'vba',
+    \ }                                                                         " Debug echo for debuging vim plugins
+  let s:decho = neobundle#get('Decho')
+  function! s:decho.hooks.on_source(bundle)
+    let g:decho_enable = 0
+    let g:dechofuncname = 1
+    let g:decho_winheight = 10
+  endfunction
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
@@ -497,6 +497,23 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'jphustman/SQLUtilities', {
+    \ 'on_ft' : ['sql'],
+    \ 'depends' : ['Align'],
+    \ }                                                                         " Utilities for editing SQL scripts (v7.0)
+  let s:sqlutilities = neobundle#get('SQLUtilities')
+  function! s:sqlutilities.hooks.on_source(bundle)
+    let g:sqlutil_align_comma = 0
+    if (neobundle#is_sourced('vim-codefmt') ||
+      \ maktaba#plugin#IsRegistered('codefmt'))
+      \ && neobundle#is_installed('vimutils')
+      let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+      call l:codefmt_registry.AddExtension(
+        \ vimutils#sqlformatter#GetSQLFormatter())
+    endif
+  endfunction
+  " }}}
+  " {{{2
   NeoBundle 'ntpeters/vim-better-whitespace'                                    " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
@@ -505,14 +522,35 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/vim-autoclose', {
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " Automatically close brackets
+  NeoBundle 'octol/vim-cpp-enhanced-highlight', {
+    \ 'on_ft' : ['cpp'],
+    \ }                                                                         " Enhanced vim cpp highlight
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/file-line', {
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " Open files and go to specific line and column (original user not active)
+  " }}}
+  " {{{2
+  NeoBundle 'paulhybryant/relatedfiles', {
+    \ 'on_ft' : ['cpp'],
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Open related files in C++
+  let s:relatedfiles = neobundle#get('relatedfiles')
+  function s:relatedfiles.hooks.on_source(bundle)
+    Glaive relatedfiles plugin[mappings]=0
+    for l:key in ['c', 'h', 't', 'b']
+      execute 'nnoremap <unique> <silent> <leader>g' . l:key .
+        \ ' :call relatedfiles#selector#JumpToRelatedFile("' .
+        \ l:key . '")<CR>'
+    endfor
+    nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'paulhybryant/vim-autoclose', {
+    \ 'type__protocol' : 'ssh',
+    \ }                                                                         " Automatically close brackets
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/vimutils', {
@@ -530,17 +568,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   function! s:vimutils.hooks.on_post_source(bundle)
     " call vimutils#SetupTablineMappings(s:OS)
-    if has('gui_running')
-      silent! nmap <silent> <unique> <M-1> <Plug>AirlineSelectTab1
-      silent! nmap <silent> <unique> <M-2> <Plug>AirlineSelectTab2
-      silent! nmap <silent> <unique> <M-3> <Plug>AirlineSelectTab3
-      silent! nmap <silent> <unique> <M-4> <Plug>AirlineSelectTab4
-      silent! nmap <silent> <unique> <M-5> <Plug>AirlineSelectTab5
-      silent! nmap <silent> <unique> <M-6> <Plug>AirlineSelectTab6
-      silent! nmap <silent> <unique> <M-7> <Plug>AirlineSelectTab7
-      silent! nmap <silent> <unique> <M-8> <Plug>AirlineSelectTab8
-      silent! nmap <silent> <unique> <M-9> <Plug>AirlineSelectTab9
-    else
+    if !has('gui_running')
       silent! nmap <silent> <unique> 1 <Plug>AirlineSelectTab1
       silent! nmap <silent> <unique> 2 <Plug>AirlineSelectTab2
       silent! nmap <silent> <unique> 3 <Plug>AirlineSelectTab3
@@ -555,6 +583,14 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     call l:codefmt_registry.AddExtension(
       \ vimutils#fsqlf#GetSQLFormatter())
   endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'plasticboy/vim-markdown', {
+    \ 'on_ft' : ['markdown'],
+    \ 'directory' : 'plasticboy-markdown',
+    \ 'name' : 'plasticboy-markdown',
+    \ 'regular_name' : 'plasticboy-markdown',
+    \ }                                                                         " Yet another markdown syntax highlighting
   " }}}
   " {{{2
   NeoBundle 'rking/ag.vim', {
@@ -638,9 +674,39 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'thinca/vim-ft-markdown_fold', {
+    \ 'on_ft' : ['markdown'],
+    \ }                                                                         " Fold markdown
+  " }}}
+  " {{{2
+  NeoBundle 'tmux-plugins/vim-tmux', {
+    \ 'on_ft' : ['tmux'],
+    \ }                                                                         " Vim plugin for editing .tmux.conf
+  " }}}
+  " {{{2
   NeoBundle 'tyru/capture.vim', {
     \   'on_cmd' : ['Capture'],
     \ }                                                                         " Capture Ex command output to buffer
+  " }}}
+  " {{{2
+  NeoBundle 'vim-ruby/vim-ruby', {
+    \ 'on_ft' : ['ruby'],
+    \ }                                                                         " Vim plugin for editing ruby files.
+  " }}}
+  " {{{2
+  NeoBundle 'vim-scripts/ReloadScript', {
+    \ 'on_cmd' : ['ReloadScript'],
+    \ 'on_ft' : ['vim'],
+    \ }                                                                         " Reload vim script without having to restart vim
+  let s:reload_script = neobundle#get('ReloadScript')
+  function! s:reload_script.hooks.on_source(bundle)
+    nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'vim-scripts/sql.vim--Stinson', {
+    \ 'on_ft' : ['sql'],
+    \ }                                                                         " Better SQL syntax highlighting
   " }}}
   " {{{2
   NeoBundle 'vim-utils/vim-line'                                                " Vim inner line text object
@@ -657,8 +723,10 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \   'on_cmd' : [{'name' : [ 'Note' ],
     \                'complete' : 'customlist,xolox#notes#cmd_complete'}],
     \ 'depends' : ['xolox/vim-misc'],
-    \ 'lazy' : 1,
     \ }                                                                         " Note taking with vim
+  NeoBundle 'xolox/vim-misc', {
+    \ 'lazy' : 1,
+    \ }                                                                         " Utility functions for plugins from xolox
   let s:vimnotes = neobundle#get('vim-notes')
   function! s:vimnotes.hooks.on_source(bundle)
     let g:notes_directories = ['~/.vim/.vimnotes']
@@ -666,151 +734,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:notes_indexfile = '~/.vim/.vimnotes/notes.idx'
     let g:notes_tagsindex = '~/.vim/.vimnotes/notes.tags'
   endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'octol/vim-cpp-enhanced-highlight', {
-    \ 'on_ft' : ['cpp'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Enhanced vim cpp highlight
-  " }}}
-  " {{{2
-  NeoBundle 'vim-ruby/vim-ruby', {
-    \ 'on_ft' : ['ruby'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Vim plugin for editing ruby files.
-  " }}}
-  " {{{2
-  NeoBundle 'chiphogg/vim-vtd', {
-    \ 'on_ft' : ['vtd'],
-    \ 'lazy' : 1,
-    \ }
-  let s:vimvtd = neobundle#get('vim-vtd')
-  function! s:vimvtd.hooks.on_source(bundle)
-    Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
-    if &background == 'light'
-      hi! Ignore guifg=#FDF6E3
-    else
-      hi! Ignore guifg=#002B36
-    endif
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'plasticboy/vim-markdown', {
-    \ 'on_ft' : ['markdown'],
-    \ 'lazy' : 1,
-    \ 'directory' : 'plasticboy-markdown',
-    \ 'name' : 'plasticboy-markdown',
-    \ 'regular_name' : 'plasticboy-markdown',
-    \ }                                                                         " Yet another markdown syntax highlighting
-  " }}}
-  " {{{2
-  NeoBundle 'thinca/vim-ft-markdown_fold', {
-    \ 'on_ft' : ['markdown'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Fold markdown
-  " }}}
-  " {{{2
-  NeoBundle 'klen/python-mode', {
-    \ 'on_ft' : ['python'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Python dev env
-  let s:pythonmode = neobundle#get('python-mode')
-  function! s:pythonmode.hooks.on_source(bundle)
-    let g:pymode_rope = 0                                                       " To be used with jedi
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'davidhalter/jedi-vim', {
-    \ 'depends' : ['davidhalter/jedi'],
-    \ 'on_ft' : ['python'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Can be used with both YCM and NeoComplete
-  " }}}
-  " {{{2
-  NeoBundle 'xolox/vim-pyref', {
-    \ 'depends' : ['xolox/vim-misc'],
-    \ 'on_ft' : ['python'],
-    \ 'lazy' : 1,
-    \ }
-  " }}}
-  " {{{2
-  NeoBundle 'jphustman/SQLUtilities', {
-    \ 'on_ft' : ['sql'],
-    \ 'depends' : ['Align'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Utilities for editing SQL scripts (v7.0)
-  let s:sqlutilities = neobundle#get('SQLUtilities')
-  function! s:sqlutilities.hooks.on_source(bundle)
-    let g:sqlutil_align_comma = 0
-    if (neobundle#is_sourced('vim-codefmt') ||
-      \ maktaba#plugin#IsRegistered('codefmt'))
-      \ && neobundle#is_installed('vimutils')
-      let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
-      call l:codefmt_registry.AddExtension(
-        \ vimutils#sqlformatter#GetSQLFormatter())
-    endif
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'vim-scripts/SQLComplete.vim', {
-    \ 'on_ft' : ['sql'],
-    \ 'lazy' : 1,
-    \ }                                                                         " SQL script completion
-  " }}}
-  " {{{2
-  NeoBundle 'vim-scripts/sql.vim--Stinson', {
-    \ 'on_ft' : ['sql'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Better SQL syntax highlighting
-  " }}}
-  " {{{2
-  NeoBundle 'tmux-plugins/vim-tmux', {
-    \ 'on_ft' : ['tmux'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Vim plugin for editing .tmux.conf
-  " }}}
-  " {{{2
-  NeoBundle 'vim-scripts/ReloadScript', {
-    \ 'on_cmd' : ['ReloadScript'],
-    \ 'on_ft' : ['vim'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Reload vim script without having to restart vim
-  let s:reload_script = neobundle#get('ReloadScript')
-  function! s:reload_script.hooks.on_source(bundle)
-    nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/'.
-    \ 'dotfiles/master/blob/vba/Decho.vba.gz', {
-    \ 'on_cmd' : ['Decho'],
-    \ 'on_ft' : ['vim'],
-    \ 'lazy' : 1,
-    \ 'name' : 'Decho',
-    \ 'regular_namne' : 'Decho',
-    \ 'frozen' : 1,
-    \ 'type' : 'vba',
-    \ }                                                                         " Debug echo for debuging vim plugins
-  let s:decho = neobundle#get('Decho')
-  function! s:decho.hooks.on_source(bundle)
-    let g:decho_enable = 0
-    let g:dechofuncname = 1
-    let g:decho_winheight = 10
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'google/vim-ft-vroom', {
-    \ 'on_ft' : ['vroom'],
-    \ 'lazy' : 1,
-    \ }                                                                         " Filetype plugin for vroom
-  " }}}
-  " {{{2
-  NeoBundle 'syngan/vim-vimlint', {
-        \ 'on_cmd' : ['VimLint'],
-        \ 'on_ft' : ['vim'],
-        \ 'depends' : 'ynkdir/vim-vimlparser',
-        \ 'lazy' : 1,
-        \ }                                                                     " Syntax checker for vimscript
   " }}}
   " Windows Plugins {{{2
   if s:is_windows
@@ -824,12 +747,12 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endif
   " }}}
 " }}}
-" Local config {{{1
+" Local bundles and config {{{1
 if filereadable(expand('~/.vimrc.local'))
   execute 'source' expand('~/.vimrc.local')
 endif
 " }}}
-" Wrap up bundle setup {{{1
+" NeoBundle End {{{1
 call neobundle#end()
 NeoBundleCheck
 call s:SetVimOptions()
