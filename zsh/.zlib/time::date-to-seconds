@@ -10,6 +10,19 @@ $1 Date string
 @return string in seconds since epoch.
 =cut
 
-local _seconds_str
-_seconds_str=$(date -d "$1" +%s)
-printf "${_seconds_str}\n"
+local -a nano milli micro
+zparseopts -D -nano=nano -milli=milli -micro=micro
+
+local _fmt _str
+if [[ -n "${nano}" ]]; then
+  _fmt="+%s%N"
+elif [[ -n "${micro}" ]]; then
+  _fmt="+%s%6N"
+elif [[ -n "${milli}" ]]; then
+  _fmt="+%s%3N"
+else
+  _fmt="+%s"
+fi
+
+_str=$(date -d "$1" "${_fmt}")
+printf "${_str}\n"

@@ -113,6 +113,8 @@ if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
+antigen apply
+
 if [[ -n ${PROFILING+1} ]]; then
   exit 0
 fi
