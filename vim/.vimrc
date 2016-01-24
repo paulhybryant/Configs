@@ -124,7 +124,6 @@ function s:SetVimOptions()
 endfunction
 " }}}
 " NeoBundle Begin {{{1
-filetype off
 if has('vim_starting')
   let s:bundle_base_path = expand('~/.vim/bundle/')
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
@@ -170,7 +169,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " }}}
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
-    \ 'depends' : 'Shougo/context_filetype.vim',
+    \ 'depends' : ['Shougo/context_filetype.vim'],
     \ 'disabled' : !has('lua'),
     \ 'vim_version' : '7.3.885',
     \ }                                                                         " Code completion engine
@@ -368,9 +367,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'bling/vim-airline', {
-    \ 'disabled' : 0,
-    \ }                                                                         " Lean & mean status/tabline for vim that's light as air
+  NeoBundle 'bling/vim-airline'                                                 " Lean & mean status/tabline for vim that's light as air
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
     let g:airline_detect_paste = 1
@@ -435,8 +432,8 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive', {
-    \ 'depends' : ['google/vim-maktaba'],
     \ }                                                                         " Plugin for better vim plugin configuration
+  " \ 'depends' : ['google/vim-maktaba'],
   let s:glaive = neobundle#get('vim-glaive')
   function s:glaive.hooks.on_source(bundle)
     call glaive#Install()
@@ -498,8 +495,8 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " }}}
   " {{{2
   NeoBundle 'jphustman/SQLUtilities', {
-    \ 'on_ft' : ['sql'],
     \ 'depends' : ['Align'],
+    \ 'on_ft' : ['sql'],
     \ }                                                                         " Utilities for editing SQL scripts (v7.0)
   let s:sqlutilities = neobundle#get('SQLUtilities')
   function! s:sqlutilities.hooks.on_source(bundle)
@@ -720,9 +717,9 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " }}}
   " {{{2
   NeoBundle 'xolox/vim-notes', {
-    \   'on_cmd' : [{'name' : [ 'Note' ],
-    \                'complete' : 'customlist,xolox#notes#cmd_complete'}],
     \ 'depends' : ['xolox/vim-misc'],
+    \ 'on_cmd' : [{'name' : [ 'Note' ],
+    \              'complete' : 'customlist,xolox#notes#cmd_complete'}],
     \ }                                                                         " Note taking with vim
   NeoBundle 'xolox/vim-misc', {
     \ 'lazy' : 1,
