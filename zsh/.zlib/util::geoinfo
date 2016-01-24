@@ -17,7 +17,7 @@ local _expire _filter _url
 _expire=$(time::now)
 _expire=$((_expire - 3600))
 if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
-  rm ${_cache} > /dev/null 2>&1
+  mv ${_cache} ${_cache}.bak > /dev/null 2>&1
   # ip, hostname, city, region, country, loc, org
   if [[ -n ${opt_cn} ]]; then
     _url='ipinfo.io'
@@ -25,7 +25,10 @@ if [[ (! -f "${_cache}") || $(time::getmtime ${_cache}) -lt ${_expire} ]]; then
     _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
   fi
   io::vlog 1 "Using url: ${_url}"
-  curl -x '' "${_url}" 1> ${_cache} 2> /dev/null
+  curl -m 10 -x '' "${_url}" 1> ${_cache} 2> /dev/null
+  if [[ (! -e ${_cache}) || ($? -ne 0) ]]; then
+    mv ${_cache}.bak ${_cache} > /dev/null 2>&1
+  fi
 fi
 _filter=$(strings::join --prefix . --delim , "$@")
 jq "${_filter}" < ${_cache}
