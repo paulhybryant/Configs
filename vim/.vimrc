@@ -431,9 +431,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \ }                                                                         " Filetype plugin for vroom
   " }}}
   " {{{2
-  NeoBundle 'google/vim-glaive', {
-    \ }                                                                         " Plugin for better vim plugin configuration
-  " \ 'depends' : ['google/vim-maktaba'],
+  NeoBundle 'google/vim-glaive'                                                 " Plugin for better vim plugin configuration
   let s:glaive = neobundle#get('vim-glaive')
   function s:glaive.hooks.on_source(bundle)
     call glaive#Install()
@@ -709,10 +707,10 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'vim-utils/vim-line'                                                " Vim inner line text object
   let s:vimline = neobundle#get('vim-line')
   function s:vimline.hooks.on_source(bundle)
-    omap <unique> <silent> i_  <Plug>(inner_line)
-    xmap <unique> <silent> i_  <Plug>(inner_line)
-    omap <unique> <silent> a_  $
-    xmap <unique> <silent> a_  $
+    omap <unique> <silent> il  <Plug>(inner_line)
+    xmap <unique> <silent> il  <Plug>(inner_line)
+    omap <unique> <silent> al  $
+    xmap <unique> <silent> al  $
   endfunction
   " }}}
   " {{{2

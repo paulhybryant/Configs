@@ -61,8 +61,6 @@ source ~/.antigen/repos/antigen/antigen.zsh
 # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/anyframe
 
-# ZDOTDIR is set here
-antigen use prezto
 local pmodules
 zstyle ':prezto:environment:termcap' color yes
 zstyle ':prezto:module:syntax-highlighting' color yes
@@ -72,15 +70,12 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Order matters!
 pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
-# zstyle ':prezto:load' pmodule ${pmodules}
-pmodload "${pmodules[@]}"
-unset pmodules
+zstyle ':prezto:load' pmodule ${pmodules[@]}
 
-# Alternative 1
-# zstyle ':prezto:load' pmodule ${pmodules}
-# Does not work with antigen as the root init.zsh of prezto will only be called
-# by antigen apply and 'prompt' is used before that.
-# Should work if the usage of prompt is moved after antigen apply
+# ZDOTDIR is set here
+antigen use prezto
+# pmodload "${pmodules[@]}"
+unset pmodules
 
 # Alternative 2
 # for module in ${pmodules}; do
@@ -97,7 +92,7 @@ unset pmodules
 # antigen bundle git directories
 # antigen theme robbyrussell
 
-antigen apply
+# antigen apply
 
 if zstyle -t ":registry:var:tty" registry 'virtual'; then
   prompt powerline-shell
@@ -112,8 +107,6 @@ fi
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-antigen apply
 
 if [[ -n ${PROFILING+1} ]]; then
   exit 0

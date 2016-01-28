@@ -110,7 +110,7 @@ function bootstrap::brewinstall() {
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
     the_silver_searcher zsh netcat most stdman ranger fasd \
-    brew-rmtree git-extras fzf peco grc markdown \
+    brew-rmtree git-extras fzf peco grc markdown noti \
     zsh-completions gnu-sed jq"
   # xbindkeys makeself vimpager dos2unix findutils
   # zsh::eval 'brew install --force pt'
