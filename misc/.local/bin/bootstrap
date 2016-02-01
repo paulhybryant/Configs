@@ -32,10 +32,10 @@ function bootstrap::init() {
   # zsh::eval 'sudo -v'
   io::msg "Installing dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl \
-    git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev \
+    git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev htop\
     libncurses-dev zlib1g-dev xclip x11-xkb-utils xbindkeys xbindkeys-config \
-    kupfer xvkbd xautomation urlview xdotool x11-apps terminator \
-    haskell-platform"
+    kupfer xvkbd xautomation urlview xdotool x11-apps terminator most markdown\
+    haskell-platform cmake ctags jq stow git-extras grc trash-cli"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
@@ -71,7 +71,10 @@ function bootstrap::brew() {
   zsh::eval 'brew tap beeftornado/rmtree'
   zsh::eval 'brew tap peco/peco'
 
-  zsh::eval 'brew install coreutils stow'
+  zsh::eval 'brew install coreutils'
+  if os::OSX; then
+    zsh::eval 'brew install stow'
+  fi
 }
 function bootstrap::neobundle() {
   # Install neobundle before stow so it won't uses the stowed vimrc
@@ -105,15 +108,14 @@ function bootstrap::brewinstall() {
     zsh::eval 'brew install python'
   fi
   zsh::eval 'brew install --HEAD paulhybryant/myformulae/powerline-shell'
-  zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
+  # zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
   zsh::eval "brew install https://raw.githubusercontent.com/moul/`
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
-  zsh::eval "brew install brew-gem cmake ctags git htop python3 tmux npm \
-    the_silver_searcher zsh netcat most stdman ranger fasd \
-    brew-rmtree git-extras fzf peco grc markdown noti \
-    zsh-completions gnu-sed jq"
+  zsh::eval "brew install brew-gem python3 tmux the_silver_searcher zsh \
+    netcat stdman ranger fasd brew-rmtree fzf peco noti zsh-completions \
+    gnu-sed"
   # xbindkeys makeself vimpager dos2unix findutils
-  # zsh::eval 'brew install --force pt'
+  # zsh::eval 'brew install --force the_platinum_searcher'
   zsh::eval 'brew gem install tmuxinator'
   # zsh::eval 'brew gem install automux'
   zsh::eval 'brew install --HEAD vimdoc vroom'
@@ -122,7 +124,7 @@ function bootstrap::brewinstall() {
   if os::LINUX; then
     # zsh::eval "brew install --disable-nls --override-system-vi \
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"
-    zsh::eval 'brew install --HEAD trash-cli'
+    # zsh::eval 'brew install --HEAD trash-cli'
     # zsh::eval 'pip install --upgrade trash-cli'
     zsh::eval 'cabal update && cabal install shellcheck --force-reinstalls'
   elif os::OSX; then
@@ -136,13 +138,19 @@ function bootstrap::brewinstall() {
     zsh::eval "brew install brew-cask clipper osxutils lsof gnu-trash \
       paulhybryant/myformulae/gnu-getopt yank textql shellcheck findutils"
     zsh::eval "brew cask install karabiner seil spectacle xquartz urlview \
-      key-codes google-drive google-chrome git-annex haskell-platform"
+      key-codes google-drive google-chrome git-annex haskell-platform most \
+      htop markdown cmake ctags jq git-extras grc npm"
     # zsh::eval './osx/.osx/init.zsh'
   fi
 }
 function bootstrap::misc() {
-  zsh::eval "http_proxy='' https_proxy='' \
-    npm install -g urchin npm-update-outdated shelljs js-beautify"
+  if os::OSX; then
+    zsh::eval "http_proxy='' https_proxy='' \
+      npm install -g urchin npm-update-outdated shelljs js-beautify"
+  else
+    zsh::eval "http_proxy='' https_proxy='' \
+      sudo npm install -g urchin npm-update-outdated shelljs js-beautify"
+  fi
   zsh::eval 'ln -sf ~/.xbindkeysrc.viminsert.scm ~/.xbindkeysrc.scm'
   if os::LINUX; then
     zsh::eval 'command rm ~/.ssh/assh.d/gmac.yml'
