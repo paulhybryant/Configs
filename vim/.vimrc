@@ -141,7 +141,7 @@ catch /E117:/
   finish
 endtry
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
-NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 0 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " }}}
 " Bundles {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
@@ -157,7 +157,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion of words in adjacent panes
+  NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
   " {{{2
   NeoBundle 'DeaR/vim-scratch', {
     \ 'on_cmd' : ['ScratchOpen'],
@@ -367,7 +367,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'bling/vim-airline'                                                 " Lean & mean status/tabline for vim that's light as air
+  NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
     let g:airline_detect_paste = 1
@@ -393,6 +393,11 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:airline#extensions#whitespace#enabled = 1
     let g:airline_powerline_fonts = 1
   endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'vim-airline/vim-airline-themes', {
+    \ 'depends' : ['vim-airline/vim-airline'],
+    \ }                                                                         " vim-airline themes
   " }}}
   " {{{2
   NeoBundle 'chiphogg/vim-vtd', {
