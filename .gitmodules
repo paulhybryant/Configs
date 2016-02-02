@@ -1,15 +1,6 @@
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "oh-my-zsh/.oh-my-zsh"]
-	path = oh-my-zsh/.oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "third_party/antigen"]
-	path = third_party/antigen
-	url = https://github.com/zsh-users/antigen.git
-[submodule "misc/.fzf"]
-	path = misc/.fzf
-	url = https://github.com/junegunn/fzf.git
 [submodule "zsh/.antigen/repos/.zprezto"]
 	path = zsh/.antigen/repos/.zprezto
 	url = git@github.com:paulhybryant/prezto.git
