@@ -19,7 +19,7 @@
 
   alias = config --get-regexp ^alias\\.
 
-  export = "!gitexport() { if [[ $# -ne 2 ]]; then echo 'Usage: git export [branch] [output]'; exit 1; fi; git archive --format=tar --output $2 $1; }; gitexport"
+  export = !"gitexport() { if [[ $# -ne 2 ]]; then echo 'Usage: git export [branch] [output]'; exit 1; fi; git archive --format=tar --output $2 $1; }; gitexport"
 
   ignored = ls-files --others -i --exclude-standard
 
@@ -29,7 +29,7 @@
   ; pa = !"git pull --recurse-submodules; git submodule update --remote --merge"
   p = !"git submodule update --init --recursive; git pull --recurse-submodules --remote"
 
-  pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach git pull; git::has-remote upstream && git fetch upstream -v && git merge upstream/master"
+  pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach 'git pull && ((git remote | grep upstream && git fetch upstream -v && git merge upstream/master) || true)';"
 
   ; Push changes for submodules also
   ; pu = push --recurse-submodules=on-demand
