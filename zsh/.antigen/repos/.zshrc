@@ -71,12 +71,16 @@ antigen bundle uvaes/fzf-marks
 antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
 
+if [[ -f ~/.antigen.local ]]; then
+  source ~/.antigen.local
+fi
+
+antigen apply
+
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-antigen apply
 
 if zstyle -t ":registry:var:tty" registry 'virtual'; then
   prompt powerline-shell
