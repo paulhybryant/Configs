@@ -47,8 +47,6 @@ stty start undef
 # stty eof undef
 # bindkey -s '^D' 'exit^M'
 
-autoload -Uz bashcompinit && bashcompinit
-
 source ~/.antigen/repos/antigen/antigen.zsh
 
 # ZDOTDIR is set here
@@ -67,11 +65,16 @@ pmodload "${pmodules[@]}"
 unset pmodules
 
 # Wrapper for peco/percol/fzf
-antigen bundle mollifier/anyframe
+# antigen bundle mollifier/anyframe
 antigen bundle mollifier/zload
 antigen bundle uvaes/fzf-marks
 antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
+
+# Local configurations
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
 
 antigen apply
 
@@ -79,11 +82,6 @@ if zstyle -t ":registry:var:tty" registry 'virtual'; then
   prompt powerline-shell
 else
   prompt clint
-fi
-
-# Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
 fi
 
 if [[ -n ${PROFILING+1} ]]; then

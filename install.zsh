@@ -19,7 +19,7 @@ local log
 log=$(mktemp)
 
 printf 'Sourcing antigen...\n' | tee "${log}"
-source <(curl -sL https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh) || return 1
+source <(curl -sL https://raw.githubusercontent.com/paulhybryant/antigen/master/antigen.zsh) || return 1
 
 [[ -n ${verbose} ]] && setopt verbose
 local url="$(-antigen-resolve-bundle-url 'https://github.com/paulhybryant/dotfiles.git')"
