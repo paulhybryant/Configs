@@ -7,9 +7,6 @@
 [submodule "third_party/antigen"]
 	path = third_party/antigen
 	url = https://github.com/zsh-users/antigen.git
-[submodule "zsh/.antigen/repos/antigen"]
-	path = zsh/.antigen/repos/antigen
-	url = https://github.com/zsh-users/antigen.git
 [submodule "misc/.fzf"]
 	path = misc/.fzf
 	url = https://github.com/junegunn/fzf.git
