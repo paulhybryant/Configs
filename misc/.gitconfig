@@ -29,7 +29,7 @@
   ; pa = !"git pull --recurse-submodules; git submodule update --remote --merge"
   p = !"git submodule update --init --recursive; git pull --recurse-submodules --remote"
 
-  pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach git pull"
+  pa = !"git submodule update --init --recursive; git submodule foreach git checkout master; git submodule foreach git pull; git::has-remote upstream && git fetch upstream -v && git merge upstream/master"
 
   ; Push changes for submodules also
   ; pu = push --recurse-submodules=on-demand
