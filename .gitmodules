@@ -4,3 +4,6 @@
 [submodule "zsh/.antigen/repos/.zprezto"]
 	path = zsh/.antigen/repos/.zprezto
 	url = git@github.com:paulhybryant/prezto.git
+[submodule "zsh/.antigen/repos/antigen"]
+	path = zsh/.antigen/repos/antigen
+	url = git@github.com:paulhybryant/antigen.git
