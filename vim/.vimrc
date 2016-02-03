@@ -8,7 +8,6 @@ let g:mapleader = ','
 let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
-" let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 let s:is_windows =
   \ has('win16') || has('win32') || has('win64') || has('win95')
 let s:is_cygwin = has('win32unix')
@@ -18,31 +17,6 @@ let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
 " }}}
 " Vim options {{{1
 function s:SetVimOptions()
-  " Windows Compatible {{{2
-  if s:is_windows
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-
-    let $TERM = 'win32'
-    " On Windows, also use '.vim' instead of 'vimfiles'. It makes synchronization
-    " across (heterogeneous) systems easier.
-    set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-    " Be nice and check for multi_byte even if the config requires
-    " multi_byte support most of the time
-    if has('multi_byte')
-      " Windows cmd.exe still uses cp850. If Windows ever moved to
-      " Powershell as the primary terminal, this would be utf-8
-      set termencoding=cp850
-      setglobal fileencoding=utf-8
-      " Windows has traditionally used cp1252, so it's probably wise to
-      " fallback into cp1252 instead of eg. iso-8859-15.
-      " Newer Windows files might contain utf-8 or utf-16 LE so we might
-      " want to try them first.
-      set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-    endif
-    set shellslash
-  endif
-  " }}}
   filetype plugin indent on                                                     " Automatically detect file types.
   syntax on                                                                     " Syntax highlighting
   " Can also use the let syntax to set these options. e.g. let &autoindent = 1
@@ -134,9 +108,7 @@ catch /E117:/
   echohl ErrorMsg
   echom "Error setting up neobundle. Make sure neobundle is installed and"
     \ s:bundle_base_path "is the correct bundle base directory."
-  echohl Nonek
-  filetype plugin indent on                                                     " Automatically detect file types.
-  syntax on                                                                     " Syntax highlighting
+  echohl None
   call s:SetVimOptions()
   finish
 endtry
@@ -153,7 +125,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
-  NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
+  " NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
@@ -410,33 +382,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/blob/vba/Align.vba.gz', {
-    \ 'lazy' : 1,
-    \ 'name' : 'Align',
-    \ 'frozen' : 1,
-    \ 'regular_namne' : 'Align',
-    \ 'type' : 'vba',
-    \ }                                                                         " Alinghing texts based on specific charater etc
-  " }}}
-  " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/'.
-    \ 'dotfiles/master/blob/vba/Decho.vba.gz', {
-    \ 'on_cmd' : ['Decho'],
-    \ 'on_ft' : ['vim'],
-    \ 'name' : 'Decho',
-    \ 'regular_namne' : 'Decho',
-    \ 'frozen' : 1,
-    \ 'type' : 'vba',
-    \ }                                                                         " Debug echo for debuging vim plugins
-  let s:decho = neobundle#get('Decho')
-  function! s:decho.hooks.on_source(bundle)
-    let g:decho_enable = 0
-    let g:dechofuncname = 1
-    let g:decho_winheight = 10
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
     \ 'name' : 'Mark',
     \ 'regular_namne' : 'Mark',
@@ -460,23 +405,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:buffergator_autoupdate = 1
     let g:buffergator_suppress_keymaps = 1
     noremap <unique> <leader>bg :BuffergatorOpen<CR>
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'jphustman/SQLUtilities', {
-    \ 'depends' : ['Align'],
-    \ 'on_ft' : ['sql'],
-    \ }                                                                         " Utilities for editing SQL scripts (v7.0)
-  let s:sqlutilities = neobundle#get('SQLUtilities')
-  function! s:sqlutilities.hooks.on_source(bundle)
-    let g:sqlutil_align_comma = 0
-    if (neobundle#is_sourced('vim-codefmt') ||
-      \ maktaba#plugin#IsRegistered('codefmt'))
-      \ && neobundle#is_installed('vimutils')
-      let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
-      call l:codefmt_registry.AddExtension(
-        \ vimutils#sqlformatter#GetSQLFormatter())
-    endif
   endfunction
   " }}}
   " {{{2
@@ -573,25 +501,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
       \ }
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'scrooloose/nerdtree', {
-    \ 'lazy' : 1,
-    \ }                                                                         " File explorer inside vim
-  let s:nerdtree = neobundle#get('nerdtree')
-  function! s:nerdtree.hooks.on_source(bundle)
-    let g:NERDShutUp = 1
-    let g:NERDTreeChDirMode = 1
-    let g:NERDTreeIgnore = [
-      \ '\.pyc', '\~$', '\.swo$', '\.swp$',
-      \ '\.git', '\.hg', '\.svn', '\.bzr']
-    let g:NERDTreeMouseMode = 2
-    let g:NERDTreeQuitOnOpen = 0                                                " Keep NERDTree open after click
-    let g:NERDTreeShowBookmarks = 1
-    let g:NERDTreeShowHidden = 1
-    let g:nerdtree_tabs_open_on_gui_startup = 0
-    nnoremap <unique> <C-e> :NERDTreeToggle %<CR>
   endfunction
   " }}}
   " {{{2
@@ -701,49 +610,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   function! s:reload_script.hooks.on_source(bundle)
     nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
   endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'vim-scripts/sql.vim--Stinson', {
-    \ 'on_ft' : ['sql'],
-    \ }                                                                         " Better SQL syntax highlighting
-  " }}}
-  " {{{2
-  NeoBundle 'vim-utils/vim-line'                                                " Vim inner line text object
-  let s:vimline = neobundle#get('vim-line')
-  function s:vimline.hooks.on_source(bundle)
-    omap <unique> <silent> il  <Plug>(inner_line)
-    xmap <unique> <silent> il  <Plug>(inner_line)
-    omap <unique> <silent> al  $
-    xmap <unique> <silent> al  $
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'xolox/vim-notes', {
-    \ 'depends' : ['xolox/vim-misc'],
-    \ 'on_cmd' : [{'name' : [ 'Note' ],
-    \              'complete' : 'customlist,xolox#notes#cmd_complete'}],
-    \ }                                                                         " Note taking with vim
-  NeoBundle 'xolox/vim-misc', {
-    \ 'lazy' : 1,
-    \ }                                                                         " Utility functions for plugins from xolox
-  let s:vimnotes = neobundle#get('vim-notes')
-  function! s:vimnotes.hooks.on_source(bundle)
-    let g:notes_directories = ['~/.vim/.vimnotes']
-    let g:notes_suffix = '.txt'
-    let g:notes_indexfile = '~/.vim/.vimnotes/notes.idx'
-    let g:notes_tagsindex = '~/.vim/.vimnotes/notes.tags'
-  endfunction
-  " }}}
-  " Windows Plugins {{{2
-  if s:is_windows
-    NeoBundle 'vim-scripts/Tail-Bundle'                                         " Tail for windows in vim
-    NeoBundle 'wincent/Command-T'
-    " {{{3
-    NeoBundle 'sgur/unite-everything', {
-      \ 'depends' : [ 'Shougo/unite.vim' ],
-      \ }                                                                       " Unite source for everything
-    " }}}
-  endif
   " }}}
 " }}}
 " Local bundles and config {{{1

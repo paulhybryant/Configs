@@ -71,8 +71,8 @@ antigen bundle uvaes/fzf-marks
 antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
 
-if [[ -f ~/.antigen.local ]]; then
-  source ~/.antigen.local
+if [[ -f ~/.antigen/.local ]]; then
+  source ~/.antigen/.local
 fi
 
 antigen apply
