@@ -141,11 +141,10 @@ catch /E117:/
   finish
 endtry
 NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
-NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 0 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
 " }}}
 " Bundles {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'Shougo/context_filetype.vim'                                       " Context filetype
   NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
@@ -365,39 +364,6 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 0 }                       
   function s:camelcasemotion.hooks.on_source(bundle)
     call camelcasemotion#CreateMotionMappings('<leader>')
   endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
-  let s:airline = neobundle#get('vim-airline')
-  function! s:airline.hooks.on_source(bundle)
-    let g:airline_detect_paste = 1
-    let g:airline_detect_modified = 1
-    let g:airline#extensions#nrrwrgn#enabled = 1
-    let g:airline#extensions#branch#use_vcscommand = 0
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#show_tab_type = 1
-    let g:airline#extensions#tabline#show_buffers = 1
-    let g:airline#extensions#tabline#show_tabs = 1
-    let g:airline#extensions#tabline#show_tabs_nr = 1
-    let g:airline#extensions#tabline#left_sep = ''
-    let g:airline#extensions#tabline#left_alt_sep = ''
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
-    let g:airline_theme = 'powerlineish'
-    " let g:airline#extensions#tabline#formatter = 'customtab'
-    " let g:airline#extensions#taboo#enabled = 1
-    let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
-    let g:airline#extensions#tmuxline#color_template = 'normal'
-    " let g:airline#extensions#tmuxline#snapshot_file =
-      " \ '~/.tmux-statusline-colors.conf'
-    let g:airline#extensions#hunks#enabled = 1
-    let g:airline#extensions#whitespace#enabled = 1
-    let g:airline_powerline_fonts = 1
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'vim-airline/vim-airline-themes', {
-    \ 'depends' : ['vim-airline/vim-airline'],
-    \ }                                                                         " vim-airline themes
   " }}}
   " {{{2
   NeoBundle 'chiphogg/vim-vtd', {
@@ -687,6 +653,39 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 0 }                       
   NeoBundle 'tyru/capture.vim', {
     \   'on_cmd' : ['Capture'],
     \ }                                                                         " Capture Ex command output to buffer
+  " }}}
+  " {{{2
+  NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
+  let s:airline = neobundle#get('vim-airline')
+  function! s:airline.hooks.on_source(bundle)
+    let g:airline_detect_paste = 1
+    let g:airline_detect_modified = 1
+    let g:airline#extensions#nrrwrgn#enabled = 1
+    let g:airline#extensions#branch#use_vcscommand = 0
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_tab_type = 1
+    let g:airline#extensions#tabline#show_buffers = 1
+    let g:airline#extensions#tabline#show_tabs = 1
+    let g:airline#extensions#tabline#show_tabs_nr = 1
+    let g:airline#extensions#tabline#left_sep = ''
+    let g:airline#extensions#tabline#left_alt_sep = ''
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    let g:airline_theme = 'powerlineish'
+    " let g:airline#extensions#tabline#formatter = 'customtab'
+    " let g:airline#extensions#taboo#enabled = 1
+    let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
+    let g:airline#extensions#tmuxline#color_template = 'normal'
+    " let g:airline#extensions#tmuxline#snapshot_file =
+      " \ '~/.tmux-statusline-colors.conf'
+    let g:airline#extensions#hunks#enabled = 1
+    let g:airline#extensions#whitespace#enabled = 1
+    let g:airline_powerline_fonts = 1
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'vim-airline/vim-airline-themes', {
+    \ 'depends' : ['vim-airline/vim-airline'],
+    \ }                                                                         " vim-airline themes
   " }}}
   " {{{2
   NeoBundle 'vim-ruby/vim-ruby', {
