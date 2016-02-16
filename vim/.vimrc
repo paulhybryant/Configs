@@ -117,7 +117,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
 " }}}
 " Bundles {{{1
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
+  " NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
@@ -128,15 +128,15 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
+  " NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
   " {{{2
-  NeoBundle 'DeaR/vim-scratch', {
-    \ 'on_cmd' : ['ScratchOpen'],
-    \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
-  let s:vimscratch = neobundle#get('vim-scratch')
-  function! s:vimscratch.hooks.on_source(bundle)
-    vnoremap <unique> <CR> <Plug>(scrath-evaluate)
-  endfunction
+  " NeoBundle 'DeaR/vim-scratch', {
+    " \ 'on_cmd' : ['ScratchOpen'],
+    " \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
+  " let s:vimscratch = neobundle#get('vim-scratch')
+  " function! s:vimscratch.hooks.on_source(bundle)
+    " vnoremap <unique> <CR> <Plug>(scrath-evaluate)
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
@@ -340,7 +340,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   " {{{2
   NeoBundle 'chiphogg/vim-vtd', {
     \ 'on_ft' : ['vtd'],
-    \ } " Manage TODO in vim
+    \ }                                                                         " Manage TODO in vim
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
     Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
@@ -369,9 +369,9 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'google/vim-ft-vroom', {
-    \ 'on_ft' : ['vroom'],
-    \ }                                                                         " Filetype plugin for vroom
+  " NeoBundle 'google/vim-ft-vroom', {
+    " \ 'on_ft' : ['vroom'],
+    " \ }                                                                         " Filetype plugin for vroom
   " }}}
   " {{{2
   NeoBundle 'google/vim-glaive'                                                 " Plugin for better vim plugin configuration
@@ -541,12 +541,12 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simultaneously
-  let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
-  function! s:vimmulticursors.hooks.on_source(bundle)
-    nnoremap <unique> <leader>mcf
-      \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
-  endfunction
+  " NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simultaneously
+  " let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
+  " function! s:vimmulticursors.hooks.on_source(bundle)
+    " nnoremap <unique> <leader>mcf
+      " \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'thinca/vim-ft-markdown_fold', {

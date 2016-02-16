@@ -27,7 +27,7 @@ declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -xg HELPDIR="$BREWHOME/share/zsh/help"
 declare -xg VISUAL="$EDITOR"
 declare -xg GIT_EDITOR="$EDITOR"
-declare -xg GREP_OPTIONS='--color=auto'
+declare -xg GREP_OPTIONS='--color=auto -H'
 declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
   `--no-init --raw-control-chars"
 declare -xg PAGER='most'
@@ -51,18 +51,6 @@ source ~/.antigen/repos/antigen/antigen.zsh
 
 # ZDOTDIR is set here
 antigen use prezto
-local pmodules
-zstyle ':prezto:environment:termcap' color yes
-zstyle ':prezto:module:syntax-highlighting' color yes
-zstyle ':completion:*' show-completer true
-zstyle ':prezto:module:prompt' theme 'powerline-shell'
-zstyle ':prezto:module:editor' key-bindings 'vi'
-# Order matters!
-pmodules=(environment directory helper editor completion git homebrew fasd \
-  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
-# zstyle ':prezto:load' pmodule ${pmodules[@]}
-pmodload "${pmodules[@]}"
-unset pmodules
 
 # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/anyframe
@@ -70,6 +58,18 @@ antigen bundle mollifier/zload
 antigen bundle uvaes/fzf-marks
 antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
+
+local pmodules
+zstyle ':prezto:environment:termcap' color yes
+zstyle ':prezto:module:syntax-highlighting' color yes
+zstyle ':completion:*' show-completer true
+zstyle ':prezto:module:editor' key-bindings 'vi'
+# Order matters!
+pmodules=(environment directory helper editor completion git homebrew fasd \
+  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
+# zstyle ':prezto:load' pmodule ${pmodules[@]}
+pmodload "${pmodules[@]}"
+unset pmodules
 
 if [[ -f ~/.antigen/.local ]]; then
   source ~/.antigen/.local
@@ -80,12 +80,6 @@ antigen apply
 # Local configurations
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
-fi
-
-if zstyle -t ":registry:var:tty" registry 'virtual'; then
-  prompt powerline-shell
-else
-  prompt clint
 fi
 
 if [[ -n ${PROFILING+1} ]]; then
