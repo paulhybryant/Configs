@@ -23,17 +23,6 @@
 
   ignored = ls-files --others -i --exclude-standard
 
-  pr = pull --recurse-submodules
-
-  ; Pull in remote changes for the current repository and all its submodules
-  ; pa = !"git pull --recurse-submodules; git submodule update --remote --merge"
-  p = !"git submodule update --init --recursive; git pull --recurse-submodules --remote"
-
-  pa = !"git submodule update --init --recursive; git submodule foreach 'git checkout master && git pull && ((git remote | grep upstream && git fetch upstream -v && git merge upstream/master) || true)';"
-
-  ; Push changes for submodules also
-  ; pu = push --recurse-submodules=on-demand
-
   ; Pull from upstream and merge
   mu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
 
