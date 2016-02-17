@@ -120,7 +120,7 @@ function bootstrap::brewinstall() {
   # zsh::eval 'brew gem install automux'
   zsh::eval 'brew install --HEAD vimdoc vroom'
   zsh::eval "pip install --upgrade powerline-status neovim \
-    bz2file percol butterfly jedi"
+    percol butterfly jedi pip-autoremove pipdeptree mdview"
   if os::LINUX; then
     # zsh::eval "brew install --disable-nls --override-system-vi \
       # --with-client-server --with-lua --with-luajit --with-gtk+ vim"

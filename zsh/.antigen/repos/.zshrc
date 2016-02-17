@@ -27,7 +27,8 @@ declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
 declare -xg HELPDIR="$BREWHOME/share/zsh/help"
 declare -xg VISUAL="$EDITOR"
 declare -xg GIT_EDITOR="$EDITOR"
-declare -xg GREP_OPTIONS='--color=auto -H'
+# Adding -H breaks scripts uses grep without unsetting GREP_OPTIONS
+declare -xg GREP_OPTIONS="--color=auto"
 declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
   `--no-init --raw-control-chars"
 declare -xg PAGER='most'
