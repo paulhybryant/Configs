@@ -1,5 +1,40 @@
-" vim: filetype=vim shiftwidth=2 tabstop=2 softtabstop=2 expandtab textwidth=80
-" vim: foldlevel=0 foldmethod=marker nospell
+" vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
+
+  " NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
+  " NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
+  " NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
+  " {{{3
+  " NeoBundle 'google/vim-ft-vroom', {
+    " \ 'on_ft' : ['vroom'],
+    " \ }                                                                         " Filetype plugin for vroom
+  " }}}
+  " {{{3
+  " NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simultaneously
+  " let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
+  " function! s:vimmulticursors.hooks.on_source(bundle)
+    " nnoremap <unique> <leader>mcf
+      " \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
+  " endfunction
+  " }}}
+  " {{{3
+  NeoBundle 'vim-scripts/ReloadScript', {
+    \ 'on_cmd' : ['ReloadScript'],
+    \ 'on_ft' : ['vim'],
+    \ }                                                                         " Reload vim script without having to restart vim
+  let s:reload_script = neobundle#get('ReloadScript')
+  function! s:reload_script.hooks.on_source(bundle)
+    nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
+  endfunction
+  " }}}
+  " {{{3
+  " NeoBundle 'DeaR/vim-scratch', {
+    " \ 'on_cmd' : ['ScratchOpen'],
+    " \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
+  " let s:vimscratch = neobundle#get('vim-scratch')
+  " function! s:vimscratch.hooks.on_source(bundle)
+    " vnoremap <unique> <CR> <Plug>(scrath-evaluate)
+  " endfunction
+  " }}}
 
 " let $PYTHONPATH = $PYTHONPATH . expand(':$HOME/.pyutils')
 " windows {{{1

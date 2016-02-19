@@ -1,5 +1,4 @@
-" vim: filetype=vim shiftwidth=2 tabstop=2 softtabstop=2 expandtab textwidth=80
-" vim: foldlevel=0 foldmethod=marker nospell
+" vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 " Globals {{{1
 set nocompatible                                                                " Must be first line
 set encoding=utf-8                                                              " Set text encoding default to utf-8
@@ -17,8 +16,8 @@ let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
 " }}}
 " Vim options {{{1
 function s:SetVimOptions()
-  filetype plugin indent on                                                     " Automatically detect file types.
-  syntax on                                                                     " Syntax highlighting
+  filetype plugin indent on                                                   " Automatically detect file types.
+  syntax on                                                                   " Syntax highlighting
   " Can also use the let syntax to set these options. e.g. let &autoindent = 1
   " let &wrapscan = 0 is the same as set nowrapscan
   " let &l:wrapscan = 0 is the same as setlocal nowrapscan
@@ -83,13 +82,11 @@ function s:SetVimOptions()
   set comments=sl:/*,mb:*,elx:*/                                              " auto format comment blocks
   " let &shellcmdflag = '-f ' . &shellcmdflag                                 " For zsh to not load any RC file
   " set shell=/bin/sh                                                         " Sometimes shell can cause vim system command to be slow
-
   if &diff
     set nospell                                                               " No spellcheck
   else
     set spell                                                                 " Spellcheck
   endif
-
   if has ('x11') && (s:is_linux || s:is_mac)                                  " On Linux and Mac use + register
     set clipboard=unnamedplus
   else                                                                        " On Windows use * register
@@ -97,27 +94,18 @@ function s:SetVimOptions()
   endif
 endfunction
 " }}}
-" NeoBundle Begin {{{1
-if has('vim_starting')
-  let s:bundle_base_path = expand('~/.vim/bundle/')
-  execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
-endif
-try
-  call neobundle#begin(s:bundle_base_path)
-catch /E117:/
-  echohl ErrorMsg
-  echom "Error setting up neobundle. Make sure neobundle is installed and"
-    \ s:bundle_base_path "is the correct bundle base directory."
-  echohl None
+" NeoBundle {{{1
+let s:bundle_base_path = expand('~/.vim/bundle/')
+if !isdirectory(s:bundle_base_path . 'neobundle.vim/')
   call s:SetVimOptions()
   finish
-endtry
-NeoBundleFetch 'Shougo/neobundle.vim'                                           " Plugin manager
-NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-" }}}
-" Bundles {{{1
+endif
+" NeoBundles {{{2
+  execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
+  call neobundle#begin(s:bundle_base_path)
+  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
+  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  " NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
@@ -125,20 +113,9 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
-  " NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  " NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
-  " {{{2
-  " NeoBundle 'DeaR/vim-scratch', {
-    " \ 'on_cmd' : ['ScratchOpen'],
-    " \ }                                                                         " Creates a scratch buffer, can evaluate the expression there
-  " let s:vimscratch = neobundle#get('vim-scratch')
-  " function! s:vimscratch.hooks.on_source(bundle)
-    " vnoremap <unique> <CR> <Plug>(scrath-evaluate)
-  " endfunction
-  " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],
     \ 'disabled' : !has('lua'),
@@ -223,7 +200,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     autocmd FileType c,cpp,go,python NeoCompleteLock
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'Shougo/unite.vim', {
     \ 'recipe' : 'unite',
     \ }                                                                         " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
@@ -240,7 +217,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'Shougo/vimproc.vim', {
     \   'build' : {
     \     'windows' : 'tools\\update-dll-mingw',
@@ -251,7 +228,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \   }
     \ }                                                                         " Enable background process and multi-threading
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'SirVer/ultisnips', {
     \ 'disabled' : !has('python'),
     \ }                                                                         " Define and insert snippets
@@ -262,7 +239,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:UltiSnipsExpandTrigger = "<tab>"
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'Valloric/YouCompleteMe', {
     \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
     \ }                                                                         " Python based multi-language completion engine
@@ -313,7 +290,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:ycm_warning_symbol = '>>'
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'airblade/vim-gitgutter', {
     \ 'disabled' : &diff,
     \ }                                                                         " Show sign at changes from last commit
@@ -322,7 +299,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:gitgutter_highlight_lines = 1
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
@@ -330,14 +307,14 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     colorscheme solarized
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   let s:camelcasemotion = neobundle#get('CamelCaseMotion')
   function s:camelcasemotion.hooks.on_source(bundle)
     call camelcasemotion#CreateMotionMappings('<leader>')
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'chiphogg/vim-vtd', {
     \ 'on_ft' : ['vtd'],
     \ }                                                                         " Manage TODO in vim
@@ -346,7 +323,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
   function! s:tmux_navigator.hooks.on_source(bundle)
@@ -357,7 +334,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     inoremap <unique> <C-k> <ESC><C-k>
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'google/vim-codefmt', {
     \ 'on_ft' : ['cpp', 'javascript', 'sql'],
     \ }                                                                         " Code formating plugin from google
@@ -368,19 +345,14 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     " java formatter: https://github.com/google/google-java-format
   endfunction
   " }}}
-  " {{{2
-  " NeoBundle 'google/vim-ft-vroom', {
-    " \ 'on_ft' : ['vroom'],
-    " \ }                                                                         " Filetype plugin for vroom
-  " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'google/vim-glaive'                                                 " Plugin for better vim plugin configuration
   let s:glaive = neobundle#get('vim-glaive')
   function s:glaive.hooks.on_source(bundle)
     call glaive#Install()
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
     \ 'name' : 'Mark',
@@ -394,10 +366,8 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
   endfunction
   " }}}
-  " {{{2
-  NeoBundle 'jeetsukumaran/vim-buffergator', {
-    \   'on_cmd' : [ 'BuffergatorOpen', 'BuffergatorToggle' ]
-    \ }                                                                         " Buffer selector in vim
+  " {{{3
+  NeoBundle 'jeetsukumaran/vim-buffergator'                                     " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
     let g:buffergator_viewport_split_policy = 'L'
@@ -407,7 +377,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     noremap <unique> <leader>bg :BuffergatorOpen<CR>
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'ntpeters/vim-better-whitespace'                                    " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
@@ -415,17 +385,17 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     nnoremap <unique> <leader>sw :ToggleStripWhitespaceOnSave<CR>
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {
     \ 'on_ft' : ['cpp'],
     \ }                                                                         " Enhanced vim cpp highlight
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'paulhybryant/file-line', {
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " Open files and go to specific line and column (original user not active)
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'paulhybryant/relatedfiles', {
     \ 'on_ft' : ['cpp'],
     \ 'type__protocol' : 'ssh',
@@ -441,12 +411,12 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'paulhybryant/vim-autoclose', {
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " Automatically close brackets
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'paulhybryant/vimutils', {
     \ 'type__protocol' : 'ssh',
     \ }                                                                         " My vim customization (utility functions, syntax etc)
@@ -478,7 +448,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
       \ vimutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'plasticboy/vim-markdown', {
     \ 'on_ft' : ['markdown'],
     \ 'directory' : 'plasticboy-markdown',
@@ -486,12 +456,12 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     \ 'regular_name' : 'plasticboy-markdown',
     \ }                                                                         " Yet another markdown syntax highlighting
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'rking/ag.vim', {
     \ 'disabled' : !executable('ag'),
     \ }                                                                         " Text based search tool using the silver searcher
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'scrooloose/nerdcommenter'                                          " Plugin for adding comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
@@ -503,7 +473,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:NERDUsePlaceHolders = 0
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'scrooloose/syntastic'                                              " Check syntax with external syntax checker
   let s:syntastic = neobundle#get('syntastic')
   function! s:syntastic.hooks.on_source(bundle)
@@ -516,7 +486,7 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
   let s:expand_region = neobundle#get('vim-expand-region')
   function! s:expand_region.hooks.on_source(bundle)
@@ -540,30 +510,22 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
       \ })
   endfunction
   " }}}
-  " {{{2
-  " NeoBundle 'terryma/vim-multiple-cursors'                                      " Insert words at multiple places simultaneously
-  " let s:vimmulticursors = neobundle#get('vim-multiple-cursors')
-  " function! s:vimmulticursors.hooks.on_source(bundle)
-    " nnoremap <unique> <leader>mcf
-      " \ :execute 'MultipleCursorsFind \<' . expand('<cword>') . '\>'<CR>
-  " endfunction
-  " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'thinca/vim-ft-markdown_fold', {
     \ 'on_ft' : ['markdown'],
     \ }                                                                         " Fold markdown
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'tmux-plugins/vim-tmux', {
     \ 'on_ft' : ['tmux'],
     \ }                                                                         " Vim plugin for editing .tmux.conf
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'tyru/capture.vim', {
     \   'on_cmd' : ['Capture'],
     \ }                                                                         " Capture Ex command output to buffer
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
@@ -591,33 +553,22 @@ NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                       
     let g:airline_powerline_fonts = 1
   endfunction
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'vim-airline/vim-airline-themes', {
     \ 'depends' : ['vim-airline/vim-airline'],
     \ }                                                                         " vim-airline themes
   " }}}
-  " {{{2
+  " {{{3
   NeoBundle 'vim-ruby/vim-ruby', {
     \ 'on_ft' : ['ruby'],
     \ }                                                                         " Vim plugin for editing ruby files.
   " }}}
-  " {{{2
-  NeoBundle 'vim-scripts/ReloadScript', {
-    \ 'on_cmd' : ['ReloadScript'],
-    \ 'on_ft' : ['vim'],
-    \ }                                                                         " Reload vim script without having to restart vim
-  let s:reload_script = neobundle#get('ReloadScript')
-  function! s:reload_script.hooks.on_source(bundle)
-    nnoremap <unique> <leader>rl :ReloadScript %:p<CR>
-  endfunction
+  " Local bundles {{{3
+  if filereadable(expand('~/.vimrc.local'))
+    execute 'source' expand('~/.vimrc.local')
+  endif
   " }}}
 " }}}
-" Local bundles and config {{{1
-if filereadable(expand('~/.vimrc.local'))
-  execute 'source' expand('~/.vimrc.local')
-endif
-" }}}
-" NeoBundle End {{{1
 call neobundle#end()
 NeoBundleCheck
 call s:SetVimOptions()
