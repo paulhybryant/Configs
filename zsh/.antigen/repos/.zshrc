@@ -1,7 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 # /etc/zshenv will be loaded before zshrc. In OSX, the path_helper binary
-# is called in /etc/zshenv, which reorders the entries in $PATH, causing problems.
+# is called in /etc/zshenv, which reorders the entries in $PATH and makes
+# homebrew's bin directory to appear after system bin directory.
 path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
   $BREWHOME/opt/go/libexec/bin $path)
 
@@ -49,10 +50,8 @@ stty start undef
 # bindkey -s '^D' 'exit^M'
 
 source ~/.antigen/repos/antigen/antigen.zsh
-
 # ZDOTDIR is set here
 antigen use prezto
-
 # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/anyframe
 antigen bundle mollifier/zload
@@ -75,7 +74,6 @@ unset pmodules
 if [[ -f ~/.antigen/.local ]]; then
   source ~/.antigen/.local
 fi
-
 antigen apply
 
 # Local configurations
