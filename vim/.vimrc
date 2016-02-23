@@ -14,95 +14,12 @@ let s:is_mac = !s:is_windows && !s:is_cygwin
   \ && (has('mac') || has('macunix') || has('gui_macvim'))
 let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
 " }}}
-" Vim options {{{1
-function s:SetVimOptions()
-  filetype plugin indent on                                                   " Automatically detect file types.
-  syntax on                                                                   " Syntax highlighting
-  " Can also use the let syntax to set these options. e.g. let &autoindent = 1
-  " let &wrapscan = 0 is the same as set nowrapscan
-  " let &l:wrapscan = 0 is the same as setlocal nowrapscan
-  " The let syntax is useful for setting option with another option's value.
-  set autoindent                                                              " Indent at the same level of the previous line
-  set autoread                                                                " Automatically load changed files
-  set autowrite                                                               " Automatically write a file when leaving a modified buffer
-  set background=dark                                                         " Assume a dark background
-  set backspace=indent,eol,start                                              " Backspace for dummies
-  set backup                                                                  " Whether saves a backup before editing
-  set cmdheight=2                                                             " Height of the cmd line
-  set cursorline                                                              " Highlight current line
-  set cursorcolumn                                                            " Highlight current line
-  set expandtab                                                               " Tabs are spaces, not tabs
-  set foldcolumn=5                                                            " Fold indicators on the left
-  set foldenable                                                              " Auto fold code
-  set hidden                                                                  " Allow buffer switching without saving
-  set history=1000                                                            " Store a ton of history (default is 20)
-  set hlsearch                                                                " Highlight search terms
-  set ignorecase                                                              " Case insensitive search
-  set imdisable                                                               " Disable IME in vim
-  set incsearch                                                               " Find as you type search
-  set laststatus=2                                                            " Always show statusline
-  set linespace=0                                                             " No extra spaces between rows
-  set list                                                                    " Display unprintable characters
-  set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                              " Highlight problematic whitespace
-  set matchpairs+=<:>                                                         " Match, to be used with %
-  set modeline                                                                " Mac disables modeline by default
-  set modelines=5                                                             " Mac sets it to 0 by default
-  set mouse=a                                                                 " Automatically enable mouse usage
-  set mousehide                                                               " Hide the mouse cursor while typing
-  set number                                                                  " Line numbers on
-  set pastetoggle=<F12>                                                       " pastetoggle (sane indentation on paste)
-  set ruler                                                                   " Show the ruler
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                          " A ruler on steroids
-  set scrolljump=5                                                            " Lines to scroll when cursor leaves screen
-  set scrolloff=0                                                             " Minimum lines to keep above and below cursor
-  set shiftround                                                              " Round indent to multiple of shiftwidth
-  set shiftwidth=2                                                            " Use indents of 2 spaces
-  set shortmess+=filmnrxoOtT                                                  " Abbrev. of messages (avoids 'hit enter')
-  set showcmd                                                                 " Show partial commands in status line and selected text in visual mode
-  set showmatch                                                               " Show matching brackets/parenthesis
-  set showmode                                                                " Display the current mode
-  set showtabline=2                                                           " Always show the tabline
-  set smartcase                                                               " Case sensitive when uppercase present
-  set softtabstop=2                                                           " Let backspace delete indent
-  " set splitbelow                                                            " Create the split at the bottom when split horizontally
-  set splitright                                                              " Create the split on the right when split vertically
-  set t_Co=256                                                                " Set number of colors supported by term
-  set tabstop=2                                                               " An indentation every two columns
-  " set term=$TERM                                                            " Make arrow and other keys work
-  set undofile                                                                " Persists undo
-  set undolevels=1000                                                         " Maximum number of changes that can be undone
-  set undoreload=10000                                                        " Save the whole buffer for undo when reloading it
-  set viewoptions=folds,options,cursor,unix,slash                             " Better Unix / Windows compatibility
-  set whichwrap=b,s,h,l,<,>,[,]                                               " Backspace and cursor keys wrap too
-  set wildmenu                                                                " Show list instead of just completing
-  set wildmode=list:longest,full                                              " Command <Tab> completion, list matches, then longest common part, then all
-  set winminheight=0                                                          " Windows can be 0 line high
-  set wrap                                                                    " Wrap long lines
-  set nowrapscan                                                              " Make regex search wrap to the start of the file
-  set comments=sl:/*,mb:*,elx:*/                                              " auto format comment blocks
-  " let &shellcmdflag = '-f ' . &shellcmdflag                                 " For zsh to not load any RC file
-  " set shell=/bin/sh                                                         " Sometimes shell can cause vim system command to be slow
-  if &diff
-    set nospell                                                               " No spellcheck
-  else
-    set spell                                                                 " Spellcheck
-  endif
-  if has ('x11') && (s:is_linux || s:is_mac)                                  " On Linux and Mac use + register
-    set clipboard=unnamedplus
-  else                                                                        " On Windows use * register
-    set clipboard=unnamed
-  endif
-endfunction
-" }}}
 " NeoBundle {{{1
 let s:bundle_base_path = expand('~/.vim/bundle/')
-if !isdirectory(s:bundle_base_path . 'neobundle.vim/')
-  call s:SetVimOptions()
-  finish
-endif
-" NeoBundles {{{2
+if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
   call neobundle#begin(s:bundle_base_path)
+" NeoBundles {{{2
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
@@ -569,7 +486,85 @@ endif
   endif
   " }}}
 " }}}
-call neobundle#end()
-NeoBundleCheck
-call s:SetVimOptions()
+  call neobundle#end()
+  NeoBundleCheck
+endif
+" }}}
+" Options {{{1
+filetype plugin indent on                                                   " Automatically detect file types.
+syntax on                                                                   " Syntax highlighting
+" Can also use the let syntax to set these options. e.g. let &autoindent = 1
+" let &wrapscan = 0 is the same as set nowrapscan
+" let &l:wrapscan = 0 is the same as setlocal nowrapscan
+" The let syntax is useful for setting option with another option's value.
+set autoindent                                                              " Indent at the same level of the previous line
+set autoread                                                                " Automatically load changed files
+set autowrite                                                               " Automatically write a file when leaving a modified buffer
+set background=dark                                                         " Assume a dark background
+set backspace=indent,eol,start                                              " Backspace for dummies
+set backup                                                                  " Whether saves a backup before editing
+set cmdheight=2                                                             " Height of the cmd line
+set cursorline                                                              " Highlight current line
+set cursorcolumn                                                            " Highlight current line
+set expandtab                                                               " Tabs are spaces, not tabs
+set foldcolumn=5                                                            " Fold indicators on the left
+set foldenable                                                              " Auto fold code
+set hidden                                                                  " Allow buffer switching without saving
+set history=1000                                                            " Store a ton of history (default is 20)
+set hlsearch                                                                " Highlight search terms
+set ignorecase                                                              " Case insensitive search
+set imdisable                                                               " Disable IME in vim
+set incsearch                                                               " Find as you type search
+set laststatus=2                                                            " Always show statusline
+set linespace=0                                                             " No extra spaces between rows
+set list                                                                    " Display unprintable characters
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                              " Highlight problematic whitespace
+set matchpairs+=<:>                                                         " Match, to be used with %
+set modeline                                                                " Mac disables modeline by default
+set modelines=5                                                             " Mac sets it to 0 by default
+set mouse=a                                                                 " Automatically enable mouse usage
+set mousehide                                                               " Hide the mouse cursor while typing
+set number                                                                  " Line numbers on
+set pastetoggle=<F12>                                                       " pastetoggle (sane indentation on paste)
+set ruler                                                                   " Show the ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                          " A ruler on steroids
+set scrolljump=5                                                            " Lines to scroll when cursor leaves screen
+set scrolloff=0                                                             " Minimum lines to keep above and below cursor
+set shiftround                                                              " Round indent to multiple of shiftwidth
+set shiftwidth=2                                                            " Use indents of 2 spaces
+set shortmess+=filmnrxoOtT                                                  " Abbrev. of messages (avoids 'hit enter')
+set showcmd                                                                 " Show partial commands in status line and selected text in visual mode
+set showmatch                                                               " Show matching brackets/parenthesis
+set showmode                                                                " Display the current mode
+set showtabline=2                                                           " Always show the tabline
+set smartcase                                                               " Case sensitive when uppercase present
+set softtabstop=2                                                           " Let backspace delete indent
+" set splitbelow                                                            " Create the split at the bottom when split horizontally
+set splitright                                                              " Create the split on the right when split vertically
+set t_Co=256                                                                " Set number of colors supported by term
+set tabstop=2                                                               " An indentation every two columns
+" set term=$TERM                                                            " Make arrow and other keys work
+set undofile                                                                " Persists undo
+set undolevels=1000                                                         " Maximum number of changes that can be undone
+set undoreload=10000                                                        " Save the whole buffer for undo when reloading it
+set viewoptions=folds,options,cursor,unix,slash                             " Better Unix / Windows compatibility
+set whichwrap=b,s,h,l,<,>,[,]                                               " Backspace and cursor keys wrap too
+set wildmenu                                                                " Show list instead of just completing
+set wildmode=list:longest,full                                              " Command <Tab> completion, list matches, then longest common part, then all
+set winminheight=0                                                          " Windows can be 0 line high
+set wrap                                                                    " Wrap long lines
+set nowrapscan                                                              " Make regex search wrap to the start of the file
+set comments=sl:/*,mb:*,elx:*/                                              " auto format comment blocks
+" let &shellcmdflag = '-f ' . &shellcmdflag                                 " For zsh to not load any RC file
+" set shell=/bin/sh                                                         " Sometimes shell can cause vim system command to be slow
+if &diff
+  set nospell                                                               " No spellcheck
+else
+  set spell                                                                 " Spellcheck
+endif
+if has ('x11') && (s:is_linux || s:is_mac)                                  " On Linux and Mac use + register
+  set clipboard=unnamedplus
+else                                                                        " On Windows use * register
+  set clipboard=unnamed
+endif
 " }}}
