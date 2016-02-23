@@ -13,20 +13,27 @@ let s:bundle_base_path = expand('~/.vim/bundle/')
 if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
   call neobundle#begin(s:bundle_base_path)
-" NeoBundles {{{2
-  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
+  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
+  NeoBundle 'octol/vim-cpp-enhanced-highlight', { 'on_ft' : ['cpp'] }           " Enhanced vim cpp highlight
+  NeoBundle 'paulhybryant/file-line', { 'type__protocol' : 'ssh' }              " Open files and go to specific line and column (original user not active)
+  NeoBundle 'paulhybryant/vim-autoclose', { 'type__protocol' : 'ssh' }          " Automatically close brackets
+  NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }                  " Text based search tool using the silver searcher
+  NeoBundle 'thinca/vim-ft-markdown_fold', { 'on_ft' : ['markdown'] }           " Fold markdown
+  NeoBundle 'tmux-plugins/vim-tmux', { 'on_ft' : ['tmux'] }                     " Vim plugin for editing .tmux.conf
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
+  NeoBundle 'tyru/capture.vim', { 'on_cmd' : ['Capture'] }                      " Capture Ex command output to buffer
+  NeoBundle 'vim-ruby/vim-ruby', { 'on_ft' : ['ruby'] }                         " Vim plugin for editing ruby files.
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  " {{{3
+  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
+  " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],
     \ 'disabled' : !has('lua'),
@@ -111,10 +118,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     autocmd FileType c,cpp,go,python NeoCompleteLock
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'Shougo/unite.vim', {
-    \ 'recipe' : 'unite',
-    \ }                                                                         " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+  " {{{2
+  NeoBundle 'Shougo/unite.vim', { 'recipe' : 'unite' }                          " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   let s:unite = neobundle#get('unite.vim')
   function! s:unite.hooks.on_source(bundle)
     let g:unite_data_directory = expand('~/.cache/unite')
@@ -128,21 +133,16 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'Shougo/vimproc.vim', {
     \   'build' : {
-    \     'windows' : 'tools\\update-dll-mingw',
-    \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'mac' : 'make -f make_mac.mak',
     \     'linux' : 'make',
     \     'unix' : 'gmake',
     \   }
     \ }                                                                         " Enable background process and multi-threading
   " }}}
-  " {{{3
-  NeoBundle 'SirVer/ultisnips', {
-    \ 'disabled' : !has('python'),
-    \ }                                                                         " Define and insert snippets
+  " {{{2
+  NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }                 " Define and insert snippets
   let s:ultisnips = neobundle#get('ultisnips')
   " If there are multiple ft.snippet files, UltiSnips will only load the first.
   function! s:ultisnips.hooks.on_source(bundle)
@@ -150,7 +150,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:UltiSnipsExpandTrigger = "<tab>"
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'Valloric/YouCompleteMe', {
     \ 'on_ft' : ['c', 'cpp', 'go', 'python'],
     \ }                                                                         " Python based multi-language completion engine
@@ -201,16 +201,14 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:ycm_warning_symbol = '>>'
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'airblade/vim-gitgutter', {
-    \ 'disabled' : &diff,
-    \ }                                                                         " Show sign at changes from last commit
+  " {{{2
+  NeoBundle 'airblade/vim-gitgutter', { 'disabled' : &diff }                    " Show sign at changes from last commit
   let s:gitgutter = neobundle#get('vim-gitgutter')
   function! s:gitgutter.hooks.on_source(bundle)
     let g:gitgutter_highlight_lines = 1
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'altercation/vim-colors-solarized'                                  " Vim colorscheme solarized
   let s:solarized = neobundle#get('vim-colors-solarized')
   function! s:solarized.hooks.on_source(bundle)
@@ -218,23 +216,21 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     colorscheme solarized
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'bkad/CamelCaseMotion'                                              " Defines CamelCase text object
   let s:camelcasemotion = neobundle#get('CamelCaseMotion')
   function s:camelcasemotion.hooks.on_source(bundle)
     call camelcasemotion#CreateMotionMappings('<leader>')
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'chiphogg/vim-vtd', {
-    \ 'on_ft' : ['vtd'],
-    \ }                                                                         " Manage TODO in vim
+  " {{{2
+  NeoBundle 'chiphogg/vim-vtd', { 'on_ft' : ['vtd'] }                           " Manage TODO in vim
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
     Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'christoomey/vim-tmux-navigator'                                    " Allow using the same keymap to move between tmux panes and vim splits seamlessly
   let s:tmux_navigator = neobundle#get('vim-tmux-navigator')
   function! s:tmux_navigator.hooks.on_source(bundle)
@@ -245,10 +241,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     inoremap <unique> <C-k> <ESC><C-k>
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'google/vim-codefmt', {
-    \ 'on_ft' : ['cpp', 'javascript', 'sql'],
-    \ }                                                                         " Code formating plugin from google
+  " {{{2
+  NeoBundle 'google/vim-codefmt', { 'on_ft' : ['cpp', 'javascript', 'sql'] }    " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive vim-codefmt plugin[mappings]
@@ -256,14 +250,14 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     " java formatter: https://github.com/google/google-java-format
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'google/vim-glaive'                                                 " Plugin for better vim plugin configuration
   let s:glaive = neobundle#get('vim-glaive')
   function s:glaive.hooks.on_source(bundle)
     call glaive#Install()
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
     \ 'name' : 'Mark',
@@ -277,7 +271,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator'                                     " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
@@ -288,7 +282,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     noremap <unique> <leader>bg :BuffergatorOpen<CR>
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'ntpeters/vim-better-whitespace'                                    " Highlight all types of whitespaces
   let s:betterws = neobundle#get('vim-better-whitespace')
   function! s:betterws.hooks.on_source(bundle)
@@ -296,17 +290,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     nnoremap <unique> <leader>sw :ToggleStripWhitespaceOnSave<CR>
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'octol/vim-cpp-enhanced-highlight', {
-    \ 'on_ft' : ['cpp'],
-    \ }                                                                         " Enhanced vim cpp highlight
-  " }}}
-  " {{{3
-  NeoBundle 'paulhybryant/file-line', {
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " Open files and go to specific line and column (original user not active)
-  " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
     \ 'on_ft' : ['cpp'],
     \ 'type__protocol' : 'ssh',
@@ -322,27 +306,18 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     nnoremap <unique> <silent> <leader>rw :RelatedFilesWindow<CR>
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'paulhybryant/vim-autoclose', {
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " Automatically close brackets
-  " }}}
-  " {{{3
-  NeoBundle 'paulhybryant/vimutils', {
-    \ 'type__protocol' : 'ssh',
-    \ }                                                                         " My vim customization (utility functions, syntax etc)
+  " {{{2
+  NeoBundle 'paulhybryant/vimutils', { 'type__protocol' : 'ssh' }               " My vim customization (utility functions, syntax etc)
   let s:vimutils = neobundle#get('vimutils')
   function! s:vimutils.hooks.on_source(bundle)
     " Close vim when the only buffer left is a special type of buffer
     Glaive vimutils plugin[mappings]
       \ bufclose_skip_types=`[
-      \  'gistls', 'nerdtree', 'indicator',
-      \  'folddigest', 'capture' ]`
+      \  'gistls', 'nerdtree', 'indicator', 'folddigest', 'capture' ]`
     execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
     call vimutils#InitUndoSwapViews()
   endfunction
   function! s:vimutils.hooks.on_post_source(bundle)
-    " call vimutils#SetupTablineMappings(s:OS)
     if !has('gui_running')
       silent! nmap <silent> <unique> 1 <Plug>AirlineSelectTab1
       silent! nmap <silent> <unique> 2 <Plug>AirlineSelectTab2
@@ -355,11 +330,10 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
       silent! nmap <silent> <unique> 9 <Plug>AirlineSelectTab9
     endif
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
-    call l:codefmt_registry.AddExtension(
-      \ vimutils#fsqlf#GetSQLFormatter())
+    call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'plasticboy/vim-markdown', {
     \ 'on_ft' : ['markdown'],
     \ 'directory' : 'plasticboy-markdown',
@@ -367,12 +341,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ 'regular_name' : 'plasticboy-markdown',
     \ }                                                                         " Yet another markdown syntax highlighting
   " }}}
-  " {{{3
-  NeoBundle 'rking/ag.vim', {
-    \ 'disabled' : !executable('ag'),
-    \ }                                                                         " Text based search tool using the silver searcher
-  " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'scrooloose/nerdcommenter'                                          " Plugin for adding comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
@@ -384,7 +353,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:NERDUsePlaceHolders = 0
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'scrooloose/syntastic'                                              " Check syntax with external syntax checker
   let s:syntastic = neobundle#get('syntastic')
   function! s:syntastic.hooks.on_source(bundle)
@@ -397,7 +366,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
   let s:expand_region = neobundle#get('vim-expand-region')
   function! s:expand_region.hooks.on_source(bundle)
@@ -421,22 +390,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
       \ })
   endfunction
   " }}}
-  " {{{3
-  NeoBundle 'thinca/vim-ft-markdown_fold', {
-    \ 'on_ft' : ['markdown'],
-    \ }                                                                         " Fold markdown
-  " }}}
-  " {{{3
-  NeoBundle 'tmux-plugins/vim-tmux', {
-    \ 'on_ft' : ['tmux'],
-    \ }                                                                         " Vim plugin for editing .tmux.conf
-  " }}}
-  " {{{3
-  NeoBundle 'tyru/capture.vim', {
-    \   'on_cmd' : ['Capture'],
-    \ }                                                                         " Capture Ex command output to buffer
-  " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
   let s:airline = neobundle#get('vim-airline')
   function! s:airline.hooks.on_source(bundle)
@@ -464,22 +418,16 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:airline_powerline_fonts = 1
   endfunction
   " }}}
-  " {{{3
+  " {{{2
   NeoBundle 'vim-airline/vim-airline-themes', {
     \ 'depends' : ['vim-airline/vim-airline'],
     \ }                                                                         " vim-airline themes
   " }}}
-  " {{{3
-  NeoBundle 'vim-ruby/vim-ruby', {
-    \ 'on_ft' : ['ruby'],
-    \ }                                                                         " Vim plugin for editing ruby files.
-  " }}}
-  " Local bundles {{{3
+  " Local bundles {{{2
   if filereadable(expand('~/.vimrc.local'))
     execute 'source' expand('~/.vimrc.local')
   endif
   " }}}
-" }}}
   call neobundle#end()
   NeoBundleCheck
 endif
@@ -498,8 +446,9 @@ set background=dark                                                             
 set backspace=indent,eol,start                                                  " Backspace for dummies
 set backup                                                                      " Whether saves a backup before editing
 set cmdheight=2                                                                 " Height of the cmd line
-set cursorline                                                                  " Highlight current line
+set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
 set cursorcolumn                                                                " Highlight current line
+set cursorline                                                                  " Highlight current line
 set expandtab                                                                   " Tabs are spaces, not tabs
 set foldcolumn=5                                                                " Fold indicators on the left
 set foldenable                                                                  " Auto fold code
@@ -518,8 +467,8 @@ set modeline                                                                    
 set modelines=5                                                                 " Mac sets it to 0 by default
 set mouse=a                                                                     " Automatically enable mouse usage
 set mousehide                                                                   " Hide the mouse cursor while typing
+set nowrapscan                                                                  " Make regex search wrap to the start of the file
 set number                                                                      " Line numbers on
-set pastetoggle=<F12>                                                           " pastetoggle (sane indentation on paste)
 set ruler                                                                       " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                              " A ruler on steroids
 set scrolljump=5                                                                " Lines to scroll when cursor leaves screen
@@ -533,11 +482,10 @@ set showmode                                                                    
 set showtabline=2                                                               " Always show the tabline
 set smartcase                                                                   " Case sensitive when uppercase present
 set softtabstop=2                                                               " Let backspace delete indent
-" set splitbelow                                                                " Create the split at the bottom when split horizontally
 set splitright                                                                  " Create the split on the right when split vertically
 set t_Co=256                                                                    " Set number of colors supported by term
-set tabstop=2                                                                   " An indentation every two columns
 " set term=$TERM                                                                " Make arrow and other keys work
+set tabstop=2                                                                   " An indentation every two columns
 set undofile                                                                    " Persists undo
 set undolevels=1000                                                             " Maximum number of changes that can be undone
 set undoreload=10000                                                            " Save the whole buffer for undo when reloading it
@@ -547,8 +495,6 @@ set wildmenu                                                                    
 set wildmode=list:longest,full                                                  " Command <Tab> completion, list matches, then longest common part, then all
 set winminheight=0                                                              " Windows can be 0 line high
 set wrap                                                                        " Wrap long lines
-set nowrapscan                                                                  " Make regex search wrap to the start of the file
-set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
 " let &shellcmdflag = '-f ' . &shellcmdflag                                     " For zsh to not load any RC file
 " set shell=/bin/sh                                                             " Sometimes shell can cause vim system command to be slow
 if &diff
