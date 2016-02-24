@@ -15,7 +15,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   call neobundle#begin(s:bundle_base_path)
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
-
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
