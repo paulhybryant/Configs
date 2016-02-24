@@ -1,15 +1,16 @@
-# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+# vim: ft=zsh sw=2 ts=2 sts=2 et tw=80 fdl=0 nospell
 
-# /etc/zshenv will be loaded before zshrc. In OSX, the path_helper binary
-# is called in /etc/zshenv, which reorders the entries in $PATH and makes
-# homebrew's bin directory to appear after system bin directory.
-path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
-  $BREWHOME/opt/go/libexec/bin $path)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # /etc/zshenv will be loaded before zshrc. In OSX, the path_helper binary
+  # is called in /etc/zshenv, which reorders the entries in $PATH and makes
+  # homebrew's bin directory to appear after system bin directory.
+  path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
+    $BREWHOME/opt/go/libexec/bin $path)
+fi
 
 # Use PROFILING='logfile' zsh to profile the startup time
 if [[ -n ${PROFILING+1} ]]; then
-  # set the trace prompt to include seconds, nanoseconds, script name and line
-  # number.
+  # set the trace prompt to include seconds, nanoseconds, script and line#
   zmodload zsh/datetime
   PS4='+$EPOCHREALTIME %N:%i> '
   # PS4='+$(date "+%s:%N") %N:%i> '
@@ -59,7 +60,7 @@ antigen bundle uvaes/fzf-marks
 antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
 
-local pmodules
+declare -a pmodules
 zstyle ':prezto:environment:termcap' color yes
 zstyle ':prezto:module:syntax-highlighting' color yes
 zstyle ':completion:*' show-completer true
@@ -67,7 +68,6 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Order matters!
 pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
-# zstyle ':prezto:load' pmodule ${pmodules[@]}
 pmodload "${pmodules[@]}"
 unset pmodules
 

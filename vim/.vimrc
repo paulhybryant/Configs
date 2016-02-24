@@ -13,26 +13,28 @@ let s:bundle_base_path = expand('~/.vim/bundle/')
 if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
   call neobundle#begin(s:bundle_base_path)
+  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
+  NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'Shougo/neobundle-vim-recipes', { 'force' : 1 }                     " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
-  NeoBundle 'octol/vim-cpp-enhanced-highlight', { 'on_ft' : ['cpp'] }           " Enhanced vim cpp highlight
-  NeoBundle 'paulhybryant/file-line', { 'type__protocol' : 'ssh' }              " Open files and go to specific line and column (original user not active)
-  NeoBundle 'paulhybryant/vim-autoclose', { 'type__protocol' : 'ssh' }          " Automatically close brackets
-  NeoBundle 'rking/ag.vim', { 'disabled' : !executable('ag') }                  " Text based search tool using the silver searcher
-  NeoBundle 'thinca/vim-ft-markdown_fold', { 'on_ft' : ['markdown'] }           " Fold markdown
-  NeoBundle 'tmux-plugins/vim-tmux', { 'on_ft' : ['tmux'] }                     " Vim plugin for editing .tmux.conf
+  NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
+  NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
+  NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
+  NeoBundle 'plasticboy/vim-markdown', {'on_ft' : ['markdown']}                 " Yet another markdown syntax highlighting
+  NeoBundle 'rking/ag.vim', {'disabled' : !executable('ag')}                    " Text based search tool using the silver searcher
+  NeoBundle 'thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']}             " Fold markdown
+  NeoBundle 'tmux-plugins/vim-tmux', {'on_ft' : ['tmux']}                       " Vim plugin for editing .tmux.conf
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
-  NeoBundle 'tyru/capture.vim', { 'on_cmd' : ['Capture'] }                      " Capture Ex command output to buffer
-  NeoBundle 'vim-ruby/vim-ruby', { 'on_ft' : ['ruby'] }                         " Vim plugin for editing ruby files.
+  NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
+  NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
-  NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],
@@ -49,24 +51,19 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:neocomplete#sources#dictionary#dictionaries = {
       \   'default' : '',
       \   'vimshell' : expand('~/.vimshell_hist'),
-      \   'scheme' : expand('~/.gosh_completions'),
       \ }                                                                       " Define dictionary.
     if !exists('g:neocomplete#keyword_patterns')
       let g:neocomplete#keyword_patterns = {}                                   " Define keyword.
     endif
     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " Plugin key-mappings.
-    " inoremap <expr><C-g>     neocomplete#undo_completion()
-    " inoremap <expr><C-l>     neocomplete#complete_common_string()
-
     " Recommended key-mappings.
     " <CR>: close popup and save indent.
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
-      return neocomplete#close_popup() . "\<CR>"
+      " return neocomplete#close_popup() . "\<CR>"
       " For no inserting <CR> key.
-      " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+      return pumvisible() ? neocomplete#close_popup() : "\<CR>"
     endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -76,22 +73,9 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-    " For cursor moving in insert mode(Not recommended)
-    " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-    " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-    " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-    " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-    " Or set this.
-    " let g:neocomplete#enable_cursor_hold_i = 1
-    " Or set this.
-    " let g:neocomplete#enable_insert_char_pre = 1
     " AutoComplPop like behavior.
     " let g:neocomplete#enable_auto_select = 1
-    " Shell like behavior(not recommended).
-    " set completeopt+=longest
-    " let g:neocomplete#enable_auto_select = 1
-    " let g:neocomplete#disable_auto_complete = 1
-    " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+    inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -119,7 +103,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'Shougo/unite.vim', { 'recipe' : 'unite' }                          " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+  NeoBundle 'Shougo/unite.vim', {'recipe' : 'unite'}                            " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   let s:unite = neobundle#get('unite.vim')
   function! s:unite.hooks.on_source(bundle)
     let g:unite_data_directory = expand('~/.cache/unite')
@@ -131,6 +115,11 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:unite_enable_start_insert = 1
     let g:unite_prompt = '» '
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    function! s:unite.hooks.on_open()
+      nmap <buffer> <ESC> <Plug>(unite_exit)
+      imap <buffer> <ESC> <Plug>(unite_exit)
+    endfunction
+    autocmd FileType unite call s:unite.hooks.on_open()
   endfunction
   " }}}
   " {{{2
@@ -142,7 +131,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ }                                                                         " Enable background process and multi-threading
   " }}}
   " {{{2
-  NeoBundle 'SirVer/ultisnips', { 'disabled' : !has('python') }                 " Define and insert snippets
+  NeoBundle 'SirVer/ultisnips', {'disabled' : !has('python')}                   " Define and insert snippets
   let s:ultisnips = neobundle#get('ultisnips')
   " If there are multiple ft.snippet files, UltiSnips will only load the first.
   function! s:ultisnips.hooks.on_source(bundle)
@@ -157,11 +146,11 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   let s:ycm = neobundle#get('YouCompleteMe')
   function s:ycm.hooks.on_source(bundle)
     nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    let g:ycm_always_populate_location_list = 1                                   " Default 0
+    let g:ycm_always_populate_location_list = 1                                 " Default 0
     let g:ycm_auto_trigger = 1
-    let g:ycm_autoclose_preview_window_after_completion = 1                       " Automatically close the preview window for completion
-    let g:ycm_autoclose_preview_window_after_insertion = 1                        " Automatically close the preview window for completion
-    let g:ycm_collect_identifiers_from_tags_files = 1                             " Enable completion from tags
+    let g:ycm_autoclose_preview_window_after_completion = 1                     " Automatically close the preview window for completion
+    let g:ycm_autoclose_preview_window_after_insertion = 1                      " Automatically close the preview window for completion
+    let g:ycm_collect_identifiers_from_tags_files = 1                           " Enable completion from tags
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
     let g:ycm_confirm_extra_conf = 1
@@ -169,16 +158,15 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:ycm_enable_diagnostic_signs = 1
     let g:ycm_error_symbol = '>>'
     let g:ycm_filetype_blacklist = {}
-    let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
-    let g:ycm_filetype_whitelist = { 'c' : 1, 'cpp' : 1, 'python' : 1, 'go' : 1 }
-    let g:ycm_goto_buffer_command = 'same-buffer'                                 " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+    let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+    let g:ycm_filetype_whitelist = {'c' : 1, 'cpp' : 1, 'python' : 1, 'go' : 1}
+    let g:ycm_goto_buffer_command = 'same-buffer'                               " [ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
     let g:ycm_key_invoke_completion = '<C-Space>'
     let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
     let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
     let g:ycm_min_num_identifier_candidate_chars = 0
     let g:ycm_min_num_of_chars_for_completion = 2
     let g:ycm_open_loclist_on_ycm_diags = 1
-    let g:ycm_path_to_python_interpreter = '/usr/bin/python'
     let g:ycm_register_as_syntastic_checker = 1
     let g:ycm_semantic_triggers =  {
       \   'c' : ['->', '.'],
@@ -194,15 +182,15 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
       \   'lua' : ['.', ':'],
       \   'erlang' : [':'],
       \ }
-    let g:ycm_server_keep_logfiles = 10                                           " Keep log files
-    let g:ycm_server_log_level = 'debug'                                          " Default info
-    let g:ycm_server_use_vim_stdout = 1                                           " Set to 0 if ycm server crashes to debug
+    let g:ycm_server_keep_logfiles = 10                                         " Keep log files
+    let g:ycm_server_log_level = 'debug'                                        " Default info
+    let g:ycm_server_use_vim_stdout = 1                                         " Set to 0 if ycm server crashes to debug
     let g:ycm_show_diagnostics_ui = 1
     let g:ycm_warning_symbol = '>>'
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'airblade/vim-gitgutter', { 'disabled' : &diff }                    " Show sign at changes from last commit
+  NeoBundle 'airblade/vim-gitgutter', {'disabled' : &diff}                      " Show sign at changes from last commit
   let s:gitgutter = neobundle#get('vim-gitgutter')
   function! s:gitgutter.hooks.on_source(bundle)
     let g:gitgutter_highlight_lines = 1
@@ -224,7 +212,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'chiphogg/vim-vtd', { 'on_ft' : ['vtd'] }                           " Manage TODO in vim
+  NeoBundle 'chiphogg/vim-vtd', {'on_ft' : ['vtd']}                             " Manage TODO in vim
   let s:vimvtd = neobundle#get('vim-vtd')
   function! s:vimvtd.hooks.on_source(bundle)
     Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
@@ -242,7 +230,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'google/vim-codefmt', { 'on_ft' : ['cpp', 'javascript', 'sql'] }    " Code formating plugin from google
+  NeoBundle 'google/vim-codefmt', {'on_ft' : ['cpp', 'javascript', 'sql']}      " Code formating plugin from google
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive vim-codefmt plugin[mappings]
@@ -261,7 +249,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {
     \ 'name' : 'Mark',
-    \ 'regular_namne' : 'Mark',
+    \ 'regular_name' : 'Mark',
     \ 'frozen' : 1,
     \ 'type' : 'vba',
     \ }                                                                         " Highlight multiple workds
@@ -276,7 +264,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
     let g:buffergator_viewport_split_policy = 'L'
-    let g:buffergator_autodismiss_on_select = 0
+    let g:buffergator_autodismiss_on_select = 1
     let g:buffergator_autoupdate = 1
     let g:buffergator_suppress_keymaps = 1
     noremap <unique> <leader>bg :BuffergatorOpen<CR>
@@ -307,7 +295,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/vimutils', { 'type__protocol' : 'ssh' }               " My vim customization (utility functions, syntax etc)
+  NeoBundle 'paulhybryant/vimutils', {'type__protocol' : 'ssh'}                 " My vim customization (utility functions, syntax etc)
   let s:vimutils = neobundle#get('vimutils')
   function! s:vimutils.hooks.on_source(bundle)
     " Close vim when the only buffer left is a special type of buffer
@@ -334,20 +322,12 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'plasticboy/vim-markdown', {
-    \ 'on_ft' : ['markdown'],
-    \ 'directory' : 'plasticboy-markdown',
-    \ 'name' : 'plasticboy-markdown',
-    \ 'regular_name' : 'plasticboy-markdown',
-    \ }                                                                         " Yet another markdown syntax highlighting
-  " }}}
-  " {{{2
   NeoBundle 'scrooloose/nerdcommenter'                                          " Plugin for adding comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDCreateDefaultMappings = 1
     let g:NERDCustomDelimiters = {
-      \ 'cvim' : { 'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' ' }
+      \ 'cvim' : {'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' '}
       \ }
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
@@ -360,7 +340,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_mode_map = {
       \ 'mode': 'passive',
-      \ 'active_filetypes': [ 'zsh', 'sh' ],
+      \ 'active_filetypes': [ 'zsh', 'sh', 'cpp' ],
       \ 'passive_filetypes': [ 'vim' ]
       \ }
     nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
@@ -407,8 +387,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:airline#extensions#tabline#left_alt_sep = ''
     let g:airline#extensions#tabline#buffer_idx_mode = 1
     let g:airline_theme = 'powerlineish'
-    " let g:airline#extensions#tabline#formatter = 'customtab'
-    " let g:airline#extensions#taboo#enabled = 1
     let g:airline#extensions#tmuxline#enabled = 1                               " Disable this for plugin tmuxline.vim
     let g:airline#extensions#tmuxline#color_template = 'normal'
     " let g:airline#extensions#tmuxline#snapshot_file =
