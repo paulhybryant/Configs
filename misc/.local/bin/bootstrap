@@ -59,6 +59,8 @@ function bootstrap::brew() {
       \"${BREWHOME}\""
   fi
 
+  zsh::eval "mkdir -p ~/.zlib"
+  ln -s $BREWHOME/Library/Contributions/brew_zsh_completion.zsh ~/.zlib/_brew
   # brew tap / search etc sometimes complains about Non-HTTP proxy URI.
   # This is because of an issue with the ruby open-uri library. The workaround
   # is to set https_proxy to http_proxy (`export https_proxy=$http_proxy`).
@@ -113,7 +115,7 @@ function bootstrap::brewinstall() {
     `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem python3 tmux the_silver_searcher zsh \
     netcat stdman ranger fasd brew-rmtree fzf peco noti zsh-completions \
-    gnu-sed"
+    gnu-sed brew-cask-completion"
   # xbindkeys makeself vimpager dos2unix findutils
   # zsh::eval 'brew install --force the_platinum_searcher'
   zsh::eval 'brew gem install tmuxinator'
