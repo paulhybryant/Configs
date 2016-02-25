@@ -1,5 +1,20 @@
 " vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
+  NeoBundle 'plasticboy/vim-markdown', {
+    \ 'on_ft' : ['markdown'],
+    \ 'directory' : 'plasticboy-markdown',
+    \ 'name' : 'plasticboy-markdown',
+    \ 'regular_name' : 'plasticboy-markdown',
+    \ }                                                                         " Yet another markdown syntax highlighting
+
+let s:is_windows =
+  \ has('win16') || has('win32') || has('win64') || has('win95')
+let s:is_cygwin = has('win32unix')
+let s:is_mac = !s:is_windows && !s:is_cygwin
+  \ && (has('mac') || has('macunix') || has('gui_macvim'))
+let s:is_linux = has('unix') && !s:is_mac && !s:is_cygwin
+" On windows we use unnamed (not unnamedplus) register
+
   " NeoBundle 'blueyed/vim-diminactive'                                           " Dim inactive windows
   " NeoBundle 'tpope/vim-rsi'                                                     " Readline style insertion
   " NeoBundle 'wellle/tmux-complete.vim'                                          " Insert mode completion in adjacent panes
