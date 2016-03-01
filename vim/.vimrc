@@ -14,12 +14,13 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   execute 'set runtimepath+=' . s:bundle_base_path . 'neobundle.vim/'
   call neobundle#begin(s:bundle_base_path)
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
-  NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
+  " NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
+  NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
-  NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
+  " NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
   NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
