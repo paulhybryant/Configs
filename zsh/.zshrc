@@ -55,9 +55,9 @@ source ~/.antigen/repos/antigen/antigen.zsh
 antigen use prezto
 # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/anyframe
-antigen bundle mollifier/zload
-antigen bundle uvaes/fzf-marks
-antigen bundle mafredri/zsh-async
+# antigen bundle mollifier/zload
+# antigen bundle uvaes/fzf-marks
+# antigen bundle mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
 
 declare -a pmodules
