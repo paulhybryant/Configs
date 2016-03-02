@@ -12,12 +12,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   if [ -d "$GHC_DOT_APP" ]; then
     path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin)
   fi
-  declare -xg EDITOR='mvim -v'
+  declare -xg EDITOR='mvim -v' VISUAL='mvim -v'
 else
   declare -xg BREWVERSION="linuxbrew"
   declare -xg BREWHOME="$HOME/.$BREWVERSION"
   declare -xg CMDPREFIX=""
-  declare -xg EDITOR='vim'
+  declare -xg EDITOR='vim' VISUAL="vim"
 fi
 
 path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \

@@ -1,44 +1,25 @@
 # vim: ft=zsh sw=2 ts=2 sts=2 et tw=80 fdl=0 nospell
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  # /etc/zshenv will be loaded before zshrc. In OSX, the path_helper binary
-  # is called in /etc/zshenv, which reorders the entries in $PATH and makes
-  # homebrew's bin directory to appear after system bin directory.
   path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
-    $BREWHOME/opt/go/libexec/bin $path)
+    $BREWHOME/opt/go/libexec/bin $path)                                         # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
 fi
 
-# Use PROFILING='logfile' zsh to profile the startup time
-if [[ -n ${PROFILING+1} ]]; then
-  # set the trace prompt to include seconds, nanoseconds, script and line#
-  zmodload zsh/datetime
-  PS4='+$EPOCHREALTIME %N:%i> '
-  # PS4='+$(date "+%s:%N") %N:%i> '
-  # save file stderr to file descriptor 3 and redirect stderr (including trace
-  # output) to a file with the script's PID as an extension
-  exec 3>&2 2> ${PROFILING}
-  # set options to turn on tracing and expansion of commands in the prompt
-  setopt xtrace prompt_subst
+if [[ -n ${PROFILING+1} ]]; then                                                # Use PROFILING='logfile' zsh to profile the startup time
+  zmodload zsh/datetime                                                         # set the trace prompt to include seconds, nanoseconds, script and line#
+  PS4='+$EPOCHREALTIME %N:%i> '                                                 # PS4='+$(date "+%s:%N") %N:%i> '
+  exec 3>&2 2> ${PROFILING}                                                     # save file stderr to file descriptor 3 and redirect stderr (including trace output) to a file with the script's PID as an extension
+  setopt xtrace prompt_subst                                                    # set options to turn on tracing and expansion of commands in the prompt
 fi
 
-# Don't enable the following line, it will screw up HOME and END key in tmux
-# export TERM=xterm-256color
-# If it is really need for program foo, create an alias like this
-# alias foo='TERM=xterm-256color foo'
-declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog"
-declare -xg HELPDIR="$BREWHOME/share/zsh/help"
-declare -xg VISUAL="$EDITOR"
-declare -xg GIT_EDITOR="$EDITOR"
-# Adding -H breaks scripts uses grep without unsetting GREP_OPTIONS
-declare -xg GREP_OPTIONS="--color=auto"
+# export TERM=xterm-256color screws up HOME and END key in tmux
+declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog" \
+  HELPDIR="$BREWHOME/share/zsh/help" GIT_EDITOR="$EDITOR" PAGER='most' \
+  GREP_OPTIONS="--color=auto" MANPAGER='most' TERM='screen-256color' \
+  XDG_CACHE_HOME="$HOME/.cache" XDG_CONFIG_HOME="$HOME/.config" \
+  XDG_DATA_HOME="$HOME/.local/share"
 declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
   `--no-init --raw-control-chars"
-declare -xg PAGER='most'
-declare -xg MANPAGER="$PAGER"
-declare -xg TERM='screen-256color'
-declare -xg XDG_CACHE_HOME="$HOME/.cache"
-declare -xg XDG_CONFIG_HOME="$HOME/.config"
-declare -xg XDG_DATA_HOME="$HOME/.local/share"
 
 # Allow pass Ctrl + C(Q, S) for terminator
 stty ixany
@@ -51,10 +32,8 @@ stty start undef
 # bindkey -s '^D' 'exit^M'
 
 source ~/.antigen/repos/antigen/antigen.zsh
-# ZDOTDIR is set here
-antigen use prezto
-# Wrapper for peco/percol/fzf
-# antigen bundle mollifier/anyframe
+antigen use prezto                                                              # ZDOTDIR is set here
+# antigen bundle mollifier/anyframe                                             # Wrapper for peco/percol/fzf
 # antigen bundle mollifier/zload
 # antigen bundle uvaes/fzf-marks
 # antigen bundle mafredri/zsh-async
@@ -63,24 +42,12 @@ antigen bundle Tarrasch/zsh-colors
 declare -a pmodules
 zstyle ':prezto:environment:termcap' color yes
 zstyle ':prezto:module:syntax-highlighting' color yes
-zstyle ':completion:*' show-completer true
 zstyle ':prezto:module:editor' key-bindings 'vi'
-# Order matters!
 pmodules=(environment directory helper editor completion git homebrew fasd \
-  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)
-pmodload "${pmodules[@]}"
-unset pmodules
+  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
+pmodload "${pmodules[@]}" && unset pmodules
 
-if [[ -f ~/.antigen/.local ]]; then
-  source ~/.antigen/.local
-fi
+[[ -f ~/.antigen/.local ]] && source ~/.antigen/.local
 antigen apply
-
-# Local configurations
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
-fi
-
-if [[ -n ${PROFILING+1} ]]; then
-  exit 0
-fi
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
+[[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
