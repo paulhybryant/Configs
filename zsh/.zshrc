@@ -22,14 +22,9 @@ declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
   `--no-init --raw-control-chars"
 
 # Allow pass Ctrl + C(Q, S) for terminator
-stty ixany
-stty ixoff -ixon
-stty stop undef
-stty start undef
+stty ixany && stty ixoff -ixon && stty stop undef && stty start undef
 # Prevent Ctrl + D to send eof so that it can be rebind
-# stty eof ''
-# stty eof undef
-# bindkey -s '^D' 'exit^M'
+# stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'
 
 source ~/.antigen/repos/antigen/antigen.zsh
 antigen use prezto                                                              # ZDOTDIR is set here
@@ -49,5 +44,7 @@ pmodload "${pmodules[@]}" && unset pmodules
 
 [[ -f ~/.antigen/.local ]] && source ~/.antigen/.local
 antigen apply
+
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
+
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling

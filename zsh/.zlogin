@@ -7,8 +7,4 @@
     # zcompile "$zcompdump"
   # fi
 # } &!
-
-# Local configurations
-if [[ -f ~/.zlogin.local ]]; then
-  source ~/.zlogin.local
-fi
+[[ -f ~/.zlogin.local ]] && source ~/.zlogin.local                              # Local configurations
