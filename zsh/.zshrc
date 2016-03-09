@@ -35,9 +35,9 @@ antigen use prezto                                                              
 antigen bundle Tarrasch/zsh-colors
 
 declare -a pmodules
-zstyle ':prezto:environment:termcap' color yes
-zstyle ':prezto:module:syntax-highlighting' color yes
-zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:environment:termcap' 'color' 'yes'
+zstyle ':prezto:module:syntax-highlighting' 'color' 'yes'
+zstyle ':prezto:module:editor' 'key-bindings' 'vi'
 pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
 pmodload "${pmodules[@]}" && unset pmodules

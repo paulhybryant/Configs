@@ -361,5 +361,5 @@ if &diff
 else
   set spell                                                                     " Spellcheck
 endif
-set clipboard=unnamedplus
+set clipboard=unnamedplus                                                       " Which clipboard */+ to use
 " }}}
