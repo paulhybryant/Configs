@@ -59,7 +59,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'Shougo/unite.vim', {'recipe' : 'unite'}                            " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+  NeoBundle 'Shougo/unite.vim'                                                  " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
   let s:unite = neobundle#get('unite.vim')
   function! s:unite.hooks.on_source(bundle)
     let g:unite_abbr_highlight = 'Keyword'
