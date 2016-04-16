@@ -185,7 +185,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
     let g:buffergator_viewport_split_policy = 'L'
-    let g:buffergator_autodismiss_on_select = 1
+    let g:buffergator_autodismiss_on_select = 0
     let g:buffergator_autoupdate = 1
     let g:buffergator_suppress_keymaps = 1
     noremap <unique> <leader>bg :BuffergatorOpen<CR>
@@ -273,8 +273,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   function! s:airline.hooks.on_source(bundle)
     let g:airline_detect_paste = 1
     let g:airline_detect_modified = 1
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    " let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#buffer_idx_mode = 1
     let g:airline_theme = 'powerlineish'
     let g:airline_powerline_fonts = 1
   endfunction
@@ -339,7 +339,7 @@ set shortmess+=filmnrxoOtT                                                      
 set showcmd                                                                     " Show partial commands in status line and selected text in visual mode
 set showmatch                                                                   " Show matching brackets/parenthesis
 set showmode                                                                    " Display the current mode
-set showtabline=2                                                               " Always show the tabline
+set showtabline=0                                                               " Always show the tabline
 set smartcase                                                                   " Case sensitive when uppercase present
 set softtabstop=2                                                               " Let backspace delete indent
 set splitright                                                                  " Create the split on the right when split vertically
