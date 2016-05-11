@@ -29,7 +29,8 @@ zstyle ':prezto:environment:termcap' 'color' 'yes'
 zstyle ':prezto:module:syntax-highlighting' 'color' 'yes'
 zstyle ':prezto:module:editor' 'key-bindings' 'vi'
 pmodules=(environment directory helper editor completion git homebrew fasd \
-  history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
+  history syntax-highlighting linux osx tmux dpkg prompt fzf custom)  # Order matters!
+# history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
 pmodload "${pmodules[@]}" && unset pmodules
 
 [[ -f ~/.antigen/.local ]] && source ~/.antigen/.local
