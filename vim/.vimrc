@@ -257,6 +257,11 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'thinca/vim-textobj-between', {
+    \ 'depends' : 'kana/vim-textobj-user',
+    \ }                                                                         " Text object between a char
+  " }}}
+  " {{{2
   NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
   let s:expand_region = neobundle#get('vim-expand-region')
   function! s:expand_region.hooks.on_source(bundle)

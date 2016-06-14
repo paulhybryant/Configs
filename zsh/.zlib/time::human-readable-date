@@ -12,13 +12,17 @@ $1 Current time in seconds since epoch
 
 # (( ${+commands[date]} )) || return 1
 
-zparseopts -D -micro=micro -milli=milli
+zparseopts -D -micro=micro -milli=milli -zone:=zone
 
-local _time_str _ts
+local _ts
 _ts="$1"
 if [[ -n ${micro} ]]; then
   ((_ts = _ts / 1000000))
 elif [[ -n ${milli} ]]; then
   ((_ts = _ts / 1000))
 fi
-printf "$(date --date=@"${_ts}")\n"
+if [[ -n ${zone} ]]; then
+  TZ="${zone[2]}" date --date=@"${_ts}"
+else
+  date --date=@"${_ts}"
+fi
