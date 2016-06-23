@@ -4,4 +4,8 @@ zstyle -s ":registry:var:prefix-width" registry _width
 # printf "%-${_width}s ${COLOR_Yellow}$*\n${COLOR_Color_Off}" "[Warning]"
 local msg
 msg=$(printf "%-${_width}s $*\n" "[Warning]"
-yellow "${msg}\n"
+if $(whence yellow); then
+  yellow "${msg}\n"
+else
+  printf "${msg}\n"
+fi

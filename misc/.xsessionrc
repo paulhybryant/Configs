@@ -14,6 +14,13 @@ setxkbmap -option ''
 # setxkbmap -option caps:escape
 
 # Swap caps to ctrl
+# The symbol file (symbol/altwin) comes with ubuntu trusty has a bug.
+# It won't map the ctrl kep to super.
+# Fix:
+# From the source code of xbindkeys (http://git.savannah.gnu.org/cgit/xbindkeys.git)
+# Copy the symbol file altwin and override that comes with trusty (/usr/share/X11/xkb/symbols/altwin)
+# reconfigure the package
+# sudo dpkg-reconfigure xkb-data
 setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 
 killall xbindkeys > /dev/null 2>&1

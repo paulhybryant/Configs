@@ -32,16 +32,15 @@ function bootstrap::init() {
   # zsh::eval 'sudo -v'
   io::msg "Installing dependencies..."
   os::LINUX && zsh::eval "sudo apt-get install ${_y} build-essential curl \
-    git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev htop\
-    libncurses-dev zlib1g-dev xclip x11-xkb-utils xbindkeys xbindkeys-config \
+    git htop xclip x11-xkb-utils xbindkeys xbindkeys-config \
     kupfer xvkbd xautomation urlview xdotool x11-apps terminator most markdown\
-    haskell-platform cmake ctags jq stow git-extras grc trash-cli"
+    cmake ctags jq stow git-extras grc trash-cli"
   # For xkb-data, symbol altwin need to be patched to fix the error where win
   # key is not correctly mapped, if the xkb-data version is too old.
   # diff the altwin symbol with system's (/usr/share/x11/xkb-data/symbol/altwin)
   # Update altwin of the system if needed, and then reload the xkb cache with
   # `sudo dpkg-reconfigure xkb-data`
-  [[ -f ~/.vimrc ]] && zsh::eval 'mv ~/.vimrc ~/.vimrc.bak'
+  [[ -f ~/.vimrc ]] && zsh::eval 'mv ~/.vimrc ~/.vimrc.orig'
 }
 function bootstrap::brew() {
   if [[ "$OSTYPE" == 'darwin'* ]]; then
@@ -60,14 +59,12 @@ function bootstrap::brew() {
   fi
 
   zsh::eval "mkdir -p ~/.zlib"
-  ln -s $BREWHOME/Library/Contributions/brew_zsh_completion.zsh ~/.zlib/_brew
   # brew tap / search etc sometimes complains about Non-HTTP proxy URI.
   # This is because of an issue with the ruby open-uri library. The workaround
   # is to set https_proxy to http_proxy (`export https_proxy=$http_proxy`).
   io::msg 'Tapping extra repositories...'
   zsh::eval 'brew tap paulhybryant/myformulae'
   zsh::eval 'brew tap homebrew/x11'
-  zsh::eval 'brew tap homebrew/dupes'
   zsh::eval 'brew tap homebrew/completions'
   zsh::eval 'brew tap iveney/mocha'
   zsh::eval 'brew tap beeftornado/rmtree'
@@ -110,12 +107,9 @@ function bootstrap::brewinstall() {
     zsh::eval 'brew install python'
   fi
   zsh::eval 'brew install --HEAD paulhybryant/myformulae/powerline-shell'
-  # zsh::eval 'brew install --with-gssapi --with-libssh2 --with-rtmpdump curl'
-  zsh::eval "brew install https://raw.githubusercontent.com/moul/`
-    `advanced-ssh-config/master/contrib/homebrew/assh.rb"
   zsh::eval "brew install brew-gem python3 tmux the_silver_searcher zsh \
     netcat stdman ranger fasd brew-rmtree fzf peco noti zsh-completions \
-    gnu-sed brew-cask-completion"
+    gnu-sed brew-cask-completion assh"
   # xbindkeys makeself vimpager dos2unix findutils
   # zsh::eval 'brew install --force the_platinum_searcher'
   zsh::eval 'brew gem install tmuxinator'
@@ -230,6 +224,8 @@ zparseopts -D -K -M -E -- h=help n=dryrun u=unstow s:=stage v=verbose l=list\
 local _cfg_dir _logfile _y
 local -a _stow_opts
 _cfg_dir="${0:A:h}/../../../"
+fpath=(${_cfg_dir}/zsh/.zlib ${fpath[@]})
+autoload -Uz -- ${_cfg_dir}/zsh/.zlib/[^_]*(:t)
 
 [[ -n ${help} ]] && bootstrap::usage
 [[ -n ${list} ]] && bootstrap::list
