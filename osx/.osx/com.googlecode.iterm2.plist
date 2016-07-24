@@ -411,9 +411,9 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>297 260 924 485 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 372 650 498 0 0 1440 877 </string>
+	<string>0 84 1440 793 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>286 134 585 473 0 0 1440 877 </string>
+	<string>751 129 650 498 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>744 286 570 451 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_183A6FE4-07B4-42E0-8890-C7C35ADE86ED</key>
@@ -1230,12 +1230,14 @@
 			<string>/Users/yuhuang</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>453869181.428069</real>
+	<real>477794465.61881</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>473587580.15617698</real>
+	<real>486437166.19492</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1300,7 +1302,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-01-04T08:06:03Z</date>
+	<date>2016-06-01T01:26:06Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1336,7 +1338,7 @@
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
-	<string>.Helvetica Neue DeskInterface</string>
+	<string>.AppleSystemUIFont</string>
 	<key>WindowNumber</key>
 	<false/>
 	<key>WindowStyle</key>
