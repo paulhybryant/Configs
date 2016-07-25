@@ -366,5 +366,9 @@ if &diff
 else
   set spell                                                                     " Spellcheck
 endif
-set clipboard=unnamedplus                                                       " Which clipboard */+ to use
+if has('mac')
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus                                                       " Which clipboard */+ to use
+endif
 " }}}
