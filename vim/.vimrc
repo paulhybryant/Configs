@@ -16,7 +16,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
-  NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
@@ -136,13 +135,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   let s:camelcasemotion = neobundle#get('CamelCaseMotion')
   function s:camelcasemotion.hooks.on_source(bundle)
     call camelcasemotion#CreateMotionMappings('<leader>')
-  endfunction
-  " }}}
-  " {{{2
-  NeoBundle 'chiphogg/vim-vtd', {'on_ft' : ['vtd']}                             " Manage TODOs in vim
-  let s:vimvtd = neobundle#get('vim-vtd')
-  function! s:vimvtd.hooks.on_source(bundle)
-    Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
   endfunction
   " }}}
   " {{{2

@@ -1,5 +1,13 @@
 " vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
+  NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}
+  " {{{2
+  NeoBundle 'chiphogg/vim-vtd', {'on_ft' : ['vtd']}                             " Manage TODOs in vim
+  let s:vimvtd = neobundle#get('vim-vtd')
+  function! s:vimvtd.hooks.on_source(bundle)
+    Glaive vtd plugin[mappings]=',v' files+=`[expand('%:p')]`
+  endfunction
+  " }}}
   " NeoBundle 'honza/vim-snippets'                                                " Collection of vim snippets
   " NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}                       " Recipes for plugins that can be installed and configured with NeoBundleRecipe
   NeoBundle 'plasticboy/vim-markdown', {
