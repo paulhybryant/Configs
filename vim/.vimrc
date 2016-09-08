@@ -20,8 +20,10 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
-  NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
-  NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
+  " NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
+  " NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
+  NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
+  NeoBundle 'paulhybryant/vim-autoclose'                                        " Automatically close brackets
   NeoBundle 'plasticboy/vim-markdown', {'on_ft' : ['markdown']}                 " Yet another markdown syntax highlighting
   NeoBundle 'rking/ag.vim', {'disabled' : !executable('ag')}                    " Text based search tool using the silver searcher
   NeoBundle 'thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']}             " Fold markdown
@@ -193,7 +195,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   " {{{2
   NeoBundle 'paulhybryant/relatedfiles', {
-    \ 'on_ft' : ['cpp'], 'type__protocol' : 'ssh'
+    \ 'on_ft' : ['cpp']
     \ }                                                                         " Open related files in C++
   let s:relatedfiles = neobundle#get('relatedfiles')
   function s:relatedfiles.hooks.on_source(bundle)
@@ -206,7 +208,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/vimutils', {'type__protocol' : 'ssh'}                 " My vim customization (utility functions, syntax etc)
+  " NeoBundle 'paulhybryant/vimutils', {'type__protocol' : 'ssh'}                 " My vim customization (utility functions, syntax etc)
+  NeoBundle 'paulhybryant/vimutils'                                             " My vim customization (utility functions, syntax etc)
   let s:vimutils = neobundle#get('vimutils')
   function! s:vimutils.hooks.on_source(bundle)
     Glaive vimutils plugin[mappings]
