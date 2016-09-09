@@ -37,3 +37,4 @@ pmodload "${pmodules[@]}" && unset pmodules
 antigen apply
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
+return 0
