@@ -1,20 +1,28 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 declare -U path fpath manpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  declare -xg BREWVERSION="homebrew" BREWHOME="$HOME/.homebrew" CMDPREFIX="g" \
+  if [[ -d "$HOME/.homebrew" ]]; then
+    declare -xg BREWHOME="$HOME/.homebrew"
+  else
+    declare -xg BREWHOME="/usr/local"
+  fi
+  declare -xg BREWVERSION="homebrew" CMDPREFIX="g" \
     EDITOR='mvim -v' VISUAL='mvim -v'
   path=(/opt/local/bin /opt/local/sbin ${path[@]})
   # Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
-  export GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
-  [[ -d "$GHC_DOT_APP" ]] && path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin)
+  GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
+  [[ -d "$GHC_DOT_APP" ]] && export GHC_DOT_APP && \
+    path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin)
 else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX="" \
     EDITOR='vim' VISUAL="vim"
 fi
 
-path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin \
-  $BREWHOME/opt/go/libexec/bin ~/.cabal/bin ${path[@]})
+path=(~/.local/bin $BREWHOME/opt/go/libexec/bin ~/.cabal/bin ${path[@]})
 fpath=(~/.zlib ${fpath[@]}) && autoload -Uz -- ~/.zlib/[^_]*(:t)
+if [[ "$BREWHOME" != "/usr/local" ]]; then
+  path+=($BREWHOME/bin $BREWHOME/sbin)
+fi
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'
