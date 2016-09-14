@@ -18,10 +18,14 @@ else
     EDITOR='vim' VISUAL="vim"
 fi
 
-path=(~/.local/bin $BREWHOME/opt/go/libexec/bin ~/.cabal/bin ${path[@]})
+path=(~/.local/bin $BREWHOME/opt/go/libexec/bin \
+  $BREWHOME/opt/coreutils/libexec/gnubin \
+  $BREWHOME/opt/findutils/libexec/gnubin ${path[@]})
+manpath=($BREWHOME/opt/coreutils/libexec/gnuman \
+  $BREWHOME/opt/findutils/libexec/gnuman ${manpath[@]})
 fpath=(~/.zlib ${fpath[@]}) && autoload -Uz -- ~/.zlib/[^_]*(:t)
 if [[ "$BREWHOME" != "/usr/local" ]]; then
-  path+=($BREWHOME/bin $BREWHOME/sbin)
+  path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
 fi
 
 alias date='${CMDPREFIX}\date'
