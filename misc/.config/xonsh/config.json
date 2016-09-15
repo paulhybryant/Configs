@@ -1,16 +1,9 @@
 {
- "foreign_shells": [
-  {
-   "login": true,
-   "shell": "zsh"
-  }
- ],
  "xontribs": [
   "distributed",
-  "vox",
   "prompt_ret_code",
   "apt_tabcomplete",
-  "vox_tabcomplete",
-  "autoxsh"
+  "autoxsh",
+  "z"
  ]
 }
