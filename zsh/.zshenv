@@ -10,17 +10,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     EDITOR='mvim -v' VISUAL='mvim -v'
   path=(/opt/local/bin /opt/local/sbin ${path[@]})
   # Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
-  GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
-  [[ -d "$GHC_DOT_APP" ]] && export GHC_DOT_APP && \
-    path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin)
+  # GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
+  # [[ -d "$GHC_DOT_APP" ]] && export GHC_DOT_APP && \
+    # path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin ${path[@]})
 else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX="" \
     EDITOR='vim' VISUAL="vim"
 fi
 
-path=(~/.local/bin $BREWHOME/opt/go/libexec/bin \
-  $BREWHOME/opt/coreutils/libexec/gnubin \
-  $BREWHOME/opt/findutils/libexec/gnubin ${path[@]})
+path=(~/.local/bin $BREWHOME/opt/go/libexec/bin ${path[@]})
 manpath=($BREWHOME/opt/coreutils/libexec/gnuman \
   $BREWHOME/opt/findutils/libexec/gnuman ${manpath[@]})
 fpath=(~/.zlib ${fpath[@]}) && autoload -Uz -- ~/.zlib/[^_]*(:t)
@@ -37,6 +35,7 @@ alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
 alias rm='${CMDPREFIX}\trash -v'
 alias xargs='${CMDPREFIX}\xargs'
+alias find='${CMDPREFIX}\find'
 zstyle ":registry:var:prefix-width" registry 10
 
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local                              # Local configurations
