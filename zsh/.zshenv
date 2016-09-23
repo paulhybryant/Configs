@@ -6,17 +6,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   else
     declare -xg BREWHOME="/usr/local"
   fi
-  declare -xg BREWVERSION="homebrew" CMDPREFIX="g" \
-    EDITOR='mvim -v' VISUAL='mvim -v'
+  declare -xg BREWVERSION="homebrew" CMDPREFIX="g"
   path=(/opt/local/bin /opt/local/sbin ${path[@]})
   # Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
   # GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
   # [[ -d "$GHC_DOT_APP" ]] && export GHC_DOT_APP && \
     # path=(~/.cabal/bin ${GHC_DOT_APP}/Contents/bin ${path[@]})
 else
-  declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX="" \
-    EDITOR='vim' VISUAL="vim"
+  declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
+declare -xg EDITOR='vim' VISUAL="vim"
 
 path=(~/.local/bin $BREWHOME/opt/go/libexec/bin ${path[@]})
 manpath=($BREWHOME/opt/coreutils/libexec/gnuman \
