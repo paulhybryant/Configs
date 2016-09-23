@@ -47,6 +47,9 @@
   ; Push to mutable and pull from origin
   pp = !"git push mutable && git pull origin"
 
+  ; Pull recursively
+  pr = pull --recurse-submodules
+
   ; Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
