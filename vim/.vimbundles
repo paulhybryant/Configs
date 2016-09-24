@@ -1,5 +1,8 @@
 " vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
+  NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
+  NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
+  NeoBundle 'osyo-manga/vim-anzu'
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}
   " {{{2
   NeoBundle 'chiphogg/vim-vtd', {'on_ft' : ['vtd']}                             " Manage TODOs in vim
@@ -381,7 +384,6 @@ NeoBundle 'kana/vim-gf-user'                                                  " 
 NeoBundle 'kana/vim-idwintab'                                                 " Assign unique id for windows
 NeoBundle 'kana/vim-niceblock'                                                " Make visual block mode more useful
 NeoBundle 'kana/vim-operator-siege'                                           " Operator to siege (surround) texts
-NeoBundle 'kana/vim-operator-user'                                            " User defined operator
 NeoBundle 'kana/vim-smartinput'                                               " Provide smart input assistance
 NeoBundle 'kana/vim-submode'                                                  " Supporting defining submode in vim
 NeoBundle 'kshenoy/vim-signature'                                             " Place, toggle and display marks

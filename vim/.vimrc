@@ -18,7 +18,12 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
+  NeoBundle 'haya14busa/incsearch-fuzzy.vim'
+  NeoBundle 'haya14busa/incsearch.vim'
+  NeoBundle 'haya14busa/vim-operator-flashy'
+  NeoBundle 'kana/vim-operator-user'                                            " User defined operator
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
+  NeoBundle 'luochen1990/rainbow'
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
   NeoBundle 'metakirby5/codi.vim'
   " NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
@@ -209,7 +214,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  " NeoBundle 'paulhybryant/vimutils', {'type__protocol' : 'ssh'}                 " My vim customization (utility functions, syntax etc)
   NeoBundle 'paulhybryant/vimutils'                                             " My vim customization (utility functions, syntax etc)
   let s:vimutils = neobundle#get('vimutils')
   function! s:vimutils.hooks.on_source(bundle)
@@ -292,6 +296,9 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   call neobundle#end()
   NeoBundleCheck
+  map /  <Plug>(incsearch-forward)
+  map ?  <Plug>(incsearch-backward)
+  map g/ <Plug>(incsearch-stay)
 endif
 " }}}
 " Options {{{1
