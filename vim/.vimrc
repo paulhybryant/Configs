@@ -20,6 +20,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
+  NeoBundle 'metakirby5/codi.vim'
   " NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
   " NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)

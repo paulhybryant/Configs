@@ -389,6 +389,8 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
+	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
 		<data>
@@ -400,18 +402,29 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1260 1440 630 435 -591 900 2560 1577 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>297 260 924 485 0 0 1440 877 </string>
+	<string>573 693 606 456 0 0 1920 1177 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>760 807 400 129 0 0 1920 1177 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>610 437 700 622 0 0 1920 1177 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>618 378 937 465 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 84 1440 793 0 0 1440 877 </string>
+	<string>3 85 1914 1092 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>751 129 650 498 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -803,14 +816,14 @@
 					<key>Text</key>
 					<string>9</string>
 				</dict>
-				<key>0x68-0x80000</key>
+				<key>0x68-0x100000</key>
 				<dict>
 					<key>Action</key>
 					<integer>10</integer>
 					<key>Text</key>
 					<string>h</string>
 				</dict>
-				<key>0x6c-0x80000</key>
+				<key>0x6c-0x100000</key>
 				<dict>
 					<key>Action</key>
 					<integer>10</integer>
@@ -1230,10 +1243,22 @@
 			<string>/Users/yuhuang</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
 	<key>NoSyncHaveShownPromoWithId_4</key>
 	<true/>
+	<key>NoSyncInstallationId</key>
+	<string>01D4BA70-E737-4444-A179-01DEDB64A8F7</string>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>486451191.246813</real>
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>477794465.61881</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
@@ -1297,12 +1322,14 @@
 	<integer>3</integer>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUFeedAlternateAppNameKey</key>
+	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=76</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-06-01T01:26:06Z</date>
+	<date>2016-09-20T09:07:22Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1346,6 +1373,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>3.0.8</string>
 </dict>
 </plist>
