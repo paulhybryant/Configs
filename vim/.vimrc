@@ -18,16 +18,12 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
-  NeoBundle 'haya14busa/incsearch-fuzzy.vim'
-  NeoBundle 'haya14busa/incsearch.vim'
   NeoBundle 'haya14busa/vim-operator-flashy'
   NeoBundle 'kana/vim-operator-user'                                            " User defined operator
   NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
   NeoBundle 'luochen1990/rainbow'
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
   NeoBundle 'metakirby5/codi.vim'
-  " NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
-  " NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
   NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
   NeoBundle 'paulhybryant/vim-autoclose'                                        " Automatically close brackets
   NeoBundle 'plasticboy/vim-markdown', {'on_ft' : ['markdown']}                 " Yet another markdown syntax highlighting
@@ -170,6 +166,20 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'haya14busa/incsearch.vim'                                          " Enhanced incremental search
+  let s:incsearch = neobundle#get('incsearch.vim')
+  function! s:incsearch.hooks.on_source(bundle)
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+  endfunction
+  " }}}
+  " {{{2
+  NeoBundle 'haya14busa/incsearch-fuzzy.vim', {
+    \ 'depends' : ['haya14busa/incsearch.vim'],
+    \ }                                                                         " Fuzzy incremental search
+  " }}}
+  " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
     \ 'regular_name' : 'Mark', 'frozen' : 1, 'type' : 'vba'
@@ -296,9 +306,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   call neobundle#end()
   NeoBundleCheck
-  map /  <Plug>(incsearch-forward)
-  map ?  <Plug>(incsearch-backward)
-  map g/ <Plug>(incsearch-stay)
 endif
 " }}}
 " Options {{{1
