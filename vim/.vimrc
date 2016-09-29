@@ -181,7 +181,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/blob/vba/pyclewn-2.3.vba.gz', {'name' : 'pyclewn',
+    \ 'dotfiles/master/blob/vba/pyclewn-2.3.vmb', {'name' : 'pyclewn',
     \ 'regular_name' : 'pyclewn', 'frozen' : 1, 'type' : 'vba'
     \ }                                                                         " Vim runtime file for pyclewn
   " }}}
