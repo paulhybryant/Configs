@@ -1,2 +1,6 @@
 # Make site-packages of homebrew available to installed formula (e.g. xonsh)
 echo 'import os; import site; site.addsitedir(os.environ["BREWHOME"] + "/lib/python3.5/site-packages")' > $(brew --prefix xonsh)/libexec/lib/python3.5/site-packages/homebrew.pth
+
+# Install an older version of a formula
+In the homebrew repo, use git log to find the SHA of the version of the formula (see the git's cheat for doing this). Assuming the exported file is at /foo/bar/x.rb
+brew install /foo/bar/x.rb
