@@ -422,7 +422,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>610 437 700 622 0 0 1920 1177 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>618 378 937 465 0 0 1920 1177 </string>
+	<string>618 386 937 465 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>3 85 1914 1092 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -1329,7 +1329,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-20T09:07:22Z</date>
+	<date>2016-10-04T14:13:45Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1343,7 +1343,7 @@
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.40000000596046448</real>
 	<key>SwitchTabModifier</key>
-	<integer>5</integer>
+	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
 	<key>TabViewType</key>

@@ -20,22 +20,12 @@ declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
 stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           # Allow pass Ctrl + C(Q, S) for terminator
 # stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'                     # Prevent Ctrl + D to send eof so that it can be rebind
 
-source ~/.antigen/repos/antigen/antigen.zsh
-antigen use prezto                                                              # ZDOTDIR is set here
-# mollifier/anyframe mollifier/zload uvaes/fzf-marks mafredri/zsh-async
-antigen bundle Tarrasch/zsh-colors
+# Use antigen
+source ~/.antigen.zsh
 
-declare -a pmodules
-zstyle ':prezto:environment:termcap' 'color' 'yes'
-zstyle ':prezto:module:syntax-highlighting' 'color' 'yes'
-zstyle ':prezto:module:editor' 'key-bindings' 'vi'
-pmodules=(environment directory helper editor completion git homebrew fasd \
-  history syntax-highlighting linux osx tmux dpkg prompt fzf custom)            # Order matters!
-# history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
-pmodload "${pmodules[@]}" && unset pmodules
+# Use zplug
+# source ~/.zplug.zsh
 
-[[ -f ~/.antigen/.local ]] && source ~/.antigen/.local
-antigen apply
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0
