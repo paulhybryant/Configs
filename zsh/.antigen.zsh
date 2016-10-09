@@ -2,6 +2,7 @@ source ~/.antigen/repos/antigen/antigen.zsh
 antigen use prezto                                                              # ZDOTDIR is set here
 # mollifier/anyframe mollifier/zload uvaes/fzf-marks mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
+antigen bundle unixorn/tumult.plugin.zsh
 
 declare -a pmodules
 zstyle ':prezto:environment:termcap' 'color' 'yes'
