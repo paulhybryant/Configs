@@ -12,6 +12,3 @@ pmodules=(environment directory helper editor completion git homebrew fasd \
   history syntax-highlighting linux osx tmux dpkg prompt fzf custom)            # Order matters!
 # history syntax-highlighting clipboard linux osx tmux dpkg prompt fzf custom)  # Order matters!
 pmodload "${pmodules[@]}" && unset pmodules
-
-[[ -f ~/.antigen/.local ]] && source ~/.antigen/.local
-antigen apply

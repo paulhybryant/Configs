@@ -14,18 +14,17 @@ declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog" \
   XDG_CACHE_HOME="$HOME/.cache" XDG_CONFIG_HOME="$HOME/.config" \
   XDG_DATA_HOME="$HOME/.local/share" \
   XDG_DATA_DIRS="$BREWHOME/share:$XDG_DATA_DIRS"
-declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen `
-  `--no-init --raw-control-chars"
+declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen`
+  ` --no-init --raw-control-chars"
 
 stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           # Allow pass Ctrl + C(Q, S) for terminator
 # stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'                     # Prevent Ctrl + D to send eof so that it can be rebind
 
-# Use antigen
 source ~/.antigen.zsh
-
-# Use zplug
 # source ~/.zplug.zsh
-
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
+antigen apply
+# zplug load
+
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0
