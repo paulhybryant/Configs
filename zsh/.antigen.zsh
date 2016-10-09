@@ -3,6 +3,8 @@ antigen use prezto                                                              
 # mollifier/anyframe mollifier/zload uvaes/fzf-marks mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
 antigen bundle unixorn/tumult.plugin.zsh
+unalias vi
+unalias vim
 
 declare -a pmodules
 zstyle ':prezto:environment:termcap' 'color' 'yes'
