@@ -306,7 +306,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ }                                                                         " vim-airline themes
   " }}}
   " Local bundles {{{2
-  call neobundle#local("~/.vim/bundle", {}, ['vim-latex-1.9.0'])
+  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0'])
   if filereadable(expand('~/.vimrc.local'))
     execute 'source' expand('~/.vimrc.local')
   endif
