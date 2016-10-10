@@ -13,6 +13,12 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
+defaults write com.apple.finder AppleShowAllFiles YES
+
 ${0:h}/karabiner-import.sh
 ${0:h}/seil-import.sh
 ${0:h}/spectacle-import.sh
+
+
+# /System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/Resources/agent-defaults/finder.plist
+# /Library/Managed Preferences/yuhuang/com.googlecode.iterm2.plist
