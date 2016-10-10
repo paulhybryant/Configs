@@ -10,6 +10,8 @@ declare -a pmodules
 zstyle ':prezto:environment:termcap' 'color' 'yes'
 zstyle ':prezto:module:syntax-highlighting' 'color' 'yes'
 zstyle ':prezto:module:editor' 'key-bindings' 'vi'
-pmodules=(environment directory helper editor completion git homebrew fasd \
-  history syntax-highlighting linux osx tmux dpkg prompt fzf custom)            # Order matters!
+zstyle ':prezto:module:autosuggestions' color 'yes'
+pmodules=(autosuggestions environment directory helper editor completion git \
+  homebrew fasd history history-substring-search syntax-highlighting linux osx \
+  tmux dpkg prompt fzf custom)                                                  # Order matters!
 pmodload "${pmodules[@]}" && unset pmodules
