@@ -1,5 +1,5 @@
 # vim: ft=zsh sw=2 ts=2 sts=2 et tw=80 fdl=0 nospell
-os::OSX && path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin $path)               # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
+# os::OSX && path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin $path)               # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
 
 if [[ -n ${PROFILING+1} ]]; then                                                # Use PROFILING='logfile' zsh to profile the startup time
   zmodload zsh/datetime                                                         # set the trace prompt to include seconds, nanoseconds, script and line#
@@ -20,11 +20,11 @@ declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen`
 stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           # Allow pass Ctrl + C(Q, S) for terminator
 # stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'                     # Prevent Ctrl + D to send eof so that it can be rebind
 
-source ~/.antigen.zsh
-# source ~/.zplug.zsh
+function use_zplug() {
+  [[ -e ~/.zplug ]]
+}
+use_zplug && source ~/.zplug.zsh || source ~/.antigen.zsh
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
-antigen apply
-# zplug load
-
+use_zplug && zplug load || antigen apply
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0
