@@ -5,6 +5,7 @@ antigen bundle Tarrasch/zsh-colors
 antigen bundle unixorn/tumult.plugin.zsh
 unalias vi
 unalias vim
+# antigen bundle hchbaw/auto-fu.zsh
 
 declare -a pmodules
 zstyle ':prezto:environment:termcap' 'color' 'yes'
