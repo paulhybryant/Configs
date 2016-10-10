@@ -13,8 +13,9 @@ zplug "modules/fasd", from:prezto, nice:0
 zplug "modules/helper", from:prezto, nice:0
 zplug "modules/history", from:prezto, nice:0
 zplug "modules/homebrew", from:prezto, nice:0
+# zplug "modules/syntax-highlighting", from:prezto, nice:0
 
-zplug "zsh-users/zsh-syntax-highlighting", from:prezto, nice:10
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-history-substring-search", nice:8
 
 zplug "seebi/dircolors-solarized"
