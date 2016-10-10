@@ -22,3 +22,6 @@ ${0:h}/spectacle-import.sh
 
 # /System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/Resources/agent-defaults/finder.plist
 # /Library/Managed Preferences/yuhuang/com.googlecode.iterm2.plist
+# /Applications/Karabiner.app/Contents/Library/bin/karabiner export
+# /Applications/Karabiner.app/Contents/Library/bin/seil export
+# Shortcuts.json from ~/Library/Application Support/Spectacle/
