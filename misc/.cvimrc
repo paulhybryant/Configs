@@ -16,7 +16,7 @@ set typelinkhints
 set hud                                                                         " Show the heads-up-display
 set smartcase
 set autohidecursor
-set showtabindices
+" set showtabindices
 
 let barposition = "bottom"
 let completionengines = ["google", "amazon", "imdb", "dogpile"]
