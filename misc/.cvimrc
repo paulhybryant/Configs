@@ -1,6 +1,9 @@
 " vim sw=2 ts=2 sts=2 et tw=78 foldlevel=0 foldmethod=marker filetype=cvim
 " vim nospell
 
+" let configpath = '~/.cvimrc'
+" set localconfig
+
 " Options {{{
 
 set noinsertmappings
@@ -14,6 +17,7 @@ set nolinkaimations
 set nonumerichints
 set typelinkhints
 set hud                                                                         " Show the heads-up-display
+set nosmoothscroll
 set smartcase
 set autohidecursor
 " set showtabindices
@@ -68,7 +72,7 @@ map gs :settings<CR>
 
 map <Leader>t :tabnew<Space>
 map <Leader>o :open http://
-map R :eloadTabUncached
+map R reloadTabUncached
 map gH :open chrome://newtab<CR>
 map dd closeTab
 unmap u
