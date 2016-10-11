@@ -8,6 +8,8 @@ cheat
 cmake
 coreutils
 curl
+docbook
+docbook-xsl
 fasd
 fsqlf
 fzf
@@ -19,6 +21,8 @@ gnu-sed
 go
 gpatch
 gperf
+graphviz
+grc
 htop
 libevent
 libidn
@@ -29,6 +33,7 @@ libyaml
 libzip
 m4
 makedepend
+moreutils
 most
 ncurses
 neovim
