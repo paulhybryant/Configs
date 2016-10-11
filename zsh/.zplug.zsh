@@ -1,19 +1,20 @@
 export ZPLUG_HOME="$BREWHOME/opt/zplug"
 source ${ZPLUG_HOME}/init.zsh
 
-zstyle ':prezto:module:autosuggestions' color 'yes'
-zplug "modules/autosuggestions", from:prezto, nice:0
-zplug "modules/directory", from:prezto, nice:0
-zplug "modules/dpkg", from:prezto, nice:0
-zstyle ':prezto:module:editor' 'key-bindings' 'vi'
-zplug "modules/editor", from:prezto, nice:0
 zstyle ':prezto:environment:termcap' 'color' 'yes'
 zplug "modules/environment", from:prezto, nice:0
-zplug "modules/fasd", from:prezto, nice:0
-zplug "modules/helper", from:prezto, nice:0
-zplug "modules/history", from:prezto, nice:0
-zplug "modules/homebrew", from:prezto, nice:0
-# zplug "modules/syntax-highlighting", from:prezto, nice:0
+zstyle ':prezto:module:autosuggestions' color 'yes'
+zplug "modules/autosuggestions", from:prezto, nice:1
+zplug "modules/directory", from:prezto, nice:1
+zplug "modules/helper", from:prezto, nice:1
+zstyle ':prezto:module:editor' 'key-bindings' 'vi'
+zplug "modules/editor", from:prezto, nice:1
+zplug "modules/git", from:prezto, nice:1
+zplug "modules/homebrew", from:prezto, nice:1
+zplug "modules/fasd", from:prezto, nice:1
+zplug "modules/history", from:prezto, nice:1
+zplug "modules/tmux", from:prezto, nice:1
+zplug "modules/dpkg", from:prezto, nice:1
 
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-history-substring-search", nice:8
