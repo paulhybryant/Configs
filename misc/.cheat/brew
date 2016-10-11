@@ -4,3 +4,6 @@ echo 'import os; import site; site.addsitedir(os.environ["BREWHOME"] + "/lib/pyt
 # Install an older version of a formula
 In the homebrew repo, use git log to find the SHA of the version of the formula (see the git's cheat for doing this). Assuming the exported file is at /foo/bar/x.rb
 brew install /foo/bar/x.rb
+
+# Install ruby gem with brew gem using homebrew ruby
+brew gem install guard --homebrew-ruby

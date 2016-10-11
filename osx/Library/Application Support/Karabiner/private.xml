@@ -151,4 +151,13 @@
       KeyCode::KEY_9, ModifierFlag::COMMAND_L
     </autogen>
   </item>
+  <item>
+    <name>Remap Control_L + Space to Command_L + Space to open spotlight (synergy)</name>
+    <identifier>private.command_l_space_to_command_l_space</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::SPACE, ModifierFlag::CONTROL_L,
+      KeyCode::SPACE, ModifierFlag::COMMAND_L,
+    </autogen>
+  </item>
 </root>
