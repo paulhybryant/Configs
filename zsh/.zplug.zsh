@@ -26,9 +26,13 @@ zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:9
 
 # nice must be 10 because it has to be loaded after compinit.
 # see the project page for details.
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+# zplug "zsh-users/zsh-syntax-highlighting", nice:10
 
 zplug "modules/osx", from:prezto, nice:0, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "unixorn/tumult.plugin.zsh", nice:8, if:"[[ $OSTYPE == *darwin* ]]"
 
+if ! zplug check --verbose; then
+  zplug install
+fi
+zplug load --verbose
 # zplug "andrewferrier/fzf-z"
