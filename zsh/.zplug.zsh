@@ -31,6 +31,8 @@ zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:9
 zplug "modules/osx", from:prezto, nice:0, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "unixorn/tumult.plugin.zsh", nice:8, if:"[[ $OSTYPE == *darwin* ]]"
 
+# zplug "sso://user/yuhuang/GoogleConfigs", from:"sso", dir:"GoogleConfigs"
+
 if ! zplug check --verbose; then
   zplug install
 fi
