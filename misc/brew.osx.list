@@ -9,13 +9,14 @@ clipper
 cmake
 coreutils
 cscope
+dos2unix
 doxygen
 fasd
 findutils
 fsqlf
 fzf
+fzy
 gdbm
-gem-guard
 gettext
 git-extras
 gnu-getopt
@@ -50,6 +51,7 @@ peco
 percol
 pkg-config
 powerline-shell
+proxychains-ng
 python
 python3
 ranger
