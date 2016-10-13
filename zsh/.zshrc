@@ -25,6 +25,13 @@ function use_zplug() {
 }
 use_zplug && source ~/.zplug.zsh || source ~/.antigen.zsh
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
-use_zplug && zplug load || antigen apply
+if use_zplug; then
+  if ! zplug check --verbose; then
+    zplug install
+  fi
+  zplug load --verbose
+else
+  antigen apply
+fi
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0

@@ -16,25 +16,19 @@ zplug "modules/history", from:prezto, nice:1
 zplug "modules/tmux", from:prezto, nice:1
 zplug "modules/dpkg", from:prezto, nice:1
 
-zplug "zsh-users/zsh-history-substring-search", nice:8
+zplug "zsh-users/zsh-history-substring-search", nice:7
 
-zplug "seebi/dircolors-solarized", nice:8
-zplug "paulhybryant/powerline-shell", nice:8
-zplug "junegunn/fzf", use:"shell/*.zsh", nice:8
-zplug "zlsun/solarized-man", nice:8
-zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:9
+zplug "seebi/dircolors-solarized", nice:7
+zplug "paulhybryant/powerline-shell", nice:7
+zplug "junegunn/fzf", use:"shell/*.zsh", nice:7
+zplug "zlsun/solarized-man", nice:7
+zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:8
 
 # nice must be 10 because it has to be loaded after compinit.
 # see the project page for details.
+# Disabled because causing zsh to exit
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
 
 zplug "modules/osx", from:prezto, nice:0, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "unixorn/tumult.plugin.zsh", nice:8, if:"[[ $OSTYPE == *darwin* ]]"
-
-# zplug "sso://user/yuhuang/GoogleConfigs", from:"sso", dir:"GoogleConfigs"
-
-if ! zplug check --verbose; then
-  zplug install
-fi
-zplug load --verbose
+zplug "unixorn/tumult.plugin.zsh", nice:7, if:"[[ $OSTYPE == *darwin* ]]"
 # zplug "andrewferrier/fzf-z"
