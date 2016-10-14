@@ -11,11 +11,6 @@ else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
 declare -xg EDITOR='vim' VISUAL="vim"
-
-path=(~/.local/bin ${path[@]})
-manpath=($BREWHOME/opt/coreutils/libexec/gnuman \
-  $BREWHOME/opt/findutils/libexec/gnuman ${manpath[@]})
-fpath=(~/.zlib ${fpath[@]}) && autoload -Uz -- ~/.zlib/[^_]*(:t)
 if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
 fi

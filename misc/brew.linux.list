@@ -13,17 +13,18 @@ docbook-xsl
 fasd
 fsqlf
 fzf
+fzy
 gdbm
 gem-guard
 gettext
 git-extras
 gnu-sed
-go
 gpatch
 gperf
 graphviz
 grc
 htop
+jq
 libevent
 libidn
 libpng
@@ -40,6 +41,7 @@ neovim
 netcat
 node
 noti
+oniguruma
 openssl
 patchelf
 pcre
