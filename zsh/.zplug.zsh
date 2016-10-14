@@ -1,4 +1,5 @@
 export ZPLUG_HOME="$BREWHOME/opt/zplug"
+export ZPLUG_REPOS="$HOME/.zplug/repos"
 source ${ZPLUG_HOME}/init.zsh
 
 zstyle ":prezto:environment:termcap" "color" "yes"
