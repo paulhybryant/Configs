@@ -21,7 +21,7 @@ stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           
 # stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'                     # Prevent Ctrl + D to send eof so that it can be rebind
 
 function use_zplug() {
-  [[ -e ~/.zplug ]]
+  [[ -e ~/use_zplug ]]
 }
 use_zplug && source ~/.zplug.zsh || source ~/.antigen.zsh
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations

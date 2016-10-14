@@ -8,7 +8,6 @@ homebrew/dupes
 homebrew/services
 homebrew/versions
 homebrew/x11
-iveney/mocha
 jhawthorn/fzy
 neovim/neovim
 paulhybryant/myformulae
