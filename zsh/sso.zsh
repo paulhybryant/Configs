@@ -101,10 +101,9 @@ __zplug::sources::sso::install()
   return $status
 }
 
-__zplug::sources::git::update()
+__zplug::sources::sso::update()
 {
   local    repo="$1"
-  local    rev_local rev_remote rev_base
   local -A tags
 
   if (( $# < 1 )); then

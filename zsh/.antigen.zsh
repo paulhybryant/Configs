@@ -2,7 +2,8 @@ source ~/.antigen/repos/antigen/antigen.zsh
 antigen use prezto                                                              # ZDOTDIR is set here
 # mollifier/anyframe mollifier/zload uvaes/fzf-marks mafredri/zsh-async
 antigen bundle Tarrasch/zsh-colors
-os::OSX && antigen bundle unixorn/tumult.plugin.zsh && unalias vi && unalias vim
+[[ $OSTYPE == *darwin* ]] && \
+  antigen bundle unixorn/tumult.plugin.zsh && unalias vi && unalias vim
 # antigen bundle hchbaw/auto-fu.zsh
 # antigen bundle paulhybryant/myzsh --loc=enabled/
 
