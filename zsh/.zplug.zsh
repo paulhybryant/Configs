@@ -20,14 +20,20 @@ zplug "modules/dpkg", from:prezto, nice:1
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 
+zplug "RobSis/zsh-completion-generator", nice:7
+zplug "psprint/ztrace", nice:7
+zplug "psprint/zsnapshot", nice:7
+zplug "jocelynmallon/zshmarks", nice:7
+# zplug "sharat87/zsh-vim-mode", nice:7
 zplug "seebi/dircolors-solarized", nice:7
 zplug "paulhybryant/powerline-shell", nice:7
 zplug "junegunn/fzf", use:"shell/*.zsh", nice:7
 zplug "zlsun/solarized-man", nice:7
+zplug "andrewferrier/fzf-z", nice:7
 zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:8
 
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
+# zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11
 
 zplug "modules/osx", from:prezto, nice:0, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "unixorn/tumult.plugin.zsh", nice:7, if:"[[ $OSTYPE == *darwin* ]]"
-# zplug "andrewferrier/fzf-z"
