@@ -14,26 +14,26 @@ zplug "modules/fasd", from:prezto, nice:1
 zplug "modules/history", from:prezto, nice:1
 zplug "modules/tmux", from:prezto, nice:1
 zplug "modules/dpkg", from:prezto, nice:1
+zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 
 # For unknown reason, zplug clear && zplug load will cause zsh to exit if
 # autosuggestions and zsh-syntax-highlighting are enabled at the same time.
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 
-zplug "RobSis/zsh-completion-generator", nice:7
-zplug "psprint/ztrace", nice:7
-zplug "psprint/zsnapshot", nice:7
-zplug "jocelynmallon/zshmarks", nice:7
-# zplug "sharat87/zsh-vim-mode", nice:7
-zplug "seebi/dircolors-solarized", nice:7
-zplug "paulhybryant/powerline-shell", nice:7
-zplug "junegunn/fzf", use:"shell/*.zsh", nice:7
-zplug "zlsun/solarized-man", nice:7
-zplug "andrewferrier/fzf-z", nice:7
-zplug "paulhybryant/myzsh", use:"enabled/*.zsh", nice:8
+zplug "RobSis/zsh-completion-generator", nice:6
+zplug "psprint/ztrace", nice:6
+zplug "psprint/zsnapshot", nice:6
+zplug "jocelynmallon/zshmarks", nice:6
+# zplug "sharat87/zsh-vim-mode", nice:6
+zplug "seebi/dircolors-solarized", nice:6
+zplug "paulhybryant/powerline-shell", nice:6
+zplug "junegunn/fzf", use:"shell/*.zsh", nice:6
+zplug "zlsun/solarized-man", nice:6
+zplug "andrewferrier/fzf-z", nice:6
+zplug "unixorn/tumult.plugin.zsh", nice:6, if:"[[ $OSTYPE == *darwin* ]]"
+# zplug "b4b4r07/enhancd", use:"init.sh", nice:7
+zplug "paulhybryant/myzsh", use:"enabled", nice:8
 
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+# zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11
-
-zplug "modules/osx", from:prezto, nice:0, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "unixorn/tumult.plugin.zsh", nice:7, if:"[[ $OSTYPE == *darwin* ]]"
