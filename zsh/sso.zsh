@@ -92,11 +92,13 @@ __zplug::sources::sso::load_command()
 __zplug::sources::sso::install()
 {
   local repo="$1"
+  tags[dir]="$(__zplug::core::core::run_interfaces 'dir' "$repo")"
+
   GIT_TERMINAL_PROMPT=0 \
     git clone \
     --quiet \
     --recursive \
-    "$repo" "$ZPLUG_REPOS/$tags[dir]" \
+    "$repo" "$tags[dir]" \
     2> >(__zplug::io::log::capture) >/dev/null
   return $status
 }
