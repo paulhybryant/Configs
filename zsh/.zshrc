@@ -1,6 +1,4 @@
 # vim: ft=zsh sw=2 ts=2 sts=2 et tw=80 fdl=0 nospell
-[[ $OSTYPE == *darwin* ]] && path=($BREWHOME/bin $BREWHOME/sbin $path)               # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
-
 if [[ -n ${PROFILING+1} ]]; then                                                # Use PROFILING='logfile' zsh to profile the startup time
   zmodload zsh/datetime                                                         # set the trace prompt to include seconds, nanoseconds, script and line#
   PS4='+$EPOCHREALTIME %N:%i> '                                                 # PS4='+$(date "+%s:%N") %N:%i> '
@@ -8,6 +6,7 @@ if [[ -n ${PROFILING+1} ]]; then                                                
   setopt xtrace prompt_subst                                                    # set options to turn on tracing and expansion of commands in the prompt
 fi
 
+source $HOME/.nix-profile/etc/profile.d/nix.sh
 declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog" \
   HELPDIR="$BREWHOME/share/zsh/help" GIT_EDITOR="$EDITOR" PAGER='most' \
   GREP_OPTIONS="--color=auto" MANPAGER='most' TERM='screen-256color' \
