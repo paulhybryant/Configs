@@ -1,5 +1,5 @@
 # vim: ft=zsh sw=2 ts=2 sts=2 et tw=80 fdl=0 nospell
-[[ $OSTYPE == *darwin* ]] && path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin $path)               # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
+[[ $OSTYPE == *darwin* ]] && path=($BREWHOME/bin $BREWHOME/sbin $path)               # Make homebrew bin dir comes first. Reordered by path_helper in OSX.
 
 if [[ -n ${PROFILING+1} ]]; then                                                # Use PROFILING='logfile' zsh to profile the startup time
   zmodload zsh/datetime                                                         # set the trace prompt to include seconds, nanoseconds, script and line#
