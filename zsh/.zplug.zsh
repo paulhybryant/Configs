@@ -19,6 +19,10 @@ zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 
+# zplug "aphelionz/strerror.plugin.zsh", nice:5
+zplug "willghatch/zsh-snippets", nice:5
+# Expand ta to tmux attach -t
+
 # zplug "RobSis/zsh-completion-generator", nice:6
 # zplug "psprint/ztrace", nice:6
 # zplug "psprint/zsnapshot", nice:6
