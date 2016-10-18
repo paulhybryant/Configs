@@ -1,6 +1,6 @@
-export ZPLUG_HOME="$BREWHOME/opt/zplug"
+export ZPLUG_ROOT="$BREWHOME/opt/zplug"
 export ZPLUG_REPOS="$HOME/.zplug/repos"
-source ${ZPLUG_HOME}/init.zsh
+source ${ZPLUG_ROOT}/init.zsh
 
 zplug "paulhybryant/dotfiles", as:command, use:"blob/bin/{xclipper,save2tmp}", nice:0
 
