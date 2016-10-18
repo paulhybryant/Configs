@@ -19,10 +19,10 @@ zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 
-zplug "RobSis/zsh-completion-generator", nice:6
-zplug "psprint/ztrace", nice:6
-zplug "psprint/zsnapshot", nice:6
-zplug "jocelynmallon/zshmarks", nice:6
+# zplug "RobSis/zsh-completion-generator", nice:6
+# zplug "psprint/ztrace", nice:6
+# zplug "psprint/zsnapshot", nice:6
+# zplug "jocelynmallon/zshmarks", nice:6
 zplug "sharat87/zsh-vim-mode", nice:6
 zplug "seebi/dircolors-solarized", nice:6
 zplug "paulhybryant/powerline-shell", nice:6
