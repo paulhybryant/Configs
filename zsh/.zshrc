@@ -19,18 +19,7 @@ declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen`
 stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           # Allow pass Ctrl + C(Q, S) for terminator
 # stty eof '' && stty eof undef && bindkey -s '^D' 'exit^M'                     # Prevent Ctrl + D to send eof so that it can be rebind
 
-function use_zplug() {
-  return 0
-}
-use_zplug && source ~/.zplug.zsh || source ~/.antigen.zsh
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
-if use_zplug; then
-  if ! zplug check --verbose; then
-    zplug install
-  fi
-  zplug load --verbose
-else
-  antigen apply
-fi
+source ~/.zplug.zsh
+# source ~/.antigen.zsh
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0

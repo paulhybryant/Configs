@@ -35,6 +35,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
+  NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
@@ -256,7 +257,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   function! s:nerdcommenter.hooks.on_source(bundle)
     let g:NERDCreateDefaultMappings = 1
     let g:NERDCustomDelimiters = {
-      \ 'cvim' : {'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' '}}
+      \ 'cvim' : {'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' '},
+      \ 'zplug' : {'left' : '#', 'leftAlt' : ' ', 'rightAlt' : ' '}}
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
   endfunction

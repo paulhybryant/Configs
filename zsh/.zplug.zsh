@@ -1,3 +1,5 @@
+# vim: ft=zplug sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
+
 export ZPLUG_ROOT="$BREWHOME/opt/zplug"
 export ZPLUG_REPOS="$HOME/.zplug/repos"
 source ${ZPLUG_ROOT}/init.zsh
@@ -23,6 +25,7 @@ zplug "zsh-users/zsh-history-substring-search", nice:5
 zplug "willghatch/zsh-snippets", nice:5
 # Expand ta to tmux attach -t
 
+# zplug "mooz/percol", use:"tools/zsh", nice:5
 # zplug "RobSis/zsh-completion-generator", nice:6
 # zplug "psprint/ztrace", nice:6
 # zplug "psprint/zsnapshot", nice:6
@@ -39,3 +42,10 @@ zplug "paulhybryant/myzsh", use:"enabled", nice:8
 
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11
+
+[[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
+
+if ! zplug check --verbose; then
+  zplug install
+fi
+zplug load --verbose
