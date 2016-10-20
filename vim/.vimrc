@@ -16,6 +16,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
+  NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'haya14busa/vim-operator-flashy'
@@ -35,8 +36,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
-  NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
+  NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}                            " Syntax highlight for zplug
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],

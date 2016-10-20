@@ -3,7 +3,6 @@
   NeoBundle 'paulhybryant/file-line', {'type__protocol' : 'ssh'}                " Open files and go to specific line and column (original user not active)
   NeoBundle 'paulhybryant/vim-autoclose', {'type__protocol' : 'ssh'}            " Automatically close brackets
   NeoBundle 'osyo-manga/vim-anzu'
-  NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}
   " {{{2
   NeoBundle 'chiphogg/vim-vtd', {'on_ft' : ['vtd']}                             " Manage TODOs in vim
   let s:vimvtd = neobundle#get('vim-vtd')

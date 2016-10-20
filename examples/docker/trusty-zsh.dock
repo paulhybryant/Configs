@@ -1,0 +1,5 @@
+# vim: ft=Dockerfile sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
+# This is a comment
+FROM ubuntu:14.04
+MAINTAINER Yu Huang <paulhybryant@gmail.com>
+RUN apt-get update && apt-get install -y zsh
