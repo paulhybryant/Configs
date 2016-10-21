@@ -1,9 +1,9 @@
 # vim: ft=zplug sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
-export ZPLUG_ROOT="$BREWHOME/opt/zplug"
-export ZPLUG_REPOS="$HOME/.zplug/repos"
-source ${ZPLUG_ROOT}/init.zsh
+export ZPLUG_HOME="$HOME/.zplug"
+source ${ZPLUG_HOME}/init.zsh
 
+zplug "zplug/zplug", nice:0
 zplug "paulhybryant/dotfiles", as:command, use:"blob/bin/{xclipper,save2tmp}", nice:0
 
 zstyle ":prezto:environment:termcap" "color" "yes"
@@ -25,6 +25,7 @@ zplug "zsh-users/zsh-history-substring-search", nice:5
 zplug "willghatch/zsh-snippets", nice:5
 # Expand ta to tmux attach -t
 
+# zplug "zsh-users/zaw", nice:5
 # zplug "mooz/percol", use:"tools/zsh", nice:5
 # zplug "RobSis/zsh-completion-generator", nice:6
 # zplug "psprint/ztrace", nice:6
