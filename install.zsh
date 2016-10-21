@@ -1,41 +1,59 @@
 #!/usr/bin/env zsh
 
-usage() {
-  cat <<EOF
-Usage: install.sh [arguments]
+local -a dryrun
+zparseopts -D -K -M -E -- n=dryrun -dryrun=dryrun
 
-Arguments:
-  -h or --help    Print the usage information
-EOF
+local logfile brewtap brewhome brewformula
+local -a stows
+logfile=$(mktemp)
+
+function log() {
+  printf "$*" | tee -a "${logfile}"
 }
 
-local -a verbose help
-zparseopts -D -K -M -E -- h=help v=verbose \
-  -help=help -verbose=verbose
+function run() {
+  if [[ -n ${dryrun} ]]; then
+    printf "Running: $*\n"
+  else
+    eval "$*"
+  fi
+}
 
-[[ -n ${help} ]] && usage && return 0
+log 'Sourcing zplug.zsh...\n'
+run "source <(curl -sL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/zsh/.zplug.zsh)"
 
-local log
-log=$(mktemp)
+pushd $ZPLUG_REPOS/paulhybryant/dotfiles
+stows=(vim zsh tmux misc)
+if [[ $OSTYPE == *linux* ]]; then
+  brewhome="~/.linuxbrew"
+  brewtap="$PWD/blob/config/brew.linux.tap"
+  brewformula="$PWD/blob/config/brew.linux.leaves"
+  stows+=(linux)
+else
+  brewhome="~/.homebrew"
+  brewtap="PWD/blob/config/brew.osx.tap"
+  brewformula="$PWD/blob/config/brew.osx.leaves"
+  stows+=(osx)
+fi
 
-printf 'Sourcing antigen...\n' | tee "${log}"
-source <(curl -sL https://raw.githubusercontent.com/paulhybryant/antigen/master/antigen.zsh) || return 1
+log "Stowing...\n"
+for module in $stows; do
+  run "stow $module -t ~ -v | tee -a \"${logfile}\""
+done
 
-[[ -n ${verbose} ]] && setopt verbose
-local url="$(-antigen-resolve-bundle-url 'https://github.com/paulhybryant/dotfiles.git')"
--antigen-ensure-repo "${url}"
-pushd $(-antigen-get-clone-dir "${url}")
-git remote set-url origin 'git@github.com:paulhybryant/dotfiles.git'
-./misc/.local/bin/bootstrap --dryrun | tee -a "${log}"
-printf 'Continue [y/n]? '
-read -r reply
-case $reply in
-  Y*|y*)
-    printf 'Bootstraping...\n' | tee -a "${log}"
-    ./misc/.local/bin/bootstrap --log "${log}" | tee -a "${log}"
-    ;;
-  *)
-    exit 1
-    ;;
-esac
+log "Installing brew to $brewhome...\n"
+run "git clone https://github.com/Homebrew/brew.git $brewhome"
+run "path+=($brewhome)"
+
+log "Brew taps: $brewtap\n"
+while read tap; do
+  run "brew tap $tap"
+done < $brewtap
+
+log "Brew formulae: $brewformula\n"
+while read formula; do
+  run "brew install $formula"
+done < $brewformula
+
+printf "Installation logs to ${logfile}\n"
 popd
