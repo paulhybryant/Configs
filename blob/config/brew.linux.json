@@ -1,0 +1,312 @@
+{
+  "name": "makedepend",
+  "used_options": []
+}
+{
+  "name": "ranger",
+  "used_options": []
+}
+{
+  "name": "noti",
+  "used_options": []
+}
+{
+  "name": "netcat",
+  "used_options": []
+}
+{
+  "name": "fpp",
+  "used_options": []
+}
+{
+  "name": "go",
+  "used_options": []
+}
+{
+  "name": "neovim",
+  "used_options": []
+}
+{
+  "name": "libxml2",
+  "used_options": []
+}
+{
+  "name": "cheat",
+  "used_options": []
+}
+{
+  "name": "s-lang",
+  "used_options": []
+}
+{
+  "name": "jq",
+  "used_options": []
+}
+{
+  "name": "tldr",
+  "used_options": []
+}
+{
+  "name": "assh",
+  "used_options": []
+}
+{
+  "name": "gettext",
+  "used_options": []
+}
+{
+  "name": "brew-gem",
+  "used_options": []
+}
+{
+  "name": "xz",
+  "used_options": []
+}
+{
+  "name": "libevent",
+  "used_options": []
+}
+{
+  "name": "pcre",
+  "used_options": []
+}
+{
+  "name": "readline",
+  "used_options": []
+}
+{
+  "name": "autoconf",
+  "used_options": []
+}
+{
+  "name": "libpng",
+  "used_options": []
+}
+{
+  "name": "cmake",
+  "used_options": []
+}
+{
+  "name": "gpatch",
+  "used_options": []
+}
+{
+  "name": "renameutils",
+  "used_options": []
+}
+{
+  "name": "node",
+  "used_options": []
+}
+{
+  "name": "docbook",
+  "used_options": []
+}
+{
+  "name": "docbook-xsl",
+  "used_options": []
+}
+{
+  "name": "unzip",
+  "used_options": []
+}
+{
+  "name": "oniguruma",
+  "used_options": []
+}
+{
+  "name": "stdman",
+  "used_options": []
+}
+{
+  "name": "texinfo",
+  "used_options": []
+}
+{
+  "name": "automake",
+  "used_options": []
+}
+{
+  "name": "patchelf",
+  "used_options": [
+    "--with-static"
+  ]
+}
+{
+  "name": "gperf",
+  "used_options": []
+}
+{
+  "name": "fsqlf",
+  "used_options": []
+}
+{
+  "name": "m4",
+  "used_options": []
+}
+{
+  "name": "peco",
+  "used_options": []
+}
+{
+  "name": "yank",
+  "used_options": []
+}
+{
+  "name": "ruby",
+  "used_options": []
+}
+{
+  "name": "fzf",
+  "used_options": []
+}
+{
+  "name": "coreutils",
+  "used_options": []
+}
+{
+  "name": "gdbm",
+  "used_options": []
+}
+{
+  "name": "most",
+  "used_options": []
+}
+{
+  "name": "zsh",
+  "used_options": []
+}
+{
+  "name": "xonsh",
+  "used_options": []
+}
+{
+  "name": "graphviz",
+  "used_options": []
+}
+{
+  "name": "libyaml",
+  "used_options": []
+}
+{
+  "name": "libidn",
+  "used_options": []
+}
+{
+  "name": "powerline-shell",
+  "used_options": []
+}
+{
+  "name": "git-extras",
+  "used_options": []
+}
+{
+  "name": "curl",
+  "used_options": []
+}
+{
+  "name": "sqlite",
+  "used_options": []
+}
+{
+  "name": "fasd",
+  "used_options": []
+}
+{
+  "name": "zunit",
+  "used_options": []
+}
+{
+  "name": "glide",
+  "used_options": []
+}
+{
+  "name": "pkg-config",
+  "used_options": []
+}
+{
+  "name": "ncurses",
+  "used_options": []
+}
+{
+  "name": "zshdb",
+  "used_options": []
+}
+{
+  "name": "sphinx-doc",
+  "used_options": []
+}
+{
+  "name": "revolver",
+  "used_options": []
+}
+{
+  "name": "openssl",
+  "used_options": []
+}
+{
+  "name": "zlib",
+  "used_options": []
+}
+{
+  "name": "grc",
+  "used_options": []
+}
+{
+  "name": "tmux",
+  "used_options": []
+}
+{
+  "name": "percol",
+  "used_options": []
+}
+{
+  "name": "brew-rmtree",
+  "used_options": []
+}
+{
+  "name": "libzip",
+  "used_options": []
+}
+{
+  "name": "htop",
+  "used_options": []
+}
+{
+  "name": "moreutils",
+  "used_options": []
+}
+{
+  "name": "bzip2",
+  "used_options": []
+}
+{
+  "name": "libtool",
+  "used_options": []
+}
+{
+  "name": "gnu-sed",
+  "used_options": []
+}
+{
+  "name": "the_silver_searcher",
+  "used_options": []
+}
+{
+  "name": "python3",
+  "used_options": []
+}
+{
+  "name": "python",
+  "used_options": [
+    "--with-unicode-ucs4"
+  ]
+}
+{
+  "name": "color",
+  "used_options": []
+}
+{
+  "name": "fzy",
+  "used_options": []
+}
