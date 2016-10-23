@@ -53,6 +53,8 @@ done < $brewtap
 run "brew install jq"
 log "Brew formulae: \n"
 # brew info --json=v1 --installed | jq '.[] | select(.installed[0].used_options!=[]) | { name: .name, used_options: .installed[0].used_options}' >! brew.linux.json
+# brew info --json=v1 --installed | jq '.[] | { name: .name, used_options: .installed[0].used_options}' >! brew.linux.json
+# brew info --json=v1 --installed | jq '.[] | if (.installed[0].used_options != []) then { name: .name, used_options: .installed[0].used_options } else { name: .name }' >! brew.linux.json
 while read formula; do
   local used_options
   if [[ $formula != "jq" ]]; then

@@ -1,0 +1,246 @@
+{
+  "name": "assh"
+}
+{
+  "name": "autoconf"
+}
+{
+  "name": "automake"
+}
+{
+  "name": "brew-cask-completion"
+}
+{
+  "name": "brew-gem"
+}
+{
+  "name": "brew-rmtree"
+}
+{
+  "name": "cheat"
+}
+{
+  "name": "clipper"
+}
+{
+  "name": "cmake"
+}
+{
+  "name": "color"
+}
+{
+  "name": "coreutils"
+}
+{
+  "name": "cscope"
+}
+{
+  "name": "dos2unix"
+}
+{
+  "name": "doxygen"
+}
+{
+  "name": "fasd"
+}
+{
+  "name": "findutils"
+}
+{
+  "name": "fsqlf"
+}
+{
+  "name": "fzf"
+}
+{
+  "name": "fzy"
+}
+{
+  "name": "gdbm"
+}
+{
+  "name": "gettext"
+}
+{
+  "name": "git-extras"
+}
+{
+  "name": "gnu-getopt"
+}
+{
+  "name": "gnu-sed"
+}
+{
+  "name": "graphviz"
+}
+{
+  "name": "grc"
+}
+{
+  "name": "htop"
+}
+{
+  "name": "jq"
+}
+{
+  "name": "libevent"
+}
+{
+  "name": "libpng"
+}
+{
+  "name": "libtool"
+}
+{
+  "name": "libyaml"
+}
+{
+  "name": "libzip"
+}
+{
+  "name": "lsof"
+}
+{
+  "name": "lua"
+}
+{
+  "name": "luajit"
+}
+{
+  "name": "mackup"
+}
+{
+  "name": "macvim",
+  "used_options": [
+    "--with-lua",
+    "--with-luajit",
+    "--with-override-system-vim"
+  ]
+}
+{
+  "name": "md5sha1sum"
+}
+{
+  "name": "moreutils"
+}
+{
+  "name": "most"
+}
+{
+  "name": "neovim"
+}
+{
+  "name": "netcat"
+}
+{
+  "name": "node"
+}
+{
+  "name": "noti"
+}
+{
+  "name": "oniguruma"
+}
+{
+  "name": "openssl"
+}
+{
+  "name": "osxutils"
+}
+{
+  "name": "pcre"
+}
+{
+  "name": "peco"
+}
+{
+  "name": "percol"
+}
+{
+  "name": "pkg-config"
+}
+{
+  "name": "powerline-shell"
+}
+{
+  "name": "proxychains-ng"
+}
+{
+  "name": "python"
+}
+{
+  "name": "python3"
+}
+{
+  "name": "ranger"
+}
+{
+  "name": "readline"
+}
+{
+  "name": "reattach-to-user-namespace",
+  "used_options": [
+    "--with-wrap-launchctl",
+    "--with-wrap-pbcopy-and-pbpaste"
+  ]
+}
+{
+  "name": "renameutils"
+}
+{
+  "name": "revolver"
+}
+{
+  "name": "ruby"
+}
+{
+  "name": "s-lang"
+}
+{
+  "name": "sqlite"
+}
+{
+  "name": "stdman"
+}
+{
+  "name": "stow"
+}
+{
+  "name": "the_silver_searcher"
+}
+{
+  "name": "tldr"
+}
+{
+  "name": "tmux"
+}
+{
+  "name": "urlview"
+}
+{
+  "name": "utf8proc"
+}
+{
+  "name": "xonsh"
+}
+{
+  "name": "xz"
+}
+{
+  "name": "yank"
+}
+{
+  "name": "zplug"
+}
+{
+  "name": "zsh"
+}
+{
+  "name": "zshdb"
+}
+{
+  "name": "zunit"
+}
+{
+  "name": "zvanilla"
+}
