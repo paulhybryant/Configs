@@ -20,6 +20,8 @@ zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 # autosuggestions and zsh-syntax-highlighting are enabled at the same time.
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
+# zplug "supercrabtree/k", nice:5
+# zplug "pindexis/qfc", as:command, use:"bin/qfc", nice:5, hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 
 # zplug "aphelionz/strerror.plugin.zsh", nice:5
 zplug "willghatch/zsh-snippets", nice:5
