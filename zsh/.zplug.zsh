@@ -19,6 +19,7 @@ zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 # For unknown reason, zplug clear && zplug load will cause zsh to exit if
 # autosuggestions and zsh-syntax-highlighting are enabled at the same time.
 zplug "zsh-users/zsh-autosuggestions", nice:5
+zplug "zsh-users/zsh-completions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 # zplug "supercrabtree/k", nice:5
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", nice:5, hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
