@@ -13,7 +13,7 @@ brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
-brew install macvim --with-override-system-vim--with-lua--with-luajit
+brew install macvim --with-lua--with-luajit--with-override-system-vim
 brew install reattach-to-user-namespace --with-wrap-launchctl--with-wrap-pbcopy-and-pbpaste
 brew install assh
 brew install homebrew/completions/brew-cask-completion
@@ -72,4 +72,6 @@ brew cask install hyperswitch
 brew cask install karabiner
 brew cask install seil
 brew cask install spectacle
+brew cask install squidman
 brew cask install vimr
+brew cask install xquartz

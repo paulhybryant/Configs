@@ -19,6 +19,9 @@ function run() {
   fi
 }
 
+log 'Installing zplug...'
+run "source <(curl -sL zplug.sh/installer)"
+
 log 'Sourcing zplug.zsh...\n'
 run "source <(curl -sL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/zsh/.zplug.zsh)"
 
@@ -42,17 +45,17 @@ run "git clone https://github.com/Homebrew/brew.git $brewhome"
 run "path+=($brewhome)"
 
 if [[ $OSTYPE == *linux* ]]; then
-  ./blob/bin/brew-import-linux.zsh
+  run "./blob/bin/brew-import-linux.zsh"
 else
-  ./blob/bin/brew-import-osx.zsh
+  run "./blob/bin/brew-import-osx.zsh"
 fi
 
 # Note that pipdeptree can only be installed for one python version.
 # Installation runs later will overwrite the binary of previous installation.
-pip install pipdeptree powerline-status pyclewn trash-cli neovim
-pip3 install gnureadline xonsh-apt-tabcomplete xonsh-autoxsh xontrib-prompt-ret-code xontrib-z
+run "pip install pipdeptree powerline-status pyclewn trash-cli neovim jedi pip-autoremove"
+run "pip3 install gnureadline xonsh-apt-tabcomplete xonsh-autoxsh xontrib-prompt-ret-code xontrib-z"j
 
-npm install js-beautify
+run "npm install js-beautify"
 
 printf "Installation logs at ${logfile}\n"
 popd
