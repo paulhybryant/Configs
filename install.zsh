@@ -20,9 +20,10 @@ function run() {
 }
 
 log 'Installing zplug...'
-run "source <(curl -sL zplug.sh/installer)"
+run "export ZPLUG_HOME=$HOME/.zplug"
+run "git clone https://github.com/zplug/zplug $ZPLUG_HOME"
 
-log 'Sourcing zplug.zsh...\n'
+log 'Sourcing .zplug.zsh...\n'
 run "source <(curl -sL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/zsh/.zplug.zsh)"
 
 pushd $ZPLUG_REPOS/paulhybryant/dotfiles
