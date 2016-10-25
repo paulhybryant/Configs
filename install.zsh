@@ -41,5 +41,11 @@ log "Installing brew to $brewhome...\n"
 run "git clone https://github.com/Homebrew/brew.git $brewhome"
 run "path+=($brewhome)"
 
-printf "Installation logs to ${logfile}\n"
+if [[ $OSTYPE == *linux* ]]; then
+  ./blob/bin/brew-import-linux.zsh
+else
+  ./blob/bin/brew-import-osx.zsh
+fi
+
+printf "Installation logs at ${logfile}\n"
 popd
