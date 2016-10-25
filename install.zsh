@@ -47,5 +47,12 @@ else
   ./blob/bin/brew-import-osx.zsh
 fi
 
+# Note that pipdeptree can only be installed for one python version.
+# Installation runs later will overwrite the binary of previous installation.
+pip install pipdeptree powerline-status pyclewn trash-cli neovim
+pip3 install gnureadline xonsh-apt-tabcomplete xonsh-autoxsh xontrib-prompt-ret-code xontrib-z
+
+npm install js-beautify
+
 printf "Installation logs at ${logfile}\n"
 popd
