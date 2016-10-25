@@ -14,6 +14,7 @@ brew tap jhawthorn/fzy
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install macvim --with-override-system-vim--with-lua--with-luajit
+brew install reattach-to-user-namespace --with-wrap-launchctl--with-wrap-pbcopy-and-pbpaste
 brew install assh
 brew install homebrew/completions/brew-cask-completion
 brew install brew-gem
@@ -29,7 +30,6 @@ brew install jhawthorn/fzy/fzy
 brew install git-extras
 brew install gnu-getopt
 brew install gnu-sed
-brew install paulhybryant/myformulae/gnu-trash
 brew install graphviz
 brew install grc
 brew install htop
@@ -48,25 +48,28 @@ brew install osxutils
 brew install peco
 brew install percol
 brew install paulhybryant/myformulae/powerline-shell
+brew install proxychains-ng
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
 brew install ruby
+brew install sshrc
 brew install stdman
 brew install stow
 brew install the_silver_searcher
 brew install tldr
 brew install tmux
-brew install paulhybryant/myformulae/trash-cli
 brew install urlview
 brew install xonsh
 brew install yank
 brew install zplug
-brew install zsh
+brew install zshdb
 brew install paulhybryant/myformulae/zunit
+brew install paulhybryant/myformulae/zvanilla
 brew cask install docker
 brew cask install hyperswitch
+brew cask install karabiner
 brew cask install seil
 brew cask install spectacle
 brew cask install vimr
