@@ -1,0 +1,2 @@
+Count number of lines using wc, without echoing the filename.
+wc -l < file.txt

@@ -1,0 +1,27 @@
+# Pretty print the json
+jq "." < filename.json
+
+# Access the value at key "foo"
+jq '.foo'
+
+# Access first list item
+jq '.[0]'
+
+# Slice & Dice
+jq '.[2:4]'
+jq '.[:3]'
+jq '.[-2:]'
+
+# Filter on array
+brew info --json=v1 --installed | jq '.[] | select(.installed[0].used_options!=[]) | { name: .name, used_options: .installed[0].used_options}'
+
+# if-else
+brew info --json=v1 --installed | jq '.[] | if (.installed[0].used_options != []) then { name: .name, used_options: .installed[0].used_options } else { name: .name }'
+
+# variable
+brew info --json=v1 --installed | \
+  jq '.[] | . as $in | reduce .installed[0].used_options[] as $item (""; . + $item) | . as $opt | "brew install " + $in.name + " " + $opt'
+
+# reduce
+brew info --json=v1 --installed | \
+  jq '.[] | select(.installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + $item) | . as $opt | "brew install " + $in.name + " " + $opt'

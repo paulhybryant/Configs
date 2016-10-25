@@ -1,0 +1,5 @@
+Use the following: Send Hex Codes: 0x1B 0x05 to send Escape + Ctrl + E in iterm2.
+
+Escape is ASCII 27 (it's often written as octal  \033 if your shell doesn't know \e).
+Ctrl-[Character] combinations result in the ASCII code corresponding to the character's position in the alphabet. Well-known examples are^H for ASCII 8 (Backspace), ^C for ASCII 3, End of Text, or ^D for ASCII 4, End of Transmission, and likewise, pressing ^E results in ASCII 5 — so that hex code needs to be sent instead.
+You can even use this (I cannot imagine a real use case, but let's not care about that) to replace pressing Enter (Line Feed) by ^J, or pressing Tab by ^I. See here for more information about control characters.
