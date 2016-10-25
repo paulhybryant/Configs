@@ -36,11 +36,6 @@ else
   stows+=(osx)
 fi
 
-log "Stowing...\n"
-for module in $stows; do
-  run "stow $module -t ~ -v | tee -a \"${logfile}\""
-done
-
 log "Installing brew to $brewhome...\n"
 run "git clone https://github.com/Homebrew/brew.git $brewhome"
 run "path+=($brewhome)"
@@ -50,6 +45,11 @@ if [[ $OSTYPE == *linux* ]]; then
 else
   run "./blob/bin/brew-import-osx.zsh"
 fi
+
+log "Stowing...\n"
+for module in $stows; do
+  run "stow $module -t ~ -v | tee -a \"${logfile}\""
+done
 
 # Note that pipdeptree can only be installed for one python version.
 # Installation runs later will overwrite the binary of previous installation.
