@@ -1,0 +1,13 @@
+# List of preferences locations
+# Finder
+/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/Resources/agent-defaults/finder.plist
+~/Library/Preferences/com.apple.finder.plist
+# iTerm2
+/Library/Managed Preferences/yuhuang/com.googlecode.iterm2.plist
+~/Library/Preferences/com.googlecode.iterm2.plist
+# Karabiner
+/Applications/Karabiner.app/Contents/Library/bin/karabiner export
+# Seil
+/Applications/Seil.app/Contents/Library/bin/seil export
+# Spectacle
+~/Library/Application Support/Spectacle/Shortcuts.json
