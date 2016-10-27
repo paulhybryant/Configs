@@ -20,7 +20,6 @@ brew install homebrew/completions/brew-cask-completion
 brew install brew-gem
 brew install beeftornado/rmtree/brew-rmtree
 brew install cheat
-brew install clipper
 brew install dos2unix
 brew install fasd
 brew install findutils
@@ -71,6 +70,7 @@ brew cask install docker
 brew cask install hyperswitch
 brew cask install karabiner
 brew cask install seil
+brew cask install showyedge
 brew cask install spectacle
 brew cask install squidman
 brew cask install vimr
