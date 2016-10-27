@@ -44,9 +44,6 @@
   ; Creates branch and checkout
   cb = checkout -b
 
-  ; Push to mutable and pull from origin
-  pp = !"git push mutable && git pull origin"
-
   ; Pull recursively
   pr = pull --recurse-submodules
 
