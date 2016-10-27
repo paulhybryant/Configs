@@ -47,6 +47,7 @@ else
 fi
 
 log "Stowing...\n"
+run "mkdir -p ~/.local/bin"
 for module in $stows; do
   run "stow $module -t ~ -v | tee -a \"${logfile}\""
 done
