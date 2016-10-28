@@ -1,0 +1,6 @@
+# After running this command, content of your $HOME would stop changing.  But
+# you still will be able to change it, with all the changed content going into
+# tmpHome.  This is useful but it is not suitable for using overlayfs for HOME
+# directory as you cannot just keep the changes you want, but you need to keep
+# all changes in the overlay fs.
+mount -t overlayfs -o lowerdir=$HOME,upperdir=/tmp/tmpHOME overlayfs $HOME
