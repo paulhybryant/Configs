@@ -19,14 +19,14 @@ function run() {
   fi
 }
 
-log 'Installing zplug...'
-run "export ZPLUG_HOME=$HOME/.zplug"
-run "git clone https://github.com/zplug/zplug $ZPLUG_HOME"
-
 log 'Sourcing .zplug.zsh...\n'
 run "source <(curl -sL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/zsh/.zplug.zsh)"
-
 pushd $ZPLUG_REPOS/paulhybryant/dotfiles
+
+# log 'Sourcing .zplugin.zsh...\n'
+# run "source <(curl -sL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/zsh/.zplugin.zsh)"
+# pushd $ZPLG_PLUGINS_DIR/paulhybryant---dotfiles
+
 stows=(vim zsh tmux misc)
 if [[ $OSTYPE == *linux* ]]; then
   brewhome="~/.linuxbrew"

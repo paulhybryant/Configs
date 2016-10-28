@@ -1,6 +1,8 @@
 # vim: ft=zplug sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
 export ZPLUG_HOME="$HOME/.zplug"
+[[ -d $ZPLUG_HOME ]] || \
+  git clone --recursive https://github.com/zplug/zplug $ZPLUG_HOME
 source ${ZPLUG_HOME}/init.zsh
 
 zplug "zplug/zplug", nice:0

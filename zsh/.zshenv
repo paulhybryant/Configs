@@ -14,6 +14,7 @@ declare -xg EDITOR='vim' VISUAL="vim"
 if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
 fi
+path=(~/.local/bin ${path[@]})
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'

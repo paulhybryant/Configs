@@ -2,10 +2,11 @@
 
 [[ -d ~/.zplugin ]] || \
   (mkdir ~/.zplugin && \
-  git clone https://github.com/psprint/zplugin.git ~/.zplugin/bin)
+  git clone --recursive https://github.com/psprint/zplugin.git ~/.zplugin/bin)
 source ~/.zplugin/bin/zplugin.zsh
 zcompile ~/.zplugin/bin/zplugin.zsh
 
+zplugin load "paulhybryant/dotfiles"
 zplugin load "paulhybryant/powerline-shell"
 zplugin load "psprint/zsh-syntax-highlighting"
 zplugin load "sharat87/zsh-vim-mode"
@@ -14,7 +15,6 @@ zplugin load "zlsun/solarized-man"
 zplugin load "zsh-users/zsh-autosuggestions"
 zplugin load "zsh-users/zsh-completions"
 zplugin load "zsh-users/zsh-history-substring-search"
-
 zplugin snippet \
   'https://github.com/junegunn/fzf/raw/master/shell/key-bindings.zsh'
 
@@ -29,4 +29,4 @@ zplugin load "paulhybryant/myzsh"
 [[ -f ~/.zplugin.local ]] && source ~/.zplugin.local                            # Local configurations
 autoload -Uz compinit
 compinit
-zplugin cdreplay -q
+# zplugin cdreplay -q
