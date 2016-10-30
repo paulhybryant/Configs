@@ -42,7 +42,7 @@ zplug "willghatch/zsh-snippets", nice:5
 # zplug "RobSis/zsh-completion-generator", nice:6
 # zplug "jocelynmallon/zshmarks", nice:6
 zplug "sharat87/zsh-vim-mode", nice:6
-zplug "paulhybryant/powerline-shell", nice:6
+# zplug "paulhybryant/powerline-shell", nice:6
 zplug "junegunn/fzf", use:"shell/*.zsh", nice:6
 zplug "zlsun/solarized-man", nice:6
 # zplug "andrewferrier/fzf-z", nice:6

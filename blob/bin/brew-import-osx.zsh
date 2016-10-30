@@ -1,5 +1,18 @@
 #!/usr/bin/env zsh
 
+brew tap ==>
+brew tap Auto-updated
+brew tap Homebrew!
+brew tap Updated
+brew tap Homebrew
+brew tap from
+brew tap 5e44184b3
+brew tap to
+brew tap ec527ff98.
+brew tap No
+brew tap changes
+brew tap to
+brew tap formulae.
 brew tap beeftornado/rmtree
 brew tap caskroom/cask
 brew tap caskroom/versions
@@ -47,8 +60,8 @@ brew install noti
 brew install osxutils
 brew install peco
 brew install percol
-brew install paulhybryant/myformulae/powerline-shell
 brew install proxychains-ng
+brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
