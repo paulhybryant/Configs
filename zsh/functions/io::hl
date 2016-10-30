@@ -1,0 +1,8 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+# printf "${COLOR_Red}$*\n${COLOR_Color_Off}"
+if $(whence red); then
+  red "$*\n"
+else
+  printf "$*\n"
+fi

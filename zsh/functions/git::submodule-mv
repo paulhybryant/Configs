@@ -1,0 +1,15 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<git::submodule-mv>
+
+Move submodule with a single command.
+
+@return NULL
+=cut
+
+git submodule deinit "$1"
+git rm "$1"
+local _url
+_url=$(git::submodule-url "$1")
+git submodule add "${_url}" "$2"

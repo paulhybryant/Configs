@@ -1,0 +1,30 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<file::find-ignore-dir>
+
+Find in current directory, with dir $1 ignored.
+TODO: Make $1 an array, and ignore a list of dirs.
+
+$1 The directory to ignore.
+
+@return NULL
+=cut
+
+# Commands with the same output
+# find . -wholename "./.git" -prune -o -wholename "./third_party" -prune -o -type f -print
+# find . -type f ! -path "./.git/*" ! -path "./third_party/*" -print
+# find . -type d \( -path './third_party*' -o -path './.git*' \) -prune -o -type f -print
+# Differences betwee these commands
+# 1. -prune stops find from descending into a directory. Just specifying
+#    -not -path will still descend into the skipped directory, but -not -path
+#    will be false whenever find tests each file.
+# 2. find prints the pruned directory
+# So performance of 1 and 3 will be better
+# find . -wholename "*/.git" -prune -o -wholename "./third_party" -prune -o "$@" -print
+
+local _dir _ignore_dir
+_ignore_dir="$1"
+_dir="$2"
+shift 2
+find "${_dir}" -wholename "*/${_ignore_dir}" -prune -o "$@" -print

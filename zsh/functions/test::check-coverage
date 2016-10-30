@@ -1,0 +1,38 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<util::check-test-coverage>
+
+Check test coverage for zsh functions.
+
+@return NULL
+=cut
+
+setopt localoptions err_return nounset
+local -a _functions _tests
+local -A _test_cases
+local _ignore
+_ignore='^lib/\.'
+# _ignore=$(strings::join --delim='\|' ${_ignore})
+io::vlog 1 "Ignored files: ${_ignore}"
+_tests=($(find tests -name "*.zsh" | grep -v ${_ignore} | xargs grep -h -o "^function test::.*()" | sed -e 's/^function \(.*\)()/\1/'))
+io::vlog 1 "Tests:\n${_tests}"
+for t in ${_tests}; do
+  io::vlog 1 ${t/test::/}
+  _test_cases[${t/test::/}]=$t
+done
+io::vlog 2 "Testcases:\n${(kv)_test_cases}"
+
+_functions=($(find lib -type f | grep -v ${_ignore}))
+io::vlog 1 "Functions:\n${_functions}"
+local _fn
+for f in ${_functions}; do
+  _fn=$(basename ${f})
+  if [[ "${_fn}" =~ '[^:]*::_.*' ]]; then
+    io::vlog 2 "Skipping whitelisted function ${_fn}"
+  elif [[ ${+_test_cases[${_fn}]} -eq 0 ]]; then
+    io::hl "✗ ${_fn}"
+  else
+    io::msg "✓ ${_fn} : ${_test_cases[${_fn}]}"
+  fi
+done

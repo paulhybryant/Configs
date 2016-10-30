@@ -1,0 +1,28 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<time::human-readable-date>
+
+Print time in human readable format.
+
+$1 Current time in seconds since epoch
+
+@return string in human readable format for the specified time.
+=cut
+
+# (( ${+commands[date]} )) || return 1
+
+zparseopts -D -micro=micro -milli=milli -zone:=zone
+
+local _ts
+_ts="$1"
+if [[ -n ${micro} ]]; then
+  ((_ts = _ts / 1000000))
+elif [[ -n ${milli} ]]; then
+  ((_ts = _ts / 1000))
+fi
+if [[ -n ${zone} ]]; then
+  TZ="${zone[2]}" date --date=@"${_ts}"
+else
+  date --date=@"${_ts}"
+fi

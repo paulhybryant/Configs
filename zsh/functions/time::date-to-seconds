@@ -1,0 +1,28 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<time::date-to-seconds>
+
+Convert date string to seconds since epoch
+
+$1 Date string
+
+@return string in seconds since epoch.
+=cut
+
+local -a nano milli micro
+zparseopts -D -nano=nano -milli=milli -micro=micro
+
+local _fmt _str
+if [[ -n "${nano}" ]]; then
+  _fmt="+%s%N"
+elif [[ -n "${micro}" ]]; then
+  _fmt="+%s%6N"
+elif [[ -n "${milli}" ]]; then
+  _fmt="+%s%3N"
+else
+  _fmt="+%s"
+fi
+
+_str=$(date -d "$1" "${_fmt}")
+printf "${_str}\n"

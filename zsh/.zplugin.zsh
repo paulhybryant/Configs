@@ -6,7 +6,6 @@
 source ~/.zplugin/bin/zplugin.zsh
 zcompile ~/.zplugin/bin/zplugin.zsh
 
-zplugin load "paulhybryant/dotfiles"
 zplugin load "paulhybryant/powerline-shell"
 zplugin load "psprint/zsh-syntax-highlighting"
 zplugin load "sharat87/zsh-vim-mode"
@@ -22,9 +21,9 @@ if [[ $OSTYPE == *darwin* ]]; then
   zplugin load "unixorn/tumult.plugin.zsh"
 fi
 
-# Put myzsh at the end as it 'fixes' some known 'bad' settings in previous
+# Put my zsh configs at the end as it 'fixes' some known 'bad' settings in previous
 # loaded plugins.
-zplugin load "paulhybryant/myzsh"
+zplugin load "paulhybryant/dotfiles"
 
 [[ -f ~/.zplugin.local ]] && source ~/.zplugin.local                            # Local configurations
 autoload -Uz compinit

@@ -1,0 +1,15 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+local -a l a
+zparseopts -D l=l a=a
+
+[[ $# -eq 0 ]] && set -- .
+
+for dir in "$*"
+do
+  if [[ ${+a[1]} -eq 1 ]]; then
+    file::ls $l -d ${dir}/*(/) ${dir}/.*(/)
+  else
+    file::ls $l -d ${dir}/*(/)
+  fi
+done

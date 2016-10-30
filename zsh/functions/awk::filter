@@ -1,0 +1,17 @@
+# vim: filetype=zshawk sw=2 ts=2 sts=2 et tw=80 foldlevel=0 foldmethod=syntax nospell
+
+setopt localoptions err_return
+
+local -a condition delimiter
+local _awk_cmd
+zparseopts -K -M -E -D -- c:=condition -condition:=condition d:=delimiter -delimiter:=delimiter
+
+if [[ (${#delimiter} -lt 2) || (${#condition} -lt 2) ]]; then
+  io::err "Missing delimiter or condition."
+fi
+
+_awk_cmd="awk 'BEGIN {FS = \"${delimiter[2]}\"}; { \
+    if (${condition[2]}) { print \$0 } \
+  }'"
+
+eval "$_awk_cmd"

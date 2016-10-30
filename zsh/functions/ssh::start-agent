@@ -1,0 +1,23 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<util::start-ssh-agent>
+
+Start ssh agent if not yet.
+
+@return NULL
+=cut
+
+local _agent _agent_pid
+_agent=$1
+# Start ssh agent if needed
+# Check to see if SSH Agent is already running
+# agent_pid="$(ps -ef | grep "${_agent}" | grep -v "grep" | awk '{print($2)}')"
+_agent_pid=$(pgrep "${_agent}")
+
+# If the agent is not running (pid is zero length string)
+if [[ -z "${_agent_pid}" ]]; then
+    # Start up SSH Agent
+    # this seems to be the proper method as opposed to $(exec ssh-agent bash)
+    eval "$(${_agent})"
+fi

@@ -1,0 +1,22 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+: <<=cut
+=item Function C<base::sourced>
+
+$1 Absolute path to the file to be sourced.
+
+@return 0 or 1, indicates whether latest version of this file is sourced.
+=cut
+
+(( ${+functions[io::vlog]} )) && io::vlog 1 "Trying to source ${1:t}"
+local _ltime
+zstyle -s ":mycfg:module:${${1:t}%.zsh}" loaded _ltime
+_mtime="$(time::getmtime $1)"
+if [[ "${_ltime}" == "$_mtime" ]]; then
+  (( ${+functions[io::vlog]} )) && io::vlog 1 "${1:t} already sourced, timestamp: ${_ltime}"
+  return 0
+else
+  (( ${+functions[io::vlog]} )) && io::vlog 1 "sourcing ${1:t}, timestamp: ${_mtime}"
+  zstyle ":mycfg:module:${${1:t}%.zsh}" loaded "${_mtime}"
+  return 1
+fi

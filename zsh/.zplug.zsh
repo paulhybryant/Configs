@@ -6,7 +6,6 @@ export ZPLUG_HOME="$HOME/.zplug"
 source ${ZPLUG_HOME}/init.zsh
 
 zplug "zplug/zplug", nice:0
-zplug "paulhybryant/dotfiles", nice:0
 
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, nice:0
@@ -49,7 +48,7 @@ zplug "zlsun/solarized-man", nice:6
 # zplug "andrewferrier/fzf-z", nice:6
 zplug "unixorn/tumult.plugin.zsh", nice:6, if:"[[ $OSTYPE == *darwin* ]]"
 # zplug "b4b4r07/enhancd", use:"init.sh", nice:7
-zplug "paulhybryant/myzsh", nice:8
+zplug "paulhybryant/dotfiles", nice:8
 
 zplug "psprint/zsh-syntax-highlighting", nice:10
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
