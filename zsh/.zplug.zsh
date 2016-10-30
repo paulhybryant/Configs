@@ -19,6 +19,7 @@ zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
 
+zplug "mafredri/zsh-async", nice:3
 # For unknown reason, zplug clear && zplug load will cause zsh to exit if
 # autosuggestions and zsh-syntax-highlighting are enabled at the same time.
 zplug "zsh-users/zsh-autosuggestions", nice:5

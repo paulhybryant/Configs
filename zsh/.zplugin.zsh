@@ -6,7 +6,9 @@
 source ~/.zplugin/bin/zplugin.zsh
 zcompile ~/.zplugin/bin/zplugin.zsh
 
-zplugin load "paulhybryant/powerline-shell"
+zplugin load "bhilburn/powerlevel9k"
+# zplugin load "paulhybryant/powerline-shell"
+# zplugin load "mafredri/zsh-async"
 zplugin load "psprint/zsh-syntax-highlighting"
 zplugin load "sharat87/zsh-vim-mode"
 zplugin load "willghatch/zsh-snippets"
