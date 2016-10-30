@@ -20,6 +20,7 @@ brew install homebrew/completions/brew-cask-completion
 brew install brew-gem
 brew install beeftornado/rmtree/brew-rmtree
 brew install cheat
+brew install homebrew/completions/docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
