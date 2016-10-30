@@ -233,27 +233,6 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'paulhybryant/vimutils'                                             " My vim customization (utility functions, syntax etc)
-  let s:vimutils = neobundle#get('vimutils')
-  function! s:vimutils.hooks.on_source(bundle)
-    Glaive vimutils plugin[mappings]
-      \ bufclose_skip_types=`[
-      \  'gistls', 'nerdtree', 'indicator', 'folddigest', 'capture' ]`
-    execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
-    call vimutils#InitUndoSwapViews()
-  endfunction
-  function! s:vimutils.hooks.on_post_source(bundle)
-    if !has('gui_running')
-      for i in range(1,9)
-        execute 'silent! nmap <silent> <unique> '
-          \ . i . '<Plug>AirlineSelectTab' . i
-      endfor
-    endif
-    let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
-    call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
-  endfunction
-  " }}}
-  " {{{2
   NeoBundle 'scrooloose/nerdcommenter'                                          " Plugin for adding comments
   let s:nerdcommenter = neobundle#get('nerdcommenter')
   function! s:nerdcommenter.hooks.on_source(bundle)
@@ -310,7 +289,27 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ }                                                                         " vim-airline themes
   " }}}
   " Local bundles {{{2
-  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0'])
+  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0', 'vimutils'])
+  " {{{3
+  let s:vimutils = neobundle#get('vimutils')
+  function! s:vimutils.hooks.on_source(bundle)
+    Glaive vimutils plugin[mappings]
+      \ bufclose_skip_types=`[
+      \  'gistls', 'nerdtree', 'indicator', 'folddigest', 'capture' ]`
+    execute 'set spellfile=' . a:bundle.path . '/spell/en.utf-8.add'
+    call vimutils#InitUndoSwapViews()
+  endfunction
+  function! s:vimutils.hooks.on_post_source(bundle)
+    if !has('gui_running')
+      for i in range(1,9)
+        execute 'silent! nmap <silent> <unique> '
+          \ . i . '<Plug>AirlineSelectTab' . i
+      endfor
+    endif
+    let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+    call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
+  endfunction
+  " }}}
   if filereadable(expand('~/.vimrc.local'))
     execute 'source' expand('~/.vimrc.local')
   endif
