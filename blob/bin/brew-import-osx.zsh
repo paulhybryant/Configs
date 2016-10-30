@@ -1,18 +1,5 @@
 #!/usr/bin/env zsh
 
-brew tap ==>
-brew tap Auto-updated
-brew tap Homebrew!
-brew tap Updated
-brew tap Homebrew
-brew tap from
-brew tap 5e44184b3
-brew tap to
-brew tap ec527ff98.
-brew tap No
-brew tap changes
-brew tap to
-brew tap formulae.
 brew tap beeftornado/rmtree
 brew tap caskroom/cask
 brew tap caskroom/versions
