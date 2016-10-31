@@ -1,4 +1,3 @@
-.*\.plist$
 README
 .*-import.sh$
 \.DS_Store
