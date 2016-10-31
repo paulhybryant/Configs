@@ -16,6 +16,7 @@ brew install noti
 brew install netcat
 brew install fpp
 brew install neovim/neovim/neovim
+brew install stow
 brew install cheat
 brew install jq
 brew install tldr
@@ -33,6 +34,7 @@ brew install ruby
 brew install fzf
 brew install most
 brew install homebrew/completions/docker-completion
+brew install md5sha1sum
 brew install xonsh
 brew install graphviz
 brew install git-extras
