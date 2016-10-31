@@ -24,6 +24,7 @@ brew install homebrew/completions/docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
+brew install fpp
 brew install paulhybryant/myformulae/fsqlf
 brew install fzf
 brew install jhawthorn/fzy/fzy
