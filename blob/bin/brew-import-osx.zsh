@@ -62,7 +62,6 @@ brew install tldr
 brew install tmux
 brew install urlview
 brew install xonsh
-brew install yank
 brew install zplug
 brew install zshdb
 brew install paulhybryant/myformulae/zunit
