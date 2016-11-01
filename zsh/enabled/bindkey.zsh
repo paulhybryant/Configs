@@ -1,7 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-# TODO(me): Bind C-Left and C-Right as HOME / END
-# '^L' is captured by tmux for navigating between tmux panes
 # bindkey '^[OD' beginning-of-line                                              # Set left arrow as HOME
 # bindkey '^[OC' end-of-line                                                    # Set right arrow as END
 bindkey "[1;5D" beginning-of-line                                             # Set ctrl + left arrow as HOME
@@ -26,4 +24,3 @@ bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 bindkey '^_' undo
 bindkey '^B' vi-quoted-insert                                                   # Use ^B as ^V with which we can see the keycodes
-# zsh::setup-abbrevs
