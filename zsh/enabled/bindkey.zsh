@@ -25,4 +25,5 @@ bindkey '^[[B' down-line-or-beginning-search                                    
 bindkey '\C-n' menu-complete
 bindkey '\C-p' reverse-menu-complete
 bindkey '^_' undo
+bindkey '^B' vi-quoted-insert                                                   # Use ^B as ^V with which we can see the keycodes
 # zsh::setup-abbrevs
