@@ -50,7 +50,7 @@ zplug "psprint/zsh-syntax-highlighting", nice:10
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11
 
-# [[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
+[[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
 
 if ! zplug check --verbose; then
   zplug install
