@@ -18,7 +18,6 @@ zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-completions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
 zplug "willghatch/zsh-snippets", nice:5
-zplug "sharat87/zsh-vim-mode", nice:6
 zplug "junegunn/fzf", use:"shell/*.zsh", nice:6
 zplug "zlsun/solarized-man", nice:6
 zplug "unixorn/tumult.plugin.zsh", nice:6, if:"[[ $OSTYPE == *darwin* ]]"

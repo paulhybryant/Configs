@@ -8,7 +8,6 @@ zcompile ~/.zplugin/bin/zplugin.zsh
 
 zplugin load "bhilburn/powerlevel9k"
 zplugin load "psprint/zsh-syntax-highlighting"
-zplugin load "sharat87/zsh-vim-mode"
 zplugin load "willghatch/zsh-snippets"
 zplugin load "zlsun/solarized-man"
 zplugin load "zsh-users/zsh-autosuggestions"
