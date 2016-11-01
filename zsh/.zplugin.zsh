@@ -7,8 +7,6 @@ source ~/.zplugin/bin/zplugin.zsh
 zcompile ~/.zplugin/bin/zplugin.zsh
 
 zplugin load "bhilburn/powerlevel9k"
-# zplugin load "paulhybryant/powerline-shell"
-# zplugin load "mafredri/zsh-async"
 zplugin load "psprint/zsh-syntax-highlighting"
 zplugin load "sharat87/zsh-vim-mode"
 zplugin load "willghatch/zsh-snippets"
@@ -18,6 +16,8 @@ zplugin load "zsh-users/zsh-completions"
 zplugin load "zsh-users/zsh-history-substring-search"
 zplugin snippet \
   'https://github.com/junegunn/fzf/raw/master/shell/key-bindings.zsh'
+
+# zplugin load "mafredri/zsh-async"
 
 if [[ $OSTYPE == *darwin* ]]; then
   zplugin load "unixorn/tumult.plugin.zsh"
