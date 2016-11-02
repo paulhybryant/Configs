@@ -1,2 +1,4 @@
 # list of FILES to be ignored, DIRECTORY is not supported
 .antigen.zsh
+.stow-local-ignore
+.stow-global-ignore
