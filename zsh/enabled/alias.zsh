@@ -1,6 +1,5 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-alias rm='\trash -v'
 if [[ ${OSTYPE} == *linux* ]]; then
   alias cdtrash='pushd ~/.local/share/Trash/files'
   alias dpkg-cleanup-config=\
@@ -32,6 +31,7 @@ fi
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
+alias dotfiler="dotfiler --base-dir $ZPLUG_REPOS/paulhybryant/dotfiles"
 alias gitfind='file::find-ignore-dir ".git"'
 alias grepc='command grep -C 5 '
 alias gyank='util::yank'
@@ -55,6 +55,7 @@ alias llink='file::ll'
 alias lll='file::ll -l'
 alias mank='command man -K'
 alias npm='command npm -g'
+alias rm='\trash -v'
 alias run='zsh::run'
 alias stow='command stow -v'
 alias vartype='declare -p'
