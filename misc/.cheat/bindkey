@@ -1,0 +1,4 @@
+# Finding out the keycodes for bindkey
+# Use `cat` and press the key combinations. e.g. C-Left will print ^[[1;5D while Left will print ^[[D
+# Use Ctrl-v in or something similar in zsh
+cat
