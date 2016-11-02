@@ -1,9 +1,9 @@
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "zsh/external/dircolors-solarized"]
-	path = zsh/external/dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "vim/.vim/bundle/vimutils"]
 	path = vim/.vim/bundle/vimutils
 	url = https://github.com/paulhybryant/vimutils.git
+[submodule "zsh/plugin/external/dircolors-solarized"]
+	path = zsh/plugin/external/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
