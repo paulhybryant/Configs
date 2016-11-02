@@ -2,7 +2,7 @@
 
 [[ -d ~/.local/bin ]] || mkdir -p ~/.local/bin
 
-local current_wd=${0:A:h}/zsh
+local current_wd=${0:A:h}/zsh/plugin
 fpath+=(${current_wd}/functions)
 autoload -Uz -- ${current_wd}/functions/[^_]*(:t)
 manpath+=(${current_wd}/man)
