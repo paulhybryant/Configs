@@ -7,8 +7,10 @@ if [[ -z "${mycache}" ]]; then
 fi
 
 local -a op cache_key expire_secs cache_value
-zparseopts -D -K -M -E -- -op:=op -key:=cache_key -expire:=expire_secs -value:=cache_value
+local print
+zparseopts -D -K -M -E -- -op:=op -key:=cache_key -expire:=expire_secs -value:=cache_value -print=print
 
+reply=
 if [[ ${#cache_key} -ne 2 ]]; then
   printf "Missing --key\n"
   return 1
@@ -50,3 +52,7 @@ case "${op[2]}" in
     fi
     ;;
 esac
+
+if [[ -n $print ]]; then
+  echo $reply
+fi
