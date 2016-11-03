@@ -20,7 +20,7 @@ bindkey '^[[A' up-line-or-beginning-search                                      
 bindkey '^[[B' down-line-or-beginning-search                                    # Down
 # bindkey '^I' expand-or-complete-prefix
 # bindkey '^[[3~' delete-char
-bindkey '\C-n' menu-complete
-bindkey '\C-p' reverse-menu-complete
+# bindkey '\C-n' menu-complete
+# bindkey '\C-p' reverse-menu-complete
 bindkey '^_' undo
 bindkey '^B' vi-quoted-insert                                                   # Use ^B as ^V with which we can see the keycodes
