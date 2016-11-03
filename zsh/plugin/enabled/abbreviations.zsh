@@ -45,6 +45,10 @@ abbrevs+=(
   "drid"  "docker rmi -f \$(docker images -q -f \"dangling=true\")"
 )
 
+# Git
+abbrevs+=(
+  "gcm" "git commit -a -m "
+)
 # Add alias and autocompleteion for hub
 type compdef >/dev/null 2>&1 && compdef hub=git
 type hub >/dev/null 2>&1 && alias git='hub'

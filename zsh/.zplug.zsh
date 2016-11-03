@@ -20,6 +20,7 @@ zplug "zsh-users/zsh-history-substring-search", nice:5
 zplug "willghatch/zsh-snippets", nice:5
 zplug "junegunn/fzf", use:"shell/*.zsh", nice:6
 zplug "zlsun/solarized-man", nice:6
+zplug "hlissner/zsh-autopair", nice:6
 zplug "unixorn/tumult.plugin.zsh", nice:6, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "paulhybryant/dotfiles", nice:8
 zplug "psprint/zsh-syntax-highlighting", nice:10
