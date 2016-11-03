@@ -13,6 +13,10 @@ brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
+brew install findutils --with-default-names
+brew install gnu-sed --with-default-names
+brew install gnu-tar --with-default-names
+brew install gnu-which --with-default-names
 brew install macvim --with-override-system-vim --with-lua --with-luajit
 brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste
 brew install assh
@@ -22,6 +26,7 @@ brew install beeftornado/rmtree/brew-rmtree
 brew install cheat
 brew install homebrew/completions/docker-completion
 brew install dos2unix
+brew install paulhybryant/myformulae/dotfiler
 brew install fasd
 brew install findutils
 brew install fpp
@@ -31,6 +36,8 @@ brew install jhawthorn/fzy/fzy
 brew install git-extras
 brew install gnu-getopt
 brew install gnu-sed
+brew install gnu-tar
+brew install gnu-which
 brew install graphviz
 brew install grc
 brew install htop
@@ -49,7 +56,6 @@ brew install osxutils
 brew install peco
 brew install percol
 brew install proxychains-ng
-brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
@@ -69,6 +75,7 @@ brew install paulhybryant/myformulae/zvanilla
 brew cask install docker
 brew cask install hyperswitch
 brew cask install karabiner
+brew cask install key-codes
 brew cask install seil
 brew cask install showyedge
 brew cask install spectacle
