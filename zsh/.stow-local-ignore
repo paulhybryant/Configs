@@ -1,2 +1,1 @@
-# This is already in global ignore, adding this so that stow will link .gitignore
 plugin
