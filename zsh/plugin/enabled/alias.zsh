@@ -31,7 +31,6 @@ fi
 alias aga='ag --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
-alias dotfiler="dotfiler --base-dir $ZPLUG_REPOS/paulhybryant/dotfiles"
 alias gitfind='file::find-ignore-dir ".git"'
 alias grepc='command grep -C 5 '
 alias gyank='util::yank'
