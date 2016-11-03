@@ -26,7 +26,6 @@ brew install beeftornado/rmtree/brew-rmtree
 brew install cheat
 brew install homebrew/completions/docker-completion
 brew install dos2unix
-brew install paulhybryant/myformulae/dotfiler
 brew install fasd
 brew install findutils
 brew install fpp
@@ -56,6 +55,7 @@ brew install osxutils
 brew install peco
 brew install percol
 brew install proxychains-ng
+brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
