@@ -1,0 +1,52 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+declare -xg mycache
+if [[ -z "${mycache}" ]]; then
+  mycache="$HOME/.cache/mycache"
+  mkdir -p ${mycache}
+fi
+
+local -a op cache_key expire_secs cache_value
+zparseopts -D -K -M -E -- -op:=op -key:=cache_key -expire:=expire_secs -value:=cache_value
+
+if [[ ${#cache_key} -ne 2 ]]; then
+  printf "Missing --key\n"
+  return 1
+fi
+
+if [[ ${#op} -ne 2 ]]; then
+  printf "Missing --op\n"
+  return 1
+fi
+
+local cache_file="${mycache}/${cache_key[2]}"
+local mtime expire
+
+case "${op[2]}" in
+  update)
+    if [[ ${#cache_value} -ne 2 ]]; then
+      printf "Missing --value for update\n"
+      reply=
+    fi
+    echo "${cache_value[2]}" >! ${cache_file}
+    ;;
+  get)
+    if [[ ${#expire_secs} -ne 2 ]]; then
+      printf "Missing --expire\n"
+      reply=
+    fi
+    if [[ -e ${cache_file} ]]; then
+      mtime=$(time::getmtime ${cache_file})
+      expire=$((mtime + ${expire_secs[2]}))
+      mtime=$(time::now)
+      if [[ $mtime -gt $expire ]]; then
+        reply=
+      else
+        io::vlog 1 "Using cache"
+        reply=$(cat ${cache_file})
+      fi
+    else
+      reply=
+    fi
+    ;;
+esac
