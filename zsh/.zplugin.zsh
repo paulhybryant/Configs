@@ -13,6 +13,7 @@ zplugin load "zlsun/solarized-man"
 zplugin load "zsh-users/zsh-autosuggestions"
 zplugin load "zsh-users/zsh-completions"
 zplugin load "zsh-users/zsh-history-substring-search"
+# zplugin load "D630/fzf-fs"
 zplugin snippet \
   'https://github.com/junegunn/fzf/raw/master/shell/key-bindings.zsh'
 
