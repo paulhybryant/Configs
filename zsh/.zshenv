@@ -18,10 +18,8 @@ path=(~/.local/bin ${path[@]})
 
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'
-alias find='${CMDPREFIX}\find'
 alias ls='${CMDPREFIX}\ls --color=auto'
 alias mktemp='${CMDPREFIX}\mktemp'
-alias sed='${CMDPREFIX}\sed'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
 alias xargs='${CMDPREFIX}\xargs'
