@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+# Swith Karabiner profiles when cursor enters / leaves screen.
+# It can be triggered by a guard on the synergy log file.
 
 # Setup variables
 synergy_log="$HOME/.local/var/log/synergy.log"
