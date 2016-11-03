@@ -184,13 +184,13 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/blob/vba/pyclewn-2.3.vmb', {'name' : 'pyclewn',
+    \ 'dotfiles/master/archive/blob/vba/pyclewn-2.3.vmb', {'name' : 'pyclewn',
     \ 'regular_name' : 'pyclewn', 'frozen' : 1, 'type' : 'vba'
     \ }                                                                         " Vim runtime file for pyclewn
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
+    \ 'dotfiles/master/archive/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
     \ 'regular_name' : 'Mark', 'frozen' : 1, 'type' : 'vba'
     \ }                                                                         " Highlight multiple words
   let s:mark = neobundle#get('Mark')
