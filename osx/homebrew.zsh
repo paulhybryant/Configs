@@ -13,10 +13,6 @@ brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
-brew install findutils --with-default-names
-brew install gnu-sed --with-default-names
-brew install gnu-tar --with-default-names
-brew install gnu-which --with-default-names
 brew install macvim --with-override-system-vim --with-lua --with-luajit
 brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste
 brew install assh
@@ -45,6 +41,7 @@ brew install homebrew/dupes/lsof
 brew install mackup
 brew install macvim
 brew install md5sha1sum
+brew install mdp
 brew install moreutils
 brew install most
 brew install neovim/neovim/neovim
