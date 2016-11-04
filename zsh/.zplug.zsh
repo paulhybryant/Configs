@@ -9,9 +9,12 @@ zplug "zplug/zplug", nice:0
 
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, nice:0
+zstyle ":prezto:module:editor" "key-bindings" "vi"
+zplug "modules/editor", from:prezto, nice:1
 zplug "modules/directory", from:prezto, nice:1
 zplug "modules/helper", from:prezto, nice:1
 zplug "modules/history", from:prezto, nice:1
+zplug "modules/fasd", from:prezto, nice:1
 zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
 zplug "zsh-users/zsh-autosuggestions", nice:5
@@ -21,6 +24,7 @@ zplug "willghatch/zsh-snippets", nice:5
 zplug "junegunn/fzf", use:"shell/*.zsh", nice:6
 zplug "zlsun/solarized-man", nice:6
 zplug "hlissner/zsh-autopair", nice:6
+zplug "urbainvaes/fzf-marks", nice:6
 zplug "unixorn/tumult.plugin.zsh", nice:6, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "paulhybryant/dotfiles", nice:8
 zplug "psprint/zsh-syntax-highlighting", nice:10
@@ -46,7 +50,6 @@ zplug "psprint/zsh-syntax-highlighting", nice:10
 # zplug "jocelynmallon/zshmarks", nice:6
 # zplug "paulhybryant/powerline-shell", nice:6
 # zplug "andrewferrier/fzf-z", nice:6
-zplug "urbainvaes/fzf-marks", nice:6
 # zplug "b4b4r07/enhancd", use:"init.sh", nice:7
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11
