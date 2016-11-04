@@ -29,7 +29,11 @@ buf=$( cat "$@" )
 test -n "$TMUX" && tmux set-buffer "$buf"
 
 # copy to X11 if possible...
-test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
+if [[ $OSTYPE == *linux* ]]; then
+  test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
+else
+  test -n "$DISPLAY" && printf %s "$buf" | pbcopy && exit
+fi
 
 # ...otherwise copy to terminal
 len=$( printf %s "$buf" | wc -c ) max=74994
