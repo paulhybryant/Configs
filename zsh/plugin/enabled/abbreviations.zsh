@@ -86,6 +86,6 @@ zle -N magic-abbrev-expand-and-execute
 zle -N no-magic-abbrev-expand
 
 bindkey " " magic-abbrev-expand
-bindkey "^M" magic-abbrev-expand-and-execute
+# bindkey "^M" magic-abbrev-expand-and-execute
 bindkey "^x " no-magic-abbrev-expand
 bindkey -M isearch " " self-insert

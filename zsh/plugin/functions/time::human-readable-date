@@ -22,7 +22,7 @@ elif [[ -n ${milli} ]]; then
   ((_ts = _ts / 1000))
 fi
 if [[ -n ${zone} ]]; then
-  TZ="${zone[2]}" date --date=@"${_ts}"
+  TZ="${zone[2]}" ${CMDPREFIX}\date --date=@"${_ts}"
 else
-  date --date=@"${_ts}"
+  ${CMDPREFIX}\date --date=@"${_ts}"
 fi
