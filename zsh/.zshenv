@@ -43,6 +43,4 @@ path=($BREWHOME/opt/gnu-tar/libexec/gnubin ${path[@]})
 # alias xargs='${CMDPREFIX}\xargs'
 path=($BREWHOME/opt/findutils/libexec/gnubin ${path[@]})
 
-zstyle ":registry:var:prefix-width" registry 10
-
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local                              # Local configurations

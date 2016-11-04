@@ -13,6 +13,7 @@ manpath+=(${current_wd}/man)
 declare -xg EDITOR=vim VISUAL=vim
 # zle_bracketed_paste
 
+zstyle ":registry:var:prefix-width" registry 10
 for f in $(ls ${current_wd}/enabled/*.zsh); do
   source $f
 done
