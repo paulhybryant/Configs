@@ -13,6 +13,6 @@ cp ~/Library/Preferences/com.googlecode.iterm2.plist .
 /Applications/Seil.app/Contents/Library/bin/seil export > seilimport.sh
 
 # Spectacle
-cp ~/Library/Application Support/Spectacle/Shortcuts.json .
+# cp "$HOME/Library/Application Support/Spectacle/Shortcuts.json" .
 
-brew::backup > homebrew.zsh
+# brew::backup > homebrew.zsh
