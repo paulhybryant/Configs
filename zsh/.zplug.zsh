@@ -46,6 +46,7 @@ zplug "psprint/zsh-syntax-highlighting", nice:10
 # zplug "jocelynmallon/zshmarks", nice:6
 # zplug "paulhybryant/powerline-shell", nice:6
 # zplug "andrewferrier/fzf-z", nice:6
+zplug "urbainvaes/fzf-marks", nice:6
 # zplug "b4b4r07/enhancd", use:"init.sh", nice:7
 # zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes", nice:11

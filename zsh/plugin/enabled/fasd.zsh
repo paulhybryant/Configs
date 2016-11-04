@@ -21,7 +21,12 @@ alias d='fasd -d -i'     # directory
 alias f='fasd -f -i'     # file
 alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias v='f -e vim'
 
 eval "$(fasd --init auto)"
+
+z() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
