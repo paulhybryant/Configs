@@ -58,6 +58,7 @@ brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
 brew install ruby
+brew install sqlite-analyzer
 brew install sshrc
 brew install stdman
 brew install stow
@@ -65,6 +66,7 @@ brew install the_silver_searcher
 brew install tldr
 brew install tmux
 brew install urlview
+brew install homebrew/completions/vagrant-completion
 brew install xonsh
 brew install zshdb
 brew install paulhybryant/myformulae/zunit
@@ -77,5 +79,6 @@ brew cask install seil
 brew cask install showyedge
 brew cask install spectacle
 brew cask install squidman
+brew cask install vagrant
 brew cask install vimr
 brew cask install xquartz
