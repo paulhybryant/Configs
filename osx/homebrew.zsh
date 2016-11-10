@@ -24,6 +24,7 @@ brew install homebrew/completions/docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
+brew install fish
 brew install fpp
 brew install paulhybryant/myformulae/fsqlf
 brew install fzf
@@ -42,6 +43,7 @@ brew install mackup
 brew install macvim
 brew install md5sha1sum
 brew install mdp
+brew install mercurial
 brew install moreutils
 brew install most
 brew install neovim/neovim/neovim
@@ -52,7 +54,6 @@ brew install osxutils
 brew install peco
 brew install percol
 brew install proxychains-ng
-brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
