@@ -47,7 +47,7 @@ abbrevs+=(
 
 # Git
 abbrevs+=(
-  "gcm" "git commit -a -m "
+  "gcm" "git commit -a -m"
 )
 # Add alias and autocompleteion for hub
 type compdef >/dev/null 2>&1 && compdef hub=git
