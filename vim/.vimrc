@@ -16,6 +16,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
+  NeoBundle 'dag/vim-fish'
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
   NeoBundle 'godlygeek/tabular'
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
@@ -383,6 +384,9 @@ set winminheight=0                                                              
 set wrap                                                                        " Wrap long lines
 " let &shellcmdflag = '-f ' . &shellcmdflag                                     " For zsh to not load any RC file
 " set shell=/bin/sh                                                             " Sometimes shell can cause vim system command to be slow
+if &shell =~# 'fish$'
+  set shell=sh
+endif
 if &diff
   set nospell                                                                   " No spellcheck
 else
