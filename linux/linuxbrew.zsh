@@ -20,6 +20,7 @@ brew install stow
 brew install cheat
 brew install jq
 brew install tldr
+brew install homebrew/completions/vagrant-completion
 brew install assh
 brew install brew-gem
 brew install renameutils
@@ -42,15 +43,17 @@ brew install fasd
 brew install paulhybryant/myformulae/zunit
 brew install zshdb
 brew install sshrc
+brew install mdp
+brew install mercurial
 brew install grc
 brew install tmux
 brew install dos2unix
 brew install percol
+brew install fish
 brew install beeftornado/rmtree/brew-rmtree
 brew install htop
 brew install moreutils
 brew install gnu-sed
 brew install the_silver_searcher
 brew install python3
-brew install python
 brew install jhawthorn/fzy/fzy
