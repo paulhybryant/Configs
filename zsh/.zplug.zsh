@@ -16,7 +16,8 @@ zplug "modules/helper", from:prezto, nice:1
 zplug "modules/history", from:prezto, nice:1
 zplug "modules/fasd", from:prezto, nice:1
 zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
+# zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
+zplug "nojhan/liquidprompt", nice:2
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-completions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
