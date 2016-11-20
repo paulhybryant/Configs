@@ -16,8 +16,7 @@ zplug "modules/helper", from:prezto, nice:1
 zplug "modules/history", from:prezto, nice:1
 zplug "modules/fasd", from:prezto, nice:1
 zplug "modules/osx", from:prezto, nice:1, if:"[[ $OSTYPE == *darwin* ]]"
-# zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
-zplug "nojhan/liquidprompt", nice:2
+zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", nice:2
 zplug "zsh-users/zsh-autosuggestions", nice:5
 zplug "zsh-users/zsh-completions", nice:5
 zplug "zsh-users/zsh-history-substring-search", nice:5
@@ -33,6 +32,7 @@ zplug "psprint/zsh-syntax-highlighting", nice:10
 # zstyle ":prezto:module:editor" "key-bindings" "vi"
 # zplug "modules/editor", from:prezto, nice:1
 # zplug "modules/ssh", from:prezto, nice:1
+# zplug "nojhan/liquidprompt", nice:2
 # zplug "mafredri/zsh-async", nice:3
 # zplug "supercrabtree/k", nice:5
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", nice:5, hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
