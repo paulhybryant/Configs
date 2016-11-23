@@ -204,6 +204,13 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    \ 'dotfiles/master/archive/blob/vba/vis-v21f.vba.gz', {
+    \ 'name' : 'VisualBlockCommands', 'regular_name' : 'VisualBlockCommands',
+    \ 'frozen' : 1, 'type' : 'vba'
+    \ }                                                                         " Visual Block Commands
+  " }}}
+  " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator'                                     " Buffer selector in vim
   let s:buffergator = neobundle#get('vim-buffergator')
   function! s:buffergator.hooks.on_source(bundle)
