@@ -13,5 +13,5 @@ if [[ -z "$SSH_CLIENT" ]]; then
     osx::xclip "$@"
   fi
 else
-  ssh::xclip --os "${SSH_OS}"  "$@"
+  ssh::xclip --os "${SSH_OS}" "$@"
 fi
