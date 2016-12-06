@@ -29,14 +29,10 @@ buf=$( cat "$@" )
 test -n "$TMUX" && tmux set-buffer "$buf"
 
 # copy to X11 if possible...
-if [[ -z $SSH_OS ]]; then
-  if [[ $OSTYPE == *linux* ]]; then
-    test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
-  else
-    test -n "$DISPLAY" && printf %s "$buf" | pbcopy && exit
-  fi
+if [[ $OSTYPE == *linux* ]]; then
+  test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
 else
-  printf %s "$buf" | ssh::xclip --os "${SSH_OS}"
+  test -n "$DISPLAY" && printf %s "$buf" | pbcopy && exit
 fi
 
 # ...otherwise copy to terminal
