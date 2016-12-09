@@ -21,65 +21,76 @@ __zplug::sources::sso::check()
 
 __zplug::sources::sso::load_plugin()
 {
-  local    repo="$1"
-  local -A tags
-  local -a unclassified_plugins
-  local -a load_fpaths
-  local    expanded_path
-  local -a expanded_paths
-  local    lazy_pattern
+    local    repo="${1:?}"
+    local -A tags default_tags
+    local -a \
+        unclassified_plugins \
+        load_fpaths \
+        defer_1_plugins \
+        defer_2_plugins \
+        defer_3_plugins \
+        load_plugins \
+        lazy_plugins
 
-  if (( $# < 1 )); then
-      __zplug::io::log::error \
-          "too few arguments"
-      return 1
-  fi
+    __zplug::core::tags::parse "$repo"
+    tags=( "${reply[@]}" )
+    default_tags[use]="$(__zplug::core::core::run_interfaces 'use')"
+    load_fpaths=()
 
-  __zplug::core::tags::parse "$repo"
-  tags=( "${reply[@]}" )
+    if [[ $tags[use] == $default_tags[use] ]]; then
+        unclassified_plugins+=( "$tags[dir]"/*.plugin.zsh(N-.) )
+    fi
+    if (( $#unclassified_plugins == 0 )); then
+        unclassified_plugins+=( ${(@f)"$( \
+            __zplug::utils::shell::expand_glob "$tags[dir]/$tags[use]" "(N-.)"
+        )"} )
+        # If $tags[use] is a directory,
+        # expect to expand to $tags[dir]/*.zsh
+        if (( $#unclassified_plugins == 0 )); then
+            unclassified_plugins+=( ${(@f)"$( \
+                __zplug::utils::shell::expand_glob "$tags[dir]/$tags[use]/$default_tags[use]" "(N-.)"
+            )"} )
+            # Add the parent directory to fpath
+            load_fpaths+=( "$tags[dir]/$tags[use]"/_*(N.:h) )
+        fi
+    fi
+    load_fpaths+=( "$tags[dir]"/_*(N.:h) )
 
-  expanded_paths=( $(
-  zsh -c "$_ZPLUG_CONFIG_SUBSHELL; echo ${tags[dir]}${lazy_pattern:+/$lazy_pattern}" \
-      2> >(__zplug::io::log::capture)
-  ) )
+    # unclassified_plugins -> {defer_N_plugins,lazy_plugins,load_plugins}
+    # the order of loading of plugin files
+    case "$tags[defer]" in
+        0)
+            if (( $_zplug_boolean_true[(I)$tags[lazy]] )); then
+                lazy_plugins+=( "${unclassified_plugins[@]}" )
+            else
+                load_plugins+=( "${unclassified_plugins[@]}" )
+            fi
+            ;;
+        1)
+            defer_1_plugins+=( "${unclassified_plugins[@]}" )
+            ;;
+        2)
+            defer_2_plugins+=( "${unclassified_plugins[@]}" )
+            ;;
+        3)
+            defer_3_plugins+=( "${unclassified_plugins[@]}" )
+            ;;
+        *)
+            : # Error
+            ;;
+    esac
+    unclassified_plugins=()
 
-  for expanded_path in "${expanded_paths[@]}"
-  do
-      if [[ -f $expanded_path ]]; then
-          unclassified_plugins+=( "$expanded_path" )
+    reply=()
+    [[ -n $load_plugins ]] && reply+=( "load_plugins" "${(F)load_plugins}" )
+    [[ -n $defer_1_plugins ]] && reply+=( "defer_1_plugins" "${(F)defer_1_plugins}" )
+    [[ -n $defer_2_plugins ]] && reply+=( "defer_2_plugins" "${(F)defer_2_plugins}" )
+    [[ -n $defer_3_plugins ]] && reply+=( "defer_3_plugins" "${(F)defer_3_plugins}" )
+    [[ -n $lazy_plugins ]] && reply+=( "lazy_plugins" "${(F)lazy_plugins}" )
+    [[ -n $load_fpaths ]] && reply+=( "load_fpaths" "${(F)load_fpaths}" )
+    [[ -n $tags[hook-load] ]] && reply+=( "hook_load" "$tags[name]\0$tags[hook-load]")
 
-          # Add parent directory to fpath
-          if (( $_zplug_boolean_true[(I)$tags[lazy]] )); then
-              load_fpaths+=( $expanded_path(N-.:h) )
-          fi
-      elif [[ -d $expanded_path ]]; then
-          if (( $_zplug_boolean_true[(I)$tags[lazy]] )); then
-              load_fpaths+=( $expanded_path(N-/) )
-          else
-              # Note: $tags[use] defaults to '*.zsh'
-              unclassified_plugins+=( $(
-              zsh -c "$_ZPLUG_CONFIG_SUBSHELL; echo $expanded_path/$tags[use]" \
-                  2> >(__zplug::io::log::capture)
-              ) )
-
-              load_fpaths+=(
-                  "$expanded_path"/{_*,**/_*}(N-.:h)
-              )
-          fi
-      fi
-  done
-
-  if (( $#unclassified_plugins == 0 )) && (( $#load_fpaths == 0 )); then
-      __zplug::io::log::warn \
-          "no matching file or directory in $tags[dir]"
-      return 1
-  fi
-
-  reply=()
-  [[ -n $load_fpaths ]] && reply+=( load_fpaths "${(F)load_fpaths}" )
-  [[ -n $unclassified_plugins ]] && reply+=( unclassified_plugins "${(F)unclassified_plugins}" )
-
-  return 0
+    return 0
 }
 
 __zplug::sources::sso::load_command()
