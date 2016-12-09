@@ -22,5 +22,6 @@ stty ixany && stty ixoff -ixon && stty stop undef && stty start undef           
 
 # source ~/.zplugin.zsh
 source ~/.zplug.zsh
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local                                # Local configurations
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
 return 0
