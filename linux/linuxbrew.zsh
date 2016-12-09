@@ -8,9 +8,12 @@ brew tap homebrew/x11
 brew tap homebrew/dupes
 brew tap homebrew/completions
 brew tap beeftornado/rmtree
+brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
 brew install patchelf --with-static
+brew install vim --with-client-server --with-lua --with-luajit --with-override-system-vi
 brew install python --with-unicode-ucs4
+brew install mawk
 brew install ranger
 brew install noti
 brew install netcat
@@ -18,13 +21,17 @@ brew install fpp
 brew install neovim/neovim/neovim
 brew install stow
 brew install cheat
+brew install td
 brew install jq
 brew install tldr
 brew install homebrew/completions/vagrant-completion
 brew install assh
+brew install gnu-which
+brew install psgrep
 brew install brew-gem
 brew install renameutils
 brew install node
+brew install util-linux
 brew install stdman
 brew install patchelf
 brew install homebrew/dupes/gperf
@@ -39,6 +46,7 @@ brew install md5sha1sum
 brew install xonsh
 brew install graphviz
 brew install git-extras
+brew install progress
 brew install fasd
 brew install paulhybryant/myformulae/zunit
 brew install zshdb
@@ -49,10 +57,13 @@ brew install grc
 brew install tmux
 brew install dos2unix
 brew install percol
+brew install vim
 brew install fish
 brew install beeftornado/rmtree/brew-rmtree
 brew install htop
 brew install moreutils
+brew install linuxbrew/xorg/xorg
+brew install sgrep
 brew install gnu-sed
 brew install the_silver_searcher
 brew install python3
