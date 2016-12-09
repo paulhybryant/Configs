@@ -14,17 +14,18 @@ zplug "modules/helper", from:prezto
 zplug "modules/history", from:prezto
 zplug "modules/fasd", from:prezto
 zplug "modules/osx", from:prezto, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "willghatch/zsh-snippets"
-zplug "junegunn/fzf", use:"shell/*.zsh"
-zplug "zlsun/solarized-man"
-zplug "hlissner/zsh-autopair"
-zplug "urbainvaes/fzf-marks"
-zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]"
-zplug "paulhybryant/dotfiles"
+
+zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
+zplug "zsh-users/zsh-autosuggestions", defer:1
+zplug "zsh-users/zsh-completions", defer:1
+zplug "zsh-users/zsh-history-substring-search", defer:1
+zplug "willghatch/zsh-snippets", defer:1
+zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
+zplug "zlsun/solarized-man", defer:1
+zplug "hlissner/zsh-autopair", defer:1
+zplug "urbainvaes/fzf-marks", defer:1
+zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
+zplug "paulhybryant/dotfiles", defer:1
 zplug "psprint/zsh-syntax-highlighting", defer:2
 
 # zstyle ":prezto:module:editor" "key-bindings" "vi"
