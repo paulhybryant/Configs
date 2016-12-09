@@ -15,8 +15,8 @@ zplug "modules/history", from:prezto
 zplug "modules/fasd", from:prezto
 zplug "modules/osx", from:prezto, if:"[[ $OSTYPE == *darwin* ]]"
 
+zplug "zsh-users/zsh-autosuggestions", defer:0
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
-zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
 zplug "willghatch/zsh-snippets", defer:1
