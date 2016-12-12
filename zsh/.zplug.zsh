@@ -29,8 +29,6 @@ zplug "paulhybryant/dotfiles", defer:1
 # zplug "psprint/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-# zstyle ":prezto:module:editor" "key-bindings" "vi"
-# zplug "modules/editor", from:prezto
 # zplug "modules/ssh", from:prezto
 # zplug "nojhan/liquidprompt"
 # zplug "mafredri/zsh-async"
