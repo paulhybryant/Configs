@@ -26,8 +26,8 @@ zplug "hlissner/zsh-autopair", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "paulhybryant/dotfiles", defer:1
-# zplug "psprint/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+# zplug "psprint/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 # zplug "modules/ssh", from:prezto
 # zplug "nojhan/liquidprompt"
