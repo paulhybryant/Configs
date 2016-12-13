@@ -7,6 +7,10 @@ let g:mapleader = ','
 let g:maplocalleader = ',,'
 let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
 let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
+if has('nvim')
+  let g:python_host_prog = $BREWHOME . "/bin/python2"
+  let g:python3_host_prog = $BREWHOME . "/bin/python3"
+endif
 " }}}
 " NeoBundle {{{1
 let s:bundle_base_path = expand('~/.vim/bundle/')

@@ -11,7 +11,7 @@ brew tap beeftornado/rmtree
 brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
 brew install patchelf --with-static
-brew install vim --with-client-server --with-lua --with-luajit --with-override-system-vi
+brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
 brew install python --with-unicode-ucs4
 brew install mawk
 brew install ranger
