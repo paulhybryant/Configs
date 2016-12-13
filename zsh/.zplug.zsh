@@ -26,6 +26,7 @@ zplug "hlissner/zsh-autopair", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "paulhybryant/dotfiles", defer:1
+zplug "psprint/zsh-navigation-tools", defer:1
 # zplug "psprint/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
@@ -35,7 +36,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "supercrabtree/k"
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 # zplug "aphelionz/strerror.plugin.zsh"
-# zplug "psprint/zsh-navigation-tools"
 # zplug "psprint/zsh-cmd-architect"
 # zplug "psprint/zsh-editing-workbench"
 # zplug "psprint/zsh-select"

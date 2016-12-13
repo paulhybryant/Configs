@@ -14,6 +14,7 @@ zplugin load "zsh-users/zsh-autosuggestions"
 zplugin load "zsh-users/zsh-completions"
 zplugin load "zsh-users/zsh-history-substring-search"
 zplugin load "hlissner/zsh-autopair"
+zplugin load "psprint/zsh-navigation-tools"
 # zplugin load "D630/fzf-fs"
 zplugin snippet \
   'https://github.com/junegunn/fzf/raw/master/shell/key-bindings.zsh'
