@@ -18,6 +18,7 @@ zplug "modules/osx", from:prezto, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
+zplug "psprint/zsh-navigation-tools", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
 zplug "willghatch/zsh-snippets", defer:1
@@ -27,7 +28,6 @@ zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
 
 zplug "paulhybryant/dotfiles", defer:1
-zplug "psprint/zsh-navigation-tools", defer:1
 # zplug "psprint/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
