@@ -27,7 +27,7 @@ zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
 
-zplug "paulhybryant/dotfiles", defer:1
+zplug "paulhybryant/dotfiles", defer:2
 # zplug "psprint/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
