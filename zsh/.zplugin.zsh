@@ -16,6 +16,8 @@ zplugin snippet \
 if [[ $OSTYPE == *darwin* ]]; then
   zplugin load "unixorn/tumult.plugin.zsh"
 fi
+zplugin load "hlissner/zsh-autopair"
+zplugin load "psprint/zsh-navigation-tools"
 zplugin load "urbainvaes/fzf-marks"
 zplugin load "willghatch/zsh-snippets"
 zplugin load "zlsun/solarized-man"
