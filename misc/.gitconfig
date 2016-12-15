@@ -39,7 +39,7 @@
   co = checkout
 
   ; Commit all changes
-  ca = !"git add -A && git commit -av"
+  ca = ! git add -A && git commit -av
 
   ; Creates branch and checkout
   cb = checkout -b
@@ -63,6 +63,9 @@
 
   ; dirty
   dirty = "!gitdirty() { if [[ -d '.git' && -n $(git status --porcelain) ]]; then exit 1; fi }; gitdirty"
+
+  ; merge with upstream
+  mu = ! git fetch upstream && git merge upstream/master
 
 [core]
   pager = less -F -X
