@@ -5,6 +5,8 @@ brew update && brew upgrade
 
 echo 'Updating zplug...'
 zplug update
+
+echo 'Updating zplug itself'
 zplug::update-self
 
 echo 'Updating pip...'
