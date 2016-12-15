@@ -5,6 +5,7 @@ brew update && brew upgrade
 
 echo 'Updating zplug...'
 zplug update
+zplug::update-self
 
 echo 'Updating pip...'
 pip freeze >! /tmp/pip.log && pip install --upgrade -r /tmp/pip.log
