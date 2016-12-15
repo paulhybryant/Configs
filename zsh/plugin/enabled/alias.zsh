@@ -28,7 +28,7 @@ if (( ${+commands[grc]} )); then
 fi
 
 # alias trash-restore='restore-trash'
-alias aga='ag --hidden'
+alias aga='ag -a --hidden'
 alias cdlink='file::cdlink'
 alias cdr='cd-gitroot'
 alias gitfind='file::find-ignore-dir ".git"'
