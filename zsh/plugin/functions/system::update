@@ -1,19 +1,19 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-echo 'Updating brew...'
+print 'Updating brew...'
 brew update && brew upgrade
 
-echo 'Updating zplug...'
+print '\nUpdating zplug...'
 zplug update
 
-echo 'Updating zplug itself'
+print '\nUpdating zplug itself'
 zplug::update-self
 
-echo 'Updating pip...'
+print '\nUpdating pip...'
 pip freeze >! /tmp/pip.log && pip install --upgrade -r /tmp/pip.log
 
-echo 'Updating gem...'
+print '\nUpdating gem...'
 gem update
 
-echo 'Updating vim...'
+print '\nUpdating vim...'
 vi -c 'NeoBundleUpdate' -c 'q'
