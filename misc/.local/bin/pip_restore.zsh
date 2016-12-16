@@ -22,9 +22,6 @@ gnureadline==6.3.3
 greenlet==0.4.11
 msgpack-python==0.4.8
 neovim==0.1.12
-pip-autoremove==0.9.0
-pipdeptree==0.8.0
-powerline-status==2.5
 xonsh-apt-tabcomplete==0.1.4
 xonsh-autoxsh==0.2
 xontrib-prompt-ret-code==1.0.1
