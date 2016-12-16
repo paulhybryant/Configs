@@ -12,6 +12,9 @@ zplug::update-self
 print '\nUpdating pip...'
 pip freeze >! /tmp/pip.log && pip install --upgrade -r /tmp/pip.log
 
+print '\nUpdating pip3...'
+pip3 freeze >! /tmp/pip3.log && pip3 install --upgrade -r /tmp/pip3.log
+
 print '\nUpdating gem...'
 gem update
 

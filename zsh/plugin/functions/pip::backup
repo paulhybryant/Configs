@@ -1,0 +1,17 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+echo "#!/usr/bin/env zsh"
+echo ""
+
+# echo "pip freeze | pip install --upgrade -r /dev/stdin"
+# echo "pip3 freeze | pip3 install --upgrade -r /dev/stdin"
+
+echo "pip install --upgrade -r /dev/stdin <<EOF"
+echo "$(pip freeze)"
+echo "EOF"
+
+echo ""
+
+echo "pip3 install --upgrade -r /dev/stdin <<EOF"
+echo "$(pip3 freeze)"
+echo "EOF"
