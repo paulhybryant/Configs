@@ -10,10 +10,12 @@ print '\nUpdating zplug itself'
 zplug::update-self
 
 print '\nUpdating pip...'
-pip freeze >! /tmp/pip.log && pip install --upgrade -r /tmp/pip.log
+# pip freeze | pip install --upgrade -r /dev/stdin
+pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
 
 print '\nUpdating pip3...'
-pip3 freeze >! /tmp/pip3.log && pip3 install --upgrade -r /tmp/pip3.log
+# pip3 freeze | pip3 install --upgrade -r /dev/stdin
+pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U
 
 print '\nUpdating gem...'
 gem update
