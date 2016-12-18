@@ -13,6 +13,7 @@ fi
 declare -xg EDITOR='vim' VISUAL="vim"
 if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
+  declare -xg LOCATE_PATH=$BREWHOME/var/locate/locatedb
 fi
 path=(~/.local/bin ${path[@]})
 path+=(/usr/local/bin /usr/local/sbin)
