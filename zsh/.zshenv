@@ -15,6 +15,7 @@ if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
 fi
 path=(~/.local/bin ${path[@]})
+path+=(/usr/local/bin /usr/local/sbin)
 
 # coreutils
 alias date='${CMDPREFIX}\date'

@@ -20,5 +20,9 @@ pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U
 print '\nUpdating gem...'
 gem update
 
+# print '\nUpdating gem...'
+# upm update
+# upm upgrade
+
 print '\nUpdating vim...'
 vi -c 'NeoBundleUpdate' -c 'q'
