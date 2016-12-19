@@ -1,2 +1,5 @@
 plugin
 \.DS_Store
+.zimrc
+.zlogin.zim
+.zshrc.zim
