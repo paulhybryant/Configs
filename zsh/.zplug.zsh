@@ -49,6 +49,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "mooz/percol", use:"tools/zsh"
 # zplug "RobSis/zsh-completion-generator"
 # zplug "jocelynmallon/zshmarks"
+# zplug "huyng/bashmarks"
 # zplug "paulhybryant/powerline-shell"
 # zplug "andrewferrier/fzf-z"
 # zplug "b4b4r07/enhancd", use:"init.sh"

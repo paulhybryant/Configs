@@ -25,6 +25,7 @@ zplugin load "zsh-users/zsh-completions"
 zplugin load "zsh-users/zsh-history-substring-search"
 zplugin load "shannonmoeller/up"
 # zplugin load "D630/fzf-fs"
+# zplugin load "huyng/bashmarks"
 
 # Put my zsh configs at the end as it 'fixes' some known 'bad' settings in previous
 # loaded plugins.
