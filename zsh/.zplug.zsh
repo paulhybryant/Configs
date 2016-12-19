@@ -32,30 +32,31 @@ zplug "paulhybryant/dotfiles", defer:2
 # zplug "psprint/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
-# zplug "modules/ssh", from:prezto
-# zplug "nojhan/liquidprompt"
-# zplug "mafredri/zsh-async"
-# zplug "supercrabtree/k"
-# zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
+# zplug "D630/fzf-fs"
+# zplug "RobSis/zsh-completion-generator"
+# zplug "andrewferrier/fzf-z"
 # zplug "aphelionz/strerror.plugin.zsh"
+# zplug "arialdomartini/oh-my-git", use:"prompt.sh", defer:1
+# zplug "b4b4r07/enhancd", use:"init.sh"
+# zplug "huyng/bashmarks"
+# zplug "jocelynmallon/zshmarks"
+# zplug "mafredri/zsh-async"
+# zplug "modules/ssh", from:prezto
+# zplug "mooz/percol", use:"tools/zsh"
+# zplug "nojhan/liquidprompt"
+# zplug "paulhybryant/powerline-shell"
+# zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
+# zplug "psprint/history-search-multi-word"
+# zplug "psprint/zconvey"
 # zplug "psprint/zsh-cmd-architect"
 # zplug "psprint/zsh-editing-workbench"
 # zplug "psprint/zsh-select"
-# zplug "psprint/zconvey"
-# zplug "psprint/history-search-multi-word"
-# zplug "psprint/ztrace"
 # zplug "psprint/zsnapshot"
-# zplug "zsh-users/zaw"
-# zplug "mooz/percol", use:"tools/zsh"
-# zplug "RobSis/zsh-completion-generator"
-# zplug "jocelynmallon/zshmarks"
-# zplug "huyng/bashmarks"
-# zplug "paulhybryant/powerline-shell"
-# zplug "andrewferrier/fzf-z"
-# zplug "b4b4r07/enhancd", use:"init.sh"
-# zplug "zsh-users/zsh-syntax-highlighting"
+# zplug "psprint/ztrace"
+# zplug "supercrabtree/k"
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes"
-# zplug "D630/fzf-fs"
+# zplug "zsh-users/zaw"
+# zplug "zsh-users/zsh-syntax-highlighting"
 
 [[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
 
