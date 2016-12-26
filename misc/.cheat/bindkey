@@ -2,3 +2,9 @@
 # Use `cat` and press the key combinations. e.g. C-Left will print ^[[1;5D while Left will print ^[[D
 # Use Ctrl-v in or something similar in zsh
 cat
+
+# For bash, to see all key bindings, use
+bind -p
+
+# For zsh, to see all key bindings, use
+bindkey
