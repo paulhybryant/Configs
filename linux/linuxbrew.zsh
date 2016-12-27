@@ -4,6 +4,7 @@ brew tap jhawthorn/fzy
 brew tap neovim/neovim
 brew tap homebrew/versions
 brew tap homebrew/core
+brew tap homebrew/command-not-found
 brew tap homebrew/x11
 brew tap homebrew/dupes
 brew tap homebrew/completions
@@ -24,6 +25,7 @@ brew install cheat
 brew install td
 brew install jq
 brew install tldr
+brew install hh
 brew install homebrew/completions/vagrant-completion
 brew install assh
 brew install gnu-which
@@ -32,6 +34,7 @@ brew install brew-gem
 brew install renameutils
 brew install node
 brew install util-linux
+brew install paulhybryant/myformulae/qfc
 brew install stdman
 brew install patchelf
 brew install homebrew/dupes/gperf
