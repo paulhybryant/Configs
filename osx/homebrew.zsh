@@ -41,6 +41,7 @@ brew install jq
 brew install homebrew/dupes/lsof
 brew install mackup
 brew install macvim
+brew install mawk
 brew install md5sha1sum
 brew install mdp
 brew install mercurial
@@ -53,8 +54,10 @@ brew install noti
 brew install osxutils
 brew install peco
 brew install percol
+brew install progress
 brew install proxychains-ng
 brew install python3
+brew install paulhybryant/myformulae/qfc
 brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
@@ -63,6 +66,7 @@ brew install sqlite-analyzer
 brew install sshrc
 brew install stdman
 brew install stow
+brew install td
 brew install the_silver_searcher
 brew install tldr
 brew install tmux
@@ -77,6 +81,7 @@ brew cask install hyperswitch
 brew cask install karabiner
 brew cask install key-codes
 brew cask install seil
+brew cask install shadowsocksx-ng
 brew cask install showyedge
 brew cask install spectacle
 brew cask install squidman
