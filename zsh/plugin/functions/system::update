@@ -1,28 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-print 'Updating brew...'
-brew update && brew upgrade
-
-print '\nUpdating zplug...'
-zplug update
-
-print '\nUpdating zplug itself'
-zplug::update-self
-
-print '\nUpdating pip...'
-# pip freeze | pip install --upgrade -r /dev/stdin
-pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
-
-print '\nUpdating pip3...'
-# pip3 freeze | pip3 install --upgrade -r /dev/stdin
-pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U
-
-print '\nUpdating gem...'
-gem update
-
-# print '\nUpdating gem...'
-# upm update
-# upm upgrade
-
-print '\nUpdating vim...'
-vi -c 'NeoBundleUpdate' -c 'q'
+brew::update
+zplug::update
+pip::update
+gem::update
+# node::update
+vim::update
