@@ -31,7 +31,6 @@ brew install grc
 brew install hh
 brew install homebrew/completions/docker-completion
 brew install homebrew/completions/vagrant-completion
-brew install homebrew/dupes/gperf
 brew install htop
 brew install jhawthorn/fzy/fzy
 brew install jq
