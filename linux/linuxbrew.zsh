@@ -59,7 +59,6 @@ brew install python3
 brew install ranger
 brew install renameutils
 brew install ruby
-brew install sgrep
 brew install sshrc
 brew install stdman
 brew install stow
