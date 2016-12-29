@@ -4,21 +4,32 @@
 [keybindings]
   cycle_prev = None
   next_tab = None
-  go_up = None
-  group_tab = None
-  paste = <Primary>v
   close_window = None
-  go_prev = None
-  prev_tab = None
-  go_down = None
-  close_term = None
-  cycle_next = None
+  switch_to_tab_10 = <Primary>9
   go_right = None
-  rotate_cw = None
-  go_left = None
-  go_next = None
-  copy = <Primary>c
+  new_tab = <Primary>t
   group_all = None
+  prev_tab = None
+  switch_to_tab_6 = <Primary>6
+  switch_to_tab_7 = <Primary>7
+  switch_to_tab_4 = <Primary>4
+  switch_to_tab_5 = <Primary>5
+  cycle_next = None
+  switch_to_tab_3 = <Primary>3
+  switch_to_tab_1 = <Primary>1
+  switch_to_tab_2 = <Primary>2
+  group_tab = None
+  switch_to_tab_8 = <Primary>8
+  switch_to_tab_9 = <Primary>9
+  go_prev = None
+  close_term = None
+  go_left = None
+  copy = <Primary>c
+  paste = <Primary>v
+  go_up = None
+  rotate_cw = None
+  go_down = None
+  go_next = None
 [profiles]
   [[default]]
     copy_on_selection = True
