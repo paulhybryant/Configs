@@ -1,0 +1,127 @@
+" vim: ft=vim sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
+" Globals {{{1
+set nocompatible                                                                " Must be first line
+set encoding=utf-8                                                              " Set text encoding default to utf-8
+scriptencoding utf-8                                                            " Character encoding used in this script
+let g:mapleader = ','
+let g:maplocalleader = ',,'
+let g:sh_fold_enabled = 1                                                       " Enable syntax folding for sh, ksh and bash
+let g:vimsyn_folding = 'af'                                                     " Syntax fold vimscript augroups and functions
+if has('nvim')
+  let g:python_host_prog = $BREWHOME . "/bin/python2"
+  let g:python3_host_prog = $BREWHOME . "/bin/python3"
+endif
+" }}}
+" Dein {{{1
+let s:bundle_base_path = expand('~/.vim/bundle/')
+if isdirectory(s:bundle_base_path . 'dein.vim/')
+  execute 'set runtimepath+=' . s:bundle_base_path . 'dein.vim/'
+  call dein#begin(s:bundle_base_path)
+  call dein#add('ConradIrwin/vim-bracketed-paste')                                  " Automatically toggle paste mode
+  call dein#add('benmills/vimux')
+  call dein#add('chrisbra/Recover.vim')                                             " Show diff between swap and saved file
+  call dein#add('dag/vim-fish')
+  call dein#add('chiphogg/vim-vtd')
+  call dein#add('ekalinin/Dockerfile.vim', {'on_ft' : ['docker']})                  " Syntax highlight for docker
+  call dein#add('godlygeek/tabular')
+  call dein#add('google/vim-maktaba')                                               " Vimscript plugin library from google
+  call dein#add('google/vim-searchindex')                                           " Display and index search matches
+  call dein#add('haya14busa/vim-operator-flashy')
+  call dein#add('kana/vim-operator-user')                                           " User defined operator
+  call dein#add('kana/vim-textobj-user')                                            " Allow defining text object by user
+  call dein#add('luochen1990/rainbow')
+  call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']})            " Enhanced vim cpp highlight
+  call dein#add('metakirby5/codi.vim')
+  call dein#add('paulhybryant/file-line')                                           " Open files and go to specific line and column (original user not active)
+  call dein#add('paulhybryant/vim-autoclose')                                       " Automatically close brackets
+  call dein#add('plasticboy/vim-markdown', {'on_ft' : ['markdown']})                " Yet another markdown syntax highlighting
+  call dein#add('rking/ag.vim', {'disabled' : !executable('ag')})                   " Text based search tool using the silver searcher
+  call dein#add('thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']})            " Fold markdown
+  call dein#add('tmux-plugins/vim-tmux', {'on_ft' : ['tmux']})                      " Vim plugin for editing .tmux.conf
+  call dein#add('tpope/vim-endwise')                                                " Automatically put end constructs
+  call dein#add('tpope/vim-repeat')                                                 " Repeat any command with '.'
+  call dein#add('tpope/vim-surround')                                               " Mappings for surrounding text objects
+  call dein#add('tyru/capture.vim', {'on_cmd' : ['Capture']})                       " Capture Ex command output to buffer
+  call dein#add('vim-ruby/vim-ruby', {'on_ft' : ['ruby']})                          " Vim plugin for editing ruby files.
+  call dein#add('vitalk/vim-shebang')                                               " Detect shell file types by shell bang
+  call dein#add('zplug/vim-zplug', {'on_ft' : ['zplug']})                           " Syntax highlight for zplug
+  call dein#end()
+endif
+" }}}
+" Options {{{1
+filetype plugin indent on                                                       " Automatically detect file types.
+syntax enable                                                                   " Syntax highlighting
+" The let syntax is useful for setting option with another option's value.
+" let &wrapscan = 0 equals set nowrapscan
+" let &l:wrapscan = 0 equals setlocal nowrapscan
+set autoindent                                                                  " Indent at the same level of the previous line
+set autoread                                                                    " Automatically load changed files
+set autowrite                                                                   " Automatically write a file when leaving a modified buffer
+set background=dark                                                             " Assume a dark background
+set backspace=indent,eol,start                                                  " Backspace for dummies
+set backup                                                                      " Whether saves a backup before editing
+set cmdheight=2                                                                 " Height of the cmd line
+set comments=sl:/*,mb:*,elx:*/                                                  " auto format comment blocks
+set cursorcolumn                                                                " Highlight current line
+set cursorline                                                                  " Highlight current line
+set expandtab                                                                   " Tabs are spaces, not tabs
+set foldcolumn=5                                                                " Fold indicators on the left
+set foldenable                                                                  " Auto fold code
+set hidden                                                                      " Allow buffer switching without saving
+set history=1000                                                                " Store a ton of history (default is 20)
+set hlsearch                                                                    " Highlight search terms
+set ignorecase                                                                  " Case insensitive search
+set imdisable                                                                   " Disable IME in vim
+set incsearch                                                                   " Find as you type search
+set laststatus=2                                                                " Always show statusline
+set linespace=0                                                                 " No extra spaces between rows
+set list                                                                        " Display unprintable characters
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.                                  " Highlight problematic whitespace
+set matchpairs+=<:>                                                             " Match, to be used with %
+set modeline                                                                    " Mac disables modeline by default
+set modelines=5                                                                 " Mac sets it to 0 by default
+set mouse=a                                                                     " Automatically enable mouse usage
+set mousehide                                                                   " Hide the mouse cursor while typing
+set nowrapscan                                                                  " Make regex search wrap to the start of the file
+set number                                                                      " Line numbers on
+set ruler                                                                       " Show the ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)                              " A ruler on steroids
+set scrolljump=5                                                                " Lines to scroll when cursor leaves screen
+set scrolloff=0                                                                 " Minimum lines to keep above and below cursor
+set shiftround                                                                  " Round indent to multiple of shiftwidth
+set shiftwidth=2                                                                " Use indents of 2 spaces
+set shortmess+=filmnrxoOtT                                                      " Abbrev. of messages (avoids 'hit enter')
+set showcmd                                                                     " Show partial commands in status line and selected text in visual mode
+set showmatch                                                                   " Show matching brackets/parenthesis
+set showmode                                                                    " Display the current mode
+set showtabline=0                                                               " Always show the tabline
+set smartcase                                                                   " Case sensitive when uppercase present
+set softtabstop=2                                                               " Let backspace delete indent
+set splitright                                                                  " Create the split on the right when split vertically
+set t_Co=256                                                                    " Set number of colors supported by term
+set tabstop=2                                                                   " An indentation every two columns
+set undofile                                                                    " Persists undo
+set undolevels=1000                                                             " Maximum number of changes that can be undone
+set undoreload=10000                                                            " Save the whole buffer for undo when reloading it
+set viewoptions=folds,options,cursor,unix,slash                                 " Better Unix / Windows compatibility
+set whichwrap=b,s,h,l,<,>,[,]                                                   " Backspace and cursor keys wrap too
+set wildmenu                                                                    " Show list instead of just completing
+set wildmode=list:longest,full                                                  " Command <Tab> completion, list matches, then longest common part, then all
+set winminheight=0                                                              " Windows can be 0 line high
+set wrap                                                                        " Wrap long lines
+" let &shellcmdflag = '-f ' . &shellcmdflag                                     " For zsh to not load any RC file
+" set shell=/bin/sh                                                             " Sometimes shell can cause vim system command to be slow
+if &shell =~# 'fish$'
+  set shell=sh
+endif
+if &diff
+  set nospell                                                                   " No spellcheck
+else
+  set spell                                                                     " Spellcheck
+endif
+if has('mac')
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus                                                       " Which clipboard */+ to use
+endif
+" }}}
