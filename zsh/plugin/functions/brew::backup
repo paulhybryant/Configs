@@ -3,18 +3,18 @@
 echo "#!/usr/bin/env zsh"
 echo ""
 
-for tap in $(brew tap); do
+for tap in $(brew tap | sort); do
   echo "brew tap $tap"
 done
 
-brew info --json=v1 --installed | jq -r '.[] | select(.installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + " " + $item) | . as $opt | "brew install " + $in.name + $opt'
+brew info --json=v1 --installed | jq -r '.[] | select(.installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + " " + $item) | . as $opt | "brew install " + $in.name + $opt' | sort
 
-for formula in $(brew leaves); do
+for formula in $(brew leaves | sort); do
   echo "brew install $formula"
 done
 
 if [[ $OSTYPE == *darwin* ]]; then
-  for cask in $(brew cask list); do
+  for cask in $(brew cask list | sort); do
     echo "brew cask install $cask"
   done
 fi
