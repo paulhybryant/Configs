@@ -67,6 +67,11 @@
   ; merge with upstream
   mu = ! git fetch upstream && git merge upstream/master
 
+  ; log
+  ll = log --stat
+  lg = log
+  lp = log -p
+
 [core]
   pager = less -F -X
 
