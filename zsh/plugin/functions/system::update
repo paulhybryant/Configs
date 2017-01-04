@@ -6,3 +6,4 @@ pip::update
 gem::update
 # node::update
 vim::update
+tldr --update

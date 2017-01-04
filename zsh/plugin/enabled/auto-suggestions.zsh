@@ -3,4 +3,4 @@
 # Otherwise the suggestions won't be visible with the default value.
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
-bindkey '^I' autosuggest-accept
+bindkey '^N' autosuggest-accept
