@@ -6,4 +6,5 @@ pip::update
 gem::update
 # node::update
 vim::update
+print '\nUpdating tldr...'
 tldr --update
