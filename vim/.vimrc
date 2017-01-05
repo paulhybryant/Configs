@@ -39,6 +39,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'rking/ag.vim', {'disabled' : !executable('ag')}                    " Text based search tool using the silver searcher
   NeoBundle 'thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']}             " Fold markdown
   NeoBundle 'tmux-plugins/vim-tmux', {'on_ft' : ['tmux']}                       " Vim plugin for editing .tmux.conf
+  NeoBundle 'tmux-plugins/vim-tmux-focus-events'
   " NeoBundle 'junegunn/vim-slash'
   " NeoBundle 'pgdouyon/vim-evanesco'
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
