@@ -9,7 +9,7 @@ done
 
 brew info --json=v1 --installed | jq -r '.[] | select(.name != "patchelf" and .installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + " " + $item) | . as $opt | "brew install " + $in.name + $opt' | sort
 
-for formula in $(brew leaves | sort); do
+for formula in $(brew leaves | grep -v 'patchelf' | sort); do
   echo "brew install $formula"
 done
 
