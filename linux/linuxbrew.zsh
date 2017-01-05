@@ -11,7 +11,6 @@ brew tap jhawthorn/fzy
 brew tap linuxbrew/xorg
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
-brew install patchelf --with-static
 brew install python --with-unicode-ucs4
 brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
 brew install assh
@@ -45,7 +44,6 @@ brew install neovim/neovim/neovim
 brew install netcat
 brew install node
 brew install noti
-brew install patchelf
 brew install paulhybryant/myformulae/fsqlf
 brew install paulhybryant/myformulae/qfc
 brew install paulhybryant/myformulae/zunit
