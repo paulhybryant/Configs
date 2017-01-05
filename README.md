@@ -4,7 +4,7 @@ My work environment bootstrap and configurations for zsh
 
 ## Installation
 
-    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/blob/bin/install.zsh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/paulhybryant/dotfiles/master/install.sh)"
 
 ## Binaries
 
