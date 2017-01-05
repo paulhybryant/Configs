@@ -4,5 +4,5 @@ FROM ubuntu:latest
 MAINTAINER Yu Huang <paulhybryant@gmail.com>
 ENV LANG en_US.UTF-8
 RUN apt-get update
-RUN apt-get install -y zsh curl git vim stow make gcc tmux build-essential python
+RUN apt-get install -y zsh curl git build-essential python
 RUN locale-gen en_US.UTF-8
