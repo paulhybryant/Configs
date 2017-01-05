@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+cd $HOME
 echo 'Creating directories...'
 mkdir -p ~/.pip ~/.ssh/assh.d ~/.cheat ~/.config/ranger ~/.local/bin \
   ~/.tmux/plugins ~/.vim/bundle
