@@ -8,7 +8,6 @@ source ${ZPLUG_HOME}/init.zsh
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
 zstyle ":prezto:module:editor" "key-bindings" "vi"
-zplug "modules/editor", from:prezto, defer:0
 zplug "modules/directory", from:prezto, defer:0
 zplug "modules/helper", from:prezto, defer:0
 zplug "modules/history", from:prezto, defer:0
