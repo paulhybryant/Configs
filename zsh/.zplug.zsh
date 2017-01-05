@@ -20,6 +20,7 @@ zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "psprint/zsh-navigation-tools", defer:0
+zplug "seebi/dircolors-solarized", defer:1
 zplug "shannonmoeller/up", use:"up.sh", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "urbainvaes/fzf-marks", defer:1

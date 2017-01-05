@@ -14,5 +14,7 @@ unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
 setopt PUSHD_MINUS
 setopt MARK_DIRS
 
-declare -xg LS_COLORS
-eval "$(dircolors ${0:A:h:h}/external/dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
+if [[ -e $ZPLUG_REPOS/seebi/dircolors-solarized ]]; then
+  declare -xg LS_COLORS
+  eval "$(dircolors $ZPLUG_REPOS/seebi/dircolors-solarized/dircolors.256dark)" > /dev/null 2>&1
+fi
