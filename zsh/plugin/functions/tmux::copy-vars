@@ -30,7 +30,7 @@ else
     export ${var}
     io::vlog 1 "_varsmap[${var/=*/}]=1"
     _varsmap[${var/=*/}]=1
-  done< <(\tmux show-environment | GREP_OPTIONS= command grep "${_pat}")
+  done< <(\tmux show-environment | command grep "${_pat}")
 
   for var in ${_tmux_vars};
   do

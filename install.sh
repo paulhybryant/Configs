@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 echo 'Creating directories...'
 mkdir -p ~/.pip ~/.ssh/assh.d ~/.cheat ~/.config/ranger ~/.local/bin \
@@ -18,7 +18,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 cd ~/.zplug/repos/paulhybryant/dotfiles
 echo 'Installing brew...'
-if [ $OSTYPE == *darwin* ]; then
+if [[ $OSTYPE == *darwin* ]]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ./osx/homebrew.zsh
 else
@@ -32,7 +32,7 @@ for module in bash misc tmux vim zsh; do
   stow $module -t ~
 done
 
-if [ $OSTYPE == *darwin* ]; then
+if [[ $OSTYPE == *darwin* ]]; then
   stow osx -t ~
 else
   stow linux -t ~
