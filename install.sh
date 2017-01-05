@@ -21,12 +21,11 @@ cd ~/.zplug/repos/paulhybryant/dotfiles
 echo 'Installing brew...'
 if [[ $OSTYPE == *darwin* ]]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  ./osx/homebrew.zsh
 else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   export PATH="$HOME/.linuxbrew/bin:$PATH"
-  ./linux/linuxbrew.zsh
 fi
+brew install stow vim tmux
 
 echo 'Stowing dotfiles...'
 for module in bash misc tmux vim zsh; do
@@ -44,6 +43,18 @@ vim -c 'NeoBundleInstall' -c 'q'
 
 echo 'Installing tmux plugins...'
 ~/.tmux/plugins/tpm/bin/install_plugins
+
+read -p "Restore brew (this can take a while)? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo 'Restoring brew...'
+  if [[ $OSTYPE == *darwin* ]]; then
+    ./osx/homebrew.zsh
+  else
+    ./linux/linuxbrew.zsh
+  fi
+fi
 
 echo 'Reloading zsh...'
 exec zsh
