@@ -1,6 +1,3 @@
 [submodule "tmux/.tmux/plugins/tpm"]
 	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "zsh/plugin/external/dircolors-solarized"]
-	path = zsh/plugin/external/dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
