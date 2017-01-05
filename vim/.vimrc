@@ -304,9 +304,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ 'depends' : ['vim-airline/vim-airline'],
     \ }                                                                         " vim-airline themes
   " }}}
-  " Local bundles {{{2
-  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0', 'vimutils'])
-  " {{{3
+  " {{{2
+  NeoBundle 'paulhybryant/vimutils'                                             " My vim utils
   let s:vimutils = neobundle#get('vimutils')
   function! s:vimutils.hooks.on_source(bundle)
     Glaive vimutils plugin[mappings]
@@ -326,6 +325,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
   endfunction
   " }}}
+  " Local bundles {{{2
+  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0'])
   if filereadable(expand('~/.vimrc.local'))
     execute 'source' expand('~/.vimrc.local')
   endif
