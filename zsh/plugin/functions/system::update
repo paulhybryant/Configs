@@ -6,5 +6,9 @@ pip::update
 gem::update
 # node::update
 vim::update
+
 print '\nUpdating tldr...'
 tldr --update
+
+print '\nUpdating tmux plugins...'
+~/.tmux/plugins/tpm/bin/update_plugins all
