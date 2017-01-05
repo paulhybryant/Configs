@@ -21,10 +21,12 @@ cd ~/.zplug/repos/paulhybryant/dotfiles
 echo 'Installing brew...'
 if [[ $OSTYPE == *darwin* ]]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install python
   brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   export PATH="$HOME/.linuxbrew/bin:$PATH"
+  brew install python
   brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
 fi
 brew install stow tmux
