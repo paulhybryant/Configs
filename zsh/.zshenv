@@ -10,7 +10,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
-declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8'
+declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
+  PYTHONSTARTUP="$HOME/.pythonrc"
 if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
   declare -xg LOCATE_PATH=$BREWHOME/var/locate/locatedb
