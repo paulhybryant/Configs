@@ -3,14 +3,18 @@
 brew tap beeftornado/rmtree
 brew tap caskroom/cask
 brew tap caskroom/versions
+brew tap homebrew/aliases
+brew tap homebrew/bundle
 brew tap homebrew/command-not-found
 brew tap homebrew/completions
 brew tap homebrew/core
 brew tap homebrew/dupes
+brew tap homebrew/gui
 brew tap homebrew/services
 brew tap homebrew/versions
 brew tap homebrew/x11
 brew tap jhawthorn/fzy
+brew tap koekeishiya/khd
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install macvim --with-override-system-vim --with-lua --with-luajit
@@ -40,12 +44,11 @@ brew install homebrew/dupes/lsof
 brew install htop
 brew install jhawthorn/fzy/fzy
 brew install jq
-brew install mackup
+brew install koekeishiya/khd/khd
 brew install macvim
 brew install mawk
 brew install md5sha1sum
 brew install mdp
-brew install mercurial
 brew install moreutils
 brew install most
 brew install neovim/neovim/neovim
@@ -54,6 +57,7 @@ brew install node
 brew install noti
 brew install osxutils
 brew install paulhybryant/myformulae/fsqlf
+brew install paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/qfc
 brew install paulhybryant/myformulae/zunit
 brew install paulhybryant/myformulae/zvanilla
@@ -61,6 +65,7 @@ brew install peco
 brew install percol
 brew install progress
 brew install proxychains-ng
+brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
@@ -80,6 +85,7 @@ brew install zshdb
 brew cask install docker
 brew cask install hyperswitch
 brew cask install karabiner
+brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install seil
 brew cask install shadowsocksx-ng
