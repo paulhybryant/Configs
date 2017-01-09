@@ -1,6 +1,6 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-HIST_STAMPS='yyyy-mm-dd'
+declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history"
 case $HIST_STAMPS in
   'mm/dd/yyyy') alias history='fc -fl 1' ;;
   'dd.mm.yyyy') alias history='fc -El 1' ;;
