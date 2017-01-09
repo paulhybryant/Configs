@@ -13,11 +13,12 @@ fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
   PYTHONSTARTUP="$HOME/.pythonrc"
 if [[ "$BREWHOME" != "/usr/local" ]]; then
-  path=($BREWHOME/bin $BREWHOME/sbin ${path[@]})
+  path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin /usr/local/bin \
+    /usr/local/sbin ${path[@]})
   declare -xg LOCATE_PATH=$BREWHOME/var/locate/locatedb
+else
+  path=(~/.local/bin /usr/local/bin /usr/local/sbin ${path[@]})
 fi
-path=(~/.local/bin ${path[@]})
-path+=(/usr/local/bin /usr/local/sbin)
 
 # coreutils
 alias date='${CMDPREFIX}\date'
