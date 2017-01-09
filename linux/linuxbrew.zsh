@@ -38,7 +38,6 @@ brew install linuxbrew/xorg/xorg
 brew install mawk
 brew install md5sha1sum
 brew install mdp
-brew install mercurial
 brew install moreutils
 brew install most
 brew install neovim/neovim/neovim
@@ -53,6 +52,7 @@ brew install peco
 brew install percol
 brew install progress
 brew install psgrep
+brew install python
 brew install python3
 brew install ranger
 brew install renameutils
