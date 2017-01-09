@@ -15,7 +15,6 @@ zplug "modules/fasd", from:prezto, defer:0
 zplug "modules/osx", from:prezto, defer:0, if:"[[ $OSTYPE == *darwin* ]]"
 
 # Must load zsh-cdr before zaw
-zplug "KasperChristensen/mylocation", defer:1
 zplug "Valodim/zsh-curl-completion", defer:1
 zplug "arzzen/calc.plugin.zsh", defer:1
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
@@ -28,7 +27,6 @@ zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-navigation-tools", defer:0
 zplug "seebi/dircolors-solarized", defer:1
-# zplug "shannonmoeller/up", use:"up.sh", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
 zplug "willghatch/zsh-cdr", defer:1
@@ -44,6 +42,7 @@ zplug "paulhybryant/dotfiles", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 # zplug "D630/fzf-fs"
+# zplug "KasperChristensen/mylocation", defer:1
 # zplug "RobSis/zsh-completion-generator"
 # zplug "andrewferrier/fzf-z"
 # zplug "arialdomartini/oh-my-git", use:"prompt.sh", defer:1
@@ -62,6 +61,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "psprint/zsh-select"
 # zplug "psprint/zsnapshot"
 # zplug "psprint/ztrace"
+# zplug "shannonmoeller/up", use:"up.sh", defer:1
 # zplug "supercrabtree/k"
 # zplug "trapd00r/zsh-syntax-highlighting-filetypes"
 
