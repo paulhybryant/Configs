@@ -14,17 +14,23 @@ zplug "modules/history", from:prezto, defer:0
 zplug "modules/fasd", from:prezto, defer:0
 zplug "modules/osx", from:prezto, defer:0, if:"[[ $OSTYPE == *darwin* ]]"
 
+# Must load zsh-cdr before zaw
 zplug "Valodim/zsh-curl-completion", defer:1
+zplug "arzzen/calc.plugin.zsh", defer:1
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
+zplug "hchbaw/auto-fu.zsh", defer:1
 zplug "hlissner/zsh-autopair", defer:1
+zplug "joepvd/grep2awk", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "psprint/zsh-navigation-tools", defer:0
 zplug "seebi/dircolors-solarized", defer:1
 zplug "shannonmoeller/up", use:"up.sh", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
+zplug "willghatch/zsh-cdr", defer:1
 zplug "willghatch/zsh-snippets", defer:1
 zplug "zlsun/solarized-man", defer:1
+zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
