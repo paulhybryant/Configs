@@ -33,8 +33,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'luochen1990/rainbow'
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
   NeoBundle 'metakirby5/codi.vim'
-  NeoBundle 'paulhybryant/file-line'                                            " Open files and go to specific line and column (original user not active)
-  NeoBundle 'paulhybryant/vim-autoclose'                                        " Automatically close brackets
+  NeoBundle 'bogado/file-line'                                                  " Open files and go to specific line and column (original user not active)
+  NeoBundle 'somini/vim-autoclose'                                              " Automatically close brackets
   NeoBundle 'plasticboy/vim-markdown', {'on_ft' : ['markdown']}                 " Yet another markdown syntax highlighting
   NeoBundle 'rking/ag.vim', {'disabled' : !executable('ag')}                    " Text based search tool using the silver searcher
   NeoBundle 'thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']}             " Fold markdown

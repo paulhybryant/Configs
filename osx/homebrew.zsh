@@ -20,6 +20,7 @@ brew tap paulhybryant/myformulae
 brew install macvim --with-override-system-vim --with-lua --with-luajit
 brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste
 brew install assh
+brew install bash
 brew install beeftornado/rmtree/brew-rmtree
 brew install brew-gem
 brew install cheat
