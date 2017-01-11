@@ -4,8 +4,6 @@ zstyle ":registry:var:tmux-vars" registry \
   "SSH_CLIENT" "SSH_OS" "SSH_AUTH_SOCK" "SSH_CONNECTION" \
   "DISPLAY" "SSH_AGENT_PID" "P4DIFF" "G4MULTIDIFF"
 
-alias tmux='TERM=screen-256color command tmux -2'
-
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz precmd tmux::copy-vars
 add-zsh-hook -Uz zshexit tmux::try-switch
