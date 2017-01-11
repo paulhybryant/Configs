@@ -27,4 +27,4 @@ local _dir _ignore_dir
 _ignore_dir="$1"
 _dir="$2"
 shift 2
-find "${_dir}" -wholename "*/${_ignore_dir}" -prune -o "$@" -print
+${CMDPREFIX}\find "${_dir}" -wholename "*/${_ignore_dir}" -prune -o "$@" -print
