@@ -21,8 +21,9 @@ zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 # zplug "hchbaw/auto-fu.zsh", defer:1
 zplug "hlissner/zsh-autopair", defer:1
-# zplug "joepvd/grep2awk", defer:1
+zplug "jocelynmallon/zshmarks"
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
+# zplug "mooz/percol", use:"tools/zsh", defer:1
 # zplug "oz/safe-paste", defer:1
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-navigation-tools", defer:0
@@ -38,8 +39,8 @@ zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
 
 zplug "paulhybryant/dotfiles", defer:2
-# zplug "psprint/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
+# zplug "trapd00r/zsh-syntax-highlighting-filetypes", defer:3
 
 # zplug "D630/fzf-fs"
 # zplug "KasperChristensen/mylocation", defer:1
@@ -48,10 +49,9 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "arialdomartini/oh-my-git", use:"prompt.sh", defer:1
 # zplug "b4b4r07/enhancd", use:"init.sh"
 # zplug "huyng/bashmarks"
-# zplug "jocelynmallon/zshmarks"
+# zplug "joepvd/grep2awk", defer:1
 # zplug "mafredri/zsh-async"
 # zplug "modules/ssh", from:prezto
-# zplug "mooz/percol", use:"tools/zsh"
 # zplug "nojhan/liquidprompt"
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 # zplug "psprint/history-search-multi-word"
@@ -63,7 +63,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "psprint/ztrace"
 # zplug "shannonmoeller/up", use:"up.sh", defer:1
 # zplug "supercrabtree/k"
-# zplug "trapd00r/zsh-syntax-highlighting-filetypes"
 
 [[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
 
