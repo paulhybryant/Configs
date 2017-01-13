@@ -16,3 +16,5 @@ lctrl - v   [Google Chrome]  : khd -p "cmd - v"
 lctrl - w   [Google Chrome,Finder]  : khd -p "cmd - w"
 lctrl - x   [Google Chrome]  : khd -p "cmd - x"
 lshift + lctrl - t   [Google Chrome]  : khd -p "shift + cmd - t"
+# lcmd + lctrl - l             : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
+lcmd + lctrl - l             : pmset displaysleepnow
