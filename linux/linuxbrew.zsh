@@ -15,7 +15,6 @@ brew install python --with-unicode-ucs4
 brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
 brew install assh
 brew install bash
-brew install beeftornado/rmtree/brew-rmtree
 brew install brew-gem
 brew install cheat
 brew install dos2unix
