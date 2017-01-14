@@ -31,6 +31,7 @@ zplug "seebi/dircolors-solarized", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 zplug "urbainvaes/fzf-marks", defer:1
 zplug "willghatch/zsh-cdr", defer:1
+zplug "willghatch/zsh-hooks", defer:1
 zplug "willghatch/zsh-snippets", defer:1
 zplug "zlsun/solarized-man", defer:1
 zplug "zsh-users/zaw", defer:1
