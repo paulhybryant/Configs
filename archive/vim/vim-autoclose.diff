@@ -1,0 +1,55 @@
+commit d9cd5a0ddf2f5a3c8b66d8446750a36fe638a966
+Author: paulhybryant <paulhybryant@gmail.com>
+Date:   Wed Dec 30 13:50:04 2015 +0800
+
+    My update
+
+diff --git a/plugin/AutoClose.vim b/plugin/AutoClose.vim
+index d91ba8b..b44a039 100644
+--- a/plugin/AutoClose.vim
++++ b/plugin/AutoClose.vim
+@@ -15,7 +15,7 @@ if !exists("g:debug_AutoClose") && exists("g:loaded_AutoClose")
+ endif
+ let g:loaded_AutoClose = 1
+ 
+-let s:global_cpo = &cpo " store compatible-mode in local variable
++let s:cpo_save = &cpo   " store compatible-mode in local variable
+ set cpo&vim             " go into nocompatible-mode
+ 
+ if !exists('g:AutoClosePreserveDotReg')
+@@ -352,7 +352,7 @@ endfunction
+ 
+ function! s:ModifyPairsList(list, pairsToAdd, openersToRemove)
+     return filter(
+-                \ extend(a:list, AutoClose#ParsePairs(a:pairsToAdd), "force"),
++                \ extend(AutoClose#ParsePairs(a:pairsToAdd), a:list, "keep"),
+                 \ "stridx(a:openersToRemove,v:key)<0")
+ endfunction
+ 
+@@ -370,7 +370,7 @@ function! s:DefineVariables()
+                 \ 'AutoCloseSmartQuote': 1,
+                 \ 'AutoCloseOn': 1,
+                 \ 'AutoCloseSelectionWrapPrefix': '<LEADER>a',
+-                \ 'AutoClosePumvisible': {"ENTER": "\<C-Y>", "ESC": "\<C-E>"},
++                \ 'AutoClosePumvisible': {"ENTER": "\<C-Y>", "ESC": "\<ESC>"},
+                 \ 'AutoCloseExpandEnterOn': "",
+                 \ 'AutoCloseExpandSpace': 1,
+                 \ }
+@@ -481,7 +481,7 @@ function! s:CreateExtraMaps()
+ endfunction
+ 
+ function! s:CreateMaps()
+-    silent doautocmd FileType
++    " silent doautocmd FileType
+     call s:DefineVariables()
+     call s:CreatePairsMaps()
+     call s:CreateExtraMaps()
+@@ -539,4 +539,8 @@ augroup END
+ command! AutoCloseOn :let b:AutoCloseOn = 1
+ command! AutoCloseOff :let b:AutoCloseOn = 0
+ command! AutoCloseToggle :call s:ToggleAutoClose()
++
++" Restore 'cpoptions'
++let &cpo = s:cpo_save
++unlet s:cpo_save
+ " vim:sw=4:sts=4:
