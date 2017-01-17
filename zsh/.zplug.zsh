@@ -21,7 +21,7 @@ zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 # zplug "hchbaw/auto-fu.zsh", defer:1
 zplug "hlissner/zsh-autopair", defer:1
-zplug "jocelynmallon/zshmarks"
+zplug "jocelynmallon/zshmarks", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 # zplug "mooz/percol", use:"tools/zsh", defer:1
 # zplug "oz/safe-paste", defer:1
