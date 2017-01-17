@@ -14,14 +14,14 @@ brew tap homebrew/services
 brew tap homebrew/versions
 brew tap homebrew/x11
 brew tap jhawthorn/fzy
-brew tap koekeishiya/khd
+brew tap koekeishiya/formulae
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install macvim --with-override-system-vim --with-lua --with-luajit
 brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste
+brew install aria2
 brew install assh
 brew install bash
-brew install beeftornado/rmtree/brew-rmtree
 brew install brew-gem
 brew install cheat
 brew install dos2unix
@@ -45,7 +45,9 @@ brew install homebrew/dupes/lsof
 brew install htop
 brew install jhawthorn/fzy/fzy
 brew install jq
-brew install koekeishiya/khd/khd
+brew install koekeishiya/formulae/cev
+brew install koekeishiya/formulae/khd
+brew install koekeishiya/formulae/kwm
 brew install macvim
 brew install mawk
 brew install md5sha1sum
@@ -64,6 +66,7 @@ brew install paulhybryant/myformulae/zunit
 brew install paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
+brew install polipo
 brew install progress
 brew install proxychains-ng
 brew install python
@@ -81,6 +84,7 @@ brew install the_silver_searcher
 brew install tldr
 brew install tmux
 brew install urlview
+brew install wget
 brew install xonsh
 brew install zshdb
 brew cask install docker
