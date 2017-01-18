@@ -75,6 +75,7 @@ brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
 brew install ruby
+brew install shadowsocks-libev
 brew install sqlite-analyzer
 brew install sshrc
 brew install stdman
