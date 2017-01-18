@@ -11,7 +11,7 @@ else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
-  PYTHONSTARTUP="$HOME/.pythonrc"
+  PYTHONSTARTUP="$HOME/.pythonrc" GOPATH="$BREWHOME/opt/go/libexec"
 if [[ "$BREWHOME" != "/usr/local" ]]; then
   path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin /usr/local/bin \
     /usr/local/sbin ${path[@]})
