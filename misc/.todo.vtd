@@ -1,85 +1,31 @@
 * vim related tasks
-= Vim @p:1 =
-  @ Profile vim write slowness. (DONE 2015-08-19 16:18)
+= Vim =
   @ Know vtd better. @p:2
   @ Know vimdoc better. @p:2
-  @ Syntax highlight file for .cvimrc (DONE 2015-09-05 21:44)
-  @ Documentation for vim-textobj-path < 2014-12-31 (DONE 2014-11-22 09:40)
-  @ Fix airline tabline (current buffer not highlighted) (Update: this is caused by value of 'TERM') (DONE 2014-12-01 15:51)
-  @ Find out why only the first and last buffer get syntax highlighting (DONE 2014-11-23 15:38)
-  @ Change the background of selected tmux window (DONE 2014-11-21 22:57)
-  @ Set nospell for DONE item in vtd. (DONE 2014-11-17 20:12)
-  @ Update vim-custom, for C-Q, check whether the buffer to be closed is in a split (DONE 2014-11-17 20:12)
-  @ Update SQLUtilities to wrap at comma but leave comma with previous line. (DONE 2014-11-17 20:13)
   @ Documentation for relatedfiles. @p:2
   @ Documentation for folddigest. @p:2
-  @ Use verbose to find out what cause the autofold when terminus is enabled @p:0 (DONE 2015-09-09 22:00)
-  @ Snippets for adding POD documentations in vim. (DONE 2015-09-09 14:47)
-  @ Sort block by foldtext @p:1 (DONE 2015-09-10 15:25)
-  @ Fix yanking multiline stuff in OSX. @p:2 (DONE 2015-11-19 11:21)
   @ Finish all of learn vimscript the hard way @p:1
   @ Learn vim syntax fold, convert zsh fold to syntax fold if possible @p:2
-  @ Make .vimrc resourceable @p:1 (DONE 2015-09-13 11:07)
-  @ Make shellcheck for zsh work as external checker @p:0 (DONE 2015-09-13 11:07)
-  @ Integrate gtags with vim better (tagbar) @p:1
+  @ Integrate gtags with vim better (tagbar) @p:3
   @ Learn to write unite sources @p:3
   @ Learn maktaba libraries @p:3
-  @ Integrate SQLUtilities with codefmt @p:2 (DONE 2015-09-13 19:10)
   @ Configure delimitMate to add newline after {}, and only close <> in html / XML
   @ Add vroom tests for all my plugins @p:2
-  @ Make vim-argwrap handle vimscript better (DONE 2015-12-19 17:05)
   @ Try to write a vim plugin with python @p:2
-  @ Fix tmux-complete.vim hang in OSX (DONE 2016-01-05 12:51)
 
 * tmux related tasks
-= Tmux @p:2 =
-  @ tmux-session.sh (DONE 2015-08-19 16:18)
-  @ Fix the issue for attaching, when a shell script spawn another long running process.
-  @ Fix the annoying binding 'C-\' (DONE 2014-12-10 12:18)
-  @ Find out why the color is not correctly set when do 'mux start', and color is back to normal after attaching. (DONE 2014-12-06 18:09)
-  @ Make tmux resurrect automatic. (DONE 2015-08-19 16:18)
-  @ Fix tmux-continuum to kill default session (DONE 2015-11-17 22:03)
-  @ Migrate muxcfg (DONE 2015-10-16 14:35)
+= Tmux =
+  @ Kill default session when tmux server starts @p:2
 
 * zsh related tasks
-= Zsh @p:2 =
-  @ Redirect completion of bb to blaze subcommand, when complete_aliases is set (DONE 2015-10-16 22:30)
+= Zsh =
   @ Learn zsh completions
-  @ Abbreviation breaks history search, fix it. (DONE 2015-10-16 22:30)
-  @ Modify base::exists to accept array, see how to get variable type in zsh, make it accept params. (DONE 2015-11-02 17:18)
-  @ Manage myconfigs with antigen @p:1 (DONE 2015-10-16 14:33)
-  @ Use zstyle to track loaded lib version @p:1 (DONE 2015-10-16 14:26)
-  @ Cache geoinfo (DONE 2015-10-16 22:30)
   @ Add option completion for zsh in vim
-  @ Make powerline-shell one prompt plugin for zsh (DONE 2015-12-19 16:59)
 
 * misc
-= Misc @p:2 =
-  @ Change tmuxline.vim back after pull request merged. @p:1 (DONE 2015-09-13 11:07)
+= Misc =
   @ Map Fn key to control in autohotkey. @p:3
-  @ Copy and then 'p' does not work in vim for mac. (DONE 2014-12-09 16:03)
   @ Completion for .cvimrc @p:3
   @ Vtd syntax highlight fix on windows @p:3
-  @ Cleanup and enhance cVim mappings in chrome. (DONE 2014-12-01 20:56)
-  @ Reinstall bundle (vim-nerdtree-tabs, ReloadScript) (DONE 2014-11-28 10:55)
-  @ Make the key map from Caps_Lock to ESC universal (DONE 2014-11-21 20:00)
-  @ In autohotkey, make C-D exit terminal if in one (DONE 2014-11-27 12:39)
-  @ Fix vim-vtd in windows (DONE 2014-11-27 12:39)
-  @ Try out babun. (DONE 2014-12-02 21:13)
-  @ Build vim on windows (DONE 2014-12-02 21:13)
-  @ Gvim windows shell context extension (DONE 2014-12-06 18:10)
-  @ Try out rocket dock in win (DONE 2014-12-06 18:10)
-  @ Unit test zsh library. @p:1 (DONE 2015-10-16 14:33)
   @ Check documentation for all my vim plugins, do not create new before updating existing doc @p:1
-  @ Document zsh library, checkout the doc gen tools @p:1 (DONE 2015-10-16 14:33)
   @ Learn python @p:1
-  @ Fix linuxbrew shellcheck dependency @p:0 (DONE 2015-09-08 17:34)
-  @ Add brew formula for trash-cli (DONE 2015-11-02 17:17)
-  @ Add completion for functions like cg (DONE 2015-11-02 17:17)
-  @ Make keyboardlayouteditor work
-  @ Compile xvkbd in OSX (with macports if needed) (DONE 2015-11-17 17:19)
-  @ Make command-1 work in OSX (it is mapped to ctrl-1 now) (DONE 2015-11-02 17:18)
-  @ Map win+h,i,j,k to arrow keys (DONE 2015-10-29 17:30)
-  @ Fix urlview build in linuxbrew
-  @ Ranger configuration
-  @ man terminfo

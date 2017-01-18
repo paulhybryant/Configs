@@ -56,6 +56,7 @@ alias mank='command man -K'
 alias npm='command npm -g'
 alias rm='\trash -v'
 alias run='zsh::run'
+alias t='todo.sh'
 alias stow='command stow -v'
 alias vartype='declare -p'
 # This is not needed by puting homebrew.pth in the site-packges of xonsh
