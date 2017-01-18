@@ -19,6 +19,7 @@ if [[ "$BREWHOME" != "/usr/local" ]]; then
 else
   path=(~/.local/bin /usr/local/bin /usr/local/sbin ${path[@]})
 fi
+unset SSL_CERT_FILE
 
 # coreutils
 alias date='${CMDPREFIX}\date'
