@@ -4,6 +4,7 @@ percol.import_keymap({
     "C-p" : lambda percol: percol.command.select_previous(),
     "C-d" : lambda percol: percol.command.select_next_page(),
     "C-u" : lambda percol: percol.command.select_previous_page(),
+    "C-m" : lambda percol: percol.finish(),
 })
 
 percol.view.__class__.PROMPT = property(

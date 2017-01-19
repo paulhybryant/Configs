@@ -21,6 +21,8 @@ zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "jocelynmallon/zshmarks", defer:1
+zplug "oz/safe-paste", defer:1
+zplug "paulhybryant/dotfiles", defer:2
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
@@ -33,7 +35,6 @@ zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
-zplug "paulhybryant/dotfiles", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 # zplug "D630/fzf-fs"
@@ -50,7 +51,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "modules/ssh", from:prezto
 # zplug "mooz/percol", use:"tools/zsh/*.zsh", defer:1
 # zplug "nojhan/liquidprompt"
-# zplug "oz/safe-paste", defer:1
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 # zplug "psprint/history-search-multi-word"
 # zplug "psprint/zconvey"
