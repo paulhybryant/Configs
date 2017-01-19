@@ -91,14 +91,9 @@ brew install xonsh
 brew install zshdb
 brew cask install docker
 brew cask install hyperswitch
-brew cask install karabiner
 brew cask install karabiner-elements
 brew cask install key-codes
-brew cask install seil
 brew cask install shadowsocksx-ng
-brew cask install showyedge
 brew cask install spectacle
 brew cask install squidman
-brew cask install vagrant
-brew cask install vimr
 brew cask install xquartz
