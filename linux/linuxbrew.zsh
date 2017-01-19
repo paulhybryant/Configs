@@ -59,10 +59,10 @@ brew install ruby
 brew install sshrc
 brew install stdman
 brew install stow
-brew install td
 brew install the_silver_searcher
 brew install tldr
 brew install tmux
+brew install todo-txt
 brew install util-linux
 brew install vim
 brew install xonsh
