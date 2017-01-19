@@ -1,24 +1,13 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 declare -U path manpath fpath
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [[ -d "$HOME/.homebrew" ]]; then
-    declare -xg BREWHOME="$HOME/.homebrew"
-  else
-    declare -xg BREWHOME="/usr/local"
-  fi
-  declare -xg BREWVERSION="homebrew" CMDPREFIX="g"
+  declare -xg BREWVERSION="homebrew" BREWHOME="/usr/local" CMDPREFIX="g"
 else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
   PYTHONSTARTUP="$HOME/.pythonrc" GOPATH="$BREWHOME/opt/go/libexec"
-if [[ "$BREWHOME" != "/usr/local" ]]; then
-  path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin /usr/local/bin \
-    /usr/local/sbin ${path[@]})
-  declare -xg LOCATE_PATH=$BREWHOME/var/locate/locatedb
-else
-  path=(~/.local/bin /usr/local/bin /usr/local/sbin ${path[@]})
-fi
+path=(~/.local/bin /usr/local/bin /usr/local/sbin ${path[@]})
 unset SSL_CERT_FILE
 
 # coreutils
