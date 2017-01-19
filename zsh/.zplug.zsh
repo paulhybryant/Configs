@@ -19,17 +19,12 @@ zplug "Valodim/zsh-curl-completion", defer:1
 zplug "arzzen/calc.plugin.zsh", defer:1
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
-# zplug "hchbaw/auto-fu.zsh", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "jocelynmallon/zshmarks", defer:1
-zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
-# zplug "mooz/percol", use:"tools/zsh", defer:1
-# zplug "oz/safe-paste", defer:1
 zplug "peterhurford/up.zsh", defer:1
-zplug "psprint/zsh-navigation-tools", defer:0
+zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
-zplug "urbainvaes/fzf-marks", defer:1
 zplug "willghatch/zsh-cdr", defer:1
 zplug "willghatch/zsh-hooks", defer:1
 zplug "willghatch/zsh-snippets", defer:1
@@ -38,10 +33,8 @@ zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
-
 zplug "paulhybryant/dotfiles", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
-# zplug "trapd00r/zsh-syntax-highlighting-filetypes", defer:3
 
 # zplug "D630/fzf-fs"
 # zplug "KasperChristensen/mylocation", defer:1
@@ -49,11 +42,15 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "andrewferrier/fzf-z"
 # zplug "arialdomartini/oh-my-git", use:"prompt.sh", defer:1
 # zplug "b4b4r07/enhancd", use:"init.sh"
+# zplug "hchbaw/auto-fu.zsh", defer:1
 # zplug "huyng/bashmarks"
 # zplug "joepvd/grep2awk", defer:1
+# zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 # zplug "mafredri/zsh-async"
 # zplug "modules/ssh", from:prezto
+# zplug "mooz/percol", use:"tools/zsh/*.zsh", defer:1
 # zplug "nojhan/liquidprompt"
+# zplug "oz/safe-paste", defer:1
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 # zplug "psprint/history-search-multi-word"
 # zplug "psprint/zconvey"
@@ -64,6 +61,8 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "psprint/ztrace"
 # zplug "shannonmoeller/up", use:"up.sh", defer:1
 # zplug "supercrabtree/k"
+# zplug "trapd00r/zsh-syntax-highlighting-filetypes", defer:3
+# zplug "urbainvaes/fzf-marks", defer:1
 
 [[ -f ~/.zplug.local ]] && source ~/.zplug.local                                # Local configurations
 
