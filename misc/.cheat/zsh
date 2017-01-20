@@ -1,0 +1,16 @@
+# Redirect stdout and stderr with exec
+# Redirect stdout and stderr to /dev/null to silence messages
+exec 1>&/dev/null 2>&/dev/null
+
+# Restore the message to tty
+exec 1>&$(tty) 2>&$(tty)
+
+# Example
+# ----- start example -----
+#!/usr/bin/evn zsh
+exec 1>&/dev/null 2>&/dev/null
+echo 'yo'
+
+exec 1>&$(tty) 2>&$(tty)
+echo 'yoyo'
+# ----- end example -----
