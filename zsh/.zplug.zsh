@@ -25,6 +25,7 @@ zplug "jocelynmallon/zshmarks", defer:1
 zplug "oz/safe-paste", defer:1
 zplug "paulhybryant/dotfiles", defer:2
 zplug "peterhurford/up.zsh", defer:1
+zplug "psprint/zsh-cmd-architect", defer:1
 zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
@@ -55,7 +56,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
 # zplug "psprint/history-search-multi-word"
 # zplug "psprint/zconvey"
-# zplug "psprint/zsh-cmd-architect"
 # zplug "psprint/zsh-editing-workbench"
 # zplug "psprint/zsh-select"
 # zplug "psprint/zsnapshot"
