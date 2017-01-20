@@ -7,7 +7,7 @@ else
 fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
   PYTHONSTARTUP="$HOME/.pythonrc" GOPATH="$BREWHOME/opt/go/libexec"
-path=(~/.local/bin /usr/local/bin /usr/local/sbin ${path[@]})
+path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin ${path[@]})
 unset SSL_CERT_FILE
 
 # coreutils

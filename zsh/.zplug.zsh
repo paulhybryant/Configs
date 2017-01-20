@@ -4,6 +4,7 @@ export ZPLUG_HOME="$HOME/.zplug"
 [[ -d $ZPLUG_HOME ]] || \
   git clone --recursive https://github.com/zplug/zplug $ZPLUG_HOME
 source ${ZPLUG_HOME}/init.zsh
+export _ZPLUG_PREZTO="zsh-users/prezto"
 
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0

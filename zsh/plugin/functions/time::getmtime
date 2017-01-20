@@ -10,6 +10,6 @@ $1 Filename
 =cut
 
 local _mtime
-_mtime="$(gstat -c '%Y' $1)"
+_mtime="$(${CMDPREFIX}\stat -c '%Y' $1)"
 # $(date -r "$1" +%s)
 printf "${_mtime}\n"
