@@ -9,13 +9,13 @@ export _ZPLUG_PREZTO="zsh-users/prezto"
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
 zstyle ":prezto:module:editor" "key-bindings" "vi"
+zplug "modules/editor", from:prezto, defer:0
 zplug "modules/directory", from:prezto, defer:0
 zplug "modules/helper", from:prezto, defer:0
 zplug "modules/history", from:prezto, defer:0
 zplug "modules/fasd", from:prezto, defer:0
 zplug "modules/osx", from:prezto, defer:0, if:"[[ $OSTYPE == *darwin* ]]"
 
-# Must load zsh-cdr before zaw
 zplug "Valodim/zsh-curl-completion", defer:1
 zplug "arzzen/calc.plugin.zsh", defer:1
 zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
@@ -29,6 +29,7 @@ zplug "psprint/zsh-cmd-architect", defer:1
 zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
+# Must load zsh-cdr before zaw
 zplug "willghatch/zsh-cdr", defer:1
 zplug "willghatch/zsh-hooks", defer:1
 zplug "willghatch/zsh-snippets", defer:1

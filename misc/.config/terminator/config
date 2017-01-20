@@ -8,7 +8,7 @@
   close_window = None
   switch_to_tab_10 = <Primary>9
   go_right = None
-  new_tab = <Primary>t
+  new_tab = <Alt>t
   group_all = None
   prev_tab = None
   switch_to_tab_6 = <Primary>6
