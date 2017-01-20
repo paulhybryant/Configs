@@ -1,0 +1,2 @@
+Setup aria2 in miwifi.
+Fix google scholar for shadowsocks.
