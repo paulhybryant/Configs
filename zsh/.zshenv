@@ -37,4 +37,4 @@ alias updatedb='${CMDPREFIX}\updatedb'
 alias xargs='${CMDPREFIX}\xargs'
 # path=($BREWHOME/opt/findutils/libexec/gnubin ${path[@]})
 
-[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local                              # Local configurations
+[[ -f ~/.local/.zshenv ]] && source ~/.local/.zshenv                            # Local configurations
