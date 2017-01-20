@@ -135,7 +135,7 @@
   ; helper = store
 
 [include]
-  path = ~/.gitconfig.local
+  path = ~/.local/.gitconfig
 
 [url "git@github.com:paulhybryant/"]
   insteadof = me:

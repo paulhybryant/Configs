@@ -294,8 +294,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endif
 
   " Local bundles {{{2
-  if filereadable(expand('~/.vimrc.local'))
-    execute 'source' expand('~/.vimrc.local')
+  if filereadable(expand('~/.local/.vimrc'))
+    execute 'source' expand('~/.local/.vimrc')
   endif
   " }}}
   call neobundle#end()
