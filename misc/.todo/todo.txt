@@ -1,4 +1,3 @@
-Setup aria2 in miwifi.
 Fix google scholar for shadowsocks.
 Review EDGE.
 Signup crutial conversations.
