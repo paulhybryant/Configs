@@ -7,7 +7,7 @@ declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history"
   # 'yyyy-mm-dd') alias history='fc -il 1' ;;
   # *) alias history='fc -l 1' ;;
 # esac
-# setopt INC_APPEND_HISTORY      # Provided by prezto history module, append history immediatly instead of wait until shell exits.
+# setopt INC_APPEND_HISTORY      # Append history immediatly instead of wait until shell exits.
 setopt NO_APPEND_HISTORY
 setopt HIST_ALLOW_CLOBBER
 setopt HIST_FCNTL_LOCK
