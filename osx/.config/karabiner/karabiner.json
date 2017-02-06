@@ -1,7 +1,8 @@
 {
     "global": {
         "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true
+        "show_in_menu_bar": true,
+        "show_profile_name_in_menu_bar": false
     },
     "profiles": [
         {
@@ -20,7 +21,7 @@
                 "f8": "play_or_pause",
                 "f9": "fastforward"
             },
-            "name": "Default profile",
+            "name": "paulhybryant",
             "selected": true,
             "simple_modifications": {
                 "caps_lock": "escape",
