@@ -22,11 +22,12 @@ zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "jocelynmallon/zshmarks", defer:1
+zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "oz/safe-paste", defer:1
 zplug "paulhybryant/dotfiles", defer:2
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-cmd-architect", defer:1
-zplug "psprint/zsh-navigation-tools", defer:1
+# zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
 # Must load zsh-cdr before zaw
@@ -49,7 +50,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "hchbaw/auto-fu.zsh", defer:1
 # zplug "huyng/bashmarks"
 # zplug "joepvd/grep2awk", defer:1
-# zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 # zplug "mafredri/zsh-async"
 # zplug "modules/ssh", from:prezto
 # zplug "mooz/percol", use:"tools/zsh/*.zsh", defer:1
