@@ -1,6 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 print '\nUpdating vim...'
-vi -c 'execute(NeoBundleUpdate)' -c 'q'
+vi -c 'set nomore' -c 'execute(NeoBundleUpdate)' -c 'q'
+# vi -c 'execute(NeoBundleUpdate)' -c 'q'
 # vi -c 'NeoBundleUpdate' -c 'q'
 # vi -c 'redir @a && NeoBundleUpdate' -c 'q'
