@@ -134,9 +134,6 @@
 ; [credential]
   ; helper = store
 
-[include]
-  path = ~/.local/.gitconfig
-
 [url "git@github.com:paulhybryant/"]
   insteadof = me:
 
