@@ -1,3 +1,5 @@
 xontrib load prompt_ret_code
 xontrib load powerline
 xontrib load z
+xontrib load autoxsh
+xontrib load apt_tabcomplete
