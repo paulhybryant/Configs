@@ -1,0 +1,3 @@
+# Install xontrib for homebrew-installed xonsh
+# Must use pip3, and specify --prefix, e.g.
+pip3 install xontrib-powerline --prefix /usr/local/Cellar/xonsh/0.5.2/libexec/
