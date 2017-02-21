@@ -32,7 +32,7 @@ function _start_paste() {
 function _end_paste() {
 #use bindkey -v here with vi mode probably. maybe you want to track
 #if you were in ins or cmd mode and restore the right one.
-  bindkey -e
+  bindkey -v
   LBUFFER+=$_paste_content
   unset _paste_content
 }
