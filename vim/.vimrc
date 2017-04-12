@@ -326,7 +326,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " Local bundles {{{2
-  call neobundle#local("~/.vim/bundle", {}, ['pyclewn', 'vim-latex-1.9.0'])
+  call neobundle#local("~/.vim/bundle", {}, ['pyclewn'])
   if filereadable(expand('~/.local/.vimrc'))
     execute 'source' expand('~/.local/.vimrc')
   endif
