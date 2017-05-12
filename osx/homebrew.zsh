@@ -25,6 +25,7 @@ brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install cheat
+brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -72,7 +73,6 @@ brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
-brew install renameutils
 brew install ruby
 brew install shadowsocks-libev
 brew install sqlite-analyzer
@@ -85,6 +85,7 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install urlview
+brew install vagrant-completion
 brew install wget
 brew install xonsh
 brew install zshdb
