@@ -17,6 +17,7 @@ brew install assh
 brew install bash
 brew install brew-gem
 brew install cheat
+brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -54,7 +55,6 @@ brew install psgrep
 brew install python
 brew install python3
 brew install ranger
-brew install renameutils
 brew install ruby
 brew install sshrc
 brew install stdman
