@@ -45,6 +45,7 @@ brew install netcat
 brew install node
 brew install noti
 brew install paulhybryant/myformulae/fsqlf
+brew install paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/qfc
 brew install paulhybryant/myformulae/zunit
 brew install paulhybryant/myformulae/zvanilla
