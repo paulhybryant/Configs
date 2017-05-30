@@ -1,5 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 declare -U path manpath fpath
+# Previusly brew failed to update if nix is enabled and sets SSL_CERT_FILE.
+# source $HOME/.nix-profile/etc/profile.d/nix.sh
 if [[ "$OSTYPE" == "darwin"* ]]; then
   declare -xg BREWVERSION="homebrew" BREWHOME="/usr/local" CMDPREFIX="g"
 else
