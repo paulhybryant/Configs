@@ -200,6 +200,13 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " }}}
   " {{{2
   NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    \ 'dotfiles/master/archive/blob/vba/PreserveNoEOL-1.01.vmb', {
+    \ 'name' : 'PreserveNoEOL', 'regular_name' : 'PreserveNoEOL',
+    \ 'frozen' : 1, 'type' : 'vba'
+    \ }                                                                         " Do not preserve EOL plugin
+  " }}}
+  " {{{2
+  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
     \ 'dotfiles/master/archive/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
     \ 'regular_name' : 'Mark', 'frozen' : 1, 'type' : 'vba'
     \ }                                                                         " Highlight multiple words
