@@ -27,7 +27,8 @@ if [[ ! -z ${_refresh} ]]; then
   if [[ -n ${opt_cn} ]]; then
     _url='ipinfo.io'
   else
-    _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
+    _url='ipinfo.io'
+    # _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
   fi
   io::vlog 1 "Using url: ${_url}"
   _value=$(curl -m 10 -x '' "${_url}" 2> /dev/null)
