@@ -1,6 +1,9 @@
 # Adopted from http://stackoverflow.com/questions/28573145/how-can-i-move-the-cursor-after-a-zsh-abbreviation
 # Source: https://github.com/ericboehs/dotfiles/blob/master/.zsh/abbreviations.zsh
 # http://zshwiki.org/home/examples/zleiab
+# More:
+# http://hackerific.net/2009/01/23/zsh-abbreviations/
+# https://github.com/smly/config/blob/master/.zsh/abbreviations.zsh
 
 setopt extendedglob
 
