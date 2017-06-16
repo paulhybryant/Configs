@@ -14,7 +14,6 @@ abbrevs=(
   'cx'        'chmod +x'
   'da'        'du -sch'
   'lad'       'ls -d .*(/)\n# only show dot-directories'
-  'lb'        'listabbrevs'
   'lsa'       'ls -a .*(.)\n# only show dot-files'
   'lsbig'     'ls -flh *(.OL[1,10])\n# display the biggest files'
   'lsd'       'ls -d *(/)\n# only show directories'
