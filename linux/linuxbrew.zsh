@@ -12,9 +12,10 @@ brew tap linuxbrew/xorg
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install python --with-unicode-ucs4
-brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
+brew install vim --with-override-system-vi --with-client-server --with-lua
 brew install assh
 brew install bash
+brew install berkeley-db@4
 brew install brew-gem
 brew install cheat
 brew install coreutils
