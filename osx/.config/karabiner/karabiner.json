@@ -6,6 +6,12 @@
     },
     "profiles": [
         {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 1000
+                },
+                "rules": []
+            },
             "devices": [],
             "fn_function_keys": {
                 "f1": "display_brightness_decrement",
@@ -25,6 +31,7 @@
             "selected": true,
             "simple_modifications": {
                 "caps_lock": "escape",
+                "delete_forward": "delete_or_backspace",
                 "escape": "caps_lock",
                 "left_command": "left_control",
                 "left_control": "left_option",
@@ -36,6 +43,12 @@
             }
         },
         {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 1000
+                },
+                "rules": []
+            },
             "devices": [],
             "fn_function_keys": {
                 "f1": "display_brightness_decrement",
@@ -55,6 +68,7 @@
             "selected": false,
             "simple_modifications": {
                 "caps_lock": "escape",
+                "delete_forward": "delete_or_backspace",
                 "escape": "caps_lock",
                 "left_control": "left_option",
                 "left_option": "left_control"
