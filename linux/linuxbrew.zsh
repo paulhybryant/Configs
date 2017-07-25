@@ -2,14 +2,9 @@
 
 brew tap beeftornado/rmtree
 brew tap homebrew/command-not-found
-brew tap homebrew/completions
 brew tap homebrew/core
-brew tap homebrew/dupes
-brew tap homebrew/versions
-brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap linuxbrew/xorg
-brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install python --with-unicode-ucs4
 brew install vim --with-override-system-vi --with-client-server --with-lua
@@ -26,7 +21,6 @@ brew install fish
 brew install fpp
 brew install fzf
 brew install gem-guard
-brew install gem-neovim
 brew install git-extras
 brew install gnu-sed
 brew install gnu-which
@@ -41,7 +35,6 @@ brew install mawk
 brew install mdp
 brew install moreutils
 brew install most
-brew install neovim/neovim/neovim
 brew install netcat
 brew install node
 brew install noti
