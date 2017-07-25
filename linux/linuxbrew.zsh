@@ -10,8 +10,7 @@ brew install python --with-unicode-ucs4
 brew install vim --with-override-system-vi --with-client-server --with-lua
 brew install assh
 brew install bash
-brew install berkeley-db@4
-brew install brew-gem
+brew install --HEAD brew-gem
 brew install cheat
 brew install coreutils
 brew install docker-completion
@@ -20,7 +19,6 @@ brew install fasd
 brew install fish
 brew install fpp
 brew install fzf
-brew install gem-guard
 brew install git-extras
 brew install gnu-sed
 brew install gnu-which
@@ -38,11 +36,11 @@ brew install most
 brew install netcat
 brew install node
 brew install noti
-brew install paulhybryant/myformulae/fsqlf
-brew install paulhybryant/myformulae/powerline-fonts
-brew install paulhybryant/myformulae/qfc
-brew install paulhybryant/myformulae/zunit
-brew install paulhybryant/myformulae/zvanilla
+brew install --HEAD paulhybryant/myformulae/fsqlf
+brew install --HEAD paulhybryant/myformulae/powerline-fonts
+brew install --HEAD paulhybryant/myformulae/qfc
+brew install --HEAD paulhybryant/myformulae/zunit
+brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
 brew install progress
@@ -59,6 +57,6 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install util-linux
-brew install vim
 brew install xonsh
 brew install zshdb
+brew gem install guard --homebrew-ruby

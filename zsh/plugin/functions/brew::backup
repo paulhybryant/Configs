@@ -7,10 +7,34 @@ for tap in $(brew tap | sort); do
   echo "brew tap $tap"
 done
 
-brew info --json=v1 --installed | jq -r '.[] | select(.name != "patchelf" and .installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + " " + $item) | . as $opt | "brew install " + $in.name + $opt' | sort
+# Find out formulae installed with custom options
+# e.g brew install python --with-unicode-ucs4
+local -A formula_options_map
+formula_options_map=($(brew info --json=v1 --installed | jq -r '.[] | select(.installed[0].used_options != []) | . as $in | reduce .installed[0].used_options[] as $item (""; . + " " + $item) | . as $opt | $in.name + $opt' | sort))
+for formula in ${(@k)formula_options_map}; do
+  echo "brew install ${formula} ${formula_options_map[$formula]}"
+done
 
-for formula in $(brew leaves | grep -v 'patchelf' | sort); do
-  echo "brew install $formula"
+# Find out formulae installed with HEAD
+local -a head_formulae
+head_formulae=($(brew info --json=v1 --installed | jq -r '.[] | select(.installed[0].version | contains("^HEAD")) | .name' | sort))
+for formula in ${head_formulae}; do
+  echo "brew install --HEAD ${formula}"
+done
+
+for formula in $(brew leaves | grep -v 'gem-.*' | sort); do
+  # if $formula in ${head_formulae}; then
+    # continue
+  # fi
+  # if $formula in ${(@k)formula_options_map}; then
+    # continue
+  # fi
+  echo "brew install ${formula}"
+done
+
+# Handle brew gem installed formula
+for formula in $(brew leaves | grep 'gem-.*' | sed 's/gem-//'); do
+  echo "brew gem install ${formula} --homebrew-ruby"
 done
 
 if [[ $OSTYPE == *darwin* ]]; then
