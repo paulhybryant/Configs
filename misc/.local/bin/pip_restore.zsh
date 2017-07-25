@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-pip install --upgrade -r /dev/stdin <<EOF
+pip2 install --upgrade -r /dev/stdin <<EOF
 futures==3.0.5
 greenlet==0.4.11
 jedi==0.9.0

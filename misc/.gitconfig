@@ -139,6 +139,3 @@
 
 [url "https://github.com/"]
   insteadof = github:
-
-[homebrew]
-  private = true

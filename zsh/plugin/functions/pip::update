@@ -1,8 +1,8 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
 print '\nUpdating pip...'
-# pip freeze | pip install --upgrade -r /dev/stdin
-pip list -o --format freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
+# pip2 freeze | pip2 install --upgrade -r /dev/stdin
+pip2 list -o --format freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip2 install -U
 
 print '\nUpdating pip3...'
 # pip3 freeze | pip3 install --upgrade -r /dev/stdin

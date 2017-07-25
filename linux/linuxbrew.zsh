@@ -2,11 +2,7 @@
 
 brew tap beeftornado/rmtree
 brew tap homebrew/command-not-found
-brew tap homebrew/completions
 brew tap homebrew/core
-brew tap homebrew/dupes
-brew tap homebrew/versions
-brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap linuxbrew/xorg
 brew tap neovim/neovim

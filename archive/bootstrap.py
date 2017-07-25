@@ -147,7 +147,7 @@ class Bundle(object):
     self.ExecuteSystemCmd(cmd)
 
   def InstallWithPipUser(self, target):
-    """Install the bundle with pip --user."""
+    """Install the bundle with pip2 --user."""
 
     cmdlist = ["pip", "install", "--user"]
     if FLAGS.reinstall:

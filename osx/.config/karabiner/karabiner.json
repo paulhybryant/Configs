@@ -27,8 +27,8 @@
                 "f8": "play_or_pause",
                 "f9": "fastforward"
             },
-            "name": "paulhybryant",
-            "selected": true,
+            "name": "usb",
+            "selected": false,
             "simple_modifications": {
                 "caps_lock": "escape",
                 "delete_forward": "delete_or_backspace",
@@ -64,8 +64,8 @@
                 "f8": "play_or_pause",
                 "f9": "fastforward"
             },
-            "name": "usb",
-            "selected": false,
+            "name": "direct",
+            "selected": true,
             "simple_modifications": {
                 "caps_lock": "escape",
                 "delete_forward": "delete_or_backspace",
