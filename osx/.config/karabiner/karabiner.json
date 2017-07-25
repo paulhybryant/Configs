@@ -27,7 +27,7 @@
                 "f8": "play_or_pause",
                 "f9": "fastforward"
             },
-            "name": "usb",
+            "name": "direct",
             "selected": false,
             "simple_modifications": {
                 "caps_lock": "escape",
@@ -64,7 +64,7 @@
                 "f8": "play_or_pause",
                 "f9": "fastforward"
             },
-            "name": "direct",
+            "name": "usb",
             "selected": true,
             "simple_modifications": {
                 "caps_lock": "escape",
