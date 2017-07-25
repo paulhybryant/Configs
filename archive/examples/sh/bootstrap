@@ -115,13 +115,13 @@ function bootstrap::brewinstall() {
   zsh::eval 'brew gem install tmuxinator'
   # zsh::eval 'brew gem install automux'
   zsh::eval 'brew install --HEAD vimdoc vroom'
-  zsh::eval "pip install --upgrade powerline-status neovim \
+  zsh::eval "pip2 install --upgrade powerline-status neovim \
     percol butterfly jedi pip-autoremove pipdeptree mdview"
   if os::LINUX; then
     zsh::eval "brew install --disable-nls --override-system-vi \
       --with-client-server --with-lua --with-luajit vim"
     # zsh::eval 'brew install --HEAD trash-cli'
-    # zsh::eval 'pip install --upgrade trash-cli'
+    # zsh::eval 'pip2 install --upgrade trash-cli'
     zsh::eval 'cabal update && cabal install shellcheck'
     zsh::eval 'cabal install Cabal cabal-install'
   elif os::OSX; then

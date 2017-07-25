@@ -54,7 +54,7 @@ done
 
 # Note that pipdeptree can only be installed for one python version.
 # Installation runs later will overwrite the binary of previous installation.
-run "pip install pipdeptree powerline-status pyclewn trash-cli neovim jedi pip-autoremove"
+run "pip2 install pipdeptree powerline-status pyclewn trash-cli neovim jedi pip-autoremove"
 run "pip3 install gnureadline xonsh-apt-tabcomplete xonsh-autoxsh xontrib-prompt-ret-code xontrib-z"j
 
 run "npm install js-beautify"

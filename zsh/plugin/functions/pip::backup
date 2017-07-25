@@ -3,11 +3,11 @@
 echo "#!/usr/bin/env zsh"
 echo ""
 
-# echo "pip freeze | pip install --upgrade -r /dev/stdin"
+# echo "pip2 freeze | pip2 install --upgrade -r /dev/stdin"
 # echo "pip3 freeze | pip3 install --upgrade -r /dev/stdin"
 
-echo "pip install --upgrade -r /dev/stdin <<EOF"
-echo "$(pip freeze)"
+echo "pip2 install --upgrade -r /dev/stdin <<EOF"
+echo "$(pip2 freeze)"
 echo "EOF"
 
 echo ""
