@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
+brew tap homebrew/aliases
 brew tap homebrew/command-not-found
 brew tap homebrew/core
 brew tap jhawthorn/fzy
+brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
-brew install python --with-unicode-ucs4
-brew install vim --with-override-system-vi --with-client-server --with-lua
 brew install assh
 brew install bash
 brew install --HEAD brew-gem
@@ -15,6 +15,7 @@ brew install cheat
 brew install coreutils
 brew install docker-completion
 brew install dos2unix
+brew install extract_url
 brew install fasd
 brew install fish
 brew install fpp
@@ -43,9 +44,8 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
-brew install progress
 brew install psgrep
-brew install python
+brew install python  --with-unicode-ucs4
 brew install python3
 brew install ranger
 brew install ruby
@@ -57,6 +57,7 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install util-linux
+brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install xonsh
 brew install zshdb
 brew gem install guard --homebrew-ruby

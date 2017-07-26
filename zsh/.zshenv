@@ -8,7 +8,8 @@ else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="$HOME/.linuxbrew" CMDPREFIX=""
 fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
-  PYTHONSTARTUP="$HOME/.pythonrc" GOPATH="$BREWHOME/opt/go/libexec"
+  PYTHONSTARTUP="$HOME/.pythonrc" GOPATH="$BREWHOME/opt/go/libexec" \
+  HOMEBREW_NO_AUTO_UPDATE=1
 path=(~/.local/bin $BREWHOME/bin $BREWHOME/sbin ${path[@]})
 unset SSL_CERT_FILE
 
