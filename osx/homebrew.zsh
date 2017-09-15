@@ -17,14 +17,13 @@ brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
 brew tap neovim/neovim
 brew tap paulhybryant/myformulae
-brew install macvim --with-override-system-vim --with-lua --with-luajit
-brew install reattach-to-user-namespace --with-wrap-launchctl --with-wrap-pbcopy-and-pbpaste
 brew install aria2
 brew install assh
 brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install cheat
+brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -47,22 +46,21 @@ brew install koekeishiya/formulae/cev
 brew install koekeishiya/formulae/khd
 brew install koekeishiya/formulae/kwm
 brew install lsof
-brew install macvim
+brew install macvim  --with-override-system-vim --with-luajit
 brew install mawk
 brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
-brew install neovim/neovim/neovim
 brew install netcat
 brew install node
 brew install noti
 brew install osxutils
-brew install paulhybryant/myformulae/fsqlf
-brew install paulhybryant/myformulae/powerline-fonts
-brew install paulhybryant/myformulae/qfc
-brew install paulhybryant/myformulae/zunit
-brew install paulhybryant/myformulae/zvanilla
+brew install --HEAD paulhybryant/myformulae/fsqlf
+brew install --HEAD paulhybryant/myformulae/powerline-fonts
+brew install --HEAD paulhybryant/myformulae/qfc
+brew install --HEAD paulhybryant/myformulae/zunit
+brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
 brew install polipo
@@ -72,7 +70,6 @@ brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
-brew install renameutils
 brew install ruby
 brew install shadowsocks-libev
 brew install sqlite-analyzer
