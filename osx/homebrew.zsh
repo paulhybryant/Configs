@@ -81,6 +81,7 @@ brew install the_silver_searcher
 brew install tldr
 brew install tmux
 brew install todo-txt
+brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
