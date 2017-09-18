@@ -10,7 +10,7 @@ brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
 brew install assh
 brew install bash
-brew install --HEAD brew-gem
+brew install brew-gem
 brew install cheat
 brew install coreutils
 brew install docker-completion
@@ -20,7 +20,9 @@ brew install fasd
 brew install fish
 brew install fpp
 brew install fzf
+brew install gcc
 brew install git-extras
+brew install glibc
 brew install gnu-sed
 brew install gnu-which
 brew install graphviz
