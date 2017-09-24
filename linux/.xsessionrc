@@ -23,9 +23,9 @@ setxkbmap -option ''
 # sudo dpkg-reconfigure xkb-data
 # The ctrl_win mapping is also not working well. ctrl and win is not swapped, but only ctrl is mapped to win.
 # Uses with a normal keyboard
-# setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
+setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 # Uses with a programmed keyboard
-setxkbmap -option 'caps:swapescape,altwin:ctrl_win'
+# setxkbmap -option 'caps:swapescape,altwin:ctrl_win'
 
 killall xbindkeys > /dev/null 2>&1
 xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
