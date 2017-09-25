@@ -165,7 +165,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'google/vim-codefmt', {'on_ft' : ['cpp', 'javascript', 'sql']}      " Code formating plugin from google, python formatter: https://github.com/google/yapf, java formatter: https://github.com/google/google-java-format
+  NeoBundle 'google/vim-codefmt', {'on_ft' : ['cpp', 'javascript', 'sql', 'xml']}      " Code formating plugin from google, python formatter: https://github.com/google/yapf, java formatter: https://github.com/google/google-java-format
   let s:vimcodefmt = neobundle#get('vim-codefmt')
   function! s:vimcodefmt.hooks.on_source(bundle)
     Glaive vim-codefmt plugin[mappings]
@@ -331,6 +331,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     endif
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
+    call l:codefmt_registry.AddExtension(vimutils#xmlformatter#GetXMLFormatter())
   endfunction
   " }}}
   " Local bundles {{{2
