@@ -18,13 +18,15 @@ make
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 cd ~/.zplug/repos/paulhybryant/dotfiles
-echo 'Installing brew...'
 if [[ $OSTYPE == *darwin* ]]; then
+  echo 'Installing brew...'
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew install python
   brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
-  sudo apt-get install bison flex xsltproc
+  echo 'Installing linuxbrew dependencies'
+  sudo apt-get install bison flex xsltproc build-essential
+  echo 'Installing brew...'
   su - $USER -c 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   brew install python
