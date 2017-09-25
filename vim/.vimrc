@@ -331,6 +331,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     endif
     let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
     call l:codefmt_registry.AddExtension(vimutils#fsqlf#GetSQLFormatter())
+    " call l:codefmt_registry.AddExtension(vimutils#xmlformatter#GetXMLFormatter())
   endfunction
   " }}}
   " Local bundles {{{2

@@ -25,7 +25,7 @@ if [[ $OSTYPE == *darwin* ]]; then
   brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
   sudo apt-get install bison flex xsltproc
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+  su - $USER ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   brew install python
   brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
