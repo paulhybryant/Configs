@@ -18,14 +18,16 @@ make
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 cd ~/.zplug/repos/paulhybryant/dotfiles
-echo 'Installing brew...'
 if [[ $OSTYPE == *darwin* ]]; then
+  echo 'Installing brew...'
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew install python
   brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
-  sudo apt-get install bison flex xsltproc
-  su - $USER -c ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+  echo 'Installing linuxbrew dependencies'
+  sudo apt-get install bison flex xsltproc build-essential
+  echo 'Installing brew...'
+  su - $USER -c 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   brew install python
   brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
@@ -49,7 +51,7 @@ vim -c 'NeoBundleInstall' -c 'q'
 echo 'Installing tmux plugins...'
 ~/.tmux/plugins/tpm/bin/install_plugins
 
-read -p "Restore brew (this can take a while)? " -n 1 -r
+read -p "Restore brew (this can take a while) (y/n)? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
