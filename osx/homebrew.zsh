@@ -23,7 +23,6 @@ brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install cheat
-brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -70,6 +69,7 @@ brew install python
 brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
+brew install renameutils
 brew install ruby
 brew install shadowsocks-libev
 brew install sqlite-analyzer
@@ -87,6 +87,7 @@ brew install wget
 brew install xonsh
 brew install zshdb
 brew cask install docker
+brew cask install electronic-wechat
 brew cask install hyperswitch
 brew cask install karabiner-elements
 brew cask install key-codes
