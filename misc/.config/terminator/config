@@ -1,70 +1,69 @@
 [global_config]
   always_split_with_profile = True
-  title_transmit_bg_color = "#d30102"
   focus = system
+  title_transmit_bg_color = "#d30102"
 [keybindings]
-  cycle_prev = None
-  next_tab = None
+  close_term = None
   close_window = None
-  switch_to_tab_10 = <Primary>9
+  copy = <Primary>c
+  cycle_next = None
+  cycle_prev = None
+  go_down = None
+  go_left = None
+  go_next = None
+  go_prev = None
   go_right = None
-  new_tab = <Alt>t
+  go_up = None
   group_all = None
+  group_tab = None
+  layout_launcher = None
+  new_tab = <Alt>t
+  next_tab = None
+  paste = <Primary>v
   prev_tab = None
-  switch_to_tab_6 = <Primary>6
-  switch_to_tab_7 = <Primary>7
+  rotate_cw = None
+  switch_to_tab_1 = <Primary>1
+  switch_to_tab_10 = <Primary>9
+  switch_to_tab_2 = <Primary>2
+  switch_to_tab_3 = <Primary>3
   switch_to_tab_4 = <Primary>4
   switch_to_tab_5 = <Primary>5
-  cycle_next = None
-  switch_to_tab_3 = <Primary>3
-  switch_to_tab_1 = <Primary>1
-  switch_to_tab_2 = <Primary>2
-  group_tab = None
+  switch_to_tab_6 = <Primary>6
+  switch_to_tab_7 = <Primary>7
   switch_to_tab_8 = <Primary>8
   switch_to_tab_9 = <Primary>9
-  go_prev = None
-  close_term = None
-  go_left = None
-  copy = <Primary>c
-  paste = <Primary>v
-  go_up = None
-  rotate_cw = None
-  go_down = None
-  go_next = None
-[profiles]
-  [[default]]
-    copy_on_selection = True
-    use_system_font = False
-    font = Source Code Pro for Powerline Semi-Bold 11
-    background_image = None
-    scrollback_infinite = True
-  [[solarized-dark]]
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    font = Source Code Pro for Powerline Semi-Bold 11
-    background_image = None
-    use_system_font = False
-    cursor_color = "#eee8d5"
-    foreground_color = "#eee8d5"
-    copy_on_selection = True
-    background_color = "#002b36"
-    scrollback_infinite = True
-  [[solarized-light]]
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    font = Source Code Pro for Powerline Semi-Bold 11
-    background_image = None
-    use_system_font = False
-    cursor_color = "#002b36"
-    foreground_color = "#002b36"
-    copy_on_selection = True
-    background_color = "#eee8d5"
-    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = solarized-dark
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
+[profiles]
+  [[default]]
+    copy_on_selection = True
+    cursor_color = "#aaaaaa"
+    font = Source Code Pro for Powerline Semi-Bold 11
+    scrollback_infinite = True
+    use_system_font = False
+  [[solarized-dark]]
+    background_color = "#002b36"
+    copy_on_selection = True
+    cursor_color = "#eee8d5"
+    font = Source Code Pro for Powerline Semi-Bold 11
+    foreground_color = "#eee8d5"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_infinite = True
+    use_system_font = False
+  [[solarized-light]]
+    background_color = "#eee8d5"
+    copy_on_selection = True
+    cursor_color = "#002b36"
+    font = Source Code Pro for Powerline Semi-Bold 11
+    foreground_color = "#002b36"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_infinite = True
+    use_system_font = False
