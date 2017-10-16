@@ -1,6 +1,8 @@
 [global_config]
   always_split_with_profile = True
+  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   focus = system
+  inactive_color_offset = 0.5
   title_transmit_bg_color = "#d30102"
 [keybindings]
   close_term = None
