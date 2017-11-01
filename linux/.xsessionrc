@@ -38,3 +38,4 @@ xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
 # setxkbmap -option altwin:ctrl_win
 
 xrandr --output DP-6 --primary --pos 0x0 --rotate normal --mode 2560x1440 --output DP-5 --auto --rotate left --right-of DP-6
+/usr/bin/synergys --address localhost
