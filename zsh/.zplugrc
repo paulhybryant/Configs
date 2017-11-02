@@ -71,3 +71,5 @@ if ! zplug check --verbose; then
   zplug install
 fi
 zplug load --verbose
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(vi_mode)
