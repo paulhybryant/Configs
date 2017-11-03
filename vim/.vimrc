@@ -23,6 +23,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'benmills/vimux'
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'dag/vim-fish'
+  NeoBundle 'edkolev/tmuxline.vim'
   NeoBundle 'epeli/slimux'
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
   NeoBundle 'godlygeek/tabular'
