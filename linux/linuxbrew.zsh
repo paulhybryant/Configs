@@ -11,6 +11,7 @@ brew tap paulhybryant/myformulae
 brew install assh
 brew install bash
 brew install brew-gem
+brew install ccat
 brew install cheat
 brew install coreutils
 brew install docker-completion
@@ -26,6 +27,7 @@ brew install graphviz
 brew install grc
 brew install hh
 brew install htop
+brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
 brew install linuxbrew/xorg/xorg
@@ -37,6 +39,7 @@ brew install netcat
 brew install node
 brew install noti
 brew install --HEAD paulhybryant/myformulae/fsqlf
+brew install --HEAD paulhybryant/myformulae/i3locknext
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install --HEAD paulhybryant/myformulae/qfc
 brew install --HEAD paulhybryant/myformulae/zunit
@@ -44,6 +47,7 @@ brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
 brew install psgrep
+brew install pstree
 brew install python  --with-unicode-ucs4
 brew install python3
 brew install ranger
@@ -52,9 +56,11 @@ brew install sshrc
 brew install stdman
 brew install stow
 brew install the_silver_searcher
+brew install tig
 brew install tldr
 brew install tmux
 brew install todo-txt
+brew install tree
 brew install util-linux
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install xonsh
