@@ -26,3 +26,18 @@ lctrl - w   ! [*]                                           : khd -p "cmd - w"
 lctrl - x   ! [*]                                           : khd -p "cmd - x"
 lcmd + lctrl - l                                            : pmset displaysleepnow
 # lcmd + lctrl - l                                          : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
+
+# Reload khd config
+cmd + alt + ctrl - r                                        : khd -e "reload"
+
+# Open iTerm2
+cmd - return                                                : open -na /Applications/iTerm.app
+
+# focus window
+alt - h : chunkc tiling::window --focus west
+alt - j : chunkc tiling::window --focus south
+alt - k : chunkc tiling::window --focus north
+alt - l : chunkc tiling::window --focus east
+
+cmd - j : chunkc tiling::window --focus prev
+cmd - k : chunkc tiling::window --focus next
