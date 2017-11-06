@@ -3,6 +3,7 @@
 brew tap beeftornado/rmtree
 brew tap caskroom/cask
 brew tap caskroom/versions
+brew tap crisidev/chunkwm
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/command-not-found
@@ -22,7 +23,9 @@ brew install assh
 brew install bash
 brew install brew-cask-completion
 brew install brew-gem
+brew install ccat
 brew install cheat
+brew install crisidev/chunkwm/chunkwm
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -39,6 +42,7 @@ brew install graphviz
 brew install grc
 brew install hh
 brew install htop
+brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
 brew install koekeishiya/formulae/cev
@@ -65,6 +69,7 @@ brew install percol
 brew install polipo
 brew install progress
 brew install proxychains-ng
+brew install pstree
 brew install python
 brew install python3
 brew install ranger
@@ -78,9 +83,11 @@ brew install stdman
 brew install stow
 brew install td
 brew install the_silver_searcher
+brew install tig
 brew install tldr
 brew install tmux
 brew install todo-txt
+brew install tree
 brew install udns
 brew install urlview
 brew install wget
@@ -91,7 +98,9 @@ brew cask install electronic-wechat
 brew cask install hyperswitch
 brew cask install karabiner-elements
 brew cask install key-codes
+brew cask install kitty
 brew cask install shadowsocksx-ng
+brew cask install slate
 brew cask install spectacle
 brew cask install squidman
 brew cask install xquartz
