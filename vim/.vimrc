@@ -23,7 +23,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'benmills/vimux'
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
   NeoBundle 'dag/vim-fish'
-  NeoBundle 'edkolev/tmuxline.vim'
+  " NeoBundle 'edkolev/tmuxline.vim'
   NeoBundle 'epeli/slimux'
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
   NeoBundle 'godlygeek/tabular'
@@ -115,8 +115,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   function s:ycm.hooks.on_source(bundle)
     nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
     let g:ycm_always_populate_location_list = 1                                 " Default 0
-    let g:ycm_autoclose_preview_window_after_completion = 1                     " Automatically close the preview window for completion
-    let g:ycm_autoclose_preview_window_after_insertion = 1                      " Automatically close the preview window for completion
+    let g:ycm_autoclose_preview_window_after_completion = 0                     " Automatically close the preview window for completion
+    let g:ycm_autoclose_preview_window_after_insertion = 0                      " Automatically close the preview window for completion
     let g:ycm_collect_identifiers_from_tags_files = 1                           " Enable completion from tags
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
