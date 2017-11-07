@@ -94,8 +94,12 @@ brew install urlview
 brew install wget
 brew install xonsh
 brew install zshdb
+brew cask install atom
 brew cask install docker
 brew cask install electronic-wechat
+brew cask install flux
+brew cask install free-download-manager
+brew cask install hammerspoon
 brew cask install hyperswitch
 brew cask install karabiner-elements
 brew cask install key-codes
@@ -104,4 +108,5 @@ brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
 brew cask install squidman
+brew cask install typora
 brew cask install xquartz
