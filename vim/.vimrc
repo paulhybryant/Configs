@@ -28,6 +28,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
   NeoBundle 'godlygeek/tabular'
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
+  NeoBundle 'koekeishiya/kwm', {'rtp' : 'syntax/vim'}
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
   NeoBundle 'haya14busa/vim-operator-flashy'
   NeoBundle 'kana/vim-operator-user'                                            " User defined operator
