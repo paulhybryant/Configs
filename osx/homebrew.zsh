@@ -7,13 +7,8 @@ brew tap crisidev/chunkwm
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/command-not-found
-brew tap homebrew/completions
 brew tap homebrew/core
-brew tap homebrew/dupes
-brew tap homebrew/gui
 brew tap homebrew/services
-brew tap homebrew/versions
-brew tap homebrew/x11
 brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
 brew tap neovim/neovim
