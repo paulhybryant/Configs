@@ -15,11 +15,13 @@ brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install aria2
 brew install assh
+brew install autoconf
 brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install ccat
 brew install cheat
+brew install cmake
 brew install crisidev/chunkwm/chunkwm
 brew install docker-completion
 brew install dos2unix
@@ -62,12 +64,11 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
+brew install pkg-config
 brew install polipo
 brew install progress
 brew install proxychains-ng
 brew install pstree
-brew install python
-brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
