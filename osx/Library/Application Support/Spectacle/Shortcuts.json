@@ -9,26 +9,26 @@
   },
   {
     "shortcut_key_binding" : null,
-    "shortcut_name" : "MoveToLowerRight"
+    "shortcut_name" : "MoveToPreviousThird"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "alt+cmd+right",
     "shortcut_name" : "MoveToUpperRight"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "ctrl+alt+down",
     "shortcut_name" : "MoveToBottomHalf"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "ctrl+alt+cmd+right",
     "shortcut_name" : "MoveToNextDisplay"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "ctrl+alt+up",
     "shortcut_name" : "MoveToTopHalf"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "ctrl+cmd+left",
     "shortcut_name" : "MoveToLowerLeft"
   },
   {
@@ -40,11 +40,11 @@
     "shortcut_name" : "UndoLastMove"
   },
   {
-    "shortcut_key_binding" : null,
+    "shortcut_key_binding" : "ctrl+alt+cmd+left",
     "shortcut_name" : "MoveToPreviousDisplay"
   },
   {
-    "shortcut_key_binding" : "ctrl+alt+up",
+    "shortcut_key_binding" : "ctrl+alt+return",
     "shortcut_name" : "MoveToFullscreen"
   },
   {
@@ -56,7 +56,7 @@
     "shortcut_name" : "MoveToLeftHalf"
   },
   {
-    "shortcut_key_binding" : "ctrl+alt+down",
+    "shortcut_key_binding" : "ctrl+alt+home",
     "shortcut_name" : "MoveToCenter"
   },
   {
@@ -64,11 +64,11 @@
     "shortcut_name" : "MoveToRightHalf"
   },
   {
-    "shortcut_key_binding" : null,
-    "shortcut_name" : "MoveToUpperLeft"
+    "shortcut_key_binding" : "ctrl+cmd+right",
+    "shortcut_name" : "MoveToLowerRight"
   },
   {
-    "shortcut_key_binding" : null,
-    "shortcut_name" : "MoveToPreviousThird"
+    "shortcut_key_binding" : "alt+cmd+left",
+    "shortcut_name" : "MoveToUpperLeft"
   }
 ]
