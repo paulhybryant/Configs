@@ -30,16 +30,11 @@ chunkc set global_desktop_offset_left    20
 chunkc set global_desktop_offset_right   20
 chunkc set global_desktop_offset_gap     15
 
-chunkc set 1_desktop_offset_top          190
-chunkc set 1_desktop_offset_bottom       190
-chunkc set 1_desktop_offset_left         190
-chunkc set 1_desktop_offset_right        190
-chunkc set 1_desktop_offset_gap          15
-
-chunkc set 3_desktop_offset_top          190
-chunkc set 3_desktop_offset_bottom       190
-chunkc set 3_desktop_offset_left         190
-chunkc set 3_desktop_offset_right        190
+# chunkc set 1_desktop_offset_top          20
+# chunkc set 1_desktop_offset_bottom       20
+# chunkc set 1_desktop_offset_left         20
+# chunkc set 1_desktop_offset_right        20
+# chunkc set 1_desktop_offset_gap          15
 
 chunkc set desktop_padding_step_size     10.0
 chunkc set desktop_gap_step_size         5.0

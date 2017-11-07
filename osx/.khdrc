@@ -30,8 +30,12 @@ lcmd + lctrl - l                                            : pmset displaysleep
 # Reload khd config
 cmd + alt + ctrl - r                                        : khd -e "reload"
 
+# Start / Stop chunkwm
+cmd + alt + ctrl - k                                        : brew services stop chunkwm
+cmd + alt + ctrl - w                                        : brew services start chunkwm
+
 # Open iTerm2
-cmd - return                                                : open -na /Applications/iTerm.app
+cmd - return                                                : open -a /Applications/iTerm.app
 
 # focus window
 alt - h : chunkc tiling::window --focus west
