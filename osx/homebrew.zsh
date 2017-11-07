@@ -48,6 +48,7 @@ brew install jq
 brew install koekeishiya/formulae/cev
 brew install koekeishiya/formulae/khd
 brew install koekeishiya/formulae/kwm
+brew install koekeishiya/formulae/skhd
 brew install lsof
 brew install macvim  --with-override-system-vim --with-luajit
 brew install mawk
