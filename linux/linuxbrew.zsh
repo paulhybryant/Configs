@@ -8,6 +8,7 @@ brew tap jhawthorn/fzy
 brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
+brew install aria2
 brew install assh
 brew install bash
 brew install brew-gem
@@ -17,11 +18,14 @@ brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
+brew install findutils
 brew install fpp
 brew install fzf
 brew install gcc
 brew install git-extras
+brew install gnu-getopt
 brew install gnu-sed
+brew install gnu-tar
 brew install gnu-which
 brew install graphviz
 brew install grc
@@ -31,7 +35,9 @@ brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
 brew install linuxbrew/xorg/xorg
+brew install lsof
 brew install mawk
+brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
@@ -46,6 +52,7 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
+brew install progress
 brew install psgrep
 brew install pstree
 brew install python  --with-unicode-ucs4
