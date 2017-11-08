@@ -16,10 +16,10 @@ brew install aria2
 brew install assh
 brew install bash
 brew install brew-cask-completion
-brew install brew-gem
 brew install ccat
 brew install cheat
 brew install crisidev/chunkwm/chunkwm
+brew install curl
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -63,6 +63,7 @@ brew install percol
 brew install polipo
 brew install progress
 brew install proxychains-ng
+brew install psgrep
 brew install pstree
 brew install python
 brew install python3
