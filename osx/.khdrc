@@ -25,14 +25,14 @@ lctrl - v   ! [*]   : khd -p "cmd - v"
 lctrl - w   ! [*]   : khd -p "cmd - w"
 lctrl - x   ! [*]   : khd -p "cmd - x"
 lcmd + lctrl - l    : pmset displaysleepnow
-# lcmd + lctrl - l                                          : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
+# lcmd + lctrl - l  : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
 # Reload khd config
-cmd + alt + ctrl - r  : khd -e "reload"
+cmd + alt + ctrl - r  : noti -m "khd reloaded!" khd -e "reload"
 
 # Start / Stop chunkwm
-cmd + alt + ctrl - k  : brew services stop chunkwm
-cmd + alt + ctrl - w  : brew services start chunkwm
+cmd + alt + ctrl - k  : noti -m "chunkwm stopped!" brew services stop chunkwm
+cmd + alt + ctrl - w  : noti -m "chunkwm started!" brew services start chunkwm
 
 # Open iTerm2
 cmd - return  : open -a /Applications/iTerm.app
