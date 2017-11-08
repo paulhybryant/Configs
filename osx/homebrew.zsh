@@ -86,6 +86,7 @@ brew install urlview
 brew install wget
 brew install xonsh
 brew install zshdb
+brew cask install adobe-acrobat-reader
 brew cask install atom
 brew cask install docker
 brew cask install electronic-wechat
