@@ -37,7 +37,7 @@ cmd + alt + ctrl - w                                        : brew services star
 # Open iTerm2
 cmd - return                                                : open -a /Applications/iTerm.app
 
-# focus window
+# Focus window
 alt - h : chunkc tiling::window --focus west
 alt - j : chunkc tiling::window --focus south
 alt - k : chunkc tiling::window --focus north
@@ -45,3 +45,8 @@ alt - l : chunkc tiling::window --focus east
 
 cmd - j : chunkc tiling::window --focus prev
 cmd - k : chunkc tiling::window --focus next
+
+# Change layout
+ctrl + alt - b                                              : chunkc tiling::desktop --layout bsp
+ctrl + alt - m                                              : chunkc tiling::desktop --layout monocle
+ctrl + alt - f                                              : chunkc tiling::desktop --layout float
