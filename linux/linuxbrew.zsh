@@ -11,10 +11,8 @@ brew tap paulhybryant/myformulae
 brew install aria2
 brew install assh
 brew install bash
-brew install brew-gem
 brew install ccat
 brew install cheat
-brew install coreutils
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -58,6 +56,7 @@ brew install pstree
 brew install python  --with-unicode-ucs4
 brew install python3
 brew install ranger
+brew install renameutils
 brew install ruby
 brew install sshrc
 brew install stdman
@@ -68,8 +67,8 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
-brew install util-linux
+brew install urlview
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
+brew install wget
 brew install xonsh
 brew install zshdb
-brew gem install guard --homebrew-ruby
