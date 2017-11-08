@@ -11,7 +11,6 @@ brew tap homebrew/core
 brew tap homebrew/services
 brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
-brew tap neovim/neovim
 brew tap paulhybryant/myformulae
 brew install aria2
 brew install assh
@@ -25,7 +24,6 @@ brew install docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
-brew install fish
 brew install fpp
 brew install fzf
 brew install git-extras
@@ -77,14 +75,12 @@ brew install sqlite-analyzer
 brew install sshrc
 brew install stdman
 brew install stow
-brew install td
 brew install the_silver_searcher
 brew install tig
 brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
-brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
