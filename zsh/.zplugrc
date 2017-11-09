@@ -1,11 +1,11 @@
 # vim: ft=zplug sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
-export ZPLUG_HOME="$HOME/.zplug"
+declare -xg ZPLUG_HOME="$HOME/.zplug"
 [[ -d $ZPLUG_HOME ]] || \
   git clone --recursive https://github.com/zplug/zplug $ZPLUG_HOME
 source ${ZPLUG_HOME}/init.zsh
-export _ZPLUG_PREZTO="zsh-users/prezto"
 
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
 zstyle ":prezto:module:editor" "key-bindings" "vi"
@@ -38,6 +38,7 @@ zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
+# This is causing some failure for creating aliases, not sure why.
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 # zplug "D630/fzf-fs"
