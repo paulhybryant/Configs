@@ -18,6 +18,7 @@ brew install bash
 brew install brew-cask-completion
 brew install ccat
 brew install cheat
+brew install cmake
 brew install crisidev/chunkwm/chunkwm
 brew install curl
 brew install docker-completion
@@ -60,13 +61,12 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
+brew install pkg-config
 brew install polipo
 brew install progress
 brew install proxychains-ng
 brew install psgrep
 brew install pstree
-brew install python
-brew install python3
 brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
@@ -82,11 +82,11 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
+brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
 brew install zshdb
-brew cask install adobe-acrobat-reader
 brew cask install atom
 brew cask install docker
 brew cask install electronic-wechat
