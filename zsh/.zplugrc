@@ -23,6 +23,7 @@ zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "jocelynmallon/zshmarks", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
+# zplug "momo-lab/zsh-abbrev-alias", defer:1
 zplug "paulhybryant/dotfiles", defer:2
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-cmd-architect", defer:1
