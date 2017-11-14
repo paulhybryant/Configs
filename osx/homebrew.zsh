@@ -35,6 +35,7 @@ brew install gnu-which
 brew install graphviz
 brew install grc
 brew install hh
+brew install hr
 brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
