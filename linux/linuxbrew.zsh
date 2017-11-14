@@ -13,6 +13,7 @@ brew install assh
 brew install bash
 brew install ccat
 brew install cheat
+brew install cmake
 brew install docker-completion
 brew install dos2unix
 brew install fasd
@@ -21,6 +22,7 @@ brew install fpp
 brew install fzf
 brew install gcc
 brew install git-extras
+brew install glibc
 brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
