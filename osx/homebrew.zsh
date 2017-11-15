@@ -12,6 +12,7 @@ brew tap homebrew/services
 brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
 brew tap paulhybryant/myformulae
+brew tap sebglazebrook/aliases
 brew install aria2
 brew install assh
 brew install bash
@@ -72,6 +73,7 @@ brew install ranger
 brew install reattach-to-user-namespace
 brew install renameutils
 brew install ruby
+brew install sebglazebrook/aliases/aliases
 brew install shadowsocks-libev
 brew install sqlite-analyzer
 brew install sshrc
@@ -89,6 +91,7 @@ brew install wget
 brew install xonsh
 brew install zshdb
 brew cask install atom
+brew cask install baidunetdisk
 brew cask install docker
 brew cask install electronic-wechat
 brew cask install flux
@@ -96,6 +99,7 @@ brew cask install free-download-manager
 brew cask install hammerspoon
 brew cask install hyper
 brew cask install hyperswitch
+brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kitty
@@ -103,5 +107,7 @@ brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
 brew cask install squidman
+brew cask install the-unarchiver
+brew cask install thunder
 brew cask install typora
 brew cask install xquartz
