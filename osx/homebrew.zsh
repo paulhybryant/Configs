@@ -4,6 +4,7 @@ brew tap beeftornado/rmtree
 brew tap caskroom/cask
 brew tap caskroom/versions
 brew tap crisidev/chunkwm
+brew tap fisherman/tap
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/command-not-found
@@ -26,6 +27,7 @@ brew install docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
+brew install fisherman/tap/fisherman
 brew install fpp
 brew install fzf
 brew install git-extras
