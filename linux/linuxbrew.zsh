@@ -8,6 +8,7 @@ brew tap jhawthorn/fzy
 brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
 brew tap paulhybryant/myformulae
+brew tap sebglazebrook/aliases
 brew install aria2
 brew install assh
 brew install bash
@@ -36,7 +37,6 @@ brew install jq
 brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install mawk
-brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
