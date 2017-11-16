@@ -1,0 +1,6 @@
+{
+            "shim_directory" : "${HOME}/.aliases.d/shims",
+            "alias_directories" : [],
+            "users" : ["default"]
+        }
+        
