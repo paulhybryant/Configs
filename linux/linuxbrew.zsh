@@ -36,7 +36,6 @@ brew install jq
 brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install mawk
-brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
