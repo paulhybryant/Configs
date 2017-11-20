@@ -87,11 +87,11 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
-brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
 brew install zshdb
+brew cask install adobe-acrobat-reader
 brew cask install atom
 brew cask install baidunetdisk
 brew cask install docker
