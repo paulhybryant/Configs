@@ -7,3 +7,7 @@ powerline-setup
 
 # Enable vi-mode
 fish_vi_key_bindings
+
+if test -e "~/.local/config.fish"
+  source ~/.local/config.fish
+end
