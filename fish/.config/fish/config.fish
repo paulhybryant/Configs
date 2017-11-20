@@ -1,4 +1,9 @@
-set fish_plugins autojump vi-mode
-function tmux
-  command tmux -2 $argv
-end
+# Aliases
+alias wc "gwc"
+
+# Powerline prompt setup
+set fish_function_path $fish_function_path "/usr/local/lib/python2.7/site-packages/powerline/bindings/fish"
+powerline-setup
+
+# Enable vi-mode
+fish_vi_key_bindings
