@@ -1,5 +1,9 @@
 # Aliases
-alias wc "gwc"
+# alias wc "gwc"
+alias j "z"
+
+# Abbreviations
+abbr gcm "git commit -a -m"
 
 # Powerline prompt setup
 set fish_function_path $fish_function_path "$BREWHOME/lib/python2.7/site-packages/powerline/bindings/fish"
