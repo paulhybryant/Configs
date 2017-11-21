@@ -2,7 +2,7 @@
 alias wc "gwc"
 
 # Powerline prompt setup
-set fish_function_path $fish_function_path "/usr/local/lib/python2.7/site-packages/powerline/bindings/fish"
+set fish_function_path $fish_function_path "$BREWHOME/lib/python2.7/site-packages/powerline/bindings/fish"
 powerline-setup
 
 # Enable vi-mode
