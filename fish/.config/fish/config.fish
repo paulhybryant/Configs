@@ -1,3 +1,6 @@
+# Plugins
+# omf/balias omf/brew omf/osx omf/pbcopy omf/peco omf/percol omf/ssh omf/tmux
+
 # Aliases
 # alias wc "gwc"
 alias j "z"
