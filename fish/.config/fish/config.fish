@@ -1,5 +1,7 @@
 # Plugins
+# fzf paths string edc/bass debug
 # omf/balias omf/brew omf/osx omf/pbcopy omf/peco omf/percol omf/ssh omf/tmux
+# omf/fasd
 
 # Aliases
 # alias wc "gwc"
