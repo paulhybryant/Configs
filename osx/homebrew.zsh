@@ -105,6 +105,7 @@ brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kitty
+brew cask install osxfuse
 brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
