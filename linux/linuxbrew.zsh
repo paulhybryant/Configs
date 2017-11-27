@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
+brew tap fisherman/tap
 brew tap homebrew/aliases
 brew tap homebrew/command-not-found
 brew tap homebrew/core
@@ -18,11 +19,11 @@ brew install docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
+brew install fisherman/tap/fisherman
 brew install fpp
 brew install fzf
 brew install gcc
 brew install git-extras
-brew install glibc
 brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
@@ -34,7 +35,6 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
-brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install mawk
 brew install mdp
@@ -43,6 +43,7 @@ brew install most
 brew install netcat
 brew install node
 brew install noti
+brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/i3locknext
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -51,14 +52,12 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
+brew install pkg-config
 brew install progress
 brew install psgrep
 brew install pstree
-brew install python  --with-unicode-ucs4
-brew install python3
 brew install ranger
 brew install renameutils
-brew install ruby
 brew install sshrc
 brew install stdman
 brew install stow
