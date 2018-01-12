@@ -74,7 +74,10 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(vi_mode)
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+abbrev-alias --init
