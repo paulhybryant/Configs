@@ -28,6 +28,7 @@ brew install dos2unix
 brew install fasd
 brew install findutils
 brew install fisherman/tap/fisherman
+brew install fontforge  --with-extra-tools
 brew install fpp
 brew install fzf
 brew install git-extras
@@ -65,7 +66,6 @@ brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
-brew install pkg-config
 brew install polipo
 brew install progress
 brew install proxychains-ng
@@ -87,6 +87,7 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
+brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
