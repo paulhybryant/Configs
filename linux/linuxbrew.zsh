@@ -8,12 +8,14 @@ brew tap homebrew/core
 brew tap jhawthorn/fzy
 brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
+brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew install aria2
 brew install assh
 brew install bash
 brew install ccat
 brew install cheat
+brew install check
 brew install cmake
 brew install docker-completion
 brew install dos2unix
@@ -28,6 +30,7 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
+brew install gpatch
 brew install graphviz
 brew install grc
 brew install hh
@@ -36,6 +39,7 @@ brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
 brew install lsof
+brew install martido/brew-graph/brew-graph
 brew install mawk
 brew install mdp
 brew install moreutils
