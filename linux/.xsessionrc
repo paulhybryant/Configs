@@ -17,11 +17,13 @@ setxkbmap -option ''
 # The symbol file (symbol/altwin) comes with ubuntu trusty has a bug.
 # It won't map the ctrl kep to super.
 # Fix:
-# From the source code of xbindkeys (http://git.savannah.gnu.org/cgit/xbindkeys.git)
-# Copy the symbol file altwin and override that comes with trusty (/usr/share/X11/xkb/symbols/altwin)
+# From the source code of xbindkeys
+# (http://git.savannah.gnu.org/cgit/xbindkeys.git) Copy the symbol file altwin
+# and override that comes with trusty (/usr/share/X11/xkb/symbols/altwin)
 # reconfigure the package
 # sudo dpkg-reconfigure xkb-data
-# The ctrl_win mapping is also not working well. ctrl and win is not swapped, but only ctrl is mapped to win.
+# The ctrl_win mapping is also not working well. ctrl and win is not swapped,
+# but only ctrl is mapped to win.
 # Uses with a normal keyboard
 setxkbmap -option 'caps:swapescape,altwin:ctrl_alt_win'
 # Uses with a programmed keyboard
@@ -37,5 +39,8 @@ xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
 # setxkbmap -option altwin:swap_alt_win
 # setxkbmap -option altwin:ctrl_win
 
-xrandr --output DP-2 --primary --pos 0x0 --rotate normal --mode 2560x1440 --output DP-1 --auto --rotate left --right-of DP-2
+# Use xrandr -q to see the list of displays. The displays' IDs may change
+# sometimes.
+xrandr --output DP-2 --primary --pos 0x0 --rotate normal --mode 2560x1440 \
+  --output DP-1 --auto --rotate left --right-of DP-2
 /usr/bin/synergys --address localhost
