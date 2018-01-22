@@ -9,6 +9,7 @@ declare -xg ZPLUG_HOME="$HOME/.zplug"
 source ${ZPLUG_HOME}/init.zsh
 
 # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zstyle ":prezto:load" zmodule 'pcre'
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
 zstyle ":prezto:module:editor" "key-bindings" "vi"
