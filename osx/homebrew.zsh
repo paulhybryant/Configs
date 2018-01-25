@@ -2,6 +2,7 @@
 
 brew tap beeftornado/rmtree
 brew tap caskroom/cask
+brew tap caskroom/fonts
 brew tap caskroom/versions
 brew tap crisidev/chunkwm
 brew tap fisherman/tap
@@ -98,6 +99,7 @@ brew cask install baidunetdisk
 brew cask install docker
 brew cask install electronic-wechat
 brew cask install flux
+brew cask install font-awesome-terminal-fonts
 brew cask install free-download-manager
 brew cask install hammerspoon
 brew cask install hyper
