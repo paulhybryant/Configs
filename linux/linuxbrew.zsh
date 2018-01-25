@@ -38,6 +38,8 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
+brew install linuxbrew/xorg/xcb-proto
+brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install martido/brew-graph/brew-graph
 brew install mawk
