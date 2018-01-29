@@ -49,6 +49,7 @@ brew install most
 brew install netcat
 brew install node
 brew install noti
+brew install openssl@1.1
 brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/i3locknext
