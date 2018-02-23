@@ -3,3 +3,4 @@
 print 'Updating brew...'
 unset GIT_CONFIG
 brew update && brew upgrade
+brew cask upgrade
