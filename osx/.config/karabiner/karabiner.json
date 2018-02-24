@@ -138,7 +138,7 @@
                 }
             ],
             "name": "paulhybryant",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
@@ -344,7 +344,7 @@
                 }
             ],
             "name": "bluetooth",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {
