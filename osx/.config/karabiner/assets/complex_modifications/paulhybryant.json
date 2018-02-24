@@ -2,10 +2,36 @@
     "title": "Personal rules.",
     "rules": [
         {
-            "description": "Mouse button4 → Mission Control",
+            "description": "ctrl - mouse button1 (left) → cmd - mouse button 1 (left) in google chrome",
             "manipulators": [{
                 "from": {
-                    "pointing_button": "button4",
+                    "pointing_button": "button1",
+                    "modifiers": {
+                      "mandatory": [
+                        "control"
+                      ]
+                    }
+                },
+                "to": [{
+                    "pointing_button": "button1",
+                    "modifiers": "command"
+                }],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.google\\.Chrome$"
+                    ]
+                  }
+                ],
+                "type": "basic"
+            }]
+        },
+        {
+            "description": "Mouse button2 (right) → Mission Control",
+            "manipulators": [{
+                "from": {
+                    "pointing_button": "button2",
                     "modifiers": {
                       "mandatory": [
                         "control"
@@ -20,100 +46,10 @@
             }]
         },
         {
-            "description": "Mouse button3 → Mission Control",
+            "description": "Mouse button3 (middle) → Mission Control",
             "manipulators": [{
                 "from": {
                     "pointing_button": "button3",
-                    "modifiers": {
-                      "mandatory": [
-                        "control"
-                      ]
-                    }
-                },
-                "to": [{
-                    "key_code": "up_arrow",
-                    "modifiers": "control"
-                }],
-                "type": "basic"
-            }]
-        },
-        {
-            "description": "Mouse button5 → Mission Control",
-            "manipulators": [{
-                "from": {
-                    "pointing_button": "button5",
-                    "modifiers": {
-                      "mandatory": [
-                        "control"
-                      ]
-                    }
-                },
-                "to": [{
-                    "key_code": "up_arrow",
-                    "modifiers": "control"
-                }],
-                "type": "basic"
-            }]
-        },
-        {
-            "description": "Mouse button7 → Mission Control",
-            "manipulators": [{
-                "from": {
-                    "pointing_button": "button7",
-                    "modifiers": {
-                      "mandatory": [
-                        "control"
-                      ]
-                    }
-                },
-                "to": [{
-                    "key_code": "up_arrow",
-                    "modifiers": "control"
-                }],
-                "type": "basic"
-            }]
-        },
-        {
-            "description": "Mouse button8 → Mission Control",
-            "manipulators": [{
-                "from": {
-                    "pointing_button": "button8",
-                    "modifiers": {
-                      "mandatory": [
-                        "control"
-                      ]
-                    }
-                },
-                "to": [{
-                    "key_code": "up_arrow",
-                    "modifiers": "control"
-                }],
-                "type": "basic"
-            }]
-        },
-        {
-            "description": "Mouse button9 → Mission Control",
-            "manipulators": [{
-                "from": {
-                    "pointing_button": "button9",
-                    "modifiers": {
-                      "mandatory": [
-                        "control"
-                      ]
-                    }
-                },
-                "to": [{
-                    "key_code": "up_arrow",
-                    "modifiers": "control"
-                }],
-                "type": "basic"
-            }]
-        },
-        {
-            "description": "Mouse button6 → Mission Control",
-            "manipulators": [{
-                "from": {
-                    "pointing_button": "button6",
                     "modifiers": {
                       "mandatory": [
                         "control"
