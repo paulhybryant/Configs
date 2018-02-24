@@ -38,8 +38,8 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
+brew install libxml2
 brew install linuxbrew/xorg/xcb-proto
-brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install martido/brew-graph/brew-graph
 brew install mawk
@@ -65,6 +65,7 @@ brew install psgrep
 brew install pstree
 brew install ranger
 brew install renameutils
+brew install shc
 brew install sshrc
 brew install stdman
 brew install stow
@@ -74,6 +75,7 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
+brew install unzip
 brew install urlview
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install wget
