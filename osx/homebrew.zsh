@@ -59,6 +59,7 @@ brew install most
 brew install netcat
 brew install node
 brew install noti
+brew install openssl@1.1
 brew install osxutils
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
