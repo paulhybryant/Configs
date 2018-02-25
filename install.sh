@@ -63,5 +63,12 @@ then
   fi
 fi
 
+# pip
+
+# gem
+
+# npm
+# js-beautify, bundle-id-cli
+
 echo 'Reloading zsh...'
 exec zsh
