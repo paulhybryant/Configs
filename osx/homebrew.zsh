@@ -19,6 +19,7 @@ brew install aria2
 brew install assh
 brew install bash
 brew install brew-cask-completion
+brew install brew-gem
 brew install ccat
 brew install cheat
 brew install cmake
