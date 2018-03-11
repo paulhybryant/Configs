@@ -39,7 +39,6 @@ brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
 brew install libxml2
-brew install linuxbrew/xorg/xcb-proto
 brew install lsof
 brew install martido/brew-graph/brew-graph
 brew install mawk
@@ -49,7 +48,6 @@ brew install most
 brew install netcat
 brew install node
 brew install noti
-brew install openssl@1.1
 brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/i3locknext
