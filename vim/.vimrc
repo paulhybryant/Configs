@@ -46,6 +46,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " NeoBundle 'junegunn/vim-slash'
   " NeoBundle 'pgdouyon/vim-evanesco'
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
+  " NeoBundle 'w0rp/ale'
+  " NeoBundle 'raimondi/delimitmate'
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
