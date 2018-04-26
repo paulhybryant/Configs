@@ -6,12 +6,12 @@ if [[ -n ${PROFILING+1} ]]; then                                                
   setopt xtrace prompt_subst                                                    # set options to turn on tracing and expansion of commands in the prompt
 fi
 
-declare -xg XML_CATALOG_FILES="$BREWHOME/etc/xml/catalog" \
-  HELPDIR="$BREWHOME/share/zsh/help" GIT_EDITOR="$EDITOR" PAGER='most' \
+declare -xg XML_CATALOG_FILES="${BREWHOME}/etc/xml/catalog" \
+  HELPDIR="${BREWHOME}/share/zsh/help" GIT_EDITOR="${EDITOR}" PAGER='most' \
   MANPAGER='most' TERM='xterm-256color' \
-  XDG_CACHE_HOME="$HOME/.cache" XDG_CONFIG_HOME="$HOME/.config" \
-  XDG_DATA_HOME="$HOME/.local/share" \
-  XDG_DATA_DIRS="$BREWHOME/share:$XDG_DATA_DIRS"
+  XDG_CACHE_HOME="${HOME}/.cache" XDG_CONFIG_HOME="${HOME}/.config" \
+  XDG_DATA_HOME="${HOME}/.local/share" \
+  XDG_DATA_DIRS="${BREWHOME}/share:${XDG_DATA_DIRS}"
 declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen`
   ` --no-init --raw-control-chars"
 

@@ -3,9 +3,9 @@
 POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
 POWERLEVEL9K_MODE="awesome-fontconfig"
 
-declare -xg ZPLUG_HOME="$HOME/.zplug"
-[[ -d $ZPLUG_HOME ]] || \
-  git clone --recursive https://github.com/zplug/zplug $ZPLUG_HOME
+declare -xg ZPLUG_HOME="${HOME}/.zplug"
+[[ -d ${ZPLUG_HOME} ]] || \
+  git clone --recursive https://github.com/zplug/zplug ${ZPLUG_HOME}
 source ${ZPLUG_HOME}/init.zsh
 
 # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
@@ -18,7 +18,7 @@ zplug "modules/directory", from:prezto, defer:0
 zplug "modules/helper", from:prezto, defer:0
 zplug "modules/history", from:prezto, defer:0
 zplug "modules/fasd", from:prezto, defer:0
-zplug "modules/osx", from:prezto, defer:0, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "modules/osx", from:prezto, defer:0, if:"[[ ${OSTYPE} == *darwin* ]]"
 
 zplug "Valodim/zsh-curl-completion", defer:1
 zplug "arzzen/calc.plugin.zsh", defer:1
@@ -33,7 +33,7 @@ zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-cmd-architect", defer:1
 # zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
-zplug "unixorn/tumult.plugin.zsh", if:"[[ $OSTYPE == *darwin* ]]", defer:1
+zplug "unixorn/tumult.plugin.zsh", if:"[[ ${OSTYPE} == *darwin* ]]", defer:1
 # Must load zsh-cdr before zaw
 zplug "willghatch/zsh-cdr", defer:1
 zplug "willghatch/zsh-hooks", defer:1
@@ -59,7 +59,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # zplug "modules/ssh", from:prezto
 # zplug "mooz/percol", use:"tools/zsh/*.zsh", defer:1
 # zplug "nojhan/liquidprompt"
-# zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source $ZPLUG_REPOS/pindexis/qfc/bin/qfc.sh"
+# zplug "pindexis/qfc", as:command, use:"bin/qfc", hook-load:"source ${ZPLUG_REPOS}/pindexis/qfc/bin/qfc.sh"
 # zplug "psprint/history-search-multi-word"
 # zplug "psprint/zconvey"
 # zplug "psprint/zsh-editing-workbench"
