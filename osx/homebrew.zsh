@@ -89,6 +89,7 @@ brew install tig
 brew install tldr
 brew install tmux
 brew install todo-txt
+brew install trash
 brew install tree
 brew install udns
 brew install urlview
@@ -104,12 +105,14 @@ brew cask install electronic-wechat
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install free-download-manager
+brew cask install funter
 brew cask install hammerspoon
 brew cask install hyper
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
+brew cask install kindle
 brew cask install kitty
 brew cask install osxfuse
 brew cask install shadowsocksx-ng
@@ -119,4 +122,5 @@ brew cask install squidman
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
+brew cask install xmind
 brew cask install xquartz
