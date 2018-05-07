@@ -89,7 +89,6 @@ brew install tig
 brew install tldr
 brew install tmux
 brew install todo-txt
-brew install trash
 brew install tree
 brew install udns
 brew install urlview
@@ -119,6 +118,7 @@ brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
 brew cask install squidman
+brew cask install teamviewer
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
