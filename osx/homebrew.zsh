@@ -33,6 +33,7 @@ brew install fisherman/tap/fisherman
 brew install fontforge  --with-extra-tools
 brew install fpp
 brew install fzf
+brew install ghostscript
 brew install git-extras
 brew install gnu-getopt
 brew install gnu-sed
@@ -114,6 +115,8 @@ brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
 brew cask install kitty
+brew cask install latexit
+brew cask install mactex
 brew cask install osxfuse
 brew cask install restor
 brew cask install shadowsocksx-ng
@@ -121,6 +124,7 @@ brew cask install slate
 brew cask install spectacle
 brew cask install squidman
 brew cask install teamviewer
+brew cask install tex-live-utility
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
