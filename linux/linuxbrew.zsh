@@ -40,7 +40,6 @@ brew install jhawthorn/fzy/fzy
 brew install jq
 brew install linuxbrew/xorg/xcb-proto
 brew install lsof
-brew install m4
 brew install martido/brew-graph/brew-graph
 brew install mawk
 brew install mdp
