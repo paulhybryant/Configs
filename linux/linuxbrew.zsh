@@ -38,15 +38,9 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
-brew install linuxbrew/xorg/fixesproto
-brew install linuxbrew/xorg/inputproto
-brew install linuxbrew/xorg/kbproto
-brew install linuxbrew/xorg/renderproto
-brew install linuxbrew/xorg/videoproto
 brew install linuxbrew/xorg/xcb-proto
-brew install linuxbrew/xorg/xextproto
-brew install linuxbrew/xorg/xorg
 brew install lsof
+brew install m4
 brew install martido/brew-graph/brew-graph
 brew install mawk
 brew install mdp
