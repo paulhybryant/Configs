@@ -57,6 +57,7 @@ brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
+brew install neovim
 brew install netcat
 brew install node
 brew install noti
@@ -114,6 +115,7 @@ brew cask install key-codes
 brew cask install kindle
 brew cask install kitty
 brew cask install osxfuse
+brew cask install restor
 brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
@@ -122,5 +124,6 @@ brew cask install teamviewer
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
+brew cask install wiznote
 brew cask install xmind
 brew cask install xquartz
