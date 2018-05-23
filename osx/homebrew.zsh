@@ -115,7 +115,7 @@ brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
 brew cask install kitty
-brew cask install latexit
+brew cask install knotes
 brew cask install mactex
 brew cask install osxfuse
 brew cask install restor
@@ -124,7 +124,6 @@ brew cask install slate
 brew cask install spectacle
 brew cask install squidman
 brew cask install teamviewer
-brew cask install tex-live-utility
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
