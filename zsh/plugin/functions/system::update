@@ -1,15 +1,9 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-permission::update
-brew::update
-zplug::update
 pip::update
 gem::update
-# node::update
+npm::update
 vim::update
-
-print '\nUpdating tldr...'
-tldr --update
-
-print '\nUpdating tmux plugins...'
-~/.tmux/plugins/tpm/bin/update_plugins all
+zplug::update
+permission::update
+brew::update

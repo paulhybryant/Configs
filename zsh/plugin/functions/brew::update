@@ -4,3 +4,5 @@ print 'Updating brew...'
 unset GIT_CONFIG
 brew update && brew upgrade
 os::OSX && brew cask upgrade
+
+brew doctor
