@@ -1,5 +1,7 @@
 \.vimbundles
 \.vimrc.eclim
-\.vimrc.dein
 \.gvimrc.eclim
 \.DS_Store
+\.vimrc
+\.gvimrc
+\.vim
