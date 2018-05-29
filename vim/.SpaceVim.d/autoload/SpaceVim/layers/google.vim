@@ -13,5 +13,6 @@ endfunction
 function! SpaceVim#layers#google#config() abort
   if filereadable('/usr/share/vim/google/google.vim')
     source /usr/share/vim/google/google.vim
+    Glug magic
   endif
 endfunction

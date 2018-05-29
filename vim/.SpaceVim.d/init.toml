@@ -24,11 +24,22 @@
     enable_tabline_filetype_icon = true
     statusline_display_mode = false
 
-# Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
 auto-completion-return-key-behavior = 'complete'
 auto-completion-tab-key-behavior = 'smart'
+
+[[layers]]
+name = 'colorscheme'
+
+[[layers]]
+name = 'core#statusline'
+
+[[layers]]
+name = 'core#tabline'
+
+[[layers]]
+name = 'format'
 
 [[layers]]
 name = 'shell'
@@ -36,19 +47,22 @@ default_position = 'top'
 default_height = 30
 
 [[layers]]
-name = 'colorscheme'
+name = 'fzf'
 
 [[layers]]
-name = 'fzf'
+name = 'unite'
+
+[[layers]]
+name = 'tmux'
+
+[[layers]]
+name = 'lang#vim'
+
+[[layers]]
+name = 'lang#tmux'
 
 [[layers]]
 name = 'paulhybryant'
 
 [[layers]]
 name = 'google'
-
-[[layers]]
-name = 'unite'
-
-[[layers]]
-name = 'lang#vim'
