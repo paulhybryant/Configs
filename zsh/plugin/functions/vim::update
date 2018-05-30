@@ -3,7 +3,7 @@
 print '\nUpdating vim...'
 vi -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
 
-print '\nUpdating vim...'
+print '\nUpdating SpaceVim...'
 pushd ~/.SpaceVim
 git pull
 popd
