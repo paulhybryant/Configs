@@ -40,11 +40,13 @@ brew install jhawthorn/fzy/fzy
 brew install jq
 brew install linuxbrew/xorg/xcb-proto
 brew install lsof
+brew install lua@5.1
 brew install martido/brew-graph/brew-graph
 brew install mawk
 brew install mdp
 brew install moreutils
 brew install most
+brew install neovim
 brew install netcat
 brew install node
 brew install noti
@@ -72,7 +74,6 @@ brew install tldr
 brew install tmux
 brew install todo-txt
 brew install tree
-brew install unzip
 brew install urlview
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install wget
