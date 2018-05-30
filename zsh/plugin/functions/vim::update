@@ -2,6 +2,11 @@
 
 print '\nUpdating vim...'
 vi -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
+
+print '\nUpdating vim...'
+pushd ~/.SpaceVim
+git pull
+popd
 # vi -c 'execute(NeoBundleUpdate)' -c 'q'
 # vi -c 'NeoBundleUpdate' -c 'q'
 # vi -c 'redir @a && NeoBundleUpdate' -c 'q'
