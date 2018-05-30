@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
-brew tap caskroom/cask
-brew tap caskroom/fonts
-brew tap caskroom/versions
 brew tap crisidev/chunkwm
 brew tap fisherman/tap
 brew tap homebrew/aliases
 brew tap homebrew/bundle
+brew tap homebrew/cask
+brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 brew tap homebrew/command-not-found
 brew tap homebrew/core
 brew tap homebrew/services
@@ -106,6 +106,7 @@ brew cask install docker
 brew cask install electronic-wechat
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
+brew cask install foxitreader
 brew cask install free-download-manager
 brew cask install funter
 brew cask install hammerspoon
