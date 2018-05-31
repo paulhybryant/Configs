@@ -129,6 +129,7 @@ brew cask install teamviewer
 brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
+brew cask install vanilla
 brew cask install wiznote
 brew cask install xmind
 brew cask install xquartz
