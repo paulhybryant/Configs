@@ -5,9 +5,9 @@ POWERLEVEL9K_MODE="awesome-fontconfig"
 
 declare -xg ZPLUG_THREADS=30
 declare -xg ZPLUG_HOME="${HOME}/.zplug"
-[[ -d ${ZPLUG_HOME} ]] || \
-  git clone --recursive https://github.com/zplug/zplug ${ZPLUG_HOME}
-source ${ZPLUG_HOME}/init.zsh
+[[ -d "${ZPLUG_HOME}" ]] || \
+  git clone --recursive https://github.com/zplug/zplug "${ZPLUG_HOME}"
+source "${ZPLUG_HOME}/init.zsh"
 
 # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zstyle ":prezto:load" zmodule 'pcre'
