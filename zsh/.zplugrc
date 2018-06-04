@@ -29,7 +29,6 @@ zplug "hlissner/zsh-autopair", defer:1
 zplug "jocelynmallon/zshmarks", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "momo-lab/zsh-abbrev-alias", defer:1
-zplug "paulhybryant/dotfiles", defer:2
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-cmd-architect", defer:1
 # zplug "psprint/zsh-navigation-tools", defer:1
@@ -44,8 +43,9 @@ zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
+zplug "paulhybryant/dotfiles", on:'zsh-users/zsh-autosuggestions', defer:1
 # This is causing some failure for creating aliases, not sure why.
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", on:'zsh-users/zsh-autosuggestions', defer:1
 
 # zplug "D630/fzf-fs"
 # zplug "KasperChristensen/mylocation", defer:1
