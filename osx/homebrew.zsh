@@ -13,6 +13,7 @@ brew tap homebrew/core
 brew tap homebrew/services
 brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
+brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew install aria2
@@ -82,6 +83,7 @@ brew install renameutils
 brew install ruby
 brew install sebglazebrook/aliases/aliases
 brew install shadowsocks-libev
+brew install shc
 brew install sqlite-analyzer
 brew install sshrc
 brew install stdman
