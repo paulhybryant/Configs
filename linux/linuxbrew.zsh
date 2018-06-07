@@ -38,7 +38,6 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
-brew install linuxbrew/xorg/xcb-proto
 brew install lsof
 brew install lua@5.1
 brew install martido/brew-graph/brew-graph

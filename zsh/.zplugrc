@@ -9,7 +9,6 @@ declare -xg ZPLUG_HOME="${HOME}/.zplug"
   git clone --recursive https://github.com/zplug/zplug "${ZPLUG_HOME}"
 source "${ZPLUG_HOME}/init.zsh"
 
-# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zstyle ":prezto:load" zmodule 'pcre'
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
@@ -19,7 +18,9 @@ zplug "modules/directory", from:prezto, defer:0
 zplug "modules/helper", from:prezto, defer:0
 zplug "modules/history", from:prezto, defer:0
 zplug "modules/fasd", from:prezto, defer:0
+
 [[ "${OSTYPE}" =~ ".*darwin.*" ]] && zplug "modules/osx", from:prezto, defer:0
+[[ "${OSTYPE}" =~ ".*darwin.*" ]] && zplug "unixorn/tumult.plugin.zsh", defer:1
 
 zplug "Valodim/zsh-curl-completion", defer:1
 zplug "arzzen/calc.plugin.zsh", defer:1
@@ -31,21 +32,17 @@ zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "momo-lab/zsh-abbrev-alias", defer:1
 zplug "peterhurford/up.zsh", defer:1
 zplug "psprint/zsh-cmd-architect", defer:1
-# zplug "psprint/zsh-navigation-tools", defer:1
 zplug "seebi/dircolors-solarized", defer:1
-[[ "${OSTYPE}" =~ ".*darwin.*" ]] && zplug "unixorn/tumult.plugin.zsh", defer:1
-# Must load zsh-cdr before zaw
 zplug "willghatch/zsh-cdr", defer:1
 zplug "willghatch/zsh-hooks", defer:1
 zplug "willghatch/zsh-snippets", defer:1
 zplug "zlsun/solarized-man", defer:1
-zplug "zsh-users/zaw", defer:1
+zplug "zsh-users/zaw", on:"willghatch/zsh-cdr", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
-zplug "paulhybryant/dotfiles", on:'zsh-users/zsh-autosuggestions', defer:1
-# This is causing some failure for creating aliases, not sure why.
-zplug "zsh-users/zsh-syntax-highlighting", on:'zsh-users/zsh-autosuggestions', defer:1
+zplug "paulhybryant/dotfiles", on:"jocelynmallon/zshmarks", defer:1
+zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
 
 # zplug "D630/fzf-fs"
 # zplug "KasperChristensen/mylocation", defer:1
@@ -64,6 +61,7 @@ zplug "zsh-users/zsh-syntax-highlighting", on:'zsh-users/zsh-autosuggestions', d
 # zplug "psprint/history-search-multi-word"
 # zplug "psprint/zconvey"
 # zplug "psprint/zsh-editing-workbench"
+# zplug "psprint/zsh-navigation-tools", defer:1
 # zplug "psprint/zsh-select"
 # zplug "psprint/zsnapshot"
 # zplug "psprint/ztrace"
