@@ -10,9 +10,11 @@ brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
 brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
+brew tap sebglazebrook/aliases
 brew install aria2
 brew install assh
 brew install bash
+brew install brew-gem
 brew install ccat
 brew install cheat
 brew install check
@@ -34,6 +36,7 @@ brew install gpatch
 brew install graphviz
 brew install grc
 brew install hh
+brew install hr
 brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
