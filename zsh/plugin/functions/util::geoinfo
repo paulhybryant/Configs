@@ -24,7 +24,8 @@ fi
 
 if [[ ! -z ${_refresh} ]]; then
   # ip, hostname, city, region, country, loc, org
-  _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
+  # _url='int.dpool.sina.com.cn/iplookup/iplookup.php?format=json'
+  _url='http://ip-api.com/json'
   io::vlog 1 "Using url: ${_url}"
   _value=$(curl -m 10 -x '' "${_url}" 2> /dev/null)
   util::cache --key "geoinfo" --op "update" --value "${_value}"
@@ -33,4 +34,4 @@ else
 fi
 
 _filter=$(strings::join --prefix . --delim , "$@")
-echo ${_value} | jq "${_filter}"
+echo "${_value}" | jq "${_filter}"
