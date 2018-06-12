@@ -41,6 +41,6 @@ xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
 
 # Use xrandr -q to see the list of displays. The displays' IDs may change
 # sometimes.
-xrandr --output DP-2 --primary --pos 0x0 --rotate normal --mode 2560x1440 \
-  --output DP-1 --auto --rotate left --right-of DP-2
-/usr/bin/synergys
+# xrandr --output DP-2 --primary --pos 0x0 --rotate normal --mode 2560x1440 \
+#   --output DP-1 --auto --rotate left --right-of DP-2
+# /usr/bin/synergys
