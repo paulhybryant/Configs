@@ -56,11 +56,11 @@ brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install --HEAD paulhybryant/myformulae/qfc
+brew install paulhybryant/myformulae/xbindkeys
 brew install --HEAD paulhybryant/myformulae/zunit
 brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
-brew install pkg-config
 brew install progress
 brew install psgrep
 brew install pstree
