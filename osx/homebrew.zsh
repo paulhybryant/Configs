@@ -123,6 +123,7 @@ brew cask install knotes
 brew cask install mactex
 brew cask install osxfuse
 brew cask install restor
+brew cask install scroll-reverser
 brew cask install shadowsocksx-ng
 brew cask install slate
 brew cask install spectacle
