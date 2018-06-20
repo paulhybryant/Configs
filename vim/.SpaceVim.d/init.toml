@@ -11,7 +11,7 @@
     # set spacevim theme. by default colorscheme layer is not loaded,
     # if you want to use more colorscheme, please load the colorscheme
     # layer
-    colorscheme = 'NeoSolarized'
+    # colorscheme = 'NeoSolarized'
     background = 'dark'
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
@@ -28,15 +28,6 @@
 name = 'autocomplete'
 auto-completion-return-key-behavior = 'complete'
 auto-completion-tab-key-behavior = 'smart'
-
-[[layers]]
-name = 'colorscheme'
-
-[[layers]]
-name = 'core#statusline'
-
-[[layers]]
-name = 'core#tabline'
 
 [[layers]]
 name = 'format'

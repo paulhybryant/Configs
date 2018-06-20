@@ -10,9 +10,10 @@ print '\nUpdating vim plugins...'
 if [[ -f ~/.vimrc ]]; then
   vi -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
 else
-  vi -c 'SPUpdate'
+  vi -c 'call dein#update()' -c 'q'
 fi
 
+# vi -c 'SPUpdate'
 # vi -c 'execute(NeoBundleUpdate)' -c 'q'
 # vi -c 'NeoBundleUpdate' -c 'q'
 # vi -c 'redir @a && NeoBundleUpdate' -c 'q'
