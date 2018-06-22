@@ -6,6 +6,7 @@ if [[ -n ${PROFILING+1} ]]; then                                                
   setopt xtrace prompt_subst                                                    # set options to turn on tracing and expansion of commands in the prompt
 fi
 
+# zmodload zsh/zprof
 declare -xg XML_CATALOG_FILES="${BREWHOME}/etc/xml/catalog" \
   HELPDIR="${BREWHOME}/share/zsh/help" GIT_EDITOR="${EDITOR}" PAGER='most' \
   MANPAGER='most' TERM='xterm-256color' \

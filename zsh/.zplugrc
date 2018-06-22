@@ -1,7 +1,24 @@
 # vim: ft=zplug sw=2 ts=2 sts=2 et tw=80 fdl=0 fdm=marker nospell
 
-POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
-POWERLEVEL9K_MODE="awesome-fontconfig"
+function +vi-hg-untracked() {
+  if [[ $(hg status | wc -l 2> /dev/null) -ne 0 ]]; then
+      hook_com[staged]+=" $(print_icon 'VCS_STAGED_ICON')"
+      VCS_WORKDIR_DIRTY=true
+  else
+      VCS_WORKDIR_DIRTY=false
+  fi
+}
+
+function powerlevel9k_config() {
+  POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
+  POWERLEVEL9K_MODE="awesome-fontconfig"
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(root_indicator)
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(vi_mode)
+  POWERLEVEL9K_SHORTEN_DELIMITER=""
+  POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+  POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+}
 
 declare -xg ZPLUG_THREADS=30
 declare -xg ZPLUG_HOME="${HOME}/.zplug"
@@ -9,7 +26,7 @@ declare -xg ZPLUG_HOME="${HOME}/.zplug"
   git clone --recursive https://github.com/zplug/zplug "${ZPLUG_HOME}"
 source "${ZPLUG_HOME}/init.zsh"
 
-zstyle ":prezto:load" zmodule 'pcre'
+zstyle ":prezto:load" zmodule "pcre"
 zstyle ":prezto:environment:termcap" "color" "yes"
 zplug "modules/environment", from:prezto, defer:0
 zstyle ":prezto:module:editor" "key-bindings" "vi"
@@ -23,26 +40,30 @@ zplug "modules/fasd", from:prezto, defer:0
 [[ "${OSTYPE}" =~ ".*darwin.*" ]] && zplug "unixorn/tumult.plugin.zsh", defer:1
 
 zplug "Valodim/zsh-curl-completion", defer:1
-zplug "arzzen/calc.plugin.zsh", defer:1
-zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
+zplug "bhilburn/powerlevel9k", \
+  hook-load:"powerlevel9k_config", use:"powerlevel9k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
-zplug "jocelynmallon/zshmarks", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
-zplug "momo-lab/zsh-abbrev-alias", defer:1
-zplug "peterhurford/up.zsh", defer:1
-zplug "psprint/zsh-cmd-architect", defer:1
+zplug "momo-lab/zsh-abbrev-alias", hook-load:"abbrev-alias --init", defer:1
 zplug "seebi/dircolors-solarized", defer:1
-zplug "willghatch/zsh-cdr", defer:1
-zplug "willghatch/zsh-hooks", defer:1
-zplug "willghatch/zsh-snippets", defer:1
 zplug "zlsun/solarized-man", defer:1
-zplug "zsh-users/zaw", on:"willghatch/zsh-cdr", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
-zplug "paulhybryant/dotfiles", on:"jocelynmallon/zshmarks", defer:1
+zplug "paulhybryant/dotfiles", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
+
+
+# zplug "arzzen/calc.plugin.zsh", defer:1
+# zplug "jocelynmallon/zshmarks", defer:1
+# zplug "peterhurford/up.zsh", defer:1
+# zplug "psprint/zsh-cmd-architect", defer:1
+# zplug "willghatch/zsh-cdr", defer:1
+# zplug "willghatch/zsh-hooks", defer:1
+# zplug "willghatch/zsh-snippets", defer:1
+# zplug "zsh-users/zaw", on:"willghatch/zsh-cdr", defer:1
+
 
 # zplug "D630/fzf-fs"
 # zplug "KasperChristensen/mylocation", defer:1
@@ -76,21 +97,3 @@ if ! zplug check --verbose; then
   zplug install
 fi
 zplug load --verbose
-
-function +vi-hg-untracked() {
-  if [[ $(hg status | wc -l 2> /dev/null) -ne 0 ]]; then
-      hook_com[staged]+=" $(print_icon 'VCS_STAGED_ICON')"
-      VCS_WORKDIR_DIRTY=true
-  else
-      VCS_WORKDIR_DIRTY=false
-  fi
-}
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(vi_mode)
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-
-abbrev-alias --init
