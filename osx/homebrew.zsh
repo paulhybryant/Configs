@@ -104,6 +104,7 @@ brew cask install alfred3
 brew cask install amethyst
 brew cask install atom
 brew cask install baidunetdisk
+brew cask install calibre
 brew cask install docker
 brew cask install electronic-wechat
 brew cask install flux
@@ -118,6 +119,7 @@ brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
+brew cask install keyboardcleantool
 brew cask install kindle
 brew cask install kitty
 brew cask install knotes
