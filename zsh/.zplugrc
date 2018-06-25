@@ -43,13 +43,13 @@ zplug "bhilburn/powerlevel9k", \
 zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
-zplug "momo-lab/zsh-abbrev-alias", hook-load:"abbrev-alias --init", defer:1
+zplug "momo-lab/zsh-abbrev-alias", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "zlsun/solarized-man", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
-zplug "paulhybryant/dotfiles", defer:1
+zplug "paulhybryant/dotfiles", on:"momo-lab/zsh-abbrev-alias", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
 
 
@@ -95,3 +95,5 @@ if ! zplug check --verbose; then
   zplug install
 fi
 zplug load --verbose
+
+abbrev-alias --init
