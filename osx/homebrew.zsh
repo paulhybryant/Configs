@@ -107,6 +107,7 @@ brew cask install baidunetdisk
 brew cask install calibre
 brew cask install docker
 brew cask install electronic-wechat
+brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
