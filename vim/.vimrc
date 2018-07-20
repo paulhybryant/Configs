@@ -55,6 +55,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}                            " Syntax highlight for zplug
+  NeoBundle 'previm/previm'
+  NeoBundle 'tyru/open-browser.vim'
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],
