@@ -7,8 +7,9 @@ declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history"
   # 'yyyy-mm-dd') alias history='fc -il 1' ;;
   # *) alias history='fc -l 1' ;;
 # esac
-# setopt INC_APPEND_HISTORY      # Append history immediatly instead of wait until shell exits.
-setopt NO_APPEND_HISTORY
+setopt INC_APPEND_HISTORY      # Append history immediatly instead of wait until shell exits.
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
 setopt HIST_ALLOW_CLOBBER
 setopt HIST_FCNTL_LOCK
 setopt HIST_NO_STORE
