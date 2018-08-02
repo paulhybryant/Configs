@@ -1,6 +1,7 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history"
+declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history" \
+  SAVEHIST=10000 HISTSIZE=50000
 # case $HIST_STAMPS in
   # 'mm/dd/yyyy') alias history='fc -fl 1' ;;
   # 'dd.mm.yyyy') alias history='fc -El 1' ;;
@@ -8,7 +9,7 @@ declare -xg HIST_STAMPS='yyyy-mm-dd' HISTFILE="$HOME/.zsh_history"
   # *) alias history='fc -l 1' ;;
 # esac
 setopt INC_APPEND_HISTORY      # Append history immediatly instead of wait until shell exits.
-setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_ALLOW_CLOBBER
 setopt HIST_FCNTL_LOCK
