@@ -1,7 +1,8 @@
-*.pyc
-*.a
-*.o
+*\.pyc
+*\.a
+*\.o
 doc/tags
-.urchin.log
-.DS_Store
-*.zwc
+\.urchin.log
+\.DS_Store
+*\.zwc
+default\.profraw
