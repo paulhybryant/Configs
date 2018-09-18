@@ -43,4 +43,4 @@ xbindkeys -fg ~/.xbindkeysrc.viminsert.scm
 # sometimes.
 xrandr --output DP-2 --primary --pos 0x0 --rotate normal --mode 2560x1440 \
   --output DP-7 --auto --rotate left --right-of DP-2
-# /usr/bin/synergys
+/usr/bin/synergys
