@@ -2,7 +2,6 @@
 
 brew tap beeftornado/rmtree
 brew tap crisidev/chunkwm
-brew tap fisherman/tap
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/cask
@@ -23,6 +22,7 @@ brew install brew-cask-completion
 brew install brew-gem
 brew install ccat
 brew install cheat
+brew install chrome-cli
 brew install cmake
 brew install crisidev/chunkwm/chunkwm
 brew install curl
@@ -30,7 +30,7 @@ brew install docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
-brew install fisherman/tap/fisherman
+brew install fisherman
 brew install fontforge  --with-extra-tools
 brew install fpp
 brew install fzf
@@ -54,11 +54,13 @@ brew install koekeishiya/formulae/kwm
 brew install koekeishiya/formulae/skhd
 brew install lsof
 brew install macvim  --with-override-system-vim --with-luajit
+brew install makedepend
 brew install mawk
 brew install md5sha1sum
 brew install mdp
 brew install moreutils
 brew install most
+brew install mupdf
 brew install neovim
 brew install netcat
 brew install node
@@ -98,6 +100,7 @@ brew install udns
 brew install urlview
 brew install wget
 brew install xonsh
+brew install xpdf
 brew install zshdb
 brew cask install adobe-acrobat-reader
 brew cask install alfred3
@@ -111,6 +114,7 @@ brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
+brew cask install fontforge
 brew cask install foxitreader
 brew cask install free-download-manager
 brew cask install funter
@@ -126,6 +130,7 @@ brew cask install kitty
 brew cask install knotes
 brew cask install mactex
 brew cask install osxfuse
+brew cask install pomotodo
 brew cask install restor
 brew cask install scroll-reverser
 brew cask install shadowsocksx-ng
@@ -137,6 +142,6 @@ brew cask install the-unarchiver
 brew cask install thunder
 brew cask install typora
 brew cask install vanilla
-brew cask install wiznote
 brew cask install xmind
+brew cask install xmind-zen
 brew cask install xquartz
