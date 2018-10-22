@@ -66,7 +66,6 @@ alias vartype='declare -p'
 # alias vim='util::vim'
 # alias vim='vim -p'
 alias zunbindkey='bindkey -r'
-alias ec2='command ssh -i ~/.ssh/paulhybryant.pem ubuntu@ec2'
 alias pi='command ssh -i ~/.ssh/paulhybryant pi@pi'
 alias miwifi='command ssh -i ~/.ssh/paulhybryant root@mifiwi'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
