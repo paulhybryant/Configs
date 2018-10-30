@@ -1,0 +1,12 @@
+# vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
+
+# compresspdf "Massive.pdf" "Small.pdf" ebook
+# gs options
+# -dPDFSETTINGS=/screen   (screen-view-only quality, 72 dpi images)
+# -dPDFSETTINGS=/ebook    (low quality, 150 dpi images)
+# -dPDFSETTINGS=/printer  (high quality, 300 dpi images)
+# -dPDFSETTINGS=/prepress (high quality, color preserving, 300 dpi imgs)
+# -dPDFSETTINGS=/default  (almost identical to /screen)
+
+echo 'Usage: compresspdf [input file] [output file] [screen|ebook|printer|prepress]'
+gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dPDFSETTINGS=/${3:-"screen"} -dCompatibilityLevel=1.4 -sOutputFile="$2" "$1"
