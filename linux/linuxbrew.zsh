@@ -16,7 +16,6 @@ brew install ccat
 brew install cmake
 brew install coreutils
 brew install curl
-brew install dos2unix
 brew install fasd
 brew install findutils
 brew install fzf
@@ -49,7 +48,6 @@ brew install sshrc
 brew install stow
 brew install the_silver_searcher
 brew install tmux
-brew install unzip
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install wget
 brew install zsh  --with-pcre
