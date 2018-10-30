@@ -28,10 +28,8 @@ brew install gnu-which
 brew install grc
 brew install htop
 brew install jq
-brew install linuxbrew/xorg/util-macros
 brew install linuxbrew/xorg/xorg
 brew install lsof
-brew install lua@5.1
 brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
@@ -51,6 +49,7 @@ brew install sshrc
 brew install stow
 brew install the_silver_searcher
 brew install tmux
+brew install unzip
 brew install vim  --with-override-system-vi --with-client-server --with-luajit
 brew install wget
 brew install zsh  --with-pcre
