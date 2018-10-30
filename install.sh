@@ -2,7 +2,7 @@
 
 cd $HOME
 echo 'Creating directories...'
-mkdir -p ~/.pip ~/.ssh/assh.d ~/.cheat ~/.config/ranger ~/.local/bin \
+mkdir -p ~/.pip ~/.ssh/assh.d ~/.config/ranger ~/.local/bin \
   ~/.tmux/plugins ~/.vim/bundle
 
 echo 'Cloning zplug, dotfiles, tpm, basher and neobundle...'
@@ -10,7 +10,6 @@ git clone https://github.com/zplug/zplug ~/.zplug
 mkdir -p ~/.zplug/repos/paulhybryant/
 git clone https://github.com/paulhybryant/dotfiles \
   ~/.zplug/repos/paulhybryant/dotfiles
-git clone https://github.com/basherpm/basher.git ~/.basher
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
 cd ~/.vim/bundle/vimproc.vim
@@ -25,9 +24,9 @@ if [[ $OSTYPE == *darwin* ]]; then
   brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
   echo 'Installing linuxbrew dependencies'
-  sudo apt-get install bison flex xsltproc build-essential
+  sudo apt-get install build-essential curl file git
   echo 'Installing brew...'
-  su - $USER -c 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   brew install python
   brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
