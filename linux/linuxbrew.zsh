@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
-brew tap fisherman/tap
 brew tap homebrew/aliases
 brew tap homebrew/command-not-found
 brew tap homebrew/core
@@ -23,7 +22,7 @@ brew install docker-completion
 brew install dos2unix
 brew install fasd
 brew install findutils
-brew install fisherman/tap/fisherman
+brew install fisherman
 brew install fpp
 brew install fzf
 brew install gcc
@@ -41,6 +40,7 @@ brew install htop
 brew install httpie
 brew install jhawthorn/fzy/fzy
 brew install jq
+brew install linuxbrew/xorg/util-macros
 brew install linuxbrew/xorg/xorg
 brew install lsof
 brew install lua@5.1
@@ -51,6 +51,7 @@ brew install moreutils
 brew install most
 brew install neovim
 brew install netcat
+brew install nmap
 brew install node
 brew install noti
 brew install patchelf  --with-static
