@@ -18,6 +18,9 @@ if [[ ${OSTYPE} == *linux* ]]; then
   abbrev-alias -c xkbmapclear="setxkbmap -option ''"
   abbrev-alias -c xkbmapreload="~/.xsessionrc"
   abbrev-alias -c resetxkbmap='sudo dpkg-reconfigure xkb-data'
+else
+  abbrev-alias -c vi='mvim -v'
+  abbrev-alias -c vim='mvim -v'
 fi
 
 if (( ${+commands[grc]} )); then

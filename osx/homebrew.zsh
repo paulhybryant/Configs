@@ -15,24 +15,17 @@ brew tap koekeishiya/formulae
 brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
-brew install aria2
 brew install assh
-brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install ccat
-brew install cheat
-brew install chrome-cli
 brew install cmake
-brew install crisidev/chunkwm/chunkwm
+brew install coreutils
 brew install curl
 brew install docker-completion
-brew install dos2unix
 brew install fasd
 brew install findutils
-brew install fisherman
-brew install fontforge  --with-extra-tools
-brew install fpp
+brew install fontconfig
 brew install fzf
 brew install ghostscript
 brew install git-extras
@@ -40,108 +33,58 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
-brew install graphviz
 brew install grc
-brew install hh
-brew install hr
 brew install htop
-brew install httpie
-brew install jhawthorn/fzy/fzy
 brew install jq
-brew install koekeishiya/formulae/cev
 brew install koekeishiya/formulae/khd
-brew install koekeishiya/formulae/kwm
-brew install koekeishiya/formulae/skhd
+brew install libffi
 brew install lsof
-brew install makedepend
-brew install mawk
 brew install md5sha1sum
-brew install mdp
 brew install moreutils
 brew install most
-brew install mupdf
-brew install neovim
 brew install netcat
+brew install nmap
 brew install node
 brew install noti
-brew install openssl@1.1
 brew install osxutils
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
-brew install --HEAD paulhybryant/myformulae/qfc
-brew install --HEAD paulhybryant/myformulae/zunit
-brew install --HEAD paulhybryant/myformulae/zvanilla
 brew install peco
 brew install percol
-brew install polipo
-brew install progress
-brew install proxychains-ng
+brew install pkg-config
 brew install psgrep
 brew install pstree
 brew install ranger
 brew install reattach-to-user-namespace
-brew install renameutils
-brew install ruby
 brew install sebglazebrook/aliases/aliases
-brew install shadowsocks-libev
-brew install shc
-brew install sqlite-analyzer
 brew install sshrc
-brew install stdman
 brew install stow
 brew install the_silver_searcher
-brew install tig
-brew install tldr
 brew install tmux
-brew install todo-txt
-brew install tree
-brew install udns
-brew install urlview
 brew install wget
-brew install xonsh
-brew install xpdf
-brew install zshdb
+brew install zsh
 brew cask install adobe-acrobat-reader
-brew cask install alfred3
 brew cask install amethyst
-brew cask install atom
-brew cask install baidunetdisk
-brew cask install calibre
+brew cask install cyberduck
 brew cask install docker
-brew cask install electronic-wechat
 brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install fontforge
-brew cask install foxitreader
 brew cask install free-download-manager
-brew cask install funter
-brew cask install hammerspoon
-brew cask install hyper
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
-brew cask install keyboardcleantool
 brew cask install kindle
-brew cask install kitty
 brew cask install knotes
-brew cask install mactex
 brew cask install macvim
 brew cask install osxfuse
-brew cask install pomotodo
-brew cask install restor
 brew cask install scroll-reverser
-brew cask install shadowsocksx-ng
-brew cask install slate
 brew cask install spectacle
-brew cask install squidman
-brew cask install teamviewer
 brew cask install the-unarchiver
-brew cask install thunder
-brew cask install typora
 brew cask install vanilla
 brew cask install xmind
-brew cask install xmind-zen
 brew cask install xquartz
+brew cask install zenmap
