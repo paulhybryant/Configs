@@ -53,7 +53,6 @@ brew install koekeishiya/formulae/khd
 brew install koekeishiya/formulae/kwm
 brew install koekeishiya/formulae/skhd
 brew install lsof
-brew install macvim  --with-override-system-vim --with-luajit
 brew install makedepend
 brew install mawk
 brew install md5sha1sum
@@ -129,6 +128,7 @@ brew cask install kindle
 brew cask install kitty
 brew cask install knotes
 brew cask install mactex
+brew cask install macvim
 brew cask install osxfuse
 brew cask install pomotodo
 brew cask install restor

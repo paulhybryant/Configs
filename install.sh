@@ -20,18 +20,13 @@ cd ~/.zplug/repos/paulhybryant/dotfiles
 if [[ $OSTYPE == *darwin* ]]; then
   echo 'Installing brew...'
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install python
-  brew install macvim --with-override-system-vim --with-lua --with-luajit
 else
   echo 'Installing linuxbrew dependencies'
-  sudo apt-get install build-essential curl file git
+  sudo apt-get install build-essential curl file git stow
   echo 'Installing brew...'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   export PATH="$HOME/.linuxbrew/bin:$PATH"
-  brew install python
-  brew install vim --with-override-system-vi --with-client-server --with-lua --with-luajit
 fi
-brew install stow tmux
 
 echo 'Stowing dotfiles...'
 for module in bash misc tmux vim zsh; do
