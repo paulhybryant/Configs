@@ -3,7 +3,7 @@
 vim::update
 zplug::update
 permission::update
-pip::update
+# pip::update
 npm::update
 gem::update
 brew::update
