@@ -11,6 +11,8 @@ declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
   PYTHONSTARTUP="${HOME}/.pythonrc" GOPATH="${BREWHOME}/opt/go/libexec" \
   HOMEBREW_NO_AUTO_UPDATE=1
 path=(~/.local/bin ${BREWHOME}/bin ${BREWHOME}/sbin ${path[@]})
+manpath=(${BREWHOME}/share/man)
+infopath=(${BREWHOME}/share/info)
 unset SSL_CERT_FILE
 
 # coreutils

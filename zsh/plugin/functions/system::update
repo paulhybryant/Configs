@@ -4,6 +4,6 @@ vim::update
 zplug::update
 permission::update
 # pip::update
-npm::update
-gem::update
+# npm::update
+# gem::update
 brew::update
