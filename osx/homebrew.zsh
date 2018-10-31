@@ -25,7 +25,6 @@ brew install curl
 brew install docker-completion
 brew install fasd
 brew install findutils
-brew install fontconfig
 brew install fzf
 brew install ghostscript
 brew install git-extras
