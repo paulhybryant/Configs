@@ -37,7 +37,6 @@ brew install grc
 brew install htop
 brew install jq
 brew install koekeishiya/formulae/khd
-brew install libffi
 brew install lsof
 brew install md5sha1sum
 brew install moreutils
