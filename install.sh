@@ -8,7 +8,7 @@ mkdir -p ~/.pip ~/.ssh/assh.d ~/.config/ranger ~/.local/bin \
 echo 'Cloning zplug, dotfiles, tpm, basher and neobundle...'
 git clone https://github.com/zplug/zplug ~/.zplug
 mkdir -p ~/.zplug/repos/paulhybryant/
-git clone https://github.com/paulhybryant/dotfiles \
+git clone --recurse-submodules https://github.com/paulhybryant/dotfiles \
   ~/.zplug/repos/paulhybryant/dotfiles
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
