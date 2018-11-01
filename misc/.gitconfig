@@ -140,5 +140,9 @@
 [url "https://github.com/"]
   insteadof = github:
 
+[submodule "private"]
+  url = git@yuhuang.linkpc.net:paulhybryant.git
+  active = true
+
 [include]
   path = ~/.local/.gitconfig
