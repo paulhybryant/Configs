@@ -1,0 +1,3 @@
+[submodule "private"]
+	path = private
+	url = git@yuhuang.linkpc.net:paulhybryant.git
