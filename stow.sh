@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for module in bash misc vim tmux zsh fish; do
+for module in misc vim tmux zsh; do
   stow $module -t ~
 done
 
