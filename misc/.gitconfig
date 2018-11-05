@@ -141,7 +141,7 @@
   insteadof = github:
 
 [submodule "private"]
-  url = git@yuhuang.linkpc.net:paulhybryant.git
+  url = git@www.paulhybryant.tk:paulhybryant.git
   active = true
 
 [include]

@@ -74,6 +74,6 @@ abbrev-alias -c vartype='declare -p'
 abbrev-alias -c zunbindkey='bindkey -r'
 abbrev-alias -c pi='command ssh -i ~/.ssh/paulhybryant pi@pi'
 abbrev-alias -c miwifi='command ssh -i ~/.ssh/paulhybryant root@mifiwi'
-abbrev-alias -c vps='command ssh root@yuhuang.linkpc.net'
+abbrev-alias -c vps='command ssh root@www.paulhybryant.tk'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
 autoload run-help                                                               # Unset previous run-help alias
