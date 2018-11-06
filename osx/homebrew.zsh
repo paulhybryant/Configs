@@ -62,6 +62,7 @@ brew install tmux
 brew install wget
 brew install zsh
 brew cask install adobe-acrobat-reader
+brew cask install alfred3
 brew cask install amethyst
 brew cask install cyberduck
 brew cask install docker
