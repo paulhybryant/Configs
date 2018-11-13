@@ -19,7 +19,6 @@ brew install assh
 brew install brew-cask-completion
 brew install brew-gem
 brew install ccat
-brew install cmake
 brew install coreutils
 brew install curl
 brew install docker-completion
