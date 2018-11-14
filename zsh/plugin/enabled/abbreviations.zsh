@@ -33,6 +33,10 @@ if (( ${+commands[grc]} )); then
   abbrev-alias -c df='colorify df'
 fi
 
+if (( ${+commands[bat]} )); then
+  abbrev-alias -c bat='PAGER= bat'
+fi
+
 # abbrev-alias -c trash-restore='restore-trash'
 abbrev-alias -c aga='ag -a --hidden'
 abbrev-alias -c cdlink='file::cdlink'
