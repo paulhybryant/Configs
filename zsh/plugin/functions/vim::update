@@ -1,10 +1,9 @@
 # vim: filetype=zsh sw=2 ts=2 sts=2 et tw=80 foldlevel=0 nospell
 
-print '\nUpdating SpaceVim...'
-pushd ~/.SpaceVim
-git pull
-popd
-
+# print '\nUpdating SpaceVim...'
+# pushd ~/.SpaceVim
+# git pull
+# popd
 
 print '\nUpdating vim plugins...'
 if [[ -f ~/.vimrc ]]; then
