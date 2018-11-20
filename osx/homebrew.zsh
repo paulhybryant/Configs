@@ -79,6 +79,7 @@ brew cask install kindle
 brew cask install knotes
 brew cask install macvim
 brew cask install osxfuse
+brew cask install owncloud
 brew cask install scroll-reverser
 brew cask install spectacle
 brew cask install the-unarchiver
