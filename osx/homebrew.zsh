@@ -16,6 +16,7 @@ brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew install assh
+brew install bat
 brew install brew-cask-completion
 brew install brew-gem
 brew install ccat
@@ -51,6 +52,7 @@ brew install percol
 brew install pkg-config
 brew install psgrep
 brew install pstree
+brew install q
 brew install ranger
 brew install reattach-to-user-namespace
 brew install sebglazebrook/aliases/aliases
@@ -63,6 +65,7 @@ brew install zsh
 brew cask install adobe-acrobat-reader
 brew cask install alfred3
 brew cask install amethyst
+brew cask install calibre
 brew cask install cyberduck
 brew cask install docker
 brew cask install evernote
