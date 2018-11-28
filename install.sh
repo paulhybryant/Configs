@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 cd "${HOME}"
 echo 'Creating directories...'
@@ -22,8 +22,6 @@ if [ ! -x "$(command -v brew)" ]; then
     echo 'Installing brew...'
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
   else
-    echo 'Installing linuxbrew dependencies'
-    sudo apt-get install build-essential curl file git stow
     echo 'Installing brew...'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" < /dev/null
     export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
