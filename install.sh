@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cd $HOME
+cd "${HOME}"
 echo 'Creating directories...'
 mkdir -p ~/.pip ~/.ssh/assh.d ~/.config/ranger ~/.local/bin \
   ~/.tmux/plugins ~/.vim/bundle
 
-echo 'Cloning zplug, dotfiles, tpm, basher and neobundle...'
+echo 'Cloning zplug, dotfiles, tpm, and neobundle...'
 git clone https://github.com/zplug/zplug ~/.zplug
 mkdir -p ~/.zplug/repos/paulhybryant/
 git clone --recurse-submodules https://github.com/paulhybryant/dotfiles \
@@ -17,23 +17,25 @@ make
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 cd ~/.zplug/repos/paulhybryant/dotfiles
-if [[ $OSTYPE == *darwin* ]]; then
-  echo 'Installing brew...'
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else
-  echo 'Installing linuxbrew dependencies'
-  sudo apt-get install build-essential curl file git stow
-  echo 'Installing brew...'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
+if [ ! -x "$(command -v brew)" ]; then
+  if [[ "${OSTYPE}" == *darwin* ]]; then
+    echo 'Installing brew...'
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+  else
+    echo 'Installing linuxbrew dependencies'
+    sudo apt-get install build-essential curl file git stow
+    echo 'Installing brew...'
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" < /dev/null
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  fi
 fi
 
 echo 'Stowing dotfiles...'
-for module in bash misc tmux vim zsh; do
-  stow $module -t ~
+for module in misc tmux vim zsh; do
+  stow "${module}" -t ~
 done
 
-if [[ $OSTYPE == *darwin* ]]; then
+if [[ "${OSTYPE}" == *darwin* ]]; then
   stow osx -t ~
 else
   stow linux -t ~
@@ -45,17 +47,12 @@ vim -c 'NeoBundleInstall' -c 'q'
 echo 'Installing tmux plugins...'
 ~/.tmux/plugins/tpm/bin/install_plugins
 
-read -p "Restore brew (this can take a while) (y/n)? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-  echo 'Restoring brew...'
-  if [[ $OSTYPE == *darwin* ]]; then
-    ./osx/homebrew.zsh
-  else
-    ./linux/linuxbrew.zsh
-  fi
-fi
+# echo 'Restoring brew...'
+# if [[ "${OSTYPE}" == *darwin* ]]; then
+  # ./osx/homebrew.zsh
+# else
+  # ./linux/linuxbrew.zsh
+# fi
 
 # pip
 
