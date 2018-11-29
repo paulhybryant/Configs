@@ -9,7 +9,7 @@ function install_common() {
   echo 'Cloning zplug, dotfiles, tpm, and neobundle...'
   git clone https://github.com/zplug/zplug ~/.zplug
   mkdir -p ~/.zplug/repos/paulhybryant/
-  git clone --recurse-submodules https://github.com/paulhybryant/dotfiles \
+  git clone https://github.com/paulhybryant/dotfiles \
     ~/.zplug/repos/paulhybryant/dotfiles
   git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
@@ -20,10 +20,9 @@ function install_common() {
   cd ~/.zplug/repos/paulhybryant/dotfiles
   git remote set-url origin git@github.com:paulhybryant/dotfiles.git
   echo 'Stowing dotfiles...'
-  for module in misc tmux vim zsh private; do
+  for module in misc tmux vim zsh; do
     stow "${module}" -t ~
   done
-  chmod 400 ~/.ssh/paulhybryant
 
   echo 'Installing vim plugins...'
   vim -c 'NeoBundleInstall' -c 'q'
@@ -32,9 +31,7 @@ function install_common() {
   ~/.tmux/plugins/tpm/bin/install_plugins
 
   # pip
-
   # gem
-
   # npm
   # js-beautify, bundle-id-cli
 }
@@ -45,6 +42,7 @@ function install_linux() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" < /dev/null
     export PATH="${HOME}/.linuxbrew/bin:$PATH"
   fi
+  cd ~/.zplug/repos/paulhybryant/dotfiles
   stow linux -t ~
 
   echo 'Restoring brew...'
@@ -56,6 +54,7 @@ function install_osx() {
     echo 'Installing brew...'
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
   fi
+  cd ~/.zplug/repos/paulhybryant/dotfiles
   stow osx -t ~
 
   echo 'Restoring brew...'
