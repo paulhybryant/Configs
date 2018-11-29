@@ -67,6 +67,3 @@ if [[ "${OSTYPE}" == *darwin* ]]; then
 else
   install_linux
 fi
-
-echo 'Reloading zsh...'
-exec zsh
