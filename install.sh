@@ -24,8 +24,8 @@ function install_common() {
     stow "${module}" -t ~
   done
 
-  echo 'Installing vim plugins...'
-  vim -c 'NeoBundleInstall' -c 'q'
+  # echo 'Installing vim plugins...'
+  # vim -c 'NeoBundleInstall' -c 'q'
 
   echo 'Installing tmux plugins...'
   ~/.tmux/plugins/tpm/bin/install_plugins
