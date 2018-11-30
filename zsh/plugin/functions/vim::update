@@ -6,12 +6,13 @@
 # popd
 
 bin="vim"
-os::OSX && bin="mvim"
+flags=
+os::OSX && bin="mvim" && flags="-v"
 print '\nUpdating vim plugins...'
 if [[ -f ~/.vimrc ]]; then
-  ${bin} -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
+  ${bin} ${flags} -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
 else
-  ${bin} -c 'call dein#update()' -c 'q'
+  ${bin} ${flags} -c 'call dein#update()' -c 'q'
 fi
 
 # vi -c 'SPUpdate'
