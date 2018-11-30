@@ -5,11 +5,13 @@
 # git pull
 # popd
 
+bin="vim"
+os::OSX && bin="mvim"
 print '\nUpdating vim plugins...'
 if [[ -f ~/.vimrc ]]; then
-  vi -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
+  ${bin} -c 'set nomore' -c 'NeoBundleUpdate' -c 'q'
 else
-  vi -c 'call dein#update()' -c 'q'
+  ${bin} -c 'call dein#update()' -c 'q'
 fi
 
 # vi -c 'SPUpdate'
