@@ -37,6 +37,8 @@ function install_common() {
 }
 
 function install_linux() {
+  # sudo apt-get install linuxbrew-wrapper
+  # Prefer the user-space brew
   if [ ! -x "$(command -v brew)" ]; then
     echo 'Installing brew...'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" < /dev/null
