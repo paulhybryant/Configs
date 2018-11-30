@@ -46,6 +46,8 @@ function install_linux() {
   cd ~/.zplug/repos/paulhybryant/dotfiles
   stow linux -t ~
 
+  # bat: https://github.com/sharkdp/bat/releases
+  # fsqlf: https://owncloud.paulhybryant.tk/index.php/s/opmXFhdHJ3PLP5G
   echo 'Restoring brew...'
   ./linux/linuxbrew.zsh
 }
