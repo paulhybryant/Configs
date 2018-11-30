@@ -21,7 +21,6 @@ brew install go
 brew install martido/brew-graph/brew-graph
 brew install noti
 brew install patchelf  --with-static
-brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install pkg-config
 brew install psgrep
