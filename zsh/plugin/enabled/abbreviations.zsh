@@ -21,6 +21,7 @@ if [[ ${OSTYPE} == *linux* ]]; then
 else
   abbrev-alias -c vi='mvim -v'
   abbrev-alias -c vim='mvim -v'
+  abbrev-alias -c doc2pdf='/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf'
 fi
 
 if (( ${+commands[grc]} )); then
