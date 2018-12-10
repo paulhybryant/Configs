@@ -28,5 +28,4 @@ brew install pstree
 brew install q
 brew install sshrc
 brew install tmux
-brew install you-get
 brew install zsh  --with-pcre
