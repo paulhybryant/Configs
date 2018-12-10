@@ -1,3 +1,9 @@
 [submodule "private"]
 	path = private
 	url = git@www.paulhybryant.tk:paulhybryant.git
+[submodule "docker/base"]
+	path = docker/base
+	url = https://github.com/paulhybryant/docker-base.git
+[submodule "docker/calibre"]
+	path = docker/calibre
+	url = https://github.com/paulhybryant/docker-calibre.git
