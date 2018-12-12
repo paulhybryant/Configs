@@ -19,7 +19,6 @@ function install_common() {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
   cd ~/.zplug/repos/paulhybryant/dotfiles
-  git remote set-url origin git@github.com:paulhybryant/dotfiles.git
   echo 'Stowing dotfiles...'
   for module in misc tmux vim zsh; do
     stow "${module}" -t ~

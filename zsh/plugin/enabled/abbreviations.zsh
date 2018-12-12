@@ -5,6 +5,7 @@ abbrev-alias -c ta='command tmux attach -d -t'
 abbrev-alias -c tl='command tmux list-sessions'
 abbrev-alias -c ts='command tmux start-server; command tmux attach'
 abbrev-alias -c gcm='git commit -a -m'
+abbrev-alias -c workenv='docker run -it --hostname paulhybryant paulhybryant/docker-base:v0.1 /home/linuxbrew/.linuxbrew/bin/zsh'
 
 if [[ ${OSTYPE} == *linux* ]]; then
   abbrev-alias -c cdtrash='pushd ~/.local/share/Trash/files'
