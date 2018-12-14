@@ -141,7 +141,7 @@
   insteadof = github:
 
 [submodule "private"]
-  url = git@www.paulhybryant.tk:paulhybryant.git
+  url = git@paulhybryant.myqnapcloud.cn:/opt/repos/paulhybryant.git
   active = true
 
 [include]

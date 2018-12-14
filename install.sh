@@ -48,7 +48,7 @@ function install_linux() {
 
   # curl -L https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb -o /tmp/bat.deb
   # sudo dpkg -i /tmp/bat.deb
-  # curl -L http://www.paulhybryant.tk:8002/index.php/s/opmXFhdHJ3PLP5G/download -o /tmp/fsqlf.deb
+  # curl -L 'http://paulhybryant.myqnapcloud.cn:8880/kodexplorer/index.php?user/publicLink&fid=1a13Nx54XO5WUkiKaT9fg-iVHIAImculBfkfpcunXXynpMMZdYRQ7lVv5tEfo4pJAnf7ajS7UiJE2oVy8X8FA2hixDn6HL4n9KGYIrQJPlCzsDVPUF-NBtlMj3EEJYJwkoQd022x76byYxsTtJ4-TCtWL2lfEvZh3Q&file_name=/fsqlf_20181130-1_amd64.deb' -o /tmp/fsqlf.deb \
   # sudo dpkg -i /tmp/fsqlf.deb
 }
 
