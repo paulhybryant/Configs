@@ -7,9 +7,9 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
 else
   declare -xg BREWVERSION="linuxbrew" BREWHOME="${HOME}/.linuxbrew" CMDPREFIX=""
 fi
-declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' \
+declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' LANGUAGE="${LANG}" \
   PYTHONSTARTUP="${HOME}/.pythonrc" GOPATH="${BREWHOME}/opt/go/libexec" \
-  HOMEBREW_NO_AUTO_UPDATE=1
+  HOMEBREW_NO_AUTO_UPDATE=1 LC_ALL="${LANG}"
 path=(~/.local/bin ${BREWHOME}/bin ${BREWHOME}/sbin ${path[@]})
 manpath=(${BREWHOME}/share/man)
 infopath=(${BREWHOME}/share/info)
