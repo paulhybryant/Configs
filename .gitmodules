@@ -16,3 +16,6 @@
 [submodule "docker/nginx-proxy"]
 	path = docker/nginx-proxy
 	url = git@github.com:paulhybryant/docker-nginx-proxy.git
+[submodule "docker/arm64v8-ubuntu-qemu"]
+	path = docker/arm64v8-ubuntu-qemu
+	url = git@github.com:paulhybryant/arm64v8-ubuntu-qemu.git
