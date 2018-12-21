@@ -80,7 +80,7 @@ abbrev-alias -c zunbindkey='bindkey -r'
 abbrev-alias -c pi='command ssh -i ~/.ssh/paulhybryant pi@pi'
 abbrev-alias -c miwifi='command ssh -i ~/.ssh/paulhybryant root@mifiwi'
 abbrev-alias -c vps='command ssh -i ~/.ssh/paulhybryant root@www.paulhybryant.tk'
-abbrev-alias -c nas='command ssh -i ~/.ssh/paulhybryant admin@paulhybryant.myqnapcloud.cn'
+abbrev-alias -c nas='command ssh -i ~/.ssh/paulhybryant admin@paulhybryant.myqnapcloud.com'
 abbrev-alias -c workenv='docker run -it --hostname paulhybryant paulhybryant/docker-base:v0.1 /home/linuxbrew/.linuxbrew/bin/zsh'
 abbrev-alias -c combine_pdf='"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o '
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
