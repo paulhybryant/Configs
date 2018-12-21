@@ -19,3 +19,9 @@
 [submodule "docker/arm64v8-ubuntu-qemu"]
 	path = docker/arm64v8-ubuntu-qemu
 	url = git@github.com:paulhybryant/arm64v8-ubuntu-qemu.git
+[submodule "docker/arm64v8-builder"]
+	path = docker/arm64v8-builder
+	url = git@github.com:paulhybryant/docker-arm64v8-builder.git
+[submodule "docker/naotu"]
+	path = docker/naotu
+	url = https://github.com/paulhybryant/docker-naotu.git
