@@ -1,6 +1,6 @@
 [submodule "private"]
 	path = private
-	url = git@paulhybryant.myqnapcloud.cn:/opt/repos/paulhybryant
+	url = git@paulhybryant.myqnapcloud.com:/opt/repos/paulhybryant
 [submodule "docker/base"]
 	path = docker/base
 	url = https://github.com/paulhybryant/docker-base.git
