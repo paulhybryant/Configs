@@ -23,6 +23,7 @@ brew install ccat
 brew install coreutils
 brew install curl
 brew install docker-completion
+brew install e2fsprogs
 brew install fasd
 brew install findutils
 brew install fzf
@@ -65,6 +66,7 @@ brew install zsh
 brew cask install adobe-acrobat-reader
 brew cask install alfred3
 brew cask install amethyst
+brew cask install angry-ip-scanner
 brew cask install calibre
 brew cask install cyberduck
 brew cask install docker
@@ -82,8 +84,8 @@ brew cask install kindle
 brew cask install knotes
 brew cask install macvim
 brew cask install osxfuse
-brew cask install owncloud
 brew cask install scroll-reverser
+brew cask install shadowsocksx-ng
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vanilla
