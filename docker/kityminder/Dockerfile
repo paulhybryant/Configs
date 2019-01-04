@@ -1,4 +1,4 @@
-FROM paulhybryant/arm64v8-builder
+FROM paulhybryant/arm64v8-qemu:ubuntu
 MAINTAINER yivanus yivanus@gmail.com
 RUN mkdir -p /var/mindx/meteor && chmod 777 /var/mindx/meteor
 RUN apt-get update && apt-get install -y git curl libcurl3

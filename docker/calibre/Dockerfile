@@ -1,5 +1,5 @@
 FROM  ubuntu:18.04
-MAINTAINER  paulhybryant <paulhybryant@gmail.com>
+LABEL maintainer="paulhybryant@gmail.com"
 ENV  TZ  'Asia/Chongqing'
 RUN  ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   && echo ${TZ} > /etc/timezone \

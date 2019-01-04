@@ -1,7 +1,7 @@
 ARG ARCH=docker.io
 FROM ${ARCH}/alpine:3.8
 
-MAINTAINER paulhybryant <paulhybryant@gmail.com>
+LABEL maintainer="paulhybryant@gmail.com"
 
 ENV TZ 'Asia/Chongqing'
 

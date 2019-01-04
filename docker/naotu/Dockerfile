@@ -1,6 +1,7 @@
-FROM node:11-alpine
+ARG ARCH=docker.io
+FROM ${ARCH}/node:11-alpine
 
-MAINTAINER paulhybryant <paulhybryant@gmail.com>
+LABEL maintainer="paulhybryant@gmail.com"
 
 ENV TZ 'Asia/Chongqing'
 

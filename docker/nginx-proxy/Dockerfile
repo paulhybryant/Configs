@@ -1,7 +1,7 @@
-FROM nginx:1.15.7-alpine
-# FROM arm64v8/nginx:1.15.7-alpine
+ARG ARCH=docker.io
+FROM ${ARCH}/nginx:1.15.7-alpine
 
-MAINTAINER paulhybryant <paulhybryant@gmail.com>
+LABEL maintainer="paulhybryant@gmail.com"
 
 ENV TZ 'Asia/Chongqing'
 
