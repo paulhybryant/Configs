@@ -1,0 +1,33 @@
+FROM paulhybryant/docker-arm64v8-ubuntu-qemu
+MAINTAINER yivanus yivanus@gmail.com
+RUN ["/usr/bin/qemu-aarch64-static", "/bin/mkdir", "-p", "/var/mindx/meteor"]
+RUN ["/usr/bin/qemu-aarch64-static", "/bin/chmod", "777", "/var/mindx/meteor"]
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/bin/apt-get", "update"]
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/bin/apt-get", "install", "-y", "git", "curl", "vim"]
+ENV HOME /var/mindx/meteor
+ENV LC_ALL "C"
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/sbin/useradd", "mindx"]
+USER mindx
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/bin/git", "clone", "--progress", "https://github.com/paulhybryant/meteor.git", "/var/mindx/meteor/.meteor"]
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/bin/curl", "http://paulhybryant.myqnapcloud.com:8880/kodexplorer/index.php?user/publicLink&fid=20b0q6pr23o_V15VF6w9p5h3JjXb-cTVQ-L6JCeIsaY0-kr2-MuDqnwIVDFeLeaW5Z3zmJ1gCh9XXcfejiAf8Pt_Bz1rWzC1t0BRqXO0z1CS3kIhPVeKehsbya1nO0z26gxWcnWo0okP6UX90c0h0_OxlwLraKMG7yqjK2HU0z_DYy7MUHJX&file_name=/dev_bundle_Linux_aarch64_8.11.4.7.tar.gz", "-o", "/var/mindx/meteor/.meteor/dev_bundle_Linux_aarch64_8.11.4.7.tar.gz"]
+WORKDIR /var/mindx/meteor
+RUN ["/usr/bin/qemu-aarch64-static", "/usr/bin/git", "clone", "--progress", "https://github.com/yivanus/kityminder-meteor.git"]
+ENV PATH $PATH:$HOME/.meteor
+COPY meteor-docker $HOME/.meteor/
+RUN meteor-docker create --bare /var/mindx/meteor/kityminder-meteor-demo
+WORKDIR /var/mindx/meteor/kityminder-meteor-demo/
+RUN meteor-docker remove static-html \
+  && meteor-docker add angular-templates \
+  && meteor-docker npm install --save angular angular-meteor \
+  && meteor-docker add iron:router \
+  && meteor-docker add meteorhacks:picker \
+  && meteor-docker add session \
+  && meteor-docker add autopublish
+WORKDIR /var/mindx/meteor/kityminder-meteor
+RUN ["/usr/bin/qemu-aarch64-static", "/bin/cp", "-r", "-f", "README.md", "client", "collection", "packages.json", "server", "public", "/var/mindx/meteor/kityminder-meteor-demo/"]
+WORKDIR /var/mindx/meteor/kityminder-meteor-demo/
+RUN meteor-docker add meteorhacks:npm \
+  && meteor-docker update meteorhacks:npm
+COPY meteor.sh /var/mindx/meteor/
+EXPOSE 8889
+CMD "/var/mindx/meteor/meteor.sh"
