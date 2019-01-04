@@ -1,21 +1,3 @@
 [submodule "private"]
 	path = private
 	url = git@paulhybryant.myqnapcloud.com:/opt/repos/paulhybryant
-[submodule "docker/base"]
-	path = docker/base
-	url = https://github.com/paulhybryant/docker-base.git
-[submodule "docker/calibre"]
-	path = docker/calibre
-	url = https://github.com/paulhybryant/docker-calibre.git
-[submodule "docker/kityminder"]
-	path = docker/kityminder
-	url = https://github.com/paulhybryant/docker-kityminder.git
-[submodule "docker/aria2"]
-	path = docker/aria2
-	url = git@github.com:paulhybryant/docker-aria2.git
-[submodule "docker/nginx-proxy"]
-	path = docker/nginx-proxy
-	url = git@github.com:paulhybryant/docker-nginx-proxy.git
-[submodule "docker/naotu"]
-	path = docker/naotu
-	url = https://github.com/paulhybryant/docker-naotu.git
