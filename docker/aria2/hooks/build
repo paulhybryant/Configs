@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ARCH=("amd64" "arm64v8")
+for arch in ${ARCH[@]}; do
+  base="${arch}"
+  if [[ "${arch}" == "amd64" ]]; then
+    base="docker.io"
+  fi
+
+  docker build . --build-arg ARCH=${base} -t paulhybryant/docker-aria2:${ARCH}
+done
