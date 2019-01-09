@@ -1,7 +1,8 @@
-FROM  ubuntu:18.04
+ARG ARCH=docker.io
+FROM ${ARCH}/ubuntu:18.04
 LABEL maintainer="paulhybryant@gmail.com"
-ENV  TZ  'Asia/Chongqing'
-RUN  ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
+ENV TZ 'Asia/Chongqing'
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   && echo ${TZ} > /etc/timezone \
   && apt-get update -y \
   && apt-get install -y \
@@ -48,5 +49,4 @@ RUN git clone https://github.com/kovidgoyal/dukpy.git /tmp/dukpy \
   && cd /tmp/calibre \
   && python setup.py bootstrap \
   && git clone https://github.com/kovidgoyal/build-calibre.git /tmp/build-calibre
-# RUN cd /tmp/build-calibre \
-  # && ./linux 64
+RUN cd /tmp/build-calibre && ./linux 64
