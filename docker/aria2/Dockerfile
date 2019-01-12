@@ -14,6 +14,6 @@ RUN \
 VOLUME ["/config"]
 VOLUME ["/downloads"]
 
-EXPOSE 8800
+EXPOSE 6800
 
 CMD ["/usr/bin/aria2c", "--conf-path", "/config/aria2.conf"]
