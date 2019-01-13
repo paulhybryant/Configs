@@ -42,11 +42,15 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   && useradd -m -s /bin/bash calibre \
   && echo 'calibre ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER calibre
-RUN git clone https://github.com/kovidgoyal/dukpy.git /tmp/dukpy \
+RUN git clone --progress https://github.com/kovidgoyal/dukpy.git /tmp/dukpy \
   && cd /tmp/dukpy \
-  && sudo ./setup.py install \
-  && git clone https://github.com/kovidgoyal/calibre.git /tmp/calibre \
+  && sudo ./setup.py install
+RUN git clone --progress https://github.com/ebook-utils/css-parser.git /tmp/css-parser \
+  && cd /tmp/css-parser \
+  && sudo ./setup.py install
+RUN git clone --progress https://github.com/kovidgoyal/calibre.git /tmp/calibre \
   && cd /tmp/calibre \
-  && python setup.py bootstrap \
-  && git clone https://github.com/kovidgoyal/build-calibre.git /tmp/build-calibre
-RUN cd /tmp/build-calibre && ./linux 64
+  && python setup.py bootstrap
+RUN git clone --progress https://github.com/kovidgoyal/build-calibre.git /tmp/build-calibre
+  && cd /tmp/build-calibre \
+  && ./linux 64
