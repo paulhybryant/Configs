@@ -54,3 +54,4 @@ RUN git clone --progress https://github.com/kovidgoyal/calibre.git /tmp/calibre 
 RUN git clone --progress https://github.com/kovidgoyal/build-calibre.git /tmp/build-calibre
   && cd /tmp/build-calibre \
   && ./linux 64
+CMD ["/bin/bash"]
