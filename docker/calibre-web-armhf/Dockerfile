@@ -6,7 +6,7 @@ ADD Python-2.7.15-tgz /tmp/Python-2.7.15
 ADD calibre-web.tar.gz /app/
 COPY get-pip.py /tmp/
 RUN apt-get update -y \
-  && apt-get install -y vim python build-essential
+  && apt-get install -y vim python build-essential \
   && apt-get build-dep -y python2.7
 WORKDIR /tmp/Python-2.7.15
 RUN ./configure --prefix=/usr --enable-shared --with-threads --enable-ipv6 --with-system-ffi --with-system-expat --enable-unicode=ucs4 \
