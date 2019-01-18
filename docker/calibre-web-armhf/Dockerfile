@@ -15,7 +15,6 @@ RUN python /tmp/get-pip.py
 WORKDIR /app/calibre-web
 RUN pip install --no-cache-dir -U -r requirements.txt \
   && pip install --no-cache-dir -U -r optional-requirements.txt
-ENTRYPOINT ["/init"]
 EXPOSE 8083
 VOLUME [/books /config]
-CMD ["/bin/bash"]
+CMD ["python", "cps.py"]
