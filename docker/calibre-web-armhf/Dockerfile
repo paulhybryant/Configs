@@ -12,6 +12,7 @@ RUN apt-get update -y \
 WORKDIR /tmp/Python-2.7.15
 RUN ./configure --prefix=/usr --enable-shared --with-threads --enable-ipv6 --with-system-ffi --with-system-expat --enable-unicode=ucs4
 RUN make
+RUN apt-get install -y libxslt1-dev
 RUN make install
 RUN python /tmp/get-pip.py
 WORKDIR /calibre-web
