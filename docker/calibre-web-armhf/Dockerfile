@@ -13,8 +13,9 @@ RUN python /tmp/get-pip.py
 ADD calibre-3.37.0-i686.txz /opt/calibre/
 ADD calibre-web.tar.gz /
 WORKDIR /calibre-web
-RUN pip install --no-cache-dir -U -r requirements.txt \
-  && pip install --no-cache-dir -U -r optional-requirements.txt
+RUN pip install setuptools wheel \
+  && pip install --target vendor -r requirements.txt \
+  && pip install --target vendor -r optional-requirements.txt
 
 EXPOSE 8083
 VOLUME [/books /config]
