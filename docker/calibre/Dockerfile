@@ -41,6 +41,7 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   sudo \
   && useradd -m -s /bin/bash calibre \
   && echo 'calibre ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+COPY qemu-arm-static /usr/bin/
 USER calibre
 RUN git clone --progress https://github.com/kovidgoyal/dukpy.git /tmp/dukpy \
   && cd /tmp/dukpy \
