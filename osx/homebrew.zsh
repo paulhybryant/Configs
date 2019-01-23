@@ -15,6 +15,7 @@ brew tap koekeishiya/formulae
 brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
+brew tap yudai/gotty
 brew install assh
 brew install bat
 brew install brew-cask-completion
@@ -33,6 +34,7 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
+brew install go
 brew install grc
 brew install htop
 brew install jq
@@ -62,6 +64,7 @@ brew install stow
 brew install the_silver_searcher
 brew install tmux
 brew install wget
+brew install yudai/gotty/gotty
 brew install zsh
 brew cask install adobe-acrobat-reader
 brew cask install alfred3
