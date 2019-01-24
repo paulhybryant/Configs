@@ -55,5 +55,5 @@ RUN git clone --progress https://github.com/kovidgoyal/calibre.git /tmp/calibre 
   && python setup.py bootstrap
 RUN git clone --progress https://github.com/paulhybryant/build-calibre.git /tmp/build-calibre
 WORKDIR /tmp/build-calibre
-RUN ./linux 32
+# RUN ./linux 32
 CMD ["/bin/bash"]
