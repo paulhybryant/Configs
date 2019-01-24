@@ -53,7 +53,7 @@ RUN git clone --progress https://github.com/ebook-utils/css-parser.git /tmp/css-
 RUN git clone --progress https://github.com/kovidgoyal/calibre.git /tmp/calibre \
   && cd /tmp/calibre \
   && python setup.py bootstrap
-RUN git clone --progress https://github.com/paulhybryant/build-calibre.git /tmp/build-calibre \
-  && cd /tmp/build-calibre \
-  && ./linux 32
+RUN git clone --progress https://github.com/paulhybryant/build-calibre.git /tmp/build-calibre
+WORKDIR /tmp/build-calibre
+RUN ./linux 32
 CMD ["/bin/bash"]
