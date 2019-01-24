@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ARCH=("amd64" "arm64v8")
+for arch in ${ARCH[@]}; do
+  base="${arch}"
+  if [[ "${arch}" == "amd64" ]]; then
+    base="docker.io"
+  fi
+
+  echo "docker build . --build-arg ARCH=${base} -t paulhybryant/docker-calibre:${arch}"
+  docker build . --build-arg ARCH=${base} -t paulhybryant/docker-calibre:${arch}
+  echo "docker push paulhybryant/docker-calibre:${arch}"
+  docker push paulhybryant/docker-calibre:${arch}
+done

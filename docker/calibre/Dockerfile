@@ -2,6 +2,8 @@ ARG ARCH=docker.io
 FROM ${ARCH}/ubuntu:18.04
 LABEL maintainer="paulhybryant@gmail.com"
 ENV TZ 'Asia/Chongqing'
+ENV TERM 'xterm-256color'
+COPY qemu-arm-static /usr/bin/
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   && echo ${TZ} > /etc/timezone \
   && apt-get update -y \
@@ -15,6 +17,8 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   qt5-qmake \
   qt5-default \
   python-pyqt5 \
+  python-pyqt5.qtwebkit \
+  python-pyqt5.qtsvg \
   pyqt5-dev \
   libglib2.0-dev \
   libfontconfig1-dev \
@@ -38,11 +42,10 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   python-cssutils \
   python-regex \
   python-dateutil \
+  python-apsw \
   sudo \
   && useradd -m -s /bin/bash calibre \
   && echo 'calibre ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-COPY qemu-arm-static /usr/bin/
-ENV TERM 'xterm-256color'
 USER calibre
 RUN git clone --progress https://github.com/kovidgoyal/dukpy.git /tmp/dukpy \
   && cd /tmp/dukpy \
@@ -53,7 +56,5 @@ RUN git clone --progress https://github.com/ebook-utils/css-parser.git /tmp/css-
 RUN git clone --progress https://github.com/kovidgoyal/calibre.git /tmp/calibre \
   && cd /tmp/calibre \
   && python setup.py bootstrap
-RUN git clone --progress https://github.com/paulhybryant/build-calibre.git /tmp/build-calibre
-WORKDIR /tmp/build-calibre
-# RUN ./linux 32
+# RUN sudo python setup.py install
 CMD ["/bin/bash"]
