@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ARCH=("amd64" "arm64v8")
+ARCH=("arm64v8")
 for arch in ${ARCH[@]}; do
   base="${arch}"
   if [[ "${arch}" == "amd64" ]]; then
