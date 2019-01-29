@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
-brew tap crisidev/chunkwm
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/cask
@@ -40,7 +39,7 @@ brew install htop
 brew install jq
 brew install koekeishiya/formulae/khd
 brew install lsof
-brew install md5sha1sum
+brew install macvim
 brew install moreutils
 brew install most
 brew install netcat
@@ -63,13 +62,11 @@ brew install sshrc
 brew install stow
 brew install the_silver_searcher
 brew install tmux
+brew install trash-cli
 brew install wget
 brew install yudai/gotty/gotty
 brew install zsh
-brew cask install adobe-acrobat-reader
-brew cask install alfred3
 brew cask install amethyst
-brew cask install angry-ip-scanner
 brew cask install calibre
 brew cask install cyberduck
 brew cask install docker
@@ -78,9 +75,7 @@ brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install fontforge
-brew cask install free-download-manager
 brew cask install hyperswitch
-brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
@@ -88,10 +83,8 @@ brew cask install knotes
 brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
-brew cask install shadowsocksx-ng
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vanilla
 brew cask install xmind
 brew cask install xquartz
-brew cask install zenmap
