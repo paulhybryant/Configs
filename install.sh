@@ -4,7 +4,7 @@ set -e
 function install_common() {
   cd "${HOME}"
   echo 'Creating directories...'
-  mkdir -p ~/.pip ~/.ssh/assh.d ~/.config/ranger ~/.local/bin \
+  mkdir -p ~/.pip ~/.cache ~/.ssh/assh.d ~/.config/ranger ~/.local/bin \
     ~/.tmux/plugins ~/.vim/bundle
 
   echo 'Cloning zplug, dotfiles, tpm, and neobundle...'
@@ -58,6 +58,7 @@ function install_osx() {
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
+  brew install stow
   stow osx -t ~
 }
 

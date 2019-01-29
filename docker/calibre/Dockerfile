@@ -3,7 +3,7 @@ FROM ${ARCH}/ubuntu:18.04
 LABEL maintainer="paulhybryant@gmail.com"
 ENV TZ 'Asia/Chongqing'
 ENV TERM 'xterm-256color'
-COPY qemu-arm-static /usr/bin/
+COPY qemu-aarch64-static /usr/bin/
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   && echo ${TZ} > /etc/timezone \
   && apt-get update -y \
