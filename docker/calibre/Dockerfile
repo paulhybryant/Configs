@@ -43,6 +43,8 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
   python-regex \
   python-dateutil \
   python-apsw \
+  python-sphinx \
+  bash-completion \
   sudo \
   && useradd -m -s /bin/bash calibre \
   && echo 'calibre ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
