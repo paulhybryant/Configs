@@ -277,7 +277,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     let g:NERDCreateDefaultMappings = 1
     let g:NERDCustomDelimiters = {
       \ 'cvim' : {'left' : '"', 'leftAlt' : ' ', 'rightAlt' : ' '},
-      \ 'zplug' : {'left' : '#', 'leftAlt' : ' ', 'rightAlt' : ' '}}
+      \ 'zplug' : {'left' : '#', 'leftAlt' : ' ', 'rightAlt' : ' '},
+      \ 'Dockerfile' : {'left' : '#', 'leftAlt' : ' ', 'rightAlt' : ' '}}
     let g:NERDSpaceDelims = 1
     let g:NERDUsePlaceHolders = 0
   endfunction
