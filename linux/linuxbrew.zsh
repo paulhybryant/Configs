@@ -12,10 +12,12 @@ brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew install assh
 brew install brew-gem
+brew install brew-pip
 brew install ccat
+brew install curl
+brew install docker-completion
 brew install fasd
 brew install fzf
-brew install git
 brew install git-extras
 brew install go
 brew install martido/brew-graph/brew-graph
@@ -28,4 +30,4 @@ brew install pstree
 brew install q
 brew install sshrc
 brew install tmux
-brew install zsh  --with-pcre
+brew install zsh
