@@ -15,6 +15,7 @@ brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew tap yudai/gotty
+brew install aria2
 brew install assh
 brew install bat
 brew install brew-cask-completion
@@ -67,6 +68,7 @@ brew install wget
 brew install yudai/gotty/gotty
 brew install zsh
 brew cask install amethyst
+brew cask install ariang
 brew cask install calibre
 brew cask install cyberduck
 brew cask install docker
