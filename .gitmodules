@@ -1,3 +1,3 @@
 [submodule "private"]
 	path = private
-	url = git@paulhybryant.myqnapcloud.com:/opt/repos/paulhybryant
+	url = admin@paulhybryant.myqnapcloud.com:/root/paulhybryant
