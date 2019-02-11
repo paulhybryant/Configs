@@ -20,6 +20,7 @@ brew install assh
 brew install bat
 brew install brew-cask-completion
 brew install brew-gem
+brew install brew-pip
 brew install ccat
 brew install coreutils
 brew install curl
@@ -77,11 +78,13 @@ brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install fontforge
+brew cask install gotofile
 brew cask install hyperswitch
 brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
 brew cask install knotes
+brew cask install launchcontrol
 brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
