@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.zerowidth.launched.aria2</string>
+	<key>LaunchOnlyOnce</key>
+	<true/>
+	<key>ProgramArguments</key>
+	<array>
+		<string>sh</string>
+		<string>-c</string>
+		<string>/usr/local/bin/aria2c --conf-path ~/.aria2.conf</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>UserName</key>
+	<string>yuhuang</string>
+</dict>
+</plist>
