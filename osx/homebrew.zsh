@@ -20,6 +20,7 @@ brew install assh
 brew install bat
 brew install brew-cask-completion
 brew install brew-gem
+brew install brew-pip
 brew install ccat
 brew install coreutils
 brew install curl
