@@ -15,7 +15,6 @@ brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew tap yudai/gotty
-brew install aria2
 brew install assh
 brew install bat
 brew install brew-cask-completion
@@ -49,6 +48,7 @@ brew install nmap
 brew install node
 brew install noti
 brew install osxutils
+brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install peco
