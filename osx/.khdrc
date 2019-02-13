@@ -35,7 +35,7 @@ cmd + alt + ctrl - k  : noti -m "chunkwm stopped!" brew services stop chunkwm
 cmd + alt + ctrl - w  : noti -m "chunkwm started!" brew services start chunkwm
 
 # Open iTerm2
-cmd - return  : open -a /Applications/iTerm.app
+alt - return  : open -a /Applications/iTerm.app
 
 # Focus window
 alt - h   : chunkc tiling::window --focus west
