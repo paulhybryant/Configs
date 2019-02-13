@@ -54,6 +54,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
+  NeoBundle 'xu-cheng/brew.vim', {'on_ft' : ['ruby']}                           " Syntax highlight for homebrew formula
   NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}                            " Syntax highlight for zplug
   NeoBundle 'previm/previm'
   NeoBundle 'tyru/open-browser.vim'
