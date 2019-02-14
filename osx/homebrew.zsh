@@ -86,6 +86,7 @@ brew cask install knotes
 brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
+brew cask install shadowsocksx-ng
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vanilla
