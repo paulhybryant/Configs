@@ -14,6 +14,7 @@ brew tap koekeishiya/formulae
 brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
+brew tap waltarix/customs
 brew tap yudai/gotty
 brew install assh
 brew install bat
@@ -34,7 +35,6 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
-brew install go
 brew install grc
 brew install htop
 brew install jq
@@ -48,6 +48,7 @@ brew install nmap
 brew install node
 brew install noti
 brew install osxutils
+brew install p7zip
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -62,12 +63,14 @@ brew install reattach-to-user-namespace
 brew install sebglazebrook/aliases/aliases
 brew install sshrc
 brew install stow
+brew install telnet
 brew install the_silver_searcher
 brew install tmux
 brew install trash-cli
+brew install waltarix/customs/gnu-cpio
 brew install wget
-brew install yudai/gotty/gotty
 brew install zsh
+brew cask install alfred3
 brew cask install amethyst
 brew cask install ariang
 brew cask install calibre
@@ -78,7 +81,9 @@ brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install fontforge
+brew cask install free-download-manager
 brew cask install hyperswitch
+brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
@@ -86,6 +91,7 @@ brew cask install knotes
 brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
+brew cask install shadowsocksx-ng
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vanilla
