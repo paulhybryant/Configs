@@ -35,6 +35,7 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
+brew install go
 brew install grc
 brew install htop
 brew install jq
@@ -69,6 +70,7 @@ brew install tmux
 brew install trash-cli
 brew install waltarix/customs/gnu-cpio
 brew install wget
+brew install yudai/gotty/gotty
 brew install zsh
 brew cask install alfred3
 brew cask install amethyst
@@ -81,7 +83,6 @@ brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install fontforge
-brew cask install free-download-manager
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
