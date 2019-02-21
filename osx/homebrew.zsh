@@ -18,6 +18,7 @@ brew tap waltarix/customs
 brew tap yudai/gotty
 brew install assh
 brew install bat
+brew install bower
 brew install brew-cask-completion
 brew install brew-gem
 brew install brew-pip
@@ -37,6 +38,7 @@ brew install gnu-tar
 brew install gnu-which
 brew install go
 brew install grc
+brew install grunt-cli
 brew install htop
 brew install jq
 brew install koekeishiya/formulae/khd
@@ -46,7 +48,6 @@ brew install moreutils
 brew install most
 brew install netcat
 brew install nmap
-brew install node
 brew install noti
 brew install osxutils
 brew install p7zip
