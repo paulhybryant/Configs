@@ -10,12 +10,12 @@ lctrl - 8   [Google Chrome,iTerm2]  : khd -p "cmd - 8"
 lctrl - 9   [Google Chrome,iTerm2]  : khd -p "cmd - 9"
 
 # Browser shortcuts
-lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
-lctrl - f   [Google Chrome,Safari]  : khd -p "cmd - f"
-lctrl - i   [Google Chrome,Safari]  : khd -p "cmd - i"
-lctrl - l   [Google Chrome,Safari]  : khd -p "cmd - l"
-lctrl - t   [Google Chrome,Safari]  : khd -p "cmd - t"
-lshift + lctrl - t  [Google Chrome,Safari]  : khd -p "shift + cmd - t"
+# lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
+# lctrl - f   [Google Chrome,Safari]  : khd -p "cmd - f"
+# lctrl - i   [Google Chrome,Safari]  : khd -p "cmd - i"
+# lctrl - l   [Google Chrome,Safari]  : khd -p "cmd - l"
+# lctrl - t   [Google Chrome,Safari]  : khd -p "cmd - t"
+# lshift + lctrl - t  [Google Chrome,Safari]  : khd -p "shift + cmd - t"
 
 # Global
 lctrl - a   ! [*]   : khd -p "cmd - a"
@@ -27,38 +27,39 @@ lctrl - x   ! [*]   : khd -p "cmd - x"
 lcmd + lctrl - l    : pmset displaysleepnow
 # lcmd + lctrl - l  : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
-# Reload khd config
-cmd + alt + ctrl - r  : noti -m "khd reloaded!" khd -e "reload"
-
-# Start / Stop chunkwm
-cmd + alt + ctrl - k  : noti -m "chunkwm stopped!" brew services stop chunkwm
-cmd + alt + ctrl - w  : noti -m "chunkwm started!" brew services start chunkwm
-
 # Open iTerm2
 alt - return  : open -a /Applications/iTerm.app
 
-# Focus window
-alt - h   : chunkc tiling::window --focus west
-alt - j   : chunkc tiling::window --focus south
-alt - k   : chunkc tiling::window --focus north
-alt - l   : chunkc tiling::window --focus east
+# Reload khd config
+cmd + alt + ctrl - r  : noti -m "khd reloaded!" khd -e "reload"
 
-cmd - j   : chunkc tiling::window --focus prev
-cmd - k   : chunkc tiling::window --focus next
+# Chunkwm
+# Start / Stop chunkwm
+# cmd + alt + ctrl - k  : noti -m "chunkwm stopped!" brew services stop chunkwm
+# cmd + alt + ctrl - w  : noti -m "chunkwm started!" brew services start chunkwm
+
+# Focus window
+# alt - h   : chunkc tiling::window --focus west
+# alt - j   : chunkc tiling::window --focus south
+# alt - k   : chunkc tiling::window --focus north
+# alt - l   : chunkc tiling::window --focus east
+
+# cmd - j   : chunkc tiling::window --focus prev
+# cmd - k   : chunkc tiling::window --focus next
 
 # Change layout
-ctrl + alt - b  : chunkc tiling::desktop --layout bsp
-ctrl + alt - m  : chunkc tiling::desktop --layout monocle
-ctrl + alt - f  : chunkc tiling::desktop --layout float
+# ctrl + alt - b  : chunkc tiling::desktop --layout bsp
+# ctrl + alt - m  : chunkc tiling::desktop --layout monocle
+# ctrl + alt - f  : chunkc tiling::desktop --layout float
 
 # Swap window
-shift + alt - h   : chunkc tiling::window --swap west
-shift + alt - j   : chunkc tiling::window --swap south
-shift + alt - k   : chunkc tiling::window --swap north
-shift + alt - l   : chunkc tiling::window --swap east
+# shift + alt - h   : chunkc tiling::window --swap west
+# shift + alt - j   : chunkc tiling::window --swap south
+# shift + alt - k   : chunkc tiling::window --swap north
+# shift + alt - l   : chunkc tiling::window --swap east
 
 # Move window
-shift + cmd - h   : chunkc tiling::window --warp west
-shift + cmd - j   : chunkc tiling::window --warp south
-shift + cmd - k   : chunkc tiling::window --warp north
-shift + cmd - l   : chunkc tiling::window --warp east
+# shift + cmd - h   : chunkc tiling::window --warp west
+# shift + cmd - j   : chunkc tiling::window --warp south
+# shift + cmd - k   : chunkc tiling::window --warp north
+# shift + cmd - l   : chunkc tiling::window --warp east
