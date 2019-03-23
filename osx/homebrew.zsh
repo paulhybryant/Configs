@@ -41,6 +41,7 @@ brew install grc
 brew install grunt-cli
 brew install htop
 brew install jq
+brew install koekeishiya/formulae/khd
 brew install lsof
 brew install macvim
 brew install moreutils
