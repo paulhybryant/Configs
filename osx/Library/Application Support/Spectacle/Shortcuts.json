@@ -16,7 +16,7 @@
     "shortcut_name" : "MoveToUpperRight"
   },
   {
-    "shortcut_key_binding" : "alt+down",
+    "shortcut_key_binding" : "ctrl+down",
     "shortcut_name" : "MoveToBottomHalf"
   },
   {
@@ -24,7 +24,7 @@
     "shortcut_name" : "MoveToNextDisplay"
   },
   {
-    "shortcut_key_binding" : "alt+up",
+    "shortcut_key_binding" : "ctrl+up",
     "shortcut_name" : "MoveToTopHalf"
   },
   {
@@ -36,7 +36,7 @@
     "shortcut_name" : "MakeLarger"
   },
   {
-    "shortcut_key_binding" : "alt+z",
+    "shortcut_key_binding" : null,
     "shortcut_name" : "UndoLastMove"
   },
   {
@@ -44,7 +44,7 @@
     "shortcut_name" : "MoveToPreviousDisplay"
   },
   {
-    "shortcut_key_binding" : "alt+return",
+    "shortcut_key_binding" : "ctrl+return",
     "shortcut_name" : "MoveToFullscreen"
   },
   {
@@ -52,7 +52,7 @@
     "shortcut_name" : "MoveToNextThird"
   },
   {
-    "shortcut_key_binding" : "alt+left",
+    "shortcut_key_binding" : "ctrl+left",
     "shortcut_name" : "MoveToLeftHalf"
   },
   {
@@ -60,7 +60,7 @@
     "shortcut_name" : "MoveToCenter"
   },
   {
-    "shortcut_key_binding" : "alt+right",
+    "shortcut_key_binding" : "ctrl+right",
     "shortcut_name" : "MoveToRightHalf"
   },
   {
