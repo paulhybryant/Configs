@@ -52,15 +52,24 @@ zplug "zsh-users/zsh-history-substring-search", defer:1
 zplug "paulhybryant/dotfiles", on:"momo-lab/zsh-abbrev-alias", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
 
+# zplug "Valiev/almostontop", defer:1
+# zplug "mafredri/zsh-async", defer:1
+# zplug "gretzky/auto-color-ls", defer:1
+# zplug "willghatch/zsh-cdr", defer:1
+# zplug "zsh-users/zaw", on:"willghatch/zsh-cdr", defer:1
+# zplug "chrissicool/zsh-bash", defer:1
+# zplug "colored-man-pages", defer:1
+# zplug "zpm-zsh/clipboard", defer:1
+# zplug "Tarrasch/zsh-command-not-found", defer:1
+# zplug "popstas/zsh-command-time", defer:1
+# zplug "webyneter/docker-aliases", defer:1
 
 # zplug "arzzen/calc.plugin.zsh", defer:1
 # zplug "jocelynmallon/zshmarks", defer:1
 # zplug "peterhurford/up.zsh", defer:1
 # zplug "psprint/zsh-cmd-architect", defer:1
-# zplug "willghatch/zsh-cdr", defer:1
 # zplug "willghatch/zsh-hooks", defer:1
 # zplug "willghatch/zsh-snippets", defer:1
-# zplug "zsh-users/zaw", on:"willghatch/zsh-cdr", defer:1
 
 
 # zplug "D630/fzf-fs"
@@ -72,7 +81,6 @@ zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
 # zplug "hchbaw/auto-fu.zsh", defer:1
 # zplug "huyng/bashmarks"
 # zplug "joepvd/grep2awk", defer:1
-# zplug "mafredri/zsh-async"
 # zplug "modules/ssh", from:prezto
 # zplug "mooz/percol", use:"tools/zsh/*.zsh", defer:1
 # zplug "nojhan/liquidprompt"
