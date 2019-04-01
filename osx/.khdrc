@@ -1,13 +1,14 @@
 # Tab navigation in Chrome and iTerm2
-lctrl - 1   [Google Chrome,iTerm2]  : khd -p "cmd - 1"
-lctrl - 2   [Google Chrome,iTerm2]  : khd -p "cmd - 2"
-lctrl - 3   [Google Chrome,iTerm2]  : khd -p "cmd - 3"
-lctrl - 4   [Google Chrome,iTerm2]  : khd -p "cmd - 4"
-lctrl - 5   [Google Chrome,iTerm2]  : khd -p "cmd - 5"
-lctrl - 6   [Google Chrome,iTerm2]  : khd -p "cmd - 6"
-lctrl - 7   [Google Chrome,iTerm2]  : khd -p "cmd - 7"
-lctrl - 8   [Google Chrome,iTerm2]  : khd -p "cmd - 8"
-lctrl - 9   [Google Chrome,iTerm2]  : khd -p "cmd - 9"
+# lctrl - 1   [Google Chrome,iTerm2]  : khd -p "cmd - 1"
+# lctrl - 2   [Google Chrome,iTerm2]  : khd -p "cmd - 2"
+# lctrl - 3   [Google Chrome,iTerm2]  : khd -p "cmd - 3"
+# lctrl - 4   [Google Chrome,iTerm2]  : khd -p "cmd - 4"
+# lctrl - 5   [Google Chrome,iTerm2]  : khd -p "cmd - 5"
+# lctrl - 6   [Google Chrome,iTerm2]  : khd -p "cmd - 6"
+# lctrl - 7   [Google Chrome,iTerm2]  : khd -p "cmd - 7"
+# lctrl - 8   [Google Chrome,iTerm2]  : khd -p "cmd - 8"
+# lctrl - 9   [Google Chrome,iTerm2]  : khd -p "cmd - 9"
+lctrl - space [iTerm2]  : khd -p "cmd - space"
 
 # Browser shortcuts
 # lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
@@ -18,17 +19,17 @@ lctrl - 9   [Google Chrome,iTerm2]  : khd -p "cmd - 9"
 # lshift + lctrl - t  [Google Chrome,Safari]  : khd -p "shift + cmd - t"
 
 # Global
-lctrl - a   ! [*]   : khd -p "cmd - a"
-lctrl - c   ! [*]   : khd -p "cmd - c"
-lctrl - s   ! [*]   : khd -p "cmd - s"
-lctrl - v   ! [*]   : khd -p "cmd - v"
-lctrl - w   ! [*]   : khd -p "cmd - w"
-lctrl - x   ! [*]   : khd -p "cmd - x"
-lcmd + lctrl - l    : pmset displaysleepnow
+# lctrl - a   ! [*]   : khd -p "cmd - a"
+# lctrl - c   ! [*]   : khd -p "cmd - c"
+# lctrl - s   ! [*]   : khd -p "cmd - s"
+# lctrl - v   ! [*]   : khd -p "cmd - v"
+# lctrl - w   ! [*]   : khd -p "cmd - w"
+# lctrl - x   ! [*]   : khd -p "cmd - x"
+# lcmd + lctrl - l    : pmset displaysleepnow
 # lcmd + lctrl - l  : open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
 # Open iTerm2
-alt - return  : open -a /Applications/iTerm.app
+# alt - return  : open -a /Applications/iTerm.app
 
 # Reload khd config
 cmd + alt + ctrl - r  : noti -m "khd reloaded!" khd -e "reload"

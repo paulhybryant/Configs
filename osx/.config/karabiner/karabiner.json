@@ -666,18 +666,18 @@
                 },
                 {
                     "from": {
-                        "key_code": "escape"
-                    },
-                    "to": {
-                        "key_code": "caps_lock"
-                    }
-                },
-                {
-                    "from": {
                         "key_code": "delete_forward"
                     },
                     "to": {
                         "key_code": "delete_or_backspace"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "escape"
+                    },
+                    "to": {
+                        "key_code": "caps_lock"
                     }
                 }
             ],
