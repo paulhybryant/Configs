@@ -31,6 +31,7 @@ brew install fasd
 brew install findutils
 brew install fzf
 brew install ghostscript
+brew install git
 brew install git-extras
 brew install gnu-getopt
 brew install gnu-sed
@@ -74,7 +75,6 @@ brew install wget
 brew install yudai/gotty/gotty
 brew install zsh
 brew cask install alfred3
-brew cask install amethyst
 brew cask install ariang
 brew cask install calibre
 brew cask install cyberduck
@@ -83,7 +83,7 @@ brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
-brew cask install fontforge
+brew cask install google-backup-and-sync
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
@@ -94,8 +94,10 @@ brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
 brew cask install shadowsocksx-ng
+brew cask install sogouinput
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vanilla
+brew cask install wechat
 brew cask install xmind
 brew cask install xquartz
