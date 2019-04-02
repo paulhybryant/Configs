@@ -9,16 +9,19 @@
 # lctrl - 8   [Google Chrome,iTerm2]  : khd -p "cmd - 8"
 # lctrl - 9   [Google Chrome,iTerm2]  : khd -p "cmd - 9"
 # lctrl - space [iTerm2]  : khd -p "cmd - space"
+
 cmd - a [iTerm2]  : khd -p "ctrl - a"
 cmd - c [iTerm2]  : khd -p "ctrl - c"
 cmd - d [iTerm2]  : khd -p "ctrl - d"
 cmd - h [iTerm2]  : khd -p "ctrl - h"
 cmd - l [iTerm2]  : khd -p "ctrl - l"
 cmd - n [iTerm2]  : khd -p "ctrl - n"
+cmd - q [iTerm2]  : khd -p "ctrl - q"
 cmd - r [iTerm2]  : khd -p "ctrl - r"
 cmd - s [iTerm2]  : khd -p "ctrl - s"
 cmd - u [iTerm2]  : khd -p "ctrl - u"
 cmd - w [iTerm2]  : khd -p "ctrl - w"
+cmd - z [iTerm2]  : khd -p "ctrl - z"
 
 # Browser shortcuts
 # lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
