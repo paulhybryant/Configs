@@ -22,6 +22,8 @@ cmd - s [iTerm2]  : khd -p "ctrl - s"
 cmd - u [iTerm2]  : khd -p "ctrl - u"
 cmd - w [iTerm2]  : khd -p "ctrl - w"
 cmd - z [iTerm2]  : khd -p "ctrl - z"
+cmd - tab [Google Chrome]  : khd -p "ctrl - tab"
+cmd + shift - tab [Google Chrome]  : khd -p "ctrl + shift - tab"
 
 # Browser shortcuts
 # lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
