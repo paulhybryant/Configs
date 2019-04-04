@@ -62,6 +62,18 @@
                 }],
                 "type": "basic"
             }]
+        },
+        {
+            "description": "right_alt restarts synergy",
+            "manipulators": [{
+                "from": {
+                    "key_code": "right_alt"
+                },
+                "to": [{
+                    "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergy"
+                }],
+                "type": "basic"
+            }]
         }
     ]
 }
