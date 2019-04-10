@@ -41,11 +41,11 @@ brew install go
 brew install grc
 brew install grunt-cli
 brew install htop
-brew install martido/brew-graph/brew-graph
 brew install jq
 brew install koekeishiya/formulae/khd
 brew install lsof
 brew install macvim
+brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
 brew install netcat
@@ -84,6 +84,7 @@ brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
+brew cask install freemind
 brew cask install google-backup-and-sync
 brew cask install hyperswitch
 brew cask install iterm2
@@ -91,6 +92,7 @@ brew cask install karabiner-elements
 brew cask install key-codes
 brew cask install kindle
 brew cask install knotes
+brew cask install libreoffice
 brew cask install macvim
 brew cask install osxfuse
 brew cask install scroll-reverser
