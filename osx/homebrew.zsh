@@ -41,6 +41,7 @@ brew install go
 brew install grc
 brew install grunt-cli
 brew install htop
+brew install martido/brew-graph/brew-graph
 brew install jq
 brew install koekeishiya/formulae/khd
 brew install lsof
