@@ -10,7 +10,6 @@ brew tap linuxbrew/xorg
 brew tap martido/brew-graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
-brew tap waltarix/customs
 brew install assh
 brew install bat
 brew install bower
@@ -18,7 +17,6 @@ brew install brew-gem
 brew install brew-pip
 brew install ccat
 brew install coreutils
-brew install curl
 brew install docker-completion
 brew install fasd
 brew install findutils
@@ -33,15 +31,15 @@ brew install go
 brew install grc
 brew install grunt-cli
 brew install htop
-brew install martido/brew-graph/brew-graph
 brew install jq
 brew install lsof
+brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
 brew install netcat
 brew install noti
-brew install patchelf  --with-static
 brew install p7zip
+brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install peco
@@ -56,6 +54,5 @@ brew install stow
 brew install the_silver_searcher
 brew install tmux
 brew install trash-cli
-brew install waltarix/customs/gnu-cpio
 brew install wget
 brew install zsh
