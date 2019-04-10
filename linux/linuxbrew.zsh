@@ -41,6 +41,7 @@ brew install noti
 brew install p7zip
 brew install patchelf  --with-static
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
+brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install peco
 brew install percol
