@@ -353,7 +353,7 @@
                 }
             ],
             "name": "pc",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {
@@ -688,7 +688,7 @@
                 }
             ],
             "name": "basic",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
