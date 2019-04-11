@@ -194,7 +194,24 @@
                     "basic.to_if_alone_timeout_milliseconds": 1000,
                     "basic.to_if_held_down_threshold_milliseconds": 500
                 },
-                "rules": []
+                "rules": [
+                    {
+                        "description": "right_alt restarts synergys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_alt"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergys"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
             },
             "devices": [
                 {
