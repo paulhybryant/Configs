@@ -64,13 +64,13 @@
             }]
         },
         {
-            "description": "right_alt restarts synergy",
+            "description": "right_alt restarts synergys",
             "manipulators": [{
                 "from": {
                     "key_code": "right_alt"
                 },
                 "to": [{
-                    "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergy"
+                    "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergys"
                 }],
                 "type": "basic"
             }]

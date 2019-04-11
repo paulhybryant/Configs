@@ -2,4 +2,5 @@ Library/Application\ Support/iTerm2
 .*\.sh
 .*\.zsh
 \.skhdrc
+\.khdrc
 \.config/com.googlecode.iterm2.plist
