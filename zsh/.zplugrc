@@ -11,7 +11,7 @@ function +vi-hg-untracked() {
 
 function powerlevel9k_config() {
   POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
-  POWERLEVEL9K_MODE="awesome-fontconfig"
+  # POWERLEVEL9K_MODE="awesome-fontconfig"
   POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(root_indicator)
   POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(date time vi_mode)
   POWERLEVEL9K_SHORTEN_DELIMITER=""
@@ -39,7 +39,8 @@ zplug "modules/fasd", from:prezto, defer:0
 [[ "${OSTYPE}" =~ ".*darwin.*" ]] && zplug "unixorn/tumult.plugin.zsh", defer:1
 
 zplug "Valodim/zsh-curl-completion", defer:1
-zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
+# zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", defer:1
+zplug "romkatv/powerlevel10k", use:"powerlevel10k.zsh-theme", defer:1
 zplug "bric3/nice-exit-code", defer:1
 zplug "hlissner/zsh-autopair", defer:1
 zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
