@@ -9,6 +9,8 @@ cp ~/Library/Preferences/com.pilotmoon.scroll-reverser.plist .
 # Hyperswitch
 # Spectable
 # Karabiner
+# Global
+# App shortcut
 
 brew::backup >! homebrew.zsh
 
