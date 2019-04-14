@@ -11,7 +11,11 @@ function +vi-hg-untracked() {
 
 function powerlevel9k_config() {
   POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
-  # POWERLEVEL9K_MODE="awesome-fontconfig"
+  if [[ "${OSTYPE}" =~ ".*darwin.*" ]]; then
+    POWERLEVEL9K_MODE="awesome-patched"
+  else
+    POWERLEVEL9K_MODE="awesome-fontconfig"
+  fi
   POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(root_indicator)
   POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=(date time vi_mode)
   POWERLEVEL9K_SHORTEN_DELIMITER=""
