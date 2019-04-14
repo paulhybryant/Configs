@@ -80,7 +80,6 @@ brew cask install ariang
 brew cask install calibre
 brew cask install cyberduck
 brew cask install docker
-brew cask install evernote
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
@@ -104,3 +103,4 @@ brew cask install vanilla
 brew cask install wechat
 brew cask install xmind
 brew cask install xquartz
+brew cask install yinxiangbiji
