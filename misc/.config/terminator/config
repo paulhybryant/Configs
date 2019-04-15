@@ -1,15 +1,22 @@
 [global_config]
   always_split_with_profile = True
-  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = CustomCommandsMenu, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, Logger, LaunchpadBugURLHandler
   focus = system
   inactive_color_offset = 0.5
   title_transmit_bg_color = "#d30102"
 [keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
   close_term = None
   close_window = None
   copy = <Primary>c
   cycle_next = None
   cycle_prev = None
+  edit_tab_title = None
+  edit_terminal_title = None
+  edit_window_title = None
+  full_screen = <Primary>Return
   go_down = None
   go_left = None
   go_next = None
@@ -18,14 +25,33 @@
   go_up = None
   group_all = None
   group_tab = None
+  help = None
+  hide_window = None
+  insert_number = None
+  insert_padded = None
   layout_launcher = None
-  new_tab = <Alt>t
-  next_tab = None
+  move_tab_left = None
+  move_tab_right = None
+  new_tab = <Primary>t
+  new_terminator = None
+  new_window = None
+  next_tab = <Primary>Tab
   paste = <Primary>v
-  prev_tab = None
+  prev_tab = <Primary><Shift>Tab
+  reset = None
+  reset_clear = None
+  resize_down = None
+  resize_left = None
+  resize_right = None
+  resize_up = None
+  rotate_ccw = None
   rotate_cw = None
+  scaled_zoom = None
+  search = None
+  split_horiz = None
+  split_vert = None
   switch_to_tab_1 = <Primary>1
-  switch_to_tab_10 = <Primary>9
+  switch_to_tab_10 = None
   switch_to_tab_2 = <Primary>2
   switch_to_tab_3 = <Primary>3
   switch_to_tab_4 = <Primary>4
@@ -34,6 +60,11 @@
   switch_to_tab_7 = <Primary>7
   switch_to_tab_8 = <Primary>8
   switch_to_tab_9 = <Primary>9
+  toggle_scrollbar = None
+  toggle_zoom = None
+  ungroup_all = None
+  ungroup_tab = None
+  zoom_normal = <Primary>0
   zoom_out = <Primary>minus
 [layouts]
   [[default]]
@@ -49,14 +80,14 @@
   [[default]]
     copy_on_selection = True
     cursor_color = "#aaaaaa"
-    font = Source Code Pro for Powerline Semi-Bold 11
+    font = Source Code Pro for Powerline 12
     scrollback_infinite = True
     use_system_font = False
   [[solarized-dark]]
     background_color = "#002b36"
     copy_on_selection = True
     cursor_color = "#eee8d5"
-    font = Droid Sans Mono for Powerline 11
+    font = Source Code Pro for Powerline 12
     foreground_color = "#eee8d5"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scrollback_infinite = True
@@ -65,7 +96,7 @@
     background_color = "#eee8d5"
     copy_on_selection = True
     cursor_color = "#002b36"
-    font = Source Code Pro for Powerline Semi-Bold 11
+    font = Source Code Pro for Powerline 12
     foreground_color = "#002b36"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scrollback_infinite = True
