@@ -10,7 +10,7 @@ function install_common() {
   echo 'Cloning zplug, dotfiles, tpm, and neobundle...'
   git clone https://github.com/zplug/zplug ~/.zplug
   mkdir -p ~/.zplug/repos/paulhybryant/
-  git clone https://github.com/paulhybryant/dotfiles \
+  git clone --depth=1 https://github.com/paulhybryant/dotfiles \
     ~/.zplug/repos/paulhybryant/dotfiles
   git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim

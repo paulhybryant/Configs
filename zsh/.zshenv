@@ -5,7 +5,11 @@ declare -U path manpath fpath
 if [[ "${OSTYPE}" == "darwin"* ]]; then
   declare -xg BREWVERSION="homebrew" BREWHOME="/usr/local" CMDPREFIX="g"
 else
-  declare -xg BREWVERSION="linuxbrew" BREWHOME="${HOME}/.linuxbrew" CMDPREFIX=""
+  if [[ -d "${HOME}/.linuxbrew" ]]; then
+    declare -xg BREWVERSION="linuxbrew" BREWHOME="${HOME}/.linuxbrew" CMDPREFIX=""
+  else
+    declare -xg BREWVERSION="linuxbrew" BREWHOME="/home/linuxbrew/.linuxbrew" CMDPREFIX=""
+  fi
 fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' LANGUAGE="${LANG}" \
   PYTHONSTARTUP="${HOME}/.pythonrc" GOPATH="${BREWHOME}/opt/go/libexec" \

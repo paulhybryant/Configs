@@ -22,6 +22,7 @@ else
   abbrev-alias -c vi='mvim -v'
   abbrev-alias -c vim='mvim -v'
   abbrev-alias -c doc2pdf='/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf'
+  abbrev-alias -c svg2pdf='/Applications/Inkscape.app/Contents/Resources/bin/Inkscape --without-gui'
 fi
 
 if (( ${+commands[grc]} )); then
@@ -79,8 +80,10 @@ abbrev-alias -c vartype='declare -p'
 abbrev-alias -c zunbindkey='bindkey -r'
 abbrev-alias -c pi='sshrc -X pi@pi'
 abbrev-alias -c miwifi='sshrc -X root@mifiwi'
-# abbrev-alias -c nas='sshrc -X admin@paulhybryant.myqnapcloud.com'
-abbrev-alias -c nas='ssh admin@paulhybryant.myqnapcloud.com'
+# abbrev-alias -c nas='sshrc -X admin@nas'
+abbrev-alias -c nas='ssh admin@nas'
+abbrev-alias -c vpsroot='ssh root@vps'
+abbrev-alias -c vps='sshrc -X paulhybryant@vps'
 abbrev-alias -c workenv='docker run -it --hostname paulhybryant paulhybryant/docker-base:v0.1 /home/linuxbrew/.linuxbrew/bin/zsh'
 abbrev-alias -c combine_pdf='"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o '
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help

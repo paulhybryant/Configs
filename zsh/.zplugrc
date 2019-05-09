@@ -117,4 +117,3 @@ zplug load --verbose
 powerlevel9k_config
 
 abbrev-alias --init
-zplug_post_load
