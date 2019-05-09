@@ -48,12 +48,14 @@ brew install percol
 brew install pkg-config
 brew install psgrep
 brew install pstree
+brew install python@2
 brew install q
 brew install ranger
 brew install sshrc
 brew install stow
 brew install the_silver_searcher
 brew install tmux
+brew install translate-shell
 brew install trash-cli
 brew install wget
 brew install zsh
