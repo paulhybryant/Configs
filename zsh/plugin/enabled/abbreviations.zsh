@@ -83,7 +83,7 @@ abbrev-alias -c miwifi='sshrc -X root@mifiwi'
 # abbrev-alias -c nas='sshrc -X admin@nas'
 abbrev-alias -c nas='ssh admin@nas'
 abbrev-alias -c vpsroot='ssh root@vps'
-abbrev-alias -c vps='sshrc -X paulhybryant@vps'
+abbrev-alias -c vps='ssh paulhybryant@vps'
 abbrev-alias -c workenv='docker run -it --hostname paulhybryant paulhybryant/docker-base:v0.1 /home/linuxbrew/.linuxbrew/bin/zsh'
 abbrev-alias -c combine_pdf='"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o '
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
