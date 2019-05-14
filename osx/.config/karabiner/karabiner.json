@@ -24,7 +24,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergys"
+                                        "shell_command": "msg=$(/Users/yuhuang/.local/bin/synergys); /usr/local/bin/noti -m \"${msg}\""
                                     }
                                 ],
                                 "type": "basic"
@@ -173,7 +173,7 @@
                 }
             ],
             "name": "usb",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
@@ -233,7 +233,7 @@
                 },
                 "rules": [
                     {
-                        "description": "right_alt restarts synergy",
+                        "description": "right_alt restarts synergys",
                         "manipulators": [
                             {
                                 "from": {
@@ -241,7 +241,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergy -m 'synergy restarted'"
+                                        "shell_command": "msg=$(/Users/yuhuang/.local/bin/synergys); /usr/local/bin/noti -m \"${msg}\""
                                     }
                                 ],
                                 "type": "basic"
@@ -350,7 +350,7 @@
                 }
             ],
             "name": "direct",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {

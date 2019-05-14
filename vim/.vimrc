@@ -44,6 +44,7 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'tmux-plugins/vim-tmux', {'on_ft' : ['tmux']}                       " Vim plugin for editing .tmux.conf
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'
   NeoBundle 'junegunn/vim-easy-align'
+  NeoBundle 'justinmk/vim-dirvish'
   " NeoBundle 'junegunn/vim-slash'
   " NeoBundle 'pgdouyon/vim-evanesco'
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
