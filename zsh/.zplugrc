@@ -115,5 +115,5 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 powerlevel9k_config
-
+functions zplug_post_load > /dev/null && zplug_post_load
 abbrev-alias --init
