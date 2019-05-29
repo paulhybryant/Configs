@@ -13,7 +13,8 @@ function powerlevel9k_config() {
   POWERLEVEL9K_VCS_HG_HOOKS=(hg-untracked)
   if [[ -z "${SSH_OS}" ]]; then
     if [[ "${OSTYPE}" =~ ".*darwin.*" ]]; then
-      POWERLEVEL9K_MODE="awesome-patched"
+      # POWERLEVEL9K_MODE="awesome-patched"
+      POWERLEVEL9K_MODE="nerdfont-complete"
     else
       POWERLEVEL9K_MODE="awesome-fontconfig"
     fi
