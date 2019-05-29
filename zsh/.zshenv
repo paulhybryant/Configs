@@ -22,6 +22,7 @@ unset SSL_CERT_FILE
 # coreutils
 alias date='${CMDPREFIX}\date'
 alias dircolors='${CMDPREFIX}\dircolors'
+alias du='${CMDPREFIX}\du'
 alias ls='${CMDPREFIX}\ls --color=auto'
 alias mktemp='${CMDPREFIX}\mktemp'
 alias stat='${CMDPREFIX}\stat'
