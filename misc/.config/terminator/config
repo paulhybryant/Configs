@@ -80,7 +80,7 @@
   [[default]]
     copy_on_selection = True
     cursor_color = "#aaaaaa"
-    font = Source Code Pro for Powerline 12
+    font = Hack Nerd Font 14
     scrollback_infinite = True
     use_system_font = False
   [[solarized-dark]]
