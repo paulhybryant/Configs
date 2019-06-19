@@ -1,0 +1,3 @@
+#!/bin/bash
+
+dumppdf.py -T "$1" | xq -r '.outlines.outline[] | {level: .["@level"]|tonumber, outline: .["@title"]} | "\t" * (.level - 1) + .outline' | sed -e "s/b'//" -e "s/'//g" | ascii2uni -q -a 7

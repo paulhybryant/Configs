@@ -1,0 +1,6 @@
+#!/bin/bash
+
+tmpdir=$(mktemp -d)
+cp "$1" "${tmpdir}/" && cd "${tmpdir}"
+ncx=$(unzip "$1" | grep "toc.ncx" | sed -e 's/.*inflating: //' -e 's/ *$//')
+cat "${ncx}" | xq '.' | jq '.ncx.navMap | .' | grep '"text":' | sed -e 's/"text": //' -e 's/"//g' -e 's/“//g' -e 's/”//g'
