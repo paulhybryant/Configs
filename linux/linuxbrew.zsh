@@ -19,7 +19,6 @@ brew install ccat
 brew install coreutils
 brew install docker-completion
 brew install fasd
-brew install findutils
 brew install fzf
 brew install git
 brew install git-extras
@@ -39,7 +38,7 @@ brew install most
 brew install netcat
 brew install noti
 brew install p7zip
-brew install patchelf  --with-static
+brew install patchelf
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -58,4 +57,5 @@ brew install tmux
 brew install translate-shell
 brew install trash-cli
 brew install wget
+brew install you-get
 brew install zsh
