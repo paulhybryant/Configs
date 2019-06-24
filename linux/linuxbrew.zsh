@@ -58,4 +58,5 @@ brew install tmux
 brew install translate-shell
 brew install trash-cli
 brew install wget
+brew install you-get
 brew install zsh
