@@ -31,7 +31,6 @@ brew install go
 brew install grc
 brew install grunt-cli
 brew install htop
-brew install jq
 brew install lsof
 brew install martido/brew-graph/brew-graph
 brew install moreutils
@@ -39,7 +38,7 @@ brew install most
 brew install netcat
 brew install noti
 brew install p7zip
-brew install patchelf  --with-static
+brew install patchelf
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -49,6 +48,7 @@ brew install pkg-config
 brew install psgrep
 brew install pstree
 brew install python@2
+brew install python-yq
 brew install q
 brew install ranger
 brew install sshrc
