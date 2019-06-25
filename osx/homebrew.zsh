@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
+brew tap caskroom/fonts
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/cask
-brew tap homebrew/cask-fonts
 brew tap homebrew/cask-versions
 brew tap homebrew/command-not-found
 brew tap homebrew/core
@@ -41,18 +41,20 @@ brew install go
 brew install grc
 brew install grunt-cli
 brew install htop
-brew install jq
+brew install imagemagick
 brew install koekeishiya/formulae/khd
 brew install lsof
 brew install macvim
 brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
+brew install mupdf
 brew install netcat
 brew install nmap
 brew install noti
 brew install osxutils
 brew install p7zip
+brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -61,6 +63,8 @@ brew install percol
 brew install pkg-config
 brew install psgrep
 brew install pstree
+brew install python-yq
+brew install python@2
 brew install q
 brew install ranger
 brew install reattach-to-user-namespace
@@ -71,6 +75,7 @@ brew install telnet
 brew install the_silver_searcher
 brew install tmux
 brew install trash-cli
+brew install uni2ascii
 brew install waltarix/customs/gnu-cpio
 brew install wget
 brew install yudai/gotty/gotty
@@ -93,14 +98,13 @@ brew cask install kindle
 brew cask install knotes
 brew cask install libreoffice
 brew cask install macvim
+brew cask install mubu
 brew cask install osxfuse
 brew cask install scroll-reverser
 brew cask install shadowsocksx-ng
 brew cask install sogouinput
 brew cask install spectacle
-brew cask install the-unarchiver
 brew cask install vanilla
 brew cask install wechat
-brew cask install xmind
 brew cask install xquartz
 brew cask install yinxiangbiji
