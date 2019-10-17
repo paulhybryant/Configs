@@ -11,7 +11,7 @@ brew tap homebrew/core
 brew tap homebrew/services
 brew tap jhawthorn/fzy
 brew tap koekeishiya/formulae
-brew tap martido/brew-graph
+brew tap martido/graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew tap waltarix/customs
@@ -45,7 +45,6 @@ brew install imagemagick
 brew install koekeishiya/formulae/khd
 brew install lsof
 brew install macvim
-brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
 brew install mupdf
@@ -106,5 +105,6 @@ brew cask install sogouinput
 brew cask install spectacle
 brew cask install vanilla
 brew cask install wechat
+brew cask install xmind-zen
 brew cask install xquartz
 brew cask install yinxiangbiji
