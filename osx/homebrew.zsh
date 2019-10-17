@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
 brew tap beeftornado/rmtree
-brew tap caskroom/fonts
 brew tap homebrew/aliases
 brew tap homebrew/bundle
 brew tap homebrew/cask
+brew tap homebrew/cask-fonts
 brew tap homebrew/cask-versions
 brew tap homebrew/command-not-found
 brew tap homebrew/core
