@@ -12,6 +12,9 @@ function install_common() {
   mkdir -p ~/.zplug/repos/paulhybryant/
   git clone --depth=1 https://github.com/paulhybryant/dotfiles \
     ~/.zplug/repos/paulhybryant/dotfiles
+}
+
+function post_install_common() {
   git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
   cd ~/.vim/bundle/vimproc.vim
@@ -27,8 +30,8 @@ function install_common() {
   echo 'Installing tmux plugins...'
   ~/.tmux/plugins/tpm/bin/install_plugins
 
-  # echo 'Installing vim plugins...'
-  # vim -c 'set nomore' -c 'NeoBundleInstall' -c 'q'
+  echo 'Installing vim plugins...'
+  vim -c 'set nomore' -c 'NeoBundleInstall' -c 'q'
   # pip
   # gem
   # npm
@@ -44,6 +47,7 @@ function install_linux() {
     export PATH="${HOME}/.linuxbrew/bin:$PATH"
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
+  ./osx/linuxbrew.zsh
   stow linux -t ~
 
   # curl -L https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb -o /tmp/bat.deb
@@ -58,6 +62,7 @@ function install_osx() {
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
+  ./osx/homebrew.zsh
   stow osx -t ~
 }
 
@@ -67,3 +72,4 @@ if [[ "${OSTYPE}" == *darwin* ]]; then
 else
   install_linux
 fi
+post_install_common
