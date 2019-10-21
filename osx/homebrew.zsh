@@ -93,6 +93,7 @@ brew cask install google-backup-and-sync
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
+brew cask install keka
 brew cask install key-codes
 brew cask install kindle
 brew cask install knotes
