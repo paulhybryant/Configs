@@ -19,23 +19,23 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   call neobundle#begin(s:bundle_base_path)
   NeoBundleFetch 'Shougo/neobundle.vim'                                         " Install NeoBundle itself
   NeoBundle 'ConradIrwin/vim-bracketed-paste'                                   " Automatically toggle paste mode
-  NeoBundle 'LnL7/vim-nix', {'on_ft' : ['nix']}                                 " Syntax highlight for nix
-  NeoBundle 'benmills/vimux'
+  " NeoBundle 'LnL7/vim-nix', {'on_ft' : ['nix']}                                 " Syntax highlight for nix
+  " NeoBundle 'benmills/vimux'
   NeoBundle 'chrisbra/Recover.vim'                                              " Show diff between swap and saved file
-  NeoBundle 'dag/vim-fish'
+  " NeoBundle 'dag/vim-fish'
   " NeoBundle 'edkolev/tmuxline.vim'
-  NeoBundle 'epeli/slimux'
+  " NeoBundle 'epeli/slimux'
   NeoBundle 'ekalinin/Dockerfile.vim', {'on_ft' : ['docker']}                   " Syntax highlight for docker
-  NeoBundle 'godlygeek/tabular'
+  " NeoBundle 'godlygeek/tabular'
   NeoBundle 'google/vim-maktaba'                                                " Vimscript plugin library from google
-  NeoBundle 'koekeishiya/kwm', {'rtp' : 'syntax/vim'}
+  " NeoBundle 'koekeishiya/kwm', {'rtp' : 'syntax/vim'}
   NeoBundle 'google/vim-searchindex'                                            " Display and index search matches
-  NeoBundle 'haya14busa/vim-operator-flashy'
-  NeoBundle 'kana/vim-operator-user'                                            " User defined operator
-  NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
-  NeoBundle 'luochen1990/rainbow'
+  " NeoBundle 'haya14busa/vim-operator-flashy'
+  " NeoBundle 'kana/vim-operator-user'                                            " User defined operator
+  " NeoBundle 'kana/vim-textobj-user'                                             " Allow defining text object by user
+  " NeoBundle 'luochen1990/rainbow'
   NeoBundle 'octol/vim-cpp-enhanced-highlight', {'on_ft' : ['cpp']}             " Enhanced vim cpp highlight
-  NeoBundle 'metakirby5/codi.vim'
+  " NeoBundle 'metakirby5/codi.vim'
   NeoBundle 'bogado/file-line'                                                  " Open files and go to specific line and column (original user not active)
   NeoBundle 'somini/vim-autoclose'                                              " Automatically close brackets
   NeoBundle 'plasticboy/vim-markdown', {'on_ft' : ['markdown']}                 " Yet another markdown syntax highlighting
@@ -43,8 +43,8 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'thinca/vim-ft-markdown_fold', {'on_ft' : ['markdown']}             " Fold markdown
   NeoBundle 'tmux-plugins/vim-tmux', {'on_ft' : ['tmux']}                       " Vim plugin for editing .tmux.conf
   NeoBundle 'tmux-plugins/vim-tmux-focus-events'
-  NeoBundle 'junegunn/vim-easy-align'
-  NeoBundle 'justinmk/vim-dirvish'
+  " NeoBundle 'junegunn/vim-easy-align'
+  " NeoBundle 'justinmk/vim-dirvish'
   " NeoBundle 'junegunn/vim-slash'
   " NeoBundle 'pgdouyon/vim-evanesco'
   NeoBundle 'tpope/vim-endwise'                                                 " Automatically put end constructs
@@ -52,13 +52,13 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   " NeoBundle 'raimondi/delimitmate'
   NeoBundle 'tpope/vim-repeat'                                                  " Repeat any command with '.'
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
-  NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
+  " NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'xu-cheng/brew.vim', {'on_ft' : ['ruby']}                           " Syntax highlight for homebrew formula
   NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}                            " Syntax highlight for zplug
-  NeoBundle 'previm/previm'
-  NeoBundle 'tyru/open-browser.vim'
+  " NeoBundle 'previm/previm'                                                     " Realtime preview in vim
+  " NeoBundle 'tyru/open-browser.vim'
   " {{{2
   NeoBundle 'Shougo/neocomplete.vim', {
     \ 'depends' : ['Shougo/context_filetype.vim'],
@@ -85,20 +85,20 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'Shougo/unite.vim'                                                  " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
-  let s:unite = neobundle#get('unite.vim')
-  function! s:unite.hooks.on_source(bundle)
-    let g:unite_abbr_highlight = 'Keyword'
-    let g:unite_enable_start_insert = 1
-    let g:unite_prompt = '» '
-    nnoremap <unique> <C-p> :Unite file_rec/async<CR>
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    function! s:unite.hooks.on_open()
-      nmap <buffer> <ESC> <Plug>(unite_exit)
-      imap <buffer> <ESC> <Plug>(unite_exit)
-    endfunction
-    autocmd FileType unite call s:unite.hooks.on_open()
-  endfunction
+  " NeoBundle 'Shougo/unite.vim'                                                  " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
+  " let s:unite = neobundle#get('unite.vim')
+  " function! s:unite.hooks.on_source(bundle)
+    " let g:unite_abbr_highlight = 'Keyword'
+    " let g:unite_enable_start_insert = 1
+    " let g:unite_prompt = '» '
+    " nnoremap <unique> <C-p> :Unite file_rec/async<CR>
+    " call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    " function! s:unite.hooks.on_open()
+      " nmap <buffer> <ESC> <Plug>(unite_exit)
+      " imap <buffer> <ESC> <Plug>(unite_exit)
+    " endfunction
+    " autocmd FileType unite call s:unite.hooks.on_open()
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'Shougo/vimproc.vim', {
@@ -109,44 +109,42 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ }                                                                         " Enable background process and multi-threading
   " }}}
   " {{{2
-  NeoBundle 'SirVer/ultisnips', {'disabled' : !has('python')}                   " Define and insert snippets
-  let s:ultisnips = neobundle#get('ultisnips')
-  " If there are multiple ft.snippet files, UltiSnips will only load the first.
-  function! s:ultisnips.hooks.on_source(bundle)
-    " Remap Ultisnips for compatibility for YCM
-    let g:UltiSnipsExpandTrigger = "<tab>"
-  endfunction
+  " NeoBundle 'SirVer/ultisnips', {'disabled' : !has('python')}                   " Define and insert snippets
+  " let s:ultisnips = neobundle#get('ultisnips')
+  " function! s:ultisnips.hooks.on_source(bundle)   " If there are multiple ft.snippet files, UltiSnips will only load the first.
+    " let g:UltiSnipsExpandTrigger = "<tab>"        " Remap Ultisnips for compatibility for YCM
+  " endfunction
   " }}}
   " {{{2
-  NeoBundle 'Valloric/YouCompleteMe', {'disabled' : 1}                          " Python based multi-language completion engine
-  let s:ycm = neobundle#get('YouCompleteMe')
-  function s:ycm.hooks.on_source(bundle)
-    nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    let g:ycm_always_populate_location_list = 1                                 " Default 0
-    let g:ycm_autoclose_preview_window_after_completion = 0                     " Automatically close the preview window for completion
-    let g:ycm_autoclose_preview_window_after_insertion = 0                      " Automatically close the preview window for completion
-    let g:ycm_collect_identifiers_from_tags_files = 1                           " Enable completion from tags
-    let g:ycm_complete_in_comments = 1
-    let g:ycm_complete_in_strings = 1
-    let g:ycm_confirm_extra_conf = 1
-    let g:ycm_error_symbol = '!!'
-    let g:ycm_filetype_blacklist = {
-      \ 'infolog': 1,
-      \ }
-    let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
-    let g:ycm_filetype_whitelist = {
-      \ 'c' : 1,
-      \ 'cpp' : 1,
-      \ 'python' : 1,
-      \ 'go' : 1}
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_semantic_triggers =  {
-      \   'c' : ['->', '.'], 'cpp,objcpp' : ['->', '.', '::'],
-      \   'java,javascript,python' : ['.'], 'ruby' : ['.', '::'],
-      \ }
-    let g:ycm_warning_symbol = '>>'
-  endfunction
+  " NeoBundle 'Valloric/YouCompleteMe', {'disabled' : 1}                          " Python based multi-language completion engine
+  " let s:ycm = neobundle#get('YouCompleteMe')
+  " function s:ycm.hooks.on_source(bundle)
+    " nnoremap <unique> <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " let g:ycm_always_populate_location_list = 1                                 " Default 0
+    " let g:ycm_autoclose_preview_window_after_completion = 0                     " Automatically close the preview window for completion
+    " let g:ycm_autoclose_preview_window_after_insertion = 0                      " Automatically close the preview window for completion
+    " let g:ycm_collect_identifiers_from_tags_files = 1                           " Enable completion from tags
+    " let g:ycm_complete_in_comments = 1
+    " let g:ycm_complete_in_strings = 1
+    " let g:ycm_confirm_extra_conf = 1
+    " let g:ycm_error_symbol = '!!'
+    " let g:ycm_filetype_blacklist = {
+      " \ 'infolog': 1,
+      " \ }
+    " let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+    " let g:ycm_filetype_whitelist = {
+      " \ 'c' : 1,
+      " \ 'cpp' : 1,
+      " \ 'python' : 1,
+      " \ 'go' : 1}
+    " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    " let g:ycm_semantic_triggers =  {
+      " \   'c' : ['->', '.'], 'cpp,objcpp' : ['->', '.', '::'],
+      " \   'java,javascript,python' : ['.'], 'ruby' : ['.', '::'],
+      " \ }
+    " let g:ycm_warning_symbol = '>>'
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'airblade/vim-gitgutter', {'disabled' : &diff}                      " Show sign at changes from last commit
@@ -209,35 +207,35 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
     \ }                                                                         " Fuzzy incremental search
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/archive/blob/vba/pyclewn-2.3.vmb', {'name' : 'pyclewn',
-    \ 'regular_name' : 'pyclewn', 'frozen' : 1, 'type' : 'vba'
-    \ }                                                                         " Vim runtime file for pyclewn
+  " NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    " \ 'dotfiles/master/archive/blob/vba/pyclewn-2.3.vmb', {'name' : 'pyclewn',
+    " \ 'regular_name' : 'pyclewn', 'frozen' : 1, 'type' : 'vba'
+    " \ }                                                                         " Vim runtime file for pyclewn
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/archive/blob/vba/PreserveNoEOL-1.01.vmb', {
-    \ 'name' : 'PreserveNoEOL', 'regular_name' : 'PreserveNoEOL',
-    \ 'frozen' : 1, 'type' : 'vba'
-    \ }                                                                         " Do not preserve EOL plugin
+  " NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    " \ 'dotfiles/master/archive/blob/vba/PreserveNoEOL-1.01.vmb', {
+    " \ 'name' : 'PreserveNoEOL', 'regular_name' : 'PreserveNoEOL',
+    " \ 'frozen' : 1, 'type' : 'vba'
+    " \ }                                                                         " Do not preserve EOL plugin
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/archive/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
-    \ 'regular_name' : 'Mark', 'frozen' : 1, 'type' : 'vba'
-    \ }                                                                         " Highlight multiple words
-  let s:mark = neobundle#get('Mark')
-  function! s:mark.hooks.on_source(bundle)
-    nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
-    nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
-  endfunction
+  " NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    " \ 'dotfiles/master/archive/blob/vba/mark-2.8.5.vba.gz', {'name' : 'Mark',
+    " \ 'regular_name' : 'Mark', 'frozen' : 1, 'type' : 'vba'
+    " \ }                                                                         " Highlight multiple words
+  " let s:mark = neobundle#get('Mark')
+  " function! s:mark.hooks.on_source(bundle)
+    " nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+    " nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+  " endfunction
   " }}}
   " {{{2
-  NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
-    \ 'dotfiles/master/archive/blob/vba/vis-v21f.vba.gz', {
-    \ 'name' : 'VisualBlockCommands', 'regular_name' : 'VisualBlockCommands',
-    \ 'frozen' : 1, 'type' : 'vba'
-    \ }                                                                         " Visual Block Commands
+  " NeoBundle 'https://raw.githubusercontent.com/paulhybryant/' .
+    " \ 'dotfiles/master/archive/blob/vba/vis-v21f.vba.gz', {
+    " \ 'name' : 'VisualBlockCommands', 'regular_name' : 'VisualBlockCommands',
+    " \ 'frozen' : 1, 'type' : 'vba'
+    " \ }                                                                         " Visual Block Commands
   " }}}
   " {{{2
   NeoBundle 'jeetsukumaran/vim-buffergator'                                     " Buffer selector in vim
@@ -297,20 +295,20 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   endfunction
   " }}}
   " {{{2
-  NeoBundle 'thinca/vim-textobj-between', {
-    \ 'depends' : 'kana/vim-textobj-user',
-    \ }                                                                         " Text object between a char
+  " NeoBundle 'thinca/vim-textobj-between', {
+    " \ 'depends' : 'kana/vim-textobj-user',
+    " \ }                                                                         " Text object between a char
   " }}}
   " {{{2
-  NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
-  let s:expand_region = neobundle#get('vim-expand-region')
-  function! s:expand_region.hooks.on_source(bundle)
-    let g:expand_region_text_objects = {'iw' : 0, 'iW' : 0, 'i"' : 0, 'i''': 0,
-      \ 'i]' : 1, 'ib' : 1, 'iB' : 1, 'il' : 0, 'ip' : 0, 'ie' : 0, }
-  endfunction
-  function! s:expand_region.hooks.on_post_source(bundle)
-    call expand_region#custom_text_objects('ruby', {'im': 0, 'am': 0})
-  endfunction
+  " NeoBundle 'terryma/vim-expand-region'                                         " Expand visual selection by text object
+  " let s:expand_region = neobundle#get('vim-expand-region')
+  " function! s:expand_region.hooks.on_source(bundle)
+    " let g:expand_region_text_objects = {'iw' : 0, 'iW' : 0, 'i"' : 0, 'i''': 0,
+      " \ 'i]' : 1, 'ib' : 1, 'iB' : 1, 'il' : 0, 'ip' : 0, 'ie' : 0, }
+  " endfunction
+  " function! s:expand_region.hooks.on_post_source(bundle)
+    " call expand_region#custom_text_objects('ruby', {'im': 0, 'am': 0})
+  " endfunction
   " }}}
   " {{{2
   NeoBundle 'vim-airline/vim-airline'                                           " Lean & mean status/tabline for vim
