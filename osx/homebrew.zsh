@@ -100,6 +100,8 @@ brew cask install libreoffice
 brew cask install macvim
 brew cask install mubu
 brew cask install osxfuse
+brew cask install plistedit-pro
+brew cask install prefs-editor
 brew cask install sogouinput
 brew cask install spectacle
 brew cask install vanilla
