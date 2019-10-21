@@ -82,6 +82,7 @@ brew install zsh
 brew cask install alfred3
 brew cask install ariang
 brew cask install calibre
+brew cask install clashx
 brew cask install cyberduck
 brew cask install docker
 brew cask install flux
@@ -99,8 +100,6 @@ brew cask install libreoffice
 brew cask install macvim
 brew cask install mubu
 brew cask install osxfuse
-brew cask install scroll-reverser
-brew cask install shadowsocksx-ng
 brew cask install sogouinput
 brew cask install spectacle
 brew cask install vanilla
