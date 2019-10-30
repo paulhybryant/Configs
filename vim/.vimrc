@@ -54,35 +54,33 @@ if isdirectory(s:bundle_base_path . 'neobundle.vim/')
   NeoBundle 'tpope/vim-surround'                                                " Mappings for surrounding text objects
   " NeoBundle 'tyru/capture.vim', {'on_cmd' : ['Capture']}                        " Capture Ex command output to buffer
   NeoBundle 'vim-ruby/vim-ruby', {'on_ft' : ['ruby']}                           " Vim plugin for editing ruby files.
+  NeoBundle 'prabirshrestha/vim-lsp'
+  NeoBundle 'prabirshrestha/async.vim'
+  NeoBundle 'prabirshrestha/asyncomplete.vim'
+  NeoBundle 'prabirshrestha/asyncomplete-lsp.vim'
   NeoBundle 'vitalk/vim-shebang'                                                " Detect shell file types by shell bang
   NeoBundle 'xu-cheng/brew.vim', {'on_ft' : ['ruby']}                           " Syntax highlight for homebrew formula
   NeoBundle 'zplug/vim-zplug', {'on_ft' : ['zplug']}                            " Syntax highlight for zplug
   " NeoBundle 'previm/previm'                                                     " Realtime preview in vim
   " NeoBundle 'tyru/open-browser.vim'
   " {{{2
-  NeoBundle 'Shougo/neocomplete.vim', {
-    \ 'depends' : ['Shougo/context_filetype.vim'],
-    \ 'disabled' : !has('lua'),
-    \ }                                                                         " Code completion engine
-  let s:neocomplete = neobundle#get('neocomplete.vim')
-  function! s:neocomplete.hooks.on_source(bundle)
-    let g:neocomplete#enable_at_startup = 1                                     " Use neocomplete.
-    let g:neocomplete#enable_smart_case = 1                                     " Use smartcase.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3                     " Set minimum syntax keyword length.
-    let g:neocomplete#enable_auto_select = 1
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      " return neocomplete#close_popup() . "\<CR>"
-      " For no inserting <CR> key.
-      return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    " Do not use NeoComplete for these file types
-    autocmd FileType c,cpp,go,python NeoCompleteLock
-  endfunction
+  " NeoBundle 'Shougo/neocomplete.vim', {
+    " \ 'depends' : ['Shougo/context_filetype.vim'],
+    " \ 'disabled' : !has('lua'),
+    " \ }                                                                         " Code completion engine
+  " let s:neocomplete = neobundle#get('neocomplete.vim')
+  " function! s:neocomplete.hooks.on_source(bundle)
+    " let g:neocomplete#enable_at_startup = 1                                     " Use neocomplete.
+    " let g:neocomplete#enable_smart_case = 1                                     " Use smartcase.
+    " let g:neocomplete#sources#syntax#min_keyword_length = 3                     " Set minimum syntax keyword length.
+    " let g:neocomplete#enable_auto_select = 1
+    " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    " function! s:my_cr_function()
+      " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    " endfunction
+    " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"                    " <TAB>: completion.
+    " autocmd FileType c,cpp,go,python NeoCompleteLock                            " Do not use NeoComplete for these file types
+  " endfunction
   " }}}
   " {{{2
   " NeoBundle 'Shougo/unite.vim'                                                  " Unite plugins: https://github.com/Shougo/unite.vim/wiki/unite-plugins
