@@ -74,6 +74,22 @@
                 }],
                 "type": "basic"
             }]
+        },
+        {
+            "description": "dot desktop2",
+            "manipulators": [{
+                "from": {
+                    "key_code": "keypad_period"
+                },
+                "to": [{
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                        "left_alt",
+                        "left_gui"
+                    ]
+                }],
+                "type": "basic"
+            }]
         }
     ]
 }
