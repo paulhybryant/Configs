@@ -76,7 +76,7 @@
             }]
         },
         {
-            "description": "dot desktop2",
+            "description": "dot move space",
             "manipulators": [{
                 "from": {
                     "key_code": "keypad_period"
