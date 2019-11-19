@@ -64,22 +64,27 @@
             }]
         },
         {
-            "description": "right_alt restarts synergys",
+            "description": "right_alt switch karabiner",
             "manipulators": [{
                 "from": {
                     "key_code": "right_alt"
                 },
                 "to": [{
-                    "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/synergys"
+                    "shell_command": "/usr/local/bin/noti /Users/yuhuang/.local/bin/karabiner-switch"
                 }],
                 "type": "basic"
             }]
         },
         {
-            "description": "dot move space",
+            "description": "mouse move space",
             "manipulators": [{
                 "from": {
-                    "key_code": "keypad_period"
+                    "pointing_button": "button5",
+                    "modifiers": {
+                      "mandatory": [
+                        "left_gui"
+                      ]
+                    }
                 },
                 "to": [{
                     "key_code": "left_arrow",
