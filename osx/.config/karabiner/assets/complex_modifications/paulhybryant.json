@@ -87,7 +87,7 @@
                     }
                 },
                 "to": [{
-                    "key_code": "left_arrow",
+                    "key_code": "h",
                     "modifiers": [
                         "left_alt",
                         "left_gui"
