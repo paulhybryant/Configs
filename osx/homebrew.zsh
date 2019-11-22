@@ -85,6 +85,7 @@ brew cask install calibre
 brew cask install clashx
 brew cask install cyberduck
 brew cask install docker
+brew cask install firefox
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
@@ -100,6 +101,8 @@ brew cask install knotes
 brew cask install libreoffice
 brew cask install macvim
 brew cask install mubu
+brew cask install nextcloud
+brew cask install opera
 brew cask install osxfuse
 brew cask install plistedit-pro
 brew cask install prefs-editor
