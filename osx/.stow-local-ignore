@@ -1,5 +1,4 @@
 Library/Application\ Support/iTerm2
 .*\.sh
 .*\.zsh
-\.skhdrc
 \.config/.*\.pref
