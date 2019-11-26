@@ -25,6 +25,11 @@
 cmd - tab [Google Chrome]  : khd -p "ctrl - tab"
 cmd + shift - tab [Google Chrome]  : khd -p "ctrl + shift - tab"
 
+alt - h [Google Chrome]  : khd -p "- left"
+alt - j [Google Chrome]  : khd -p "- down"
+alt - k [Google Chrome]  : khd -p "- up"
+alt - l [Google Chrome]  : khd -p "- right"
+
 # Browser shortcuts
 # lctrl - b   [Google Chrome,Safari]  : khd -p "cmd - b"
 # lctrl - f   [Google Chrome,Safari]  : khd -p "cmd - f"
