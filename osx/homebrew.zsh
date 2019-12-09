@@ -43,6 +43,8 @@ brew install grunt-cli
 brew install htop
 brew install imagemagick
 brew install koekeishiya/formulae/khd
+brew install koekeishiya/formulae/skhd
+brew install koekeishiya/formulae/yabai
 brew install lsof
 brew install macvim
 brew install moreutils
@@ -79,7 +81,7 @@ brew install waltarix/customs/gnu-cpio
 brew install wget
 brew install yudai/gotty/gotty
 brew install zsh
-brew cask install alfred3
+brew cask install alfred
 brew cask install ariang
 brew cask install calibre
 brew cask install clashx
@@ -106,6 +108,7 @@ brew cask install opera
 brew cask install osxfuse
 brew cask install plistedit-pro
 brew cask install prefs-editor
+brew cask install qownnotes
 brew cask install sogouinput
 brew cask install spectacle
 brew cask install vanilla
