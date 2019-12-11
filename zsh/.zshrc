@@ -23,7 +23,6 @@ source ~/.zplugrc
 [[ -f ~/.local/.zshrc ]] && source ~/.local/.zshrc                              # Local configurations
 setopt monitor
 [[ -n ${PROFILING+1} ]] && exit 0                                               # Exit shell if it is profiling
-return 0                                                                        # Avoid exit status 0 after zsh starts
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -e ~/.p10k.zsh ]] && source ~/.p10k.zsh
+return 0                                                                        # Avoid exit status 0 after zsh starts
