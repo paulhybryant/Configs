@@ -97,7 +97,7 @@
             }]
         },
         {
-          "description": "ctrl + hjkl to arrows",
+          "description": "left_control + hjkl to arrows",
           "manipulators": [{
             "from": {
               "key_code": "h",
@@ -162,6 +162,89 @@
             ],
             "type": "basic"
           }]
+      },
+      {
+        "description": "Simulate CMD+` use CMD+Esc for HHKB",
+        "manipulators": [
+            {
+                "from": {
+                    "key_code": "escape",
+                    "modifiers": {
+                        "mandatory": [
+                            "left_command"
+                        ]
+                    }
+                },
+                "to": [
+                    {
+                        "key_code": "grave_accent_and_tilde",
+                        "modifiers": "left_command"
+                    }
+                ],
+                "type": "basic"
+            }
+        ]
+      },
+      {
+        "description": "left_shift + esc to evavluate normal keyboard \"~\" for HHKB",
+        "manipulators": [
+            {
+                "from": {
+                    "key_code": "escape",
+                    "modifiers": {
+                        "mandatory": [
+                            "left_shift"
+                        ]
+                    }
+                },
+                "to": [
+                    {
+                        "key_code": "grave_accent_and_tilde",
+                        "modifiers": "left_shift"
+                    }
+                ],
+                "type": "basic"
+            }
+        ]
+      },
+      {
+        "description": "left_control + HL as HOME and END",
+        "manipulators": [
+          {
+            "from": {
+                "key_code": "h",
+                "modifiers": {
+                    "mandatory": [
+                        "left_control",
+                        "left_shift"
+                    ]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "home"
+                }
+            ],
+            "type": "basic"
+          },
+          {
+            "from": {
+                "key_code": "l",
+                "modifiers": {
+                    "mandatory": [
+                        "left_control",
+                        "left_shift"
+                    ]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "end"
+                }
+            ],
+            "type": "basic"
+          }
+        ]
       }
     ]
 }
