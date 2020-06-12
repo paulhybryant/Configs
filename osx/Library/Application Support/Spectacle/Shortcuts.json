@@ -16,7 +16,7 @@
     "shortcut_name" : "MoveToUpperRight"
   },
   {
-    "shortcut_key_binding" : "cmd+down",
+    "shortcut_key_binding" : "ctrl+cmd+j",
     "shortcut_name" : "MoveToBottomHalf"
   },
   {
@@ -24,7 +24,7 @@
     "shortcut_name" : "MoveToNextDisplay"
   },
   {
-    "shortcut_key_binding" : "cmd+up",
+    "shortcut_key_binding" : "ctrl+cmd+k",
     "shortcut_name" : "MoveToTopHalf"
   },
   {
@@ -52,7 +52,7 @@
     "shortcut_name" : "MoveToNextThird"
   },
   {
-    "shortcut_key_binding" : "cmd+left",
+    "shortcut_key_binding" : "ctrl+cmd+h",
     "shortcut_name" : "MoveToLeftHalf"
   },
   {
@@ -60,7 +60,7 @@
     "shortcut_name" : "MoveToCenter"
   },
   {
-    "shortcut_key_binding" : "cmd+right",
+    "shortcut_key_binding" : "ctrl+cmd+l",
     "shortcut_name" : "MoveToRightHalf"
   },
   {
