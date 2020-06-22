@@ -5,6 +5,9 @@
 [push]
   default = simple
 
+[pull]
+  rebase = false
+
 [diff]
   tool = vimdiff
 
