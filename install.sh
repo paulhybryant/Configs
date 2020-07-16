@@ -59,7 +59,7 @@ function install_linux() {
 function install_osx() {
   if [ ! -x "$(command -v brew)" ]; then
     echo 'Installing brew...'
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
   ./osx/homebrew.zsh
