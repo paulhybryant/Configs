@@ -80,7 +80,6 @@ brew install yudai/gotty/gotty
 brew install zsh
 brew cask install alfred
 brew cask install ariang
-brew cask install calibre
 brew cask install clashx
 brew cask install cyberduck
 brew cask install docker
