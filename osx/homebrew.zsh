@@ -56,7 +56,6 @@ brew install osxutils
 brew install p7zip
 brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
-brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install peco
@@ -64,7 +63,6 @@ brew install percol
 brew install psgrep
 brew install pstree
 brew install python-yq
-brew install python@2
 brew install q
 brew install ranger
 brew install reattach-to-user-namespace
