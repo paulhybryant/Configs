@@ -29,6 +29,7 @@ brew install curl
 brew install docker-completion
 brew install e2fsprogs
 brew install fasd
+brew install ffmpeg
 brew install findutils
 brew install fzf
 brew install git
@@ -55,12 +56,10 @@ brew install osxutils
 brew install p7zip
 brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
-brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install peco
 brew install percol
-brew install pkg-config
 brew install psgrep
 brew install pstree
 brew install python-yq
@@ -79,6 +78,7 @@ brew install you-get
 brew install yudai/gotty/gotty
 brew install zsh
 brew cask install alfred
+brew cask install alt-tab
 brew cask install ariang
 brew cask install clashx
 brew cask install cyberduck
@@ -88,7 +88,6 @@ brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install google-backup-and-sync
-brew cask install hyperswitch
 brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install keka
@@ -97,7 +96,6 @@ brew cask install kindle
 brew cask install knotes
 brew cask install libreoffice
 brew cask install macvim
-brew cask install nextcloud
 brew cask install osxfuse
 brew cask install plistedit-pro
 brew cask install prefs-editor
