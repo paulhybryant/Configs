@@ -4,7 +4,7 @@ local git_config=${GIT_CONFIG}
 unset GIT_CONFIG
 print 'Updating brew...'
 brew update && brew upgrade
-os::OSX && brew cask upgrade
+os::OSX && brew upgrade --cask
 export GIT_CONFIG=${git_config}
 
 brew doctor
