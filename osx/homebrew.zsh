@@ -56,6 +56,7 @@ brew install osxutils
 brew install p7zip
 brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
+brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install peco

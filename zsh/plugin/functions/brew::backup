@@ -42,7 +42,7 @@ for formula in $(brew leaves | grep 'gem-.*' | sed 's/gem-//'); do
 done
 
 if [[ $OSTYPE == *darwin* ]]; then
-  for cask in $(brew cask list | sort); do
+  for cask in $(brew list --cask | sort); do
     echo "brew cask install $cask"
   done
 fi
