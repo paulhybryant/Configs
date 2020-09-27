@@ -44,10 +44,10 @@ function install_linux() {
   if [ ! -x "$(command -v brew)" ]; then
     echo 'Installing brew...'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" < /dev/null
-    export PATH="${HOME}/.linuxbrew/bin:$PATH"
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
-  ./osx/linuxbrew.zsh
+  ./linux/linuxbrew.sh
   stow linux -t ~
 
   # curl -L https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb -o /tmp/bat.deb
@@ -62,7 +62,7 @@ function install_osx() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
   cd ~/.zplug/repos/paulhybryant/dotfiles
-  ./osx/homebrew.zsh
+  ./osx/homebrew.sh
   stow osx -t ~
 }
 
