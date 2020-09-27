@@ -86,5 +86,6 @@ abbrev-alias -c ts551='ssh admin@ts551'
 abbrev-alias -c vps='ssh paulhybryant@vps'
 abbrev-alias -c workenv='docker run -it --hostname paulhybryant paulhybryant/docker-base:v0.1 /home/linuxbrew/.linuxbrew/bin/zsh'
 abbrev-alias -c combine_pdf='"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o '
+abbrev-alias -c mitunnel='ssh -L localhost:8098:192.168.31.1:8098 -N -f admin@nas'
 [[ -n ${aliases[run-help]+1} ]] && unalias run-help                             # Use built-in run-help for online help
 autoload run-help                                                               # Unset previous run-help alias
