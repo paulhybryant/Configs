@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
 brew tap beeftornado/rmtree
 brew tap homebrew/aliases
@@ -56,7 +56,6 @@ brew install osxutils
 brew install p7zip
 brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
-brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install peco
@@ -81,6 +80,7 @@ brew install zsh
 brew cask install alfred
 brew cask install alt-tab
 brew cask install ariang
+brew cask install calibre
 brew cask install clashx
 brew cask install cyberduck
 brew cask install docker
