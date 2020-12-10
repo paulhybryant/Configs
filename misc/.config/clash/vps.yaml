@@ -2,7 +2,7 @@ port: 7890
 socks-port: 7891
 redir-port: 0
 allow-lan: true
-mode: global
+mode: rule
 # Need to select the proxy to be 'Azure' that is defined below.
 # 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
 # 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
@@ -12,17 +12,17 @@ external-controller: '0.0.0.0:9090'
 proxies:
   - name: "Azure"
     type: vmess
-    server: www.xn--4gqp3kj4hgvhbnaj0m7o1g.tk
+    server: www.xn--4gqp3kj4hgvhbnaj0m7o1g.cn
     port: 443
-    uuid: 14b20bd1-5159-4661-8d30-e58213214a66
+    uuid: 8e6fbab2-5db6-4c9e-b28c-dfb7c92a65a3
     alterId: 2
     cipher: auto
     tls: true
     network: ws
-    ws-path: /220e0/
+    ws-path: /a955ffa39/
     skip-cert-verify: true
     ws-headers:
-      Host: www.xn--4gqp3kj4hgvhbnaj0m7o1g.tk
+      Host: www.xn--4gqp3kj4hgvhbnaj0m7o1g.cn
 
 proxy-groups:
 - { name: "PROXY", type: select, proxies: ["Azure"] }
@@ -30,3 +30,4 @@ proxy-groups:
 
 rules:
 - MATCH,MATCH
+- DOMAIN-SUFFIX,qnap.com,PROXY
