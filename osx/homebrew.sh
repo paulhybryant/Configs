@@ -45,7 +45,6 @@ brew install imagemagick
 brew install koekeishiya/formulae/skhd
 brew install koekeishiya/formulae/yabai
 brew install lsof
-brew install macvim
 brew install moreutils
 brew install most
 brew install mupdf
@@ -56,6 +55,7 @@ brew install osxutils
 brew install p7zip
 brew install pandoc
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
+brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install peco
@@ -80,23 +80,18 @@ brew install zsh
 brew cask install alfred
 brew cask install alt-tab
 brew cask install ariang
-brew cask install calibre
 brew cask install clashx
 brew cask install cyberduck
 brew cask install docker
-brew cask install firefox
 brew cask install flux
 brew cask install font-awesome-terminal-fonts
 brew cask install font-hack-nerd-font
 brew cask install google-backup-and-sync
-brew cask install iterm2
 brew cask install karabiner-elements
 brew cask install keka
 brew cask install key-codes
 brew cask install kindle
 brew cask install knotes
-brew cask install libreoffice
-brew cask install macvim
 brew cask install osxfuse
 brew cask install plistedit-pro
 brew cask install prefs-editor
