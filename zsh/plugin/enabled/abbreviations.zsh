@@ -18,6 +18,7 @@ if [[ ${OSTYPE} == *linux* ]]; then
   abbrev-alias -c xkbmapclear="setxkbmap -option ''"
   abbrev-alias -c xkbmapreload="~/.xsessionrc"
   abbrev-alias -c resetxkbmap='sudo dpkg-reconfigure xkb-data'
+  abbrev-alias -c doc2pdf='soffice --headless --convert-to pdf'
 else
   abbrev-alias -c vi='mvim -v'
   abbrev-alias -c vim='mvim -v'
