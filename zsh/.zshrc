@@ -12,7 +12,8 @@ declare -xg XML_CATALOG_FILES="${BREWHOME}/etc/xml/catalog" \
   MANPAGER='most' TERM='xterm-256color' \
   XDG_CACHE_HOME="${HOME}/.cache" XDG_CONFIG_HOME="${HOME}/.config" \
   XDG_DATA_HOME="${HOME}/.local/share" \
-  XDG_DATA_DIRS="${BREWHOME}/share:${XDG_DATA_DIRS}"
+  XDG_DATA_DIRS="${BREWHOME}/share:${XDG_DATA_DIRS}" \
+  GEM_HOME="$HOME/.gems"
 declare -xg LESS="--ignore-case --quiet --chop-long-lines --quit-if-one-screen`
   ` --no-init --raw-control-chars"
 
