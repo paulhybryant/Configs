@@ -61,8 +61,10 @@ zplug "junegunn/fzf", use:"shell/*.zsh", defer:1
 zplug "momo-lab/zsh-abbrev-alias", defer:1
 zplug "seebi/dircolors-solarized", defer:1
 zplug "zlsun/solarized-man", defer:1
+zplug "zsh-users/zaw", defer:1
 zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-completions", defer:1
+zplug "zsh-users/zsh-docker", defer:1
 zplug "zsh-users/zsh-history-substring-search", defer:1
 zplug "paulhybryant/dotfiles", on:"momo-lab/zsh-abbrev-alias", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", on:"paulhybryant/dotfiles", defer:2
