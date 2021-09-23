@@ -10,8 +10,9 @@ function install_common() {
   echo 'Cloning zplug, dotfiles, tpm, and neobundle...'
   [[ -d ~/.zplug ]] || git clone https://github.com/zplug/zplug ~/.zplug
   mkdir -p ~/.zplug/repos/paulhybryant/
-  [[ -d ~/.zplug/repos/paulhybryant/dotfiles ]] || git clone --depth=1 https://github.com/paulhybryant/dotfiles.git \
-   ~/.zplug/repos/paulhybryant/dotfiles
+  [[ -d ~/.zplug/repos/paulhybryant/dotfiles ]] || \
+    git clone --depth=1 https://github.com/paulhybryant/dotfiles.git \
+    ~/.zplug/repos/paulhybryant/dotfiles
 }
 
 function post_install_common() {
