@@ -38,6 +38,7 @@ brew install htop
 brew install koekeishiya/formulae/skhd
 brew install koekeishiya/formulae/yabai
 brew install lsof
+brew install macvim
 brew install moreutils
 brew install most
 brew install netcat
@@ -67,6 +68,7 @@ brew install --cask flux
 brew install --cask font-awesome-terminal-fonts
 brew install --cask font-hack-nerd-font
 brew install --cask google-backup-and-sync
+brew install --cask iterm2
 brew install --cask karabiner-elements
 brew install --cask key-codes
 brew install --cask sogouinput
