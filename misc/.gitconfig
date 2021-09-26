@@ -144,7 +144,7 @@
   insteadof = github:
 
 [submodule "private"]
-  url = admin@paulhybryant.myqnapcloud.com:/share/homes/admin/paulhybryant
+  url = admin@paulhybryant551.myqnapcloud.com:10022:/share/homes/admin/paulhybryant
   active = true
 
 [include]
