@@ -17,6 +17,7 @@ brew tap sebglazebrook/aliases
 brew tap waltarix/customs
 brew tap yudai/gotty
 brew install assh
+brew install bash
 brew install brew-cask-completion
 brew install brew-gem
 brew install brew-pip
@@ -24,7 +25,6 @@ brew install ccat
 brew install coreutils
 brew install csvq
 brew install curl
-brew install docker-completion
 brew install fasd
 brew install findutils
 brew install fzf
@@ -35,6 +35,7 @@ brew install gnu-tar
 brew install gnu-which
 brew install grc
 brew install htop
+brew install jq
 brew install koekeishiya/formulae/skhd
 brew install koekeishiya/formulae/yabai
 brew install lsof
@@ -47,6 +48,7 @@ brew install p7zip
 brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
+brew install pkg-config
 brew install psgrep
 brew install pstree
 brew install reattach-to-user-namespace

@@ -43,6 +43,6 @@ done
 
 if [[ $OSTYPE == *darwin* ]]; then
   for cask in $(brew list --cask | sort); do
-    echo "brew cask install $cask"
+    echo "brew install --cask $cask"
   done
 fi
