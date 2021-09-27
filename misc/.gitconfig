@@ -143,9 +143,5 @@
 [url "https://github.com/"]
   insteadof = github:
 
-[submodule "private"]
-  url = admin@paulhybryant551.myqnapcloud.com:10022:/share/homes/admin/paulhybryant
-  active = true
-
 [include]
   path = ~/.local/.gitconfig
