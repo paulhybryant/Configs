@@ -69,6 +69,7 @@ brew install --cask firefox
 brew install --cask flux
 brew install --cask font-awesome-terminal-fonts
 brew install --cask font-hack-nerd-font
+brew install --cask github
 brew install --cask google-backup-and-sync
 brew install --cask iterm2
 brew install --cask karabiner-elements
