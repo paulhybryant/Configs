@@ -3,7 +3,7 @@ declare -U path manpath fpath
 # Previusly brew failed to update if nix is enabled and sets SSL_CERT_FILE.
 # source ${HOME}/.nix-profile/etc/profile.d/nix.sh
 if [[ "${OSTYPE}" == "darwin"* ]]; then
-  declare -xg BREWVERSION="homebrew" BREWHOME="/usr/local" CMDPREFIX="g"
+  declare -xg BREWVERSION="homebrew" BREWHOME="${HOME}/homebrew" CMDPREFIX="g"
 else
   if [[ -d "${HOME}/.linuxbrew" ]]; then
     declare -xg BREWVERSION="linuxbrew" BREWHOME="${HOME}/.linuxbrew" CMDPREFIX=""
