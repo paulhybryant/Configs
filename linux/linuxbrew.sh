@@ -33,7 +33,6 @@ brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
 brew install psgrep
 brew install pstree
-brew install python-yq
 brew install stow
 brew install the_silver_searcher
 brew install tmux
