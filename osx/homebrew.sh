@@ -23,12 +23,10 @@ brew install brew-gem
 brew install brew-pip
 brew install ccat
 brew install coreutils
-brew install csvq
 brew install curl
 brew install fasd
 brew install findutils
 brew install fzf
-brew install git
 brew install git-extras
 brew install gnu-sed
 brew install gnu-tar
@@ -45,22 +43,17 @@ brew install netcat
 brew install noti
 brew install osxutils
 brew install p7zip
-brew install --HEAD paulhybryant/myformulae/aria2-daemon
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
-brew install pkg-config
 brew install psgrep
 brew install pstree
 brew install reattach-to-user-namespace
 brew install sebglazebrook/aliases/aliases
 brew install stow
-brew install telnet
 brew install the_silver_searcher
 brew install tmux
 brew install trash-cli
-brew install uni2ascii
 brew install wget
-brew install you-get
 brew install zsh
 brew install --cask alfred
 brew install --cask alt-tab
@@ -74,6 +67,7 @@ brew install --cask google-backup-and-sync
 brew install --cask iterm2
 brew install --cask karabiner-elements
 brew install --cask key-codes
+brew install --cask libreoffice
 brew install --cask macvim
 brew install --cask sogouinput
 brew install --cask spectacle
