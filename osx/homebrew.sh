@@ -74,6 +74,7 @@ brew install --cask google-backup-and-sync
 brew install --cask iterm2
 brew install --cask karabiner-elements
 brew install --cask key-codes
+brew install --cask libreoffice
 brew install --cask macvim
 brew install --cask sogouinput
 brew install --cask spectacle
