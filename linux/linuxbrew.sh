@@ -7,7 +7,7 @@ brew tap homebrew/core
 brew tap jhawthorn/fzy
 brew tap linuxbrew/extra
 brew tap linuxbrew/xorg
-brew tap martido/brew-graph
+brew tap martido/graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew install assh
@@ -24,7 +24,6 @@ brew install gnu-tar
 brew install gnu-which
 brew install grc
 brew install htop
-brew install martido/brew-graph/brew-graph
 brew install moreutils
 brew install most
 brew install p7zip
