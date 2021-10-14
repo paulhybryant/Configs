@@ -23,7 +23,6 @@ brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
-brew install gperf
 brew install grc
 brew install htop
 brew install jq
