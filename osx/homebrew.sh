@@ -17,17 +17,17 @@ brew tap sebglazebrook/aliases
 brew tap waltarix/customs
 brew tap yudai/gotty
 brew install assh
-brew install bash
+brew install bat
 brew install brew-cask-completion
 brew install brew-gem
 brew install brew-pip
-brew install ccat
 brew install coreutils
 brew install curl
 brew install fasd
 brew install findutils
 brew install fzf
 brew install git-extras
+brew install gnu-getopt
 brew install gnu-sed
 brew install gnu-tar
 brew install gnu-which
@@ -40,7 +40,6 @@ brew install lsof
 brew install moreutils
 brew install most
 brew install netcat
-brew install noti
 brew install osxutils
 brew install p7zip
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
@@ -55,6 +54,7 @@ brew install tmux
 brew install trash-cli
 brew install wget
 brew install zsh
+brew install zsh-completions
 brew install --cask alfred
 brew install --cask alt-tab
 brew install --cask docker
