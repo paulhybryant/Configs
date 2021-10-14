@@ -22,7 +22,6 @@ brew install brew-cask-completion
 brew install brew-gem
 brew install brew-pip
 brew install coreutils
-brew install curl
 brew install fasd
 brew install findutils
 brew install fzf
@@ -52,7 +51,6 @@ brew install stow
 brew install the_silver_searcher
 brew install tmux
 brew install trash-cli
-brew install wget
 brew install zsh
 brew install zsh-completions
 brew install --cask alfred
