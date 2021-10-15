@@ -55,6 +55,7 @@ brew install zsh
 brew install zsh-completions
 brew install --cask alfred
 brew install --cask alt-tab
+brew install --cask anaconda
 brew install --cask docker
 brew install --cask firefox
 brew install --cask flux
