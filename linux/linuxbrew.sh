@@ -14,7 +14,9 @@ brew install assh
 brew install bat
 brew install brew-gem
 brew install brew-pip
+brew install coreutils
 brew install fasd
+brew install findutils
 brew install fzf
 brew install git-extras
 brew install gnu-getopt
@@ -26,6 +28,7 @@ brew install htop
 brew install moreutils
 brew install most
 brew install p7zip
+brew install patchelf
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
