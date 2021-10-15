@@ -11,12 +11,10 @@ brew tap martido/graph
 brew tap paulhybryant/myformulae
 brew tap sebglazebrook/aliases
 brew install assh
+brew install bat
 brew install brew-gem
 brew install brew-pip
-brew install ccat
-brew install coreutils
 brew install fasd
-brew install findutils
 brew install fzf
 brew install git-extras
 brew install gnu-getopt
@@ -25,11 +23,9 @@ brew install gnu-tar
 brew install gnu-which
 brew install grc
 brew install htop
-brew install jq
 brew install moreutils
 brew install most
 brew install p7zip
-brew install patchelf
 brew install --HEAD paulhybryant/myformulae/fsqlf
 brew install --HEAD paulhybryant/myformulae/powerline-fonts
 brew install paulhybryant/myformulae/sshrc
