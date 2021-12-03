@@ -14,7 +14,7 @@ fi
 declare -xg EDITOR='vim' VISUAL="vim" LANG='en_US.UTF-8' LANGUAGE="${LANG}" \
   PYTHONSTARTUP="${HOME}/.pythonrc" GOPATH="${BREWHOME}/opt/go/libexec" \
   HOMEBREW_NO_AUTO_UPDATE=1 LC_ALL="${LANG}"
-path=(~/.gems/bin ~/.local/bin ${BREWHOME}/bin ${BREWHOME}/sbin ${path[@]})
+# path=(~/.gems/bin ~/.local/bin ${BREWHOME}/bin ${BREWHOME}/sbin ${path[@]})
 manpath=(${BREWHOME}/share/man)
 infopath=(${BREWHOME}/share/info)
 unset SSL_CERT_FILE
@@ -27,7 +27,7 @@ alias ls='${CMDPREFIX}\ls --color=auto'
 alias mktemp='${CMDPREFIX}\mktemp'
 alias stat='${CMDPREFIX}\stat'
 alias tac='${CMDPREFIX}\tac'
-path=(${BREWHOME}/opt/coreutils/libexec/gnubin ${path[@]})
+# path=(${BREWHOME}/opt/coreutils/libexec/gnubin ${path[@]})
 
 # gnu-sed
 alias sed='${CMDPREFIX}\sed'
