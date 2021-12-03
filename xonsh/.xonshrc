@@ -14,7 +14,7 @@ del _sys, _mod, _ModuleType
 conda activate xonsh
 # XONSH WIZARD START
 # xontrib load abbrevs argcomplete bashisms docker_tabcomplete fzf-widgets homebrew mpl prompt_vi_mode readable-traceback ssh_agent zoxide
-xontrib load fzf-widgets zoxide
+xontrib load fzf-widgets zoxide prompt_ret_code prompt_starship prompt_bar
 # XONSH WIZARD END
 #
 $fzf_history_binding = "c-r"  # Ctrl+R
@@ -28,3 +28,9 @@ aliases['j'] = 'z'
 
 $VI_MODE = True
 $AUTO_SUGGEST = True
+
+# $XONTRIB_PROMPT_STARSHIP_RIGHT_CONFIG = "~/.config/starship_xonsh_right.toml"
+# $XONTRIB_PROMPT_STARSHIP_REPLACE_PROMPT = False
+# $XONTRIB_PROMPT_BAR_RIGHT = '{starship_right#noesc#nonl#strip}'
+
+execx($(starship init xonsh))
